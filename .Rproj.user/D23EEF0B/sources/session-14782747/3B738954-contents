@@ -1,5 +1,6 @@
 
 source("utils.R")
+source("get_metadata.R")
 source("source_ssb.R")
 source("source_nav.R")
 source("get_kpi.R")
