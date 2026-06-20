@@ -1,27 +1,27 @@
 {
-    "id": "DC49E31E",
-    "path": "~/NorMacro/source_all.R",
-    "project_path": "source_all.R",
+    "id": "35A8AFB6",
+    "path": "~/NorMacro/R/create_derived_variables.R",
+    "project_path": "R/create_derived_variables.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1781987925099.0,
+    "created": 1781990043542.0,
     "source_on_save": false,
-    "relative_order": 1,
+    "relative_order": 5,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "17,0",
-        "scrollLine": "3"
+        "cursorPosition": "2,2",
+        "scrollLine": "2"
     },
     "folds": "",
-    "lastKnownWriteTime": 1781990093,
+    "lastKnownWriteTime": 1781990079,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1781990093898,
+    "last_content_update": 1781990079340,
     "read_only": false,
     "read_only_alternatives": []
 }

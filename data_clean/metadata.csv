@@ -10,3 +10,7 @@ BNP_Fastland,"BNP Fastlands-Norge, faste priser",SSB,https://data.ssb.no/api/v0/
 BNP_Fastland_vekst,Årsvekst i BNP Fastlands-Norge,Beregnet,,BNP_Fastland,Prosent,Årlig,1971,,get_bnp_fastland,Beregnet som (BNP_Fastland / lag(BNP_Fastland) - 1) * 100
 Lonn,"Årslønn, påløpt",SSB,https://data.ssb.no/api/v0/no/table/al/al05/lonnansatt/SBMENU7201/NRArslonnSnitt,09786,1000 kroner,Årlig,1970,,get_lonn,Gjennomsnitt for alle lønnstakere
 Lonnvekst,"Årslønn, påløpt. Endring fra året før",SSB,https://data.ssb.no/api/v0/no/table/al/al05/lonnansatt/SBMENU7201/NRArslonnSnitt,09786,Prosent,Årlig,1971,,get_lonn,Direkte fra SSB-tabell
+Befolkningsvekst,Årlig vekst i befolkningen,Beregnet,,Befolkning,Prosent,Årlig,1736,,create_derived_variables,Beregnet som (Befolkning / lag(Befolkning) - 1) * 100
+Reallonnsvekst,Lønnsvekst minus inflasjon,Beregnet,,Lonnvekst og Inflasjon,Prosent,Årlig,1971,,create_derived_variables,Beregnet som Lonnvekst - Inflasjon
+Arbeidsstyrkeandel,Arbeidsstyrken som andel av befolkningen,Beregnet,,Arbeidsstyrke og Befolkning,Prosent,Årlig,1972,,create_derived_variables,Beregnet som Arbeidsstyrke / Befolkning * 100
+Arbledige_andel_arbeidsstyrke_NAV,Registrerte arbeidsledige som andel av arbeidsstyrken,Beregnet,,Arbledige_NAV og Arbeidsstyrke,Prosent,Årlig,1972,,create_derived_variables,Beregnet som Arbledige_NAV / Arbeidsstyrke * 100
