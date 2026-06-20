@@ -1,0 +1,158 @@
+---
+title: "Norges Bank"
+format: 
+  html:
+    code_fold: TRUE
+editor: visual
+---
+
+```{r setup, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+## Nødvendige pakker
+
+```{r}
+library(jsonlite)
+library(httr2)
+library(tidyverse)
+library(janitor)
+library(zoo)
+library(PxWebApiData)
+```
+
+## Finne URL til dataene
+
+Norges Bank har et [Datatorg - QueryBuilder](https://app.norges-bank.no/query/#/no) der man enkelt kan produsere riktig URL for de dataene man vil hente inn.
+
+F.eks. kan jeg hente styringsrente, månedlig for periodne 2016-2026 som er: https://data.norges-bank.no/api/data/IR/M.KPRA.SD.?format=sdmx-json&startPeriod=2016-06-14&endPeriod=2026-06-14&locale=no
+
+## Hente data
+
+Definere URL:
+
+```{r}
+url <- "https://data.norges-bank.no/api/data/IR/M.KPRA.SD.?format=csv&startPeriod=2016-06-14&endPeriod=2026-06-14&locale=no&bom=include"
+```
+
+## Hente data:
+
+```{r}
+styringsrente_raw <- read_csv2(url, show_col_types = FALSE)
+```
+
+## Vaske data
+
+Vaske dataene til en ryddig tabell (Trekker ut dato og verdi)
+
+```{r}
+styringsrente <- styringsrente_raw %>% 
+  select(
+    Dato = TIME_PERIOD, 
+    Rente = OBS_VALUE
+  ) %>% 
+  mutate(
+    Dato = ymd(Dato, truncated = 1), 
+    Rente = as.numeric(Rente)
+  ) %>% 
+  drop_na(Dato)
+```
+
+Sjekke tabell:
+
+```{r}
+head(styringsrente)
+```
+
+## Visualisere
+
+```{r}
+ggplot(styringsrente, aes(x = Dato, y = Rente)) +
+  geom_line(color = "#104E8B", size = 1.2) +
+  geom_area(fill = "#104E8B", alpha = 0.1) +
+  labs(
+    title = "Norges Banks styringsrente (2016 - 2026)",
+    subtitle = "Månedlig gjennomsnittlig styringsrente i prosent",
+    x = "År",
+    y = "Prosent (%)",
+    caption = "Kilde: Norges Bank / Datatorg\nVisualisering laget i R med ggplot2"
+  ) +
+  theme_minimal(base_size = 12) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1, accuracy = 0.1))
+```
+
+## Tid i dataserier
+
+I eksempelet ovenfor har vi hentet månedlige data. Andre dataserier kan ha kvartalsvise datapunkter. Dette kan skape litt krøll, men er relativt lett å komme seg forbi. Det er i realiteten bare én eneste linje i datavasken du må justere: hvordan R tolker tidsvariabelen.
+
+Når du henter kvartalsdata fra en leverandør kan tidsvariabelen ofte kunne se slik ut i rådataene: "2024-Q1" eller "2024K1".
+
+Verken standard R eller lubridate::ymd() skjønner hva "Q1" eller "K1" betyr som en eksakt dato. For at ggplot2 skal klare å tegne en jevn tidsrekke, må vi hjelpe R med å forstå kvartaler.
+
+Pakken "lubridate" - som vi allerede har brukt - er spesialisert til å håndtere og omkode tid i datasett. I stedet for ymd() (Year-Month-Day), bruker du funksjonen yq() (Year-Quarter). Den er skreddersydd for å gjøre kvartalstekst om til ekte datoer (den setter automatisk datoen til første dag i kvartalet, f.eks. 2024-01-01 for Q1).
+
+For å vise framgangsmåte lager vi et generisk eksempel med syntetiske data.
+
+### Lager data
+
+```{r}
+ra_finans_data <- tibble(
+  Kvartal = c("2024-Q1", "2024-Q2", "2024-Q3", "2024-Q4", 
+              "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4",
+              "2026-Q1", "2026-Q2"),
+  Resultat_MNOK = c(120, 145, 110, 165, 135, 155, 130, 180, 150, 175)
+)
+```
+
+### Sjekker data
+
+```{r}
+ra_finans_data
+```
+
+Vi ser at tidsfaktoren er oppgitt i kvartal og på et format som kan være trøblete.
+
+### Omkoding av tid med lubridate
+
+```{r}
+rensede_data <- ra_finans_data %>%
+  mutate(Dato = yq(Kvartal))
+```
+
+### Sjekker rensede data
+
+```{r}
+rensede_data
+```
+
+### Visualisering
+
+```{r}
+ggplot(rensede_data, aes(x = Dato, y = Resultat_MNOK)) +
+  geom_line(color = "darkblue", size = 1) +
+  geom_point(color = "darkblue", size = 3) +
+  labs(
+    title = "Simulert kvartalsresultat (2024 - 2026)",
+    subtitle = "Eksempel på tidsomkoding av kvartalsdata i R",
+    x = "Tidslinje (Kvartalene er omkodet til datoer)",
+    y = "Resultat i millioner kroner (MNOK)",
+    caption = "Metode: lubridate::yq()"
+  ) +
+  scale_x_date(
+    breaks = rensede_data$Dato,
+    labels = function(x)
+      format(as.yearqtr(x), "%Y-Q%q")
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(
+    angle = 45,
+    hjust = 1,
+    vjust = 1
+  ),
+  axis.ticks.x = element_blank())
+```
+
+```{r}
+library(report)
+report(sessionInfo())
+```
