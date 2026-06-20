@@ -8,6 +8,7 @@ build_database <- function(){
   rente <- get_rente()
   bnp_lopende  <- get_bnp()
   bnp_fastland <- get_bnp_fastland()
+  lonn <- get_lonn()
   
   kpi |>
     dplyr::left_join(befolkning, by = "Aar") |>
@@ -15,5 +16,6 @@ build_database <- function(){
     dplyr::left_join(ledighet, by = "Aar") |>
     dplyr::left_join(rente, by = "Aar") |>
     dplyr::left_join(bnp_lopende, by = "Aar") |>
-    dplyr::left_join(bnp_fastland, by = "Aar")
+    dplyr::left_join(bnp_fastland, by = "Aar") |>
+    dplyr::left_join(lonn, by = "Aar")
 }

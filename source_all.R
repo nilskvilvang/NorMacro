@@ -9,5 +9,6 @@ source("get_ledighet.R")
 source("get_rente.R")
 source("get_bnp_lopende.R")
 source("get_bnp_fastland.R")
+source("get_lonn.R")
 
 source("build_database.R")
