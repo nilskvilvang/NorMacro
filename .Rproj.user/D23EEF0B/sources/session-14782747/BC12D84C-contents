@@ -6,11 +6,9 @@ get_bnp_lopende <- function(){
     Tid = "*"
   )
   
-  bnp <- suppressWarnings(
-    ssb_get(
-      url = "https://data.ssb.no/api/v0/no/table/nk/nk03/knr/SBMENU5140/NRbnp",
-      query = query
-    )
+  bnp <- ssb_get(
+    url = "https://data.ssb.no/api/v0/no/table/nk/nk03/knr/SBMENU5140/NRbnp",
+    query = query
   )
   
   names(bnp) <- c("Aar", "BNP_lopende")
