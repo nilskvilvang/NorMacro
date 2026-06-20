@@ -1,0 +1,5 @@
+"0","url_diskonto <- ""https://data.norges-bank.no/api/data/IR/B.DISC.SD.?format=csv&startPeriod=1948&endPeriod=1991"""
+"0","raw_diskonto <- read.csv(url_diskonto, sep = "";"", stringsAsFactors = FALSE)"
+"2","Error in file(file, ""rt"") : 
+  cannot open the connection to 'https://data.norges-bank.no/api/data/IR/B.DISC.SD.?format=csv&startPeriod=1948&endPeriod=1991'
+"

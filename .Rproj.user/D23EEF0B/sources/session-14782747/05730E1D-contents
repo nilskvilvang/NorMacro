@@ -1,0 +1,152 @@
+---
+title: "NAV"
+format: 
+  html:
+    code_fold: TRUE
+editor: visual
+resources:
+  - Tabell_3_Helt_ledige_fordelt_pa_kjonn_Aarsgjennomsnitt_1948-2025.xls
+  - Tabell_3_Redigert.xls
+---
+
+```{r setup, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+```{r}
+library(rio)
+library(janitor)
+library(tidyverse)
+library(PxWebApiData)
+```
+
+NAVs tall på registrerte helt arbeidsledige er en av de mest fulgte makroøkonomiske temperaturendringene i Norge, fordi den fanger opp endringer i realøkonomien langt raskere enn kvartalsvise utvalgsundersøkelser.
+
+Siden NAVs datastruktur kan endres og krever spesifikke tabellnedlastinger, er den mest robuste, ryddige og pedagogiske måten å laste ned en av NAVs offisielle, historiske månedsoversikter (Excel/CSV) og hente den inn i R.
+
+## Hente inn NAV data
+
+Vi kan hente inn statistikk fra NAV fra deres [websider for statistikk](https://www.nav.no/no/nav-og-samfunn/statistikk/statistikk). Her finner man mye statistikk. Dessverre er disse nedlastbare i xlsx-filer som er litt trøblete å jobbe direkte med i R fordi de inneholder masse formateringer - vi ønsker i størst mulig grad rådata i enkelt tabelloppsett.
+
+F.eks. ser den opprinnelige tabellen "Helt arbeidsledige fordelt på kjønn. Årsgjennomsnitt" slik ut i originaldrakt:
+
+<a class="btn btn-primary"
+   href="Tabell_3_Helt_ledige_fordelt_pa_kjonn_Aarsgjennomsnitt_1948-2025.xls"
+   download> 📥 Last ned datagrunnlag (Excel) </a>
+
+Når dere åpner den i Excel ser dere at det ligger masse formatertinger, dataserier er delt opp i flere kolonner o.l. Det er kanskje bra for lesbarheten hvis man kun ser på fila, men dumt for oss som ønsker å bruke dataene til analyser.
+
+Etter litt opprydding har vi et renset datasett her:
+
+<a class="btn btn-primary"
+   href="Tabell_3_Redigert.xls"
+   download> 📥 Last ned datagrunnlag (Excel) </a>
+
+NAV oppgir følgende fotnoter til denne tabellen:
+
+1)  Nytt datagrunnlag for arbeidsstyrken ved beregning av arbeidsledighetsprosenter i 1984.
+2)  Brudd i statistikken f.o.m. jan. 1999. Les kapittel 5 i «Om statistikken – arbeidssøkere» på nav.no
+3)  Brudd i statistikk over antall arbeidsledige fra og med november 2018 pga ny registreringsmetode. Les kapittel 5 i «Om statistikken – arbeidssøkere» på nav.no
+4)  Covid19 pandemi fra mars 2020. Les kapittel 5 i «Om statistikken – arbeidssøkere» på nav.no
+5)  Innføring nytt arbeidssøkerregister i april 2025. Les kapittel 5 i «Om statistikken – arbeidssøkere» på nav.no
+
+Strukturen i datasettet ser slik ut:
+
+```{r}
+NAV_data <- import("Tabell_3_Redigert.xls") |>
+  clean_names()
+head(NAV_data)
+```
+
+## Eksempel på makroøkonomisk analyse: Det historiske forholdet mellom rente og arbeidsledighet (1948–2025)
+
+I makroøkonomisk teori (særlig gjennom IS-LM- og AD-AS-modeller) studerer vi hvordan sentralbanken bruker renten for å stabilisere arbeidsmarkedet.
+
+NAV-data:
+
+```{r}
+nav_aar <- NAV_data %>%
+  mutate(
+    Aar = as.numeric(aar),
+    # Vi gjør andelen om til prosent (f.eks. 0.0102 -> 1.02%) for grafen
+    Ledighetsprosent = as.numeric(andel_av_arbeidsstyrken) * 100
+  ) %>%
+  select(Aar, Ledighetsprosent)
+```
+
+Rentedata fra Norges Bank:
+
+```{r}
+url_diskonto <- "https://data.norges-bank.no/api/data/IR/B.DISC.SD.?format=csv&startPeriod=1948&endPeriod=1991"
+raw_diskonto <- read.csv(url_diskonto, sep = ";", stringsAsFactors = FALSE)
+
+rente_gammel <- raw_diskonto %>%
+  mutate(Aar = as.numeric(substr(TIME_PERIOD, 1, 4)), rate = as.numeric(OBS_VALUE)) %>%
+  group_by(Aar) %>%
+  summarise(styringsrente = mean(rate, na.rm = TRUE))
+
+# ==========================================
+# 3. HENT MODERNE STYRINGSRENTE (FOLIORENTE 1991-2025)
+# ==========================================
+url_folio <- "https://data.norges-bank.no/api/data/IR/B.KPRA.SD.?format=csv&startPeriod=1991&endPeriod=2025"
+raw_folio <- read.csv(url_folio, sep = ";", stringsAsFactors = FALSE)
+
+rente_ny <- raw_folio %>%
+  mutate(Aar = as.numeric(substr(TIME_PERIOD, 1, 4)), rate = as.numeric(OBS_VALUE)) %>%
+  group_by(Aar) %>%
+  summarise(styringsrente = mean(rate, na.rm = TRUE))
+
+# ==========================================
+# 4. SMELT RENTENE SAMMEN TIL ÉN LANG SERIE
+# ==========================================
+# Vi kombinerer de to radvis, og bruker filter for å unngå overlapp i 1991
+styringsrente_komplett <- bind_rows(
+  rente_gammel %>% filter(Aar < 1991),
+  rente_ny
+)
+```
+
+Sammenkobling:
+
+```{r}
+historisk_sammenstilling <- inner_join(nav_aar, styringsrente_aar, by = "Aar")
+
+historisk_long <- historisk_sammenstilling %>%
+  pivot_longer(cols = c(Ledighetsprosent, styringsrente), 
+               names_to = "Indikator", 
+               values_to = "Verdi")
+
+ggplot(historisk_long, aes(x = Aar, y = Verdi, color = Indikator)) +
+  geom_line(size = 0.8) +
+  geom_point(size = 1.2) +
+  
+  scale_color_manual(
+    values = c(
+      "Ledighetsprosent" = "blue", # NAV-oransje
+      "styringsrente" = "red"     # Norges Bank-rød
+    ),
+    labels = c("Registrert arbeidsledighet (NAV)", "Styringsrente (Norges Bank)")
+  ) +
+  
+  scale_x_continuous(breaks = seq(1950, 2025, by = 10)) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1, accuracy = 1)) +
+  
+  labs(
+    title = "75 år med norsk økonomisk historie: Rente og Arbeidsledighet",
+    subtitle = "Sammenligning av årlig registrert arbeidsledighet og sentralbankens styringsrente",
+    x = "År",
+    y = "Prosent",
+    color = "Makroindikator",
+    caption = "Kilder: NAV & Norges Bank"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank(),
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)
+  )
+```
+
+```{r}
+sessionInfo()
+```
