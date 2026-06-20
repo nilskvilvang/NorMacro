@@ -1,0 +1,11 @@
+
+build_database <- function(){
+  
+  kpi <- get_kpi()
+  befolkning <- get_befolkning()
+  
+  normacro <- kpi |>
+    dplyr::left_join(befolkning, by = "Aar")
+  
+  normacro
+}
