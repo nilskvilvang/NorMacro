@@ -23,6 +23,11 @@ get_metadata <- function(){
     "03780", "Personer", "Årlig", 1972, NA, "get_arbeidsstyrke",
     "Summert menn og kvinner, multiplisert med 1000",
     
+    "Sysselsatte", "Sysselsatte personer, 15-74 år", "SSB AKU",
+    "https://data.ssb.no/api/v0/no/table/al/al06/aku/SBMENU9726/SysselAKUAar",
+    "03781", "Personer", "Årlig", 1972, NA, "get_sysselsatte",
+    "Summert menn og kvinner, multiplisert med 1000",
+    
     "Arbledige_NAV", "Registrerte helt arbeidsledige", "NAV",
     "https://www.nav.no/_/attachment/download/a5aa83cd-c083-4b88-9359-1c1b3b2f936e:285ebf18c576ff0fd1537a83289401df2498cae4/Tabell%203_Helt%20ledige%20fordelt%20pa%20kjonn.Aarsgjennomsnitt.1948_2025.xls",
     "Tabell 3", "Personer", "Årlig", 1948, 2025, "get_ledighet",

@@ -14,5 +14,6 @@ source("R/get_bnp_fastland.R")
 source("R/get_lonn.R")
 source("R/get_metadata.R")
 source("R/create_derived_variables.R")
+source("R/get_sysselsatte.R")
 
 source("build_database.R")

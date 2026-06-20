@@ -1,27 +1,27 @@
 {
-    "id": "35A8AFB6",
-    "path": "~/NorMacro/R/create_derived_variables.R",
-    "project_path": "R/create_derived_variables.R",
+    "id": "BA6B999A",
+    "path": "~/NorMacro/R/get_sysselsatte.R",
+    "project_path": "R/get_sysselsatte.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "936321875",
     "contents": "",
     "dirty": false,
-    "created": 1781990043542.0,
+    "created": 1781992033307.0,
     "source_on_save": false,
-    "relative_order": 5,
+    "relative_order": 4,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "2,2",
-        "scrollLine": "2"
+        "cursorPosition": "30,1",
+        "scrollLine": "15"
     },
     "folds": "",
-    "lastKnownWriteTime": 1781990079,
+    "lastKnownWriteTime": 1781992223,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1781990079340,
+    "last_content_update": 1781992223874,
     "read_only": false,
     "read_only_alternatives": []
 }
