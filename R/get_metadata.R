@@ -351,6 +351,29 @@ get_metadata <- function(){
     1995,
     NA,
     "create_derived_variables",
-    "Beregnet som Offentlig_nettofordringer / BNP_lopende * 100"
+    "Beregnet som Offentlig_nettofordringer / BNP_lopende * 100",
+    
+    "Offentlige_utgifter", "Offentlig forvaltnings totale utgifter", "SSB",
+    "https://data.ssb.no/api/v0/no/table/os/os02/offinnut/SBMENU4642/OffInnUt21",
+    "14668", "Millioner kroner", "Årlig", 1995, NA, "get_offentlige_utgifter",
+    "Art = Totale utgifter (B+D), Sektor = Offentlig forvaltning",
+    
+    "Statlige_utgifter", "Statsforvaltningens totale utgifter", "SSB",
+    "https://data.ssb.no/api/v0/no/table/os/os02/offinnut/SBMENU4642/OffInnUt21",
+    "14668", "Millioner kroner", "Årlig", 1995, NA, "get_offentlige_utgifter",
+    "Art = Totale utgifter (B+D), Sektor = Statsforvaltningen",
+    
+    "Kommunale_utgifter", "Kommuneforvaltningens totale utgifter", "SSB",
+    "https://data.ssb.no/api/v0/no/table/os/os02/offinnut/SBMENU4642/OffInnUt21",
+    "14668", "Millioner kroner", "Årlig", 1995, NA, "get_offentlige_utgifter",
+    "Art = Totale utgifter (B+D), Sektor = Kommuneforvaltningen",
+    
+    "Kommunal_utgiftsandel", "Kommunale utgifter som andel av offentlige utgifter", "Beregnet",
+    NA, "Kommunale_utgifter og Offentlige_utgifter", "Prosent", "Årlig", 1995, NA,
+    "create_derived_variables", "Beregnet som Kommunale_utgifter / Offentlige_utgifter * 100",
+    
+    "Statlig_utgiftsandel", "Statlige utgifter som andel av offentlige utgifter", "Beregnet",
+    NA, "Statlige_utgifter og Offentlige_utgifter", "Prosent", "Årlig", 1995, NA,
+    "create_derived_variables", "Beregnet som Statlige_utgifter / Offentlige_utgifter * 100"
   )
 }

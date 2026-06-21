@@ -10,7 +10,7 @@ Databasen henter data direkte fra offentlige kilder som SSB, Norges Bank, NAV og
 
 Per juni 2026:
 
-- 33 variabler
+- 44 variabler
 - 161 årsobservasjoner
 - SSB
 - NAV

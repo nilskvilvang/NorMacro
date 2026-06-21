@@ -17,6 +17,7 @@ build_database <- function(){
   oseax <- get_oseax()
   strompris <- get_strompris()
   offentlig_finans <- get_offentlig_finans()
+  offentlige_utgifter <- get_offentlige_utgifter()
   
   kpi |>
     dplyr::left_join(befolkning, by = "Aar") |>
@@ -34,5 +35,6 @@ build_database <- function(){
     dplyr::left_join(oseax, by = "Aar") |>
     dplyr::left_join(strompris, by = "Aar") |>
     dplyr::left_join(offentlig_finans, by = "Aar") |>
+    dplyr::left_join(offentlige_utgifter, by = "Aar") |>
     create_derived_variables() 
 }

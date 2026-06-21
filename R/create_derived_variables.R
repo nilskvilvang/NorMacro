@@ -20,6 +20,12 @@ create_derived_variables <- function(data){
         Offentlig_gjeld / BNP_lopende * 100,
       
       Offentlig_nettofordringer_andel_BNP =
-        Offentlig_nettofordringer / BNP_lopende * 100
+        Offentlig_nettofordringer / BNP_lopende * 100,
+      
+      Kommunal_utgiftsandel =
+        Kommunale_utgifter / Offentlige_utgifter * 100,
+      
+      Statlig_utgiftsandel =
+        Statlige_utgifter / Offentlige_utgifter * 100
     )
 }
