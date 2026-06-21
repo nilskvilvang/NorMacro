@@ -23,6 +23,7 @@ source("R/get_oseax.R")
 source("R/get_strompris.R")
 source("R/get_offentlig_finans.R")
 source("R/get_offentlige_utgifter.R")
+source("R/get_kreditt.R")
 
 source("R/build_database.R")
 

@@ -18,6 +18,7 @@ build_database <- function(){
   strompris <- get_strompris()
   offentlig_finans <- get_offentlig_finans()
   offentlige_utgifter <- get_offentlige_utgifter()
+  kreditt <- get_kreditt()
   
   kpi |>
     dplyr::left_join(befolkning, by = "Aar") |>
@@ -36,5 +37,6 @@ build_database <- function(){
     dplyr::left_join(strompris, by = "Aar") |>
     dplyr::left_join(offentlig_finans, by = "Aar") |>
     dplyr::left_join(offentlige_utgifter, by = "Aar") |>
+    dplyr::left_join(kreditt, by = "Aar") |>
     create_derived_variables() 
 }

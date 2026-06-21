@@ -374,6 +374,30 @@ get_metadata <- function(){
     
     "Statlig_utgiftsandel", "Statlige utgifter som andel av offentlige utgifter", "Beregnet",
     NA, "Statlige_utgifter og Offentlige_utgifter", "Prosent", "Årlig", 1995, NA,
-    "create_derived_variables", "Beregnet som Statlige_utgifter / Offentlige_utgifter * 100"
+    "create_derived_variables", "Beregnet som Statlige_utgifter / Offentlige_utgifter * 100",
+    
+    "Kreditt_K2",
+    "Innenlandsk lånegjeld til publikum, årsgjennomsnitt",
+    "SSB",
+    "https://data.ssb.no/api/v0/no/table/bf/bf02/kredind/InnLandGjeldNY",
+    "06718",
+    "Millioner kroner",
+    "Årlig",
+    1987,
+    NA,
+    "get_kreditt",
+    "Valuta = I alt, låntakersektor = Publikum, kredittkilde = alle långivere. Årsgjennomsnitt av månedstall",
+    
+    "Kredittvekst_K2",
+    "Årlig prosentvis vekst i innenlandsk lånegjeld til publikum",
+    "Beregnet",
+    NA,
+    "Kreditt_K2",
+    "Prosent",
+    "Årlig",
+    1988,
+    NA,
+    "get_kreditt",
+    "Beregnet som (Kreditt_K2 / lag(Kreditt_K2) - 1) * 100"
   )
 }
