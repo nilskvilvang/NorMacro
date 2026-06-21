@@ -514,6 +514,42 @@ get_metadata <- function(){
     1973,
     NA,
     "create_derived_variables",
-    "Beregnet som (Arbeidsproduktivitet / lag(Arbeidsproduktivitet) - 1) * 100"
+    "Beregnet som (Arbeidsproduktivitet / lag(Arbeidsproduktivitet) - 1) * 100",
+    
+    "Offentlige_investeringer",
+    "Bruttoinvesteringer i offentlig forvaltning",
+    "SSB",
+    "https://data.ssb.no/api/v0/no/table/nk/nk03/knr/SBMENU5140/NRMakroHov",
+    "Makrost=bif.nr83_6",
+    "Millioner kroner (faste 2023-priser)",
+    "Årlig",
+    1970,
+    2025,
+    "get_offentlige_investeringer",
+    "Bruttoinvesteringer i offentlig forvaltning i faste 2023-priser",
+    
+    "Offentlige_investeringer_vekst",
+    "Årlig vekst i offentlige investeringer",
+    "Beregnet",
+    NA,
+    "Offentlige_investeringer",
+    "Prosent",
+    "Årlig",
+    1971,
+    NA,
+    "get_offentlige_investeringer",
+    "Beregnet som (Offentlige_investeringer / lag(Offentlige_investeringer) - 1) * 100",
+    
+    "Offentlige_investeringer_andel_BNP",
+    "Offentlige investeringer som andel av BNP Fastlands-Norge",
+    "Beregnet",
+    NA,
+    "Offentlige_investeringer og BNP_Fastland",
+    "Prosent",
+    "Årlig",
+    1970,
+    NA,
+    "create_derived_variables",
+    "Beregnet som Offentlige_investeringer / BNP_Fastland * 100"
   )
 }

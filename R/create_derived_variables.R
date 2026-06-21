@@ -42,7 +42,11 @@ create_derived_variables <- function(data){
         BNP_lopende / Befolkning,
       
       Arbeidsproduktivitet =
-        BNP_Fastland / Sysselsatte
+        BNP_Fastland / Sysselsatte,
+      
+      Offentlige_investeringer_andel_BNP =
+        Offentlige_investeringer / BNP_Fastland * 100,
+      
     ) |>
     
     dplyr::mutate(

@@ -2,7 +2,7 @@
 
 **Version:** 0.7.0
 
-NorMacro er en norsk makroøkonomisk database som automatisk bygger et datasett med 55 dokumenterte makroøkonomiske indikatorere.
+NorMacro er en norsk makroøkonomisk database som automatisk bygger et datasett med 61 dokumenterte makroøkonomiske indikatorere.
 Databasen henter data direkte fra offentlige kilder som SSB, Norges Bank, NAV og FRED, kombinerer dem til ett konsistent datasett og dokumenterer alle variabler gjennom metadata.
 
 ## Status
