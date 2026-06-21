@@ -3,7 +3,7 @@ get_normacro <- function(export = FALSE){
   
   normacro <- build_database()
   
-  check_metadata(normacro)
+  check_normacro(normacro)
   
   if(export){
     dir.create("data_clean", showWarnings = FALSE)

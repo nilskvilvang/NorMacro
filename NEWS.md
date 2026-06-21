@@ -17,4 +17,5 @@
 
 - Utvidet dokumentasjon og metadata
 - Alle 55 variabler dokumentert
+- Lagt til automatisk kvalitetssjekk med funksjonen `check_normacro()`
 - README oppdatert

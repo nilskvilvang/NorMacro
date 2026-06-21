@@ -182,6 +182,21 @@ Forventet resultat:
 
 ---
 
+## Kvalitetskontroll
+
+NorMacro har en enkel kvalitetskontroll som kjøres automatisk når databasen bygges med:
+
+```r
+normacro <- get_normacro()
+```
+
+Funksjonen check_normacro() kontrollerer at:
+
+ - datasettet har en variabel som heter Aar
+ - årgangene er sortert stigende
+ - det ikke finnes dupliserte år
+ - alle variabler er dokumentert i metadata
+
 ## Eksport
 
 Eksporter database og metadata:
