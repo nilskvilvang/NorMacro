@@ -11,8 +11,7 @@ library(quantmod)
 # sjekksekvens
 ## rm(list = ls())
 ## source("source_all.R")
-## normacro <- build_database()
-## check_metadata(normacro)
+## normacro <- get_normacro()
 ## tail(normacro)
 
 

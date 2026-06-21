@@ -1,31 +1,38 @@
 
-get_boligpriser <- function(){
+get_boligpriser <- function(refresh = FALSE){
   
-  bolig_raw <- suppressWarnings(
-    ssb_get(
-      url = "https://data.ssb.no/api/v0/no/table/pp/pp01/bpi/SBMENU7481/NyBoligindeks3",
-      query = list(
-        Region = "TOTAL",
-        Boligtype = "00",
-        ContentsCode = "BruktBlindex",
-        Tid = "*"
+  cache_get(
+    name = "boligpriser",
+    refresh = refresh,
+    fun = function(){
+      
+      bolig_raw <- suppressWarnings(
+        ssb_get(
+          url = "https://data.ssb.no/api/v0/no/table/pp/pp01/bpi/SBMENU7481/NyBoligindeks3",
+          query = list(
+            Region = "TOTAL",
+            Boligtype = "00",
+            ContentsCode = "BruktBlindex",
+            Tid = "*"
+          )
+        )
       )
-    )
+      
+      bolig_raw |>
+        dplyr::rename(
+          Aar = ar,
+          Boligprisindeks = prisindeks_for_brukte_boliger
+        ) |>
+        dplyr::mutate(
+          Aar = as.integer(Aar),
+          Boligprisindeks = as.numeric(Boligprisindeks)
+        ) |>
+        dplyr::select(Aar, Boligprisindeks) |>
+        dplyr::arrange(Aar) |>
+        dplyr::mutate(
+          Boligprisvekst =
+            (Boligprisindeks / dplyr::lag(Boligprisindeks) - 1) * 100
+        )
+    }
   )
-  
-  bolig_raw |>
-    dplyr::rename(
-      Aar = ar,
-      Boligprisindeks = prisindeks_for_brukte_boliger
-    ) |>
-    dplyr::mutate(
-      Aar = as.integer(Aar),
-      Boligprisindeks = as.numeric(Boligprisindeks)
-    ) |>
-    dplyr::select(Aar, Boligprisindeks) |>
-    dplyr::arrange(Aar) |>
-    dplyr::mutate(
-      Boligprisvekst =
-        (Boligprisindeks / dplyr::lag(Boligprisindeks) - 1) * 100
-    )
 }

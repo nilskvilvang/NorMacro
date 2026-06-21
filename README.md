@@ -160,6 +160,21 @@ Resultatet er et data.frame/tibble med alle tilgjengelige dataserier.
 
 ---
 
+## Cache
+
+NorMacro cacher nedlastede datasett lokalt i mappen `cache/`.
+
+Første kjøring laster ned data fra eksterne kilder (SSB, Norges Bank, NAV, FRED og Yahoo) og tar omtrent 20–30 sekunder.
+Senere kjøringer bruker lokale `.rds`-filer og går betydelig raskere - normalt under ett sekund.
+
+For å tvinge ny nedlasting:
+
+get_kpi(refresh = TRUE)
+
+For å slette all cache:
+
+unlink("cache", recursive = TRUE)
+
 ## Metadata
 
 Alle variabler dokumenteres gjennom:

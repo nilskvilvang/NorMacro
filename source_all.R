@@ -28,6 +28,7 @@ source("R/get_offentlige_utgifter.R")
 source("R/get_kreditt.R")
 source("R/get_boliginvesteringer.R")
 source("R/get_husholdningsgjeld.R")
+source("R/get_disponibel_inntekt.R")
 source("R/check_normacro.R")
 
 source("R/build_database.R")
