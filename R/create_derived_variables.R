@@ -14,6 +14,12 @@ create_derived_variables <- function(data){
         Arbeidsstyrke / Befolkning * 100,
       
       Arbledige_andel_arbeidsstyrke_NAV =
-        Arbledige_NAV / Arbeidsstyrke * 100
+        Arbledige_NAV / Arbeidsstyrke * 100,
+      
+      Offentlig_gjeld_andel_BNP =
+        Offentlig_gjeld / BNP_lopende * 100,
+      
+      Offentlig_nettofordringer_andel_BNP =
+        Offentlig_nettofordringer / BNP_lopende * 100
     )
 }
