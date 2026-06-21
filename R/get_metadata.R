@@ -255,6 +255,30 @@ get_metadata <- function(){
     1971,
     NA,
     "get_utenrikshandel",
-    "Beregnet som (Import / lag(Import) - 1) * 100"
+    "Beregnet som (Import / lag(Import) - 1) * 100",
+    
+    "OSEAX",
+    "Oslo Stock Exchange All-Share Index (årsgjennomsnitt)",
+    "Yahoo Finance",
+    "https://finance.yahoo.com/quote/%5EOSEAX/",
+    "^OSEAX",
+    "Indeks",
+    "Årlig",
+    2013,
+    NA,
+    "get_oseax",
+    "Årsgjennomsnitt av daglige observasjoner",
+    
+    "OSEAX_vekst",
+    "Årlig prosentvis vekst i OSEAX",
+    "Beregnet",
+    NA,
+    "OSEAX",
+    "Prosent",
+    "Årlig",
+    2014,
+    NA,
+    "get_oseax",
+    "Beregnet som (OSEAX / lag(OSEAX) - 1) * 100"
   )
 }
