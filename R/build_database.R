@@ -13,6 +13,7 @@ build_database <- function(){
   boligpriser <- get_boligpriser()
   oljepris <- get_oljepris()
   valutakurs <- get_valutakurs()
+  utenrikshandel <- get_utenrikshandel()
   
   kpi |>
     dplyr::left_join(befolkning, by = "Aar") |>
@@ -24,7 +25,8 @@ build_database <- function(){
     dplyr::left_join(bnp_fastland, by = "Aar") |>
     dplyr::left_join(lonn, by = "Aar") |>
     dplyr::left_join(valutakurs, by = "Aar") |>
-    create_derived_variables() |>
     dplyr::left_join(boligpriser, by = "Aar") |>
-    dplyr::left_join(oljepris, by = "Aar")
+    dplyr::left_join(oljepris, by = "Aar") |>
+    dplyr::left_join(utenrikshandel, by = "Aar") |>
+    create_derived_variables() 
 }

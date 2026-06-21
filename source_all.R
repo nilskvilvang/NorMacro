@@ -18,6 +18,7 @@ source("R/create_derived_variables.R")
 source("R/get_sysselsatte.R")
 source("R/get_boligpriser.R")
 source("R/get_oljepris.R")
+source("R/get_utenrikshandel.R")
 
 source("R/build_database.R")
 
