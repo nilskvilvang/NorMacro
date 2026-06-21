@@ -4,6 +4,7 @@ library(pxweb)
 library(PxWebApiData)
 library(janitor)
 library(lubridate)
+library(quantmod)
 
 # pxweb::pxweb_interactive("data.ssb.no")
 

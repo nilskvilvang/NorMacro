@@ -159,6 +159,30 @@ get_metadata <- function(){
     1993,
     NA,
     "get_boligpriser",
-    "Beregnet som (Boligprisindeks / lag(Boligprisindeks) - 1) * 100"
+    "Beregnet som (Boligprisindeks / lag(Boligprisindeks) - 1) * 100",
+    
+    "Oljepris_USD",
+    "Brent Blend spotpris, årsgjennomsnitt",
+    "FRED",
+    "https://fred.stlouisfed.org/series/DCOILBRENTEU",
+    "DCOILBRENTEU",
+    "USD per fat",
+    "Årlig",
+    1987,
+    NA,
+    "get_oljepris",
+    "Årsgjennomsnitt av daglige Brent-observasjoner",
+    
+    "Oljeprisvekst",
+    "Årlig prosentvis vekst i Brent oljepris",
+    "Beregnet",
+    NA,
+    "Oljepris_USD",
+    "Prosent",
+    "Årlig",
+    1988,
+    NA,
+    "get_oljepris",
+    "Beregnet som (Oljepris_USD / lag(Oljepris_USD) - 1) * 100"
   )
 }

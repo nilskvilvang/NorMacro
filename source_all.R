@@ -16,5 +16,6 @@ source("R/get_metadata.R")
 source("R/create_derived_variables.R")
 source("R/get_sysselsatte.R")
 source("R/get_boligpriser.R")
+source("R/get_oljepris.R")
 
 source("build_database.R")
