@@ -279,6 +279,30 @@ get_metadata <- function(){
     2014,
     NA,
     "get_oseax",
-    "Beregnet som (OSEAX / lag(OSEAX) - 1) * 100"
+    "Beregnet som (OSEAX / lag(OSEAX) - 1) * 100",
+    
+    "Strompris",
+    "Kraft og nett i alt inklusive avgifter for husholdninger",
+    "SSB",
+    "https://data.ssb.no/api/v0/no/table/ei/ei01/elkraftpris/SBMENU4023/KraftPrisNettLeiAar",
+    "09007",
+    "Øre per kWh",
+    "Årlig",
+    2012,
+    NA,
+    "get_strompris",
+    "Kraft og nett i alt inkl. avgifter",
+    
+    "Stromprisvekst",
+    "Årlig prosentvis vekst i strømpris",
+    "Beregnet",
+    NA,
+    "Strompris",
+    "Prosent",
+    "Årlig",
+    2013,
+    NA,
+    "get_strompris",
+    "Beregnet som (Strompris / lag(Strompris) - 1) * 100",
   )
 }

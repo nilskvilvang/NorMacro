@@ -20,6 +20,7 @@ source("R/get_boligpriser.R")
 source("R/get_oljepris.R")
 source("R/get_utenrikshandel.R")
 source("R/get_oseax.R")
+source("R/get_strompris.R")
 
 source("R/build_database.R")
 

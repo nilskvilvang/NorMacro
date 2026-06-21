@@ -15,6 +15,7 @@ build_database <- function(){
   valutakurs <- get_valutakurs()
   utenrikshandel <- get_utenrikshandel()
   oseax <- get_oseax()
+  strompris <- get_strompris()
   
   kpi |>
     dplyr::left_join(befolkning, by = "Aar") |>
@@ -30,5 +31,6 @@ build_database <- function(){
     dplyr::left_join(oljepris, by = "Aar") |>
     dplyr::left_join(utenrikshandel, by = "Aar") |>
     dplyr::left_join(oseax, by = "Aar") |>
+    dplyr::left_join(strompris, by = "Aar") |>
     create_derived_variables() 
 }
