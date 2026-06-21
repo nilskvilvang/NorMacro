@@ -19,4 +19,6 @@ source("R/get_sysselsatte.R")
 source("R/get_boligpriser.R")
 source("R/get_oljepris.R")
 
-source("build_database.R")
+source("R/build_database.R")
+
+source("R/get_normacro.R")
