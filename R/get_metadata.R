@@ -183,6 +183,30 @@ get_metadata <- function(){
     1988,
     NA,
     "get_oljepris",
-    "Beregnet som (Oljepris_USD / lag(Oljepris_USD) - 1) * 100"
+    "Beregnet som (Oljepris_USD / lag(Oljepris_USD) - 1) * 100",
+    
+    "Valutakurs_I44",
+    "Importveid kronekursindeks I-44",
+    "Norges Bank",
+    "https://data.norges-bank.no/api/data/EXR/A.I44.NOK.SP?format=csv&lastNObservations=100&locale=no",
+    "EXR/A.I44.NOK.SP",
+    "Indeks",
+    "Årlig",
+    1990,
+    NA,
+    "get_valutakurs",
+    "Høyere verdi betyr svakere krone",
+    
+    "Valutakurs_I44_vekst",
+    "Årlig prosentvis vekst i importveid kronekursindeks I-44",
+    "Beregnet",
+    NA,
+    "Valutakurs_I44",
+    "Prosent",
+    "Årlig",
+    1991,
+    NA,
+    "get_valutakurs",
+    "Beregnet som (Valutakurs_I44 / lag(Valutakurs_I44) - 1) * 100. Positiv verdi betyr svakere krone",
   )
 }
