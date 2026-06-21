@@ -26,6 +26,9 @@ create_derived_variables <- function(data){
         Kommunale_utgifter / Offentlige_utgifter * 100,
       
       Statlig_utgiftsandel =
-        Statlige_utgifter / Offentlige_utgifter * 100
+        Statlige_utgifter / Offentlige_utgifter * 100,
+      
+      Boliginvesteringer_andel_BNP =
+        Boliginvesteringer / BNP_Fastland * 100
     )
 }

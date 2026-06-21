@@ -398,6 +398,42 @@ get_metadata <- function(){
     1988,
     NA,
     "get_kreditt",
-    "Beregnet som (Kreditt_K2 / lag(Kreditt_K2) - 1) * 100"
+    "Beregnet som (Kreditt_K2 / lag(Kreditt_K2) - 1) * 100",
+    
+    "Boliginvesteringer",
+    "Boliginvesteringer i husholdninger, faste 2023-priser",
+    "SSB",
+    "https://data.ssb.no/api/v0/no/table/nk/nk03/knr/SBMENU5140/NRMakroHov",
+    "09189",
+    "Millioner kroner (2023-priser)",
+    "Årlig",
+    1970,
+    NA,
+    "get_boliginvesteringer",
+    "Boliger (husholdninger), bruttoinvestering i fast realkapital",
+    
+    "Boliginvesteringer_vekst",
+    "Årlig vekst i boliginvesteringer",
+    "Beregnet",
+    NA,
+    "Boliginvesteringer",
+    "Prosent",
+    "Årlig",
+    1971,
+    NA,
+    "get_boliginvesteringer",
+    "Beregnet som (Boliginvesteringer / lag(Boliginvesteringer) - 1) * 100",
+    
+    "Boliginvesteringer_andel_BNP",
+    "Boliginvesteringer som andel av BNP Fastlands-Norge",
+    "Beregnet",
+    NA,
+    "Boliginvesteringer og BNP_Fastland",
+    "Prosent",
+    "Årlig",
+    1970,
+    NA,
+    "create_derived_variables",
+    "Beregnet som Boliginvesteringer / BNP_Fastland * 100"
   )
 }
