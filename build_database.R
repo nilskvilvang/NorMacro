@@ -10,6 +10,7 @@ build_database <- function(){
   bnp_lopende <- get_bnp_lopende()
   bnp_fastland <- get_bnp_fastland()
   lonn <- get_lonn()
+  boligpriser <- get_boligpriser()
   
   kpi |>
     dplyr::left_join(befolkning, by = "Aar") |>
@@ -20,5 +21,6 @@ build_database <- function(){
     dplyr::left_join(bnp_lopende, by = "Aar") |>
     dplyr::left_join(bnp_fastland, by = "Aar") |>
     dplyr::left_join(lonn, by = "Aar") |>
-    create_derived_variables()
+    create_derived_variables() |>
+    dplyr::left_join(boligpriser, by = "Aar")
 }

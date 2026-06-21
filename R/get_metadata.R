@@ -135,6 +135,30 @@ get_metadata <- function(){
     1972,
     NA,
     "create_derived_variables",
-    "Beregnet som Arbledige_NAV / Arbeidsstyrke * 100"
+    "Beregnet som Arbledige_NAV / Arbeidsstyrke * 100",
+    
+    "Boligprisindeks",
+    "Prisindeks for brukte boliger, hele landet, alle boligtyper (2015=100)",
+    "SSB",
+    "https://data.ssb.no/api/v0/no/table/pp/pp01/bpi/SBMENU7481/NyBoligindeks3",
+    "07230",
+    "Indeks (2015=100)",
+    "Årlig",
+    1992,
+    NA,
+    "get_boligpriser",
+    "Hele landet, alle boligtyper",
+    
+    "Boligprisvekst",
+    "Årlig prosentvis vekst i boligprisindeksen",
+    "Beregnet",
+    NA,
+    "Boligprisindeks",
+    "Prosent",
+    "Årlig",
+    1993,
+    NA,
+    "get_boligpriser",
+    "Beregnet som (Boligprisindeks / lag(Boligprisindeks) - 1) * 100"
   )
 }
