@@ -1,8 +1,20 @@
 # NorMacro
 
+**Version:** 0.1.0
+
 NorMacro er en åpen og reproduserbar makroøkonomisk database for Norge bygget i R.
 
 Databasen henter data direkte fra offentlige kilder som SSB, Norges Bank, NAV og FRED, kombinerer dem til ett konsistent datasett og dokumenterer alle variabler gjennom metadata.
+
+## Status
+
+Per juni 2026:
+
+- 24 variabler
+- 161 årsobservasjoner
+- Datakilder: SSB, NAV, Norges Bank og FRED
+- Full metadata-dokumentasjon
+- Automatisk oppdatering fra kildene
 
 ## Formål
 

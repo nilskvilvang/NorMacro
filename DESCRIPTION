@@ -1,0 +1,9 @@
+Package: NorMacro
+Title: Norwegian Macroeconomic Database
+Version: 0.1.0
+Authors@R:
+    person("Nils", "Kvilvang", role = c("aut", "cre"))
+Description: Reproducible Norwegian macroeconomic database built from public sources.
+License: MIT
+Encoding: UTF-8
+LazyData: true
