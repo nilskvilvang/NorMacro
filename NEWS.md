@@ -1,20 +1,20 @@
-# NorMacro
+# NorMacro 0.7.0
 
-## 0.1.0
+## Nye serier
 
-Initial public version.
+- Boliginvesteringer
+- Boliginvesteringer_vekst
+- Boliginvesteringer_andel_BNP
 
-Included:
+- Disponibel_inntekt_husholdninger
 
-- KPI and inflation
-- Population
-- Labour force
-- Employment
-- Registered unemployment
-- Wages
-- House prices
-- Interest rates
-- Exchange rate (I44)
-- Brent oil price
-- GDP (mainland and nominal)
-- Metadata system
+- Husholdningsgjeldsrate
+- Husholdningsgjeldsvekst
+- Husholdningsfordringsrate
+- Husholdningsnettofordringsrate
+
+## Forbedringer
+
+- Utvidet dokumentasjon og metadata
+- Alle 55 variabler dokumentert
+- README oppdatert

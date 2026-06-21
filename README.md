@@ -1,16 +1,15 @@
 # NorMacro
 
-**Version:** 0.1.0
+**Version:** 0.7.0
 
-NorMacro er en åpen og reproduserbar makroøkonomisk database for Norge bygget i R.
-
+NorMacro er en norsk makroøkonomisk database som automatisk bygger et datasett med 55 dokumenterte makroøkonomiske indikatorere.
 Databasen henter data direkte fra offentlige kilder som SSB, Norges Bank, NAV og FRED, kombinerer dem til ett konsistent datasett og dokumenterer alle variabler gjennom metadata.
 
 ## Status
 
 Per juni 2026:
 
-- 44 variabler
+- 53 variabler
 - 161 årsobservasjoner
 - SSB
 - NAV
@@ -46,65 +45,73 @@ Alle dataserier hentes automatisk fra originale datakilder.
 ## Variabler
 
 ### Demografi
+- Befolkning
+- Befolkningsvekst
 
-| Variabel | Beskrivelse |
-|---------|---------|
-| Befolkning | Folkemengde per 1. januar |
-| Befolkningsvekst | Årlig befolkningsvekst (%) |
+### Priser og inflasjon
+- KPI
+- Inflasjon
+- Strømpris
+- Strømprisvekst
 
 ### Arbeidsmarked
+- Arbeidsstyrke
+- Sysselsatte
+- Arbledige_NAV
+- Arbledighetsrate_NAV
+- ...
 
-| Variabel | Beskrivelse |
-|---------|---------|
-| Arbeidsstyrke | Personer i arbeidsstyrken |
-| Arbeidsstyrkeandel | Arbeidsstyrke som andel av befolkningen |
-| Sysselsatte | Sysselsatte personer |
-| Arbledige_NAV | Registrert arbeidsledighet |
-| Arbledighetsrate_NAV | NAV-ledighet (%) |
-| Arbledige_andel_arbeidsstyrke_NAV | Ledige som andel av arbeidsstyrken (%) |
-| Menn_arbledige_NAV | Registrerte arbeidsledige menn |
-| Kvinner_arbledige_NAV | Registrerte arbeidsledige kvinner |
-| Kvinneandel_arbledige_NAV | Kvinners andel av registrerte ledige (%) |
+### Lønn og inntekt
+- Lonn
+- Lonnvekst
+- Reallonnsvekst
+- Disponibel_inntekt_husholdninger
 
-### Priser
+### Boligmarked
+- Boligprisindeks
+- Boligprisvekst
+- Boliginvesteringer
+- Boliginvesteringer_vekst
+- Boliginvesteringer_andel_BNP
 
-| Variabel | Beskrivelse |
-|---------|---------|
-| KPI | Konsumprisindeks (2025 = 100) |
-| Inflasjon | Årlig inflasjon (%) |
-| Boligprisindeks | Prisindeks for brukte boliger |
-| Boligprisvekst | Årlig boligprisvekst (%) |
+### Kreditt og husholdninger
+- Kreditt_K2
+- Kredittvekst_K2
+- Husholdningsgjeldsrate
+- Husholdningsgjeldsvekst
+- Husholdningsfordringsrate
+- Husholdningsnettofordringsrate
 
-### Lønn
+### Finansmarkeder
+- Styringsrente
+- Valutakurs_I44
+- Valutakurs_I44_vekst
+- OSEAX
+- OSEAX_vekst
 
-| Variabel | Beskrivelse |
-|---------|---------|
-| Lonn | Gjennomsnittlig årslønn (1 000 kroner) |
-| Lonnvekst | Årlig lønnsvekst (%) |
-| Reallonnsvekst | Lønnsvekst minus inflasjon (%) |
+### Offentlig sektor
+- Offentlig_gjeld
+- Offentlig_nettofordringer
+- Offentlig_gjeld_andel_BNP
+- Offentlig_nettofordringer_andel_BNP
+- Offentlige_utgifter
+- Statlige_utgifter
+- Kommunale_utgifter
+- Kommunal_utgiftsandel
+- Statlig_utgiftsandel
 
-### Produksjon
+### Nasjonalregnskap og handel
+- BNP_lopende
+- BNP_Fastland
+- BNP_Fastland_vekst
+- Eksport
+- Eksportvekst
+- Import
+- Importvekst
 
-| Variabel | Beskrivelse |
-|---------|---------|
-| BNP_lopende | BNP i løpende priser |
-| BNP_Fastland | BNP Fastlands-Norge i faste priser |
-| BNP_Fastland_vekst | Årlig BNP-vekst (%) |
-
-### Finans og valuta
-
-| Variabel | Beskrivelse |
-|---------|---------|
-| Styringsrente | Norges Banks styringsrente (%) |
-| Valutakurs_I44 | Importveid kronekursindeks (I-44) |
-| Valutakurs_I44_vekst | Årlig endring i I-44 (%) |
-
-### Energi
-
-| Variabel | Beskrivelse |
-|---------|---------|
-| Oljepris_USD | Brent oljepris (USD per fat) |
-| Oljeprisvekst | Årlig vekst i oljepris (%) |
+### Energi og råvarer
+- Oljepris_USD
+- Oljeprisvekst
 
 ---
 

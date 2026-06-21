@@ -29,6 +29,12 @@ create_derived_variables <- function(data){
         Statlige_utgifter / Offentlige_utgifter * 100,
       
       Boliginvesteringer_andel_BNP =
-        Boliginvesteringer / BNP_Fastland * 100
+        Boliginvesteringer / BNP_Fastland * 100,
+      
+      BNP_Fastland_per_innbygger =
+        BNP_Fastland / Befolkning,
+      
+      BNP_lopende_per_innbygger =
+        BNP_lopende / Befolkning
     )
 }

@@ -434,6 +434,50 @@ get_metadata <- function(){
     1970,
     NA,
     "create_derived_variables",
-    "Beregnet som Boliginvesteringer / BNP_Fastland * 100"
+    "Beregnet som Boliginvesteringer / BNP_Fastland * 100",
+    
+    "Husholdningsgjeldsrate", "Husholdningenes gjeldsrate", "SSB",
+    "https://data.ssb.no/api/v0/no/table/nk/nk01/finsek/div_finsek_mappe/FinansSektReg9",
+    "09477", "Prosent", "Årlig", 1996, NA, "get_husholdningsgjeld",
+    "Ujustert. Årsgjennomsnitt av kvartalstall",
+    
+    "Husholdningsfordringsrate", "Husholdningenes fordringsrate", "SSB",
+    "https://data.ssb.no/api/v0/no/table/nk/nk01/finsek/div_finsek_mappe/FinansSektReg9",
+    "09477", "Prosent", "Årlig", 1996, NA, "get_husholdningsgjeld",
+    "Ujustert. Årsgjennomsnitt av kvartalstall",
+    
+    "Husholdningsnettofordringsrate", "Husholdningenes nettofordringsrate", "SSB",
+    "https://data.ssb.no/api/v0/no/table/nk/nk01/finsek/div_finsek_mappe/FinansSektReg9",
+    "09477", "Prosent", "Årlig", 1996, NA, "get_husholdningsgjeld",
+    "Ujustert. Årsgjennomsnitt av kvartalstall",
+    
+    "Husholdningsgjeldsvekst", "Husholdningenes gjeldsvekst", "SSB",
+    "https://data.ssb.no/api/v0/no/table/nk/nk01/finsek/div_finsek_mappe/FinansSektReg9",
+    "09477", "Prosent", "Årlig", 1996, NA, "get_husholdningsgjeld",
+    "Ujustert. Årsgjennomsnitt av kvartalstall",
+    
+    "BNP_Fastland_per_innbygger",
+    "BNP Fastlands-Norge per innbygger",
+    "Beregnet",
+    NA,
+    "BNP_Fastland og Befolkning",
+    "1000 kroner per innbygger",
+    "Årlig",
+    1970,
+    NA,
+    "create_derived_variables",
+    "Beregnet som BNP_Fastland / Befolkning",
+    
+    "BNP_lopende_per_innbygger",
+    "BNP i løpende priser per innbygger",
+    "Beregnet",
+    NA,
+    "BNP_lopende og Befolkning",
+    "1000 kroner per innbygger",
+    "Årlig",
+    1970,
+    NA,
+    "create_derived_variables",
+    "Beregnet som BNP_lopende / Befolkning"
   )
 }
