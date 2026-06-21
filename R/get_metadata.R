@@ -468,6 +468,18 @@ get_metadata <- function(){
     "create_derived_variables",
     "Beregnet som BNP_Fastland / Befolkning",
     
+    "BNP_Fastland_per_innbygger_vekst",
+    "Årlig vekst i BNP Fastlands-Norge per innbygger",
+    "Beregnet",
+    NA,
+    "BNP_Fastland_per_innbygger",
+    "Prosent",
+    "Årlig",
+    1971,
+    NA,
+    "create_derived_variables",
+    "Beregnet som (BNP_Fastland_per_innbygger / lag(BNP_Fastland_per_innbygger) - 1) * 100",
+    
     "BNP_lopende_per_innbygger",
     "BNP i løpende priser per innbygger",
     "Beregnet",
@@ -478,6 +490,30 @@ get_metadata <- function(){
     1970,
     NA,
     "create_derived_variables",
-    "Beregnet som BNP_lopende / Befolkning"
+    "Beregnet som BNP_lopende / Befolkning",
+    
+    "Arbeidsproduktivitet",
+    "BNP Fastlands-Norge per sysselsatt",
+    "Beregnet",
+    NA,
+    "BNP_Fastland og Sysselsatte",
+    "Millioner kroner per sysselsatt",
+    "Årlig",
+    1972,
+    NA,
+    "create_derived_variables",
+    "Beregnet som BNP_Fastland / Sysselsatte",
+    
+    "Produktivitetsvekst",
+    "Årlig vekst i arbeidsproduktivitet",
+    "Beregnet",
+    NA,
+    "Arbeidsproduktivitet",
+    "Prosent",
+    "Årlig",
+    1973,
+    NA,
+    "create_derived_variables",
+    "Beregnet som (Arbeidsproduktivitet / lag(Arbeidsproduktivitet) - 1) * 100"
   )
 }

@@ -1,4 +1,5 @@
 
+
 old_wd <- getwd()
 setwd("../..")
 source("source_all.R")
@@ -20,4 +21,13 @@ testthat::test_that("All variables have metadata", {
   undocumented <- setdiff(names(normacro), c(metadata$Variabel, "Aar"))
   
   testthat::expect_equal(undocumented, character(0))
+})
+
+test_that("Productivity variables contain data", {
+  normacro <- get_normacro()
+  
+  expect_gt(sum(!is.na(normacro$Arbeidsproduktivitet)), 0)
+  
+  expect_gt(sum(!is.na(normacro$BNP_Fastland_per_innbygger)), 0)
+  
 })

@@ -34,7 +34,19 @@ create_derived_variables <- function(data){
       BNP_Fastland_per_innbygger =
         BNP_Fastland / Befolkning,
       
+      BNP_Fastland_per_innbygger_vekst =
+        (BNP_Fastland_per_innbygger /
+           dplyr::lag(BNP_Fastland_per_innbygger) - 1) * 100,
+      
       BNP_lopende_per_innbygger =
-        BNP_lopende / Befolkning
+        BNP_lopende / Befolkning,
+      
+      Arbeidsproduktivitet =
+        BNP_Fastland / Sysselsatte
+    ) |>
+    
+    dplyr::mutate(
+      Produktivitetsvekst =
+        (Arbeidsproduktivitet / dplyr::lag(Arbeidsproduktivitet) - 1) * 100
     )
 }
