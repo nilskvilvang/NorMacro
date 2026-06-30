@@ -260,6 +260,20 @@ Alle dataserier lastes ned direkte fra kildene ved kjøring, slik at databasen a
 
 ---
 
+## Metadata og variabelsøk
+
+NorMacro inneholder metadata for alle variabler.
+
+search_variables() søker i variabelnavn, beskrivelser og kommentarer.
+
+describe_variable() viser metadata for én enkelt variabel.
+
+```r
+search_variables("konsum")
+describe_variable("BNP_Fastland")
+```
+---
+
 ## Lisens
 
 Datakildene tilhører de respektive institusjonene:
