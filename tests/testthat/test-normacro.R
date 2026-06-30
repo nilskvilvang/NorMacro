@@ -43,3 +43,11 @@ testthat::test_that("Metadata helper functions work", {
   testthat::expect_equal(nrow(description), 1)
   testthat::expect_equal(description$Variabel, "BNP_Fastland")
 })
+
+testthat::test_that("Overview works", {
+  result <- overview(normacro)
+  
+  testthat::expect_true(is.list(result))
+  testthat::expect_true("categories" %in% names(result))
+  testthat::expect_gt(result$n_variables, 0)
+})

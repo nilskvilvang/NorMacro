@@ -1,21 +1,27 @@
-# NorMacro 0.7.0
+# NorMacro 0.7.2
 
-## Nye serier
+## Nye funksjoner
 
-- Boliginvesteringer
-- Boliginvesteringer_vekst
-- Boliginvesteringer_andel_BNP
+- overview()
+- list_categories()
+- list_variables()
+- search_variables()
+- describe_variable()
 
-- Disponibel_inntekt_husholdninger
+## Infrastruktur
 
-- Husholdningsgjeldsrate
-- Husholdningsgjeldsvekst
-- Husholdningsfordringsrate
-- Husholdningsnettofordringsrate
+- Metadata flyttet til data/metadata.csv
+- Metadata utvidet med kategori og type
+- Forbedret dokumentasjon
+- Oppdatert testdekning
 
-## Forbedringer
+## Nye variabler
 
-- Utvidet dokumentasjon og metadata
-- Alle 55 variabler dokumentert
-- Lagt til automatisk kvalitetssjekk med funksjonen `check_normacro()`
+- Privat konsum
+- Offentlig konsum
+- Husholdningssparing
+- Handelsbalanse
+- Offentlige investeringer
+
+## Annet
 - README oppdatert

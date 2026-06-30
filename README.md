@@ -1,21 +1,43 @@
 # NorMacro
 
-**Version:** 0.7.1
+**Version:** 0.7.2
 
-NorMacro er en norsk makroøkonomisk database som automatisk bygger et datasett med 75 dokumenterte makroøkonomiske indikatorere.
-Databasen henter data direkte fra offentlige kilder som SSB, Norges Bank, NAV og FRED, kombinerer dem til ett konsistent datasett og dokumenterer alle variabler gjennom metadata.
+NorMacro er en norsk makroøkonomisk database med årlige indikatorer fra SSB, NAV, Norges Bank, FRED og Yahoo Finance. Databasen er selvdokumenterende gjennom innebygde metadata og hjelpefunksjoner.
+
+## Kom i gang
+
+```r
+source("source_all.R")
+
+overview()
+
+normacro <- get_normacro()
+```
+
+## Utforske databasen
+
+NorMacro inneholder metadata for alle variabler.
+
+```r
+overview()
+
+list_categories()
+
+list_variables()
+
+search_variables("konsum")
+
+describe_variable("BNP_Fastland")
+```
 
 ## Status
 
-Per juni 2026:
+Ved siste versjon inneholder NorMacro:
 
-- 75 variabler
-- 161 årsobservasjoner
-- SSB
-- NAV
-- Norges Bank
-- FRED
-- Yahoo Finance
+- omtrent 75 makroøkonomiske indikatorer
+- data fra 1865 til siste tilgjengelige år
+- automatisk nedlasting fra offentlige datakilder
+- komplett metadata og kvalitetskontroller
 
 ## Formål
 
@@ -44,25 +66,26 @@ Alle dataserier hentes automatisk fra relevante datakilder, i all hovedsak origi
 
 ## Variabler
 
-### Demografi
+NorMacro organiserer variablene i følgende kategorier:
 
-### Priser og inflasjon
+- Demografi
+- Priser og inflasjon
+- Arbeidsmarked
+- Lønn og inntekt
+- Husholdningsøkonomi
+- Boligmarked
+- Kreditt og husholdninger
+- Finansmarkeder
+- Offentlige finanser
+- Nasjonalregnskap
+- Utenriksøkonomi
+- Energi og råvarer
 
-### Arbeidsmarked
+For å se alle tilgjengelige variabler:
 
-### Lønn og inntekt
-
-### Boligmarked
-
-### Kreditt og husholdninger
-
-### Finansmarkeder
-
-### Offentlig sektor
-
-### Nasjonalregnskap og handel
-
-### Energi og råvarer
+```r
+list_variables()
+```
 
 ---
 
@@ -101,6 +124,12 @@ Last inn alle funksjoner:
 source("source_all.R")
 ```
 
+Få oversikt:
+
+```r
+overview()
+```
+
 Bygg databasen:
 
 ```r
@@ -120,11 +149,14 @@ Senere kjøringer bruker lokale `.rds`-filer og går betydelig raskere - normalt
 
 For å tvinge ny nedlasting:
 
+```r
 get_kpi(refresh = TRUE)
-
+```
 For å slette all cache:
 
+```r
 unlink("cache", recursive = TRUE)
+```
 
 ## Metadata
 
@@ -187,55 +219,28 @@ data_clean/
 
 ```text
 NorMacro/
-├── .gitignore
-├── DESCRIPTION
-├── NEWS.md
-├── PROJECT_STATUS.md
-├── README.md
-├── NorMacro.Rproj
-├── source_all.R
 │
 ├── R/
-│   ├── cache_get.R
-│   ├── source_ssb.R
-│   ├── source_nav.R
+│   ├── get_*.R
 │   ├── build_database.R
-│   ├── get_normacro.R
-│   ├── get_metadata.R
-│   ├── check_metadata.R
-│   ├── check_normacro.R
 │   ├── create_derived_variables.R
-│   ├── utils.R
-│   │
-│   ├── get_kpi.R
-│   ├── get_befolkning.R
-│   ├── get_arbeidsstyrke.R
-│   ├── get_sysselsatte.R
-│   ├── get_ledighet.R
-│   ├── get_rente.R
-│   ├── get_bnp_lopende.R
-│   ├── get_bnp_fastland.R
-│   ├── get_lonn.R
-│   ├── get_boligpriser.R
-│   ├── get_oljepris.R
-│   ├── get_valutakurs.R
-│   ├── get_utenrikshandel.R
-│   ├── get_oseax.R
-│   ├── get_strompris.R
-│   ├── get_offentlig_finans.R
-│   ├── get_offentlige_utgifter.R
-│   ├── get_kreditt.R
-│   ├── get_boliginvesteringer.R
-│   ├── get_disponibel_inntekt.R
-│   ├── get_husholdningsgjeld.R
-│   └── get_offentlige_investeringer.R
+│   ├── get_metadata.R
+│   ├── overview.R
+│   ├── list_categories.R
+│   ├── list_variables.R
+│   ├── search_variables.R
+│   ├── describe_variable.R
+│   ├── check_normacro.R
+│   └── utils.R
 │
+├── data/
+│   └── metadata.csv
+│
+├── cache/
+├── scripts/
 ├── tests/
-│   └── testthat/
-│       └── test-normacro.R
-│
-└── cache/
-    └── *.rds
+├── source_all.R
+└── README.md
 ```
 
 ## Filstruktur
@@ -245,7 +250,8 @@ NorMacro/
 - `R/cache_get.R` håndterer lokal cache av eksterne datakall.
 - `R/build_database.R` kobler alle serier sammen på `Aar`.
 - `R/create_derived_variables.R` beregner avledede indikatorer.
-- `R/get_metadata.R` dokumenterer alle variabler.
+- `data/metadata.csv` inneholder metadata for alle variabler.
+- `R/get_metadata.R` leser metadata.csv
 - `R/check_normacro.R` kjører kvalitetskontroller.
 - `tests/testthat/` inneholder automatiske tester.
 - `cache/` inneholder lokale `.rds`-filer og pushes ikke til GitHub.
@@ -254,7 +260,7 @@ NorMacro/
 
 ## Reproduserbarhet
 
-NorMacro inneholder ingen manuelt vedlikeholdte datafiler.
+NorMacro inneholder ingen manuelt vedlikeholdte **tidsserier**. Alle makroøkonomiske data lastes ned automatisk fra de opprinnelige datakildene. Den eneste vedlikeholdte datafilen er `metadata.csv`, som dokumenterer variablene.
 
 Alle dataserier lastes ned direkte fra kildene ved kjøring, slik at databasen alltid oppdateres med siste tilgjengelige observasjoner.
 
@@ -268,13 +274,11 @@ search_variables() søker i variabelnavn, beskrivelser og kommentarer.
 
 describe_variable() viser metadata for én enkelt variabel.
 
+Eksempler:  
+
 ```r
 search_variables("konsum")
-description <- capture.output(
-  metadata <- describe_variable("BNP_Fastland")
-)
-
-description <- metadata
+describe_variable("BNP_Fastland")
 ```
 ---
 
