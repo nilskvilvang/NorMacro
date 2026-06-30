@@ -45,73 +45,24 @@ Alle dataserier hentes automatisk fra relevante datakilder, i all hovedsak origi
 ## Variabler
 
 ### Demografi
-- Befolkning
-- Befolkningsvekst
 
 ### Priser og inflasjon
-- KPI
-- Inflasjon
 
 ### Arbeidsmarked
-- Arbeidsstyrke
-- Sysselsatte
-- Arbledige_NAV
-- Arbledighetsrate_NAV
-- ...
 
 ### Lønn og inntekt
-- Lonn
-- Lonnvekst
-- Reallonnsvekst
-- Disponibel_inntekt_husholdninger
 
 ### Boligmarked
-- Boligprisindeks
-- Boligprisvekst
-- Boliginvesteringer
-- Boliginvesteringer_vekst
-- Boliginvesteringer_andel_BNP
 
 ### Kreditt og husholdninger
-- Kreditt_K2
-- Kredittvekst_K2
-- Husholdningsgjeldsrate
-- Husholdningsgjeldsvekst
-- Husholdningsfordringsrate
-- Husholdningsnettofordringsrate
 
 ### Finansmarkeder
-- Styringsrente
-- Valutakurs_I44
-- Valutakurs_I44_vekst
-- OSEAX
-- OSEAX_vekst
 
 ### Offentlig sektor
-- Offentlig_gjeld
-- Offentlig_nettofordringer
-- Offentlig_gjeld_andel_BNP
-- Offentlig_nettofordringer_andel_BNP
-- Offentlige_utgifter
-- Statlige_utgifter
-- Kommunale_utgifter
-- Kommunal_utgiftsandel
-- Statlig_utgiftsandel
 
 ### Nasjonalregnskap og handel
-- BNP_lopende
-- BNP_Fastland
-- BNP_Fastland_vekst
-- Eksport
-- Eksportvekst
-- Import
-- Importvekst
 
 ### Energi og råvarer
-- Oljepris_USD
-- Oljeprisvekst
-- Strømpris
-- Strømprisvekst
 
 ---
 

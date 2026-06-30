@@ -54,7 +54,19 @@ create_derived_variables <- function(data){
         Offentlig_konsum / BNP_Fastland * 100,
       
       Husholdningssparing_andel_disponibel_inntekt =
-        Husholdningssparing / Disponibel_inntekt_husholdninger * 100
+        Husholdningssparing / Disponibel_inntekt_husholdninger * 100,
+      
+      Handelsbalanse =
+        Eksport - Import,
+      
+      Handelsbalanse_andel_BNP =
+        Handelsbalanse / BNP_Fastland * 100,
+      
+      Eksportandel_BNP =
+        Eksport / BNP_Fastland * 100,
+      
+      Importandel_BNP =
+        Import / BNP_Fastland * 100
       
     ) |>
     
