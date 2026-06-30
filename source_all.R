@@ -31,6 +31,7 @@ source("R/get_husholdningsgjeld.R")
 source("R/get_disponibel_inntekt.R")
 source("R/get_offentlige_investeringer.R")
 source("R/get_konsum.R")
+source("R/get_sparing.R")
 source("R/check_normacro.R")
 
 source("R/build_database.R")

@@ -51,7 +51,10 @@ create_derived_variables <- function(data){
         Privat_konsum / BNP_Fastland * 100,
       
       Offentlig_konsum_andel_BNP =
-        Offentlig_konsum / BNP_Fastland * 100
+        Offentlig_konsum / BNP_Fastland * 100,
+      
+      Husholdningssparing_andel_disponibel_inntekt =
+        Husholdningssparing / Disponibel_inntekt_husholdninger * 100
       
     ) |>
     
