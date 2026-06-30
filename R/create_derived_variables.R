@@ -47,6 +47,12 @@ create_derived_variables <- function(data){
       Offentlige_investeringer_andel_BNP =
         Offentlige_investeringer / BNP_Fastland * 100,
       
+      Privat_konsum_andel_BNP =
+        Privat_konsum / BNP_Fastland * 100,
+      
+      Offentlig_konsum_andel_BNP =
+        Offentlig_konsum / BNP_Fastland * 100
+      
     ) |>
     
     dplyr::mutate(

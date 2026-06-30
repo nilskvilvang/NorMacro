@@ -1,15 +1,15 @@
 # NorMacro
 
-**Version:** 0.7.0
+**Version:** 0.7.1
 
-NorMacro er en norsk makroøkonomisk database som automatisk bygger et datasett med 61 dokumenterte makroøkonomiske indikatorere.
+NorMacro er en norsk makroøkonomisk database som automatisk bygger et datasett med 67 dokumenterte makroøkonomiske indikatorere.
 Databasen henter data direkte fra offentlige kilder som SSB, Norges Bank, NAV og FRED, kombinerer dem til ett konsistent datasett og dokumenterer alle variabler gjennom metadata.
 
 ## Status
 
 Per juni 2026:
 
-- 53 variabler
+- 67 variabler
 - 161 årsobservasjoner
 - SSB
 - NAV
@@ -27,7 +27,7 @@ Målet med NorMacro er å tilby et enkelt og transparent datasett for:
 - forskning og metodeutvikling
 - tidsserieanalyser og prognoser
 
-Alle dataserier hentes automatisk fra originale datakilder.
+Alle dataserier hentes automatisk fra relevante datakilder, i all hovedsak originalkilde.
 
 ---
 
@@ -51,8 +51,6 @@ Alle dataserier hentes automatisk fra originale datakilder.
 ### Priser og inflasjon
 - KPI
 - Inflasjon
-- Strømpris
-- Strømprisvekst
 
 ### Arbeidsmarked
 - Arbeidsstyrke
@@ -112,6 +110,8 @@ Alle dataserier hentes automatisk fra originale datakilder.
 ### Energi og råvarer
 - Oljepris_USD
 - Oljeprisvekst
+- Strømpris
+- Strømprisvekst
 
 ---
 
@@ -236,29 +236,68 @@ data_clean/
 
 ```text
 NorMacro/
+├── .gitignore
+├── DESCRIPTION
+├── NEWS.md
+├── PROJECT_STATUS.md
+├── README.md
+├── NorMacro.Rproj
+├── source_all.R
 │
 ├── R/
+│   ├── cache_get.R
+│   ├── source_ssb.R
+│   ├── source_nav.R
+│   ├── build_database.R
+│   ├── get_normacro.R
+│   ├── get_metadata.R
+│   ├── check_metadata.R
+│   ├── check_normacro.R
+│   ├── create_derived_variables.R
+│   ├── utils.R
+│   │
 │   ├── get_kpi.R
 │   ├── get_befolkning.R
 │   ├── get_arbeidsstyrke.R
 │   ├── get_sysselsatte.R
 │   ├── get_ledighet.R
 │   ├── get_rente.R
-│   ├── get_valutakurs.R
 │   ├── get_bnp_lopende.R
 │   ├── get_bnp_fastland.R
 │   ├── get_lonn.R
 │   ├── get_boligpriser.R
 │   ├── get_oljepris.R
-│   ├── build_database.R
-│   ├── get_metadata.R
-│   ├── get_normacro.R
-│   └── utils.R
+│   ├── get_valutakurs.R
+│   ├── get_utenrikshandel.R
+│   ├── get_oseax.R
+│   ├── get_strompris.R
+│   ├── get_offentlig_finans.R
+│   ├── get_offentlige_utgifter.R
+│   ├── get_kreditt.R
+│   ├── get_boliginvesteringer.R
+│   ├── get_disponibel_inntekt.R
+│   ├── get_husholdningsgjeld.R
+│   └── get_offentlige_investeringer.R
 │
-├── source_all.R
-├── README.md
-└── .gitignore
+├── tests/
+│   └── testthat/
+│       └── test-normacro.R
+│
+└── cache/
+    └── *.rds
 ```
+
+## Filstruktur
+
+- `source_all.R` laster alle R-filer i riktig rekkefølge.
+- `R/get_*.R` henter enkeltserier fra eksterne datakilder.
+- `R/cache_get.R` håndterer lokal cache av eksterne datakall.
+- `R/build_database.R` kobler alle serier sammen på `Aar`.
+- `R/create_derived_variables.R` beregner avledede indikatorer.
+- `R/get_metadata.R` dokumenterer alle variabler.
+- `R/check_normacro.R` kjører kvalitetskontroller.
+- `tests/testthat/` inneholder automatiske tester.
+- `cache/` inneholder lokale `.rds`-filer og pushes ikke til GitHub.
 
 ---
 

@@ -22,6 +22,7 @@ build_database <- function(){
   boliginvesteringer <- get_boliginvesteringer()
   husholdningsgjeld <- get_husholdningsgjeld()
   offentlige_investeringer <- get_offentlige_investeringer()
+  konsum <- get_konsum()
   
   kpi |>
     dplyr::left_join(befolkning, by = "Aar") |>
@@ -44,5 +45,6 @@ build_database <- function(){
     dplyr::left_join(boliginvesteringer, by = "Aar") |>
     dplyr::left_join(husholdningsgjeld, by = "Aar") |>
     dplyr::left_join(offentlige_investeringer, by = "Aar") |>
+    dplyr::left_join(konsum, by = "Aar") |>
     create_derived_variables() 
 }
