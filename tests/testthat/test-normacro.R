@@ -31,3 +31,15 @@ test_that("Productivity variables contain data", {
   expect_gt(sum(!is.na(normacro$BNP_Fastland_per_innbygger)), 0)
   
 })
+
+testthat::test_that("Metadata helper functions work", {
+  result <- search_variables("konsum")
+  
+  testthat::expect_true(nrow(result) > 0)
+  testthat::expect_true("Privat_konsum" %in% result$Variabel)
+  
+  description <- describe_variable("BNP_Fastland")
+  
+  testthat::expect_equal(nrow(description), 1)
+  testthat::expect_equal(description$Variabel, "BNP_Fastland")
+})

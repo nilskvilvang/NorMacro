@@ -33,6 +33,8 @@ source("R/get_offentlige_investeringer.R")
 source("R/get_konsum.R")
 source("R/get_sparing.R")
 source("R/check_normacro.R")
+source("R/search_variables.R")
+source("R/describe_variable.R")
 
 source("R/build_database.R")
 
