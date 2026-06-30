@@ -35,6 +35,8 @@ source("R/get_sparing.R")
 source("R/check_normacro.R")
 source("R/search_variables.R")
 source("R/describe_variable.R")
+source("R/list_categories.R")
+source("R/list_variables.R")
 
 source("R/build_database.R")
 

@@ -270,7 +270,11 @@ describe_variable() viser metadata for én enkelt variabel.
 
 ```r
 search_variables("konsum")
-describe_variable("BNP_Fastland")
+description <- capture.output(
+  metadata <- describe_variable("BNP_Fastland")
+)
+
+description <- metadata
 ```
 ---
 
