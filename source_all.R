@@ -38,6 +38,8 @@ source("R/describe_variable.R")
 source("R/list_categories.R")
 source("R/list_variables.R")
 source("R/overview.R")
+source("R/get_fastlandsinvesteringer.R")
+source("R/validate_metadata.R")
 
 source("R/build_database.R")
 

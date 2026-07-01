@@ -66,7 +66,10 @@ create_derived_variables <- function(data){
         Eksport / BNP_Fastland * 100,
       
       Importandel_BNP =
-        Import / BNP_Fastland * 100
+        Import / BNP_Fastland * 100,
+      
+      Fastlandsinvesteringer_andel_BNP =
+        Fastlandsinvesteringer / BNP_Fastland * 100
       
     ) |>
     

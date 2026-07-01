@@ -280,6 +280,12 @@ Eksempler:
 search_variables("konsum")
 describe_variable("BNP_Fastland")
 ```
+
+### Vedlikehold av metadata
+
+`data/metadata.csv` er NorMacros "single source of truth" for variabelmetadata.
+
+Filen bør redigeres i en teksteditor (f.eks. Notepad++ eller VS Code), ikke i Excel, for å unngå at CSV-formatet endres.
 ---
 
 ## Lisens

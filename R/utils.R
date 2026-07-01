@@ -15,6 +15,11 @@ library(quantmod)
 ## tail(normacro)
 
 
+# git add .
+# git commit -m "Added household and public consumption indicators"
+# git push
+
+
 check_metadata <- function(data, metadata = NULL, ignore = "Aar"){
   
   if(is.null(metadata)){
