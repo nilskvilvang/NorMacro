@@ -28,6 +28,7 @@ build_database <- function(){
   fastlandsinvesteringer <- get_fastlandsinvesteringer()
   industriproduksjon <- get_industriproduksjon()
   byggeaktivitet <- get_byggeaktivitet()
+  detaljhandel <- get_detaljhandel()
   
   kpi |>
     dplyr::left_join(befolkning, by = "Aar") |>
@@ -56,5 +57,6 @@ build_database <- function(){
     dplyr::left_join(fastlandsinvesteringer, by = "Aar") |>
     dplyr::left_join(industriproduksjon, by = "Aar") |>
     dplyr::left_join(byggeaktivitet, by = "Aar") |>
+    dplyr::left_join(detaljhandel, by = "Aar") |>
     create_derived_variables() 
 }
