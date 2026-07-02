@@ -32,6 +32,7 @@ build_database <- function(){
   kapasitetsutnytting <- get_kapasitetsutnytting()
   konjunkturindikator <- get_konjunkturindikator()
   ressursknapphet <- get_ressursknapphet()
+  ordrebeholdning <- get_ordrebeholdning()
   
   kpi |>
     dplyr::left_join(befolkning, by = "Aar") |>
@@ -64,6 +65,7 @@ build_database <- function(){
     dplyr::left_join(kapasitetsutnytting, by = "Aar") |>
     dplyr::left_join(konjunkturindikator, by = "Aar") |>
     dplyr::left_join(ressursknapphet, by = "Aar") |>
+    dplyr::left_join(ordrebeholdning, by = "Aar") |>
         
     create_derived_variables() 
 }

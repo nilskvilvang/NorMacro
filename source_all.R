@@ -6,6 +6,8 @@ source("R/cache_get.R")
 source("R/source_ssb.R")
 source("R/source_nav.R")
 
+source("R/install_dependencies.R")
+
 source("R/get_kpi.R")
 source("R/get_befolkning.R")
 source("R/get_arbeidsstyrke.R")
@@ -47,6 +49,7 @@ source("R/get_detaljhandel.R")
 source("R/get_kapasitetsutnytting.R")
 source("R/get_konjunkturindikator.R")
 source("R/get_ressursknapphet.R")
+source("R/get_ordrebeholdning.R")
 
 source("R/build_database.R")
 

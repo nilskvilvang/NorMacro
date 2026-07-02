@@ -47,7 +47,7 @@ coverage()
 
 Pr 1.juli 2026 inneholder NorMacro:
 
-- 83 makroøkonomiske variabler
+- 88 makroøkonomiske variabler
 - 161 årsobservasjoner (1865–2025)
 - 13 fagkategorier
 - Full metadata for alle variabler
@@ -138,6 +138,12 @@ Last inn alle funksjoner:
 
 ```r
 source("source_all.R")
+```
+
+Installer nødvendige pakker (hvis nødvendig):
+
+```r
+install_dependencies()
 ```
 
 Få oversikt:
@@ -240,13 +246,17 @@ NorMacro/
 │   ├── get_*.R
 │   ├── build_database.R
 │   ├── create_derived_variables.R
+│   ├── cache_get.R
+│   ├── ssb_get.R
 │   ├── get_metadata.R
+│   ├── validate_metadata.R
+│   ├── check_normacro.R
 │   ├── overview.R
+│   ├── coverage.R
 │   ├── list_categories.R
 │   ├── list_variables.R
 │   ├── search_variables.R
 │   ├── describe_variable.R
-│   ├── check_normacro.R
 │   └── utils.R
 │
 ├── data/
@@ -255,22 +265,27 @@ NorMacro/
 ├── cache/
 ├── scripts/
 ├── tests/
+│   └── testthat/
+│
 ├── source_all.R
+├── NEWS.md
 └── README.md
 ```
 
 ## Filstruktur
 
-- `source_all.R` laster alle R-filer i riktig rekkefølge.
-- `R/get_*.R` henter enkeltserier fra eksterne datakilder.
-- `R/cache_get.R` håndterer lokal cache av eksterne datakall.
-- `R/build_database.R` kobler alle serier sammen på `Aar`.
+- `R/get_*.R` henter og klargjør enkeltserier fra eksterne datakilder.
+- `R/build_database.R` bygger NorMacro ved å koble alle serier på `Aar`.
 - `R/create_derived_variables.R` beregner avledede indikatorer.
-- `data/metadata.csv` inneholder metadata for alle variabler.
-- `R/get_metadata.R` leser metadata.csv
-- `R/check_normacro.R` kjører kvalitetskontroller.
-- `tests/testthat/` inneholder automatiske tester.
-- `cache/` inneholder lokale `.rds`-filer og pushes ikke til GitHub.
+- `R/cache_get.R` håndterer lokal caching av nedlastede datasett.
+- `R/ssb_get.R` standardiserer kall mot SSBs PXWEB-API.
+- `data/metadata.csv` inneholder dokumentasjon for alle variabler.
+- `R/get_metadata.R` leser metadata inn i R.
+- `R/validate_metadata.R` validerer struktur og innhold i metadata.
+- `R/check_normacro.R` kjører kvalitetskontroller av databasen.
+- `R/overview.R` og øvrige hjelpefunksjoner (`coverage()`, `list_*()`, `search_variables()`, `describe_variable()`) gjør databasen selvdokumenterende.
+- `tests/testthat/` inneholder automatiske enhetstester.
+- `cache/` inneholder lokale `.rds`-filer og versjonshåndteres ikke.
 
 ---
 
