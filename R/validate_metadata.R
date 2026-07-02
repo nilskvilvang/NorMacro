@@ -82,6 +82,7 @@ validate_metadata <- function(metadata = NULL){
   }
   
   if("Kategori" %in% names(metadata)){
+    
     valid_categories <- c(
       "Arbeidsmarked",
       "Boligmarked",
@@ -94,9 +95,12 @@ validate_metadata <- function(metadata = NULL){
       "Nasjonalregnskap",
       "Offentlige finanser",
       "Priser og inflasjon",
-      "Utenriks\u00f8konomi",
-      "Produksjon og aktivitet"
+      "Produksjon og aktivitet",
+      "Utenriks\u00f8konomi"
     )
+    
+    valid_categories <- enc2utf8(valid_categories)
+    metadata$Kategori <- enc2utf8(metadata$Kategori)
     
     invalid_categories <- setdiff(
       unique(metadata$Kategori),
