@@ -30,6 +30,7 @@ build_database <- function(){
   byggeaktivitet <- get_byggeaktivitet()
   detaljhandel <- get_detaljhandel()
   kapasitetsutnytting <- get_kapasitetsutnytting()
+  konjunkturindikator <- get_konjunkturindikator()
   
   kpi |>
     dplyr::left_join(befolkning, by = "Aar") |>
@@ -60,5 +61,6 @@ build_database <- function(){
     dplyr::left_join(byggeaktivitet, by = "Aar") |>
     dplyr::left_join(detaljhandel, by = "Aar") |>
     dplyr::left_join(kapasitetsutnytting, by = "Aar") |>
+    dplyr::left_join(konjunkturindikator, by = "Aar") |>
     create_derived_variables() 
 }

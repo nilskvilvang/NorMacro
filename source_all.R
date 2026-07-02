@@ -45,6 +45,7 @@ source("R/get_industriproduksjon.R")
 source("R/get_byggeaktivitet.R")
 source("R/get_detaljhandel.R")
 source("R/get_kapasitetsutnytting.R")
+source("R/get_konjunkturindikator.R")
 
 source("R/build_database.R")
 
