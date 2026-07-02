@@ -94,7 +94,8 @@ validate_metadata <- function(metadata = NULL){
       "Nasjonalregnskap",
       "Offentlige finanser",
       "Priser og inflasjon",
-      "Utenriks\u00f8konomi"
+      "Utenriks\u00f8konomi",
+      "Produksjon og aktivitet"
     )
     
     invalid_categories <- setdiff(

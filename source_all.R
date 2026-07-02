@@ -40,6 +40,7 @@ source("R/list_variables.R")
 source("R/overview.R")
 source("R/get_fastlandsinvesteringer.R")
 source("R/validate_metadata.R")
+source("R/get_industriproduksjon.R")
 
 source("R/build_database.R")
 
