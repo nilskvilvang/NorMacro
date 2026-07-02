@@ -96,7 +96,8 @@ validate_metadata <- function(metadata = NULL){
       "Offentlige finanser",
       "Priser og inflasjon",
       "Produksjon og aktivitet",
-      "Utenriks\u00f8konomi"
+      "Utenriks\u00f8konomi",
+      "Konjunkturindikatorer"
     )
     
     valid_categories <- enc2utf8(valid_categories)

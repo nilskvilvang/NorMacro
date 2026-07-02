@@ -2,7 +2,18 @@
 
 **Version:** 0.7.2
 
-NorMacro er en norsk makroøkonomisk database med årlige indikatorer fra SSB, NAV, Norges Bank, FRED og Yahoo Finance. Databasen er selvdokumenterende gjennom innebygde metadata og hjelpefunksjoner.
+NorMacro er en selvdokumenterende makroøkonomisk database for Norge. Alle variabler har standardiserte metadata med beskrivelse, kilde, enhet, dekning og funksjonsreferanse. Databasen inneholder innebygde verktøy for å utforske variabler, kontrollere datakvalitet og dokumentere tidsseriedekning.
+
+## Hovedfunksjoner
+
+- Automatisk nedlasting fra offentlige datakilder
+- Lokal cache for raske oppslag
+- Standardiserte metadata for alle variabler
+- Automatisk validering av metadata
+- Innebygde kvalitetskontroller
+- Oversikt over datadekning (`coverage()`)
+- Søk og dokumentasjon av variabler
+- Eksport til CSV, RDS og Excel
 
 ## Kom i gang
 
@@ -25,19 +36,24 @@ list_categories()
 
 list_variables()
 
-search_variables("konsum")
+search_variables()
 
-describe_variable("BNP_Fastland")
+describe_variable()
+
+coverage()
 ```
 
 ## Status
 
-Ved siste versjon inneholder NorMacro:
+Pr 1.juli 2026 inneholder NorMacro:
 
-- omtrent 75 makroøkonomiske indikatorer
-- data fra 1865 til siste tilgjengelige år
-- automatisk nedlasting fra offentlige datakilder
-- komplett metadata og kvalitetskontroller
+- 83 makroøkonomiske variabler
+- 161 årsobservasjoner (1865–2025)
+- 13 fagkategorier
+- Full metadata for alle variabler
+- Automatisk kvalitetskontroll
+- Lokal caching
+- Selvdokumenterende hjelpefunksjoner
 
 ## Formål
 
