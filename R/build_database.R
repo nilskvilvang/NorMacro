@@ -34,6 +34,7 @@ build_database <- function(){
   ressursknapphet <- get_ressursknapphet()
   ordrebeholdning <- get_ordrebeholdning()
   pengemarkedsrente <- get_pengemarkedsrente()
+  statsrente <- get_statsrente()
   
   kpi |>
     dplyr::left_join(befolkning, by = "Aar") |>
@@ -68,6 +69,7 @@ build_database <- function(){
     dplyr::left_join(ressursknapphet, by = "Aar") |>
     dplyr::left_join(ordrebeholdning, by = "Aar") |>
     dplyr::left_join(pengemarkedsrente, by = "Aar") |> 
+    dplyr::left_join(statsrente, by = "Aar") |> 
        
     create_derived_variables() 
 }
