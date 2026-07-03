@@ -14,6 +14,9 @@ library(quantmod)
 ## normacro <- get_normacro()
 ## tail(normacro)
 
+## validate_metadata()
+## testthat::test_dir("tests/testthat")
+
 
 # git add .
 # git commit -m "Added household and public consumption indicators"
