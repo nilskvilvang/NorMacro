@@ -56,6 +56,7 @@ source("R/get_tjenesteproduksjon.R")
 source("R/leading_indicators.R")
 source("R/conjuncture_dashboard.R")
 source("R/about.R")
+source("R/summary_normacro.R")
 
 source("R/build_database.R")
 

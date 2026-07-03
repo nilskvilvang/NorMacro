@@ -1,6 +1,6 @@
 # NorMacro
 
-**Version:** 0.7.3
+**Version:** 0.8.0
 
 NorMacro er en kuratert makroøkonomisk database for Norge som samler representative årlige indikatorer fra SSB, Norges Bank, NAV, Yahoo Finance og FRED i ett konsistent datasett. Databasen er dokumentert med metadata, kvalitetssikret gjennom automatiske tester og utstyrt med hjelpefunksjoner for søk, dokumentasjon, visualisering og utforsking.
 
