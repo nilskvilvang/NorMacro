@@ -1,59 +1,20 @@
 # NorMacro
 
-**Version:** 0.7.2
+**Version:** 0.7.3
 
-NorMacro er en selvdokumenterende makroøkonomisk database for Norge. Alle variabler har standardiserte metadata med beskrivelse, kilde, enhet, dekning og funksjonsreferanse. Databasen inneholder innebygde verktøy for å utforske variabler, kontrollere datakvalitet og dokumentere tidsseriedekning.
-
-## Hovedfunksjoner
-
-- Automatisk nedlasting fra offentlige datakilder
-- Lokal cache for raske oppslag
-- Standardiserte metadata for alle variabler
-- Automatisk validering av metadata
-- Innebygde kvalitetskontroller
-- Oversikt over datadekning (`coverage()`)
-- Søk og dokumentasjon av variabler
-- Eksport til CSV, RDS og Excel
-
-## Kom i gang
-
-```r
-source("source_all.R")
-
-overview()
-
-normacro <- get_normacro()
-```
-
-## Utforske databasen
-
-NorMacro inneholder metadata for alle variabler.
-
-```r
-overview()
-
-list_categories()
-
-list_variables()
-
-search_variables()
-
-describe_variable()
-
-coverage()
-```
+NorMacro er en kuratert makroøkonomisk database for Norge som samler representative årlige indikatorer fra SSB, Norges Bank, NAV, Yahoo Finance og FRED i ett konsistent datasett. Databasen er dokumentert med metadata, kvalitetssikret gjennom automatiske tester og utstyrt med hjelpefunksjoner for søk, dokumentasjon, visualisering og utforsking.
 
 ## Status
 
-Pr 1.juli 2026 inneholder NorMacro:
+Per juli 2026 inneholder NorMacro:
 
-- 88 makroøkonomiske variabler
+- 93 makroøkonomiske variabler
 - 161 årsobservasjoner (1865–2025)
 - 13 fagkategorier
 - Full metadata for alle variabler
-- Automatisk kvalitetskontroll
-- Lokal caching
-- Selvdokumenterende hjelpefunksjoner
+- Automatisk kvalitetskontroll og validering
+- Lokal caching av datakilder
+- Hjelpefunksjoner for søk, dokumentasjon og visualisering
 
 ## Formål
 
@@ -67,7 +28,99 @@ Målet med NorMacro er å tilby et enkelt og transparent datasett for:
 
 Alle dataserier hentes automatisk fra relevante datakilder, i all hovedsak originalkilde.
 
----
+## Hovedfunksjoner
+
+- Automatisk nedlasting fra offentlige datakilder
+- Lokal caching for raske oppslag
+- Standardiserte metadata for alle variabler
+- Automatisk metadata- og datavalidering
+- Innebygde kvalitetskontroller
+- Oversikt over datadekning (`coverage()`)
+- Oversikt over ledende indikatorer (`leading_indicators()`)
+- Utforsking av kategorier og metadata
+- Visualisering med ggplot2 (`plot_series()`)
+- Eksport til CSV, RDS og Excel
+
+## Designprinsipper
+
+NorMacro bygger på noen enkle prinsipper:
+
+- én konsistent database
+- én representativ tidsserie per økonomisk fenomen
+- originale datakilder når det er mulig
+- full dokumentasjon av alle variabler
+- automatisk kvalitetssikring
+- reproduserbar datainnhenting
+
+## Installasjon
+
+Klon prosjektet:
+
+```bash
+git clone https://github.com/nilskvilvang/NorMacro.git
+```
+
+Åpne prosjektet i RStudio.
+
+## Kom i gang
+
+```r
+source("source_all.R")
+
+install_dependencies()
+
+overview()
+
+normacro <- get_normacro()
+```
+
+Resultatet er et data.frame/tibble med alle tilgjengelige dataserier.
+
+## Utforske databasen
+
+NorMacro inneholder metadata for alle variabler og flere hjelpefunksjoner for å utforske innholdet.
+
+```r
+overview()
+
+coverage()
+
+list_categories()
+
+list_variables()
+
+search_variables()
+
+describe_variable()
+
+leading_indicators()
+
+category_variables()
+```
+
+## Visualisering
+
+Alle serier kan plottes direkte gjennom funksjonen
+
+```r
+plot_series()
+```
+
+F.eks.:
+
+```r
+plot_series("BNP_Fastland")
+```
+
+Siden funksjonen returnerer et ordinært ggplot-objekt, kan plottet tilpasses videre.
+
+```r
+plot_series("BNP_Fastland") +
+  ggplot2::labs(
+    title = "BNP Fastlands-Norge"
+  ) +
+  ggplot2::theme_bw()
+```
 
 ## Datakilder
 
@@ -77,8 +130,6 @@ Alle dataserier hentes automatisk fra relevante datakilder, i all hovedsak origi
 | NAV | Registrert arbeidsledighet |
 | Norges Bank | Styringsrente og valutakurs |
 | FRED | Brent oljepris |
-
----
 
 ## Variabler
 
@@ -94,6 +145,8 @@ NorMacro organiserer variablene i følgende kategorier:
 - Finansmarkeder
 - Offentlige finanser
 - Nasjonalregnskap
+- Produksjon og aktivitet
+- Konjunkturindikatorer
 - Utenriksøkonomi
 - Energi og råvarer
 
@@ -102,65 +155,6 @@ For å se alle tilgjengelige variabler:
 ```r
 list_variables()
 ```
-
----
-
-## Installasjon
-
-Klon prosjektet:
-
-```bash
-git clone https://github.com/nilskvilvang/NorMacro.git
-```
-
-Åpne prosjektet i RStudio.
-
-Installer nødvendige pakker:
-
-```r
-install.packages(
-  c(
-    "tidyverse",
-    "rio",
-    "PxWebApiData",
-    "quantmod",
-    "zoo",
-    "readr"
-  )
-)
-```
-
----
-
-## Bruk
-
-Last inn alle funksjoner:
-
-```r
-source("source_all.R")
-```
-
-Installer nødvendige pakker (hvis nødvendig):
-
-```r
-install_dependencies()
-```
-
-Få oversikt:
-
-```r
-overview()
-```
-
-Bygg databasen:
-
-```r
-normacro <- get_normacro()
-```
-
-Resultatet er et data.frame/tibble med alle tilgjengelige dataserier.
-
----
 
 ## Cache
 
@@ -210,6 +204,16 @@ NorMacro har en enkel kvalitetskontroll som kjøres automatisk når databasen by
 normacro <- get_normacro()
 ```
 
+NorMacro inneholder automatiske kvalitetskontroller og validering av både data og metadata.
+
+```r
+validate_metadata()
+
+check_normacro()
+
+testthat::test_dir("tests/testthat")
+```
+
 Funksjonen check_normacro() kontrollerer at:
 
  - datasettet har en variabel som heter Aar
@@ -248,50 +252,61 @@ NorMacro/
 │   ├── create_derived_variables.R
 │   ├── cache_get.R
 │   ├── ssb_get.R
+│   ├── install_dependencies.R
 │   ├── get_metadata.R
 │   ├── validate_metadata.R
 │   ├── check_normacro.R
 │   ├── overview.R
 │   ├── coverage.R
+│   ├── leading_indicators.R
+│   ├── category_variables.R
 │   ├── list_categories.R
 │   ├── list_variables.R
 │   ├── search_variables.R
 │   ├── describe_variable.R
+│   ├── plot_series.R
 │   └── utils.R
 │
 ├── data/
 │   └── metadata.csv
 │
 ├── cache/
+│
 ├── scripts/
+│
 ├── tests/
 │   └── testthat/
+│       ├── helper-setup.R
+│       ├── test_build.R
+│       ├── test_coverage.R
+│       ├── test_derived.R
+│       ├── test_metadata.R
+│       ├── test_overview.R
+│       ├── test_search.R
+│       └── test_validation.R
 │
 ├── source_all.R
 ├── NEWS.md
 └── README.md
 ```
-
 ## Filstruktur
 
-- `R/get_*.R` henter og klargjør enkeltserier fra eksterne datakilder.
-- `R/build_database.R` bygger NorMacro ved å koble alle serier på `Aar`.
-- `R/create_derived_variables.R` beregner avledede indikatorer.
-- `R/cache_get.R` håndterer lokal caching av nedlastede datasett.
-- `R/ssb_get.R` standardiserer kall mot SSBs PXWEB-API.
-- `data/metadata.csv` inneholder dokumentasjon for alle variabler.
-- `R/get_metadata.R` leser metadata inn i R.
-- `R/validate_metadata.R` validerer struktur og innhold i metadata.
-- `R/check_normacro.R` kjører kvalitetskontroller av databasen.
-- `R/overview.R` og øvrige hjelpefunksjoner (`coverage()`, `list_*()`, `search_variables()`, `describe_variable()`) gjør databasen selvdokumenterende.
-- `tests/testthat/` inneholder automatiske enhetstester.
-- `cache/` inneholder lokale `.rds`-filer og versjonshåndteres ikke.
+- `get_*.R` – henter og klargjør enkeltserier.
+- `build_database.R` – bygger NorMacro.
+- `create_derived_variables.R` – beregner avledede indikatorer.
+- `cache_get.R` – lokal caching.
+- `ssb_get.R` – standardiserte kall mot SSB.
+- `install_dependencies.R` – installerer nødvendige pakker.
+- `metadata.csv` – dokumentasjon av alle variabler.
+- `overview()` og `coverage()` – oppsummerer databasen.
+- `leading_indicators()` – returnerer sentrale konjunkturindikatorer.
+- `plot_series()` – lager ggplot-objekter.
+- `tests/` – automatiske tester.
 
----
 
 ## Reproduserbarhet
 
-NorMacro inneholder ingen manuelt vedlikeholdte **tidsserier**. Alle makroøkonomiske data lastes ned automatisk fra de opprinnelige datakildene. Den eneste vedlikeholdte datafilen er `metadata.csv`, som dokumenterer variablene.
+NorMacro inneholder ingen manuelt vedlikeholdte data. Alle tidsserier lastes ned direkte fra de opprinnelige datakildene. Den eneste vedlikeholdte datafilen er metadata.csv, som dokumenterer variablene.
 
 Alle dataserier lastes ned direkte fra kildene ved kjøring, slik at databasen alltid oppdateres med siste tilgjengelige observasjoner.
 

@@ -7,7 +7,6 @@ install_dependencies <- function(){
     "PxWebApiData",
     "quantmod",
     "zoo",
-    "readr",
     "testthat"
   )
   
