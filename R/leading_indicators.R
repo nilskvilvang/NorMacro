@@ -2,7 +2,7 @@
 leading_indicators <- function(data = NULL){
   
   if(is.null(data)){
-    data <- get_normacro()
+    data <- suppressMessages(get_normacro())
   }
   
   indicators <- c(
@@ -24,6 +24,13 @@ leading_indicators <- function(data = NULL){
   
   existing <- intersect(indicators, names(data))
   
-  data |>
+  result <- data |>
     dplyr::select(dplyr::all_of(existing))
+  
+  indicator_cols <- setdiff(names(result), "Aar")
+  
+  result |>
+    dplyr::filter(
+      rowSums(!is.na(dplyr::pick(dplyr::all_of(indicator_cols)))) > 0
+    )
 }
