@@ -54,6 +54,8 @@ source("R/get_pengemarkedsrente.R")
 source("R/get_statsrente.R")
 source("R/get_tjenesteproduksjon.R")
 source("R/leading_indicators.R")
+source("R/conjuncture_dashboard.R")
+source("R/about.R")
 
 source("R/build_database.R")
 
