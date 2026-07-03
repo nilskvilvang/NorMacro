@@ -69,7 +69,10 @@ create_derived_variables <- function(data){
         Import / BNP_Fastland * 100,
       
       Fastlandsinvesteringer_andel_BNP =
-        Fastlandsinvesteringer / BNP_Fastland * 100
+        Fastlandsinvesteringer / BNP_Fastland * 100,
+      
+      Rentekurve =
+        Statsrente_10aar - Styringsrente
       
     ) |>
     

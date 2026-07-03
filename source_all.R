@@ -52,6 +52,7 @@ source("R/get_ressursknapphet.R")
 source("R/get_ordrebeholdning.R")
 source("R/get_pengemarkedsrente.R")
 source("R/get_statsrente.R")
+source("R/get_tjenesteproduksjon.R")
 
 source("R/build_database.R")
 
