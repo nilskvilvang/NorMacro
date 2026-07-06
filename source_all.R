@@ -66,6 +66,9 @@ source("R/latest_observations.R")
 source("R/missing_data.R")
 source("R/compare_periods.R")
 source("R/variable_summary.R")
+source("R/business_cycle_score.R")
+source("R/business_cycle.R")
+source("R/business_cycle_explain.R")
 
 source("R/build_database.R")
 

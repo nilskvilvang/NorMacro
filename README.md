@@ -155,6 +155,26 @@ plot_series("BNP_Fastland") +
   ggplot2::theme_bw()
 ```
 
+## Konjunkturklassifisering
+
+`business_cycle()` klassifiserer år basert på en transparent poengmodell. Klassifiseringen er ikke en offisiell konjunkturdatering, men en enkel indikatorbasert vurdering.
+
+Indikatorene som inngår er:
+
+- BNP Fastlands-Norge, årlig vekst
+- NAV-ledighet
+- SSBs sammensatte konjunkturindikator
+- kapasitetsutnytting
+- rentekurve
+
+Hver indikator får poeng etter forhåndsdefinerte terskler. De viktigste indikatorene gis høyere vekt. Funksjonen returnerer både delpoeng, totalscore og fase.
+
+```r
+business_cycle()
+
+business_cycle_explain(2020)
+```
+
 ## Datakilder
 
 | Kilde | Beskrivelse |
