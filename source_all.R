@@ -64,6 +64,7 @@ source("R/plot_correlation_matrix.R")
 source("R/growth_table.R")
 source("R/latest_observations.R")
 source("R/missing_data.R")
+source("R/compare_periods.R")
 
 source("R/build_database.R")
 
