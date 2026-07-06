@@ -76,6 +76,39 @@ normacro <- get_normacro()
 
 Resultatet er et data.frame/tibble med alle tilgjengelige dataserier.
 
+## NorMacro API
+
+Data
+-----
+get_normacro()
+
+Metadata
+--------
+get_metadata()
+describe_variable()
+search_variables()
+list_categories()
+list_variables()
+category_variables()
+
+Oversikt
+---------
+overview()
+coverage()
+about()
+summary_normacro()
+
+Analyse
+--------
+leading_indicators()
+normalize_series()
+compare_series()
+
+Visualisering
+-------------
+plot_series()
+conjuncture_dashboard()
+
 ## Utforske databasen
 
 NorMacro inneholder metadata for alle variabler og flere hjelpefunksjoner for å utforske innholdet.

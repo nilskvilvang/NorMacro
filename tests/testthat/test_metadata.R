@@ -1,5 +1,5 @@
 
-testthat::test_that("All variables have metadata", {
+testthat::test_that("validate_metadata returns TRUE for valid metadata", {
   undocumented <- setdiff(names(normacro), c(metadata$Variabel, "Aar"))
   
   testthat::expect_equal(undocumented, character(0))

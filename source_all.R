@@ -57,6 +57,13 @@ source("R/leading_indicators.R")
 source("R/conjuncture_dashboard.R")
 source("R/about.R")
 source("R/summary_normacro.R")
+source("R/normalize_series.R")
+source("R/compare_series.R")
+source("R/correlation_matrix.R")
+source("R/plot_correlation_matrix.R")
+source("R/growth_table.R")
+source("R/latest_observations.R")
+source("R/missing_data.R")
 
 source("R/build_database.R")
 
