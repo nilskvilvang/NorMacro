@@ -4,6 +4,13 @@
 
 NorMacro er en kuratert makroøkonomisk database for Norge som samler representative årlige indikatorer fra SSB, Norges Bank, NAV, Yahoo Finance og FRED i ett konsistent datasett. Databasen er dokumentert med metadata, kvalitetssikret gjennom automatiske tester og utstyrt med hjelpefunksjoner for søk, dokumentasjon, visualisering og utforsking.
 
+## Filosofi
+
+- representative indikatorer fremfor flest mulig serier
+- full transparens i datagrunnlag og beregninger
+- metadata som dokumentasjonslag
+- små funksjoner som kan kombineres til større analyser
+
 ## Status
 
 Per juli 2026 inneholder NorMacro:
@@ -79,7 +86,7 @@ Resultatet er et data.frame/tibble med alle tilgjengelige dataserier.
 ## NorMacro API
 
 Data
------
+----
 get_normacro()
 
 Metadata
@@ -103,11 +110,24 @@ Analyse
 leading_indicators()
 normalize_series()
 compare_series()
+compare_periods()
+growth_table()
+correlation_matrix()
+business_cycle()
+business_cycle_score()
+business_cycle_explain()
 
 Visualisering
 -------------
 plot_series()
+plot_correlation_matrix()
 conjuncture_dashboard()
+
+Diagnostikk
+-----------
+latest_observations()
+missing_data()
+variable_summary()
 
 ## Utforske databasen
 
@@ -157,23 +177,14 @@ plot_series("BNP_Fastland") +
 
 ## Konjunkturklassifisering
 
-`business_cycle()` klassifiserer år basert på en transparent poengmodell. Klassifiseringen er ikke en offisiell konjunkturdatering, men en enkel indikatorbasert vurdering.
-
-Indikatorene som inngår er:
-
-- BNP Fastlands-Norge, årlig vekst
-- NAV-ledighet
-- SSBs sammensatte konjunkturindikator
-- kapasitetsutnytting
-- rentekurve
-
-Hver indikator får poeng etter forhåndsdefinerte terskler. De viktigste indikatorene gis høyere vekt. Funksjonen returnerer både delpoeng, totalscore og fase.
+NorMacro inneholder en transparent indikatorbasert konjunkturklassifisering.
 
 ```r
 business_cycle()
-
 business_cycle_explain(2020)
 ```
+
+Se `docs/business_cycle.md` for metode, vekter og poengsystem.
 
 ## Datakilder
 
@@ -229,25 +240,14 @@ unlink("cache", recursive = TRUE)
 
 ## Metadata
 
-Alle variabler dokumenteres gjennom:
+Alle variabler dokumenteres gjennom `metadata.csv`.
 
 ```r
-metadata <- get_metadata()
+get_metadata()
+describe_variable("BNP_Fastland")
 ```
 
-Kontroller at alle variabler er dokumentert:
-
-```r
-check_metadata(normacro)
-```
-
-Forventet resultat:
-
-```text
-✓ Alle variabler er dokumentert i metadata.
-```
-
----
+Se `docs/metadata.md`.
 
 ## Kvalitetskontroll
 
@@ -292,78 +292,22 @@ data_clean/
 └── metadata.xlsx
 ```
 
----
+## Arkitektur
 
-## Prosjektstruktur
-
-```text
 NorMacro/
-│
-├── R/
-│   ├── get_*.R
-│   ├── build_database.R
-│   ├── create_derived_variables.R
-│   ├── cache_get.R
-│   ├── ssb_get.R
-│   ├── install_dependencies.R
-│   ├── get_metadata.R
-│   ├── validate_metadata.R
-│   ├── check_normacro.R
-│   ├── overview.R
-│   ├── coverage.R
-│   ├── leading_indicators.R
-│   ├── category_variables.R
-│   ├── list_categories.R
-│   ├── list_variables.R
-│   ├── search_variables.R
-│   ├── describe_variable.R
-│   ├── plot_series.R
-│   └── utils.R
-│
-├── data/
-│   └── metadata.csv
-│
-├── cache/
-│
-├── scripts/
-│
-├── tests/
-│   └── testthat/
-│       ├── helper-setup.R
-│       ├── test_build.R
-│       ├── test_coverage.R
-│       ├── test_derived.R
-│       ├── test_metadata.R
-│       ├── test_overview.R
-│       ├── test_search.R
-│       └── test_validation.R
-│
-├── source_all.R
-├── NEWS.md
-└── README.md
-```
-## Filstruktur
+R/
+data/
+cache/
+tests/
+docs/
 
-- `get_*.R` – henter og klargjør enkeltserier.
-- `build_database.R` – bygger NorMacro.
-- `create_derived_variables.R` – beregner avledede indikatorer.
-- `cache_get.R` – lokal caching.
-- `ssb_get.R` – standardiserte kall mot SSB.
-- `install_dependencies.R` – installerer nødvendige pakker.
-- `metadata.csv` – dokumentasjon av alle variabler.
-- `overview()` og `coverage()` – oppsummerer databasen.
-- `leading_indicators()` – returnerer sentrale konjunkturindikatorer.
-- `plot_series()` – lager ggplot-objekter.
-- `tests/` – automatiske tester.
-
+Se docs/architecture.md
 
 ## Reproduserbarhet
 
 NorMacro inneholder ingen manuelt vedlikeholdte data. Alle tidsserier lastes ned direkte fra de opprinnelige datakildene. Den eneste vedlikeholdte datafilen er metadata.csv, som dokumenterer variablene.
 
 Alle dataserier lastes ned direkte fra kildene ved kjøring, slik at databasen alltid oppdateres med siste tilgjengelige observasjoner.
-
----
 
 ## Metadata og variabelsøk
 
@@ -385,7 +329,17 @@ describe_variable("BNP_Fastland")
 `data/metadata.csv` er NorMacros "single source of truth" for variabelmetadata.
 
 Filen bør redigeres i en teksteditor (f.eks. Notepad++ eller VS Code), ikke i Excel, for å unngå at CSV-formatet endres.
----
+
+## Dokumentasjon
+
+Utfyllende dokumentasjon finnes i `docs/`.
+
+| Dokument | Innhold |
+|-----------|----------|
+| business_cycle.md | Konjunkturklassifisering |
+| metadata.md | Metadata og dokumentasjon |
+| architecture.md | Arkitektur og design |
+| roadmap.md | Planlagt videreutvikling |
 
 ## Lisens
 

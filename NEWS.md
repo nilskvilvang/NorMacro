@@ -1,39 +1,18 @@
-# NorMacro 0.8.0
+# NorMacro 0.8.1
 
-## Nye funksjoner
+Nytt
+- business_cycle_score()
+- business_cycle()
+- business_cycle_explain()
+- compare_periods()
+- growth_table()
+- latest_observations()
+- missing_data()
+- variable_summary()
 
-### Databasen
-
-- Antall variabler økt til 92
-- Ny kategori: Konjunkturindikatorer
-- Tjenesteproduksjon lagt til
-- Statsrente (10 år) lagt til
-- Pengemarkedsrente (3 mnd) lagt til
-- Rentekurve lagt til
-
-### Utforsking
-
-- Ny funksjon `coverage()`
-- Ny funksjon `leading_indicators()`
-- Ny funksjon `category_variables()`
-- Ny funksjon `about()`
-- Ny funksjon `summary_normacro()`
-
-### Visualisering
-
-- Ny funksjon `plot_series()`
-- Metadata-drevet plotting
-- Penere akseformatering
-- Returnerer standard ggplot-objekter
-
-### Infrastruktur
-
-- `install_dependencies()`
-- Utvidet metadata-validering
-- Forbedret README
-- Nye tester
-- Utvidet dokumentasjon
-
-### Annet
-
-README oppdatert
+Forbedret
+- plot_series()
+- compare_series()
+- summary_normacro()
+- README restructured
+- New documentation under docs/
