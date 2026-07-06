@@ -65,6 +65,7 @@ source("R/growth_table.R")
 source("R/latest_observations.R")
 source("R/missing_data.R")
 source("R/compare_periods.R")
+source("R/variable_summary.R")
 
 source("R/build_database.R")
 
