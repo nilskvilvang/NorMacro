@@ -32,6 +32,11 @@ library(testthat)
 # git commit -m "Added household and public consumption indicators"
 # git push
 
+# Når man vet github har rett versjon, men ikke får tatt git pull lokalt:
+# git fetch origin
+# git reset --hard origin/main
+# Dette sletter alle lokale endringer som ikke er pushet fra den lokale maskinen
+
 
 check_metadata <- function(data, metadata = NULL, ignore = "Aar") {
   
