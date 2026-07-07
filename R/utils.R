@@ -33,9 +33,9 @@ library(testthat)
 # git push
 
 
-check_metadata <- function(data, metadata = NULL, ignore = "Aar"){
+check_metadata <- function(data, metadata = NULL, ignore = "Aar") {
   
-  if(is.null(metadata)){
+  if (is.null(metadata)) {
     metadata <- get_metadata()
   }
   
@@ -44,7 +44,7 @@ check_metadata <- function(data, metadata = NULL, ignore = "Aar"){
     c(metadata$Variabel, ignore)
   )
   
-  if(length(missing_vars) == 0){
+  if (length(missing_vars) == 0) {
     message("✓ Alle variabler er dokumentert i metadata.")
   } else {
     warning(
@@ -56,4 +56,25 @@ check_metadata <- function(data, metadata = NULL, ignore = "Aar"){
   }
   
   invisible(missing_vars)
+}
+
+retry_download <- function(expr, retries = 5, wait = 5, label = "Nedlasting") {
+  for (i in seq_len(retries)) {
+    result <- tryCatch(
+      force(expr),
+      error = function(e) e
+    )
+    
+    if (!inherits(result, "error")) {
+      return(result)
+    }
+    
+    if (i < retries) {
+      msg <- sprintf("%s feilet. Prøver igjen om %s sekunder (forsøk %s av %s).", label, wait, i + 1, retries)
+      message(msg)
+      Sys.sleep(wait)
+    } else {
+      stop(conditionMessage(result), call. = FALSE)
+    }
+  }
 }

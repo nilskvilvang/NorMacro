@@ -8,12 +8,17 @@ get_ledighet <- function(refresh = FALSE){
       
       nav_url <- "https://www.nav.no/_/attachment/download/a5aa83cd-c083-4b88-9359-1c1b3b2f936e:285ebf18c576ff0fd1537a83289401df2498cae4/Tabell%203_Helt%20ledige%20fordelt%20pa%20kjonn.Aarsgjennomsnitt.1948_2025.xls"
       
-      nav_raw <- suppressMessages(
-        rio::import(
-          nav_url,
-          skip = 6,
-          col_names = FALSE
-        )
+      nav_raw <- retry_download(
+        suppressMessages(
+          rio::import(
+            nav_url,
+            skip = 6,
+            col_names = FALSE
+          )
+        ),
+        retries = 5,
+        wait = 5,
+        label = "NAV-kall"
       )
       
       venstre <- nav_raw |>
