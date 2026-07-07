@@ -11,12 +11,14 @@ latest_observations <- function(
   
   metadata <- get_metadata()
   
+
   result <- data |>
     tidyr::pivot_longer(
       cols = -Aar,
       names_to = "Variabel",
       values_to = "Verdi"
     ) |>
+
     dplyr::filter(!is.na(Verdi)) |>
     dplyr::group_by(Variabel) |>
     dplyr::slice_max(Aar, n = 1, with_ties = FALSE) |>

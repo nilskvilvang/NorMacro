@@ -73,16 +73,12 @@ growth_table <- function(
   metadata <- get_metadata()
   
   result |>
-    dplyr::left_join(
-      metadata |>
-        dplyr::select(Variabel, Kategori, Beskrivelse, Enhet),
-      by = "Variabel"
+    dplyr::mutate(
+      Display_navn = get_display_name(Variabel, metadata)
     ) |>
     dplyr::select(
-      Variabel,
-      Kategori,
-      Beskrivelse,
-      Enhet,
-      dplyr::everything()
+      Display_navn,
+      dplyr::everything(),
+      -Variabel
     )
 }

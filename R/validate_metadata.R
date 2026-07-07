@@ -7,6 +7,7 @@ validate_metadata <- function(metadata = NULL){
   
   expected_cols <- c(
     "Variabel",
+    "Display_navn",
     "Type",
     "Kategori",
     "Beskrivelse",
@@ -122,6 +123,7 @@ validate_metadata <- function(metadata = NULL){
   }
   
   required_text_cols <- c(
+    "Display_navn",
     "Beskrivelse",
     "Kilde",
     "Tabell",

@@ -12,6 +12,8 @@ compare_series <- function(
     data <- suppressMessages(get_normacro())
   }
   
+  metadata <- get_metadata()
+  
   missing <- setdiff(variables, names(data))
   
   if(length(missing) > 0){
@@ -64,12 +66,23 @@ compare_series <- function(
     y_label <- NULL
   }
   
+  display_lookup <- tibble::tibble(
+    Variabel = variables,
+    Display_navn = vapply(
+      variables,
+      get_display_name,
+      character(1),
+      metadata = metadata
+    )
+  )
+  
   plot_data_long <- plot_data |>
     tidyr::pivot_longer(
       cols = -Aar,
       names_to = "Variabel",
       values_to = "Verdi"
     ) |>
+    dplyr::left_join(display_lookup, by = "Variabel") |>
     dplyr::filter(!is.na(Verdi))
   
   ggplot2::ggplot(
@@ -77,10 +90,14 @@ compare_series <- function(
     ggplot2::aes(
       x = Aar,
       y = Verdi,
-      colour = Variabel
+      colour = Display_navn
     )
   ) +
-    ggplot2::geom_line() +
+    ggplot2::geom_line(linewidth = 0.9) +
+    ggplot2::scale_x_continuous(
+      breaks = scales::breaks_pretty(n = 8),
+      labels = scales::label_number(accuracy = 1)
+    ) +
     ggplot2::scale_y_continuous(
       labels = scales::label_number(
         big.mark = " ",
@@ -89,7 +106,7 @@ compare_series <- function(
     ) +
     ggplot2::labs(
       title = "Sammenligning av tidsserier",
-      subtitle = paste(variables, collapse = ", "),
+      subtitle = paste(display_lookup$Display_navn, collapse = ", "),
       x = NULL,
       y = y_label,
       colour = NULL,

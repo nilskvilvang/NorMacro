@@ -18,12 +18,18 @@ plot_series <- function(variable, data = NULL, metadata = NULL){
   
   if(nrow(meta) == 0){
     title <- variable
+    subtitle <- NULL
     y_label <- NULL
     caption <- NULL
   } else {
-    title <- meta$Beskrivelse[1]
+    title <- meta$Display_navn[1]
+    subtitle <- meta$Beskrivelse[1]
     y_label <- meta$Enhet[1]
     caption <- paste0("Kilde: ", meta$Kilde[1])
+    
+    if(is.na(title) || title == ""){
+      title <- variable
+    }
   }
   
   plot_data <- data |>
@@ -43,7 +49,7 @@ plot_series <- function(variable, data = NULL, metadata = NULL){
     ) +
     ggplot2::labs(
       title = title,
-      subtitle = variable,
+      subtitle = subtitle,
       x = NULL,
       y = y_label,
       caption = caption

@@ -15,6 +15,7 @@ variable_summary <- function(
   }
   
   metadata <- get_metadata()
+  display <- get_display_name(variable, metadata)
   
   meta <- metadata |>
     dplyr::filter(Variabel == variable)
@@ -62,17 +63,19 @@ variable_summary <- function(
       dplyr::filter(Variabel != variable) |>
       dplyr::filter(!is.na(Korrelasjon)) |>
       dplyr::mutate(
+        Display_navn = get_display_name(Variabel, metadata),
         Absolutt_korrelasjon = abs(Korrelasjon)
       ) |>
       dplyr::arrange(dplyr::desc(Absolutt_korrelasjon)) |>
       dplyr::slice_head(n = top_n_correlations) |>
-      dplyr::select(Variabel, Korrelasjon)
+      dplyr::select(Display_navn, Variabel, Korrelasjon)
   }
   
   cat("\n")
   cat("Variabel\n")
   cat("--------\n")
-  cat(variable, "\n\n")
+  cat(display, "\n")
+  cat("(", variable, ")\n\n", sep = "")
   
   if(nrow(meta) > 0){
     cat("Beskrivelse\n")
@@ -91,13 +94,7 @@ variable_summary <- function(
   if(nrow(cov) > 0){
     cat("Dekning\n")
     cat("-------\n")
-    cat(
-      cov$Startaar_data[1],
-      "-",
-      cov$Sluttaar_data[1],
-      "\n",
-      sep = ""
-    )
+    cat(cov$Startaar_data[1], "-", cov$Sluttaar_data[1], "\n", sep = "")
     cat("Observasjoner: ", cov$Antall_observasjoner[1], "\n\n", sep = "")
   }
   
@@ -113,7 +110,7 @@ variable_summary <- function(
   print(
     growth |>
       dplyr::select(
-        Variabel,
+        dplyr::any_of(c("Display_navn", "Variabel")),
         Siste_aar,
         Siste_verdi,
         dplyr::starts_with("Vekst_"),
