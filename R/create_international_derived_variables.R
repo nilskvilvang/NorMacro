@@ -15,6 +15,11 @@ create_international_derived_variables <- function(data) {
         (BNP_faste_priser / dplyr::lag(BNP_faste_priser) - 1) * 100,
         NA_real_
       ),
+      Industriproduksjon_vekst = dplyr::if_else(
+        Aar - dplyr::lag(Aar) == 1,
+        (Industriproduksjon / dplyr::lag(Industriproduksjon) - 1) * 100,
+        NA_real_
+      ),
       BNP_lopende_per_innbygger = BNP_lopende * 1e6 / Befolkning
     ) |>
     dplyr::ungroup()
