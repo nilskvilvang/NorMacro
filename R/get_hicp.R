@@ -20,17 +20,7 @@
 get_hicp <- function(countries = NULL) {
   
   if (is.null(countries)) {
-    countries <- c(
-      "NO",
-      "SE",
-      "DK",
-      "FI",
-      "DE",
-      "FR",
-      "GB",
-      "EA20",
-      "EU27_2020"
-    )
+    countries <- get_standard_countries()
   }
   
   eurostat::get_eurostat(

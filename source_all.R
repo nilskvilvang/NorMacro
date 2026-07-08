@@ -75,6 +75,9 @@ source("R/display_name.R")
 source("R/macro_report.R")
 source("R/get_metadata.R")
 source("R/get_hicp.R")
+source("R/get_standard_countries.R")
+source("R/get_unemployment.R")
+source("R/get_population.R")
 
 
 

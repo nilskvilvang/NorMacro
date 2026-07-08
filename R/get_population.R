@@ -1,17 +1,15 @@
 
-
-get_unemployment <- function(countries = NULL) {
+get_population <- function(countries = NULL) {
   
   if (is.null(countries)) {
     countries <- get_standard_countries()
   }
   
   eurostat::get_eurostat(
-    id = "une_rt_a",
+    id = "demo_pjan",
     filters = list(
       sex = "T",
-      age = "Y15-74",
-      unit = "PC_ACT",
+      age = "TOTAL",
       geo = countries
     ),
     time_format = "date"
@@ -19,7 +17,8 @@ get_unemployment <- function(countries = NULL) {
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),
       Land = .data$geo,
-      Arbeidsledighetsrate = .data$values
+      Befolkning = .data$values
     ) |>
+    dplyr::filter(!is.na(.data$Befolkning)) |>
     dplyr::arrange(.data$Land, .data$Aar)
 }
