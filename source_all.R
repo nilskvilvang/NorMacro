@@ -78,7 +78,7 @@ source("R/get_hicp.R")
 source("R/get_standard_countries.R")
 source("R/get_unemployment.R")
 source("R/get_population.R")
-
+source("R/get_gdp.R")
 
 
 source("R/build_database.R")
