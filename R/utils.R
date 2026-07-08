@@ -13,6 +13,7 @@ library(janitor)
 library(lubridate)
 library(quantmod)
 library(testthat)
+library(eurostat)
 
 
 

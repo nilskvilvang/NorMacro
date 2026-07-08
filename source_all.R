@@ -74,6 +74,7 @@ source("R/recession_period_explain.R")
 source("R/display_name.R")
 source("R/macro_report.R")
 source("R/get_metadata.R")
+source("R/get_hicp.R")
 
 
 
