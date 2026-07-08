@@ -9,6 +9,8 @@ build_international_database <- function() {
   
   gdp <- get_gdp()
   
+  gdp_constant <- get_gdp_constant()
+  
   join_by <- c("Aar", "Land")
   
   international <-
@@ -23,6 +25,10 @@ build_international_database <- function() {
     ) |>
     dplyr::full_join(
       gdp,
+      by = c("Aar", "Land")
+    ) |>
+    dplyr::full_join(
+      gdp_constant,
       by = c("Aar", "Land")
     ) |>
     create_international_derived_variables()

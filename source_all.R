@@ -79,6 +79,9 @@ source("R/get_standard_countries.R")
 source("R/get_unemployment.R")
 source("R/get_population.R")
 source("R/get_gdp.R")
+source("R/create_inernational_derived_variables.R")
+source("R/build_inernational_database.R")
+source("R/get_gdp_constant.R")
 
 
 source("R/build_database.R")
