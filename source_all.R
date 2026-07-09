@@ -87,6 +87,7 @@ source("R/get_employment.R")
 source("R/get_labour_force.R")
 source("R/get_government_debt.R")
 source("R/get_house_price_index.R")
+source("R/get_retail_trade.R")
 
 
 source("R/build_international_database.R")

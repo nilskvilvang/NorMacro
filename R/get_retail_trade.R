@@ -1,15 +1,17 @@
 
-get_house_price_index <- function(countries = NULL) {
+get_retail_trade <- function(countries = NULL) {
   
   if (is.null(countries)) {
     countries <- get_standard_countries()
   }
   
   eurostat::get_eurostat(
-    id = "prc_hpi_a",
+    id = "sts_trtu_a",
     filters = list(
-      purchase = "TOTAL",
-      unit = "I15_A_AVG",
+      unit = "I15",
+      indic_bt = "VOL_SLS",
+      nace_r2 = "G47",
+      s_adj = "CA",
       geo = countries
     ),
     time_format = "date"
@@ -17,8 +19,8 @@ get_house_price_index <- function(countries = NULL) {
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),
       Land = .data$geo,
-      Boligprisindeks = .data$values
+      Detaljhandel = .data$values
     ) |>
-    dplyr::filter(!is.na(.data$Boligprisindeks)) |>
+    dplyr::filter(!is.na(.data$Detaljhandel)) |>
     dplyr::arrange(.data$Land, .data$Aar)
 }
