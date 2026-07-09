@@ -19,6 +19,7 @@ build_international_database <- function() {
   private_consumption <- get_private_consumption()
   public_consumption <- get_public_consumption()
   investment <- get_investment()
+  interest_rate <- get_long_interest_rate()
   
   international <-
     hicp |>
@@ -36,7 +37,8 @@ build_international_database <- function() {
     dplyr::full_join(imports, by = join_by) |>
     dplyr::full_join(private_consumption, by = join_by) |>
     dplyr::full_join(public_consumption, by = join_by) |>
-    full_join(investment, by = join_by) |>
+    dplyr::full_join(investment, by = join_by) |>
+    dplyr::full_join(interest_rate, by = join_by) |>
     
     create_international_derived_variables()
   
