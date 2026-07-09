@@ -9,7 +9,7 @@ coverage <- function(data = NULL){
   
   cov <- data |>
     tidyr::pivot_longer(
-      cols = -Aar,
+      cols = -dplyr::any_of(c("Aar", "Land")),
       names_to = "Variabel",
       values_to = "Verdi"
     ) |>

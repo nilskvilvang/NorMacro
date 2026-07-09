@@ -1,16 +1,27 @@
 
-cache_get <- function(name, fun, refresh = FALSE){
+cache_get <- function(
+    name,
+    fun,
+    refresh = FALSE,
+    verbose = FALSE
+){
   
   dir.create("cache", showWarnings = FALSE)
   
   file <- file.path("cache", paste0(name, ".rds"))
   
   if(file.exists(file) && !refresh){
-    message("Leser cache: ", name)
+    
+    if(verbose){
+      message("Leser cache: ", name)
+    }
+    
     return(readRDS(file))
   }
   
-  message("Laster ned: ", name)
+  if(verbose){
+    message("Laster ned: ", name)
+  }
   
   data <- fun()
   
