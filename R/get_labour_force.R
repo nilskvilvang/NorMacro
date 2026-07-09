@@ -5,7 +5,7 @@ get_labour_force <- function(countries = NULL) {
     countries <- get_standard_countries()
   }
   
-  eurostat::get_eurostat(
+  get_eurostat_data(
     id = "lfsi_emp_a",
     filters = list(
       indic_em = "ACT",
@@ -13,8 +13,7 @@ get_labour_force <- function(countries = NULL) {
       sex = "T",
       age = "Y15-64",
       geo = countries
-    ),
-    time_format = "date"
+    )
   ) |>
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),

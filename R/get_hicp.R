@@ -23,14 +23,13 @@ get_hicp <- function(countries = NULL) {
     countries <- get_standard_countries()
   }
   
-  eurostat::get_eurostat(
+  get_eurostat_data(
     id = "prc_hicp_aind",
     filters = list(
       unit = "INX_A_AVG",
       coicop = "CP00",
       geo = countries
-    ),
-    time_format = "date"
+    )
   ) |>
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),

@@ -84,3 +84,16 @@ retry_download <- function(expr, retries = 5, wait = 5, label = "Nedlasting") {
     }
   }
 }
+
+
+get_eurostat_data <- function(id, filters) {
+  
+  suppressMessages(
+    eurostat::get_eurostat(
+      id = id,
+      filters = filters,
+      time_format = "date"
+    )
+  )
+}
+

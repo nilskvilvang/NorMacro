@@ -5,14 +5,13 @@ get_population <- function(countries = NULL) {
     countries <- get_standard_countries()
   }
   
-  eurostat::get_eurostat(
+  get_eurostat_data(
     id = "demo_pjan",
     filters = list(
       sex = "T",
       age = "TOTAL",
       geo = countries
-    ),
-    time_format = "date"
+    )
   ) |>
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),

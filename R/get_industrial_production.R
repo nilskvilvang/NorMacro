@@ -5,15 +5,14 @@ get_industrial_production <- function(countries = NULL) {
     countries <- get_standard_countries()
   }
   
-  eurostat::get_eurostat(
+  get_eurostat_data(
     id = "sts_inpr_a",
     filters = list(
       unit = "I15",
       s_adj = "CA",
       nace_r2 = "C",
       geo = countries
-    ),
-    time_format = "date"
+    )
   ) |>
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),

@@ -5,15 +5,14 @@ get_government_debt <- function(countries = NULL) {
     countries <- get_standard_countries()
   }
   
-  eurostat::get_eurostat(
+  get_eurostat_data(
     id = "gov_10dd_edpt1",
     filters = list(
       unit = "PC_GDP",
       sector = "S13",
       na_item = "GD",
       geo = countries
-    ),
-    time_format = "date"
+    )
   ) |>
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),

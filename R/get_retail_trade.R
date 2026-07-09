@@ -5,7 +5,7 @@ get_retail_trade <- function(countries = NULL) {
     countries <- get_standard_countries()
   }
   
-  eurostat::get_eurostat(
+  get_eurostat_data(
     id = "sts_trtu_a",
     filters = list(
       unit = "I15",
@@ -13,8 +13,7 @@ get_retail_trade <- function(countries = NULL) {
       nace_r2 = "G47",
       s_adj = "CA",
       geo = countries
-    ),
-    time_format = "date"
+    )
   ) |>
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),

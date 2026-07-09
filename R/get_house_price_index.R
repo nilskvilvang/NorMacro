@@ -5,14 +5,13 @@ get_house_price_index <- function(countries = NULL) {
     countries <- get_standard_countries()
   }
   
-  eurostat::get_eurostat(
+  get_eurostat_data(
     id = "prc_hpi_a",
     filters = list(
       purchase = "TOTAL",
       unit = "I15_A_AVG",
       geo = countries
-    ),
-    time_format = "date"
+    )
   ) |>
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),

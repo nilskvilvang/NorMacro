@@ -5,14 +5,13 @@ get_employment <- function(countries = NULL) {
     countries <- get_standard_countries()
   }
   
-  eurostat::get_eurostat(
+  get_eurostat_data(
     id = "nama_10_pe",
     filters = list(
       unit = "THS_PER",
       na_item = "EMP_DC",
       geo = countries
-    ),
-    time_format = "date"
+    )
   ) |>
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),

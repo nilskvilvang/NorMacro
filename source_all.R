@@ -92,6 +92,7 @@ source("R/get_exports.R")
 source("R/get_imports.R")
 source("R/get_private_consumption.R")
 source("R/get_public_consumption.R")
+source("R/get_investment.R")
 
 
 source("R/build_international_database.R")

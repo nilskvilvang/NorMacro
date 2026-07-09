@@ -61,7 +61,13 @@ create_international_derived_variables <- function(data) {
         Privat_konsum / BNP_faste_priser * 100,
       
       Offentlig_konsum_andel_BNP = 
-        Offentlig_konsum / BNP_faste_priser * 100
+        Offentlig_konsum / BNP_faste_priser * 100,
+      
+      Investeringsvekst =
+        growth_rate(Investeringer, Aar),
+      
+      Investeringer_andel_BNP =
+        Investeringer / BNP_faste_priser * 100
       
     ) |>
     dplyr::ungroup()

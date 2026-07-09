@@ -5,14 +5,13 @@ get_public_consumption <- function(countries = NULL) {
     countries <- get_standard_countries()
   }
   
-  eurostat::get_eurostat(
+  get_eurostat_data(
     id = "nama_10_gdp",
     filters = list(
       unit = "CLV20_MEUR",
       na_item = "P3_S13",
       geo = countries
-    ),
-    time_format = "date"
+    )
   ) |>
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),
