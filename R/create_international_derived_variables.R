@@ -28,7 +28,10 @@ create_international_derived_variables <- function(data) {
         BNP_faste_priser * 1e6 / Sysselsatte,
       
       Produktivitetsvekst =
-        growth_rate(Arbeidsproduktivitet, Aar)
+        growth_rate(Arbeidsproduktivitet, Aar),
+      
+      Arbeidsstyrkeandel =
+        Arbeidsstyrke / Befolkning * 100
       
     ) |>
     dplyr::ungroup()

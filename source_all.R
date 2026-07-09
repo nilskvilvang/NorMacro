@@ -84,6 +84,7 @@ source("R/get_gdp_constant.R")
 source("R/create_international_derived_variables.R")
 source("R/get_industrial_production.R")
 source("R/get_employment.R")
+source("R/get_labour_force.R")
 
 
 source("R/build_international_database.R")
