@@ -22,3 +22,4 @@ get_employment <- function(countries = NULL) {
     dplyr::filter(!is.na(.data$Sysselsatte)) |>
     dplyr::arrange(.data$Land, .data$Aar)
 }
+
