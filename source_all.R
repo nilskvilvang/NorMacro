@@ -90,6 +90,8 @@ source("R/get_house_price_index.R")
 source("R/get_retail_trade.R")
 source("R/get_exports.R")
 source("R/get_imports.R")
+source("R/get_private_consumption.R")
+source("R/get_public_consumption.R")
 
 
 source("R/build_international_database.R")

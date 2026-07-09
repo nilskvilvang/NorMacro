@@ -16,6 +16,8 @@ build_international_database <- function() {
   retail_trade <- get_retail_trade()
   exports <- get_exports()
   imports <- get_imports()
+  private_consumption <- get_private_consumption()
+  public_consumption <- get_public_consumption()
   
   international <-
     hicp |>
@@ -31,6 +33,8 @@ build_international_database <- function() {
     dplyr::full_join(retail_trade, by = join_by) |>
     dplyr::full_join(exports, by = join_by) |>
     dplyr::full_join(imports, by = join_by) |>
+    dplyr::full_join(private_consumption, by = join_by) |>
+    dplyr::full_join(public_consumption, by = join_by) |>
     
     create_international_derived_variables()
   
