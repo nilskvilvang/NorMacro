@@ -62,6 +62,7 @@ source("R/compare_series.R")
 source("R/correlation_matrix.R")
 source("R/plot_correlation_matrix.R")
 source("R/growth_table.R")
+source("R/growth_rate.R")
 source("R/latest_observations.R")
 source("R/missing_data.R")
 source("R/compare_periods.R")
@@ -96,7 +97,7 @@ source("R/get_investment.R")
 source("R/get_long_interest_rate.R")
 
 source("R/build_international_database.R")
-
+source("R/get_international_macro.R")
 
 source("R/build_database.R")
 
