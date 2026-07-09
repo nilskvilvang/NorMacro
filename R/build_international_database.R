@@ -14,6 +14,8 @@ build_international_database <- function() {
   government_debt <- get_government_debt()
   house_price_index <- get_house_price_index()
   retail_trade <- get_retail_trade()
+  exports <- get_exports()
+  imports <- get_imports()
   
   international <-
     hicp |>
@@ -27,6 +29,8 @@ build_international_database <- function() {
     dplyr::full_join(government_debt, by = join_by) |>
     dplyr::full_join(house_price_index, by = join_by) |>
     dplyr::full_join(retail_trade, by = join_by) |>
+    dplyr::full_join(exports, by = join_by) |>
+    dplyr::full_join(imports, by = join_by) |>
     
     create_international_derived_variables()
   

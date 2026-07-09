@@ -37,7 +37,19 @@ create_international_derived_variables <- function(data) {
         growth_rate(Boligprisindeks, Aar),
       
       Detaljhandel_vekst =
-        growth_rate(Detaljhandel, Aar)
+        growth_rate(Detaljhandel, Aar),
+      
+      Handelsbalanse =
+        Eksport - Import,
+      
+      Eksportandel_BNP =
+        Eksport / BNP_faste_priser * 100,
+      
+      Importandel_BNP =
+        Import / BNP_faste_priser * 100,
+      
+      Handelsbalanse_andel_BNP =
+        Handelsbalanse / BNP_faste_priser * 100
       
     ) |>
     dplyr::ungroup()
