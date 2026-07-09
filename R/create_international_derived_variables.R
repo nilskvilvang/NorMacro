@@ -31,7 +31,10 @@ create_international_derived_variables <- function(data) {
         growth_rate(Arbeidsproduktivitet, Aar),
       
       Arbeidsstyrkeandel =
-        Arbeidsstyrke / Befolkning * 100
+        Arbeidsstyrke / Befolkning * 100,
+      
+      Boligprisvekst =
+        growth_rate(Boligprisindeks, Aar)
       
     ) |>
     dplyr::ungroup()

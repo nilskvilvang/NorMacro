@@ -1,16 +1,15 @@
 
-get_government_debt <- function(countries = NULL) {
+get_house_price_index <- function(countries = NULL) {
   
   if (is.null(countries)) {
     countries <- get_standard_countries()
   }
   
   eurostat::get_eurostat(
-    id = "gov_10dd_edpt1",
+    id = "prc_hpi_a",
     filters = list(
-      unit = "PC_GDP",
-      sector = "S13",
-      na_item = "GD",
+      purchase = "TOTAL",
+      unit = "I15_A_AVG",
       geo = countries
     ),
     time_format = "date"
@@ -18,8 +17,8 @@ get_government_debt <- function(countries = NULL) {
     dplyr::transmute(
       Aar = as.integer(format(.data$time, "%Y")),
       Land = .data$geo,
-      Offentlig_gjeld_andel_BNP = .data$values
+      Boligprisindeks = .data$values
     ) |>
-    dplyr::filter(!is.na(.data$Offentlig_gjeld_andel_BNP)) |>
+    dplyr::filter(!is.na(.data$Boligprisindeks)) |>
     dplyr::arrange(.data$Land, .data$Aar)
 }

@@ -12,6 +12,7 @@ build_international_database <- function() {
   employment <- get_employment()
   labour_force <- get_labour_force()
   government_debt <- get_government_debt()
+  house_prices <- get_house_price_index()
   
   international <-
     hicp |>
@@ -23,6 +24,7 @@ build_international_database <- function() {
     dplyr::full_join(employment, by = join_by) |>
     dplyr::full_join(labour_force, by = join_by) |>
     dplyr::full_join(government_debt, by = join_by) |>
+    dplyr::full_join(house_prices, by = join_by) |>
     
     create_international_derived_variables()
   
