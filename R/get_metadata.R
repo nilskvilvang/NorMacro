@@ -1,33 +1,39 @@
 
-get_metadata <- function(){
+get_metadata <- function(data = NULL) {
   
-  path <- "data/metadata.csv"
-  
-  if(!file.exists(path)){
-    path <- file.path("..", "..", "data", "metadata.csv")
-  }
-  
-  metadata <- readr::read_csv(
-    path,
-    locale = readr::locale(encoding = "UTF-8"),
-    show_col_types = FALSE
+  metadata_norway <- readr::read_csv(
+    "data/metadata.csv",
+    show_col_types = FALSE,
+    na = c("", "NA")
   )
   
-  fix_text <- function(x){
-    if(!is.character(x)) return(x)
-    
-    x |>
-      stringr::str_replace_all(stringr::fixed("C\u0005"), "Å") |>
-      stringr::str_replace_all(stringr::fixed("\u00f8"), "ø") |>
-      stringr::str_replace_all(stringr::fixed("C8"), "ø") |>
-      stringr::str_replace_all(stringr::fixed("C%"), "å")
-  }
+  metadata_international <- readr::read_csv(
+    "data/metadata_international.csv",
+    show_col_types = FALSE,
+    na = c("", "NA")
+  )
   
-  metadata |>
-    dplyr::mutate(
-      dplyr::across(
-        where(is.character),
-        fix_text
+  if (is.null(data)) {
+    return(
+      dplyr::bind_rows(
+        metadata_norway |>
+          dplyr::mutate(Omraade = "Norge"),
+        metadata_international
       )
     )
+  }
+  
+  metadata <- if ("Land" %in% names(data)) {
+    metadata_international
+  } else {
+    metadata_norway
+  }
+  
+  variables <- setdiff(
+    names(data),
+    c("Aar", "Land")
+  )
+  
+  metadata |>
+    dplyr::filter(.data$Variabel %in% variables)
 }

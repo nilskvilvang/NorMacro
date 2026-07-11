@@ -1,7 +1,10 @@
 
-validate_metadata <- function(metadata = NULL){
+validate_metadata <- function(
+    metadata = NULL,
+    verbose = FALSE
+) {
   
-  if(is.null(metadata)){
+  if (is.null(metadata)) {
     metadata <- get_metadata()
   }
   
@@ -19,7 +22,8 @@ validate_metadata <- function(metadata = NULL){
     "Startaar",
     "Sluttaar",
     "Funksjon",
-    "Kommentar"
+    "Kommentar",
+    "Omraade"
   )
   
   errors <- character()
@@ -130,7 +134,8 @@ validate_metadata <- function(metadata = NULL){
     "Enhet",
     "Frekvens",
     "Funksjon",
-    "Kommentar"
+    "Kommentar",
+    "Omraade"
   )
   
   for(col in intersect(required_text_cols, names(metadata))){
@@ -176,6 +181,9 @@ validate_metadata <- function(metadata = NULL){
     return(invisible(FALSE))
   }
   
-  message("✓ Metadata bestod validering.")
+  if (verbose) {
+    message("✓ Metadata bestod validering.")
+  }
+  
   invisible(TRUE)
 }

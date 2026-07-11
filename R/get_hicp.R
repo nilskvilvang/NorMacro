@@ -39,3 +39,4 @@ get_hicp <- function(countries = NULL) {
     dplyr::filter(!is.na(.data$HICP)) |>
     dplyr::arrange(.data$Land, .data$Aar)
 }
+

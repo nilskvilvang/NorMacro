@@ -5,7 +5,7 @@ coverage <- function(data = NULL){
     data <- get_normacro()
   }
   
-  metadata <- get_metadata()
+  metadata <- get_metadata(data)
   
   cov <- data |>
     tidyr::pivot_longer(

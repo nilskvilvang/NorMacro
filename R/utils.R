@@ -39,10 +39,15 @@ library(eurostat)
 # Dette sletter alle lokale endringer som ikke er pushet fra den lokale maskinen
 
 
-check_metadata <- function(data, metadata = NULL, ignore = "Aar") {
+check_metadata <- function(
+    data,
+    metadata = NULL,
+    ignore = c("Aar", "Land"),
+    verbose = FALSE
+) {
   
   if (is.null(metadata)) {
-    metadata <- get_metadata()
+    metadata <- get_metadata(data)
   }
   
   missing_vars <- setdiff(
@@ -51,13 +56,19 @@ check_metadata <- function(data, metadata = NULL, ignore = "Aar") {
   )
   
   if (length(missing_vars) == 0) {
-    message("✓ Alle variabler er dokumentert i metadata.")
+    
+    if (verbose) {
+      message("✓ Alle variabler er dokumentert i metadata.")
+    }
+    
   } else {
+    
     warning(
       paste(
         "Variabler uten metadata:",
         paste(missing_vars, collapse = ", ")
-      )
+      ),
+      call. = FALSE
     )
   }
   

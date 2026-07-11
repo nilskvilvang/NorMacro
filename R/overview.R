@@ -1,7 +1,7 @@
 
 overview <- function(data = NULL, print = TRUE) {
   
-  metadata <- get_metadata()
+  metadata <- get_metadata(data)
   
   if (is.null(data)) {
     data <- get_normacro()
