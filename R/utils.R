@@ -39,41 +39,7 @@ library(eurostat)
 # Dette sletter alle lokale endringer som ikke er pushet fra den lokale maskinen
 
 
-check_metadata <- function(
-    data,
-    metadata = NULL,
-    ignore = c("Aar", "Land"),
-    verbose = FALSE
-) {
-  
-  if (is.null(metadata)) {
-    metadata <- get_metadata(data)
-  }
-  
-  missing_vars <- setdiff(
-    names(data),
-    c(metadata$Variabel, ignore)
-  )
-  
-  if (length(missing_vars) == 0) {
-    
-    if (verbose) {
-      message("✓ Alle variabler er dokumentert i metadata.")
-    }
-    
-  } else {
-    
-    warning(
-      paste(
-        "Variabler uten metadata:",
-        paste(missing_vars, collapse = ", ")
-      ),
-      call. = FALSE
-    )
-  }
-  
-  invisible(missing_vars)
-}
+
 
 retry_download <- function(expr, retries = 5, wait = 5, label = "Nedlasting") {
   for (i in seq_len(retries)) {
@@ -97,14 +63,5 @@ retry_download <- function(expr, retries = 5, wait = 5, label = "Nedlasting") {
 }
 
 
-get_eurostat_data <- function(id, filters) {
-  
-  suppressMessages(
-    eurostat::get_eurostat(
-      id = id,
-      filters = filters,
-      time_format = "date"
-    )
-  )
-}
+
 
