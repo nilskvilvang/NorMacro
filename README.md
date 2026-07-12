@@ -15,13 +15,13 @@ NorMacro er en kuratert makroøkonomisk database for Norge som samler representa
 
 Per juli 2026 inneholder NorMacro:
 
-- 93 makroøkonomiske variabler
-- 161 årsobservasjoner (1865–2025)
-- 13 fagkategorier
-- Full metadata for alle variabler
-- Automatisk kvalitetskontroll og validering
-- Lokal caching av datakilder
-- Hjelpefunksjoner for søk, dokumentasjon og visualisering
+• Norsk makrodatabase (1865–2025)
+• Internasjonal makrodatabase (1960–2025)
+• 92 norske indikatorer
+• 38 internasjonale indikatorer
+• Metadata for alle variabler
+• Automatisk kvalitetskontroll
+• Visualisering og analysefunksjoner
 
 ## Formål
 
@@ -83,11 +83,64 @@ normacro <- get_normacro()
 
 Resultatet er et data.frame/tibble med alle tilgjengelige dataserier.
 
+## Quick start - norske data
+
+source("source_all.R")
+
+normacro <- get_normacro()
+
+international <- get_international_macro()
+
+plot_series("BNP_Fastland")
+
+compare_series(
+    c("BNP_Fastland", "Privat_konsum")
+)
+
+scatter_series(
+    x = "BNP_Fastland_vekst",
+    y = "Arbledighetsrate_NAV"
+)
+
+correlate_series(
+    c(
+        "Inflasjon",
+        "Lonnvekst",
+        "BNP_Fastland_vekst"
+    )
+)
+
+
+## Quick start - norske data
+
+international <- get_international_macro()
+
+sweden <-
+    international |>
+    dplyr::filter(Land == "SE")
+
+plot_series(
+    "BNP_vekst",
+    data = sweden
+)
+
+compare_series(
+    c("BNP_vekst", "Inflasjon"),
+    data = sweden
+)
+
+scatter_series(
+    x = "BNP_vekst",
+    y = "Arbeidsledighetsrate",
+    data = sweden
+)
+
 ## NorMacro API
 
 Data
 ----
 get_normacro()
+get_international_macro()
 
 Metadata
 --------
@@ -96,41 +149,20 @@ describe_variable()
 search_variables()
 list_categories()
 list_variables()
-category_variables()
-
-Oversikt
----------
-overview()
-coverage()
-about()
-summary_normacro()
 
 Analyse
 --------
-leading_indicators()
 normalize_series()
 compare_series()
-compare_periods()
-growth_table()
-correlation_matrix()
-business_cycle()
-business_cycle_score()
-business_cycle_explain()
-recession_periods()
-recession_period_explain()
-macro_report()
+scatter_series()
+correlate_series()
+variable_summary()
 
 Visualisering
 -------------
 plot_series()
-plot_correlation_matrix()
-conjuncture_dashboard()
-
-Diagnostikk
------------
-latest_observations()
-missing_data()
-variable_summary()
+compare_series()
+scatter_series()
 
 ## Utforske databasen
 
