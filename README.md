@@ -275,11 +275,16 @@ unlink("cache", recursive = TRUE)
 
 ## Metadata
 
-Alle variabler dokumenteres gjennom `metadata.csv`.
+Alle variabler dokumenteres gjennom metadata. 
 
 ```r
-get_metadata()
-describe_variable("BNP_Fastland")
+get_metadata() # Gir alle metadata 
+
+get_normacro_metadata() # Gir metadata for de norske seriene
+
+get_international_metadata() # Gir metadata for de internasjonale seriene
+
+describe_variable("BNP_Fastland") # Beskrvier en girr variabel - her BNP_Fastland
 ```
 
 Se `docs/metadata.md`.

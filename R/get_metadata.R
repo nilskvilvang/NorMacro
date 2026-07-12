@@ -1,23 +1,13 @@
 
 get_metadata <- function(data = NULL) {
   
-  metadata_norway <- readr::read_csv(
-    "data/metadata.csv",
-    show_col_types = FALSE,
-    na = c("", "NA")
-  )
-  
-  metadata_international <- readr::read_csv(
-    "data/metadata_international.csv",
-    show_col_types = FALSE,
-    na = c("", "NA")
-  )
+  metadata_norway <- get_normacro_metadata()
+  metadata_international <- get_international_metadata()
   
   if (is.null(data)) {
     return(
       dplyr::bind_rows(
-        metadata_norway |>
-          dplyr::mutate(Omraade = "Norge"),
+        metadata_norway,
         metadata_international
       )
     )
