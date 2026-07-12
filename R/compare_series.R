@@ -6,62 +6,115 @@ compare_series <- function(
     normalize = TRUE,
     start_year = NULL,
     complete_cases = FALSE
-){
+) {
   
-  if(is.null(data)){
-    data <- suppressMessages(get_normacro())
+  if (is.null(data)) {
+    data <- get_normacro()
   }
   
-  metadata <- get_metadata()
+  metadata <- get_metadata(data)
   
-  missing <- setdiff(variables, names(data))
-  
-  if(length(missing) > 0){
+  if (
+    "Land" %in% names(data) &&
+    dplyr::n_distinct(data$Land) > 1
+  ) {
     stop(
-      "Fant ikke variabler i datasettet: ",
-      paste(missing, collapse = ", ")
+      paste0(
+        "compare_series() kan sammenligne flere variabler for ett land om gangen. ",
+        "Filtrer data til ett land først."
+      ),
+      call. = FALSE
     )
   }
   
-  if(complete_cases){
-    common_years <- data |>
-      dplyr::select(Aar, dplyr::all_of(variables)) |>
-      dplyr::filter(
-        stats::complete.cases(dplyr::pick(dplyr::all_of(variables)))
-      ) |>
-      dplyr::pull(Aar)
+  if ("Land" %in% names(data)) {
+    data <- data |>
+      dplyr::select(-Land)
+  }
+  
+  missing <- setdiff(variables, names(data))
+  
+  if (length(missing) > 0) {
+    stop(
+      "Fant ikke variabler i datasettet: ",
+      paste(missing, collapse = ", "),
+      call. = FALSE
+    )
+  }
+  
+  common_years <- data |>
+    dplyr::select(
+      Aar,
+      dplyr::all_of(variables)
+    ) |>
+    dplyr::filter(
+      stats::complete.cases(
+        dplyr::pick(dplyr::all_of(variables))
+      )
+    ) |>
+    dplyr::pull(Aar)
+  
+  if (complete_cases && length(common_years) == 0) {
+    stop(
+      "Fant ingen år der alle valgte variabler har data.",
+      call. = FALSE
+    )
+  }
+  
+  if (
+    normalize &&
+    is.null(base_year) &&
+    is.null(start_year)
+  ) {
     
-    if(length(common_years) == 0){
-      stop("Fant ingen år der alle valgte variabler har data.")
+    if (length(common_years) == 0) {
+      stop(
+        paste0(
+          "Fant ikke et felles basisår der alle valgte variabler har data. ",
+          "Angi base_year eksplisitt eller bruk normalize = FALSE."
+        ),
+        call. = FALSE
+      )
     }
     
     start_year <- min(common_years)
+    base_year <- start_year
   }
   
-  if(!is.null(start_year)){
+  if (complete_cases && is.null(start_year)) {
+    start_year <- min(common_years)
+  }
+  
+  if (!is.null(start_year)) {
     data <- data |>
-      dplyr::filter(Aar >= start_year)
+      dplyr::filter(.data$Aar >= start_year)
     
-    if(is.null(base_year) && normalize){
+    if (is.null(base_year) && normalize) {
       base_year <- start_year
     }
   }
   
-  if(normalize){
+  if (normalize) {
+    
     plot_data <- normalize_series(
       data = data,
       variables = variables,
       base_year = base_year
     )
     
-    y_label <- if(is.null(base_year)){
+    y_label <- if (is.null(base_year)) {
       "Indeks"
     } else {
       paste0("Indeks, ", base_year, " = 100")
     }
+    
   } else {
+    
     plot_data <- data |>
-      dplyr::select(Aar, dplyr::all_of(variables))
+      dplyr::select(
+        Aar,
+        dplyr::all_of(variables)
+      )
     
     y_label <- NULL
   }
@@ -82,15 +135,33 @@ compare_series <- function(
       names_to = "Variabel",
       values_to = "Verdi"
     ) |>
-    dplyr::left_join(display_lookup, by = "Variabel") |>
-    dplyr::filter(!is.na(Verdi))
+    dplyr::left_join(
+      display_lookup,
+      by = "Variabel"
+    ) |>
+    dplyr::filter(!is.na(.data$Verdi))
+  
+  sources <- metadata |>
+    dplyr::filter(.data$Variabel %in% variables) |>
+    dplyr::pull(.data$Kilde) |>
+    unique() |>
+    stats::na.omit()
+  
+  caption <- if (length(sources) == 0) {
+    NULL
+  } else {
+    paste0(
+      "Kilde: ",
+      paste(sources, collapse = " / ")
+    )
+  }
   
   ggplot2::ggplot(
     plot_data_long,
     ggplot2::aes(
-      x = Aar,
-      y = Verdi,
-      colour = Display_navn
+      x = .data$Aar,
+      y = .data$Verdi,
+      colour = .data$Display_navn
     )
   ) +
     ggplot2::geom_line(linewidth = 0.9) +
@@ -106,11 +177,14 @@ compare_series <- function(
     ) +
     ggplot2::labs(
       title = "Sammenligning av tidsserier",
-      subtitle = paste(display_lookup$Display_navn, collapse = ", "),
+      subtitle = paste(
+        display_lookup$Display_navn,
+        collapse = ", "
+      ),
       x = NULL,
       y = y_label,
       colour = NULL,
-      caption = "Kilde: NorMacro"
+      caption = caption
     ) +
     ggplot2::theme_minimal()
 }

@@ -1,22 +1,43 @@
 
-plot_series <- function(variable, data = NULL, metadata = NULL){
+plot_series <- function(
+    variable,
+    data = NULL,
+    metadata = NULL,
+    countries = NULL
+) {
   
-  if(is.null(data)){
-    data <- suppressMessages(get_normacro())
+  if (is.null(data)) {
+    data <- get_normacro()
   }
   
-  if(is.null(metadata)){
-    metadata <- get_metadata()
+  if (is.null(metadata)) {
+    metadata <- get_metadata(data)
   }
   
-  if(!variable %in% names(data)){
+  if (!variable %in% names(data)) {
     stop("Fant ikke variabelen i datasettet: ", variable)
   }
   
-  meta <- metadata |>
-    dplyr::filter(Variabel == variable)
+  has_country <- "Land" %in% names(data)
   
-  if(nrow(meta) == 0){
+  if (has_country && !is.null(countries)) {
+    missing_countries <- setdiff(countries, unique(data$Land))
+    
+    if (length(missing_countries) > 0) {
+      stop(
+        "Fant ikke land i datasettet: ",
+        paste(missing_countries, collapse = ", ")
+      )
+    }
+    
+    data <- data |>
+      dplyr::filter(.data$Land %in% countries)
+  }
+  
+  meta <- metadata |>
+    dplyr::filter(.data$Variabel == variable)
+  
+  if (nrow(meta) == 0) {
     title <- variable
     subtitle <- NULL
     y_label <- NULL
@@ -27,20 +48,57 @@ plot_series <- function(variable, data = NULL, metadata = NULL){
     y_label <- meta$Enhet[1]
     caption <- paste0("Kilde: ", meta$Kilde[1])
     
-    if(is.na(title) || title == ""){
+    if (is.na(title) || title == "") {
       title <- variable
     }
   }
   
-  plot_data <- data |>
-    dplyr::select(Aar, Verdi = dplyr::all_of(variable)) |>
-    dplyr::filter(!is.na(Verdi))
+  if (has_country) {
+    
+    plot_data <- data |>
+      dplyr::select(
+        Aar,
+        Land,
+        Verdi = dplyr::all_of(variable)
+      ) |>
+      dplyr::filter(!is.na(.data$Verdi))
+    
+    p <- ggplot2::ggplot(
+      plot_data,
+      ggplot2::aes(
+        x = .data$Aar,
+        y = .data$Verdi,
+        colour = .data$Land,
+        group = .data$Land
+      )
+    ) +
+      ggplot2::geom_line(linewidth = 0.9) +
+      ggplot2::labs(colour = NULL)
+    
+  } else {
+    
+    plot_data <- data |>
+      dplyr::select(
+        Aar,
+        Verdi = dplyr::all_of(variable)
+      ) |>
+      dplyr::filter(!is.na(.data$Verdi))
+    
+    p <- ggplot2::ggplot(
+      plot_data,
+      ggplot2::aes(
+        x = .data$Aar,
+        y = .data$Verdi
+      )
+    ) +
+      ggplot2::geom_line(linewidth = 0.9)
+  }
   
-  p <- ggplot2::ggplot(
-    plot_data,
-    ggplot2::aes(x = Aar, y = Verdi)
-  ) +
-    ggplot2::geom_line() +
+  p <- p +
+    ggplot2::scale_x_continuous(
+      breaks = scales::breaks_pretty(n = 8),
+      labels = scales::label_number(accuracy = 1)
+    ) +
     ggplot2::scale_y_continuous(
       labels = scales::label_number(
         big.mark = " ",
@@ -56,7 +114,13 @@ plot_series <- function(variable, data = NULL, metadata = NULL){
     ) +
     ggplot2::theme_minimal()
   
-  if(grepl("vekst|inflasjon|rente|rentekurve|andel", variable, ignore.case = TRUE)){
+  if (
+    grepl(
+      "vekst|inflasjon|rente|rentekurve|andel",
+      variable,
+      ignore.case = TRUE
+    )
+  ) {
     p <- p +
       ggplot2::geom_hline(
         yintercept = 0,

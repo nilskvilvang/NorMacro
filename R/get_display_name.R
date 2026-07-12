@@ -1,21 +1,17 @@
 
-get_display_name <- function(variable, metadata = NULL){
+get_display_name <- function(variable, metadata = NULL) {
   
-  if(is.null(metadata)){
+  if (is.null(metadata)) {
     metadata <- get_metadata()
   }
   
-  idx <- match(variable, metadata$Variabel)
+  display <- metadata |>
+    dplyr::filter(.data$Variabel == variable) |>
+    dplyr::pull(.data$Display_navn)
   
-  name <- ifelse(
-    is.na(idx),
-    NA_character_,
-    metadata$Display_navn[idx]
-  )
+  if (length(display) == 0 || is.na(display[1]) || display[1] == "") {
+    return(variable)
+  }
   
-  ifelse(
-    is.na(name) | name == "",
-    variable,
-    name
-  )
+  display[1]
 }
