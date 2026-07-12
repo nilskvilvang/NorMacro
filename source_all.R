@@ -73,6 +73,12 @@ source("R/business_cycle.R")
 source("R/business_cycle_explain.R")
 source("R/recession_periods.R")
 source("R/recession_period_explain.R")
+source("R/plot_series.R")
+source("R/compare_series.R")
+source("R/scatter_series.R")
+source("R/correlate_series.R")
+
+
 
 source("R/macro_report.R")
 source("R/get_metadata.R")
