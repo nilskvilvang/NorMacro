@@ -8,6 +8,7 @@ source("R/source_nav.R")
 
 source("R/install_dependencies.R")
 
+source("R/formatting.R")
 source("R/get_kpi.R")
 source("R/get_befolkning.R")
 source("R/get_arbeidsstyrke.R")
