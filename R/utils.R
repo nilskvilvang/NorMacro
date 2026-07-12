@@ -23,6 +23,7 @@ library(eurostat)
 ## rm(list = ls())
 ## source("source_all.R")
 ## normacro <- get_normacro()
+## international <- get_international_macro()
 ## tail(normacro)
 
 ## validate_metadata()
@@ -38,7 +39,10 @@ library(eurostat)
 # git reset --hard origin/main
 # Dette sletter alle lokale endringer som ikke er pushet fra den lokale maskinen
 
-
+# Test tid det tar å kjøre funksjon
+# system.time({
+# international <- get_international_macro()
+# })
 
 
 retry_download <- function(expr, retries = 5, wait = 5, label = "Nedlasting") {
