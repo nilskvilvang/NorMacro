@@ -131,11 +131,11 @@ correlate_series(
     )
 )
 ```
-### Plot series - eksempel: Sammenligning av inflasjon og lønnsvekst
+### Compare series - eksempel: Sammenligning av inflasjon og lønnsvekst
 
 ```{r}
 #| label: fig-compare-inflation-wages
-#| fig-cap: "Utviklingen i inflasjon og lønnsvekst, normalisert til felles basisår."
+#| fig-cap: "BNP og arbeidsledighet."
 #| fig-width: 8
 #| fig-height: 5
 
@@ -147,6 +147,22 @@ compare_series(
   data = normacro
 )
 ```
+
+### Scatter series - eksempel: Sammenligning av inflasjon og lønnsvekst
+
+```{r}
+#| label: fig-scatter-inflation-wages
+#| fig-cap: "Scatterplott vekst BNP fastland og arbeidsledighet."
+#| fig-width: 8
+#| fig-height: 5
+
+scatter_series(
+    x = "BNP_Fastland_vekst",
+    y = "Arbledighetsrate_NAV"
+)
+
+```
+
 
 ## Quick start - internasjonale data
 
@@ -170,6 +186,24 @@ compare_series(
 scatter_series(
     x = "BNP_vekst",
     y = "Arbeidsledighetsrate",
+    data = sweden
+)
+```
+
+### Compare series - eksempel: BNP vekst og inflasjon i Sverige
+
+```{r}
+#| label: fig-compare-growth-inflation-sweden
+#| fig-cap: "BNP vekst og inflasjon i Sverige."
+#| fig-width: 8
+#| fig-height: 5
+
+sweden <-
+    international |>
+    dplyr::filter(Land == "SE")
+
+compare_series(
+    c("BNP_vekst", "Inflasjon"),
     data = sweden
 )
 ```
@@ -268,6 +302,23 @@ correlate_series(
         "BNP_Fastland_vekst"
     )
 )
+```
+
+### Describe variable - eksempel: BNP fastland
+
+```{r}
+describe_variable("BNP_Fastland")
+```
+
+### Plot series - eksempel: BNP fastland
+
+```{r}
+#| label: fig-BNP-fastland
+#| fig-cap: "BNP fastland."
+#| fig-width: 8
+#| fig-height: 5
+
+plot_series("BNP_Fastland")
 ```
 
 ## Visualisering

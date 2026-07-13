@@ -126,7 +126,7 @@ correlate_series(
 )
 ```
 
-### Plot series - eksempel: Sammenligning av inflasjon og lønnsvekst
+### Compare series - eksempel: Sammenligning av inflasjon og lønnsvekst
 
 ``` r
 compare_series(
@@ -142,8 +142,24 @@ compare_series(
 
 ![](README_files/figure-commonmark/fig-compare-inflation-wages-1.png)
 
-Figure 1: Utviklingen i inflasjon og lønnsvekst, normalisert til felles
-basisår.
+Figure 1: BNP og arbeidsledighet.
+
+</div>
+
+### Scatter series - eksempel: Sammenligning av inflasjon og lønnsvekst
+
+``` r
+scatter_series(
+    x = "BNP_Fastland_vekst",
+    y = "Arbledighetsrate_NAV"
+)
+```
+
+<div id="fig-scatter-inflation-wages">
+
+![](README_files/figure-commonmark/fig-scatter-inflation-wages-1.png)
+
+Figure 2: Scatterplott vekst BNP fastland og arbeidsledighet.
 
 </div>
 
@@ -172,6 +188,27 @@ scatter_series(
     data = sweden
 )
 ```
+
+### Compare series - eksempel: BNP vekst og inflasjon i Sverige
+
+``` r
+sweden <-
+    international |>
+    dplyr::filter(Land == "SE")
+
+compare_series(
+    c("BNP_vekst", "Inflasjon"),
+    data = sweden
+)
+```
+
+<div id="fig-compare-growth-inflation-sweden">
+
+![](README_files/figure-commonmark/fig-compare-growth-inflation-sweden-1.png)
+
+Figure 3: BNP vekst og inflasjon i Sverige.
+
+</div>
 
 ## NorMacro API
 
@@ -270,6 +307,38 @@ correlate_series(
     )
 )
 ```
+
+### Describe variable - eksempel: BNP fastland
+
+``` r
+describe_variable("BNP_Fastland")
+```
+
+
+    Variabel:    BNP_Fastland 
+    Beskrivelse: BNP Fastlands-Norge, faste priser 
+    Kilde:       SSB 
+    Enhet:       Millioner kroner, faste priser 
+    Frekvens:    Årlig 
+    Startår:     1970 
+    Sluttår:     NA 
+    Funksjon:    get_bnp_fastland 
+    Tabell:      NRMakroHov 
+    Kommentar:   Makrost = bnpb.nr23_9fn, ContentsCode = Faste 
+
+### Plot series - eksempel: BNP fastland
+
+``` r
+plot_series("BNP_Fastland")
+```
+
+<div id="fig-BNP-fastland">
+
+![](README_files/figure-commonmark/fig-BNP-fastland-1.png)
+
+Figure 4: BNP fastland.
+
+</div>
 
 ## Visualisering
 
