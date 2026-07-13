@@ -1,25 +1,3 @@
----
-format:
-  gfm:
-    output-file: README.md
-    variant: +yaml_metadata_block
-execute:
-  echo: true
-  warning: false
-  message: false
-  freeze: auto
----
-
-```{r}
-#| label: setup
-#| include: false
-
-source("source_all.R")
-
-normacro <- get_normacro()
-international <- get_international_macro()
-```
-
 # NorMacro
 
 **Version:** 2.0.0 - dev
@@ -39,11 +17,11 @@ Pakken kombinerer kuraterte datasett, standardiserte metadata og analysefunksjon
 
 Per juli 2026 inneholder NorMacro:
 
-- 92 norske indikatorer (1865–2025)
-- 38 internasjonale indikatorer (1960–2025)
-- Full metadata for alle serier
-- Innebygget kvalitetskontroll
-- Visualisering og analyse
+• 92 norske indikatorer (1865–2025)
+• 38 internasjonale indikatorer (1960–2025)
+• Full metadata for alle serier
+• Innebygget kvalitetskontroll
+• Visualisering og analyse
 
 ## Formål
 
@@ -131,22 +109,6 @@ correlate_series(
         "Lonnvekst",
         "BNP_Fastland_vekst"
     )
-)
-```
-### Plot series - eksempel
-
-```{r}
-#| label: fig-compare-inflation-wages
-#| fig-cap: "Utviklingen i inflasjon og lønnsvekst, normalisert til felles basisår."
-#| fig-width: 8
-#| fig-height: 5
-
-compare_series(
-  c(
-    "Inflasjon",
-    "Lonnvekst"
-  ),
-  data = normacro
 )
 ```
 

@@ -4,39 +4,7 @@ scatter_series <- function(
     y,
     data = NULL,
     start_year = NULL,
-    end_year = NULL,rm(list = ls())
-source("source_all.R")
-
-normacro <- get_normacro()
-international <- get_international_macro()
-
-overview(normacro)
-overview(international)
-
-coverage(normacro)
-coverage(international)
-
-plot_series("BNP_Fastland")
-
-compare_series(
-  c(
-    "Inflasjon",
-    "Lonnvekst"
-  )
-)
-
-scatter_series(
-  x = "BNP_Fastland_vekst",
-  y = "Arbledighetsrate_NAV"
-)
-
-correlate_series(
-  c(
-    "Inflasjon",
-    "Lonnvekst",
-    "BNP_Fastland_vekst"
-  )
-)
+    end_year = NULL,
     add_smooth = TRUE,
     label_years = FALSE
 ) {
@@ -143,9 +111,7 @@ correlate_series(
   )
   
   r2 <- summary(fit)$r.squared
-  
   p_value <- summary(fit)$coefficients[2, 4]
-  
   n <- nrow(plot_data)
   
   stats_label <- paste(
@@ -188,7 +154,7 @@ correlate_series(
       ),
       subtitle = paste0(
         "Observasjoner: ",
-        nrow(plot_data)
+        n
       ),
       x = if (length(x_unit) == 0) {
         x_label
@@ -211,7 +177,7 @@ correlate_series(
       vjust = 1.1,
       size = 3.5,
       linewidth = 0.3
-    )+
+    ) +
     ggplot2::theme_minimal()
   
   if (add_smooth) {

@@ -1,10 +1,25 @@
+---
+format:
+  gfm:
+    output-file: README.md
+    variant: +yaml_metadata_block
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+
 # NorMacro
 
 **Version:** 2.0.0 - dev
 
-NorMacro er et R-rammeverk for utforsking, visualisering og analyse av norske og internasjonale makroøkonomiske tidsserier.
+NorMacro er et R-rammeverk for utforsking, visualisering og analyse av
+norske og internasjonale makroøkonomiske tidsserier.
 
-Pakken kombinerer kuraterte datasett, standardiserte metadata og analysefunksjoner i ett konsistent API.
+Pakken kombinerer kuraterte datasett, standardiserte metadata og
+analysefunksjoner i ett konsistent API.
 
 ## Filosofi
 
@@ -17,11 +32,11 @@ Pakken kombinerer kuraterte datasett, standardiserte metadata og analysefunksjon
 
 Per juli 2026 inneholder NorMacro:
 
-• 92 norske indikatorer (1865–2025)
-• 38 internasjonale indikatorer (1960–2025)
-• Full metadata for alle serier
-• Innebygget kvalitetskontroll
-• Visualisering og analyse
+- 92 norske indikatorer (1865–2025)
+- 38 internasjonale indikatorer (1960–2025)
+- Full metadata for alle serier
+- Innebygget kvalitetskontroll
+- Visualisering og analyse
 
 ## Formål
 
@@ -33,7 +48,8 @@ Målet med NorMacro er å tilby et enkelt og transparent datasett for:
 - forskning og metodeutvikling
 - tidsserieanalyser og prognoser
 
-Alle dataserier hentes automatisk fra relevante datakilder, i all hovedsak originalkilde.
+Alle dataserier hentes automatisk fra relevante datakilder, i all
+hovedsak originalkilde.
 
 ## Hovedfunksjoner
 
@@ -63,7 +79,7 @@ NorMacro bygger på noen enkle prinsipper:
 
 Klon prosjektet:
 
-```bash
+``` bash
 git clone https://github.com/nilskvilvang/NorMacro.git
 ```
 
@@ -71,7 +87,7 @@ git clone https://github.com/nilskvilvang/NorMacro.git
 
 ## Kom i gang
 
-```r
+``` r
 source("source_all.R")
 
 install_dependencies()
@@ -85,7 +101,7 @@ Resultatet er et data.frame/tibble med alle tilgjengelige dataserier.
 
 ## Quick start - norske data
 
-```r
+``` r
 source("source_all.R")
 
 normacro <- get_normacro()
@@ -112,9 +128,30 @@ correlate_series(
 )
 ```
 
+### Plot series - eksempel
+
+``` r
+compare_series(
+  c(
+    "Inflasjon",
+    "Lonnvekst"
+  ),
+  data = normacro
+)
+```
+
+<div id="fig-compare-inflation-wages">
+
+![](README_files/figure-commonmark/fig-compare-inflation-wages-1.png)
+
+Figure 1: Utviklingen i inflasjon og lønnsvekst, normalisert til felles
+basisår.
+
+</div>
+
 ## Quick start - internasjonale data
 
-```r
+``` r
 international <- get_international_macro()
 
 sweden <-
@@ -140,49 +177,38 @@ scatter_series(
 
 ## NorMacro API
 
-Data
-----
-get_normacro()
-get_international_macro()
+## Data
 
-Metadata
---------
-get_metadata()
-describe_variable()
-search_variables()
-list_categories()
+get_normacro() get_international_macro()
+
+## Metadata
+
+get_metadata() describe_variable() search_variables() list_categories()
 list_variables()
 
-Utforskning
---------
-overview()
-coverage()
+## Utforskning
 
-Analyse
---------
-normalize_series()
-compare_series()
-scatter_series()
-correlate_series()
+overview() coverage()
+
+## Analyse
+
+normalize_series() compare_series() scatter_series() correlate_series()
 variable_summary()
 
-Visualisering
--------------
-plot_series()
-compare_series()
-scatter_series()
+## Visualisering
 
-Kvalitet
----------
-check_normacro()
-check_metadata()
-validate_metadata()
+plot_series() compare_series() scatter_series()
+
+## Kvalitet
+
+check_normacro() check_metadata() validate_metadata()
 
 ## Utforske databasen
 
-NorMacro inneholder metadata for alle variabler og flere hjelpefunksjoner for å utforske innholdet.
+NorMacro inneholder metadata for alle variabler og flere
+hjelpefunksjoner for å utforske innholdet.
 
-```r
+``` r
 overview()
 
 coverage()
@@ -199,11 +225,12 @@ leading_indicators()
 
 category_variables()
 ```
+
 ## Typisk analyse
 
 Se docs/analyse.md
 
-```r
+``` r
 source("source_all.R")
 
 normacro <- get_normacro()
@@ -236,12 +263,12 @@ correlate_series(
 
 Se docs/visualisering.md
 
-
 ## Konjunkturklassifisering
 
-NorMacro inneholder en transparent indikatorbasert konjunkturklassifisering.
+NorMacro inneholder en transparent indikatorbasert
+konjunkturklassifisering.
 
-```r
+``` r
 business_cycle()
 business_cycle_explain(2020)
 ```
@@ -269,7 +296,7 @@ NorMacro organiserer variablene i følgende kategorier:
 
 For å se alle tilgjengelige variabler:
 
-```r
+``` r
 list_variables()
 ```
 
@@ -285,15 +312,17 @@ Se `docs/metadata.md`.
 
 ## Kvalitetskontroll
 
-NorMacro har en enkel kvalitetskontroll som kjøres automatisk når databasen bygges med:
+NorMacro har en enkel kvalitetskontroll som kjøres automatisk når
+databasen bygges med:
 
-```r
+``` r
 normacro <- get_normacro()
 ```
 
-NorMacro inneholder automatiske kvalitetskontroller og validering av både data og metadata.
+NorMacro inneholder automatiske kvalitetskontroller og validering av
+både data og metadata.
 
-```r
+``` r
 validate_metadata()
 
 check_normacro()
@@ -303,22 +332,22 @@ testthat::test_dir("tests/testthat")
 
 Funksjonen check_normacro() kontrollerer at:
 
- - datasettet har en variabel som heter Aar
- - årgangene er sortert stigende
- - det ikke finnes dupliserte år
- - alle variabler er dokumentert i metadata
+- datasettet har en variabel som heter Aar
+- årgangene er sortert stigende
+- det ikke finnes dupliserte år
+- alle variabler er dokumentert i metadata
 
 ## Eksport
 
 Eksporter database og metadata:
 
-```r
+``` r
 normacro <- get_normacro(export = TRUE)
 ```
 
 Dette oppretter:
 
-```text
+``` text
 data_clean/
 ├── normacro.csv
 ├── normacro.rds
@@ -355,4 +384,5 @@ Datakildene tilhører de respektive institusjonene:
 - NAV
 - Federal Reserve Economic Data (FRED)
 
-NorMacro distribuerer kun kode for innhenting og bearbeiding av offentlig tilgjengelige data.
+NorMacro distribuerer kun kode for innhenting og bearbeiding av
+offentlig tilgjengelige data.
