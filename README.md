@@ -106,8 +106,6 @@ source("source_all.R")
 
 normacro <- get_normacro()
 
-international <- get_international_macro()
-
 plot_series("BNP_Fastland")
 
 compare_series(
@@ -128,7 +126,7 @@ correlate_series(
 )
 ```
 
-### Plot series - eksempel
+### Plot series - eksempel: Sammenligning av inflasjon og lønnsvekst
 
 ``` r
 compare_series(
@@ -177,31 +175,45 @@ scatter_series(
 
 ## NorMacro API
 
-## Data
+``` r
+Data
+----
+get_normacro()
+get_international_macro()
 
-get_normacro() get_international_macro()
-
-## Metadata
-
-get_metadata() describe_variable() search_variables() list_categories()
+Metadata
+--------
+get_metadata()
+describe_variable()
+search_variables()
+list_categories()
 list_variables()
 
-## Utforskning
+Utforskning
+--------
+overview()
+coverage()
 
-overview() coverage()
-
-## Analyse
-
-normalize_series() compare_series() scatter_series() correlate_series()
+Analyse
+--------
+normalize_series()
+compare_series()
+scatter_series()
+correlate_series()
 variable_summary()
 
-## Visualisering
+Visualisering
+-------------
+plot_series()
+compare_series()
+scatter_series()
 
-plot_series() compare_series() scatter_series()
-
-## Kvalitet
-
-check_normacro() check_metadata() validate_metadata()
+Kvalitet
+---------
+check_normacro()
+check_metadata()
+validate_metadata()
+```
 
 ## Utforske databasen
 
@@ -228,7 +240,7 @@ category_variables()
 
 ## Typisk analyse
 
-Se docs/analyse.md
+Se [docs/analyse](docs/analyse.md)
 
 ``` r
 source("source_all.R")
@@ -261,7 +273,7 @@ correlate_series(
 
 ## Visualisering
 
-Se docs/visualisering.md
+Se [docs/visualisering.md](docs/visualisering.md).
 
 ## Konjunkturklassifisering
 
@@ -273,7 +285,8 @@ business_cycle()
 business_cycle_explain(2020)
 ```
 
-Se `docs/business_cycle.md` for metode, vekter og poengsystem.
+Se [docs/business_cycle.md](docs/business_cycle.md) for metode, vekter
+og poengsystem.
 
 ## Variabler
 
@@ -302,13 +315,13 @@ list_variables()
 
 ## Cache
 
-Se docs/cache.md
+Se [docs/cache.md](docs/cache.md).
 
 ## Metadata
 
 NorMacro er metadata-drevet.
 
-Se `docs/metadata.md`.
+Se [docs/metadata.md](docs/metadata.md).
 
 ## Kvalitetskontroll
 
@@ -357,23 +370,26 @@ data_clean/
 
 ## Arkitektur
 
-Se docs/arkitektur.md
+Se [docs/arkitektur.md](docs/arkitektur.md).
 
 ## Reproduserbarhet
 
 NorMacro inneholder ingen manuelt vedlikeholdte data.
 
-Se docs/reproduserbarhet.md.
+Se [docs/reproduserbarhet.md](docs/reproduserbarhet.md).
 
 ## Dokumentasjon
 
-NorMacro dokumenteres gjennom en serie korte notater:
+NorMacro dokumenteres gjennom en serie korte notater i /docs:
 
 - metadata.md
 - cache.md
 - reproduserbarhet.md
 - arkitektur.md
 - business_cycle.md
+- visualisering.md
+- analyse.md
+- internasjonale_data.md
 
 ## Lisens
 
