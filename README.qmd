@@ -445,5 +445,7 @@ Datakildene tilhører de respektive institusjonene:
 - Norges Bank
 - NAV
 - Federal Reserve Economic Data (FRED)
+- Eurostat
+- Euronext Olso Børs
 
 NorMacro distribuerer kun kode for innhenting og bearbeiding av offentlig tilgjengelige data.
