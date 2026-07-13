@@ -10,7 +10,14 @@ NorMacro er bygd rundt noen enkle prinsipper:
 - små funksjoner som gjør én ting godt
 - analysefunksjoner som returnerer standard R-objekter
 
-## Hovedstruktur
+## Struktur
+
+NorMacro/
+  R/
+  data/
+  cache/
+  tests/
+  docs/
 
 NorMacro bygges i flere trinn:
 
@@ -40,10 +47,6 @@ Funksjonene i NorMacro følger noen felles mønstre:
 - plottefunksjoner returnerer `ggplot`-objekter
 - analysefunksjoner returnerer tibble, matrix eller liste
 - metadata brukes til titler, enheter og dokumentasjon
-
-## Reproduserbarhet
-
-NorMacro inneholder ingen manuelt vedlikeholdte tidsserier. Alle data hentes fra opprinnelige kilder ved kjøring. Cache brukes kun for hastighet.
 
 ## Teststruktur
 

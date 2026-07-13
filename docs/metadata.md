@@ -1,12 +1,16 @@
 # Metadata i NorMacro
 
-NorMacro er metadata-drevet. Alle variabler dokumenteres gjennom én sentral metadatafil:
+NorMacro er metadata-drevet. 
 
-```text
-data/metadata.csv
+```r
+get_metadata() # Gir alle metadata 
+
+get_normacro_metadata() # Gir metadata for de norske seriene
+
+get_international_metadata() # Gir metadata for de internasjonale seriene
+
+describe_variable("BNP_Fastland") # Beskrvier en girr variabel - her BNP_Fastland
 ```
-
-Denne filen fungerer som prosjektets **single source of truth** for variabeldokumentasjon.
 
 ## Formål
 
@@ -99,15 +103,3 @@ Metadata følger noen enkle prinsipper:
 
 ---
 
-## Fremtidige utvidelser
-
-Metadata kan senere utvides med informasjon som:
-
-- publiseringslag
-- revisjonshistorikk
-- internasjonale klassifikasjoner
-- visningsnavn for figurer
-- nøkkelord for søk
-- anbefalte sammenligningsserier
-
-NorMacro er derfor bygd slik at metadata kan utvikles uten å endre analysefunksjonene.

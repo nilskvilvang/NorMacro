@@ -1,8 +1,10 @@
 # NorMacro
 
-**Version:** 1.0.0
+**Version:** 2.0.0 - dev
 
-NorMacro er en kuratert makroøkonomisk database for Norge som samler representative årlige indikatorer fra SSB, Norges Bank, NAV, Yahoo Finance og FRED i ett konsistent datasett. Databasen er dokumentert med metadata, kvalitetssikret gjennom automatiske tester og utstyrt med hjelpefunksjoner for søk, dokumentasjon, visualisering og utforsking.
+NorMacro er et R-rammeverk for utforsking, visualisering og analyse av norske og internasjonale makroøkonomiske tidsserier.
+
+Pakken kombinerer kuraterte datasett, standardiserte metadata og analysefunksjoner i ett konsistent API.
 
 ## Filosofi
 
@@ -15,13 +17,11 @@ NorMacro er en kuratert makroøkonomisk database for Norge som samler representa
 
 Per juli 2026 inneholder NorMacro:
 
-• Norsk makrodatabase (1865–2025)
-• Internasjonal makrodatabase (1960–2025)
-• 92 norske indikatorer
-• 38 internasjonale indikatorer
-• Metadata for alle variabler
-• Automatisk kvalitetskontroll
-• Visualisering og analysefunksjoner
+• 92 norske indikatorer (1865–2025)
+• 38 internasjonale indikatorer (1960–2025)
+• Full metadata for alle serier
+• Innebygget kvalitetskontroll
+• Visualisering og analyse
 
 ## Formål
 
@@ -85,6 +85,7 @@ Resultatet er et data.frame/tibble med alle tilgjengelige dataserier.
 
 ## Quick start - norske data
 
+```r
 source("source_all.R")
 
 normacro <- get_normacro()
@@ -109,10 +110,11 @@ correlate_series(
         "BNP_Fastland_vekst"
     )
 )
+```
 
+## Quick start - internasjonale data
 
-## Quick start - norske data
-
+```r
 international <- get_international_macro()
 
 sweden <-
@@ -134,6 +136,7 @@ scatter_series(
     y = "Arbeidsledighetsrate",
     data = sweden
 )
+```
 
 ## NorMacro API
 
@@ -150,6 +153,11 @@ search_variables()
 list_categories()
 list_variables()
 
+Utforskning
+--------
+overview()
+coverage()
+
 Analyse
 --------
 normalize_series()
@@ -163,6 +171,12 @@ Visualisering
 plot_series()
 compare_series()
 scatter_series()
+
+Kvalitet
+---------
+check_normacro()
+check_metadata()
+validate_metadata()
 
 ## Utforske databasen
 
@@ -185,30 +199,43 @@ leading_indicators()
 
 category_variables()
 ```
+## Typisk analyse
+
+Se docs/analyse.md
+
+```r
+source("source_all.R")
+
+normacro <- get_normacro()
+
+overview(normacro)
+
+describe_variable("BNP_Fastland")
+
+plot_series("BNP_Fastland")
+
+compare_series(
+    c("BNP_Fastland", "Privat_konsum")
+)
+
+scatter_series(
+    x = "BNP_Fastland_vekst",
+    y = "Arbledighetsrate_NAV"
+)
+
+correlate_series(
+    c(
+        "Inflasjon",
+        "Lonnvekst",
+        "BNP_Fastland_vekst"
+    )
+)
+```
 
 ## Visualisering
 
-Alle serier kan plottes direkte gjennom funksjonen
+Se docs/visualisering.md
 
-```r
-plot_series()
-```
-
-F.eks.:
-
-```r
-plot_series("BNP_Fastland")
-```
-
-Siden funksjonen returnerer et ordinært ggplot-objekt, kan plottet tilpasses videre.
-
-```r
-plot_series("BNP_Fastland") +
-  ggplot2::labs(
-    title = "BNP Fastlands-Norge"
-  ) +
-  ggplot2::theme_bw()
-```
 
 ## Konjunkturklassifisering
 
@@ -220,15 +247,6 @@ business_cycle_explain(2020)
 ```
 
 Se `docs/business_cycle.md` for metode, vekter og poengsystem.
-
-## Datakilder
-
-| Kilde | Beskrivelse |
-|---------|---------|
-| SSB | Befolkning, KPI, BNP, lønn, arbeidsmarked, boligpriser |
-| NAV | Registrert arbeidsledighet |
-| Norges Bank | Styringsrente og valutakurs |
-| FRED | Brent oljepris |
 
 ## Variabler
 
@@ -257,35 +275,11 @@ list_variables()
 
 ## Cache
 
-NorMacro cacher nedlastede datasett lokalt i mappen `cache/`.
-
-Første kjøring laster ned data fra eksterne kilder (SSB, Norges Bank, NAV, FRED og Yahoo) og tar omtrent 20–30 sekunder.
-Senere kjøringer bruker lokale `.rds`-filer og går betydelig raskere - normalt under ett sekund.
-
-For å tvinge ny nedlasting:
-
-```r
-get_kpi(refresh = TRUE)
-```
-For å slette all cache:
-
-```r
-unlink("cache", recursive = TRUE)
-```
+Se docs/cache.md
 
 ## Metadata
 
-Alle variabler dokumenteres gjennom metadata. 
-
-```r
-get_metadata() # Gir alle metadata 
-
-get_normacro_metadata() # Gir metadata for de norske seriene
-
-get_international_metadata() # Gir metadata for de internasjonale seriene
-
-describe_variable("BNP_Fastland") # Beskrvier en girr variabel - her BNP_Fastland
-```
+NorMacro er metadata-drevet.
 
 Se `docs/metadata.md`.
 
@@ -334,52 +328,23 @@ data_clean/
 
 ## Arkitektur
 
-NorMacro/
-R/
-data/
-cache/
-tests/
-docs/
-
-Se docs/architecture.md
+Se docs/arkitektur.md
 
 ## Reproduserbarhet
 
-NorMacro inneholder ingen manuelt vedlikeholdte data. Alle tidsserier lastes ned direkte fra de opprinnelige datakildene. Den eneste vedlikeholdte datafilen er metadata.csv, som dokumenterer variablene.
+NorMacro inneholder ingen manuelt vedlikeholdte data.
 
-Alle dataserier lastes ned direkte fra kildene ved kjøring, slik at databasen alltid oppdateres med siste tilgjengelige observasjoner.
-
-## Metadata og variabelsøk
-
-NorMacro inneholder metadata for alle variabler.
-
-search_variables() søker i variabelnavn, beskrivelser og kommentarer.
-
-describe_variable() viser metadata for én enkelt variabel.
-
-Eksempler:  
-
-```r
-search_variables("konsum")
-describe_variable("BNP_Fastland")
-```
-
-### Vedlikehold av metadata
-
-`data/metadata.csv` er NorMacros "single source of truth" for variabelmetadata.
-
-Filen bør redigeres i en teksteditor (f.eks. Notepad++ eller VS Code), ikke i Excel, for å unngå at CSV-formatet endres.
+Se docs/reproduserbarhet.md.
 
 ## Dokumentasjon
 
-Utfyllende dokumentasjon finnes i `docs/`.
+NorMacro dokumenteres gjennom en serie korte notater:
 
-| Dokument | Innhold |
-|-----------|----------|
-| business_cycle.md | Konjunkturklassifisering |
-| metadata.md | Metadata og dokumentasjon |
-| architecture.md | Arkitektur og design |
-| roadmap.md | Planlagt videreutvikling |
+- metadata.md
+- cache.md
+- reproduserbarhet.md
+- arkitektur.md
+- business_cycle.md
 
 ## Lisens
 
