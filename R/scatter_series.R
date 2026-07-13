@@ -4,7 +4,39 @@ scatter_series <- function(
     y,
     data = NULL,
     start_year = NULL,
-    end_year = NULL,
+    end_year = NULL,rm(list = ls())
+source("source_all.R")
+
+normacro <- get_normacro()
+international <- get_international_macro()
+
+overview(normacro)
+overview(international)
+
+coverage(normacro)
+coverage(international)
+
+plot_series("BNP_Fastland")
+
+compare_series(
+  c(
+    "Inflasjon",
+    "Lonnvekst"
+  )
+)
+
+scatter_series(
+  x = "BNP_Fastland_vekst",
+  y = "Arbledighetsrate_NAV"
+)
+
+correlate_series(
+  c(
+    "Inflasjon",
+    "Lonnvekst",
+    "BNP_Fastland_vekst"
+  )
+)
     add_smooth = TRUE,
     label_years = FALSE
 ) {
@@ -178,7 +210,7 @@ scatter_series <- function(
       hjust = 1.05,
       vjust = 1.1,
       size = 3.5,
-      label.size = 0.25
+      linewidth = 0.3
     )+
     ggplot2::theme_minimal()
   
@@ -186,6 +218,7 @@ scatter_series <- function(
     p <- p +
       ggplot2::geom_smooth(
         method = "lm",
+        formula = y ~ x,
         se = FALSE
       )
   }

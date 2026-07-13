@@ -114,7 +114,7 @@ correlate_series <- function(variables,
       }
     })) |>
     dplyr::ungroup() |>
-    tidyr::unnest(.data$statistics) |>
+    tidyr::unnest(cols = statistics) |>
     dplyr::left_join(
       display_lookup |>
         dplyr::rename(Variabel_x = Variabel, Display_x = Display_navn),
