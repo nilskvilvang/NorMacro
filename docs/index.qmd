@@ -1,0 +1,15 @@
+
+# NorMacro
+
+Velkommen til dokumentasjonen for **NorMacro**.
+
+## Dokumentasjon
+
+- [Metadata](metadata.qmd)
+- [Visualisering](visualisering.qmd)
+- [Analyse](analyse.qmd)
+- [Internasjonale data](internasjonale_data.qmd)
+- [Cache](cache.qmd)
+- [Reproduserbarhet](reproduserbarhet.qmd)
+- [Arkitektur](arkitektur.qmd)
+- [Konjunkturklassifisering](business_cycle.qmd)

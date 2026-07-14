@@ -1,0 +1,47 @@
+
+project:
+  type: website
+
+website:
+  title: "NorMacro"
+  search: true
+
+  navbar:
+    left:
+      - href: index.qmd
+        text: Hjem
+      - href: visualisering.qmd
+        text: Visualisering
+      - href: analyse.qmd
+        text: Analyse
+      - href: internasjonale_data.qmd
+        text: Internasjonale data
+      - text: Dokumentasjon
+        menu:
+          - href: metadata.qmd
+            text: Metadata
+          - href: cache.qmd
+            text: Cache
+          - href: reproduserbarhet.qmd
+            text: Reproduserbarhet
+          - href: arkitektur.qmd
+            text: Arkitektur
+          - href: business_cycle.qmd
+            text: Konjunkturklassifisering
+          - href: international_sources.qmd
+            text: Internasjonale kilder
+          - href: roadmap.qmd
+            text: Videre utvikling
+
+    right:
+      - icon: github
+        href: https://github.com/nilskvilvang/NorMacro
+        aria-label: GitHub
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    lang: nb

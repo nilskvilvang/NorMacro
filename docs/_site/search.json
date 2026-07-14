@@ -1,0 +1,324 @@
+[
+  {
+    "objectID": "roadmap.html",
+    "href": "roadmap.html",
+    "title": "Roadmap",
+    "section": "",
+    "text": "Dette dokumentet skisserer mulige videreutviklinger av NorMacro.\n\n\n\nplot_business_cycle()\nbedre presentasjon av korrelasjonsmatriser\nflere eksempler i README\nmer dokumentasjon av analysefunksjoner\n\n\n\n\n\npakke NorMacro som en ordinær R-pakke\nvurdere pkgdown-side\nvurdere Shiny-dashboard\nlegge til vignetter\nmer avanserte konjunktur- og trendmetoder\n\n\n\n\n\nDisplay_navn\nKildefrekvens\nNøkkelord\nSist_oppdatert\nRevisjonsnotat\n\n\n\n\nNorMacro bør fortsatt prioritere:\n\nrepresentative indikatorer fremfor flest mulig variabler\ntransparente beregninger\nenkel og stabil API\nfull metadata\ntestbare funksjoner\nstandard R-objekter"
+  },
+  {
+    "objectID": "roadmap.html#kort-sikt",
+    "href": "roadmap.html#kort-sikt",
+    "title": "Roadmap",
+    "section": "",
+    "text": "plot_business_cycle()\nbedre presentasjon av korrelasjonsmatriser\nflere eksempler i README\nmer dokumentasjon av analysefunksjoner"
+  },
+  {
+    "objectID": "roadmap.html#mellomlang-sikt",
+    "href": "roadmap.html#mellomlang-sikt",
+    "title": "Roadmap",
+    "section": "",
+    "text": "pakke NorMacro som en ordinær R-pakke\nvurdere pkgdown-side\nvurdere Shiny-dashboard\nlegge til vignetter\nmer avanserte konjunktur- og trendmetoder"
+  },
+  {
+    "objectID": "roadmap.html#mulige-metadatautvidelser",
+    "href": "roadmap.html#mulige-metadatautvidelser",
+    "title": "Roadmap",
+    "section": "",
+    "text": "Display_navn\nKildefrekvens\nNøkkelord\nSist_oppdatert\nRevisjonsnotat"
+  },
+  {
+    "objectID": "roadmap.html#prinsipper-videre",
+    "href": "roadmap.html#prinsipper-videre",
+    "title": "Roadmap",
+    "section": "",
+    "text": "NorMacro bør fortsatt prioritere:\n\nrepresentative indikatorer fremfor flest mulig variabler\ntransparente beregninger\nenkel og stabil API\nfull metadata\ntestbare funksjoner\nstandard R-objekter"
+  },
+  {
+    "objectID": "internasjonale_data.html",
+    "href": "internasjonale_data.html",
+    "title": "Internasjonale data",
+    "section": "",
+    "text": "NorMacro inneholder en egen internasjonal makrodatabase.\nDatasettet bygger hovedsakelig på Eurostat og inneholder harmoniserte makroøkonomiske indikatorer for europeiske land.\n\n\n\ninternational &lt;- get_international_macro()\nDatasettet inneholder blant annet:\n\nLand\nAar\nmakroøkonomiske indikatorer\n\n\n\n\n\nAnalysefunksjonene arbeider med ett land om gangen.\nsweden &lt;-\n  international |&gt;\n  dplyr::filter(\n    Land == \"SE\"\n  )\nDeretter kan de vanlige funksjonene brukes.\nplot_series(\n  \"BNP_vekst\",\n  data = sweden\n)\ncompare_series(\n  c(\n    \"BNP_vekst\",\n    \"Inflasjon\"\n  ),\n  data = sweden\n)\nscatter_series(\n  x = \"BNP_vekst\",\n  y = \"Arbeidsledighetsrate\",\n  data = sweden\n)\n\n\n\n\nMetadata for de internasjonale seriene hentes med\nget_international_metadata()\neller\nget_metadata(international)\n\n\n\n\nHovedkilden er Eurostat.\nMetadata inneholder informasjon om:\n\ndatakilde\ntabell\nenhet\nfrekvens\ntidsdekning\nfunksjonen som har hentet data\n\n\n\n\n\nDen internasjonale databasen følger de samme prinsippene som NorMacro:\n\nén rad per land og år\nén representativ serie per fenomen\nstandardiserte metadata\ntransparente beregninger\nautomatisk kvalitetskontroll"
+  },
+  {
+    "objectID": "internasjonale_data.html#laste-inn-data",
+    "href": "internasjonale_data.html#laste-inn-data",
+    "title": "Internasjonale data",
+    "section": "",
+    "text": "international &lt;- get_international_macro()\nDatasettet inneholder blant annet:\n\nLand\nAar\nmakroøkonomiske indikatorer"
+  },
+  {
+    "objectID": "internasjonale_data.html#velge-land",
+    "href": "internasjonale_data.html#velge-land",
+    "title": "Internasjonale data",
+    "section": "",
+    "text": "Analysefunksjonene arbeider med ett land om gangen.\nsweden &lt;-\n  international |&gt;\n  dplyr::filter(\n    Land == \"SE\"\n  )\nDeretter kan de vanlige funksjonene brukes.\nplot_series(\n  \"BNP_vekst\",\n  data = sweden\n)\ncompare_series(\n  c(\n    \"BNP_vekst\",\n    \"Inflasjon\"\n  ),\n  data = sweden\n)\nscatter_series(\n  x = \"BNP_vekst\",\n  y = \"Arbeidsledighetsrate\",\n  data = sweden\n)"
+  },
+  {
+    "objectID": "internasjonale_data.html#metadata",
+    "href": "internasjonale_data.html#metadata",
+    "title": "Internasjonale data",
+    "section": "",
+    "text": "Metadata for de internasjonale seriene hentes med\nget_international_metadata()\neller\nget_metadata(international)"
+  },
+  {
+    "objectID": "internasjonale_data.html#datakilder",
+    "href": "internasjonale_data.html#datakilder",
+    "title": "Internasjonale data",
+    "section": "",
+    "text": "Hovedkilden er Eurostat.\nMetadata inneholder informasjon om:\n\ndatakilde\ntabell\nenhet\nfrekvens\ntidsdekning\nfunksjonen som har hentet data"
+  },
+  {
+    "objectID": "internasjonale_data.html#prinsipper",
+    "href": "internasjonale_data.html#prinsipper",
+    "title": "Internasjonale data",
+    "section": "",
+    "text": "Den internasjonale databasen følger de samme prinsippene som NorMacro:\n\nén rad per land og år\nén representativ serie per fenomen\nstandardiserte metadata\ntransparente beregninger\nautomatisk kvalitetskontroll"
+  },
+  {
+    "objectID": "international_sources.html",
+    "href": "international_sources.html",
+    "title": "Internasjonale kilder og valg",
+    "section": "",
+    "text": "Dette dokumentet beskriver valg av internasjonale dataserier i NorMacro fase 2.\n\n\n\nNorMacro-variabel: Industriproduksjon\nKilde: Eurostat\nTabell: sts_inpr_a\nFilter:\n\nunit = I15\ns_adj = CA\nnace_r2 = C\n\nLand: get_standard_countries()\nPeriode: 1953–2025\nBegrunnelse:\n\nI15 brukes fordi vi ønsker indeksnivå, ikke ferdig vekstrate.\nCA brukes fordi kalenderjusterte serier er bedre egnet for internasjonal sammenligning.\nC brukes fordi dette tilsvarer manufacturing / bearbeidende industri og ligger nærmest norsk industriproduksjon."
+  },
+  {
+    "objectID": "international_sources.html#industriproduksjon",
+    "href": "international_sources.html#industriproduksjon",
+    "title": "Internasjonale kilder og valg",
+    "section": "",
+    "text": "NorMacro-variabel: Industriproduksjon\nKilde: Eurostat\nTabell: sts_inpr_a\nFilter:\n\nunit = I15\ns_adj = CA\nnace_r2 = C\n\nLand: get_standard_countries()\nPeriode: 1953–2025\nBegrunnelse:\n\nI15 brukes fordi vi ønsker indeksnivå, ikke ferdig vekstrate.\nCA brukes fordi kalenderjusterte serier er bedre egnet for internasjonal sammenligning.\nC brukes fordi dette tilsvarer manufacturing / bearbeidende industri og ligger nærmest norsk industriproduksjon."
+  },
+  {
+    "objectID": "visualisering.html",
+    "href": "visualisering.html",
+    "title": "Visualisering",
+    "section": "",
+    "text": "NorMacro inneholder innebygde funksjoner for å visualisere både norske og internasjonale makroøkonomiske tidsserier.\nAlle funksjonene returnerer ordinære ggplot2-objekter og kan derfor tilpasses videre.\n\n\n\nPlotter én tidsserie.\nplot_series(\"BNP_Fastland\")\nSiden funksjonen returnerer et ordinært ggplot-objekt, kan plottet tilpasses videre.\nplot_series(\"BNP_Fastland\") +\n  ggplot2::labs(\n    title = \"BNP Fastlands-Norge\"\n  ) +\n  ggplot2::theme_bw()\nDet er også mulig å plotte internasjonale serier.\ninternational &lt;- get_international_macro()\n\nsweden &lt;-\n  international |&gt;\n  dplyr::filter(Land == \"SE\")\n\nplot_series(\n  \"BNP_vekst\",\n  data = sweden\n)\n\n\n\n\nSammenlikner flere tidsserier.\ncompare_series(\n  c(\n    \"BNP_Fastland\",\n    \"Privat_konsum\"\n  )\n)\nSeriene kan normaliseres til et felles basisår.\ncompare_series(\n  c(\n    \"BNP_Fastland\",\n    \"Privat_konsum\"\n  ),\n  base_year = 2000\n)\nFor internasjonale data må ett land velges.\ncompare_series(\n  c(\n    \"BNP_vekst\",\n    \"Inflasjon\"\n  ),\n  data = sweden\n)\n\n\n\n\nUndersøker sammenhengen mellom to variabler.\nscatter_series(\n  x = \"BNP_Fastland_vekst\",\n  y = \"Arbledighetsrate_NAV\"\n)\nFiguren viser:\n\nobservasjoner\nlineær regresjonslinje\nkorrelasjon\nR²\np-verdi\nantall observasjoner\n\n\n\n\n\nAlle funksjonene returnerer et vanlig ggplot-objekt.\nplot_series(\"BNP_Fastland\") +\n  ggplot2::theme_bw() +\n  ggplot2::labs(\n    title = \"BNP Fastlands-Norge\"\n  )"
+  },
+  {
+    "objectID": "visualisering.html#plot_series",
+    "href": "visualisering.html#plot_series",
+    "title": "Visualisering",
+    "section": "",
+    "text": "Plotter én tidsserie.\nplot_series(\"BNP_Fastland\")\nSiden funksjonen returnerer et ordinært ggplot-objekt, kan plottet tilpasses videre.\nplot_series(\"BNP_Fastland\") +\n  ggplot2::labs(\n    title = \"BNP Fastlands-Norge\"\n  ) +\n  ggplot2::theme_bw()\nDet er også mulig å plotte internasjonale serier.\ninternational &lt;- get_international_macro()\n\nsweden &lt;-\n  international |&gt;\n  dplyr::filter(Land == \"SE\")\n\nplot_series(\n  \"BNP_vekst\",\n  data = sweden\n)"
+  },
+  {
+    "objectID": "visualisering.html#compare_series",
+    "href": "visualisering.html#compare_series",
+    "title": "Visualisering",
+    "section": "",
+    "text": "Sammenlikner flere tidsserier.\ncompare_series(\n  c(\n    \"BNP_Fastland\",\n    \"Privat_konsum\"\n  )\n)\nSeriene kan normaliseres til et felles basisår.\ncompare_series(\n  c(\n    \"BNP_Fastland\",\n    \"Privat_konsum\"\n  ),\n  base_year = 2000\n)\nFor internasjonale data må ett land velges.\ncompare_series(\n  c(\n    \"BNP_vekst\",\n    \"Inflasjon\"\n  ),\n  data = sweden\n)"
+  },
+  {
+    "objectID": "visualisering.html#scatter_series",
+    "href": "visualisering.html#scatter_series",
+    "title": "Visualisering",
+    "section": "",
+    "text": "Undersøker sammenhengen mellom to variabler.\nscatter_series(\n  x = \"BNP_Fastland_vekst\",\n  y = \"Arbledighetsrate_NAV\"\n)\nFiguren viser:\n\nobservasjoner\nlineær regresjonslinje\nkorrelasjon\nR²\np-verdi\nantall observasjoner"
+  },
+  {
+    "objectID": "visualisering.html#tilpasning",
+    "href": "visualisering.html#tilpasning",
+    "title": "Visualisering",
+    "section": "",
+    "text": "Alle funksjonene returnerer et vanlig ggplot-objekt.\nplot_series(\"BNP_Fastland\") +\n  ggplot2::theme_bw() +\n  ggplot2::labs(\n    title = \"BNP Fastlands-Norge\"\n  )"
+  },
+  {
+    "objectID": "analyse.html",
+    "href": "analyse.html",
+    "title": "Analyse",
+    "section": "",
+    "text": "NorMacro inneholder en rekke hjelpefunksjoner for analyse av makroøkonomiske tidsserier.\n\n\n\nBeregner parvise korrelasjoner mellom flere variabler.\ncorrelate_series(\n  c(\n    \"Inflasjon\",\n    \"Lonnvekst\",\n    \"BNP_Fastland_vekst\"\n  )\n)\nKorrelasjon kan beregnes med:\n\nPearson\nSpearman\nKendall\n\ncorrelate_series(\n  variables = c(\n    \"Inflasjon\",\n    \"Lonnvekst\"\n  ),\n  method = \"spearman\"\n)\nResultatet inneholder blant annet:\n\nkorrelasjon\np-verdi\nsignifikans\nantall observasjoner\nanalyseperiode\n\n\n\n\n\nNormaliserer flere tidsserier til et felles basisår.\nnormalize_series(\n  variables = c(\n    \"BNP_Fastland\",\n    \"Privat_konsum\"\n  ),\n  base_year = 2000\n)\n\n\n\n\nGir en samlet beskrivelse av én variabel.\nvariable_summary(\n  \"BNP_Fastland\"\n)\nOppsummeringen inkluderer blant annet:\n\nmetadata\ndekningsgrad\nbeskrivende statistikk\nkorrelasjoner med andre variabler\n\n\n\n\n\nViser datadekning for alle variabler.\ncoverage()\n\n\n\n\nGir en samlet oversikt over databasen.\noverview()"
+  },
+  {
+    "objectID": "analyse.html#correlate_series",
+    "href": "analyse.html#correlate_series",
+    "title": "Analyse",
+    "section": "",
+    "text": "Beregner parvise korrelasjoner mellom flere variabler.\ncorrelate_series(\n  c(\n    \"Inflasjon\",\n    \"Lonnvekst\",\n    \"BNP_Fastland_vekst\"\n  )\n)\nKorrelasjon kan beregnes med:\n\nPearson\nSpearman\nKendall\n\ncorrelate_series(\n  variables = c(\n    \"Inflasjon\",\n    \"Lonnvekst\"\n  ),\n  method = \"spearman\"\n)\nResultatet inneholder blant annet:\n\nkorrelasjon\np-verdi\nsignifikans\nantall observasjoner\nanalyseperiode"
+  },
+  {
+    "objectID": "analyse.html#normalize_series",
+    "href": "analyse.html#normalize_series",
+    "title": "Analyse",
+    "section": "",
+    "text": "Normaliserer flere tidsserier til et felles basisår.\nnormalize_series(\n  variables = c(\n    \"BNP_Fastland\",\n    \"Privat_konsum\"\n  ),\n  base_year = 2000\n)"
+  },
+  {
+    "objectID": "analyse.html#variable_summary",
+    "href": "analyse.html#variable_summary",
+    "title": "Analyse",
+    "section": "",
+    "text": "Gir en samlet beskrivelse av én variabel.\nvariable_summary(\n  \"BNP_Fastland\"\n)\nOppsummeringen inkluderer blant annet:\n\nmetadata\ndekningsgrad\nbeskrivende statistikk\nkorrelasjoner med andre variabler"
+  },
+  {
+    "objectID": "analyse.html#coverage",
+    "href": "analyse.html#coverage",
+    "title": "Analyse",
+    "section": "",
+    "text": "Viser datadekning for alle variabler.\ncoverage()"
+  },
+  {
+    "objectID": "analyse.html#overview",
+    "href": "analyse.html#overview",
+    "title": "Analyse",
+    "section": "",
+    "text": "Gir en samlet oversikt over databasen.\noverview()"
+  },
+  {
+    "objectID": "reproduserbarhet.html",
+    "href": "reproduserbarhet.html",
+    "title": "Reproduserbarhet",
+    "section": "",
+    "text": "Reproduserbarhet\nNorMacro inneholder ingen manuelt vedlikeholdte data. Alle tidsserier lastes ned direkte fra de opprinnelige datakildene. Den eneste vedlikeholdte datafilen er metadata.csv, som dokumenterer variablene.\nAlle data hentes fra opprinnelige kilder ved kjøring. Cache brukes kun for hastighet."
+  },
+  {
+    "objectID": "metadata.html",
+    "href": "metadata.html",
+    "title": "Metadata i NorMacro",
+    "section": "",
+    "text": "NorMacro er metadata-drevet.\nget_metadata() # Gir alle metadata \n\nget_normacro_metadata() # Gir metadata for de norske seriene\n\nget_international_metadata() # Gir metadata for de internasjonale seriene\n\ndescribe_variable(\"BNP_Fastland\") # Beskrvier en girr variabel - her BNP_Fastland\n\n\nMetadata brukes av en rekke funksjoner i NorMacro:\n\noverview()\ncoverage()\ndescribe_variable()\nsearch_variables()\nlist_categories()\ncategory_variables()\ngrowth_table()\nlatest_observations()\nmissing_data()\nvariable_summary()\n\nMetadata benyttes både til dokumentasjon og til automatisk kvalitetskontroll.\n\n\n\n\nMetadatafilen inneholder blant annet følgende felter:\n\n\n\nFelt\nBeskrivelse\n\n\n\n\nVariabel\nInternt variabelnavn brukt i NorMacro\n\n\nBeskrivelse\nKort beskrivelse av variabelen\n\n\nKategori\nTematisk kategori\n\n\nType\nOriginal eller beregnet serie\n\n\nEnhet\nMåleenhet\n\n\nKilde\nOpprinnelig datakilde\n\n\nFrekvens\nOpprinnelig publiseringsfrekvens\n\n\nKommentar\nEventuelle merknader\n\n\n\nVed behov kan metadata utvides med flere felt uten at datastrukturen endres.\n\n\n\n\nPer i dag benytter NorMacro følgende hovedkategorier:\n\nDemografi\nArbeidsmarked\nPriser og inflasjon\nLønn og inntekt\nHusholdningsøkonomi\nBoligmarked\nKreditt og husholdninger\nFinansmarkeder\nNasjonalregnskap\nProduksjon og aktivitet\nKonjunkturindikatorer\nOffentlige finanser\nUtenriksøkonomi\nEnergi og råvarer\nAggregerte serier\n\n\n\n\n\nMetadata oppdateres når:\n\nnye variabler legges til\nvariabler endrer definisjon\nnye kategorier opprettes\n\nNorMacro kontrollerer automatisk at alle variabler finnes i metadata.\nvalidate_metadata()\n\ncheck_normacro()\n\n\n\n\nMetadata følger noen enkle prinsipper:\n\nén rad per variabel\nkonsistente variabelnavn\nkorte beskrivelser\ntydelige enheter\nén primærkategori per variabel\noriginal kilde oppgis alltid"
+  },
+  {
+    "objectID": "metadata.html#formål",
+    "href": "metadata.html#formål",
+    "title": "Metadata i NorMacro",
+    "section": "",
+    "text": "Metadata brukes av en rekke funksjoner i NorMacro:\n\noverview()\ncoverage()\ndescribe_variable()\nsearch_variables()\nlist_categories()\ncategory_variables()\ngrowth_table()\nlatest_observations()\nmissing_data()\nvariable_summary()\n\nMetadata benyttes både til dokumentasjon og til automatisk kvalitetskontroll."
+  },
+  {
+    "objectID": "metadata.html#variabler",
+    "href": "metadata.html#variabler",
+    "title": "Metadata i NorMacro",
+    "section": "",
+    "text": "Metadatafilen inneholder blant annet følgende felter:\n\n\n\nFelt\nBeskrivelse\n\n\n\n\nVariabel\nInternt variabelnavn brukt i NorMacro\n\n\nBeskrivelse\nKort beskrivelse av variabelen\n\n\nKategori\nTematisk kategori\n\n\nType\nOriginal eller beregnet serie\n\n\nEnhet\nMåleenhet\n\n\nKilde\nOpprinnelig datakilde\n\n\nFrekvens\nOpprinnelig publiseringsfrekvens\n\n\nKommentar\nEventuelle merknader\n\n\n\nVed behov kan metadata utvides med flere felt uten at datastrukturen endres."
+  },
+  {
+    "objectID": "metadata.html#kategorier",
+    "href": "metadata.html#kategorier",
+    "title": "Metadata i NorMacro",
+    "section": "",
+    "text": "Per i dag benytter NorMacro følgende hovedkategorier:\n\nDemografi\nArbeidsmarked\nPriser og inflasjon\nLønn og inntekt\nHusholdningsøkonomi\nBoligmarked\nKreditt og husholdninger\nFinansmarkeder\nNasjonalregnskap\nProduksjon og aktivitet\nKonjunkturindikatorer\nOffentlige finanser\nUtenriksøkonomi\nEnergi og råvarer\nAggregerte serier"
+  },
+  {
+    "objectID": "metadata.html#vedlikehold",
+    "href": "metadata.html#vedlikehold",
+    "title": "Metadata i NorMacro",
+    "section": "",
+    "text": "Metadata oppdateres når:\n\nnye variabler legges til\nvariabler endrer definisjon\nnye kategorier opprettes\n\nNorMacro kontrollerer automatisk at alle variabler finnes i metadata.\nvalidate_metadata()\n\ncheck_normacro()"
+  },
+  {
+    "objectID": "metadata.html#prinsipper",
+    "href": "metadata.html#prinsipper",
+    "title": "Metadata i NorMacro",
+    "section": "",
+    "text": "Metadata følger noen enkle prinsipper:\n\nén rad per variabel\nkonsistente variabelnavn\nkorte beskrivelser\ntydelige enheter\nén primærkategori per variabel\noriginal kilde oppgis alltid"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "NorMacro",
+    "section": "",
+    "text": "Velkommen til dokumentasjonen for NorMacro.\n\n\n\nMetadata\nVisualisering\nAnalyse\nInternasjonale data\nCache\nReproduserbarhet\nArkitektur\nKonjunkturklassifisering"
+  },
+  {
+    "objectID": "index.html#dokumentasjon",
+    "href": "index.html#dokumentasjon",
+    "title": "NorMacro",
+    "section": "",
+    "text": "Metadata\nVisualisering\nAnalyse\nInternasjonale data\nCache\nReproduserbarhet\nArkitektur\nKonjunkturklassifisering"
+  },
+  {
+    "objectID": "cache.html",
+    "href": "cache.html",
+    "title": "Cache",
+    "section": "",
+    "text": "Cache\nNorMacro cacher nedlastede datasett lokalt i mappen cache/.\nFørste kjøring laster ned data fra eksterne kilder (SSB, Norges Bank, NAV, FRED og Yahoo) og tar omtrent 20–30 sekunder. Senere kjøringer bruker lokale .rds-filer og går betydelig raskere - normalt under ett sekund.\nFor å tvinge ny nedlasting:\nget_kpi(refresh = TRUE)\nFor å slette all cache:\nunlink(\"cache\", recursive = TRUE)"
+  },
+  {
+    "objectID": "business_cycle.html",
+    "href": "business_cycle.html",
+    "title": "Konjunkturklassifisering",
+    "section": "",
+    "text": "NorMacro inneholder en enkel og transparent konjunkturklassifisering gjennom funksjonene:\nbusiness_cycle_score()\nbusiness_cycle()\nbusiness_cycle_explain()\nKlassifiseringen er ikke en offisiell konjunkturprognose. Den er en indikatorbasert og regelstyrt vurdering av konjunktursituasjonen.\n\n\nModellen bruker som standard:\n\nBNP Fastlands-Norge, årlig vekst\nNAV-ledighet\nSSBs sammensatte konjunkturindikator\nkapasitetsutnytting\nrentekurve\n\n\n\n\n\n\n\n\n\nVerdi\nPoeng\n\n\n\n\n&lt; 0\n-2\n\n\n0 til 1\n-1\n\n\n1 til 3\n1\n\n\n&gt; 3\n2\n\n\n\n\n\n\n\n\n\nVerdi\nPoeng\n\n\n\n\n&gt; 5\n-2\n\n\n3 til 5\n-1\n\n\n2 til 3\n1\n\n\n&lt; 2\n2\n\n\n\n\n\n\n\n\n\nVerdi\nPoeng\n\n\n\n\n&lt; -5\n-2\n\n\n-5 til 0\n-1\n\n\n0 til 5\n1\n\n\n&gt; 5\n2\n\n\n\n\n\n\n\n\n\nVerdi\nPoeng\n\n\n\n\n&lt; 75\n-1\n\n\n75 til 80\n0\n\n\n&gt; 80\n1\n\n\n\n\n\n\n\n\n\nVerdi\nPoeng\n\n\n\n\n&lt; 0\n-1\n\n\n&gt;= 0\n1\n\n\n\n\n\n\n\nSom standard vektes indikatorene slik:\n\n\n\nIndikator\nVekt\n\n\n\n\nBNP-vekst\n2\n\n\nNAV-ledighet\n2\n\n\nKonjunkturindikator\n2\n\n\nKapasitetsutnytting\n1\n\n\nRentekurve\n1\n\n\n\n\n\n\n\n\n\nScore\nFase\n\n\n\n\n&lt;= -8\nNedgang\n\n\n-7 til -2\nSvak vekst\n\n\n-1 til 5\nEkspansjon\n\n\n&gt;= 6\nHøykonjunktur\n\n\n\n\n\n\nbusiness_cycle()\n\nbusiness_cycle_explain(2020)\nbusiness_cycle_explain() viser hvordan delpoengene summeres for et enkelt år.\n\n\n\nKlassifiseringen er ment som et pedagogisk og analytisk hjelpemiddel. Den bør ikke tolkes som en offisiell konjunkturprognose."
+  },
+  {
+    "objectID": "business_cycle.html#indikatorer",
+    "href": "business_cycle.html#indikatorer",
+    "title": "Konjunkturklassifisering",
+    "section": "",
+    "text": "Modellen bruker som standard:\n\nBNP Fastlands-Norge, årlig vekst\nNAV-ledighet\nSSBs sammensatte konjunkturindikator\nkapasitetsutnytting\nrentekurve"
+  },
+  {
+    "objectID": "business_cycle.html#poengsetting",
+    "href": "business_cycle.html#poengsetting",
+    "title": "Konjunkturklassifisering",
+    "section": "",
+    "text": "Verdi\nPoeng\n\n\n\n\n&lt; 0\n-2\n\n\n0 til 1\n-1\n\n\n1 til 3\n1\n\n\n&gt; 3\n2\n\n\n\n\n\n\n\n\n\nVerdi\nPoeng\n\n\n\n\n&gt; 5\n-2\n\n\n3 til 5\n-1\n\n\n2 til 3\n1\n\n\n&lt; 2\n2\n\n\n\n\n\n\n\n\n\nVerdi\nPoeng\n\n\n\n\n&lt; -5\n-2\n\n\n-5 til 0\n-1\n\n\n0 til 5\n1\n\n\n&gt; 5\n2\n\n\n\n\n\n\n\n\n\nVerdi\nPoeng\n\n\n\n\n&lt; 75\n-1\n\n\n75 til 80\n0\n\n\n&gt; 80\n1\n\n\n\n\n\n\n\n\n\nVerdi\nPoeng\n\n\n\n\n&lt; 0\n-1\n\n\n&gt;= 0\n1"
+  },
+  {
+    "objectID": "business_cycle.html#vekting",
+    "href": "business_cycle.html#vekting",
+    "title": "Konjunkturklassifisering",
+    "section": "",
+    "text": "Som standard vektes indikatorene slik:\n\n\n\nIndikator\nVekt\n\n\n\n\nBNP-vekst\n2\n\n\nNAV-ledighet\n2\n\n\nKonjunkturindikator\n2\n\n\nKapasitetsutnytting\n1\n\n\nRentekurve\n1"
+  },
+  {
+    "objectID": "business_cycle.html#klassifisering",
+    "href": "business_cycle.html#klassifisering",
+    "title": "Konjunkturklassifisering",
+    "section": "",
+    "text": "Score\nFase\n\n\n\n\n&lt;= -8\nNedgang\n\n\n-7 til -2\nSvak vekst\n\n\n-1 til 5\nEkspansjon\n\n\n&gt;= 6\nHøykonjunktur"
+  },
+  {
+    "objectID": "business_cycle.html#eksempel",
+    "href": "business_cycle.html#eksempel",
+    "title": "Konjunkturklassifisering",
+    "section": "",
+    "text": "business_cycle()\n\nbusiness_cycle_explain(2020)\nbusiness_cycle_explain() viser hvordan delpoengene summeres for et enkelt år."
+  },
+  {
+    "objectID": "business_cycle.html#metodisk-merknad",
+    "href": "business_cycle.html#metodisk-merknad",
+    "title": "Konjunkturklassifisering",
+    "section": "",
+    "text": "Klassifiseringen er ment som et pedagogisk og analytisk hjelpemiddel. Den bør ikke tolkes som en offisiell konjunkturprognose."
+  },
+  {
+    "objectID": "arkitektur.html",
+    "href": "arkitektur.html",
+    "title": "Arkitektur",
+    "section": "",
+    "text": "NorMacro er bygd rundt noen enkle prinsipper:\n\nén samlet årlig database\nén rad per år\nén kolonne per variabel\nmetadata som dokumentasjonslag\nsmå funksjoner som gjør én ting godt\nanalysefunksjoner som returnerer standard R-objekter\n\n\n\nNorMacro/ R/ data/ cache/ tests/ docs/\nNorMacro bygges i flere trinn:\n\nenkeltserier hentes fra eksterne kilder\nseriene caches lokalt\nseriene kobles sammen på Aar\navledede variabler beregnes\nmetadata valideres\nkvalitetskontroller kjøres\n\n\n\n\n\nget_*.R henter enkeltserier\ncache_get.R håndterer lokal cache\nbuild_database.R kobler serier sammen\ncreate_derived_variables.R beregner avledede indikatorer\nmetadata.csv dokumenterer alle variabler\nvalidate_metadata.R kontrollerer metadata\ncheck_normacro.R kontrollerer databasen\n\n\n\n\nFunksjonene i NorMacro følger noen felles mønstre:\n\ndata = NULL betyr at funksjonen selv henter databasen\nfunksjoner returnerer vanlige R-objekter\nplottefunksjoner returnerer ggplot-objekter\nanalysefunksjoner returnerer tibble, matrix eller liste\nmetadata brukes til titler, enheter og dokumentasjon\n\n\n\n\nTestene ligger i tests/testthat/ og dekker:\n\nbygging av databasen\nmetadata\nvalidering\nsøk og oversikt\nanalysefunksjoner\nvisualisering"
+  },
+  {
+    "objectID": "arkitektur.html#struktur",
+    "href": "arkitektur.html#struktur",
+    "title": "Arkitektur",
+    "section": "",
+    "text": "NorMacro/ R/ data/ cache/ tests/ docs/\nNorMacro bygges i flere trinn:\n\nenkeltserier hentes fra eksterne kilder\nseriene caches lokalt\nseriene kobles sammen på Aar\navledede variabler beregnes\nmetadata valideres\nkvalitetskontroller kjøres"
+  },
+  {
+    "objectID": "arkitektur.html#viktige-komponenter",
+    "href": "arkitektur.html#viktige-komponenter",
+    "title": "Arkitektur",
+    "section": "",
+    "text": "get_*.R henter enkeltserier\ncache_get.R håndterer lokal cache\nbuild_database.R kobler serier sammen\ncreate_derived_variables.R beregner avledede indikatorer\nmetadata.csv dokumenterer alle variabler\nvalidate_metadata.R kontrollerer metadata\ncheck_normacro.R kontrollerer databasen"
+  },
+  {
+    "objectID": "arkitektur.html#api-design",
+    "href": "arkitektur.html#api-design",
+    "title": "Arkitektur",
+    "section": "",
+    "text": "Funksjonene i NorMacro følger noen felles mønstre:\n\ndata = NULL betyr at funksjonen selv henter databasen\nfunksjoner returnerer vanlige R-objekter\nplottefunksjoner returnerer ggplot-objekter\nanalysefunksjoner returnerer tibble, matrix eller liste\nmetadata brukes til titler, enheter og dokumentasjon"
+  },
+  {
+    "objectID": "arkitektur.html#teststruktur",
+    "href": "arkitektur.html#teststruktur",
+    "title": "Arkitektur",
+    "section": "",
+    "text": "Testene ligger i tests/testthat/ og dekker:\n\nbygging av databasen\nmetadata\nvalidering\nsøk og oversikt\nanalysefunksjoner\nvisualisering"
+  }
+]
