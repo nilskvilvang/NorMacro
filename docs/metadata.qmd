@@ -9,7 +9,7 @@ get_normacro_metadata() # Gir metadata for de norske seriene
 
 get_international_metadata() # Gir metadata for de internasjonale seriene
 
-describe_variable("BNP_Fastland") # Beskrvier en girr variabel - her BNP_Fastland
+describe_variable("BNP_Fastland") # Beskriver en gitt variabel - her BNP_Fastland
 ```
 
 ## Formål

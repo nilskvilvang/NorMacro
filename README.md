@@ -13,7 +13,7 @@ execute:
 
 # NorMacro
 
-**Version:** 2.0.0 - dev
+**Version:** 2.0.0
 
 NorMacro er et R-rammeverk for utforsking, visualisering og analyse av
 norske og internasjonale makroøkonomiske tidsserier.

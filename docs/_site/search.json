@@ -4,7 +4,7 @@
     "href": "roadmap.html",
     "title": "Roadmap",
     "section": "",
-    "text": "Dette dokumentet skisserer mulige videreutviklinger av NorMacro.\n\n\n\nplot_business_cycle()\nbedre presentasjon av korrelasjonsmatriser\nflere eksempler i README\nmer dokumentasjon av analysefunksjoner\n\n\n\n\n\npakke NorMacro som en ordinær R-pakke\nvurdere pkgdown-side\nvurdere Shiny-dashboard\nlegge til vignetter\nmer avanserte konjunktur- og trendmetoder\n\n\n\n\n\nDisplay_navn\nKildefrekvens\nNøkkelord\nSist_oppdatert\nRevisjonsnotat\n\n\n\n\nNorMacro bør fortsatt prioritere:\n\nrepresentative indikatorer fremfor flest mulig variabler\ntransparente beregninger\nenkel og stabil API\nfull metadata\ntestbare funksjoner\nstandard R-objekter"
+    "text": "NorMacro skal gjøre det enklere å kombinere norske og internasjonale tidsserier i samme analyse.\nMålet er å utvikle et konsistent API for å:\n\nvelge én eller flere norske serier\nvelge internasjonale serier for bestemte land\nkoble seriene sammen på år\ngi tydelige og unike kolonnenavn\nbevare metadata om variabel, land, enhet og kilde\nbruke resultatet direkte i plotting og analyse\n\nEksempel på ønsket bruk:\ncomparison &lt;- combine_series(\n  norway = c(\n    \"KPI\",\n    \"BNP_Fastland_vekst\"\n  ),\n  international = list(\n    SE = c(\n      \"HICP\",\n      \"BNP_vekst\"\n    ),\n    DK = \"HICP\"\n  )\n)\n\nplot_comparison(comparison)"
   },
   {
     "objectID": "roadmap.html#kort-sikt",
@@ -79,16 +79,16 @@
   {
     "objectID": "international_sources.html",
     "href": "international_sources.html",
-    "title": "Internasjonale kilder og valg",
+    "title": "Internasjonale datakilder",
     "section": "",
-    "text": "Dette dokumentet beskriver valg av internasjonale dataserier i NorMacro fase 2.\n\n\n\nNorMacro-variabel: Industriproduksjon\nKilde: Eurostat\nTabell: sts_inpr_a\nFilter:\n\nunit = I15\ns_adj = CA\nnace_r2 = C\n\nLand: get_standard_countries()\nPeriode: 1953–2025\nBegrunnelse:\n\nI15 brukes fordi vi ønsker indeksnivå, ikke ferdig vekstrate.\nCA brukes fordi kalenderjusterte serier er bedre egnet for internasjonal sammenligning.\nC brukes fordi dette tilsvarer manufacturing / bearbeidende industri og ligger nærmest norsk industriproduksjon."
+    "text": "NorMacro inneholder et kuratert utvalg harmoniserte internasjonale makroøkonomiske tidsserier.\nMålet er ikke å inkludere flest mulig indikatorer, men å tilby et konsistent datasett som egner seg til analyser og sammenligninger på tvers av land.\nAlle originalserier hentes automatisk fra datakildene gjennom åpne API-er. Beregnede serier konstrueres fra disse originalseriene i NorMacro."
   },
   {
     "objectID": "international_sources.html#industriproduksjon",
     "href": "international_sources.html#industriproduksjon",
-    "title": "Internasjonale kilder og valg",
-    "section": "",
-    "text": "NorMacro-variabel: Industriproduksjon\nKilde: Eurostat\nTabell: sts_inpr_a\nFilter:\n\nunit = I15\ns_adj = CA\nnace_r2 = C\n\nLand: get_standard_countries()\nPeriode: 1953–2025\nBegrunnelse:\n\nI15 brukes fordi vi ønsker indeksnivå, ikke ferdig vekstrate.\nCA brukes fordi kalenderjusterte serier er bedre egnet for internasjonal sammenligning.\nC brukes fordi dette tilsvarer manufacturing / bearbeidende industri og ligger nærmest norsk industriproduksjon."
+    "title": "Internasjonale datakilder",
+    "section": "Industriproduksjon",
+    "text": "Industriproduksjon\nNorMacro-variabel:\nIndustriproduksjon\nKilde:\nEurostat\nTabell:\nsts_inpr_a\nViktige filtre:\n\nunit = I15\ns_adj = CA\nnace_r2 = C\n\nI15 benyttes fordi NorMacro ønsker indeksnivå fremfor en ferdig beregnet vekstrate.\nCA angir kalenderjusterte data. Kalenderjustering reduserer forskjeller som skyldes variasjon i antall arbeidsdager mellom år og land.\nC i NACE Rev. 2 tilsvarer bearbeidende industri. Dette er valgt fordi det ligger nærmest den norske industriproduksjonsserien og gir en mer presis internasjonal sammenligning enn et bredere produksjonsaggregat.\nVariabelen Industriproduksjon_vekst beregnes i NorMacro fra indeksnivået."
   },
   {
     "objectID": "visualisering.html",
@@ -179,7 +179,7 @@
     "href": "metadata.html",
     "title": "Metadata i NorMacro",
     "section": "",
-    "text": "NorMacro er metadata-drevet.\nget_metadata() # Gir alle metadata \n\nget_normacro_metadata() # Gir metadata for de norske seriene\n\nget_international_metadata() # Gir metadata for de internasjonale seriene\n\ndescribe_variable(\"BNP_Fastland\") # Beskrvier en girr variabel - her BNP_Fastland\n\n\nMetadata brukes av en rekke funksjoner i NorMacro:\n\noverview()\ncoverage()\ndescribe_variable()\nsearch_variables()\nlist_categories()\ncategory_variables()\ngrowth_table()\nlatest_observations()\nmissing_data()\nvariable_summary()\n\nMetadata benyttes både til dokumentasjon og til automatisk kvalitetskontroll.\n\n\n\n\nMetadatafilen inneholder blant annet følgende felter:\n\n\n\nFelt\nBeskrivelse\n\n\n\n\nVariabel\nInternt variabelnavn brukt i NorMacro\n\n\nBeskrivelse\nKort beskrivelse av variabelen\n\n\nKategori\nTematisk kategori\n\n\nType\nOriginal eller beregnet serie\n\n\nEnhet\nMåleenhet\n\n\nKilde\nOpprinnelig datakilde\n\n\nFrekvens\nOpprinnelig publiseringsfrekvens\n\n\nKommentar\nEventuelle merknader\n\n\n\nVed behov kan metadata utvides med flere felt uten at datastrukturen endres.\n\n\n\n\nPer i dag benytter NorMacro følgende hovedkategorier:\n\nDemografi\nArbeidsmarked\nPriser og inflasjon\nLønn og inntekt\nHusholdningsøkonomi\nBoligmarked\nKreditt og husholdninger\nFinansmarkeder\nNasjonalregnskap\nProduksjon og aktivitet\nKonjunkturindikatorer\nOffentlige finanser\nUtenriksøkonomi\nEnergi og råvarer\nAggregerte serier\n\n\n\n\n\nMetadata oppdateres når:\n\nnye variabler legges til\nvariabler endrer definisjon\nnye kategorier opprettes\n\nNorMacro kontrollerer automatisk at alle variabler finnes i metadata.\nvalidate_metadata()\n\ncheck_normacro()\n\n\n\n\nMetadata følger noen enkle prinsipper:\n\nén rad per variabel\nkonsistente variabelnavn\nkorte beskrivelser\ntydelige enheter\nén primærkategori per variabel\noriginal kilde oppgis alltid"
+    "text": "NorMacro er metadata-drevet.\nget_metadata() # Gir alle metadata \n\nget_normacro_metadata() # Gir metadata for de norske seriene\n\nget_international_metadata() # Gir metadata for de internasjonale seriene\n\ndescribe_variable(\"BNP_Fastland\") # Beskriver en gitt variabel - her BNP_Fastland\n\n\nMetadata brukes av en rekke funksjoner i NorMacro:\n\noverview()\ncoverage()\ndescribe_variable()\nsearch_variables()\nlist_categories()\ncategory_variables()\ngrowth_table()\nlatest_observations()\nmissing_data()\nvariable_summary()\n\nMetadata benyttes både til dokumentasjon og til automatisk kvalitetskontroll.\n\n\n\n\nMetadatafilen inneholder blant annet følgende felter:\n\n\n\nFelt\nBeskrivelse\n\n\n\n\nVariabel\nInternt variabelnavn brukt i NorMacro\n\n\nBeskrivelse\nKort beskrivelse av variabelen\n\n\nKategori\nTematisk kategori\n\n\nType\nOriginal eller beregnet serie\n\n\nEnhet\nMåleenhet\n\n\nKilde\nOpprinnelig datakilde\n\n\nFrekvens\nOpprinnelig publiseringsfrekvens\n\n\nKommentar\nEventuelle merknader\n\n\n\nVed behov kan metadata utvides med flere felt uten at datastrukturen endres.\n\n\n\n\nPer i dag benytter NorMacro følgende hovedkategorier:\n\nDemografi\nArbeidsmarked\nPriser og inflasjon\nLønn og inntekt\nHusholdningsøkonomi\nBoligmarked\nKreditt og husholdninger\nFinansmarkeder\nNasjonalregnskap\nProduksjon og aktivitet\nKonjunkturindikatorer\nOffentlige finanser\nUtenriksøkonomi\nEnergi og råvarer\nAggregerte serier\n\n\n\n\n\nMetadata oppdateres når:\n\nnye variabler legges til\nvariabler endrer definisjon\nnye kategorier opprettes\n\nNorMacro kontrollerer automatisk at alle variabler finnes i metadata.\nvalidate_metadata()\n\ncheck_normacro()\n\n\n\n\nMetadata følger noen enkle prinsipper:\n\nén rad per variabel\nkonsistente variabelnavn\nkorte beskrivelser\ntydelige enheter\nén primærkategori per variabel\noriginal kilde oppgis alltid"
   },
   {
     "objectID": "metadata.html#formål",
@@ -320,5 +320,236 @@
     "title": "Arkitektur",
     "section": "",
     "text": "Testene ligger i tests/testthat/ og dekker:\n\nbygging av databasen\nmetadata\nvalidering\nsøk og oversikt\nanalysefunksjoner\nvisualisering"
+  },
+  {
+    "objectID": "roadmap.html#planlagt-for-2.1.0",
+    "href": "roadmap.html#planlagt-for-2.1.0",
+    "title": "Roadmap",
+    "section": "",
+    "text": "NorMacro skal gjøre det enklere å kombinere norske og internasjonale tidsserier i samme analyse.\nMålet er å utvikle et konsistent API for å:\n\nvelge én eller flere norske serier\nvelge internasjonale serier for bestemte land\nkoble seriene sammen på år\ngi tydelige og unike kolonnenavn\nbevare metadata om variabel, land, enhet og kilde\nbruke resultatet direkte i plotting og analyse\n\nEksempel på ønsket bruk:\ncomparison &lt;- combine_series(\n  norway = c(\n    \"KPI\",\n    \"BNP_Fastland_vekst\"\n  ),\n  international = list(\n    SE = c(\n      \"HICP\",\n      \"BNP_vekst\"\n    ),\n    DK = \"HICP\"\n  )\n)\n\nplot_comparison(comparison)"
+  },
+  {
+    "objectID": "international_sources.html#harmonisert-konsumprisindeks-hicp",
+    "href": "international_sources.html#harmonisert-konsumprisindeks-hicp",
+    "title": "Internasjonale datakilder",
+    "section": "Harmonisert konsumprisindeks (HICP)",
+    "text": "Harmonisert konsumprisindeks (HICP)\nNorMacro-variabel\nHICP\nDatakilde\nEurostat\nTabell\nprc_hicp_aind\nFiltre\n\ncoicop = CP00\nunit = INX_A_AVG\n\n\nBegrunnelse\nHICP benyttes fordi den harmoniserte konsumprisindeksen er utviklet nettopp for internasjonale sammenligninger innen Europa.\nHICP brukes derfor i stedet for nasjonale KPI-serier."
+  },
+  {
+    "objectID": "international_sources.html#arbeidsmarked",
+    "href": "international_sources.html#arbeidsmarked",
+    "title": "Internasjonale datakilder",
+    "section": "Arbeidsmarked",
+    "text": "Arbeidsmarked\n\n\n\n\nVariabel\n\n\nNavn\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nStartår\n\n\nSluttår\n\n\nFunksjon\n\n\n\n\n\n\nArbeidsstyrkeandel\n\n\nArbeidsstyrkeandel\n\n\nBeregnet\n\n\nBeregnet\n\n\nArbeidsstyrke og Befolkning\n\n\nProsent\n\n\n2003\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nSysselsettingsandel\n\n\nSysselsettingsandel\n\n\nBeregnet\n\n\nBeregnet\n\n\nSysselsatte og Befolkning\n\n\nProsent\n\n\n1975\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nArbeidsledighetsrate\n\n\nArbeidsledighetsrate\n\n\nOriginal\n\n\nEurostat\n\n\nune_rt_a\n\n\nProsent\n\n\n2003\n\n\n2025\n\n\nget_unemployment\n\n\n\n\nArbeidsstyrke\n\n\nArbeidsstyrke\n\n\nOriginal\n\n\nEurostat\n\n\nlfsi_emp_a\n\n\nPersoner\n\n\n2003\n\n\n2025\n\n\nget_labour_force\n\n\n\n\nSysselsatte\n\n\nSysselsatte\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_pe\n\n\nPersoner\n\n\n1975\n\n\n2025\n\n\nget_employment"
+  },
+  {
+    "objectID": "international_sources.html#boligmarked",
+    "href": "international_sources.html#boligmarked",
+    "title": "Internasjonale datakilder",
+    "section": "Boligmarked",
+    "text": "Boligmarked\n\n\n\n\nVariabel\n\n\nNavn\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nStartår\n\n\nSluttår\n\n\nFunksjon\n\n\n\n\n\n\nBoligprisvekst\n\n\nBoligprisvekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nBoligprisindeks\n\n\nProsent\n\n\n2006\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nBoligprisindeks\n\n\nBoligprisindeks\n\n\nOriginal\n\n\nEurostat\n\n\nprc_hpi_a\n\n\nIndeks (2015=100)\n\n\n2005\n\n\n2025\n\n\nget_house_price_index"
+  },
+  {
+    "objectID": "international_sources.html#demografi",
+    "href": "international_sources.html#demografi",
+    "title": "Internasjonale datakilder",
+    "section": "Demografi",
+    "text": "Demografi\n\n\n\n\nVariabel\n\n\nNavn\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nStartår\n\n\nSluttår\n\n\nFunksjon\n\n\n\n\n\n\nBefolkningsvekst\n\n\nBefolkningsvekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nBefolkning\n\n\nProsent\n\n\n1961\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nBefolkning\n\n\nBefolkning\n\n\nOriginal\n\n\nEurostat\n\n\ndemo_pjan\n\n\nPersoner\n\n\n1960\n\n\n2025\n\n\nget_population"
+  },
+  {
+    "objectID": "international_sources.html#finansmarkeder",
+    "href": "international_sources.html#finansmarkeder",
+    "title": "Internasjonale datakilder",
+    "section": "Finansmarkeder",
+    "text": "Finansmarkeder\n\n\n\n\nVariabel\n\n\nNavn\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nStartår\n\n\nSluttår\n\n\nFunksjon\n\n\n\n\n\n\nStatsrente_10aar\n\n\nStatsrente_10aar\n\n\nOriginal\n\n\nEurostat\n\n\nirt_lt_mcby_a\n\n\nProsent\n\n\n1967\n\n\n2025\n\n\nget_long_interest_rate"
+  },
+  {
+    "objectID": "international_sources.html#husholdningsøkonomi",
+    "href": "international_sources.html#husholdningsøkonomi",
+    "title": "Internasjonale datakilder",
+    "section": "Husholdningsøkonomi",
+    "text": "Husholdningsøkonomi\n\n\n\n\nVariabel\n\n\nNavn\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nStartår\n\n\nSluttår\n\n\nFunksjon\n\n\n\n\n\n\nPrivat_konsum_andel_BNP\n\n\nPrivat_konsum_andel_BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nPrivat_konsum og BNP_faste_priser\n\n\nProsent\n\n\n1975\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nPrivat_konsum_vekst\n\n\nPrivat_konsum_vekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nPrivat_konsum\n\n\nProsent\n\n\n1976\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nPrivat_konsum\n\n\nPrivat_konsum\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975\n\n\n2025\n\n\nget_private_consumption"
+  },
+  {
+    "objectID": "international_sources.html#nasjonalregnskap",
+    "href": "international_sources.html#nasjonalregnskap",
+    "title": "Internasjonale datakilder",
+    "section": "Nasjonalregnskap",
+    "text": "Nasjonalregnskap\n\n\n\n\nVariabel\n\n\nNavn\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nStartår\n\n\nSluttår\n\n\nFunksjon\n\n\n\n\n\n\nArbeidsproduktivitet\n\n\nArbeidsproduktivitet\n\n\nBeregnet\n\n\nBeregnet\n\n\nBNP_faste_priser og Sysselsatte\n\n\nEuro per sysselsatt\n\n\n1975\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nBNP_vekst\n\n\nBNP vekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nBNP_faste_priser\n\n\nProsent\n\n\n1976\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nBNP_lopende_per_innbygger\n\n\nBNP_lopende_per_innbygger\n\n\nBeregnet\n\n\nBeregnet\n\n\nBNP_lopende og Befolkning\n\n\nEuro per innbygger\n\n\n1975\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nInvesteringer_andel_BNP\n\n\nInvesteringer som andel av BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nInvesteringer og BNP_faste_priser\n\n\nProsent\n\n\n1975\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nInvesteringsvekst\n\n\nInvesteringsvekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nInvesteringer\n\n\nProsent\n\n\n1976\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nProduktivitetsvekst\n\n\nProduktivitetsvekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nArbeidsproduktivitet\n\n\nProsent\n\n\n1976\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nBNP_faste_priser\n\n\nBNP faste priser\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975\n\n\n2025\n\n\nget_gdp_constant\n\n\n\n\nBNP_lopende\n\n\nBNP_lopende\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, lxpende priser\n\n\n1975\n\n\n2025\n\n\nget_gdp\n\n\n\n\nInvesteringer\n\n\nInvesteringer\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975\n\n\n2025\n\n\nget_investment"
+  },
+  {
+    "objectID": "international_sources.html#offentlige-finanser",
+    "href": "international_sources.html#offentlige-finanser",
+    "title": "Internasjonale datakilder",
+    "section": "Offentlige finanser",
+    "text": "Offentlige finanser\n\n\n\n\nVariabel\n\n\nNavn\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nStartår\n\n\nSluttår\n\n\nFunksjon\n\n\n\n\n\n\nOffentlig_gjeld_andel_BNP\n\n\nOffentlig_gjeld_andel_BNP\n\n\nBeregnet\n\n\nEurostat\n\n\ngov_10dd_edpt1\n\n\nProsent av BNP\n\n\n1995\n\n\n2025\n\n\nget_government_debt\n\n\n\n\nOffentlig_konsum_andel_BNP\n\n\nOffentlig_konsum_andel_BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nOffentlig_konsum og BNP_faste_priser\n\n\nProsent\n\n\n1975\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nOffentlig_konsum_vekst\n\n\nOffentlig_konsum_vekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nOffentlig_konsum\n\n\nProsent\n\n\n1976\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nOffentlig_konsum\n\n\nOffentlig_konsum\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975\n\n\n2025\n\n\nget_public_consumption"
+  },
+  {
+    "objectID": "international_sources.html#priser-og-inflasjon",
+    "href": "international_sources.html#priser-og-inflasjon",
+    "title": "Internasjonale datakilder",
+    "section": "Priser og inflasjon",
+    "text": "Priser og inflasjon\n\n\n\n\nVariabel\n\n\nNavn\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nStartår\n\n\nSluttår\n\n\nFunksjon\n\n\n\n\n\n\nInflasjon\n\n\nInflasjon\n\n\nBeregnet\n\n\nBeregnet\n\n\nHICP\n\n\nProsent\n\n\n1997\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nHICP\n\n\nHarmonisert konsumprisindeks\n\n\nOriginal\n\n\nEurostat\n\n\nprc_hicp_aind\n\n\nIndeks (2015=100)\n\n\n1996\n\n\n2025\n\n\nget_hicp"
+  },
+  {
+    "objectID": "international_sources.html#produksjon-og-aktivitet",
+    "href": "international_sources.html#produksjon-og-aktivitet",
+    "title": "Internasjonale datakilder",
+    "section": "Produksjon og aktivitet",
+    "text": "Produksjon og aktivitet\n\n\n\n\nVariabel\n\n\nNavn\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nStartår\n\n\nSluttår\n\n\nFunksjon\n\n\n\n\n\n\nDetaljhandel_vekst\n\n\nDetaljhandel_vekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nDetaljhandel\n\n\nProsent\n\n\n1992\n\n\n2023\n\n\ncreate_international_derived_variables\n\n\n\n\nIndustriproduksjon_vekst\n\n\nIndustriproduksjon_vekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nIndustriproduksjon\n\n\nProsent\n\n\n1991\n\n\n2023\n\n\ncreate_international_derived_variables\n\n\n\n\nDetaljhandel\n\n\nDetaljhandel\n\n\nOriginal\n\n\nEurostat\n\n\nsts_trtu_a\n\n\nIndeks (2015=100)\n\n\n1991\n\n\n2023\n\n\nget_retail_trade\n\n\n\n\nIndustriproduksjon\n\n\nIndustriproduksjon\n\n\nOriginal\n\n\nEurostat\n\n\nsts_inpr_a\n\n\nIndeks (2015=100)\n\n\n1990\n\n\n2023\n\n\nget_industrial_production"
+  },
+  {
+    "objectID": "international_sources.html#utenriksøkonomi",
+    "href": "international_sources.html#utenriksøkonomi",
+    "title": "Internasjonale datakilder",
+    "section": "Utenriksøkonomi",
+    "text": "Utenriksøkonomi\n\n\n\n\nVariabel\n\n\nNavn\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nStartår\n\n\nSluttår\n\n\nFunksjon\n\n\n\n\n\n\nEksportandel_BNP\n\n\nEksportandel_BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nEksport og BNP_faste_priser\n\n\nProsent\n\n\n1975\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nHandelsbalanse\n\n\nHandelsbalanse\n\n\nBeregnet\n\n\nBeregnet\n\n\nEksport og Import\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nHandelsbalanse_andel_BNP\n\n\nHandelsbalanse_andel_BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nHandelsbalanse og BNP_faste_priser\n\n\nProsent\n\n\n1975\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nImportandel_BNP\n\n\nImportandel_BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nImport og BNP_faste_priser\n\n\nProsent\n\n\n1975\n\n\n2025\n\n\ncreate_international_derived_variables\n\n\n\n\nEksport\n\n\nEksport\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975\n\n\n2025\n\n\nget_exports\n\n\n\n\nImport\n\n\nImport\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975\n\n\n2025\n\n\nget_imports"
+  },
+  {
+    "objectID": "international_sources.html#harmonisert-konsumprisindeks",
+    "href": "international_sources.html#harmonisert-konsumprisindeks",
+    "title": "Internasjonale datakilder",
+    "section": "Harmonisert konsumprisindeks",
+    "text": "Harmonisert konsumprisindeks\nNorMacro-variabel:\nHICP\nKilde:\nEurostat\nTabell:\nprc_hicp_aind\nViktige filtre:\n\ncoicop = CP00\nunit = INX_A_AVG\n\nCP00 representerer totalindeksen for alle varer og tjenester.\nINX_A_AVG gir årlig gjennomsnittlig indeksnivå.\nHICP benyttes fordi indeksen er harmonisert for sammenligning mellom europeiske land. Den er derfor bedre egnet til internasjonale analyser enn de enkelte landenes nasjonale konsumprisindekser.\nVariabelen Inflasjon beregnes i NorMacro som årlig prosentvis vekst i HICP."
+  },
+  {
+    "objectID": "international_sources.html#harmonisert-arbeidsledighetsrate",
+    "href": "international_sources.html#harmonisert-arbeidsledighetsrate",
+    "title": "Internasjonale datakilder",
+    "section": "Harmonisert arbeidsledighetsrate",
+    "text": "Harmonisert arbeidsledighetsrate\nNorMacro-variabel:\nArbeidsledighetsrate\nArbeidsledighetsraten hentes som en harmonisert rate fra Eurostat.\nDenne bør ikke sammenlignes direkte med den norske NAV-serien:\nArbledighetsrate_NAV\nDe to seriene bygger på ulike definisjoner:\n\nEurostat-serien er harmonisert for internasjonale sammenligninger\nNAV-serien måler registrerte helt arbeidsledige i Norge\n\nVed sammenligninger mellom land bør Arbeidsledighetsrate brukes."
+  },
+  {
+    "objectID": "international_sources.html#bnp-i-løpende-og-faste-priser",
+    "href": "international_sources.html#bnp-i-løpende-og-faste-priser",
+    "title": "Internasjonale datakilder",
+    "section": "BNP i løpende og faste priser",
+    "text": "BNP i løpende og faste priser\nNorMacro inneholder både:\nBNP_lopende\nog:\nBNP_faste_priser\nBNP i løpende priser brukes blant annet ved beregning av:\n\nBNP per innbygger\neksportandel av BNP\nimportandel av BNP\nhandelsbalanse som andel av BNP\nkonsum- og investeringsandeler\n\nBNP i faste priser brukes som grunnlag for:\nBNP_vekst\nDette skiller nivå- og andelsberegninger fra volumutvikling."
+  },
+  {
+    "objectID": "international_sources.html#nasjonalregnskapskomponenter",
+    "href": "international_sources.html#nasjonalregnskapskomponenter",
+    "title": "Internasjonale datakilder",
+    "section": "Nasjonalregnskapskomponenter",
+    "text": "Nasjonalregnskapskomponenter\nFølgende serier inngår som sentrale komponenter i nasjonalregnskapet:\n\nPrivat_konsum\nOffentlig_konsum\nInvesteringer\nEksport\nImport\n\nTil hver nivåserie beregnes relevante vekstrater og, når det er faglig meningsfullt, andeler av BNP.\nBeregningene gjøres konsekvent innen hvert land og sorteres etter Land og Aar."
+  },
+  {
+    "objectID": "international_sources.html#befolkning-og-per-innbygger-serier",
+    "href": "international_sources.html#befolkning-og-per-innbygger-serier",
+    "title": "Internasjonale datakilder",
+    "section": "Befolkning og per innbygger-serier",
+    "text": "Befolkning og per innbygger-serier\nBefolkning brukes som nevner for serier per innbygger.\nDette gjelder blant annet:\nBNP_lopende_per_innbygger\nBefolkningsvekst beregnes fra nivåserien i NorMacro."
+  },
+  {
+    "objectID": "international_sources.html#sysselsetting-arbeidsstyrke-og-beregnede-andeler",
+    "href": "international_sources.html#sysselsetting-arbeidsstyrke-og-beregnede-andeler",
+    "title": "Internasjonale datakilder",
+    "section": "Sysselsetting, arbeidsstyrke og beregnede andeler",
+    "text": "Sysselsetting, arbeidsstyrke og beregnede andeler\nFølgende originalserier inngår:\n\nSysselsatte\nArbeidsstyrke\n\nFølgende andeler beregnes i NorMacro:\n\nSysselsettingsandel\nArbeidsstyrkeandel\n\nAndelene beregnes bare når teller og nevner er tilgjengelige og konsistente for samme land og år."
+  },
+  {
+    "objectID": "international_sources.html#boligpriser",
+    "href": "international_sources.html#boligpriser",
+    "title": "Internasjonale datakilder",
+    "section": "Boligpriser",
+    "text": "Boligpriser\nBoligprisindeks er en harmonisert indeks for boligprisutvikling.\nBoligprisvekst beregnes som årlig prosentvis endring i indeksnivået.\nIndeksnivået beholdes fordi det gir brukeren mulighet til både å analysere nivåutvikling og beregne alternative transformasjoner."
+  },
+  {
+    "objectID": "international_sources.html#utenriksøkonomi-1",
+    "href": "international_sources.html#utenriksøkonomi-1",
+    "title": "Internasjonale datakilder",
+    "section": "Utenriksøkonomi",
+    "text": "Utenriksøkonomi\nFølgende originalserier inngår:\n\nEksport\nImport\n\nFra disse beregnes:\n\nHandelsbalanse\nEksportandel_BNP\nImportandel_BNP\nHandelsbalanse_andel_BNP\n\nHandelsbalansen beregnes som eksport minus import."
+  },
+  {
+    "objectID": "international_sources.html#offentlige-finanser-1",
+    "href": "international_sources.html#offentlige-finanser-1",
+    "title": "Internasjonale datakilder",
+    "section": "Offentlige finanser",
+    "text": "Offentlige finanser\nInternasjonale indikatorer for offentlige finanser inkluderer serier som er egnet for sammenligning på tvers av land.\nNår en serie allerede publiseres som andel av BNP, beholdes den harmoniserte kildeserien dersom dette gir best sammenlignbarhet.\nMetadatafilen angir om en variabel er:\n\nOriginal\nBeregnet"
+  },
+  {
+    "objectID": "international_sources.html#statsrente",
+    "href": "international_sources.html#statsrente",
+    "title": "Internasjonale datakilder",
+    "section": "Statsrente",
+    "text": "Statsrente\nStatsrente_10aar representerer en langsiktig statsobligasjonsrente.\nBeskrivelsen er generell og gjelder de respektive landenes langsiktige statsrenter. Serien skal derfor ikke beskrives som en norsk statsobligasjonsrente i den internasjonale metadatafilen."
+  },
+  {
+    "objectID": "international_sources.html#formål",
+    "href": "international_sources.html#formål",
+    "title": "Internasjonale datakilder",
+    "section": "",
+    "text": "NorMacro inneholder et kuratert utvalg harmoniserte internasjonale makroøkonomiske tidsserier.\nMålet er ikke å inkludere flest mulig indikatorer, men å tilby et konsistent datasett som egner seg til analyser og sammenligninger på tvers av land.\nAlle originalserier hentes automatisk fra datakildene gjennom åpne API-er. Beregnede serier konstrueres fra disse originalseriene i NorMacro."
+  },
+  {
+    "objectID": "international_sources.html#prinsipper-for-valg-av-serier",
+    "href": "international_sources.html#prinsipper-for-valg-av-serier",
+    "title": "Internasjonale datakilder",
+    "section": "Prinsipper for valg av serier",
+    "text": "Prinsipper for valg av serier\nVed valg av internasjonale serier benyttes følgende prinsipper:\n\noriginale datakilder når det er mulig\nharmoniserte definisjoner\nsammenlignbarhet mellom land\nårlige observasjoner\nlengst mulig tidsdekning\ntransparente filtre og transformasjoner\nén representativ serie per økonomisk fenomen\nindeksnivå fremfor ferdig beregnede vekstrater når veksten kan beregnes konsistent i NorMacro"
+  },
+  {
+    "objectID": "international_sources.html#datakilder",
+    "href": "international_sources.html#datakilder",
+    "title": "Internasjonale datakilder",
+    "section": "Datakilder",
+    "text": "Datakilder\nEurostat er hovedkilden for den internasjonale databasen.\nAndre kilder kan benyttes dersom Eurostat ikke tilbyr en egnet, harmonisert serie med tilstrekkelig tidsdekning.\nDen løpende og autoritative oversikten over kilde, tabell, enhet, frekvens og funksjon ligger i:\ndata/metadata_international.csv\nTabellene nedenfor genereres automatisk fra denne metadatafilen ved rendering av dokumentasjonen."
+  },
+  {
+    "objectID": "international_sources.html#land-og-geografiske-aggregater",
+    "href": "international_sources.html#land-og-geografiske-aggregater",
+    "title": "Internasjonale datakilder",
+    "section": "Land og geografiske aggregater",
+    "text": "Land og geografiske aggregater\nUtvalget av land og aggregater defineres av:\nget_standard_countries()\nDatasettet inneholder for tiden:\n\n\n\nOmfanget av den internasjonale databasen\n\n\nOmfang\nAntall\n\n\n\n\nVariabler\n38\n\n\nKategorier\n10\n\n\nOriginale serier\n16\n\n\nBeregnede serier\n22\n\n\n\n\n\nAlle observasjoner identifiseres med:\n\nAar: kalenderår\nLand: landkode eller kode for geografisk aggregat"
+  },
+  {
+    "objectID": "international_sources.html#harmonisering",
+    "href": "international_sources.html#harmonisering",
+    "title": "Internasjonale datakilder",
+    "section": "Harmonisering",
+    "text": "Harmonisering\nAlle internasjonale serier standardiseres før de inngår i databasen.\nDette omfatter blant annet:\n\nfelles årskolonne: Aar\nfelles landkolonne: Land\nén verdikolonne per variabel\nstandardiserte variabelnavn\nstandardiserte metadatafelt\nårlig frekvens\nkonsistente beregninger av vekstrater og andeler\neksplisitt dokumentasjon av kilde, tabell og enhet\n\nFunksjonen:\nget_international_macro()\nreturnerer data i bredt format, med én rad per land og år."
+  },
+  {
+    "objectID": "international_sources.html#variabelkatalog",
+    "href": "international_sources.html#variabelkatalog",
+    "title": "Internasjonale datakilder",
+    "section": "Variabelkatalog",
+    "text": "Variabelkatalog\nOversikten genereres automatisk fra metadata_international.csv.\n\nArbeidsmarkedBoligmarkedDemografiFinansmarkederHusholdningsøkonomiNasjonalregnskapOffentlige finanserPriser og inflasjonProduksjon og aktivitetUtenriksøkonomi\n\n\n\n\n\n\nVariabel\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nPeriode\n\n\n\n\n\n\nArbeidsstyrkeandel\n\n\nBeregnet\n\n\nBeregnet\n\n\nArbeidsstyrke og Befolkning\n\n\nProsent\n\n\n2003–2025\n\n\n\n\nSysselsettingsandel\n\n\nBeregnet\n\n\nBeregnet\n\n\nSysselsatte og Befolkning\n\n\nProsent\n\n\n1975–2025\n\n\n\n\nArbeidsledighetsrate\n\n\nOriginal\n\n\nEurostat\n\n\nune_rt_a\n\n\nProsent\n\n\n2003–2025\n\n\n\n\nArbeidsstyrke\n\n\nOriginal\n\n\nEurostat\n\n\nlfsi_emp_a\n\n\nPersoner\n\n\n2003–2025\n\n\n\n\nSysselsatte\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_pe\n\n\nPersoner\n\n\n1975–2025\n\n\n\n\n\n\n\n\n\n\nVariabel\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nPeriode\n\n\n\n\n\n\nBoligprisvekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nBoligprisindeks\n\n\nProsent\n\n\n2006–2025\n\n\n\n\nBoligprisindeks\n\n\nOriginal\n\n\nEurostat\n\n\nprc_hpi_a\n\n\nIndeks (2015=100)\n\n\n2005–2025\n\n\n\n\n\n\n\n\n\n\nVariabel\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nPeriode\n\n\n\n\n\n\nBefolkningsvekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nBefolkning\n\n\nProsent\n\n\n1961–2025\n\n\n\n\nBefolkning\n\n\nOriginal\n\n\nEurostat\n\n\ndemo_pjan\n\n\nPersoner\n\n\n1960–2025\n\n\n\n\n\n\n\n\n\n\nVariabel\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nPeriode\n\n\n\n\n\n\nStatsrente_10aar\n\n\nOriginal\n\n\nEurostat\n\n\nirt_lt_mcby_a\n\n\nProsent\n\n\n1967–2025\n\n\n\n\n\n\n\n\n\n\nVariabel\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nPeriode\n\n\n\n\n\n\nPrivat_konsum_andel_BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nPrivat_konsum og BNP_faste_priser\n\n\nProsent\n\n\n1975–2025\n\n\n\n\nPrivat_konsum_vekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nPrivat_konsum\n\n\nProsent\n\n\n1976–2025\n\n\n\n\nPrivat_konsum\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975–2025\n\n\n\n\n\n\n\n\n\n\nVariabel\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nPeriode\n\n\n\n\n\n\nArbeidsproduktivitet\n\n\nBeregnet\n\n\nBeregnet\n\n\nBNP_faste_priser og Sysselsatte\n\n\nEuro per sysselsatt\n\n\n1975–2025\n\n\n\n\nBNP_lopende_per_innbygger\n\n\nBeregnet\n\n\nBeregnet\n\n\nBNP_lopende og Befolkning\n\n\nEuro per innbygger\n\n\n1975–2025\n\n\n\n\nBNP_vekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nBNP_faste_priser\n\n\nProsent\n\n\n1976–2025\n\n\n\n\nInvesteringer_andel_BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nInvesteringer og BNP_faste_priser\n\n\nProsent\n\n\n1975–2025\n\n\n\n\nInvesteringsvekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nInvesteringer\n\n\nProsent\n\n\n1976–2025\n\n\n\n\nProduktivitetsvekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nArbeidsproduktivitet\n\n\nProsent\n\n\n1976–2025\n\n\n\n\nBNP_faste_priser\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975–2025\n\n\n\n\nBNP_lopende\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, lxpende priser\n\n\n1975–2025\n\n\n\n\nInvesteringer\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975–2025\n\n\n\n\n\n\n\n\n\n\nVariabel\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nPeriode\n\n\n\n\n\n\nOffentlig_gjeld_andel_BNP\n\n\nBeregnet\n\n\nEurostat\n\n\ngov_10dd_edpt1\n\n\nProsent av BNP\n\n\n1995–2025\n\n\n\n\nOffentlig_konsum_andel_BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nOffentlig_konsum og BNP_faste_priser\n\n\nProsent\n\n\n1975–2025\n\n\n\n\nOffentlig_konsum_vekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nOffentlig_konsum\n\n\nProsent\n\n\n1976–2025\n\n\n\n\nOffentlig_konsum\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975–2025\n\n\n\n\n\n\n\n\n\n\nVariabel\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nPeriode\n\n\n\n\n\n\nInflasjon\n\n\nBeregnet\n\n\nBeregnet\n\n\nHICP\n\n\nProsent\n\n\n1997–2025\n\n\n\n\nHICP\n\n\nOriginal\n\n\nEurostat\n\n\nprc_hicp_aind\n\n\nIndeks (2015=100)\n\n\n1996–2025\n\n\n\n\n\n\n\n\n\n\nVariabel\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nPeriode\n\n\n\n\n\n\nDetaljhandel_vekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nDetaljhandel\n\n\nProsent\n\n\n1992–2023\n\n\n\n\nIndustriproduksjon_vekst\n\n\nBeregnet\n\n\nBeregnet\n\n\nIndustriproduksjon\n\n\nProsent\n\n\n1991–2023\n\n\n\n\nDetaljhandel\n\n\nOriginal\n\n\nEurostat\n\n\nsts_trtu_a\n\n\nIndeks (2015=100)\n\n\n1991–2023\n\n\n\n\nIndustriproduksjon\n\n\nOriginal\n\n\nEurostat\n\n\nsts_inpr_a\n\n\nIndeks (2015=100)\n\n\n1990–2023\n\n\n\n\n\n\n\n\n\n\nVariabel\n\n\nType\n\n\nKilde\n\n\nTabell\n\n\nEnhet\n\n\nPeriode\n\n\n\n\n\n\nEksportandel_BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nEksport og BNP_faste_priser\n\n\nProsent\n\n\n1975–2025\n\n\n\n\nHandelsbalanse\n\n\nBeregnet\n\n\nBeregnet\n\n\nEksport og Import\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975–2025\n\n\n\n\nHandelsbalanse_andel_BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nHandelsbalanse og BNP_faste_priser\n\n\nProsent\n\n\n1975–2025\n\n\n\n\nImportandel_BNP\n\n\nBeregnet\n\n\nBeregnet\n\n\nImport og BNP_faste_priser\n\n\nProsent\n\n\n1975–2025\n\n\n\n\nEksport\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975–2025\n\n\n\n\nImport\n\n\nOriginal\n\n\nEurostat\n\n\nnama_10_gdp\n\n\nMillioner euro, kjedevolum med referanseer 2020\n\n\n1975–2025"
+  },
+  {
+    "objectID": "international_sources.html#viktige-serievalg",
+    "href": "international_sources.html#viktige-serievalg",
+    "title": "Internasjonale datakilder",
+    "section": "Viktige serievalg",
+    "text": "Viktige serievalg\nDenne delen dokumenterer valg som krever en faglig begrunnelse utover informasjonen i metadatafilen.\n\nHarmonisert konsumprisindeks\nNorMacro-variabel:\nHICP\nKilde:\nEurostat\nTabell:\nprc_hicp_aind\nViktige filtre:\n\ncoicop = CP00\nunit = INX_A_AVG\n\nCP00 representerer totalindeksen for alle varer og tjenester.\nINX_A_AVG gir årlig gjennomsnittlig indeksnivå.\nHICP benyttes fordi indeksen er harmonisert for sammenligning mellom europeiske land. Den er derfor bedre egnet til internasjonale analyser enn de enkelte landenes nasjonale konsumprisindekser.\nVariabelen Inflasjon beregnes i NorMacro som årlig prosentvis vekst i HICP.\n\n\nIndustriproduksjon\nNorMacro-variabel:\nIndustriproduksjon\nKilde:\nEurostat\nTabell:\nsts_inpr_a\nViktige filtre:\n\nunit = I15\ns_adj = CA\nnace_r2 = C\n\nI15 benyttes fordi NorMacro ønsker indeksnivå fremfor en ferdig beregnet vekstrate.\nCA angir kalenderjusterte data. Kalenderjustering reduserer forskjeller som skyldes variasjon i antall arbeidsdager mellom år og land.\nC i NACE Rev. 2 tilsvarer bearbeidende industri. Dette er valgt fordi det ligger nærmest den norske industriproduksjonsserien og gir en mer presis internasjonal sammenligning enn et bredere produksjonsaggregat.\nVariabelen Industriproduksjon_vekst beregnes i NorMacro fra indeksnivået.\n\n\nHarmonisert arbeidsledighetsrate\nNorMacro-variabel:\nArbeidsledighetsrate\nArbeidsledighetsraten hentes som en harmonisert rate fra Eurostat.\nDenne bør ikke sammenlignes direkte med den norske NAV-serien:\nArbledighetsrate_NAV\nDe to seriene bygger på ulike definisjoner:\n\nEurostat-serien er harmonisert for internasjonale sammenligninger\nNAV-serien måler registrerte helt arbeidsledige i Norge\n\nVed sammenligninger mellom land bør Arbeidsledighetsrate brukes.\n\n\nBNP i løpende og faste priser\nNorMacro inneholder både:\nBNP_lopende\nog:\nBNP_faste_priser\nBNP i løpende priser brukes blant annet ved beregning av:\n\nBNP per innbygger\neksportandel av BNP\nimportandel av BNP\nhandelsbalanse som andel av BNP\nkonsum- og investeringsandeler\n\nBNP i faste priser brukes som grunnlag for:\nBNP_vekst\nDette skiller nivå- og andelsberegninger fra volumutvikling.\n\n\nNasjonalregnskapskomponenter\nFølgende serier inngår som sentrale komponenter i nasjonalregnskapet:\n\nPrivat_konsum\nOffentlig_konsum\nInvesteringer\nEksport\nImport\n\nTil hver nivåserie beregnes relevante vekstrater og, når det er faglig meningsfullt, andeler av BNP.\nBeregningene gjøres konsekvent innen hvert land og sorteres etter Land og Aar.\n\n\nBefolkning og per innbygger-serier\nBefolkning brukes som nevner for serier per innbygger.\nDette gjelder blant annet:\nBNP_lopende_per_innbygger\nBefolkningsvekst beregnes fra nivåserien i NorMacro.\n\n\nSysselsetting, arbeidsstyrke og beregnede andeler\nFølgende originalserier inngår:\n\nSysselsatte\nArbeidsstyrke\n\nFølgende andeler beregnes i NorMacro:\n\nSysselsettingsandel\nArbeidsstyrkeandel\n\nAndelene beregnes bare når teller og nevner er tilgjengelige og konsistente for samme land og år.\n\n\nBoligpriser\nBoligprisindeks er en harmonisert indeks for boligprisutvikling.\nBoligprisvekst beregnes som årlig prosentvis endring i indeksnivået.\nIndeksnivået beholdes fordi det gir brukeren mulighet til både å analysere nivåutvikling og beregne alternative transformasjoner.\n\n\nUtenriksøkonomi\nFølgende originalserier inngår:\n\nEksport\nImport\n\nFra disse beregnes:\n\nHandelsbalanse\nEksportandel_BNP\nImportandel_BNP\nHandelsbalanse_andel_BNP\n\nHandelsbalansen beregnes som eksport minus import.\n\n\nOffentlige finanser\nInternasjonale indikatorer for offentlige finanser inkluderer serier som er egnet for sammenligning på tvers av land.\nNår en serie allerede publiseres som andel av BNP, beholdes den harmoniserte kildeserien dersom dette gir best sammenlignbarhet.\nMetadatafilen angir om en variabel er:\n\nOriginal\nBeregnet\n\n\n\nStatsrente\nStatsrente_10aar representerer en langsiktig statsobligasjonsrente.\nBeskrivelsen er generell og gjelder de respektive landenes langsiktige statsrenter. Serien skal derfor ikke beskrives som en norsk statsobligasjonsrente i den internasjonale metadatafilen."
+  },
+  {
+    "objectID": "international_sources.html#originale-og-beregnede-serier",
+    "href": "international_sources.html#originale-og-beregnede-serier",
+    "title": "Internasjonale datakilder",
+    "section": "Originale og beregnede serier",
+    "text": "Originale og beregnede serier\nMetadatafeltet Type skiller mellom:\n\nOriginal: hentet direkte fra datakilden\nBeregnet: beregnet i NorMacro fra én eller flere originalserier\n\nBeregninger omfatter blant annet:\n\nårlige vekstrater\nper innbygger-serier\nandeler av BNP\narbeidsmarkedsandeler\nhandelsbalanse\narbeidsproduktivitet\n\nBeregningene utføres separat for hvert land."
+  },
+  {
+    "objectID": "international_sources.html#metadata",
+    "href": "international_sources.html#metadata",
+    "title": "Internasjonale datakilder",
+    "section": "Metadata",
+    "text": "Metadata\nInternasjonale metadata kan hentes med:\nget_international_metadata()\neller, når et internasjonalt datasett allerede finnes:\nget_metadata(international)\nMetadatafilen inneholder blant annet:\n\nVariabel\nDisplay_navn\nType\nKategori\nBeskrivelse\nKilde\nKilde_url\nTabell\nEnhet\nFrekvens\nStartaar\nSluttaar\nFunksjon\nKommentar\nOmraade"
+  },
+  {
+    "objectID": "international_sources.html#reproduserbarhet",
+    "href": "international_sources.html#reproduserbarhet",
+    "title": "Internasjonale datakilder",
+    "section": "Reproduserbarhet",
+    "text": "Reproduserbarhet\nAlle originalserier kan hentes på nytt fra datakildene.\nCache brukes kun for å redusere nedlastingstid og er ikke en autoritativ datakilde.\nDen internasjonale databasen bygges med:\ninternational &lt;- get_international_macro()\nMetadata kan valideres med:\nvalidate_metadata(\n  get_international_metadata(),\n  verbose = TRUE\n)\nAlle variabler i datasettet kan kontrolleres mot metadata med:\ncheck_metadata(\n  international,\n  verbose = TRUE\n)"
+  },
+  {
+    "objectID": "international_sources.html#videre-utvikling",
+    "href": "international_sources.html#videre-utvikling",
+    "title": "Internasjonale datakilder",
+    "section": "Videre utvikling",
+    "text": "Videre utvikling\nPlanlagt videreutvikling omfatter blant annet:\n\nenklere sammenligninger mellom norske og internasjonale serier\nrobuste sammenligninger mellom flere land\nvidere harmonisering av kilde- og enhetsinformasjon\nutvidelse med nye indikatorer når de gir tydelig faglig merverdi\n\nSammenligninger på tvers av den norske og internasjonale databasen er planlagt som et hovedtema for NorMacro 2.1.0."
   }
 ]

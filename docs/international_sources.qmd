@@ -1,19 +1,477 @@
-# Internasjonale kilder og valg
 
-Dette dokumentet beskriver valg av internasjonale dataserier i NorMacro fase 2.
+---
+title: "Internasjonale datakilder"
+toc-depth: 2
+page-layout: full
+---
 
-## Industriproduksjon
+```{r}
+#| label: set-root
+#| include: false
 
-- NorMacro-variabel: `Industriproduksjon`
-- Kilde: Eurostat
-- Tabell: `sts_inpr_a`
-- Filter:
-  - `unit = I15`
-  - `s_adj = CA`
-  - `nace_r2 = C`
-- Land: `get_standard_countries()`
-- Periode: 1953–2025
-- Begrunnelse:
-  - `I15` brukes fordi vi ønsker indeksnivå, ikke ferdig vekstrate.
-  - `CA` brukes fordi kalenderjusterte serier er bedre egnet for internasjonal sammenligning.
-  - `C` brukes fordi dette tilsvarer manufacturing / bearbeidende industri og ligger nærmest norsk industriproduksjon.
+knitr::opts_knit$set(
+  root.dir = normalizePath("..")
+)
+```
+
+```{r}
+#| label: setup
+#| include: false
+
+source("source_all.R")
+
+metadata_international <- get_international_metadata()
+international <- get_international_macro()
+```
+
+## Formål
+
+NorMacro inneholder et kuratert utvalg harmoniserte internasjonale makroøkonomiske tidsserier.
+
+Målet er ikke å inkludere flest mulig indikatorer, men å tilby et konsistent datasett som egner seg til analyser og sammenligninger på tvers av land.
+
+Alle originalserier hentes automatisk fra datakildene gjennom åpne API-er. Beregnede serier konstrueres fra disse originalseriene i NorMacro.
+
+## Prinsipper for valg av serier
+
+Ved valg av internasjonale serier benyttes følgende prinsipper:
+
+- originale datakilder når det er mulig
+- harmoniserte definisjoner
+- sammenlignbarhet mellom land
+- årlige observasjoner
+- lengst mulig tidsdekning
+- transparente filtre og transformasjoner
+- én representativ serie per økonomisk fenomen
+- indeksnivå fremfor ferdig beregnede vekstrater når veksten kan beregnes konsistent i NorMacro
+
+## Datakilder
+
+Eurostat er hovedkilden for den internasjonale databasen.
+
+Andre kilder kan benyttes dersom Eurostat ikke tilbyr en egnet, harmonisert serie med tilstrekkelig tidsdekning.
+
+Den løpende og autoritative oversikten over kilde, tabell, enhet, frekvens og funksjon ligger i:
+
+```text
+data/metadata_international.csv
+```
+
+Tabellene nedenfor genereres automatisk fra denne metadatafilen ved rendering av dokumentasjonen.
+
+## Land og geografiske aggregater
+
+Utvalget av land og aggregater defineres av:
+
+```r
+get_standard_countries()
+```
+
+Datasettet inneholder for tiden:
+
+```{r}
+#| echo: false
+
+summary_data <- tibble::tibble(
+  Mål = c(
+    "Variabler",
+    "Kategorier",
+    "Originale serier",
+    "Beregnede serier"
+  ),
+  Antall = c(
+    nrow(metadata_international),
+    dplyr::n_distinct(metadata_international$Kategori),
+    sum(metadata_international$Type == "Original"),
+    sum(metadata_international$Type == "Beregnet")
+  )
+)
+
+knitr::kable(
+  summary_data,
+  col.names = c("Omfang", "Antall"),
+  caption = "Omfanget av den internasjonale databasen"
+)
+```
+
+Alle observasjoner identifiseres med:
+
+- `Aar`: kalenderår
+- `Land`: landkode eller kode for geografisk aggregat
+
+## Harmonisering
+
+Alle internasjonale serier standardiseres før de inngår i databasen.
+
+Dette omfatter blant annet:
+
+- felles årskolonne: `Aar`
+- felles landkolonne: `Land`
+- én verdikolonne per variabel
+- standardiserte variabelnavn
+- standardiserte metadatafelt
+- årlig frekvens
+- konsistente beregninger av vekstrater og andeler
+- eksplisitt dokumentasjon av kilde, tabell og enhet
+
+Funksjonen:
+
+```r
+get_international_macro()
+```
+
+returnerer data i bredt format, med én rad per land og år.
+
+## Variabelkatalog
+
+Oversikten genereres automatisk fra `metadata_international.csv`.
+
+::: {.panel-tabset}
+
+```{r}
+#| echo: false
+#| results: asis
+
+categories <- metadata_international |>
+  dplyr::distinct(.data$Kategori) |>
+  dplyr::arrange(.data$Kategori) |>
+  dplyr::pull(.data$Kategori)
+
+for (category_name in categories) {
+
+  cat(
+    "\n\n### ",
+    category_name,
+    "\n\n",
+    sep = ""
+  )
+
+  table_data <- metadata_international |>
+    dplyr::filter(
+      .data$Kategori == category_name
+    ) |>
+    dplyr::transmute(
+      Variabel = .data$Variabel,
+      Type = .data$Type,
+      Kilde = .data$Kilde,
+      Tabell = .data$Tabell,
+      Enhet = .data$Enhet,
+      Periode = paste0(
+        .data$Startaar,
+        "–",
+        .data$Sluttaar
+      )
+    ) |>
+    dplyr::arrange(
+      .data$Type,
+      .data$Variabel
+    )
+
+  cat(
+    knitr::kable(
+      table_data,
+      format = "html",
+      escape = TRUE
+    ),
+    sep = "\n"
+  )
+}
+```
+
+:::
+
+## Viktige serievalg
+
+Denne delen dokumenterer valg som krever en faglig begrunnelse utover informasjonen i metadatafilen.
+
+### Harmonisert konsumprisindeks
+
+NorMacro-variabel:
+
+```text
+HICP
+```
+
+Kilde:
+
+```text
+Eurostat
+```
+
+Tabell:
+
+```text
+prc_hicp_aind
+```
+
+Viktige filtre:
+
+- `coicop = CP00`
+- `unit = INX_A_AVG`
+
+`CP00` representerer totalindeksen for alle varer og tjenester.
+
+`INX_A_AVG` gir årlig gjennomsnittlig indeksnivå.
+
+HICP benyttes fordi indeksen er harmonisert for sammenligning mellom europeiske land. Den er derfor bedre egnet til internasjonale analyser enn de enkelte landenes nasjonale konsumprisindekser.
+
+Variabelen `Inflasjon` beregnes i NorMacro som årlig prosentvis vekst i HICP.
+
+### Industriproduksjon
+
+NorMacro-variabel:
+
+```text
+Industriproduksjon
+```
+
+Kilde:
+
+```text
+Eurostat
+```
+
+Tabell:
+
+```text
+sts_inpr_a
+```
+
+Viktige filtre:
+
+- `unit = I15`
+- `s_adj = CA`
+- `nace_r2 = C`
+
+`I15` benyttes fordi NorMacro ønsker indeksnivå fremfor en ferdig beregnet vekstrate.
+
+`CA` angir kalenderjusterte data. Kalenderjustering reduserer forskjeller som skyldes variasjon i antall arbeidsdager mellom år og land.
+
+`C` i NACE Rev. 2 tilsvarer bearbeidende industri. Dette er valgt fordi det ligger nærmest den norske industriproduksjonsserien og gir en mer presis internasjonal sammenligning enn et bredere produksjonsaggregat.
+
+Variabelen `Industriproduksjon_vekst` beregnes i NorMacro fra indeksnivået.
+
+### Harmonisert arbeidsledighetsrate
+
+NorMacro-variabel:
+
+```text
+Arbeidsledighetsrate
+```
+
+Arbeidsledighetsraten hentes som en harmonisert rate fra Eurostat.
+
+Denne bør ikke sammenlignes direkte med den norske NAV-serien:
+
+```text
+Arbledighetsrate_NAV
+```
+
+De to seriene bygger på ulike definisjoner:
+
+- Eurostat-serien er harmonisert for internasjonale sammenligninger
+- NAV-serien måler registrerte helt arbeidsledige i Norge
+
+Ved sammenligninger mellom land bør `Arbeidsledighetsrate` brukes.
+
+### BNP i løpende og faste priser
+
+NorMacro inneholder både:
+
+```text
+BNP_lopende
+```
+
+og:
+
+```text
+BNP_faste_priser
+```
+
+BNP i løpende priser brukes blant annet ved beregning av:
+
+- BNP per innbygger
+- eksportandel av BNP
+- importandel av BNP
+- handelsbalanse som andel av BNP
+- konsum- og investeringsandeler
+
+BNP i faste priser brukes som grunnlag for:
+
+```text
+BNP_vekst
+```
+
+Dette skiller nivå- og andelsberegninger fra volumutvikling.
+
+### Nasjonalregnskapskomponenter
+
+Følgende serier inngår som sentrale komponenter i nasjonalregnskapet:
+
+- `Privat_konsum`
+- `Offentlig_konsum`
+- `Investeringer`
+- `Eksport`
+- `Import`
+
+Til hver nivåserie beregnes relevante vekstrater og, når det er faglig meningsfullt, andeler av BNP.
+
+Beregningene gjøres konsekvent innen hvert land og sorteres etter `Land` og `Aar`.
+
+### Befolkning og per innbygger-serier
+
+`Befolkning` brukes som nevner for serier per innbygger.
+
+Dette gjelder blant annet:
+
+```text
+BNP_lopende_per_innbygger
+```
+
+`Befolkningsvekst` beregnes fra nivåserien i NorMacro.
+
+### Sysselsetting, arbeidsstyrke og beregnede andeler
+
+Følgende originalserier inngår:
+
+- `Sysselsatte`
+- `Arbeidsstyrke`
+
+Følgende andeler beregnes i NorMacro:
+
+- `Sysselsettingsandel`
+- `Arbeidsstyrkeandel`
+
+Andelene beregnes bare når teller og nevner er tilgjengelige og konsistente for samme land og år.
+
+### Boligpriser
+
+`Boligprisindeks` er en harmonisert indeks for boligprisutvikling.
+
+`Boligprisvekst` beregnes som årlig prosentvis endring i indeksnivået.
+
+Indeksnivået beholdes fordi det gir brukeren mulighet til både å analysere nivåutvikling og beregne alternative transformasjoner.
+
+### Utenriksøkonomi
+
+Følgende originalserier inngår:
+
+- `Eksport`
+- `Import`
+
+Fra disse beregnes:
+
+- `Handelsbalanse`
+- `Eksportandel_BNP`
+- `Importandel_BNP`
+- `Handelsbalanse_andel_BNP`
+
+Handelsbalansen beregnes som eksport minus import.
+
+### Offentlige finanser
+
+Internasjonale indikatorer for offentlige finanser inkluderer serier som er egnet for sammenligning på tvers av land.
+
+Når en serie allerede publiseres som andel av BNP, beholdes den harmoniserte kildeserien dersom dette gir best sammenlignbarhet.
+
+Metadatafilen angir om en variabel er:
+
+- `Original`
+- `Beregnet`
+
+### Statsrente
+
+`Statsrente_10aar` representerer en langsiktig statsobligasjonsrente.
+
+Beskrivelsen er generell og gjelder de respektive landenes langsiktige statsrenter. Serien skal derfor ikke beskrives som en norsk statsobligasjonsrente i den internasjonale metadatafilen.
+
+## Originale og beregnede serier
+
+Metadatafeltet `Type` skiller mellom:
+
+- `Original`: hentet direkte fra datakilden
+- `Beregnet`: beregnet i NorMacro fra én eller flere originalserier
+
+Beregninger omfatter blant annet:
+
+- årlige vekstrater
+- per innbygger-serier
+- andeler av BNP
+- arbeidsmarkedsandeler
+- handelsbalanse
+- arbeidsproduktivitet
+
+Beregningene utføres separat for hvert land.
+
+## Metadata
+
+Internasjonale metadata kan hentes med:
+
+```r
+get_international_metadata()
+```
+
+eller, når et internasjonalt datasett allerede finnes:
+
+```r
+get_metadata(international)
+```
+
+Metadatafilen inneholder blant annet:
+
+- `Variabel`
+- `Display_navn`
+- `Type`
+- `Kategori`
+- `Beskrivelse`
+- `Kilde`
+- `Kilde_url`
+- `Tabell`
+- `Enhet`
+- `Frekvens`
+- `Startaar`
+- `Sluttaar`
+- `Funksjon`
+- `Kommentar`
+- `Omraade`
+
+## Reproduserbarhet
+
+Alle originalserier kan hentes på nytt fra datakildene.
+
+Cache brukes kun for å redusere nedlastingstid og er ikke en autoritativ datakilde.
+
+Den internasjonale databasen bygges med:
+
+```r
+international <- get_international_macro()
+```
+
+Metadata kan valideres med:
+
+```r
+validate_metadata(
+  get_international_metadata(),
+  verbose = TRUE
+)
+```
+
+Alle variabler i datasettet kan kontrolleres mot metadata med:
+
+```r
+check_metadata(
+  international,
+  verbose = TRUE
+)
+```
+
+## Videre utvikling
+
+Planlagt videreutvikling omfatter blant annet:
+
+- enklere sammenligninger mellom norske og internasjonale serier
+- robuste sammenligninger mellom flere land
+- videre harmonisering av kilde- og enhetsinformasjon
+- utvidelse med nye indikatorer når de gir tydelig faglig merverdi
+
+Sammenligninger på tvers av den norske og internasjonale databasen er planlagt som et hovedtema for NorMacro 2.1.0.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nb" xml:lang="nb"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.38">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>international_sources – NorMacro</title>
+<title>Internasjonale datakilder – NorMacro</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,10 +23,46 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -41,13 +77,13 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-30c57e5c82b304ab878b9cca67350aff.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7ad9f694653f6508a9ffd1f0059d72af.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -56,75 +92,1503 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "Ingen resultater",
+    "search-matching-documents-text": "Samsvarende dokumenter",
+    "search-copy-link-title": "Kopier link for å søke",
+    "search-hide-matches-text": "Skjul ytterlige resultater",
+    "search-more-match-text": "annet resultat i dette dokumentet",
+    "search-more-matches-text": "andre resultater i dette dokumentet",
+    "search-clear-button-title": "Tøm",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Avbryt",
+    "search-submit-button-title": "Send inn",
+    "search-label": "Søk"
   }
 }</script>
 
 
 </head>
 
-<body class="quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">NorMacro</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Søk"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Slå på navigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Hjem</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./visualisering.html"> 
+<span class="menu-text">Visualisering</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./analyse.html"> 
+<span class="menu-text">Analyse</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./internasjonale_data.html"> 
+<span class="menu-text">Internasjonale data</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-dokumentasjon" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Dokumentasjon</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-dokumentasjon">    
+        <li>
+    <a class="dropdown-item" href="./metadata.html">
+ <span class="dropdown-text">Metadata</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./cache.html">
+ <span class="dropdown-text">Cache</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./reproduserbarhet.html">
+ <span class="dropdown-text">Reproduserbarhet</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./arkitektur.html">
+ <span class="dropdown-text">Arkitektur</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./business_cycle.html">
+ <span class="dropdown-text">Konjunkturklassifisering</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./international_sources.html">
+ <span class="dropdown-text">Internasjonale kilder</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./roadmap.html">
+ <span class="dropdown-text">Videre utvikling</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/nilskvilvang/NorMacro"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">På denne siden</h2>
    
-  <ul>
-  <li><a href="#internasjonale-kilder-og-valg" id="toc-internasjonale-kilder-og-valg" class="nav-link active" data-scroll-target="#internasjonale-kilder-og-valg">Internasjonale kilder og valg</a>
   <ul class="collapse">
-  <li><a href="#industriproduksjon" id="toc-industriproduksjon" class="nav-link" data-scroll-target="#industriproduksjon">Industriproduksjon</a></li>
-  </ul></li>
+  <li><a href="#formål" id="toc-formål" class="nav-link active" data-scroll-target="#formål">Formål</a></li>
+  <li><a href="#prinsipper-for-valg-av-serier" id="toc-prinsipper-for-valg-av-serier" class="nav-link" data-scroll-target="#prinsipper-for-valg-av-serier">Prinsipper for valg av serier</a></li>
+  <li><a href="#datakilder" id="toc-datakilder" class="nav-link" data-scroll-target="#datakilder">Datakilder</a></li>
+  <li><a href="#land-og-geografiske-aggregater" id="toc-land-og-geografiske-aggregater" class="nav-link" data-scroll-target="#land-og-geografiske-aggregater">Land og geografiske aggregater</a></li>
+  <li><a href="#harmonisering" id="toc-harmonisering" class="nav-link" data-scroll-target="#harmonisering">Harmonisering</a></li>
+  <li><a href="#variabelkatalog" id="toc-variabelkatalog" class="nav-link" data-scroll-target="#variabelkatalog">Variabelkatalog</a></li>
+  <li><a href="#viktige-serievalg" id="toc-viktige-serievalg" class="nav-link" data-scroll-target="#viktige-serievalg">Viktige serievalg</a></li>
+  <li><a href="#originale-og-beregnede-serier" id="toc-originale-og-beregnede-serier" class="nav-link" data-scroll-target="#originale-og-beregnede-serier">Originale og beregnede serier</a></li>
+  <li><a href="#metadata" id="toc-metadata" class="nav-link" data-scroll-target="#metadata">Metadata</a></li>
+  <li><a href="#reproduserbarhet" id="toc-reproduserbarhet" class="nav-link" data-scroll-target="#reproduserbarhet">Reproduserbarhet</a></li>
+  <li><a href="#videre-utvikling" id="toc-videre-utvikling" class="nav-link" data-scroll-target="#videre-utvikling">Videre utvikling</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Internasjonale datakilder</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="internasjonale-kilder-og-valg" class="level1">
-<h1>Internasjonale kilder og valg</h1>
-<p>Dette dokumentet beskriver valg av internasjonale dataserier i NorMacro fase 2.</p>
-<section id="industriproduksjon" class="level2">
-<h2 class="anchored" data-anchor-id="industriproduksjon">Industriproduksjon</h2>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="formål" class="level2">
+<h2 class="anchored" data-anchor-id="formål">Formål</h2>
+<p>NorMacro inneholder et kuratert utvalg harmoniserte internasjonale makroøkonomiske tidsserier.</p>
+<p>Målet er ikke å inkludere flest mulig indikatorer, men å tilby et konsistent datasett som egner seg til analyser og sammenligninger på tvers av land.</p>
+<p>Alle originalserier hentes automatisk fra datakildene gjennom åpne API-er. Beregnede serier konstrueres fra disse originalseriene i NorMacro.</p>
+</section>
+<section id="prinsipper-for-valg-av-serier" class="level2">
+<h2 class="anchored" data-anchor-id="prinsipper-for-valg-av-serier">Prinsipper for valg av serier</h2>
+<p>Ved valg av internasjonale serier benyttes følgende prinsipper:</p>
 <ul>
-<li>NorMacro-variabel: <code>Industriproduksjon</code></li>
-<li>Kilde: Eurostat</li>
-<li>Tabell: <code>sts_inpr_a</code></li>
-<li>Filter:
+<li>originale datakilder når det er mulig</li>
+<li>harmoniserte definisjoner</li>
+<li>sammenlignbarhet mellom land</li>
+<li>årlige observasjoner</li>
+<li>lengst mulig tidsdekning</li>
+<li>transparente filtre og transformasjoner</li>
+<li>én representativ serie per økonomisk fenomen</li>
+<li>indeksnivå fremfor ferdig beregnede vekstrater når veksten kan beregnes konsistent i NorMacro</li>
+</ul>
+</section>
+<section id="datakilder" class="level2">
+<h2 class="anchored" data-anchor-id="datakilder">Datakilder</h2>
+<p>Eurostat er hovedkilden for den internasjonale databasen.</p>
+<p>Andre kilder kan benyttes dersom Eurostat ikke tilbyr en egnet, harmonisert serie med tilstrekkelig tidsdekning.</p>
+<p>Den løpende og autoritative oversikten over kilde, tabell, enhet, frekvens og funksjon ligger i:</p>
+<pre class="text"><code>data/metadata_international.csv</code></pre>
+<p>Tabellene nedenfor genereres automatisk fra denne metadatafilen ved rendering av dokumentasjonen.</p>
+</section>
+<section id="land-og-geografiske-aggregater" class="level2">
+<h2 class="anchored" data-anchor-id="land-og-geografiske-aggregater">Land og geografiske aggregater</h2>
+<p>Utvalget av land og aggregater defineres av:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_standard_countries</span>()</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Datasettet inneholder for tiden:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Omfanget av den internasjonale databasen</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Omfang</th>
+<th style="text-align: right;">Antall</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Variabler</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kategorier</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Originale serier</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Beregnede serier</td>
+<td style="text-align: right;">22</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Alle observasjoner identifiseres med:</p>
+<ul>
+<li><code>Aar</code>: kalenderår</li>
+<li><code>Land</code>: landkode eller kode for geografisk aggregat</li>
+</ul>
+</section>
+<section id="harmonisering" class="level2">
+<h2 class="anchored" data-anchor-id="harmonisering">Harmonisering</h2>
+<p>Alle internasjonale serier standardiseres før de inngår i databasen.</p>
+<p>Dette omfatter blant annet:</p>
+<ul>
+<li>felles årskolonne: <code>Aar</code></li>
+<li>felles landkolonne: <code>Land</code></li>
+<li>én verdikolonne per variabel</li>
+<li>standardiserte variabelnavn</li>
+<li>standardiserte metadatafelt</li>
+<li>årlig frekvens</li>
+<li>konsistente beregninger av vekstrater og andeler</li>
+<li>eksplisitt dokumentasjon av kilde, tabell og enhet</li>
+</ul>
+<p>Funksjonen:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_international_macro</span>()</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returnerer data i bredt format, med én rad per land og år.</p>
+</section>
+<section id="variabelkatalog" class="level2">
+<h2 class="anchored" data-anchor-id="variabelkatalog">Variabelkatalog</h2>
+<p>Oversikten genereres automatisk fra <code>metadata_international.csv</code>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Arbeidsmarked</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Boligmarked</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Demografi</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Finansmarkeder</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">Husholdningsøkonomi</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false" href="">Nasjonalregnskap</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-7" role="tab" aria-controls="tabset-1-7" aria-selected="false" href="">Offentlige finanser</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-8-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-8" role="tab" aria-controls="tabset-1-8" aria-selected="false" href="">Priser og inflasjon</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-9-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-9" role="tab" aria-controls="tabset-1-9" aria-selected="false" href="">Produksjon og aktivitet</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-10-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-10" role="tab" aria-controls="tabset-1-10" aria-selected="false" href="">Utenriksøkonomi</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variabel
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Kilde
+</th>
+<th style="text-align:left;">
+Tabell
+</th>
+<th style="text-align:left;">
+Enhet
+</th>
+<th style="text-align:left;">
+Periode
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Arbeidsstyrkeandel
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Arbeidsstyrke og Befolkning
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+2003–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sysselsettingsandel
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Sysselsatte og Befolkning
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Arbeidsledighetsrate
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+une_rt_a
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+2003–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Arbeidsstyrke
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+lfsi_emp_a
+</td>
+<td style="text-align:left;">
+Personer
+</td>
+<td style="text-align:left;">
+2003–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sysselsatte
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+nama_10_pe
+</td>
+<td style="text-align:left;">
+Personer
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variabel
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Kilde
+</th>
+<th style="text-align:left;">
+Tabell
+</th>
+<th style="text-align:left;">
+Enhet
+</th>
+<th style="text-align:left;">
+Periode
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Boligprisvekst
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Boligprisindeks
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+2006–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Boligprisindeks
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+prc_hpi_a
+</td>
+<td style="text-align:left;">
+Indeks (2015=100)
+</td>
+<td style="text-align:left;">
+2005–2025
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variabel
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Kilde
+</th>
+<th style="text-align:left;">
+Tabell
+</th>
+<th style="text-align:left;">
+Enhet
+</th>
+<th style="text-align:left;">
+Periode
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Befolkningsvekst
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Befolkning
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1961–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Befolkning
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+demo_pjan
+</td>
+<td style="text-align:left;">
+Personer
+</td>
+<td style="text-align:left;">
+1960–2025
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variabel
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Kilde
+</th>
+<th style="text-align:left;">
+Tabell
+</th>
+<th style="text-align:left;">
+Enhet
+</th>
+<th style="text-align:left;">
+Periode
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Statsrente_10aar
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+irt_lt_mcby_a
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1967–2025
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variabel
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Kilde
+</th>
+<th style="text-align:left;">
+Tabell
+</th>
+<th style="text-align:left;">
+Enhet
+</th>
+<th style="text-align:left;">
+Periode
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Privat_konsum_andel_BNP
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Privat_konsum og BNP_faste_priser
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Privat_konsum_vekst
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Privat_konsum
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1976–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Privat_konsum
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+nama_10_gdp
+</td>
+<td style="text-align:left;">
+Millioner euro, kjedevolum med referanseer 2020
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variabel
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Kilde
+</th>
+<th style="text-align:left;">
+Tabell
+</th>
+<th style="text-align:left;">
+Enhet
+</th>
+<th style="text-align:left;">
+Periode
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Arbeidsproduktivitet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+BNP_faste_priser og Sysselsatte
+</td>
+<td style="text-align:left;">
+Euro per sysselsatt
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BNP_lopende_per_innbygger
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+BNP_lopende og Befolkning
+</td>
+<td style="text-align:left;">
+Euro per innbygger
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BNP_vekst
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+BNP_faste_priser
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1976–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Investeringer_andel_BNP
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Investeringer og BNP_faste_priser
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Investeringsvekst
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Investeringer
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1976–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Produktivitetsvekst
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Arbeidsproduktivitet
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1976–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BNP_faste_priser
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+nama_10_gdp
+</td>
+<td style="text-align:left;">
+Millioner euro, kjedevolum med referanseer 2020
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BNP_lopende
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+nama_10_gdp
+</td>
+<td style="text-align:left;">
+Millioner euro, lxpende priser
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Investeringer
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+nama_10_gdp
+</td>
+<td style="text-align:left;">
+Millioner euro, kjedevolum med referanseer 2020
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-7-tab">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variabel
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Kilde
+</th>
+<th style="text-align:left;">
+Tabell
+</th>
+<th style="text-align:left;">
+Enhet
+</th>
+<th style="text-align:left;">
+Periode
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Offentlig_gjeld_andel_BNP
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+gov_10dd_edpt1
+</td>
+<td style="text-align:left;">
+Prosent av BNP
+</td>
+<td style="text-align:left;">
+1995–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Offentlig_konsum_andel_BNP
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Offentlig_konsum og BNP_faste_priser
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Offentlig_konsum_vekst
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Offentlig_konsum
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1976–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Offentlig_konsum
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+nama_10_gdp
+</td>
+<td style="text-align:left;">
+Millioner euro, kjedevolum med referanseer 2020
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-8" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-8-tab">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variabel
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Kilde
+</th>
+<th style="text-align:left;">
+Tabell
+</th>
+<th style="text-align:left;">
+Enhet
+</th>
+<th style="text-align:left;">
+Periode
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Inflasjon
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+HICP
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1997–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HICP
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+prc_hicp_aind
+</td>
+<td style="text-align:left;">
+Indeks (2015=100)
+</td>
+<td style="text-align:left;">
+1996–2025
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-9" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-9-tab">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variabel
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Kilde
+</th>
+<th style="text-align:left;">
+Tabell
+</th>
+<th style="text-align:left;">
+Enhet
+</th>
+<th style="text-align:left;">
+Periode
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Detaljhandel_vekst
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Detaljhandel
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1992–2023
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Industriproduksjon_vekst
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Industriproduksjon
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1991–2023
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Detaljhandel
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+sts_trtu_a
+</td>
+<td style="text-align:left;">
+Indeks (2015=100)
+</td>
+<td style="text-align:left;">
+1991–2023
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Industriproduksjon
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+sts_inpr_a
+</td>
+<td style="text-align:left;">
+Indeks (2015=100)
+</td>
+<td style="text-align:left;">
+1990–2023
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-10" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-10-tab">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variabel
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Kilde
+</th>
+<th style="text-align:left;">
+Tabell
+</th>
+<th style="text-align:left;">
+Enhet
+</th>
+<th style="text-align:left;">
+Periode
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Eksportandel_BNP
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Eksport og BNP_faste_priser
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Handelsbalanse
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Eksport og Import
+</td>
+<td style="text-align:left;">
+Millioner euro, kjedevolum med referanseer 2020
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Handelsbalanse_andel_BNP
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Handelsbalanse og BNP_faste_priser
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importandel_BNP
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Beregnet
+</td>
+<td style="text-align:left;">
+Import og BNP_faste_priser
+</td>
+<td style="text-align:left;">
+Prosent
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Eksport
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+nama_10_gdp
+</td>
+<td style="text-align:left;">
+Millioner euro, kjedevolum med referanseer 2020
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Import
+</td>
+<td style="text-align:left;">
+Original
+</td>
+<td style="text-align:left;">
+Eurostat
+</td>
+<td style="text-align:left;">
+nama_10_gdp
+</td>
+<td style="text-align:left;">
+Millioner euro, kjedevolum med referanseer 2020
+</td>
+<td style="text-align:left;">
+1975–2025
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="viktige-serievalg" class="level2">
+<h2 class="anchored" data-anchor-id="viktige-serievalg">Viktige serievalg</h2>
+<p>Denne delen dokumenterer valg som krever en faglig begrunnelse utover informasjonen i metadatafilen.</p>
+<section id="harmonisert-konsumprisindeks" class="level3">
+<h3 class="anchored" data-anchor-id="harmonisert-konsumprisindeks">Harmonisert konsumprisindeks</h3>
+<p>NorMacro-variabel:</p>
+<pre class="text"><code>HICP</code></pre>
+<p>Kilde:</p>
+<pre class="text"><code>Eurostat</code></pre>
+<p>Tabell:</p>
+<pre class="text"><code>prc_hicp_aind</code></pre>
+<p>Viktige filtre:</p>
+<ul>
+<li><code>coicop = CP00</code></li>
+<li><code>unit = INX_A_AVG</code></li>
+</ul>
+<p><code>CP00</code> representerer totalindeksen for alle varer og tjenester.</p>
+<p><code>INX_A_AVG</code> gir årlig gjennomsnittlig indeksnivå.</p>
+<p>HICP benyttes fordi indeksen er harmonisert for sammenligning mellom europeiske land. Den er derfor bedre egnet til internasjonale analyser enn de enkelte landenes nasjonale konsumprisindekser.</p>
+<p>Variabelen <code>Inflasjon</code> beregnes i NorMacro som årlig prosentvis vekst i HICP.</p>
+</section>
+<section id="industriproduksjon" class="level3">
+<h3 class="anchored" data-anchor-id="industriproduksjon">Industriproduksjon</h3>
+<p>NorMacro-variabel:</p>
+<pre class="text"><code>Industriproduksjon</code></pre>
+<p>Kilde:</p>
+<pre class="text"><code>Eurostat</code></pre>
+<p>Tabell:</p>
+<pre class="text"><code>sts_inpr_a</code></pre>
+<p>Viktige filtre:</p>
 <ul>
 <li><code>unit = I15</code></li>
 <li><code>s_adj = CA</code></li>
 <li><code>nace_r2 = C</code></li>
-</ul></li>
-<li>Land: <code>get_standard_countries()</code></li>
-<li>Periode: 1953–2025</li>
-<li>Begrunnelse:
-<ul>
-<li><code>I15</code> brukes fordi vi ønsker indeksnivå, ikke ferdig vekstrate.</li>
-<li><code>CA</code> brukes fordi kalenderjusterte serier er bedre egnet for internasjonal sammenligning.</li>
-<li><code>C</code> brukes fordi dette tilsvarer manufacturing / bearbeidende industri og ligger nærmest norsk industriproduksjon.</li>
-</ul></li>
 </ul>
-
-
+<p><code>I15</code> benyttes fordi NorMacro ønsker indeksnivå fremfor en ferdig beregnet vekstrate.</p>
+<p><code>CA</code> angir kalenderjusterte data. Kalenderjustering reduserer forskjeller som skyldes variasjon i antall arbeidsdager mellom år og land.</p>
+<p><code>C</code> i NACE Rev.&nbsp;2 tilsvarer bearbeidende industri. Dette er valgt fordi det ligger nærmest den norske industriproduksjonsserien og gir en mer presis internasjonal sammenligning enn et bredere produksjonsaggregat.</p>
+<p>Variabelen <code>Industriproduksjon_vekst</code> beregnes i NorMacro fra indeksnivået.</p>
 </section>
+<section id="harmonisert-arbeidsledighetsrate" class="level3">
+<h3 class="anchored" data-anchor-id="harmonisert-arbeidsledighetsrate">Harmonisert arbeidsledighetsrate</h3>
+<p>NorMacro-variabel:</p>
+<pre class="text"><code>Arbeidsledighetsrate</code></pre>
+<p>Arbeidsledighetsraten hentes som en harmonisert rate fra Eurostat.</p>
+<p>Denne bør ikke sammenlignes direkte med den norske NAV-serien:</p>
+<pre class="text"><code>Arbledighetsrate_NAV</code></pre>
+<p>De to seriene bygger på ulike definisjoner:</p>
+<ul>
+<li>Eurostat-serien er harmonisert for internasjonale sammenligninger</li>
+<li>NAV-serien måler registrerte helt arbeidsledige i Norge</li>
+</ul>
+<p>Ved sammenligninger mellom land bør <code>Arbeidsledighetsrate</code> brukes.</p>
+</section>
+<section id="bnp-i-løpende-og-faste-priser" class="level3">
+<h3 class="anchored" data-anchor-id="bnp-i-løpende-og-faste-priser">BNP i løpende og faste priser</h3>
+<p>NorMacro inneholder både:</p>
+<pre class="text"><code>BNP_lopende</code></pre>
+<p>og:</p>
+<pre class="text"><code>BNP_faste_priser</code></pre>
+<p>BNP i løpende priser brukes blant annet ved beregning av:</p>
+<ul>
+<li>BNP per innbygger</li>
+<li>eksportandel av BNP</li>
+<li>importandel av BNP</li>
+<li>handelsbalanse som andel av BNP</li>
+<li>konsum- og investeringsandeler</li>
+</ul>
+<p>BNP i faste priser brukes som grunnlag for:</p>
+<pre class="text"><code>BNP_vekst</code></pre>
+<p>Dette skiller nivå- og andelsberegninger fra volumutvikling.</p>
+</section>
+<section id="nasjonalregnskapskomponenter" class="level3">
+<h3 class="anchored" data-anchor-id="nasjonalregnskapskomponenter">Nasjonalregnskapskomponenter</h3>
+<p>Følgende serier inngår som sentrale komponenter i nasjonalregnskapet:</p>
+<ul>
+<li><code>Privat_konsum</code></li>
+<li><code>Offentlig_konsum</code></li>
+<li><code>Investeringer</code></li>
+<li><code>Eksport</code></li>
+<li><code>Import</code></li>
+</ul>
+<p>Til hver nivåserie beregnes relevante vekstrater og, når det er faglig meningsfullt, andeler av BNP.</p>
+<p>Beregningene gjøres konsekvent innen hvert land og sorteres etter <code>Land</code> og <code>Aar</code>.</p>
+</section>
+<section id="befolkning-og-per-innbygger-serier" class="level3">
+<h3 class="anchored" data-anchor-id="befolkning-og-per-innbygger-serier">Befolkning og per innbygger-serier</h3>
+<p><code>Befolkning</code> brukes som nevner for serier per innbygger.</p>
+<p>Dette gjelder blant annet:</p>
+<pre class="text"><code>BNP_lopende_per_innbygger</code></pre>
+<p><code>Befolkningsvekst</code> beregnes fra nivåserien i NorMacro.</p>
+</section>
+<section id="sysselsetting-arbeidsstyrke-og-beregnede-andeler" class="level3">
+<h3 class="anchored" data-anchor-id="sysselsetting-arbeidsstyrke-og-beregnede-andeler">Sysselsetting, arbeidsstyrke og beregnede andeler</h3>
+<p>Følgende originalserier inngår:</p>
+<ul>
+<li><code>Sysselsatte</code></li>
+<li><code>Arbeidsstyrke</code></li>
+</ul>
+<p>Følgende andeler beregnes i NorMacro:</p>
+<ul>
+<li><code>Sysselsettingsandel</code></li>
+<li><code>Arbeidsstyrkeandel</code></li>
+</ul>
+<p>Andelene beregnes bare når teller og nevner er tilgjengelige og konsistente for samme land og år.</p>
+</section>
+<section id="boligpriser" class="level3">
+<h3 class="anchored" data-anchor-id="boligpriser">Boligpriser</h3>
+<p><code>Boligprisindeks</code> er en harmonisert indeks for boligprisutvikling.</p>
+<p><code>Boligprisvekst</code> beregnes som årlig prosentvis endring i indeksnivået.</p>
+<p>Indeksnivået beholdes fordi det gir brukeren mulighet til både å analysere nivåutvikling og beregne alternative transformasjoner.</p>
+</section>
+<section id="utenriksøkonomi-1" class="level3">
+<h3 class="anchored" data-anchor-id="utenriksøkonomi-1">Utenriksøkonomi</h3>
+<p>Følgende originalserier inngår:</p>
+<ul>
+<li><code>Eksport</code></li>
+<li><code>Import</code></li>
+</ul>
+<p>Fra disse beregnes:</p>
+<ul>
+<li><code>Handelsbalanse</code></li>
+<li><code>Eksportandel_BNP</code></li>
+<li><code>Importandel_BNP</code></li>
+<li><code>Handelsbalanse_andel_BNP</code></li>
+</ul>
+<p>Handelsbalansen beregnes som eksport minus import.</p>
+</section>
+<section id="offentlige-finanser-1" class="level3">
+<h3 class="anchored" data-anchor-id="offentlige-finanser-1">Offentlige finanser</h3>
+<p>Internasjonale indikatorer for offentlige finanser inkluderer serier som er egnet for sammenligning på tvers av land.</p>
+<p>Når en serie allerede publiseres som andel av BNP, beholdes den harmoniserte kildeserien dersom dette gir best sammenlignbarhet.</p>
+<p>Metadatafilen angir om en variabel er:</p>
+<ul>
+<li><code>Original</code></li>
+<li><code>Beregnet</code></li>
+</ul>
+</section>
+<section id="statsrente" class="level3">
+<h3 class="anchored" data-anchor-id="statsrente">Statsrente</h3>
+<p><code>Statsrente_10aar</code> representerer en langsiktig statsobligasjonsrente.</p>
+<p>Beskrivelsen er generell og gjelder de respektive landenes langsiktige statsrenter. Serien skal derfor ikke beskrives som en norsk statsobligasjonsrente i den internasjonale metadatafilen.</p>
+</section>
+</section>
+<section id="originale-og-beregnede-serier" class="level2">
+<h2 class="anchored" data-anchor-id="originale-og-beregnede-serier">Originale og beregnede serier</h2>
+<p>Metadatafeltet <code>Type</code> skiller mellom:</p>
+<ul>
+<li><code>Original</code>: hentet direkte fra datakilden</li>
+<li><code>Beregnet</code>: beregnet i NorMacro fra én eller flere originalserier</li>
+</ul>
+<p>Beregninger omfatter blant annet:</p>
+<ul>
+<li>årlige vekstrater</li>
+<li>per innbygger-serier</li>
+<li>andeler av BNP</li>
+<li>arbeidsmarkedsandeler</li>
+<li>handelsbalanse</li>
+<li>arbeidsproduktivitet</li>
+</ul>
+<p>Beregningene utføres separat for hvert land.</p>
+</section>
+<section id="metadata" class="level2">
+<h2 class="anchored" data-anchor-id="metadata">Metadata</h2>
+<p>Internasjonale metadata kan hentes med:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_international_metadata</span>()</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>eller, når et internasjonalt datasett allerede finnes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_metadata</span>(international)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Metadatafilen inneholder blant annet:</p>
+<ul>
+<li><code>Variabel</code></li>
+<li><code>Display_navn</code></li>
+<li><code>Type</code></li>
+<li><code>Kategori</code></li>
+<li><code>Beskrivelse</code></li>
+<li><code>Kilde</code></li>
+<li><code>Kilde_url</code></li>
+<li><code>Tabell</code></li>
+<li><code>Enhet</code></li>
+<li><code>Frekvens</code></li>
+<li><code>Startaar</code></li>
+<li><code>Sluttaar</code></li>
+<li><code>Funksjon</code></li>
+<li><code>Kommentar</code></li>
+<li><code>Omraade</code></li>
+</ul>
+</section>
+<section id="reproduserbarhet" class="level2">
+<h2 class="anchored" data-anchor-id="reproduserbarhet">Reproduserbarhet</h2>
+<p>Alle originalserier kan hentes på nytt fra datakildene.</p>
+<p>Cache brukes kun for å redusere nedlastingstid og er ikke en autoritativ datakilde.</p>
+<p>Den internasjonale databasen bygges med:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>international <span class="ot">&lt;-</span> <span class="fu">get_international_macro</span>()</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Metadata kan valideres med:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">validate_metadata</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_international_metadata</span>(),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Alle variabler i datasettet kan kontrolleres mot metadata med:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_metadata</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  international,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="videre-utvikling" class="level2">
+<h2 class="anchored" data-anchor-id="videre-utvikling">Videre utvikling</h2>
+<p>Planlagt videreutvikling omfatter blant annet:</p>
+<ul>
+<li>enklere sammenligninger mellom norske og internasjonale serier</li>
+<li>robuste sammenligninger mellom flere land</li>
+<li>videre harmonisering av kilde- og enhetsinformasjon</li>
+<li>utvidelse med nye indikatorer når de gir tydelig faglig merverdi</li>
+</ul>
+<p>Sammenligninger på tvers av den norske og internasjonale databasen er planlagt som et hovedtema for NorMacro 2.1.0.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -153,12 +1617,12 @@ ul.task-list li input[type="checkbox"] {
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Kopiert!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Kopiert!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",

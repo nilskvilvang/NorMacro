@@ -1,38 +1,37 @@
 
 # Roadmap
 
-Dette dokumentet skisserer mulige videreutviklinger av NorMacro.
+## Planlagt for 2.1.0
 
-## Kort sikt
+### Sammenligninger på tvers av datasett
 
-- `plot_business_cycle()`
-- bedre presentasjon av korrelasjonsmatriser
-- flere eksempler i README
-- mer dokumentasjon av analysefunksjoner
+NorMacro skal gjøre det enklere å kombinere norske og internasjonale tidsserier i samme analyse.
 
-## Mellomlang sikt
+Målet er å utvikle et konsistent API for å:
 
-- pakke NorMacro som en ordinær R-pakke
-- vurdere `pkgdown`-side
-- vurdere Shiny-dashboard
-- legge til vignetter
-- mer avanserte konjunktur- og trendmetoder
+- velge én eller flere norske serier
+- velge internasjonale serier for bestemte land
+- koble seriene sammen på år
+- gi tydelige og unike kolonnenavn
+- bevare metadata om variabel, land, enhet og kilde
+- bruke resultatet direkte i plotting og analyse
 
-## Mulige metadatautvidelser
+Eksempel på ønsket bruk:
 
-- `Display_navn`
-- `Kildefrekvens`
-- `Nøkkelord`
-- `Sist_oppdatert`
-- `Revisjonsnotat`
+```r
+comparison <- combine_series(
+  norway = c(
+    "KPI",
+    "BNP_Fastland_vekst"
+  ),
+  international = list(
+    SE = c(
+      "HICP",
+      "BNP_vekst"
+    ),
+    DK = "HICP"
+  )
+)
 
-## Prinsipper videre
-
-NorMacro bør fortsatt prioritere:
-
-- representative indikatorer fremfor flest mulig variabler
-- transparente beregninger
-- enkel og stabil API
-- full metadata
-- testbare funksjoner
-- standard R-objekter
+plot_comparison(comparison)
+```
