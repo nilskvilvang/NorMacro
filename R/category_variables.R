@@ -1,24 +1,35 @@
 
-category_variables <- function(category){
+category_variables <- function(
+    category,
+    data = NULL
+) {
   
-  metadata <- get_metadata()
+  metadata <- get_metadata(data)
   
   result <- metadata |>
-    dplyr::filter(Kategori == category) |>
+    dplyr::filter(.data$Kategori == category) |>
     dplyr::select(
       Variabel,
+      Display_navn,
       Type,
       Beskrivelse,
       Enhet,
       Startaar,
       Sluttaar,
-      Kilde
+      Kilde,
+      Omraade
     ) |>
-    dplyr::arrange(Type, Variabel)
+    dplyr::arrange(
+      .data$Type,
+      .data$Display_navn,
+      .data$Variabel
+    )
   
-  if(nrow(result) == 0){
-    message("Ingen variabler funnet for kategori: ", category)
-    return(invisible(result))
+  if (nrow(result) == 0) {
+    message(
+      "Fant ingen variabler i kategorien: ",
+      category
+    )
   }
   
   result

@@ -1,24 +1,36 @@
 
-coverage <- function(data = NULL){
+coverage <- function(
+    data = NULL
+) {
   
-  if(is.null(data)){
+  if (is.null(data)) {
     data <- get_normacro()
   }
   
   metadata <- get_metadata(data)
   
-  cov <- data |>
+  result <- data |>
     tidyr::pivot_longer(
-      cols = -dplyr::any_of(c("Aar", "Land")),
+      cols = -dplyr::any_of(
+        c("Aar", "Land")
+      ),
       names_to = "Variabel",
       values_to = "Verdi"
     ) |>
-    dplyr::group_by(Variabel) |>
+    dplyr::group_by(.data$Variabel) |>
     dplyr::summarise(
-      Startaar_data = min(Aar[!is.na(Verdi)], na.rm = TRUE),
-      Sluttaar_data = max(Aar[!is.na(Verdi)], na.rm = TRUE),
-      Antall_observasjoner = sum(!is.na(Verdi)),
-      Antall_mangler = sum(is.na(Verdi)),
+      Startaar_data = if (all(is.na(.data$Verdi))) {
+        NA_integer_
+      } else {
+        min(.data$Aar[!is.na(.data$Verdi)])
+      },
+      Sluttaar_data = if (all(is.na(.data$Verdi))) {
+        NA_integer_
+      } else {
+        max(.data$Aar[!is.na(.data$Verdi)])
+      },
+      Antall_observasjoner = sum(!is.na(.data$Verdi)),
+      Antall_mangler = sum(is.na(.data$Verdi)),
       .groups = "drop"
     ) |>
     dplyr::left_join(
@@ -32,7 +44,10 @@ coverage <- function(data = NULL){
         ),
       by = "Variabel"
     ) |>
-    dplyr::arrange(Kategori, Variabel)
+    dplyr::arrange(
+      .data$Kategori,
+      .data$Variabel
+    )
   
-  cov
+  result
 }

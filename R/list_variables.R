@@ -1,45 +1,100 @@
 
-list_variables <- function(category = NULL, type = NULL){
+list_variables <- function(
+    data = NULL,
+    category = NULL,
+    type = NULL,
+    print = TRUE
+){
   
-  metadata <- get_metadata()
-
+  metadata <- get_metadata(data)
+  
   if(!is.null(category)){
     metadata <- metadata |>
-      dplyr::filter(Kategori == category)
+      dplyr::filter(.data$Kategori == category)
   }
   
   if(!is.null(type)){
     metadata <- metadata |>
-      dplyr::filter(Type == type)
+      dplyr::filter(.data$Type == type)
   }
   
   if(nrow(metadata) == 0){
-    message("Ingen variabler funnet.")
+    message("Fant ingen variabler med valgte kriterier.")
     return(invisible(metadata))
   }
   
-  cat("\n")
-  cat("NorMacro variabler\n")
-  cat(nrow(metadata), "variabler\n\n")
+  metadata <- metadata |>
+    dplyr::arrange(
+      .data$Kategori,
+      .data$Display_navn,
+      .data$Variabel
+    )
   
-  categories <- sort(unique(metadata$Kategori))
+  dataset_name <- if(is.null(data)){
+    "Alle metadata"
+  } else if("Land" %in% names(data)){
+    "Internasjonale data"
+  } else{
+    "Norske data"
+  }
   
-  for(cat_name in categories){
-    
-    vars <- metadata |>
-      dplyr::filter(Kategori == cat_name) |>
-      dplyr::arrange(Variabel) |>
-      dplyr::pull(Variabel)
-    
-    cat(cat_name, "\n")
-    cat(strrep("-", nchar(cat_name)), "\n", sep = "")
-    
-    for(v in vars){
-      cat("- ", v, "\n", sep = "")
-    }
+  duplicate_variables <- metadata$Variabel[
+    duplicated(metadata$Variabel) |
+      duplicated(metadata$Variabel, fromLast = TRUE)
+  ]
+  
+  if(print){
     
     cat("\n")
+    cat(dataset_name, "\n")
+    cat(strrep("-", nchar(dataset_name)), "\n", sep = "")
+    cat(nrow(metadata), " variabler\n\n", sep = "")
+    
+    categories <- unique(metadata$Kategori)
+    
+    for(category_name in categories){
+      
+      vars <- metadata |>
+        dplyr::filter(.data$Kategori == category_name)
+      
+      cat(category_name, "\n")
+      cat(strrep("-", nchar(category_name)), "\n", sep = "")
+      
+      for(i in seq_len(nrow(vars))){
+        
+        variable_name <- vars$Variabel[i]
+        display_name <- vars$Display_navn[i]
+        
+        label <- if(
+          is.na(display_name) ||
+          display_name == "" ||
+          display_name == variable_name
+        ){
+          variable_name
+        } else{
+          paste0(
+            variable_name,
+            " — ",
+            display_name
+          )
+        }
+        
+        if(variable_name %in% duplicate_variables){
+          label <- paste0(
+            label,
+            " [",
+            vars$Omraade[i],
+            "]"
+          )
+        }
+        
+        cat("- ", label, "\n", sep = "")
+      }
+      
+      cat("\n")
+    }
   }
   
   invisible(metadata)
 }
+

@@ -277,7 +277,7 @@ category_variables()
 
 ## Typisk analyse
 
-Se [docs/analyse](docs/analyse.md)
+Se [docs/analyse](docs/analyse.qmd)
 
 ``` r
 source("source_all.R")
@@ -342,7 +342,7 @@ Figure 4: BNP fastland.
 
 ## Visualisering
 
-Se [docs/visualisering.md](docs/visualisering.md).
+Se [docs/visualisering](docs/visualisering.qmd).
 
 ## Konjunkturklassifisering
 
@@ -354,7 +354,7 @@ business_cycle()
 business_cycle_explain(2020)
 ```
 
-Se [docs/business_cycle.md](docs/business_cycle.md) for metode, vekter
+Se [docs/business_cycle](docs/business_cycle.qmd) for metode, vekter
 og poengsystem.
 
 ## Variabler
@@ -384,13 +384,13 @@ list_variables()
 
 ## Cache
 
-Se [docs/cache.md](docs/cache.md).
+Se [docs/cache](docs/cache.qmd).
 
 ## Metadata
 
 NorMacro er metadata-drevet.
 
-Se [docs/metadata.md](docs/metadata.md).
+Se [docs/metadata](docs/metadata.qmd).
 
 ## Kvalitetskontroll
 
@@ -439,13 +439,13 @@ data_clean/
 
 ## Arkitektur
 
-Se [docs/arkitektur.md](docs/arkitektur.md).
+Se [docs/arkitektur](docs/arkitektur.qmd).
 
 ## Reproduserbarhet
 
 NorMacro inneholder ingen manuelt vedlikeholdte data.
 
-Se [docs/reproduserbarhet.md](docs/reproduserbarhet.md).
+Se [docs/reproduserbarhet](docs/reproduserbarhet.qmd).
 
 ## Dokumentasjon
 

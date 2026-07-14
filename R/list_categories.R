@@ -1,18 +1,29 @@
 
-list_categories <- function(){
+
+list_categories <- function(data = NULL, print = TRUE) {
+  metadata <- get_metadata(data)
   
-  metadata <- get_metadata()
+  result <- metadata |>
+    dplyr::count(.data$Kategori, name = "Antall") |>
+    dplyr::arrange(.data$Kategori)
   
-    overview <- metadata |>
-    dplyr::count(Kategori, name = "Antall") |>
-    dplyr::arrange(Kategori)
+  idataset_name <- if (is.null(data)) {
+    "Alle metadata"
+  } else if ("Land" %in% names(data)) {
+    "Internasjonale data"
+  } else {
+    "Norske data"
+  }
   
-  cat("\n")
-  cat("NorMacro\n")
-  cat(nrow(overview), "kategorier\n")
-  cat(nrow(metadata), "variabler\n\n")
+  if (print) {
+    cat("\n")
+    cat(idataset_name, "\n")
+    cat(strrep("-", nchar(idataset_name)), "\n", sep = "")
+    cat(nrow(result), " kategorier\n", sep = "")
+    cat(nrow(metadata), " variabler\n\n", sep = "")
+    
+    print(result, n = Inf)
+  }
   
-  print(overview, n = Inf)
-  
-  invisible(overview)
+  invisible(result)
 }

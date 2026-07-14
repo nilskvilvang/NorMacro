@@ -1,22 +1,19 @@
 
 get_metadata <- function(data = NULL) {
   
-  metadata_norway <- get_normacro_metadata()
-  metadata_international <- get_international_metadata()
-  
   if (is.null(data)) {
     return(
       dplyr::bind_rows(
-        metadata_norway,
-        metadata_international
+        get_normacro_metadata(),
+        get_international_metadata()
       )
     )
   }
   
   metadata <- if ("Land" %in% names(data)) {
-    metadata_international
+    get_international_metadata()
   } else {
-    metadata_norway
+    get_normacro_metadata()
   }
   
   variables <- setdiff(
@@ -27,3 +24,4 @@ get_metadata <- function(data = NULL) {
   metadata |>
     dplyr::filter(.data$Variabel %in% variables)
 }
+

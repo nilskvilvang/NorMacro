@@ -1,3 +1,4 @@
+
 describe_variable <- function(variable, print = TRUE){
   
   metadata <- get_metadata()
@@ -6,7 +7,11 @@ describe_variable <- function(variable, print = TRUE){
     dplyr::filter(Variabel == variable)
   
   if(nrow(result) == 0){
-    stop("Fant ikke variabelen i metadata: ", variable)
+    stop(
+      "Fant ikke variabelen i metadata: ",
+      variable,
+      call. = FALSE
+    )
   }
   
   if(print){
