@@ -83,8 +83,6 @@ source("R/compare_series.R")
 source("R/scatter_series.R")
 source("R/correlate_series.R")
 
-
-
 source("R/macro_report.R")
 source("R/get_metadata.R")
 source("R/check_metadata.R")
@@ -108,9 +106,10 @@ source("R/get_private_consumption.R")
 source("R/get_public_consumption.R")
 source("R/get_investment.R")
 source("R/get_long_interest_rate.R")
-
 source("R/build_international_database.R")
 source("R/get_international_macro.R")
+
+source("R/combine_series.R")
 
 source("R/build_database.R")
 
