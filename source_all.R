@@ -110,6 +110,10 @@ source("R/build_international_database.R")
 source("R/get_international_macro.R")
 
 source("R/combine_series.R")
+source("R/print.comparison_series.R")
+source("R/summary.comparison_series.R")
+source("R/plot.comparison_series.R")
+source("R/print.comparison_series.R")
 
 source("R/build_database.R")
 

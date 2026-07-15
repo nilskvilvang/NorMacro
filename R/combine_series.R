@@ -215,7 +215,7 @@ combine_series <- function(
       )
   }
   
-  result |>
+  result <- result |>
     dplyr::select(
       Aar,
       Serie_id,
@@ -231,4 +231,11 @@ combine_series <- function(
       .data$Serie_id,
       .data$Aar
     )
+  
+  class(result) <- c(
+    "comparison_series",
+    class(result)
+  )
+  
+  result
 }
