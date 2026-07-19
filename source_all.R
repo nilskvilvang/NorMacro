@@ -94,6 +94,9 @@ source("R/autocorrelate.R")
 source("R/autocorrelate.comparison_series.R")
 source("R/print.comparison_series_autocorrelation.R")
 
+source("R/regress.R")
+source("R/regress.comparison_series.R")
+source("R/print.comparison_series_regression.R")
 
 source("R/macro_report.R")
 source("R/get_metadata.R")
