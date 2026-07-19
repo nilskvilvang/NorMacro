@@ -106,7 +106,7 @@ print.comparison_series_regression <- function(
   )
   
   print_field(
-    "R-kvadrert",
+    "\nR-kvadrert",
     format_number(
       model_summary$r.squared,
       digits = 3
