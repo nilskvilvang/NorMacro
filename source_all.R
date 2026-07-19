@@ -10,6 +10,8 @@ source("R/install_dependencies.R")
 
 source("R/formatting.R")
 
+source("R/series_coverage.R")
+
 source("R/get_normacro_metadata.R")
 source("R/get_international_metadata.R")
 source("R/get_metadata.R")
@@ -110,6 +112,13 @@ source("R/build_international_database.R")
 source("R/get_international_macro.R")
 
 source("R/new_comparison_series.R")
+source("R/find_first_common_year.R")
+
+
+source("R/index.R")
+source("R/index.comparison_series.R")
+
+
 source("R/combine_series.R")
 source("R/print.comparison_series.R")
 source("R/summary.comparison_series.R")

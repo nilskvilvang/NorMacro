@@ -235,6 +235,9 @@ combine_series <- function(
   new_comparison_series(
     result,
     normalized = FALSE,
-    base_year = NULL
+    base_year = NULL,
+    transformation = "level",
+    transformation_periods = NULL,
+    transformation_base_value = NULL
   )
 }

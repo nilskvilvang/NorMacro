@@ -129,6 +129,7 @@ growth.comparison_series <- function(
     normalized = FALSE,
     base_year = NULL,
     transformation = transformation,
-    transformation_periods = periods
+    transformation_periods = periods,
+    transformation_base_value = NULL
   )
 }

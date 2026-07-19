@@ -124,8 +124,29 @@ plot.comparison_series <- function(x,
       )
     )
   
-  normalized <- isTRUE(attr(x, "normalized"))
-  base_year <- attr(x, "base_year")
+  normalized <- isTRUE(
+    attr(x, "normalized")
+  )
+  
+  base_year <- attr(
+    x,
+    "base_year"
+  )
+  
+  transformation <- attr(
+    x,
+    "transformation"
+  )
+  
+  transformation_periods <- attr(
+    x,
+    "transformation_periods"
+  )
+  
+  transformation_base_value <- attr(
+    x,
+    "transformation_base_value"
+  )
   
   if (normalized && is.null(base_year)) {
     warning(
@@ -141,30 +162,66 @@ plot.comparison_series <- function(x,
   
   transformation_periods <- attr(x, "transformation_periods")
   
-  if (identical(transformation, "normalized")) {
-    if (!is.null(base_year)) {
-      title <- paste0("Normaliserte serier (", base_year, " = 100)")
+  if (identical(transformation, "indexed")) {
+    
+    if (
+      !is.null(base_year) &&
+      !is.null(transformation_base_value)
+    ) {
+      title <- paste0(
+        "Indekserte serier (",
+        base_year,
+        " = ",
+        format(
+          transformation_base_value,
+          trim = TRUE,
+          scientific = FALSE
+        ),
+        ")"
+      )
     } else {
-      title <- "Normaliserte serier"
+      title <- "Indekserte serier"
     }
     
-  } else if (identical(transformation, "growth_percent")) {
-    if (identical(transformation_periods, 1L)) {
+  } else if (identical(
+    transformation,
+    "growth_percent"
+  )) {
+    
+    if (identical(
+      transformation_periods,
+      1L
+    )) {
       title <- "Årlig vekst"
     } else {
-      title <- paste0("Vekst over ", transformation_periods, " perioder")
+      title <- paste0(
+        "Vekst over ",
+        transformation_periods,
+        " perioder"
+      )
     }
     
-  } else if (identical(transformation, "growth_absolute")) {
-    if (identical(transformation_periods, 1L)) {
+  } else if (identical(
+    transformation,
+    "growth_absolute"
+  )) {
+    
+    if (identical(
+      transformation_periods,
+      1L
+    )) {
       title <- "Årlig endring"
     } else {
-      title <- paste0("Endring over ", transformation_periods, " perioder")
+      title <- paste0(
+        "Endring over ",
+        transformation_periods,
+        " perioder"
+      )
     }
     
   } else {
-    title <- "Sammenlikning av serier"
     
+    title <- "Sammenlikning av serier"
   }
   
   subtitle <- create_comparison_subtitle(plot_data)
