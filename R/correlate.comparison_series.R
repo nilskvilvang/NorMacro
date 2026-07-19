@@ -344,7 +344,7 @@ correlate.comparison_series <- function(
       )
   }
   
-  result |>
+  result <- result |>
     dplyr::select(
       Serie_1,
       Display_1,
@@ -358,4 +358,68 @@ correlate.comparison_series <- function(
       Startaar,
       Sluttaar
     )
+  
+  attr(
+    result,
+    "method"
+  ) <- method
+  
+  attr(
+    result,
+    "start_year"
+  ) <- start_year
+  
+  attr(
+    result,
+    "end_year"
+  ) <- end_year
+  
+  attr(
+    result,
+    "include_diagonal"
+  ) <- include_diagonal
+  
+  attr(
+    result,
+    "formatted"
+  ) <- format
+  
+  attr(
+    result,
+    "transformation"
+  ) <- attr(
+    x,
+    "transformation"
+  )
+  
+  attr(
+    result,
+    "transformation_periods"
+  ) <- attr(
+    x,
+    "transformation_periods"
+  )
+  
+  attr(
+    result,
+    "base_year"
+  ) <- attr(
+    x,
+    "base_year"
+  )
+  
+  attr(
+    result,
+    "transformation_base_value"
+  ) <- attr(
+    x,
+    "transformation_base_value"
+  )
+  
+  class(result) <- c(
+    "comparison_series_correlation",
+    class(result)
+  )
+  
+  result
 }

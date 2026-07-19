@@ -88,6 +88,7 @@ source("R/correlate.R")
 source("R/correlate_series.R")
 source("R/correlate.comparison_series.R")
 source("R/correlation_matrix.R")
+source("R/print.comparison_series_correlation.R")
 
 
 source("R/macro_report.R")
@@ -122,6 +123,11 @@ source("R/find_first_common_year.R")
 
 source("R/index.R")
 source("R/index.comparison_series.R")
+
+source("R/summary.comparison_series.R")
+source("R/print.comparison_series_summary.R")
+
+
 
 
 source("R/combine_series.R")

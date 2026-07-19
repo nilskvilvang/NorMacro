@@ -1,6 +1,4 @@
 
-
-
 correlate_series <- function(variables,
                              data = NULL,
                              start_year = NULL,
