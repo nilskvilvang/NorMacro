@@ -135,6 +135,8 @@ normalize.comparison_series <- function(
   new_comparison_series(
     result,
     normalized = TRUE,
-    base_year = base_year
+    base_year = base_year,
+    transformation = "normalized",
+    transformation_periods = NULL
   )
 }

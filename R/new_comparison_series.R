@@ -1,8 +1,11 @@
 
+
 new_comparison_series <- function(
     x,
     normalized = FALSE,
-    base_year = NULL
+    base_year = NULL,
+    transformation = "level",
+    transformation_periods = NULL
 ) {
   
   if (!inherits(x, "data.frame")) {
@@ -33,18 +36,36 @@ new_comparison_series <- function(
     stop(
       "Mangler nødvendige kolonner: ",
       paste(missing_columns, collapse = ", "),
+      ".",
       call. = FALSE
     )
   }
   
-  if (!is.logical(normalized) ||
-      length(normalized) != 1 ||
-      is.na(normalized)) {
-    
+  if (
+    !is.logical(normalized) ||
+    length(normalized) != 1 ||
+    is.na(normalized)
+  ) {
     stop(
       "`normalized` må være TRUE eller FALSE.",
       call. = FALSE
     )
+  }
+  
+  if (!is.null(base_year)) {
+    if (
+      !is.numeric(base_year) ||
+      length(base_year) != 1 ||
+      is.na(base_year) ||
+      base_year != floor(base_year)
+    ) {
+      stop(
+        "`base_year` må være ett gyldig heltallig årstall.",
+        call. = FALSE
+      )
+    }
+    
+    base_year <- as.integer(base_year)
   }
   
   if (normalized && is.null(base_year)) {
@@ -54,25 +75,108 @@ new_comparison_series <- function(
     )
   }
   
-  if (!is.null(base_year)) {
-    
-    if (!is.numeric(base_year) ||
-        length(base_year) != 1 ||
-        is.na(base_year)) {
-      
+  valid_transformations <- c(
+    "level",
+    "normalized",
+    "growth_percent",
+    "growth_absolute"
+  )
+  
+  if (
+    !is.character(transformation) ||
+    length(transformation) != 1 ||
+    is.na(transformation) ||
+    !transformation %in% valid_transformations
+  ) {
+    stop(
+      "`transformation` må være en av: ",
+      paste(valid_transformations, collapse = ", "),
+      ".",
+      call. = FALSE
+    )
+  }
+  
+  if (!is.null(transformation_periods)) {
+    if (
+      !is.numeric(transformation_periods) ||
+      length(transformation_periods) != 1 ||
+      is.na(transformation_periods) ||
+      transformation_periods < 1 ||
+      transformation_periods != floor(transformation_periods)
+    ) {
       stop(
-        "`base_year` må være ett gyldig årstall.",
+        "`transformation_periods` må være et positivt heltall.",
         call. = FALSE
       )
     }
     
-    base_year <- as.integer(base_year)
+    transformation_periods <- as.integer(
+      transformation_periods
+    )
+  }
+  
+  if (
+    transformation %in% c(
+      "growth_percent",
+      "growth_absolute"
+    ) &&
+    is.null(transformation_periods)
+  ) {
+    stop(
+      paste0(
+        "`transformation_periods` må oppgis for ",
+        "vekst- og endringstransformasjoner."
+      ),
+      call. = FALSE
+    )
+  }
+  
+  if (
+    transformation %in% c(
+      "level",
+      "normalized"
+    ) &&
+    !is.null(transformation_periods)
+  ) {
+    stop(
+      paste0(
+        "`transformation_periods` skal være NULL for ",
+        "`level` og `normalized`."
+      ),
+      call. = FALSE
+    )
+  }
+  
+  if (normalized && transformation != "normalized") {
+    stop(
+      paste0(
+        "`normalized = TRUE` krever ",
+        "`transformation = \"normalized\"`."
+      ),
+      call. = FALSE
+    )
+  }
+  
+  if (
+    transformation == "normalized" &&
+    !normalized
+  ) {
+    stop(
+      paste0(
+        "`transformation = \"normalized\"` krever ",
+        "`normalized = TRUE`."
+      ),
+      call. = FALSE
+    )
   }
   
   x <- tibble::as_tibble(x)
   
   attr(x, "normalized") <- normalized
   attr(x, "base_year") <- base_year
+  attr(x, "transformation") <- transformation
+  attr(x, "transformation_periods") <-
+    transformation_periods
   
   class(x) <- c(
     "comparison_series",

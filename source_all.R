@@ -119,6 +119,9 @@ source("R/print.comparison_series.R")
 source("R/normalize.R")
 source("R/normalize_comparison_series.R")
 
+source("R/growth.R")
+source("R/growth_comparison_series.R")
+
 source("R/build_database.R")
 
 source("R/get_normacro.R")
