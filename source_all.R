@@ -67,7 +67,7 @@ source("R/summary_normacro.R")
 source("R/normalize_series.R")
 source("R/get_display_name.R")
 source("R/compare_series.R")
-source("R/correlation_matrix.R")
+
 source("R/plot_correlation_matrix.R")
 source("R/growth_table.R")
 source("R/growth_rate.R")
@@ -83,7 +83,12 @@ source("R/recession_period_explain.R")
 source("R/plot_series.R")
 source("R/compare_series.R")
 source("R/scatter_series.R")
+
+source("R/correlate.R")
 source("R/correlate_series.R")
+source("R/correlate.comparison_series.R")
+source("R/correlation_matrix.R")
+
 
 source("R/macro_report.R")
 source("R/get_metadata.R")
