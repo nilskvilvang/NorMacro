@@ -232,10 +232,9 @@ combine_series <- function(
       .data$Aar
     )
   
-  class(result) <- c(
-    "comparison_series",
-    class(result)
+  new_comparison_series(
+    result,
+    normalized = FALSE,
+    base_year = NULL
   )
-  
-  result
 }

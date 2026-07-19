@@ -1,173 +1,252 @@
 
 plot.comparison_series <- function(
     x,
-    normalize = FALSE,
-    base_year = NULL,
+    start_year = NULL,
+    end_year = NULL,
     ...
 ) {
   
-  plot_data <- x
+  required_columns <- c(
+    "Aar",
+    "Serie_id",
+    "Land",
+    "Display_navn",
+    "Verdi",
+    "Enhet"
+  )
   
-  if (normalize) {
-    
-    available_years <- plot_data |>
-      dplyr::filter(!is.na(.data$Verdi)) |>
-      dplyr::group_by(.data$Serie_id) |>
-      dplyr::summarise(
-        years = list(.data$Aar),
-        .groups = "drop"
-      )
-    
-    common_years <- Reduce(
-      intersect,
-      available_years$years
+  missing_columns <- setdiff(
+    required_columns,
+    names(x)
+  )
+  
+  if (length(missing_columns) > 0) {
+    stop(
+      "Objektet mangler nødvendige kolonner: ",
+      paste(missing_columns, collapse = ", "),
+      call. = FALSE
     )
+  }
+  
+  if (nrow(x) == 0) {
+    stop(
+      "Objektet inneholder ingen observasjoner.",
+      call. = FALSE
+    )
+  }
+  
+  # Valider startår og sluttår
+  if (!is.null(start_year)) {
     
-    if (length(common_years) == 0) {
+    if (
+      !is.numeric(start_year) ||
+      length(start_year) != 1 ||
+      is.na(start_year)
+    ) {
       stop(
-        "Fant ikke et felles basisår der alle seriene har data.",
+        "`start_year` må være ett gyldig årstall.",
         call. = FALSE
       )
     }
     
-    if (is.null(base_year)) {
-      base_year <- min(common_years)
-    }
+    start_year <- as.integer(start_year)
+  }
+  
+  if (!is.null(end_year)) {
     
-    if (!base_year %in% common_years) {
+    if (
+      !is.numeric(end_year) ||
+      length(end_year) != 1 ||
+      is.na(end_year)
+    ) {
       stop(
-        "Alle seriene må ha data i valgt basisår: ",
-        base_year,
+        "`end_year` må være ett gyldig årstall.",
         call. = FALSE
       )
     }
     
-    base_values <- plot_data |>
+    end_year <- as.integer(end_year)
+  }
+  
+  if (
+    !is.null(start_year) &&
+    !is.null(end_year) &&
+    start_year > end_year
+  ) {
+    stop(
+      "`start_year` kan ikke være større enn `end_year`.",
+      call. = FALSE
+    )
+  }
+  
+  plot_data <- x |>
+    tibble::as_tibble()
+  
+  # Avgrens bare det som vises. Originalobjektet endres ikke.
+  if (!is.null(start_year)) {
+    plot_data <- plot_data |>
       dplyr::filter(
-        .data$Aar == base_year
-      ) |>
-      dplyr::select(
-        Serie_id,
-        Basisverdi = Verdi
+        .data$Aar >= start_year
       )
-    
-    if (any(is.na(base_values$Basisverdi))) {
-      stop(
-        "Én eller flere serier mangler verdi i valgt basisår.",
-        call. = FALSE
-      )
-    }
-    
-    if (any(base_values$Basisverdi == 0)) {
-      stop(
-        "Kan ikke normalisere fordi én eller flere serier har verdien 0 i basisåret.",
-        call. = FALSE
-      )
-    }
-    
+  }
+  
+  if (!is.null(end_year)) {
     plot_data <- plot_data |>
-      dplyr::left_join(
-        base_values,
-        by = "Serie_id"
-      ) |>
-      dplyr::mutate(
-        Verdi_plot = 100 * .data$Verdi / .data$Basisverdi
+      dplyr::filter(
+        .data$Aar <= end_year
       )
-    
-    y_label <- paste0(
-      "Indeks, ",
-      base_year,
-      " = 100"
+  }
+  
+  if (nrow(plot_data) == 0) {
+    requested_period <- paste0(
+      if (is.null(start_year)) "-Inf" else start_year,
+      "–",
+      if (is.null(end_year)) "Inf" else end_year
     )
     
-  } else {
-    
-    units <- unique(
-      stats::na.omit(plot_data$Enhet)
+    stop(
+      "Ingen observasjoner finnes i valgt periode: ",
+      requested_period,
+      ".",
+      call. = FALSE
     )
-    
-    if (length(units) > 1) {
-      stop(
-        paste0(
-          "Seriene har ulike enheter og kan ikke vises på samme akse. ",
-          "Bruk normalize = TRUE eller velg serier med samme enhet."
-        ),
-        call. = FALSE
-      )
-    }
-    
-    plot_data <- plot_data |>
-      dplyr::mutate(
-        Verdi_plot = .data$Verdi
-      )
-    
-    y_label <- if (length(units) == 0) {
-      NULL
-    } else {
-      units[1]
-    }
+  }
+  
+  # Fjern serier som ikke har noen gyldige verdier i valgt periode.
+  series_with_data <- plot_data |>
+    dplyr::filter(
+      !is.na(.data$Verdi)
+    ) |>
+    dplyr::distinct(
+      Serie_id
+    ) |>
+    dplyr::pull(
+      Serie_id
+    )
+  
+  if (length(series_with_data) == 0) {
+    stop(
+      "Ingen av seriene har gyldige verdier i valgt periode.",
+      call. = FALSE
+    )
   }
   
   plot_data <- plot_data |>
+    dplyr::filter(
+      .data$Serie_id %in% series_with_data
+    )
+  
+  # Kontroller at seriene kan vises på samme y-akse.
+  units <- plot_data |>
+    dplyr::filter(
+      !is.na(.data$Enhet),
+      .data$Enhet != ""
+    ) |>
+    dplyr::distinct(
+      Enhet
+    ) |>
+    dplyr::pull(
+      Enhet
+    )
+  
+  if (length(units) == 0) {
+    y_label <- NULL
+  } else if (length(units) == 1) {
+    y_label <- units
+  } else {
+    stop(
+      paste0(
+        "Seriene har ulike enheter. ",
+        "Normaliser dem først med normalize(), ",
+        "for eksempel plot(normalize(x))."
+      ),
+      call. = FALSE
+    )
+  }
+  
+  # Bruk brukerrettede navn i legenden.
+  plot_data <- plot_data |>
     dplyr::mutate(
-      Serie_navn = paste0(
-        .data$Land,
-        " – ",
-        .data$Display_navn
+      Serie = dplyr::case_when(
+        is.na(.data$Display_navn) |
+          .data$Display_navn == "" ~ .data$Serie_id,
+        
+        is.na(.data$Land) |
+          .data$Land == "" ~ .data$Display_navn,
+        
+        TRUE ~ paste0(
+          .data$Land,
+          ": ",
+          .data$Display_navn
+        )
       )
     )
   
-  source_text <- plot_data |>
-    dplyr::distinct(.data$Kilde) |>
-    dplyr::filter(
-      !is.na(.data$Kilde),
-      .data$Kilde != ""
-    ) |>
-    dplyr::pull(.data$Kilde)
+  normalized <- isTRUE(
+    attr(x, "normalized")
+  )
   
-  caption <- if (length(source_text) == 0) {
-    NULL
-  } else {
-    paste0(
-      "Kilde: ",
-      paste(source_text, collapse = " / ")
+  base_year <- attr(
+    x,
+    "base_year"
+  )
+  
+  if (normalized && is.null(base_year)) {
+    warning(
+      paste0(
+        "Objektet er merket som normalisert, ",
+        "men mangler attributtet `base_year`."
+      ),
+      call. = FALSE
     )
   }
+  
+  title <- if (normalized && !is.null(base_year)) {
+    paste0(
+      "Normaliserte serier (",
+      base_year,
+      " = 100)"
+    )
+  } else if (normalized) {
+    "Normaliserte serier"
+  } else {
+    "Sammenlikning av serier"
+  }
+  
+  subtitle <- create_comparison_subtitle(
+    plot_data
+  )
   
   ggplot2::ggplot(
     plot_data,
     ggplot2::aes(
       x = .data$Aar,
-      y = .data$Verdi_plot,
-      colour = .data$Serie_navn
+      y = .data$Verdi,
+      colour = .data$Serie,
+      group = .data$Serie_id
     )
   ) +
     ggplot2::geom_line(
       linewidth = 0.9,
       na.rm = TRUE
     ) +
-    ggplot2::scale_x_continuous(
-      breaks = scales::breaks_pretty(n = 8),
-      labels = scales::label_number(
-        accuracy = 1
-      )
-    ) +
-    ggplot2::scale_y_continuous(
-      labels = scales::label_number(
-        big.mark = " ",
-        decimal.mark = ","
-      )
-    ) +
     ggplot2::labs(
-      title = "Sammenligning av tidsserier",
-      subtitle = paste(
-        unique(plot_data$Serie_navn),
-        collapse = ", "
-      ),
+      title = title,
+      subtitle = subtitle,
       x = NULL,
       y = y_label,
-      colour = NULL,
-      caption = caption
+      colour = NULL
     ) +
-    ggplot2::theme_minimal()
+    ggplot2::scale_x_continuous(
+      breaks = scales::breaks_pretty()
+    ) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(
+      legend.position = "bottom",
+      legend.text = ggplot2::element_text(
+        size = 9
+      ),
+      panel.grid.minor = ggplot2::element_blank(),
+      plot.title.position = "plot"
+    )
 }
