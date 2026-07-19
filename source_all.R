@@ -90,6 +90,9 @@ source("R/correlate.comparison_series.R")
 source("R/correlation_matrix.R")
 source("R/print.comparison_series_correlation.R")
 source("R/correlation_matrix.default.R")
+source("R/autocorrelate.R")
+source("R/autocorrelate.comparison_series.R")
+source("R/print.comparison_series_autocorrelation.R")
 
 
 source("R/macro_report.R")
