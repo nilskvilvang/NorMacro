@@ -19,7 +19,7 @@ print.comparison_series_regression_summary <- function(
   
   model_label <- switch(
     x$model_type,
-    ols = "OLS lineær regresjon",
+    ols = "OLS-regresjon",
     x$model_type
   )
   
@@ -102,7 +102,12 @@ print.comparison_series_regression_summary <- function(
   )
   
   print_field(
-    "Observasjoner",
+    "Tilgjengelige perioder",
+    data_statistics$Tilgjengelige_perioder
+  )
+  
+  print_field(
+    "Brukte observasjoner",
     data_statistics$Brukte_observasjoner
   )
   
@@ -232,15 +237,15 @@ print.comparison_series_regression_summary <- function(
         .data$Estimat,
         digits = 3
       ),
-      `Std.feil` = format_number(
+      Std.feil = format_number(
         .data$Standardfeil,
         digits = 3
       ),
-      `t-verdi` = format_number(
+      t = format_number(
         .data$T_verdi,
         digits = 3
       ),
-      `p-verdi` = vapply(
+      p = vapply(
         .data$P_verdi,
         format_p_value,
         character(1),
