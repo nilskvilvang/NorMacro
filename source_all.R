@@ -103,6 +103,11 @@ source("R/regression_methods.R")
 source("R/regression_plot_data.R")
 source("R/plot.comparison_series_regression.R")
 source("R/augment.comparison_series_regression.R")
+source("R/model_metrics.R")
+source("R/model_metrics.comparison_series_regression.R")
+source("R/diagnose.R")
+source("R/diagnose.comparison_series_regression.R")
+source("R/print.comparison_series_regression_diagnosis.R")
 
 
 source("R/macro_report.R")
