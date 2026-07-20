@@ -22,7 +22,7 @@ diagnose.comparison_series_regression <- function(object, ...) {
   
   model_quality <-
     tibble::tibble(
-      Maal = c("RMSE", "MAE", "MAPE", "Residual standard error"),
+      Mål = c("RMSE", "MAE", "MAPE", "Residual standard error"),
       Verdi = c(
         rmse(object),
         mae(object),
