@@ -99,6 +99,11 @@ source("R/regress.comparison_series.R")
 source("R/print.comparison_series_regression.R")
 source("R/summary.comparison_series_regression.R")
 source("R/print.comparison_series_regression_summary.R")
+source("R/regression_methods.R")
+source("R/regression_plot_data.R")
+source("R/plot.comparison_series_regression.R")
+source("R/augment.comparison_series_regression.R")
+
 
 source("R/macro_report.R")
 source("R/get_metadata.R")

@@ -7,10 +7,22 @@ regression_plot_data <- function(
     x$model_data[[x$dependent_variable]]
   
   tibble::tibble(
-    Aar = x$model_data$Aar,
-    Faktisk = dependent_values,
-    Estimert = fitted(x),
-    Residual = residuals(x)
+    Aar = unname(
+      x$model_data$Aar
+    ),
+    Faktisk = unname(
+      dependent_values
+    ),
+    Estimert = unname(
+      fitted(
+        x
+      )
+    ),
+    Residual = unname(
+      residuals(
+        x
+      )
+    )
   )
   
 }
