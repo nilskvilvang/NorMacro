@@ -1,11 +1,5 @@
 
-diagnose <- function(
-    object,
-    ...
-) {
-  
-  UseMethod(
-    "diagnose"
-  )
+diagnose <- function(object, ...) {
+  UseMethod("diagnose")
   
 }

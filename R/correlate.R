@@ -1,7 +1,4 @@
 
-correlate <- function(
-    x,
-    ...
-) {
+correlate <- function(x, ...) {
   UseMethod("correlate")
 }

@@ -1,6 +1,5 @@
 
 build_international_database <- function() {
-  
   join_by <- c("Aar", "Land")
   
   hicp <- get_hicp()

@@ -1,35 +1,18 @@
 
-rmse <- function(
-    object,
-    ...
-) {
-  
-  UseMethod(
-    "rmse"
-  )
+
+rmse <- function(object, ...) {
+  UseMethod("rmse")
   
 }
 
 
-mae <- function(
-    object,
-    ...
-) {
-  
-  UseMethod(
-    "mae"
-  )
+mae <- function(object, ...) {
+  UseMethod("mae")
   
 }
 
 
-mape <- function(
-    object,
-    ...
-) {
-  
-  UseMethod(
-    "mape"
-  )
+mape <- function(object, ...) {
+  UseMethod("mape")
   
 }

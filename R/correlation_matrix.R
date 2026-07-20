@@ -1,7 +1,5 @@
 
-correlation_matrix <- function(
-    x,
-    ...
-) {
+
+correlation_matrix <- function(x, ...) {
   UseMethod("correlation_matrix")
 }

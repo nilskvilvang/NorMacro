@@ -1,23 +1,19 @@
 
-compare_series <- function(
-    variables,
-    data = NULL,
-    base_year = NULL,
-    normalize = TRUE,
-    start_year = NULL,
-    complete_cases = FALSE
-) {
-  
+
+compare_series <- function(variables,
+                           data = NULL,
+                           base_year = NULL,
+                           normalize = TRUE,
+                           start_year = NULL,
+                           complete_cases = FALSE) {
   if (is.null(data)) {
     data <- get_normacro()
   }
   
   metadata <- get_metadata(data)
   
-  if (
-    "Land" %in% names(data) &&
-    dplyr::n_distinct(data$Land) > 1
-  ) {
+  if ("Land" %in% names(data) &&
+      dplyr::n_distinct(data$Land) > 1) {
     stop(
       paste0(
         "compare_series() kan sammenligne flere variabler for ett land om gangen. ",
@@ -35,38 +31,23 @@ compare_series <- function(
   missing <- setdiff(variables, names(data))
   
   if (length(missing) > 0) {
-    stop(
-      "Fant ikke variabler i datasettet: ",
-      paste(missing, collapse = ", "),
-      call. = FALSE
-    )
+    stop("Fant ikke variabler i datasettet: ",
+         paste(missing, collapse = ", "),
+         call. = FALSE)
   }
   
   common_years <- data |>
-    dplyr::select(
-      Aar,
-      dplyr::all_of(variables)
-    ) |>
-    dplyr::filter(
-      stats::complete.cases(
-        dplyr::pick(dplyr::all_of(variables))
-      )
-    ) |>
+    dplyr::select(Aar, dplyr::all_of(variables)) |>
+    dplyr::filter(stats::complete.cases(dplyr::pick(dplyr::all_of(variables)))) |>
     dplyr::pull(Aar)
   
   if (complete_cases && length(common_years) == 0) {
-    stop(
-      "Fant ingen år der alle valgte variabler har data.",
-      call. = FALSE
-    )
+    stop("Fant ingen år der alle valgte variabler har data.", call. = FALSE)
   }
   
-  if (
-    normalize &&
-    is.null(base_year) &&
-    is.null(start_year)
-  ) {
-    
+  if (normalize &&
+      is.null(base_year) &&
+      is.null(start_year)) {
     if (length(common_years) == 0) {
       stop(
         paste0(
@@ -95,12 +76,9 @@ compare_series <- function(
   }
   
   if (normalize) {
-    
-    plot_data <- normalize_series(
-      data = data,
-      variables = variables,
-      base_year = base_year
-    )
+    plot_data <- normalize_series(data = data,
+                                  variables = variables,
+                                  base_year = base_year)
     
     y_label <- if (is.null(base_year)) {
       "Indeks"
@@ -109,36 +87,22 @@ compare_series <- function(
     }
     
   } else {
-    
     plot_data <- data |>
-      dplyr::select(
-        Aar,
-        dplyr::all_of(variables)
-      )
+      dplyr::select(Aar, dplyr::all_of(variables))
     
     y_label <- NULL
   }
   
   display_lookup <- tibble::tibble(
     Variabel = variables,
-    Display_navn = vapply(
-      variables,
-      get_display_name,
-      character(1),
-      metadata = metadata
-    )
+    Display_navn = vapply(variables, get_display_name, character(1), metadata = metadata)
   )
   
   plot_data_long <- plot_data |>
-    tidyr::pivot_longer(
-      cols = -Aar,
-      names_to = "Variabel",
-      values_to = "Verdi"
-    ) |>
-    dplyr::left_join(
-      display_lookup,
-      by = "Variabel"
-    ) |>
+    tidyr::pivot_longer(cols = -Aar,
+                        names_to = "Variabel",
+                        values_to = "Verdi") |>
+    dplyr::left_join(display_lookup, by = "Variabel") |>
     dplyr::filter(!is.na(.data$Verdi))
   
   sources <- metadata |>
@@ -150,10 +114,7 @@ compare_series <- function(
   caption <- if (length(sources) == 0) {
     NULL
   } else {
-    paste0(
-      "Kilde: ",
-      paste(sources, collapse = " / ")
-    )
+    paste0("Kilde: ", paste(sources, collapse = " / "))
   }
   
   ggplot2::ggplot(
@@ -169,18 +130,10 @@ compare_series <- function(
       breaks = scales::breaks_pretty(n = 8),
       labels = scales::label_number(accuracy = 1)
     ) +
-    ggplot2::scale_y_continuous(
-      labels = scales::label_number(
-        big.mark = " ",
-        decimal.mark = ","
-      )
-    ) +
+    ggplot2::scale_y_continuous(labels = scales::label_number(big.mark = " ", decimal.mark = ",")) +
     ggplot2::labs(
       title = "Sammenligning av tidsserier",
-      subtitle = paste(
-        display_lookup$Display_navn,
-        collapse = ", "
-      ),
+      subtitle = paste(display_lookup$Display_navn, collapse = ", "),
       x = NULL,
       y = y_label,
       colour = NULL,

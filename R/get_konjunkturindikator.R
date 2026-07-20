@@ -1,11 +1,9 @@
 
-get_konjunkturindikator <- function(refresh = FALSE){
-  
+get_konjunkturindikator <- function(refresh = FALSE) {
   cache_get(
     name = "konjunkturindikator",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       konj_raw <- ssb_get(
         url = "https://data.ssb.no/api/v0/no/table/nk/nk02/kbar/KBarAvledIndik",
         query = list(

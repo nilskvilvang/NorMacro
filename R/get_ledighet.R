@@ -1,21 +1,15 @@
 
-get_ledighet <- function(refresh = FALSE){
-  
+get_ledighet <- function(refresh = FALSE) {
   cache_get(
     name = "ledighet",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       nav_url <- "https://www.nav.no/_/attachment/download/a5aa83cd-c083-4b88-9359-1c1b3b2f936e:285ebf18c576ff0fd1537a83289401df2498cae4/Tabell%203_Helt%20ledige%20fordelt%20pa%20kjonn.Aarsgjennomsnitt.1948_2025.xls"
       
       nav_raw <- retry_download(
-        suppressMessages(
-          rio::import(
-            nav_url,
-            skip = 6,
-            col_names = FALSE
-          )
-        ),
+        suppressMessages(rio::import(
+          nav_url, skip = 6, col_names = FALSE
+        )),
         retries = 5,
         wait = 5,
         label = "NAV-kall"
@@ -28,8 +22,11 @@ get_ledighet <- function(refresh = FALSE){
         dplyr::select(10, 11, 12, 13, 15, 17)
       
       names(venstre) <- c(
-        "Aar", "Menn_arbledige_NAV", "Kvinner_arbledige_NAV",
-        "Arbledige_NAV", "Arbledighetsrate_NAV",
+        "Aar",
+        "Menn_arbledige_NAV",
+        "Kvinner_arbledige_NAV",
+        "Arbledige_NAV",
+        "Arbledighetsrate_NAV",
         "Kvinneandel_arbledige_NAV"
       )
       
@@ -44,11 +41,7 @@ get_ledighet <- function(refresh = FALSE){
           Arbledighetsrate_NAV = as.numeric(Arbledighetsrate_NAV) * 100,
           Kvinneandel_arbledige_NAV = as.numeric(Kvinneandel_arbledige_NAV) * 100
         ) |>
-        dplyr::filter(
-          !is.na(Aar),
-          Aar >= 1948,
-          Aar <= 2025
-        ) |>
+        dplyr::filter(!is.na(Aar), Aar >= 1948, Aar <= 2025) |>
         dplyr::arrange(Aar)
     }
   )

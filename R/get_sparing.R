@@ -1,10 +1,8 @@
-get_sparing <- function(refresh = FALSE){
-  
+get_sparing <- function(refresh = FALSE) {
   cache_get(
     name = "sparing",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       sparing_raw <- ssb_get(
         url = "https://data.ssb.no/api/v0/no/table/nk/nk03/knri/NRI",
         query = list(
@@ -16,15 +14,11 @@ get_sparing <- function(refresh = FALSE){
       )
       
       sparing_raw |>
-        dplyr::transmute(
-          Aar = as.integer(ar),
-          Husholdningssparing = as.numeric(lopende_priser)
-        ) |>
+        dplyr::transmute(Aar = as.integer(ar),
+                         Husholdningssparing = as.numeric(lopende_priser)) |>
         dplyr::arrange(Aar) |>
-        dplyr::mutate(
-          Husholdningssparing_vekst =
-            (Husholdningssparing / dplyr::lag(Husholdningssparing) - 1) * 100
-        )
+        dplyr::mutate(Husholdningssparing_vekst =
+                        (Husholdningssparing / dplyr::lag(Husholdningssparing) - 1) * 100)
     }
   )
 }

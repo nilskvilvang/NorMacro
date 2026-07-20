@@ -1,6 +1,5 @@
 
 get_house_price_index <- function(countries = NULL) {
-  
   if (is.null(countries)) {
     countries <- get_standard_countries()
   }

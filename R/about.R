@@ -1,7 +1,7 @@
 
-about <- function(data = NULL){
-  
-  if(is.null(data)){
+
+about <- function(data = NULL) {
+  if (is.null(data)) {
     data <- suppressMessages(get_normacro())
   }
   
@@ -19,11 +19,14 @@ about <- function(data = NULL){
   cat("Periode:     ", years[1], "-", years[2], "\n", sep = "")
   cat("Rader:       ", nrow(data), "\n", sep = "")
   cat("Variabler:   ", ncol(data) - 1, " (+ Aar)\n", sep = "")
-  cat("Kategorier:  ", dplyr::n_distinct(metadata$Kategori), "\n\n", sep = "")
+  cat("Kategorier:  ",
+      dplyr::n_distinct(metadata$Kategori),
+      "\n\n",
+      sep = "")
   
   cat("Datakilder\n")
   cat("----------\n")
-  for(kilde in sort(unique(metadata$Kilde))){
+  for (kilde in sort(unique(metadata$Kilde))) {
     cat("- ", kilde, "\n", sep = "")
   }
   

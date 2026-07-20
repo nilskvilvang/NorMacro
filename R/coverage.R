@@ -1,8 +1,5 @@
 
-coverage <- function(
-    data = NULL
-) {
-  
+coverage <- function(data = NULL) {
   if (is.null(data)) {
     data <- get_normacro()
   }
@@ -11,9 +8,7 @@ coverage <- function(
   
   result <- data |>
     tidyr::pivot_longer(
-      cols = -dplyr::any_of(
-        c("Aar", "Land")
-      ),
+      cols = -dplyr::any_of(c("Aar", "Land")),
       names_to = "Variabel",
       values_to = "Verdi"
     ) |>
@@ -33,21 +28,10 @@ coverage <- function(
       Antall_mangler = sum(is.na(.data$Verdi)),
       .groups = "drop"
     ) |>
-    dplyr::left_join(
-      metadata |>
-        dplyr::select(
-          Variabel,
-          Kategori,
-          Type,
-          Beskrivelse,
-          Enhet
-        ),
-      by = "Variabel"
-    ) |>
-    dplyr::arrange(
-      .data$Kategori,
-      .data$Variabel
-    )
+    dplyr::left_join(metadata |>
+                       dplyr::select(Variabel, Kategori, Type, Beskrivelse, Enhet),
+                     by = "Variabel") |>
+    dplyr::arrange(.data$Kategori, .data$Variabel)
   
   result
 }

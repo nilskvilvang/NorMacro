@@ -1,10 +1,8 @@
-get_konsum <- function(refresh = FALSE){
-  
+get_konsum <- function(refresh = FALSE) {
   cache_get(
     name = "konsum",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       url <- "https://data.ssb.no/api/v0/no/table/nk/nk03/knr/SBMENU5140/NRMakroHov"
       
       privat_raw <- ssb_get(
@@ -26,16 +24,12 @@ get_konsum <- function(refresh = FALSE){
       )
       
       privat <- privat_raw |>
-        dplyr::transmute(
-          Aar = as.integer(ar),
-          Privat_konsum = as.numeric(faste_2023_priser_mill_kr)
-        )
+        dplyr::transmute(Aar = as.integer(ar),
+                         Privat_konsum = as.numeric(faste_2023_priser_mill_kr))
       
       offentlig <- offentlig_raw |>
-        dplyr::transmute(
-          Aar = as.integer(ar),
-          Offentlig_konsum = as.numeric(faste_2023_priser_mill_kr)
-        )
+        dplyr::transmute(Aar = as.integer(ar),
+                         Offentlig_konsum = as.numeric(faste_2023_priser_mill_kr))
       
       privat |>
         dplyr::left_join(offentlig, by = "Aar") |>

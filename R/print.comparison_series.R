@@ -1,17 +1,9 @@
 
 print.comparison_series <- function(x, ...) {
-  
-  required_columns <- c(
-    "Aar",
-    "Serie_id",
-    "Land",
-    "Display_navn"
-  )
+  required_columns <- c("Aar", "Serie_id", "Land", "Display_navn")
   
   if (!all(required_columns %in% names(x))) {
-    return(
-      NextMethod("print")
-    )
+    return(NextMethod("print"))
   }
   
   n_series <- dplyr::n_distinct(x$Serie_id)
@@ -20,10 +12,7 @@ print.comparison_series <- function(x, ...) {
   period <- range(x$Aar, na.rm = TRUE)
   
   series <- x |>
-    dplyr::distinct(
-      Serie_id,
-      Display_navn
-    )
+    dplyr::distinct(Serie_id, Display_navn)
   
   cat("\n")
   cat("comparison_series\n")
@@ -46,13 +35,7 @@ print.comparison_series <- function(x, ...) {
   cat("-------\n")
   
   for (i in seq_len(nrow(series))) {
-    cat(
-      sprintf(
-        "%-25s %s\n",
-        series$Serie_id[i],
-        series$Display_navn[i]
-      )
-    )
+    cat(sprintf("%-25s %s\n", series$Serie_id[i], series$Display_navn[i]))
   }
   
   invisible(x)

@@ -1,7 +1,6 @@
 
 
 get_unemployment <- function(countries = NULL) {
-  
   if (is.null(countries)) {
     countries <- get_standard_countries()
   }

@@ -1,13 +1,10 @@
 
-plot_correlation_matrix <- function(
-    variables,
-    data = NULL,
-    start_year = NULL,
-    end_year = NULL,
-    use = "pairwise.complete.obs",
-    method = "pearson"
-){
-  
+plot_correlation_matrix <- function(variables,
+                                    data = NULL,
+                                    start_year = NULL,
+                                    end_year = NULL,
+                                    use = "pairwise.complete.obs",
+                                    method = "pearson") {
   corr <- correlation_matrix(
     variables = variables,
     data = data,
@@ -19,27 +16,12 @@ plot_correlation_matrix <- function(
   
   corr_df <- as.data.frame(as.table(corr))
   
-  names(corr_df) <- c(
-    "Variabel1",
-    "Variabel2",
-    "Korrelasjon"
-  )
+  names(corr_df) <- c("Variabel1", "Variabel2", "Korrelasjon")
   
-  ggplot2::ggplot(
-    corr_df,
-    ggplot2::aes(
-      x = Variabel1,
-      y = Variabel2,
-      fill = Korrelasjon
-    )
-  ) +
+  ggplot2::ggplot(corr_df,
+                  ggplot2::aes(x = Variabel1, y = Variabel2, fill = Korrelasjon)) +
     ggplot2::geom_tile(color = "white") +
-    ggplot2::geom_text(
-      ggplot2::aes(
-        label = sprintf("%.2f", Korrelasjon)
-      ),
-      size = 4
-    ) +
+    ggplot2::geom_text(ggplot2::aes(label = sprintf("%.2f", Korrelasjon)), size = 4) +
     ggplot2::scale_fill_gradient2(
       low = "#4575b4",
       mid = "white",
@@ -57,10 +39,7 @@ plot_correlation_matrix <- function(
     ggplot2::coord_equal() +
     ggplot2::theme_minimal() +
     ggplot2::theme(
-      axis.text.x = ggplot2::element_text(
-        angle = 45,
-        hjust = 1
-      ),
+      axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
       panel.grid = ggplot2::element_blank()
     )
 }

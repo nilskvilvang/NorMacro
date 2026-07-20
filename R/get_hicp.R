@@ -18,7 +18,6 @@
 
 
 get_hicp <- function(countries = NULL) {
-  
   if (is.null(countries)) {
     countries <- get_standard_countries()
   }
@@ -31,11 +30,9 @@ get_hicp <- function(countries = NULL) {
       geo = countries
     )
   ) |>
-    dplyr::transmute(
-      Aar = as.integer(format(.data$time, "%Y")),
-      Land = .data$geo,
-      HICP = .data$values
-    ) |>
+    dplyr::transmute(Aar = as.integer(format(.data$time, "%Y")),
+                     Land = .data$geo,
+                     HICP = .data$values) |>
     dplyr::filter(!is.na(.data$HICP)) |>
     dplyr::arrange(.data$Land, .data$Aar)
 }

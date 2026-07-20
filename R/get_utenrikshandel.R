@@ -1,11 +1,9 @@
 
-get_utenrikshandel <- function(refresh = FALSE){
-  
+get_utenrikshandel <- function(refresh = FALSE) {
   cache_get(
     name = "utenrikshandel",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       url <- "https://data.ssb.no/api/v0/no/table/nk/nk03/knr/SBMENU5140/NRMakroHov"
       
       eksport_raw <- ssb_get(
@@ -27,16 +25,12 @@ get_utenrikshandel <- function(refresh = FALSE){
       )
       
       eksport <- eksport_raw |>
-        dplyr::transmute(
-          Aar = as.integer(ar),
-          Eksport = as.numeric(faste_2023_priser_mill_kr)
-        )
+        dplyr::transmute(Aar = as.integer(ar),
+                         Eksport = as.numeric(faste_2023_priser_mill_kr))
       
       import <- import_raw |>
-        dplyr::transmute(
-          Aar = as.integer(ar),
-          Import = as.numeric(faste_2023_priser_mill_kr)
-        )
+        dplyr::transmute(Aar = as.integer(ar),
+                         Import = as.numeric(faste_2023_priser_mill_kr))
       
       eksport |>
         dplyr::left_join(import, by = "Aar") |>

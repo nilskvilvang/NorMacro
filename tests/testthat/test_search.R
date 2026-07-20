@@ -4,9 +4,7 @@ testthat::test_that("search_variables returns metadata rows", {
   
   testthat::expect_s3_class(result, "data.frame")
   testthat::expect_gt(nrow(result), 0)
-  testthat::expect_true(
-    all(c("Variabel", "Beskrivelse", "Kilde") %in% names(result))
-  )
+  testthat::expect_true(all(c("Variabel", "Beskrivelse", "Kilde") %in% names(result)))
 })
 
 testthat::test_that("describe_variable returns one metadata row", {

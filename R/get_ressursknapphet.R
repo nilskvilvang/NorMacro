@@ -1,11 +1,9 @@
 
-get_ressursknapphet <- function(refresh = FALSE){
-  
+get_ressursknapphet <- function(refresh = FALSE) {
   cache_get(
     name = "ressursknapphet",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       ressurs_raw <- ssb_get(
         url = "https://data.ssb.no/api/v0/no/table/nk/nk02/kbar/KBarAvledIndik",
         query = list(
@@ -23,10 +21,8 @@ get_ressursknapphet <- function(refresh = FALSE){
         ) |>
         dplyr::filter(!is.na(Ressursknapphet)) |>
         dplyr::group_by(Aar) |>
-        dplyr::summarise(
-          Ressursknapphet = mean(Ressursknapphet, na.rm = TRUE),
-          .groups = "drop"
-        ) |>
+        dplyr::summarise(Ressursknapphet = mean(Ressursknapphet, na.rm = TRUE),
+                         .groups = "drop") |>
         dplyr::arrange(Aar)
     }
   )

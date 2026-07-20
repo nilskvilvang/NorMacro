@@ -1,11 +1,9 @@
 
-get_ordrebeholdning <- function(refresh = FALSE){
-  
+get_ordrebeholdning <- function(refresh = FALSE) {
   cache_get(
     name = "ordrebeholdning",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       ordre_raw <- ssb_get(
         url = "https://data.ssb.no/api/v0/no/table/nk/nk02/kbar/KBarAvledIndik",
         query = list(
@@ -25,10 +23,8 @@ get_ordrebeholdning <- function(refresh = FALSE){
         ) |>
         dplyr::filter(!is.na(Ordrebeholdning)) |>
         dplyr::group_by(Aar) |>
-        dplyr::summarise(
-          Ordrebeholdning = mean(Ordrebeholdning, na.rm = TRUE),
-          .groups = "drop"
-        ) |>
+        dplyr::summarise(Ordrebeholdning = mean(Ordrebeholdning, na.rm = TRUE),
+                         .groups = "drop") |>
         dplyr::arrange(Aar)
     }
   )

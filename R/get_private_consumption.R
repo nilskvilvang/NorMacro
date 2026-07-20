@@ -1,6 +1,5 @@
 
 get_private_consumption <- function(countries = NULL) {
-  
   if (is.null(countries)) {
     countries <- get_standard_countries()
   }

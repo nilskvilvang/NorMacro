@@ -1,9 +1,4 @@
 
-autocorrelate <- function(
-    x,
-    ...
-) {
-  UseMethod(
-    "autocorrelate"
-  )
+autocorrelate <- function(x, ...) {
+  UseMethod("autocorrelate")
 }

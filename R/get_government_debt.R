@@ -1,6 +1,6 @@
 
+
 get_government_debt <- function(countries = NULL) {
-  
   if (is.null(countries)) {
     countries <- get_standard_countries()
   }

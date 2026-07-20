@@ -1,21 +1,12 @@
 
-recession_period_explain <- function(
-    start_year,
-    end_year = start_year,
-    data = NULL,
-    ...
-){
+recession_period_explain <- function(start_year,
+                                     end_year = start_year,
+                                     data = NULL,
+                                     ...) {
+  cycle <- business_cycle(data = data, ...) |>
+    dplyr::filter(Aar >= start_year, Aar <= end_year)
   
-  cycle <- business_cycle(
-    data = data,
-    ...
-  ) |>
-    dplyr::filter(
-      Aar >= start_year,
-      Aar <= end_year
-    )
-  
-  if(nrow(cycle) == 0){
+  if (nrow(cycle) == 0) {
     stop("Fant ingen konjunkturklassifisering for valgt periode.")
   }
   

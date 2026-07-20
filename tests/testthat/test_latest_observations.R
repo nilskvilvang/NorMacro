@@ -1,6 +1,5 @@
 
 testthat::test_that("latest_observations returns latest non-missing values", {
-  
   result <- latest_observations(data = normacro)
   
   testthat::expect_s3_class(result, "data.frame")
@@ -11,11 +10,7 @@ testthat::test_that("latest_observations returns latest non-missing values", {
 })
 
 testthat::test_that("latest_observations supports category filtering", {
-  
-  result <- latest_observations(
-    data = normacro,
-    category = "Finansmarkeder"
-  )
+  result <- latest_observations(data = normacro, category = "Finansmarkeder")
   
   testthat::expect_true(all(result$Kategori == "Finansmarkeder"))
   

@@ -1,9 +1,4 @@
 
-regress <- function(
-    x,
-    ...
-) {
-  UseMethod(
-    "regress"
-  )
+regress <- function(x, ...) {
+  UseMethod("regress")
 }

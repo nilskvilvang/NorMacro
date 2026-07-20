@@ -1,11 +1,10 @@
 
-get_disponibel_inntekt <- function(refresh = FALSE){
-  
+
+get_disponibel_inntekt <- function(refresh = FALSE) {
   cache_get(
     name = "disponibel_inntekt",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       disp_inntekt_raw <- ssb_get(
         url = "https://data.ssb.no/api/v0/no/table/nk/nk03/knri/NRI",
         query = list(

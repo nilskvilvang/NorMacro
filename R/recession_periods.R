@@ -1,20 +1,14 @@
 
-recession_periods <- function(
-    data = NULL,
-    phases = c("Nedgang"),
-    ...
-){
-  
-  cycle <- business_cycle(
-    data = data,
-    ...
-  )
+recession_periods <- function(data = NULL,
+                              phases = c("Nedgang"),
+                              ...) {
+  cycle <- business_cycle(data = data, ...)
   
   selected <- cycle |>
     dplyr::filter(Fase %in% phases) |>
     dplyr::arrange(Aar)
   
-  if(nrow(selected) == 0){
+  if (nrow(selected) == 0) {
     return(
       tibble::tibble(
         Startaar = integer(),
@@ -28,13 +22,11 @@ recession_periods <- function(
   }
   
   selected |>
-    dplyr::mutate(
-      Gruppe = cumsum(
-        dplyr::row_number() == 1 |
-          Aar != dplyr::lag(Aar) + 1 |
-          Fase != dplyr::lag(Fase)
-      )
-    ) |>
+    dplyr::mutate(Gruppe = cumsum(
+      dplyr::row_number() == 1 |
+        Aar != dplyr::lag(Aar) + 1 |
+        Fase != dplyr::lag(Fase)
+    )) |>
     dplyr::group_by(Gruppe, Fase) |>
     dplyr::summarise(
       Startaar = min(Aar),
@@ -44,13 +36,11 @@ recession_periods <- function(
       Laveste_score = min(Score, na.rm = TRUE),
       .groups = "drop"
     ) |>
-    dplyr::select(
-      Startaar,
-      Sluttaar,
-      Lengde,
-      Fase,
-      Gjennomsnittlig_score,
-      Laveste_score
-    ) |>
+    dplyr::select(Startaar,
+                  Sluttaar,
+                  Lengde,
+                  Fase,
+                  Gjennomsnittlig_score,
+                  Laveste_score) |>
     dplyr::arrange(Startaar)
 }

@@ -1,19 +1,13 @@
 
 
-new_comparison_series <- function(
-    x,
-    normalized = FALSE,
-    base_year = NULL,
-    transformation = "level",
-    transformation_periods = NULL,
-    transformation_base_value = NULL
-) {
-  
+new_comparison_series <- function(x,
+                                  normalized = FALSE,
+                                  base_year = NULL,
+                                  transformation = "level",
+                                  transformation_periods = NULL,
+                                  transformation_base_value = NULL) {
   if (!inherits(x, "data.frame")) {
-    stop(
-      "`x` må være en data.frame eller tibble.",
-      call. = FALSE
-    )
+    stop("`x` må være en data.frame eller tibble.", call. = FALSE)
   }
   
   required_columns <- c(
@@ -28,10 +22,7 @@ new_comparison_series <- function(
     "Kilde"
   )
   
-  missing_columns <- setdiff(
-    required_columns,
-    names(x)
-  )
+  missing_columns <- setdiff(required_columns, names(x))
   
   if (length(missing_columns) > 0) {
     stop(
@@ -42,41 +33,29 @@ new_comparison_series <- function(
     )
   }
   
-  if (
-    !is.logical(normalized) ||
-    length(normalized) != 1 ||
-    is.na(normalized)
-  ) {
-    stop(
-      "`normalized` må være TRUE eller FALSE.",
-      call. = FALSE
-    )
+  if (!is.logical(normalized) ||
+      length(normalized) != 1 ||
+      is.na(normalized)) {
+    stop("`normalized` må være TRUE eller FALSE.", call. = FALSE)
   }
   
   if (!is.null(base_year)) {
-    if (
-      !is.numeric(base_year) ||
-      length(base_year) != 1 ||
-      is.na(base_year) ||
-      base_year != floor(base_year)
-    ) {
-      stop(
-        "`base_year` må være ett gyldig heltallig årstall.",
-        call. = FALSE
-      )
+    if (!is.numeric(base_year) ||
+        length(base_year) != 1 ||
+        is.na(base_year) ||
+        base_year != floor(base_year)) {
+      stop("`base_year` må være ett gyldig heltallig årstall.", call. = FALSE)
     }
     
     base_year <- as.integer(base_year)
   }
   
   if (!is.null(transformation_base_value)) {
-    if (
-      !is.numeric(transformation_base_value) ||
-      length(transformation_base_value) != 1 ||
-      is.na(transformation_base_value) ||
-      !is.finite(transformation_base_value) ||
-      transformation_base_value == 0
-    ) {
+    if (!is.numeric(transformation_base_value) ||
+        length(transformation_base_value) != 1 ||
+        is.na(transformation_base_value) ||
+        !is.finite(transformation_base_value) ||
+        transformation_base_value == 0) {
       stop(
         paste0(
           "`transformation_base_value` må være ",
@@ -88,25 +67,15 @@ new_comparison_series <- function(
   }
   
   if (normalized && is.null(base_year)) {
-    stop(
-      "`base_year` må oppgis når `normalized = TRUE`.",
-      call. = FALSE
-    )
+    stop("`base_year` må oppgis når `normalized = TRUE`.", call. = FALSE)
   }
   
-  valid_transformations <- c(
-    "level",
-    "indexed",
-    "growth_percent",
-    "growth_absolute"
-  )
+  valid_transformations <- c("level", "indexed", "growth_percent", "growth_absolute")
   
-  if (
-    !is.character(transformation) ||
-    length(transformation) != 1 ||
-    is.na(transformation) ||
-    !transformation %in% valid_transformations
-  ) {
+  if (!is.character(transformation) ||
+      length(transformation) != 1 ||
+      is.na(transformation) ||
+      !transformation %in% valid_transformations) {
     stop(
       "`transformation` må være en av: ",
       paste(valid_transformations, collapse = ", "),
@@ -116,38 +85,25 @@ new_comparison_series <- function(
   }
   
   if (!is.null(transformation_periods)) {
-    if (
-      !is.numeric(transformation_periods) ||
-      length(transformation_periods) != 1 ||
-      is.na(transformation_periods) ||
-      transformation_periods < 1 ||
-      transformation_periods != floor(transformation_periods)
-    ) {
-      stop(
-        "`transformation_periods` må være et positivt heltall.",
-        call. = FALSE
-      )
+    if (!is.numeric(transformation_periods) ||
+        length(transformation_periods) != 1 ||
+        is.na(transformation_periods) ||
+        transformation_periods < 1 ||
+        transformation_periods != floor(transformation_periods)) {
+      stop("`transformation_periods` må være et positivt heltall.",
+           call. = FALSE)
     }
     
-    transformation_periods <- as.integer(
-      transformation_periods
-    )
+    transformation_periods <- as.integer(transformation_periods)
   }
   
-  if (
-    identical(transformation, "indexed") &&
-    is.null(base_year)
-  ) {
-    stop(
-      "`base_year` må oppgis for indekserte serier.",
-      call. = FALSE
-    )
+  if (identical(transformation, "indexed") &&
+      is.null(base_year)) {
+    stop("`base_year` må oppgis for indekserte serier.", call. = FALSE)
   }
   
-  if (
-    identical(transformation, "indexed") &&
-    is.null(transformation_base_value)
-  ) {
+  if (identical(transformation, "indexed") &&
+      is.null(transformation_base_value)) {
     stop(
       paste0(
         "`transformation_base_value` må oppgis ",
@@ -157,10 +113,8 @@ new_comparison_series <- function(
     )
   }
   
-  if (
-    !identical(transformation, "indexed") &&
-    !is.null(transformation_base_value)
-  ) {
+  if (!identical(transformation, "indexed") &&
+      !is.null(transformation_base_value)) {
     stop(
       paste0(
         "`transformation_base_value` skal bare ",
@@ -170,13 +124,8 @@ new_comparison_series <- function(
     )
   }
   
-  if (
-    transformation %in% c(
-      "growth_percent",
-      "growth_absolute"
-    ) &&
-    is.null(transformation_periods)
-  ) {
+  if (transformation %in% c("growth_percent", "growth_absolute") &&
+      is.null(transformation_periods)) {
     stop(
       paste0(
         "`transformation_periods` må oppgis for ",
@@ -186,13 +135,8 @@ new_comparison_series <- function(
     )
   }
   
-  if (
-    transformation %in% c(
-      "level",
-      "normalized"
-    ) &&
-    !is.null(transformation_periods)
-  ) {
+  if (transformation %in% c("level", "normalized") &&
+      !is.null(transformation_periods)) {
     stop(
       paste0(
         "`transformation_periods` skal være NULL for ",
@@ -212,10 +156,8 @@ new_comparison_series <- function(
     )
   }
   
-  if (
-    transformation == "normalized" &&
-    !normalized
-  ) {
+  if (transformation == "normalized" &&
+      !normalized) {
     stop(
       paste0(
         "`transformation = \"normalized\"` krever ",
@@ -236,10 +178,7 @@ new_comparison_series <- function(
     transformation_base_value
   
   
-  class(x) <- c(
-    "comparison_series",
-    class(x)
-  )
+  class(x) <- c("comparison_series", class(x))
   
   x
 }

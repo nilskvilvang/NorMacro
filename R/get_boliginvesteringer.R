@@ -1,11 +1,10 @@
 
-get_boliginvesteringer <- function(refresh = FALSE){
-  
+
+get_boliginvesteringer <- function(refresh = FALSE) {
   cache_get(
     name = "boliginvesteringer",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       bolig_inv_raw <- ssb_get(
         url = "https://data.ssb.no/api/v0/no/table/nk/nk03/knr/SBMENU5140/NRMakroHov",
         query = list(
@@ -21,10 +20,8 @@ get_boliginvesteringer <- function(refresh = FALSE){
           Boliginvesteringer = as.numeric(faste_2023_priser_mill_kr)
         ) |>
         dplyr::arrange(Aar) |>
-        dplyr::mutate(
-          Boliginvesteringer_vekst =
-            (Boliginvesteringer / dplyr::lag(Boliginvesteringer) - 1) * 100
-        )
+        dplyr::mutate(Boliginvesteringer_vekst =
+                        (Boliginvesteringer / dplyr::lag(Boliginvesteringer) - 1) * 100)
     }
   )
 }

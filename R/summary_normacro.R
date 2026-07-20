@@ -1,7 +1,6 @@
 
-summary_normacro <- function(data = NULL){
-  
-  if(is.null(data)){
+summary_normacro <- function(data = NULL) {
+  if (is.null(data)) {
     data <- suppressMessages(get_normacro())
   }
   
@@ -34,14 +33,17 @@ summary_normacro <- function(data = NULL){
   
   cat("Datakilder\n")
   cat("----------\n")
-  for(src in result$sources){
+  for (src in result$sources) {
     cat("- ", src, "\n", sep = "")
   }
   
   cat("\n")
   cat("Dekning\n")
   cat("-------\n")
-  cat("Tidligste serie: ", min(cov$Startaar_data, na.rm = TRUE), "\n", sep = "")
+  cat("Tidligste serie: ",
+      min(cov$Startaar_data, na.rm = TRUE),
+      "\n",
+      sep = "")
   cat("Seneste år:      ", max(cov$Sluttaar_data, na.rm = TRUE), "\n", sep = "")
   
   cat("\n")

@@ -1,11 +1,10 @@
 
+
 create_international_derived_variables <- function(data) {
-  
   data |>
     dplyr::group_by(Land) |>
     dplyr::arrange(Aar, .by_group = TRUE) |>
     dplyr::mutate(
-      
       Inflasjon =
         growth_rate(HICP, Aar),
       
@@ -51,16 +50,16 @@ create_international_derived_variables <- function(data) {
       Handelsbalanse_andel_BNP =
         Handelsbalanse / BNP_faste_priser * 100,
       
-      Privat_konsum_vekst = 
+      Privat_konsum_vekst =
         growth_rate(Privat_konsum, Aar),
       
-      Offentlig_konsum_vekst = 
+      Offentlig_konsum_vekst =
         growth_rate(Offentlig_konsum, Aar),
       
-      Privat_konsum_andel_BNP = 
+      Privat_konsum_andel_BNP =
         Privat_konsum / BNP_faste_priser * 100,
       
-      Offentlig_konsum_andel_BNP = 
+      Offentlig_konsum_andel_BNP =
         Offentlig_konsum / BNP_faste_priser * 100,
       
       Investeringsvekst =
@@ -73,4 +72,3 @@ create_international_derived_variables <- function(data) {
     dplyr::ungroup()
   
 }
-

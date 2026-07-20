@@ -1,7 +1,6 @@
 
-leading_indicators <- function(data = NULL){
-  
-  if(is.null(data)){
+leading_indicators <- function(data = NULL) {
+  if (is.null(data)) {
     data <- suppressMessages(get_normacro())
   }
   
@@ -30,7 +29,7 @@ leading_indicators <- function(data = NULL){
   indicator_cols <- setdiff(names(result), "Aar")
   
   result |>
-    dplyr::filter(
-      rowSums(!is.na(dplyr::pick(dplyr::all_of(indicator_cols)))) > 0
-    )
+    dplyr::filter(rowSums(!is.na(dplyr::pick(
+      dplyr::all_of(indicator_cols)
+    ))) > 0)
 }

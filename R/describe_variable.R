@@ -1,20 +1,16 @@
 
-describe_variable <- function(variable, print = TRUE){
-  
+
+describe_variable <- function(variable, print = TRUE) {
   metadata <- get_metadata()
   
   result <- metadata |>
     dplyr::filter(Variabel == variable)
   
-  if(nrow(result) == 0){
-    stop(
-      "Fant ikke variabelen i metadata: ",
-      variable,
-      call. = FALSE
-    )
+  if (nrow(result) == 0) {
+    stop("Fant ikke variabelen i metadata: ", variable, call. = FALSE)
   }
   
-  if(print){
+  if (print) {
     cat("\n")
     cat("Variabel:   ", result$Variabel, "\n")
     cat("Beskrivelse:", result$Beskrivelse, "\n")

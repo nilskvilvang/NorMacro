@@ -1,6 +1,6 @@
 
+
 get_gdp_constant <- function(countries = NULL) {
-  
   if (is.null(countries)) {
     countries <- get_standard_countries()
   }

@@ -1,11 +1,9 @@
 
-get_kapasitetsutnytting <- function(refresh = FALSE){
-  
+get_kapasitetsutnytting <- function(refresh = FALSE) {
   cache_get(
     name = "kapasitetsutnytting",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       kapasitet_raw <- ssb_get(
         url = "https://data.ssb.no/api/v0/no/table/nk/nk02/kbar/KBarAvledIndik",
         query = list(

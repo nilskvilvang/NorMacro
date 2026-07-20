@@ -1,6 +1,5 @@
 
-build_database <- function(){
-  
+build_database <- function() {
   kpi <- get_kpi()
   befolkning <- get_befolkning()
   arbeidsstyrke <- get_arbeidsstyrke()
@@ -69,9 +68,9 @@ build_database <- function(){
     dplyr::left_join(konjunkturindikator, by = "Aar") |>
     dplyr::left_join(ressursknapphet, by = "Aar") |>
     dplyr::left_join(ordrebeholdning, by = "Aar") |>
-    dplyr::left_join(pengemarkedsrente, by = "Aar") |> 
-    dplyr::left_join(statsrente, by = "Aar") |> 
-    dplyr::left_join(tjenesteproduksjon, by = "Aar") |> 
-       
-    create_derived_variables() 
+    dplyr::left_join(pengemarkedsrente, by = "Aar") |>
+    dplyr::left_join(statsrente, by = "Aar") |>
+    dplyr::left_join(tjenesteproduksjon, by = "Aar") |>
+    
+    create_derived_variables()
 }

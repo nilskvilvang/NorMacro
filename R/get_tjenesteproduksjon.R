@@ -1,11 +1,9 @@
 
-get_tjenesteproduksjon <- function(refresh = FALSE){
-  
+get_tjenesteproduksjon <- function(refresh = FALSE) {
   cache_get(
     name = "tjenesteproduksjon",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       tjeneste_raw <- ssb_get(
         url = "https://data.ssb.no/api/v0/no/table/vt/vt01/pit/Pit01",
         query = list(
@@ -27,10 +25,8 @@ get_tjenesteproduksjon <- function(refresh = FALSE){
           .groups = "drop"
         ) |>
         dplyr::arrange(Aar) |>
-        dplyr::mutate(
-          Tjenesteproduksjon_vekst =
-            (Tjenesteproduksjon / dplyr::lag(Tjenesteproduksjon) - 1) * 100
-        )
+        dplyr::mutate(Tjenesteproduksjon_vekst =
+                        (Tjenesteproduksjon / dplyr::lag(Tjenesteproduksjon) - 1) * 100)
     }
   )
 }

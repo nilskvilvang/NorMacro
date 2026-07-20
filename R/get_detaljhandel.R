@@ -1,11 +1,10 @@
 
-get_detaljhandel <- function(refresh = FALSE){
-  
+
+get_detaljhandel <- function(refresh = FALSE) {
   cache_get(
     name = "detaljhandel",
     refresh = refresh,
-    fun = function(){
-      
+    fun = function() {
       detalj_raw <- ssb_get(
         url = "https://data.ssb.no/api/v0/no/table/09296",
         query = list(
@@ -16,16 +15,12 @@ get_detaljhandel <- function(refresh = FALSE){
       )
       
       detalj_raw |>
-        dplyr::transmute(
-          Aar = as.integer(ar),
-          Detaljhandel = as.numeric(volumindeks_ujustert)
-        ) |>
+        dplyr::transmute(Aar = as.integer(ar),
+                         Detaljhandel = as.numeric(volumindeks_ujustert)) |>
         dplyr::filter(!is.na(Detaljhandel)) |>
         dplyr::arrange(Aar) |>
-        dplyr::mutate(
-          Detaljhandel_vekst =
-            (Detaljhandel / dplyr::lag(Detaljhandel) - 1) * 100
-        )
+        dplyr::mutate(Detaljhandel_vekst =
+                        (Detaljhandel / dplyr::lag(Detaljhandel) - 1) * 100)
     }
   )
 }

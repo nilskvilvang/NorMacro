@@ -1,6 +1,5 @@
 
 testthat::test_that("missing_data returns missing-value overview", {
-  
   result <- missing_data(data = normacro)
   
   testthat::expect_s3_class(result, "data.frame")
@@ -10,11 +9,7 @@ testthat::test_that("missing_data returns missing-value overview", {
 })
 
 testthat::test_that("missing_data supports category filtering", {
-  
-  result <- missing_data(
-    data = normacro,
-    category = "Konjunkturindikatorer"
-  )
+  result <- missing_data(data = normacro, category = "Konjunkturindikatorer")
   
   testthat::expect_true(all(result$Kategori == "Konjunkturindikatorer"))
   
