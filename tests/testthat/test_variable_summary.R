@@ -26,3 +26,29 @@ testthat::test_that("variable_summary throws an error for unknown variables", {
   testthat::expect_error(variable_summary("Finnes_ikke", data = normacro))
   
 })
+
+test_that("variable_summary bruker riktig analysetype", {
+  level_result <- variable_summary("Befolkning")
+  index_result <- variable_summary("KPI")
+  rate_result <- variable_summary("Inflasjon")
+  
+  expect_true(!is.null(level_result$growth))
+  expect_null(level_result$rate_summary)
+  
+  expect_true(!is.null(index_result$growth))
+  expect_null(index_result$rate_summary)
+  
+  expect_null(rate_result$growth)
+  expect_true(!is.null(rate_result$rate_summary))
+})
+
+test_that("internasjonale rateserier oppsummeres som rate", {
+  result <- variable_summary(
+    "BNP_vekst",
+    country = "SE"
+  )
+  
+  expect_null(result$growth)
+  expect_true(!is.null(result$rate_summary))
+  expect_equal(result$metadata$Analyse_type[[1]], "rate")
+})
