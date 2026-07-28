@@ -1,21 +1,3 @@
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library(readr)
-library(stringr)
-library(purrr)
-library(tibble)
-library(scales)
-library(rio)
-library(pxweb)
-library(PxWebApiData)
-library(janitor)
-library(lubridate)
-library(quantmod)
-library(testthat)
-library(eurostat)
-library(broom)
-
 
 
 # pxweb::pxweb_interactive("data.ssb.no")

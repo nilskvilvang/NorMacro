@@ -1,6 +1,8 @@
 
 source("R/utils.R")
 
+source("R/NorMacro-package.R")
+
 source("R/cache_get.R")
 
 source("R/source_ssb.R")
@@ -11,6 +13,8 @@ source("R/install_dependencies.R")
 source("R/formatting.R")
 
 source("R/series_coverage.R")
+
+source("R/read_metadata_csv.R")
 
 source("R/get_normacro_metadata.R")
 source("R/get_international_metadata.R")
@@ -135,6 +139,33 @@ source("R/get_investment.R")
 source("R/get_long_interest_rate.R")
 source("R/build_international_database.R")
 source("R/get_international_macro.R")
+
+source("R/get_px_variable.R")
+source("R/get_kostra_dimension_metadata.R")
+source("R/get_kostra_table.R")
+source("R/get_kostra_regions.R")
+source("R/kostra_table_12134.R")
+source("R/kostra_indicators_12134.R")
+source("R/get_kostra_regions_12134.R")
+source("R/get_kostra_keyfigures.R")
+source("R/standardize_kostra_keyfigures.R")
+source("R/kostra_table_12143.R")
+source("R/kostra_indicators_12143.R")
+source("R/get_kostra_regions_12143.R")
+source("R/get_kostra_financial_keyfigures.R")
+source("R/standardize_kostra_financial_keyfigures.R")
+
+
+
+
+
+
+
+
+
+
+
+
 
 source("R/new_comparison_series.R")
 source("R/find_first_common_year.R")

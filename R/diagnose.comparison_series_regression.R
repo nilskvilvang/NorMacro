@@ -1,6 +1,3 @@
-if (.Platform$OS.type == "windows") {
-  try(Sys.setlocale("LC_CTYPE", ".UTF-8"), silent = TRUE)
-}
 
 diagnose.comparison_series_regression <- function(object, ...) {
   model_summary <-
@@ -82,9 +79,11 @@ diagnose.comparison_series_regression <- function(object, ...) {
     )
   
   diagnostic_assessment <-
-    tibble::tibble(Type = character(),
-                   Nivå = character(),
-                   Melding = character())
+    tibble::tibble(
+      Type = character(),
+      Nivå = character(),
+      Melding = character()
+    )
   
   if (is.na(durbin_watson_statistic)) {
     diagnostic_assessment <-

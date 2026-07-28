@@ -1,15 +1,8 @@
 
 get_normacro_metadata <- function() {
-  readr::read_delim(
-    file.path("data", "metadata.csv"),
-    delim = ";",
-    locale = readr::locale(
-      decimal_mark = ",",
-      grouping_mark = ".",
-      encoding = "UTF-8"
-    ),
-    show_col_types = FALSE,
-    na = c("", "NA"),
-    trim_ws = TRUE
-  )
+  read_metadata_csv("metadata.csv")
+}
+
+get_international_metadata <- function() {
+  read_metadata_csv("metadata_international.csv")
 }
