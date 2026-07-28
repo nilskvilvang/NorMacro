@@ -1,24 +1,24 @@
 
-build_international_database <- function() {
+build_international_database <- function(refresh = FALSE) {
   join_by <- c("Aar", "Land")
   
-  hicp <- get_hicp()
-  unemployment <- get_unemployment()
-  population <- get_population()
-  gdp <- get_gdp()
-  gdp_constant <- get_gdp_constant()
-  industrial_production <- get_industrial_production()
-  employment <- get_employment()
-  labour_force <- get_labour_force()
-  government_debt <- get_government_debt()
-  house_price_index <- get_house_price_index()
-  retail_trade <- get_retail_trade()
-  exports <- get_exports()
-  imports <- get_imports()
-  private_consumption <- get_private_consumption()
-  public_consumption <- get_public_consumption()
-  investment <- get_investment()
-  interest_rate <- get_long_interest_rate()
+  hicp <- get_hicp(refresh = refresh)
+  unemployment <- get_unemployment(refresh = refresh)
+  population <- get_population(refresh = refresh)
+  gdp <- get_gdp(refresh = refresh)
+  gdp_constant <- get_gdp_constant(refresh = refresh)
+  industrial_production <- get_industrial_production(refresh = refresh)
+  employment <- get_employment(refresh = refresh)
+  labour_force <- get_labour_force(refresh = refresh)
+  government_debt <- get_government_debt(refresh = refresh)
+  house_price_index <- get_house_price_index(refresh = refresh)
+  retail_trade <- get_retail_trade(refresh = refresh)
+  exports <- get_exports(refresh = refresh)
+  imports <- get_imports(refresh = refresh)
+  private_consumption <- get_private_consumption(refresh = refresh)
+  public_consumption <- get_public_consumption(refresh = refresh)
+  investment <- get_investment(refresh = refresh)
+  interest_rate <- get_long_interest_rate(refresh = refresh)
   
   international <-
     hicp |>
@@ -43,4 +43,3 @@ build_international_database <- function() {
   
   international
 }
-

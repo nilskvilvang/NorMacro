@@ -1,7 +1,7 @@
 
 
-get_international_macro <- function(export = FALSE) {
-  international <- build_international_database()
+get_international_macro <- function(export = FALSE, refresh = FALSE) {
+  international <- build_international_database(refresh = refresh)
   
   check_metadata(international)
   

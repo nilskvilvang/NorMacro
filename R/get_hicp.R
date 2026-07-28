@@ -17,23 +17,31 @@
 # ------------------------------------------------------------------------------
 
 
-get_hicp <- function(countries = NULL) {
-  if (is.null(countries)) {
-    countries <- get_standard_countries()
-  }
-  
-  get_eurostat_data(
-    id = "prc_hicp_aind",
-    filters = list(
-      unit = "INX_A_AVG",
-      coicop = "CP00",
-      geo = countries
-    )
-  ) |>
-    dplyr::transmute(Aar = as.integer(format(.data$time, "%Y")),
-                     Land = .data$geo,
-                     HICP = .data$values) |>
-    dplyr::filter(!is.na(.data$HICP)) |>
-    dplyr::arrange(.data$Land, .data$Aar)
+get_hicp <- function(countries = NULL, refresh = FALSE) {
+  cache_get(
+    name = "international_hicp",
+    refresh = refresh,
+    fun = function() {
+      if (is.null(countries)) {
+        countries <- get_standard_countries()
+      }
+      
+      get_eurostat_data(
+        id = "prc_hicp_aind",
+        filters = list(
+          unit = "INX_A_AVG",
+          coicop = "CP00",
+          geo = countries
+        )
+      ) |>
+        dplyr::transmute(
+          Aar = as.integer(format(.data$time, "%Y")),
+          Land = .data$geo,
+          HICP = .data$values
+        ) |>
+        dplyr::filter(!is.na(.data$HICP)) |>
+        dplyr::arrange(.data$Land, .data$Aar)
+    }
+  )
 }
 

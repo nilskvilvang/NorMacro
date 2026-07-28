@@ -4,7 +4,7 @@ cache_get <- function(name,
                       fun,
                       refresh = FALSE,
                       verbose = FALSE) {
-  dir.create("cache", showWarnings = FALSE)
+  dir.create("cache", recursive = TRUE, showWarnings = FALSE)
   
   file <- file.path("cache", paste0(name, ".rds"))
   
@@ -13,7 +13,19 @@ cache_get <- function(name,
       message("Leser cache: ", name)
     }
     
-    return(readRDS(file))
+    cached <- tryCatch(
+      readRDS(file),
+      error = function(e)
+        NULL
+    )
+    
+    if (!is.null(cached)) {
+      return(cached)
+    }
+    
+    if (verbose) {
+      message("Kunne ikke lese cache. Laster ned på nytt: ", name)
+    }
   }
   
   if (verbose) {
