@@ -18,9 +18,12 @@ get_kostra_keyfigures <- function(
     )
   )
   
-  get_kostra_table(
+  data <- get_kostra_table(
     url = config$url,
     query = query
   )
+  
+  standardize_kostra_keyfigures(
+    data = data
+  )
 }
-

@@ -19,7 +19,7 @@ diagnose.comparison_series_regression <- function(object, ...) {
   
   model_quality <-
     tibble::tibble(
-      Mål = c("RMSE", "MAE", "MAPE", "Residual standard error"),
+      `Mål` = c("RMSE", "MAE", "MAPE", "Residual standard error"),
       Verdi = c(
         rmse(object),
         mae(object),
@@ -81,7 +81,7 @@ diagnose.comparison_series_regression <- function(object, ...) {
   diagnostic_assessment <-
     tibble::tibble(
       Type = character(),
-      Nivå = character(),
+      `Nivå` = character(),
       Melding = character()
     )
   
@@ -91,7 +91,7 @@ diagnose.comparison_series_regression <- function(object, ...) {
         diagnostic_assessment,
         tibble::tibble(
           Type = "Autokorrelasjon",
-          Nivå = "Merknad",
+          `Nivå` = "Merknad",
           Melding = paste0(
             "Durbin-Watson-statistikken kunne ikke beregnes ",
             "for denne modellen."
@@ -106,7 +106,7 @@ diagnose.comparison_series_regression <- function(object, ...) {
         diagnostic_assessment,
         tibble::tibble(
           Type = "Residualfordeling",
-          Nivå = "Merknad",
+          `Nivå` = "Merknad",
           Melding = paste0(
             "Shapiro-Wilk-testen kunne ikke gjennomføres. ",
             "Testen krever mellom 3 og 5000 varierende residualer."
@@ -123,7 +123,7 @@ diagnose.comparison_series_regression <- function(object, ...) {
         diagnostic_assessment,
         tibble::tibble(
           Type = "Autokorrelasjon",
-          Nivå = "Advarsel",
+          `Nivå` = "Advarsel",
           Melding = paste0(
             "Durbin-Watson-statistikken er ",
             round(durbin_watson_statistic, 2),
@@ -140,7 +140,7 @@ diagnose.comparison_series_regression <- function(object, ...) {
         diagnostic_assessment,
         tibble::tibble(
           Type = "Residualfordeling",
-          Nivå = "Advarsel",
+          `Nivå` = "Advarsel",
           Melding = paste0(
             "Shapiro-Wilk-testen har p-verdi ",
             round(shapiro_p_value, 3),
@@ -156,7 +156,7 @@ diagnose.comparison_series_regression <- function(object, ...) {
         diagnostic_assessment,
         tibble::tibble(
           Type = "Utvalgsstørrelse",
-          Nivå = "Merknad",
+          `Nivå` = "Merknad",
           Melding = paste0(
             "Modellen er estimert med bare ",
             nobs(object),

@@ -1,10 +1,11 @@
 
-get_kostra_financial_keyfigures <- function(
+get_kostra_main_accounts <- function(
     regions,
     concepts,
     years = 2015:2025
 ) {
-  config <- kostra_table_12143()
+  
+  config <- kostra_table_12858()
   
   query <- stats::setNames(
     list(
@@ -26,8 +27,9 @@ get_kostra_financial_keyfigures <- function(
     query = query
   )
   
-  standardize_kostra_financial_keyfigures(
+  standardize_kostra_main_accounts(
     data = data
   )
+  
 }
 
