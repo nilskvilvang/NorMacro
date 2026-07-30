@@ -1,16 +1,12 @@
 
-kostra_table_12858 <- function() {
-  
+kostra_table_12364 <- function() {
   list(
-    id = "12858",
-    title = "Nøkkeltall per innbygger",
+    table = "12364",
+    title = "Finansielle grunnlagsdata",
     url = paste0(
       "https://data.ssb.no/api/v0/no/table/",
-      "12858"
-    ),
-    title = paste(
-      "Hovedtall for drift, investering og finansiering,",
-      "kommunekonsern"
+      "os/os01/kostrahoved/SBMENU10423/",
+      "SBMENU10472/KostraKommune0042"
     ),
     region_code = "KOKkommuneregion0000",
     concept_code = "KOKartkap0000",
@@ -19,4 +15,3 @@ kostra_table_12858 <- function() {
     time_code = "Tid"
   )
 }
-

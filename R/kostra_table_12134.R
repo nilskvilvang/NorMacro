@@ -2,6 +2,7 @@
 kostra_table_12134 <- function() {
   list(
     table = "12134",
+    title = "Utvalgte nøkkeltall for kommuneregnskap",
     url = paste0(
       "https://data.ssb.no/api/v0/no/table/",
       "os/os01/kostrahoved/SBMENU10423/",

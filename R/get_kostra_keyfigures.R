@@ -23,7 +23,12 @@ get_kostra_keyfigures <- function(
     query = query
   )
   
-  standardize_kostra_keyfigures(
+  result <- standardize_kostra_keyfigures(
     data = data
+  )
+  
+  set_kostra_attributes(
+    data = result,
+    config = config
   )
 }

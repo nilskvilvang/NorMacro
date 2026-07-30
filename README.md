@@ -10,33 +10,45 @@ execute:
   freeze: auto
 ---
 
-
 # NorMacro
 
-**Version:** 2.0.1
+**Version:** 2.0.2
 
-NorMacro er et R-rammeverk for utforsking, visualisering og analyse av
-norske og internasjonale makroøkonomiske tidsserier.
+NorMacro er en R-pakke for utforsking, visualisering og analyse av
+norsk makroøkonomi.
 
-Pakken kombinerer kuraterte datasett, standardiserte metadata og
-analysefunksjoner i ett konsistent API.
+Pakken kombinerer tre datalag i ett konsistent API:
+
+- kuraterte norske makroøkonomiske tidsserier
+- internasjonale indikatorer for relevante sammenligninger
+- kommunale og regionale nøkkeltall fra KOSTRA
+
+Dataene suppleres med standardiserte metadata, kvalitetskontroller og
+funksjoner for utforsking, visualisering og analyse.
 
 ## Filosofi
 
+NorMacro bygger på følgende prinsipper:
+
 - representative indikatorer fremfor flest mulig serier
+- én anbefalt serie per økonomisk fenomen
+- offentlige originalkilder når det er mulig
 - full transparens i datagrunnlag og beregninger
-- metadata som dokumentasjonslag
+- metadata som en integrert del av databasen
 - små funksjoner som kan kombineres til større analyser
+- konsistente datastrukturer på tvers av datakilder
 
 ## Status
 
 Per juli 2026 inneholder NorMacro:
 
-- 92 norske indikatorer (1865–2025)
-- 38 internasjonale indikatorer (1960–2025)
-- Full metadata for alle serier
-- Innebygget kvalitetskontroll
-- Visualisering og analyse
+- en kuratert database med norske makroøkonomiske indikatorer
+- et internasjonalt sammenligningslag med hovedvekt på Europa
+- støtte for utvalgte KOSTRA-tabeller
+- standardiserte metadata for norske og internasjonale serier
+- automatisert datainnhenting og lokal caching
+- innebygget validering og kvalitetskontroll
+- funksjoner for utforsking, visualisering og analyse
 
 ## Formål
 
@@ -53,16 +65,18 @@ hovedsak originalkilde.
 
 ## Hovedfunksjoner
 
-- Automatisk nedlasting fra offentlige datakilder
-- Lokal caching for raske oppslag
-- Standardiserte metadata for alle variabler
-- Automatisk metadata- og datavalidering
-- Innebygde kvalitetskontroller
-- Oversikt over datadekning (`coverage()`)
-- Oversikt over ledende indikatorer (`leading_indicators()`)
-- Utforsking av kategorier og metadata
-- Visualisering med ggplot2 (`plot_series()`)
-- Eksport til CSV, RDS og Excel
+- automatisk innhenting fra offentlige datakilder
+- lokal caching for raske oppslag
+- kuraterte norske makroøkonomiske indikatorer
+- internasjonale indikatorer for sammenligning
+- standardisert tilgang til utvalgte KOSTRA-tabeller
+- metadata for dokumentasjon og variabelforståelse
+- automatisk metadata- og datavalidering
+- oversikt over datasett og datadekning med `overview()` og `coverage()`
+- analyse med blant annet `variable_summary()` og `correlate_series()`
+- visualisering med blant annet `plot_series()`, `compare_series()` og
+  `scatter_series()`
+- eksport til CSV, RDS og Excel
 
 ## Designprinsipper
 
@@ -77,13 +91,25 @@ NorMacro bygger på noen enkle prinsipper:
 
 ## Installasjon
 
-Klon prosjektet:
+NorMacro kan installeres direkte fra GitHub:
+
+```r
+remotes::install_github(
+    "nilskvilvang/NorMacro"
+)
+```
+
+Last deretter pakken:
+
+```r
+library(NorMacro)
+```
+
+For utvikling kan prosjektet klones:
 
 ``` bash
 git clone https://github.com/nilskvilvang/NorMacro.git
 ```
-
-Åpne prosjektet i RStudio.
 
 ## Kom i gang
 
@@ -210,13 +236,68 @@ Figure 3: BNP vekst og inflasjon i Sverige.
 
 </div>
 
+## Quick start – KOSTRA
+
+NorMacro gir standardisert tilgang til et kuratert utvalg
+KOSTRA-tabeller.
+
+```r
+kostra <- get_kostra_keyfigures(
+    regions = "0301",
+    years = 2015:2025
+)
+
+overview(kostra)
+```
+
+```text
+Eksempel på utskrift:
+
+KOSTRA-data
+===========
+
+Tabell: 12134
+Tema:   Utvalgte nøkkeltall for kommuneregnskap
+
+Kommunale og regionale nøkkeltall fra KOSTRA.
+
+Dekning
+-------
+Periode:        2015-2025
+Observasjoner:  11
+Enheter:        1
+Variabler:      9
+```
+
+
 ## NorMacro API
 
-``` r
-Data
-----
+```text
+
+Norske data
+-----------
 get_normacro()
+
+Internasjonale data
+-------------------
 get_international_macro()
+
+KOSTRA-data
+-----------
+get_kostra_keyfigures()
+get_kostra_financial_keyfigures()
+get_kostra_per_capita_keyfigures()
+get_kostra_debt_keyfigures()
+get_kostra_financial_foundations()
+get_kostra_main_accounts()
+get_kostra_operating_financing()
+get_kostra_investment_financing()
+
+KOSTRA-hjelpefunksjoner
+-----------------------
+get_kostra_regions()
+get_kostra_dimension()
+get_kostra_dimension_metadata()
 
 Metadata
 --------
@@ -226,18 +307,20 @@ search_variables()
 list_categories()
 list_variables()
 
-Utforskning
---------
+Utforsking
+----------
 overview()
 coverage()
+variable_summary()
 
 Analyse
---------
+-------
 normalize_series()
 compare_series()
 scatter_series()
 correlate_series()
-variable_summary()
+business_cycle()
+business_cycle_explain()
 
 Visualisering
 -------------
@@ -246,7 +329,7 @@ compare_series()
 scatter_series()
 
 Kvalitet
----------
+--------
 check_normacro()
 check_metadata()
 validate_metadata()

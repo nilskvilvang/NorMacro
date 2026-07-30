@@ -27,8 +27,13 @@ get_kostra_main_accounts <- function(
     query = query
   )
   
-  standardize_kostra_main_accounts(
+  result <- standardize_kostra_main_accounts(
     data = data
+  )
+  
+  set_kostra_attributes(
+    data = result,
+    config = config
   )
   
 }

@@ -265,6 +265,7 @@ source("R/recession_period_explain.R")
 ## Generic KOSTRA infrastructure
 ## ============================================================================
 
+source("R/set_kostra_attributes.R")
 source("R/get_px_variable.R")
 source("R/kostra_metadata.R")
 
@@ -298,6 +299,59 @@ source("R/get_kostra_regions_12143.R")
 source("R/standardize_kostra_financial_keyfigures.R")
 source("R/get_kostra_financial_keyfigures.R")
 
+# ============================================================
+# KOSTRA - Table 12135
+# ============================================================
+
+source("R/kostra_table_12135.R")
+source("R/kostra_indicators_12135.R")
+source("R/get_kostra_regions_12135.R")
+source("R/standardize_kostra_debt_keyfigures.R")
+source("R/get_kostra_debt_keyfigures.R")
+
+# ============================================================
+# KOSTRA - Table 12137
+# Financial key figures per capita
+# ============================================================
+
+source("R/kostra_table_12137.R")
+source("R/kostra_indicators_12137.R")
+source("R/get_kostra_regions_12137.R")
+source("R/standardize_kostra_per_capita_keyfigures.R")
+source("R/get_kostra_per_capita_keyfigures.R")
+
+# ============================================================
+# KOSTRA - Table 12333
+# Investment financing
+# ============================================================
+
+source("R/kostra_table_12333.R")
+source("R/kostra_indicators_12333.R")
+source("R/get_kostra_regions_12333.R")
+source("R/standardize_kostra_investment_financing.R")
+source("R/get_kostra_investment_financing.R")
+
+# ============================================================
+# KOSTRA - Table 12364
+# Financial foundations
+# ============================================================
+
+source("R/kostra_table_12364.R")
+source("R/kostra_indicators_12364.R")
+source("R/get_kostra_regions_12364.R")
+source("R/get_kostra_financial_foundations.R")
+source("R/standardize_kostra_financial_foundations.R")
+
+# ============================================================
+# KOSTRA - Table 13553
+# Operating financing
+# ============================================================
+
+source("R/kostra_table_13553.R")
+source("R/kostra_indicators_13553.R")
+source("R/get_kostra_regions_13553.R")
+source("R/standardize_kostra_operating_financing.R")
+source("R/get_kostra_operating_financing.R")
 
 ## ============================================================================
 ## KOSTRA table 12858: main accounts

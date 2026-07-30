@@ -1,10 +1,10 @@
 
-get_kostra_financial_keyfigures <- function(
+get_kostra_per_capita_keyfigures <- function(
     regions,
     concepts,
     years = 2015:2025
 ) {
-  config <- kostra_table_12143()
+  config <- kostra_table_12137()
   
   query <- stats::setNames(
     list(
@@ -26,7 +26,7 @@ get_kostra_financial_keyfigures <- function(
     query = query
   )
   
-  result <- standardize_kostra_financial_keyfigures(
+  result <- standardize_kostra_per_capita_keyfigures(
     data = data
   )
   

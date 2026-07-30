@@ -1,4 +1,4 @@
-# Utvikling.md
+# Utvikling og arkitektur
 
 NorMacro – utviklings- og arkitekturdokument
 
@@ -14,17 +14,26 @@ Ved tvil om hvordan prosjektet skal utvikles, skal prinsippene i dette dokumente
 
 # Visjon
 
-NorMacro skal utvikles til å bli en R-pakke for analyser av norsk makroøkonomi.
+NorMacro skal være en R-pakke for analyser av norsk økonomi på nasjonalt,
+internasjonalt og kommunalt nivå.
 
-Prosjektet skal tilby et kuratert, dokumentert og reproducerbart datasett over sentrale makroøkonomiske indikatorer. Internasjonale data skal kun inkluderes når de bidrar til å forstå eller sette norsk økonomi i perspektiv.
+Prosjektet skal tilby tre komplementære datalag:
+
+1. norske makroøkonomiske indikatorer
+2. internasjonale indikatorer som setter norsk økonomi i perspektiv
+3. utvalgte kommunale og regionale nøkkeltall fra KOSTRA
+
+NorMacro skal ikke forsøke å eksponere alle tilgjengelige dataserier.
+Verdien skal ligge i kuratering, konsistens, dokumentasjon og enkel bruk.
 
 NorMacro skal prioritere:
 
-* kvalitet fremfor kvantitet
-* konsistens fremfor kompleksitet
-* faglig relevans fremfor datamengde
-* enkel bruk fremfor eksponering av underliggende datakilder
-
+- kvalitet fremfor kvantitet
+- konsistens fremfor kompleksitet
+- faglig relevans fremfor datamengde
+- offentlige originalkilder
+- enkel bruk fremfor eksponering av underliggende API-er
+- felles datastrukturer og konvensjoner på tvers av datalag
 ---
 
 # Grunnprinsipper
@@ -104,38 +113,70 @@ Metadata skal brukes aktivt av funksjoner, dokumentasjon og nettsider.
 
 ---
 
-# Prosjektstruktur
+# Arkitektur
 
-NorMacro deles konseptuelt inn i følgende moduler.
+NorMacro deles inn i følgende lag.
+
+## Konfigurasjon
+
+Konfigurasjonsobjekter beskriver datakilden og hvordan den skal leses.
+
+For KOSTRA inkluderer dette blant annet:
+
+- tabellnummer
+- tabelltittel
+- API-adresse
+- dimensjonskoder
+- innholdskoder
+
+Konfigurasjon skal være adskilt fra datainnhenting og standardisering.
 
 ## Datainnhenting
 
 Ansvar:
 
-* hente rådata
-* transformere data
-* validere data
+- hente rådata fra offentlige kilder
+- bygge forespørsler
+- håndtere lokal caching
+- kontrollere grunnleggende respons og format
 
-## Database
-
-Ansvar:
-
-* lagre ferdige datasett
-* lagre metadata
-
-## API
+## Standardisering
 
 Ansvar:
 
-* eksponere data gjennom enkle funksjoner
+- gi variabler konsistente navn
+- standardisere tidsvariabler og identifikatorer
+- konvertere verdier til korrekte datatyper
+- produsere en forutsigbar datastruktur
 
-Eksempel:
+## Datasettmetadata
 
-```r
-get_normacro()
-```
+Datasett skal kunne identifiseres uten kun å basere seg på kolonnenavn.
 
-Brukeren skal ikke trenge å kjenne underliggende API-er.
+Der det er relevant, brukes attributter for blant annet:
+
+- datasettype
+- tabellnummer
+- tabelltittel
+
+Attributtene skal settes etter at transformasjonene er fullført.
+
+## Bruker-API
+
+Offentlige funksjoner skal:
+
+- ha enkle og konsistente argumenter
+- skjule underliggende API-struktur
+- returnere standardiserte data
+- bruke de samme konvensjonene på tvers av datakilder
+
+## Utforsking og analyse
+
+Funksjoner som `overview()`, `coverage()` og `variable_summary()` skal
+fungere som et felles lag over datasettene.
+
+Funksjonene skal bruke metadata og datasettype aktivt, fremfor å kreve
+at brukeren kjenner datasettets interne oppbygning.
 
 ## Dokumentasjon
 
@@ -161,34 +202,74 @@ For hver indikator skal én kilde defineres som primærkilde.
 
 ---
 
-# Kriterier for nye variabler
+## Datalag
 
-En ny variabel bør oppfylle de fleste av følgende kriterier:
+### Norske makrodata
 
-* beskriver et sentralt makroøkonomisk fenomen
-* har en tydelig definisjon
-* kommer fra en offentlig kilde
-* kan oppdateres automatisk
-* har tilstrekkelig historikk
-* er stabil over tid
-* har dokumentert metodikk
-* gir merverdi for brukeren
+Det norske makrodatasettet er prosjektets kjerne.
 
-Variabler som ikke oppfyller disse kriteriene bør normalt ikke inkluderes.
+Hver variabel skal normalt representere én anbefalt indikator for et
+sentralt økonomisk fenomen. Alternative serier skal bare inkluderes når
+de representerer en vesentlig annen definisjon eller analytisk bruk.
 
----
+### Internasjonale data
 
-# Internasjonale data
+Internasjonale data skal gjøre det enklere å forstå og sammenligne norsk
+økonomi.
 
-## Formål
+Norske indikatorer er utgangspunktet. En internasjonal serie inkluderes
+når den:
 
-Internasjonale data skal ikke gjøre NorMacro til en internasjonal makrodatabase.
+- har en tydelig norsk analog
+- er tilstrekkelig sammenlignbar
+- kommer fra en stabil og dokumentert kilde
+- gir analytisk merverdi
 
-Formålet er å gjøre det enklere å analysere norsk økonomi gjennom relevante sammenligninger.
+NorMacro skal ikke utvikles til en generell internasjonal makrodatabase.
 
-Den grunnleggende beslutningsregelen er:
+### KOSTRA-data
 
-> Internasjonale dataserier inkluderes kun dersom de bidrar til å forstå norsk makroøkonomi bedre.
+KOSTRA-datalaget skal tilby enkel og standardisert tilgang til et
+kuratert utvalg kommunale og regionale nøkkeltall.
+
+KOSTRA-støtten skal ikke være en generell wrapper rundt hele
+Statistikkbankens KOSTRA-innhold. Nye tabeller skal velges ut fra
+analytisk relevans, stabilitet og muligheten for å presentere dataene i
+en konsistent struktur.
+
+Alle standardiserte KOSTRA-datasett skal så langt det er mulig inneholde:
+
+- `Enhet`
+- `Enhet_navn`
+- `Enhetstype`
+- `Aar`
+
+Indikatorene skal ligge i separate kolonner med konsistente og
+forståelige variabelnavn.
+
+Datasettene skal også inneholde attributter som identifiserer:
+
+- datasettype
+- KOSTRA-tabell
+- tabelltittel
+
+## Kriterier for nye data
+
+En ny indikator eller KOSTRA-tabell bør oppfylle de fleste av følgende
+kriterier:
+
+- beskriver et sentralt økonomisk fenomen
+- har en tydelig definisjon
+- kommer fra en offentlig og stabil kilde
+- kan oppdateres automatisk
+- har tilstrekkelig historikk
+- kan standardiseres på en konsistent måte
+- har dokumentert metodikk
+- gir tydelig merverdi for brukeren
+- kan kvalitetssikres med automatiske tester
+
+Det at data er tilgjengelig, er ikke i seg selv et argument for å
+inkludere det.
 
 ---
 
@@ -212,6 +293,35 @@ Legg til internasjonal serie
 Ikke motsatt.
 
 ---
+
+# Datasetkontrakter
+
+Hvert datalag skal ha en tydelig og stabil datastruktur.
+
+## Norske data
+
+- én rad per år
+- tidsvariabelen heter `Aar`
+- én kolonne per indikator
+
+## Internasjonale data
+
+- én rad per land og år
+- landvariabelen heter `Land`
+- tidsvariabelen heter `Aar`
+- én kolonne per indikator
+
+## KOSTRA-data
+
+- én rad per enhet og år
+- enhetskode i `Enhet`
+- enhetsnavn i `Enhet_navn`
+- enhetstype i `Enhetstype`
+- tidsvariabelen heter `Aar`
+- én kolonne per indikator
+
+Endringer i disse kontraktene skal behandles som potensielt
+inkompatible API-endringer.
 
 ## Prioriterte datakilder
 
@@ -264,7 +374,7 @@ Denne informasjonen skal lagres i metadata.
 
 ---
 
-# Metadata
+## Metadata
 
 Metadata skal være prosjektets sentrale kunnskapsbase.
 
@@ -294,7 +404,7 @@ Metadata skal brukes aktivt ved
 
 ---
 
-# API-prinsipper
+## API-prinsipper
 
 API-et skal være enkelt.
 
@@ -316,7 +426,7 @@ Brukeren skal ikke måtte kjenne til hvilken institusjon som leverer dataene.
 
 ---
 
-# Kvalitetssikring
+## Kvalitetssikring
 
 Alle nye dataserier skal gjennomgå en standardisert kontroll.
 
@@ -333,26 +443,39 @@ Minimumskrav:
 
 # Roadmap
 
-## Versjon 1
+## Versjon 1 – norsk makrodatabase
 
-* Norsk makrodatabase
+- norsk makrodatasett
+- metadata
+- grunnleggende datainnhenting
+- kvalitetssikring
 
-Status: Ferdigstilt.
+Status: ferdigstilt.
 
-## Versjon 2
+## Versjon 2 – flere datalag og felles API
 
-* Internasjonalt sammenligningslag
-* Europeiske indikatorer
-* Utvidede metadata
+- internasjonalt sammenligningslag
+- europeiske indikatorer
+- KOSTRA-data
+- standardiserte datasettyper
+- utvidede metadata
+- felles funksjoner for utforsking og analyse
 
-## Versjon 3
+Status: aktiv utvikling.
 
-* Analysefunksjoner
-* Sammenligningsverktøy
-* Dashboards
-* Automatisk rapportering
+## Videre utvikling
 
-Roadmapen er veiledende og kan justeres underveis.
+Aktuelle områder for videre utvikling:
+
+- flere kuraterte KOSTRA-tabeller
+- bedre land- og regionsammenligninger
+- videreutvikling av analysefunksjoner
+- forbedret dokumentasjon og nettsider
+- tydeligere rapportering av datakvalitet og sammenlignbarhet
+- automatiserte rapporter og dashboards
+
+Roadmapen er veiledende. Nye funksjoner skal bare prioriteres når de
+styrker prosjektets faglige verdi uten å svekke enkelhet og konsistens.
 
 ---
 
@@ -376,7 +499,7 @@ Når det oppstår tvil mellom å legge til flere data eller bevare prosjektets e
 
 ---
 
-# Avslutning
+## Avslutning
 
 NorMacro utvikles med mål om å bli en langsiktig referanse for analyser av norsk makroøkonomi.
 

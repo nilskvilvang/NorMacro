@@ -6,6 +6,11 @@ standardize_kostra_long_table <- function(
     regions
 ) {
   
+  data <- data |>
+    dplyr::filter(
+      !is.na(.data[[config$content_value]])
+    )
+  
   concepts_in_data <- unique(
     data[[config$concept_code]]
   )
@@ -38,9 +43,6 @@ standardize_kostra_long_table <- function(
     ) |>
     dplyr::mutate(
       Aar = as.integer(Aar)
-    ) |>
-    dplyr::filter(
-      !is.na(.data[[config$content_value]])
     ) |>
     tidyr::pivot_wider(
       names_from = dplyr::all_of(config$concept_code),
