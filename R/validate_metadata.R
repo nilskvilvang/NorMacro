@@ -1,5 +1,8 @@
 
-validate_metadata <- function(metadata = NULL, verbose = FALSE) {
+validate_metadata <- function(
+    metadata = NULL,
+    verbose = FALSE
+) {
   if (is.null(metadata)) {
     metadata <- get_metadata()
   }
@@ -19,51 +22,126 @@ validate_metadata <- function(metadata = NULL, verbose = FALSE) {
     "Sluttaar",
     "Funksjon",
     "Kommentar",
-    "Omraade"
+    "Omraade",
+    "Analyse_type"
   )
   
   errors <- character()
   
-  missing_cols <- setdiff(expected_cols, names(metadata))
-  extra_cols <- setdiff(names(metadata), expected_cols)
+  missing_cols <- setdiff(
+    expected_cols,
+    names(metadata)
+  )
   
-  if (length(missing_cols) > 0) {
-    errors <- c(errors, paste0("Manglende kolonner: ", paste(missing_cols, collapse = ", ")))
+  extra_cols <- setdiff(
+    names(metadata),
+    expected_cols
+  )
+  
+  if (length(missing_cols) > 0L) {
+    errors <- c(
+      errors,
+      paste0(
+        "Manglende kolonner: ",
+        paste(missing_cols, collapse = ", ")
+      )
+    )
   }
   
-  if (length(extra_cols) > 0) {
-    errors <- c(errors, paste0("Uventede kolonner: ", paste(extra_cols, collapse = ", ")))
+  if (length(extra_cols) > 0L) {
+    errors <- c(
+      errors,
+      paste0(
+        "Uventede kolonner: ",
+        paste(extra_cols, collapse = ", ")
+      )
+    )
   }
   
   if (!identical(names(metadata), expected_cols)) {
-    errors <- c(errors, "Kolonnene står ikke i forventet rekkefølge.")
+    errors <- c(
+      errors,
+      "Kolonnene står ikke i forventet rekkefølge."
+    )
   }
   
   if ("Variabel" %in% names(metadata)) {
-    duplicated_vars <- metadata$Variabel[duplicated(metadata$Variabel)]
+    missing_variable <- which(
+      is.na(metadata$Variabel) |
+        metadata$Variabel == ""
+    )
     
-    if (length(duplicated_vars) > 0) {
-      errors <- c(errors, paste0(
-        "Dupliserte variabelnavn: ",
-        paste(unique(duplicated_vars), collapse = ", ")
-      ))
+    if (length(missing_variable) > 0L) {
+      errors <- c(
+        errors,
+        paste0(
+          "Manglende variabelnavn på rad: ",
+          paste(missing_variable, collapse = ", ")
+        )
+      )
     }
+  }
+  
+  # Samme variabelnavn kan finnes for flere områder.
+  # Kombinasjonen Variabel + Omraade skal derimot være unik.
+  if (
+    all(
+      c(
+        "Variabel",
+        "Omraade"
+      ) %in% names(metadata)
+    )
+  ) {
+    duplicate_keys <- metadata |>
+      dplyr::count(
+        .data$Variabel,
+        .data$Omraade,
+        name = "Antall"
+      ) |>
+      dplyr::filter(.data$Antall > 1L)
     
-    if (any(is.na(metadata$Variabel) | metadata$Variabel == "")) {
-      errors <- c(errors, "Én eller flere rader mangler variabelnavn.")
+    if (nrow(duplicate_keys) > 0L) {
+      duplicate_text <- paste0(
+        duplicate_keys$Variabel,
+        " [",
+        duplicate_keys$Omraade,
+        "]",
+        collapse = ", "
+      )
+      
+      errors <- c(
+        errors,
+        paste0(
+          "Dupliserte kombinasjoner av Variabel og Omraade: ",
+          duplicate_text
+        )
+      )
     }
   }
   
   if ("Type" %in% names(metadata)) {
-    invalid_type <- setdiff(unique(metadata$Type), c("Original", "Beregnet"))
+    valid_types <- c(
+      "Original",
+      "Beregnet"
+    )
     
-    invalid_type <- invalid_type[!is.na(invalid_type)]
+    invalid_type <- setdiff(
+      unique(metadata$Type),
+      valid_types
+    )
     
-    if (length(invalid_type) > 0) {
-      errors <- c(errors, paste0(
-        "Ugyldige verdier i Type: ",
-        paste(invalid_type, collapse = ", ")
-      ))
+    invalid_type <- invalid_type[
+      !is.na(invalid_type)
+    ]
+    
+    if (length(invalid_type) > 0L) {
+      errors <- c(
+        errors,
+        paste0(
+          "Ugyldige verdier i Type: ",
+          paste(invalid_type, collapse = ", ")
+        )
+      )
     }
   }
   
@@ -72,31 +150,105 @@ validate_metadata <- function(metadata = NULL, verbose = FALSE) {
       "Arbeidsmarked",
       "Boligmarked",
       "Demografi",
-      "Energi og r\u00e5varer",
+      "Energi og råvarer",
       "Finansmarkeder",
-      "Husholdnings\u00f8konomi",
+      "Husholdningsøkonomi",
       "Kreditt og husholdninger",
-      "L\u00f8nn og inntekt",
+      "Lønn og inntekt",
       "Nasjonalregnskap",
       "Offentlige finanser",
       "Priser og inflasjon",
       "Produksjon og aktivitet",
-      "Utenriks\u00f8konomi",
+      "Utenriksøkonomi",
       "Konjunkturindikatorer"
     )
     
-    valid_categories <- enc2utf8(valid_categories)
-    metadata$Kategori <- enc2utf8(metadata$Kategori)
+    valid_categories <- enc2utf8(
+      valid_categories
+    )
     
-    invalid_categories <- setdiff(unique(metadata$Kategori), valid_categories)
+    categories <- enc2utf8(
+      metadata$Kategori
+    )
     
-    invalid_categories <- invalid_categories[!is.na(invalid_categories)]
+    invalid_categories <- setdiff(
+      unique(categories),
+      valid_categories
+    )
     
-    if (length(invalid_categories) > 0) {
-      errors <- c(errors, paste0(
-        "Ugyldige kategorier: ",
-        paste(invalid_categories, collapse = ", ")
-      ))
+    invalid_categories <- invalid_categories[
+      !is.na(invalid_categories)
+    ]
+    
+    if (length(invalid_categories) > 0L) {
+      errors <- c(
+        errors,
+        paste0(
+          "Ugyldige kategorier: ",
+          paste(
+            invalid_categories,
+            collapse = ", "
+          )
+        )
+      )
+    }
+  }
+  
+  if ("Omraade" %in% names(metadata)) {
+    valid_areas <- c(
+      "Norge",
+      "Internasjonal"
+    )
+    
+    invalid_areas <- setdiff(
+      unique(metadata$Omraade),
+      valid_areas
+    )
+    
+    invalid_areas <- invalid_areas[
+      !is.na(invalid_areas)
+    ]
+    
+    if (length(invalid_areas) > 0L) {
+      errors <- c(
+        errors,
+        paste0(
+          "Ugyldige verdier i Omraade: ",
+          paste(invalid_areas, collapse = ", ")
+        )
+      )
+    }
+  }
+  
+  if ("Analyse_type" %in% names(metadata)) {
+    valid_analysis_types <- c(
+      "rate",
+      "nivå",
+      "indeks"
+    )
+    
+    invalid_analysis_types <- setdiff(
+      unique(metadata$Analyse_type),
+      valid_analysis_types
+    )
+    
+    invalid_analysis_types <-
+      invalid_analysis_types[
+        !is.na(invalid_analysis_types) &
+          invalid_analysis_types != ""
+      ]
+    
+    if (length(invalid_analysis_types) > 0L) {
+      errors <- c(
+        errors,
+        paste0(
+          "Ugyldige verdier i Analyse_type: ",
+          paste(
+            invalid_analysis_types,
+            collapse = ", "
+          )
+        )
+      )
     }
   }
   
@@ -109,51 +261,77 @@ validate_metadata <- function(metadata = NULL, verbose = FALSE) {
     "Frekvens",
     "Funksjon",
     "Kommentar",
-    "Omraade"
+    "Omraade",
+    "Analyse_type"
   )
   
-  for (col in intersect(required_text_cols, names(metadata))) {
-    missing_rows <- which(is.na(metadata[[col]]) |
-                            metadata[[col]] == "")
+  for (
+    col in intersect(
+      required_text_cols,
+      names(metadata)
+    )
+  ) {
+    missing_rows <- which(
+      is.na(metadata[[col]]) |
+        metadata[[col]] == ""
+    )
     
-    if (length(missing_rows) > 0) {
-      errors <- c(errors,
-                  paste0(
-                    "Manglende verdier i ",
-                    col,
-                    " på rad: ",
-                    paste(missing_rows, collapse = ", ")
-                  ))
+    if (length(missing_rows) > 0L) {
+      errors <- c(
+        errors,
+        paste0(
+          "Manglende verdier i ",
+          col,
+          " på rad: ",
+          paste(missing_rows, collapse = ", ")
+        )
+      )
     }
   }
   
-  if (all(c("Startaar", "Sluttaar") %in% names(metadata))) {
+  if (
+    all(
+      c(
+        "Startaar",
+        "Sluttaar"
+      ) %in% names(metadata)
+    )
+  ) {
     bad_years <- which(
       !is.na(metadata$Sluttaar) &
         !is.na(metadata$Startaar) &
         metadata$Startaar > metadata$Sluttaar
     )
     
-    if (length(bad_years) > 0) {
-      errors <- c(errors,
-                  paste0(
-                    "Startaar er større enn Sluttaar på rad: ",
-                    paste(bad_years, collapse = ", ")
-                  ))
+    if (length(bad_years) > 0L) {
+      errors <- c(
+        errors,
+        paste0(
+          "Startaar er større enn Sluttaar på rad: ",
+          paste(bad_years, collapse = ", ")
+        )
+      )
     }
   }
   
-  if (length(errors) > 0) {
-    message("✗ Metadata-validering feilet:\n")
+  if (length(errors) > 0L) {
+    message(
+      "✗ Metadata-validering feilet:\n"
+    )
+    
     for (error in errors) {
       message("- ", error)
     }
     
-    return(invisible(FALSE))
+    return(
+      invisible(FALSE)
+    )
   }
   
   if (verbose) {
-    message("✓ Metadata bestod validering.")
+    message(
+      "✓ Metadata bestod validering."
+    )
   }
   
   invisible(TRUE)

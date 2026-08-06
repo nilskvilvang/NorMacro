@@ -1,27 +1,52 @@
 
-testthat::test_that("validate_metadata returns TRUE for valid metadata", {
-  undocumented <- setdiff(names(normacro), c(metadata$Variabel, "Aar"))
-  
-  testthat::expect_equal(undocumented, character(0))
-})
+testthat::test_that(
+  "all Norwegian variables have metadata",
+  {
+    norwegian_metadata <- metadata |>
+      dplyr::filter(
+        .data$Omraade == "Norge"
+      )
+    
+    undocumented <- setdiff(
+      names(normacro),
+      c(
+        norwegian_metadata$Variabel,
+        "Aar"
+      )
+    )
+    
+    testthat::expect_identical(
+      undocumented,
+      character()
+    )
+  }
+)
 
-testthat::test_that("Metadata has expected columns", {
-  expected_cols <- c(
-    "Variabel",
-    "Display_navn",
-    "Type",
-    "Kategori",
-    "Beskrivelse",
-    "Kilde",
-    "Kilde_url",
-    "Tabell",
-    "Enhet",
-    "Frekvens",
-    "Startaar",
-    "Sluttaar",
-    "Funksjon",
-    "Kommentar"
-  )
-  
-  testthat::expect_equal(names(metadata), expected_cols)
-})
+testthat::test_that(
+  "Metadata has expected columns",
+  {
+    expected_cols <- c(
+      "Variabel",
+      "Display_navn",
+      "Type",
+      "Kategori",
+      "Beskrivelse",
+      "Kilde",
+      "Kilde_url",
+      "Tabell",
+      "Enhet",
+      "Frekvens",
+      "Startaar",
+      "Sluttaar",
+      "Funksjon",
+      "Kommentar",
+      "Omraade",
+      "Analyse_type"
+    )
+    
+    testthat::expect_identical(
+      names(metadata),
+      expected_cols
+    )
+  }
+)

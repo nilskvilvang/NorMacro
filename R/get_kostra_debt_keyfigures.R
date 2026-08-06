@@ -26,7 +26,7 @@ get_kostra_debt_keyfigures <- function(
     query = query
   )
   
-  result <- standardize_kostra_...(
+  result <- standardize_kostra_debt_keyfigures(
     data = data
   )
   

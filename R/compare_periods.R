@@ -12,7 +12,7 @@ compare_periods <- function(variables, start_year, end_year, data = NULL) {
          paste(missing, collapse = ", "))
   }
   
-  metadata <- get_metadata()
+  metadata <- get_metadata(data)
   
   result <- purrr::map_dfr(variables, function(variable) {
     x <- data |>
