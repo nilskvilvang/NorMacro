@@ -7,6 +7,31 @@ get_metadata <- function(data = NULL) {
     return(metadata)
   }
   
+  dataset_type <- attr(
+    data,
+    "dataset_type"
+  )
+  
+  has_kostra_structure <- all(
+    c(
+      "Enhet",
+      "Enhet_navn",
+      "Enhetstype",
+      "Aar"
+    ) %in% names(data)
+  )
+  
+  if (
+    identical(dataset_type, "kostra") ||
+    has_kostra_structure
+  ) {
+    return(
+      get_kostra_metadata(
+        data = data
+      )
+    )
+  }
+  
   if (
     all(
       c(

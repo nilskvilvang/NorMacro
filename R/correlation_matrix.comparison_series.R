@@ -1,6 +1,4 @@
 
-
-
 correlation_matrix.comparison_series <- function(x,
                                                  start_year = NULL,
                                                  end_year = NULL,
