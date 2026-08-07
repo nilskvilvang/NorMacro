@@ -1,3 +1,4 @@
+
 ## ============================================================================
 ## Package setup and basic utilities
 ## ============================================================================
@@ -201,15 +202,15 @@ source("R/growth_comparison_series.R")
 
 source("R/create_comparison_subtitle.R")
 source("R/plot.comparison_series.R")
+
 source("R/plot_series.R")
+source("R/compare_series.R")
 source("R/scatter_series.R")
 
 
 ## ============================================================================
-## Series comparison and correlation
+## Series correlation and dependence
 ## ============================================================================
-
-source("R/compare_series.R")
 
 source("R/correlate.R")
 source("R/correlate_series.R")
@@ -299,59 +300,66 @@ source("R/get_kostra_regions_12143.R")
 source("R/standardize_kostra_financial_keyfigures.R")
 source("R/get_kostra_financial_keyfigures.R")
 
-# ============================================================
-# KOSTRA - Table 12135
-# ============================================================
+
+## ============================================================================
+## KOSTRA table 12135: debt key figures
+## ============================================================================
 
 source("R/kostra_table_12135.R")
 source("R/kostra_indicators_12135.R")
 source("R/get_kostra_regions_12135.R")
+
 source("R/standardize_kostra_debt_keyfigures.R")
 source("R/get_kostra_debt_keyfigures.R")
 
-# ============================================================
-# KOSTRA - Table 12137
-# Financial key figures per capita
-# ============================================================
+
+## ============================================================================
+## KOSTRA table 12137: key figures per capita
+## ============================================================================
 
 source("R/kostra_table_12137.R")
 source("R/kostra_indicators_12137.R")
 source("R/get_kostra_regions_12137.R")
+
 source("R/standardize_kostra_per_capita_keyfigures.R")
 source("R/get_kostra_per_capita_keyfigures.R")
 
-# ============================================================
-# KOSTRA - Table 12333
-# Investment financing
-# ============================================================
+
+## ============================================================================
+## KOSTRA table 12333: investment financing
+## ============================================================================
 
 source("R/kostra_table_12333.R")
 source("R/kostra_indicators_12333.R")
 source("R/get_kostra_regions_12333.R")
+
 source("R/standardize_kostra_investment_financing.R")
 source("R/get_kostra_investment_financing.R")
 
-# ============================================================
-# KOSTRA - Table 12364
-# Financial foundations
-# ============================================================
+
+## ============================================================================
+## KOSTRA table 12364: financial foundations
+## ============================================================================
 
 source("R/kostra_table_12364.R")
 source("R/kostra_indicators_12364.R")
 source("R/get_kostra_regions_12364.R")
-source("R/get_kostra_financial_foundations.R")
-source("R/standardize_kostra_financial_foundations.R")
 
-# ============================================================
-# KOSTRA - Table 13553
-# Operating financing
-# ============================================================
+source("R/standardize_kostra_financial_foundations.R")
+source("R/get_kostra_financial_foundations.R")
+
+
+## ============================================================================
+## KOSTRA table 13553: operating financing
+## ============================================================================
 
 source("R/kostra_table_13553.R")
 source("R/kostra_indicators_13553.R")
 source("R/get_kostra_regions_13553.R")
+
 source("R/standardize_kostra_operating_financing.R")
 source("R/get_kostra_operating_financing.R")
+
 
 ## ============================================================================
 ## KOSTRA table 12858: main accounts
@@ -364,3 +372,29 @@ source("R/get_kostra_regions_12858.R")
 
 source("R/standardize_kostra_main_accounts.R")
 source("R/get_kostra_main_accounts.R")
+
+
+## ============================================================================
+## KOSTRA metadata API
+## ============================================================================
+
+source("R/get_kostra_metadata.R")
+
+
+## ============================================================================
+## KOSTRA cross-sectional analysis
+## ============================================================================
+
+source("R/rank_kostra.R")
+source("R/kostra_change.R")
+source("R/compare_kostra_units.R")
+source("R/kostra_summary.R")
+source("R/benchmark_kostra.R")
+
+
+## ============================================================================
+## KOSTRA plotting
+## ============================================================================
+
+source("R/plot_kostra_benchmark.R")
+source("R/plot_kostra_ranking.R")
