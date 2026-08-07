@@ -130,14 +130,15 @@ kostra_timeseries_benchmark <- function(variable,
   
   if (descending) {
     ranking <- ranking |>
-      dplyr::arrange(dplyr::desc(.data$Verdi), .data$Enhet, .by_group = TRUE)
+      dplyr::arrange(dplyr::desc(.data$Verdi), .data$Enhet, .by_group = TRUE) |>
+      dplyr::mutate(Rang = dplyr::min_rank(dplyr::desc(.data$Verdi)))
   } else {
     ranking <- ranking |>
-      dplyr::arrange(.data$Verdi, .data$Enhet, .by_group = TRUE)
+      dplyr::arrange(.data$Verdi, .data$Enhet, .by_group = TRUE) |>
+      dplyr::mutate(Rang = dplyr::min_rank(.data$Verdi))
   }
   
   ranking <- ranking |>
-    dplyr::mutate(Rang = dplyr::row_number()) |>
     dplyr::ungroup()
   
   selected_unit <- ranking |>

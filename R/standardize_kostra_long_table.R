@@ -55,6 +55,11 @@ standardize_kostra_long_table <- function(
       regions,
       by = "Enhet"
     ) |>
+    dplyr::mutate(
+      Enhet_navn = clean_kostra_unit_name(
+        .data$Enhet_navn
+      )
+    ) |>
     dplyr::relocate(
       Enhet,
       Enhet_navn,
@@ -67,4 +72,5 @@ standardize_kostra_long_table <- function(
       Aar
     )
 }
+
 

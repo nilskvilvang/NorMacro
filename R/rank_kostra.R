@@ -148,25 +148,31 @@ rank_kostra <- function(
     )
   }
   
-  if (descending) {
+    if (descending) {
     result <- result |>
       dplyr::arrange(
         dplyr::desc(.data$Verdi),
         .data$Enhet
+      ) |>
+      dplyr::mutate(
+        Rang = dplyr::min_rank(
+          dplyr::desc(.data$Verdi)
+        ),
+        .before = 1
       )
   } else {
     result <- result |>
       dplyr::arrange(
         .data$Verdi,
         .data$Enhet
+      ) |>
+      dplyr::mutate(
+        Rang = dplyr::min_rank(
+          .data$Verdi
+        ),
+        .before = 1
       )
   }
-  
-  result <- result |>
-    dplyr::mutate(
-      Rang = dplyr::row_number(),
-      .before = 1
-    )
   
   if (!is.null(top_n)) {
     result <- result |>

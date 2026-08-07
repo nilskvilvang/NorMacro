@@ -33,3 +33,30 @@
   #),
  # years = 2015:2025
 #)
+
+
+# kostra_large <- get_kostra_keyfigures(
+#   regions = c(
+#     "0301", # Oslo
+#     "1103", # Stavanger
+#     "1108", # Sandnes
+#     "1506", # Molde
+#     "1507", # Ålesund
+#     "1804", # Bodø
+#     "1902", # Tromsø
+#     "3103", # Moss
+#     "3105", # Sarpsborg
+#     "3107", # Fredrikstad
+#     "3201", # Bærum
+#     "3203", # Asker
+#     "3205", # Lillestrøm
+#     "3301", # Drammen
+#     "3403", # Hamar
+#     "3905", # Tønsberg
+#     "4001", # Porsgrunn
+#     "4204", # Kristiansand
+#     "4601", # Bergen
+#     "5001"  # Trondheim
+#   ),
+#   years = 2015:2025
+# )

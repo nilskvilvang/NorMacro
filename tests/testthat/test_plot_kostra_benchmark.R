@@ -4,7 +4,7 @@ testthat::test_that(
   {
     p <- plot_kostra_benchmark(
       variable = "Netto_driftsresultat",
-      data = kostra,
+      data = kostra_test_data,
       unit = "0301",
       year = 2025
     )
@@ -22,7 +22,7 @@ testthat::test_that(
   {
     p <- plot_kostra_benchmark(
       variable = "Langsiktig_gjeld_uten_pensjonsforpliktelser",
-      data = kostra,
+      data = kostra_test_data,
       unit = "0301",
       year = 2025,
       descending = FALSE
@@ -41,7 +41,7 @@ testthat::test_that(
   {
     p <- plot_kostra_benchmark(
       variable = "Netto_driftsresultat",
-      data = kostra,
+      data = kostra_test_data,
       unit = "0301",
       year = 2025
     )
@@ -69,7 +69,7 @@ testthat::test_that(
   {
     p <- plot_kostra_benchmark(
       variable = "Netto_driftsresultat",
-      data = kostra,
+      data = kostra_test_data,
       unit = "0301",
       year = 2025
     )
@@ -113,7 +113,7 @@ testthat::test_that(
     testthat::expect_error(
       plot_kostra_benchmark(
         variable = "Finnes_ikke",
-        data = kostra,
+        data = kostra_test_data,
         unit = "0301"
       )
     )

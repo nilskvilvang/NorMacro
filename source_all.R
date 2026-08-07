@@ -273,6 +273,7 @@ source("R/kostra_metadata.R")
 source("R/get_kostra_table.R")
 source("R/get_kostra_regions.R")
 
+source("R/clean_kostra_unit_name.R")
 source("R/standardize_kostra_wide_table.R")
 source("R/standardize_kostra_long_table.R")
 
@@ -390,6 +391,7 @@ source("R/kostra_change.R")
 source("R/compare_kostra_units.R")
 source("R/kostra_summary.R")
 source("R/benchmark_kostra.R")
+source("R/kostra_timeseries_benchmark.R")
 
 
 ## ============================================================================
@@ -398,3 +400,5 @@ source("R/benchmark_kostra.R")
 
 source("R/plot_kostra_benchmark.R")
 source("R/plot_kostra_ranking.R")
+source("R/plot_kostra_timeseries_benchmark.R")
+source("R/plot_kostra_position_over_time.R")

@@ -1,0 +1,348 @@
+
+plot_kostra_position_over_time <- function(
+    variable,
+    data,
+    unit,
+    start_year = NULL,
+    end_year = NULL,
+    descending = TRUE,
+    metric = c(
+      "percentile",
+      "rank"
+    )
+) {
+  
+  metric <- match.arg(
+    metric
+  )
+  
+  if (!is.data.frame(data)) {
+    stop(
+      "`data` må være et datasett.",
+      call. = FALSE
+    )
+  }
+  
+  if (
+    !is.logical(descending) ||
+    length(descending) != 1L ||
+    is.na(descending)
+  ) {
+    stop(
+      "`descending` må være `TRUE` eller `FALSE`.",
+      call. = FALSE
+    )
+  }
+  
+  benchmark <- kostra_timeseries_benchmark(
+    variable = variable,
+    data = data,
+    unit = unit,
+    start_year = start_year,
+    end_year = end_year,
+    descending = descending
+  )
+  
+  selected_name <- benchmark$Enhet_navn[[1]]
+  
+  metadata <- get_metadata(
+    data
+  )
+  
+  meta <- metadata |>
+    dplyr::filter(
+      .data$Variabel == variable
+    )
+  
+  display_name <- if (
+    nrow(meta) > 0L &&
+    "Display_navn" %in% names(meta)
+  ) {
+    meta$Display_navn[[1]]
+  } else {
+    stringr::str_to_sentence(
+      gsub(
+        "_",
+        " ",
+        variable
+      )
+    )
+  }
+  
+  # ------------------------------------------------------------
+  # Keep only years with a meaningful comparison group
+  # ------------------------------------------------------------
+  
+  if (metric == "percentile") {
+    
+    plot_data <- benchmark |>
+      dplyr::filter(
+        !is.na(.data$Percentil),
+        .data$Antall_enheter >= 2L
+      )
+    
+    if (nrow(plot_data) == 0L) {
+      stop(
+        paste0(
+          "Fant ingen år med tilstrekkelig ",
+          "sammenligningsgrunnlag for percentil."
+        ),
+        call. = FALSE
+      )
+    }
+    
+  } else {
+    
+    plot_data <- benchmark |>
+      dplyr::filter(
+        .data$Antall_enheter >= 2L,
+        !is.na(.data$Rang)
+      )
+    
+    if (nrow(plot_data) == 0L) {
+      stop(
+        paste0(
+          "Fant ingen år med tilstrekkelig ",
+          "sammenligningsgrunnlag for rangering."
+        ),
+        call. = FALSE
+      )
+    }
+  }
+  
+  # ------------------------------------------------------------
+  # Time period and comparison group
+  # ------------------------------------------------------------
+  
+  first_year <- min(
+    plot_data$Aar,
+    na.rm = TRUE
+  )
+  
+  last_year <- max(
+    plot_data$Aar,
+    na.rm = TRUE
+  )
+  
+  min_units <- min(
+    plot_data$Antall_enheter,
+    na.rm = TRUE
+  )
+  
+  max_units <- max(
+    plot_data$Antall_enheter,
+    na.rm = TRUE
+  )
+  
+  comparison_text <- if (min_units == max_units) {
+    paste0(
+      min_units,
+      " enheter"
+    )
+  } else {
+    paste0(
+      min_units,
+      "-",
+      max_units,
+      " enheter over perioden"
+    )
+  }
+  
+  subtitle <- paste0(
+    selected_name,
+    " - ",
+    first_year,
+    "-",
+    last_year,
+    " - ",
+    comparison_text
+  )
+  
+  subtitle <- paste0(
+    selected_name,
+    " - ",
+    first_year,
+    "-",
+    last_year,
+    " - ",
+    comparison_text
+  )
+  
+  # ------------------------------------------------------------
+  # Source
+  # ------------------------------------------------------------
+  
+  kostra_table <- attr(
+    data,
+    "kostra_table"
+  )
+  
+  caption <- "Kilde: SSB KOSTRA"
+  
+  if (
+    !is.null(kostra_table) &&
+    length(kostra_table) > 0L &&
+    !is.na(kostra_table) &&
+    kostra_table != ""
+  ) {
+    caption <- paste0(
+      caption,
+      ", tabell ",
+      kostra_table
+    )
+  }
+  
+  # ------------------------------------------------------------
+  # Year axis
+  # ------------------------------------------------------------
+  
+  year_range <- range(
+    plot_data$Aar,
+    na.rm = TRUE
+  )
+  
+  year_span <- diff(
+    year_range
+  )
+  
+  year_step <- if (year_span <= 12) {
+    1
+  } else if (year_span <= 25) {
+    2
+  } else if (year_span <= 50) {
+    5
+  } else {
+    10
+  }
+  
+  year_breaks <- seq(
+    from = year_range[[1]],
+    to = year_range[[2]],
+    by = year_step
+  )
+  
+  if (
+    tail(year_breaks, 1) !=
+    year_range[[2]]
+  ) {
+    year_breaks <- sort(
+      unique(
+        c(
+          year_breaks,
+          year_range[[2]]
+        )
+      )
+    )
+  }
+  
+  # ------------------------------------------------------------
+  # Percentile
+  # ------------------------------------------------------------
+  
+  if (metric == "percentile") {
+    
+    p <- ggplot2::ggplot(
+      plot_data,
+      ggplot2::aes(
+        x = .data$Aar,
+        y = .data$Percentil
+      )
+    ) +
+      ggplot2::geom_hline(
+        yintercept = 50,
+        linetype = "dashed",
+        linewidth = 0.6,
+        alpha = 0.7
+      ) +
+      ggplot2::geom_line(
+        linewidth = 1
+      ) +
+      ggplot2::geom_point(
+        size = 2.5
+      ) +
+      ggplot2::scale_y_continuous(
+        limits = c(
+          0,
+          100
+        ),
+        breaks = c(
+          0,
+          25,
+          50,
+          75,
+          100
+        )
+      ) +
+      ggplot2::labs(
+        title = paste0(
+          display_name,
+          " - percentil over tid"
+        ),
+        subtitle = subtitle,
+        x = NULL,
+        y = "Percentil",
+        caption = caption
+      )
+    
+  } else {
+    
+    # ----------------------------------------------------------
+    # Rank
+    # ----------------------------------------------------------
+    
+    max_rank <- max(
+      plot_data$Antall_enheter,
+      na.rm = TRUE
+    )
+    
+    p <- ggplot2::ggplot(
+      plot_data,
+      ggplot2::aes(
+        x = .data$Aar,
+        y = .data$Rang
+      )
+    ) +
+      ggplot2::geom_line(
+        linewidth = 1
+      ) +
+      ggplot2::geom_point(
+        size = 2.5
+      ) +
+      ggplot2::scale_y_reverse(
+        breaks = seq_len(
+          max_rank
+        ),
+        limits = c(
+          max_rank,
+          1
+        )
+      ) +
+      ggplot2::labs(
+        title = paste0(
+          display_name,
+          " - rang over tid"
+        ),
+        subtitle = subtitle,
+        x = NULL,
+        y = "Rang",
+        caption = caption
+      )
+  }
+  
+  # ------------------------------------------------------------
+  # Common styling
+  # ------------------------------------------------------------
+  
+  p +
+    ggplot2::scale_x_continuous(
+      breaks = year_breaks,
+      labels = scales::label_number(
+        accuracy = 1,
+        big.mark = ""
+      )
+    ) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(
+      panel.grid.minor = ggplot2::element_blank()
+    )
+}

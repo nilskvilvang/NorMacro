@@ -4,7 +4,7 @@ testthat::test_that(
   {
     result <- compare_kostra_units(
       variable = "Netto_driftsresultat",
-      data = kostra,
+      data = kostra_test_data,
       year = 2025
     )
     
@@ -33,7 +33,7 @@ testthat::test_that(
   {
     result <- compare_kostra_units(
       variable = "Netto_driftsresultat",
-      data = kostra,
+      data = kostra_test_data,
       units = c(
         "0301",
         "4601"
@@ -56,7 +56,7 @@ testthat::test_that(
   {
     result <- compare_kostra_units(
       variable = "Netto_driftsresultat",
-      data = kostra,
+      data = kostra_test_data,
       year = 2025,
       start_year = 2020
     )
@@ -76,7 +76,7 @@ testthat::test_that(
   {
     result <- compare_kostra_units(
       variable = "Frie_inntekter_per_innbygger",
-      data = kostra,
+      data = kostra_test_data,
       year = 2025,
       start_year = 2020
     )
@@ -93,7 +93,7 @@ testthat::test_that(
     testthat::expect_error(
       compare_kostra_units(
         variable = "Netto_driftsresultat",
-        data = kostra,
+        data = kostra_test_data,
         units = "9999",
         year = 2025
       ),
@@ -108,7 +108,7 @@ testthat::test_that(
     testthat::expect_error(
       compare_kostra_units(
         variable = "Netto_driftsresultat",
-        data = kostra,
+        data = kostra_test_data,
         year = 2025,
         start_year = 2025
       )

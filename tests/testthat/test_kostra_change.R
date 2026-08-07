@@ -4,7 +4,7 @@ testthat::test_that(
   {
     result <- kostra_change(
       variable = "Netto_driftsresultat",
-      data = kostra,
+      data = kostra_test_data,
       start_year = 2020,
       end_year = 2025
     )
@@ -29,7 +29,7 @@ testthat::test_that(
   {
     result <- kostra_change(
       variable = "Frie_inntekter_per_innbygger",
-      data = kostra,
+      data = kostra_test_data,
       start_year = 2020,
       end_year = 2025
     )
@@ -45,7 +45,7 @@ testthat::test_that(
   {
     result <- kostra_change(
       variable = "Netto_driftsresultat",
-      data = kostra,
+      data = kostra_test_data,
       start_year = 2020,
       end_year = 2025
     )
@@ -62,7 +62,7 @@ testthat::test_that(
   {
     result <- kostra_change(
       variable = "Netto_driftsresultat",
-      data = kostra,
+      data = kostra_test_data,
       start_year = 2015,
       end_year = 2025
     )
@@ -86,7 +86,7 @@ testthat::test_that(
     testthat::expect_error(
       kostra_change(
         variable = "Netto_driftsresultat",
-        data = kostra,
+        data = kostra_test_data,
         start_year = 2025,
         end_year = 2020
       )

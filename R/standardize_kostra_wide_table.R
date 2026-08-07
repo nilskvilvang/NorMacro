@@ -36,6 +36,11 @@ standardize_kostra_wide_table <- function(
       regions,
       by = "Enhet"
     ) |>
+    dplyr::mutate(
+      Enhet_navn = clean_kostra_unit_name(
+        .data$Enhet_navn
+      )
+    ) |>
     dplyr::filter(
       dplyr::if_any(
         dplyr::all_of(indicator_names),
@@ -54,4 +59,3 @@ standardize_kostra_wide_table <- function(
       Aar
     )
 }
-

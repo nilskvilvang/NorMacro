@@ -99,8 +99,8 @@ plot_kostra_benchmark <- function(variable,
       "rect",
       xmin = benchmark$Q1[[1]],
       xmax = benchmark$Q3[[1]],
-      ymin = -0.035,
-      ymax = 0.035,
+      ymin = -0.025,
+      ymax = 0.025,
       alpha = 0.15
     ) +
     ggplot2::annotate(
@@ -114,14 +114,15 @@ plot_kostra_benchmark <- function(variable,
     ) +
     ggplot2::annotate(
       "text",
-      x = mean(c(
-        benchmark$Q1[[1]],
-        benchmark$Q3[[1]]
-      )),
-      y = 0.024,
+      x = mean(
+        c(
+          benchmark$Q1[[1]],
+          benchmark$Q3[[1]]
+        )
+      ),
+      y = 0.032,
       label = "Midtre 50 %",
-      size = 3,
-      vjust = 0.5
+      size = 3
     ) +
     ggplot2::annotate(
       "text",
@@ -132,9 +133,16 @@ plot_kostra_benchmark <- function(variable,
     ) +
     ggplot2::geom_point(
       data = plot_data |>
-        dplyr::filter(!.data$Valgt),
+        dplyr::filter(
+          !.data$Valgt
+        ),
+      position = ggplot2::position_jitter(
+        width = 0,
+        height = 0.018,
+        seed = 123
+      ),
       size = 2.5,
-      alpha = 0.45
+      alpha = 0.55
     ) +
     ggplot2::geom_point(data = plot_data |>
                           dplyr::filter(.data$Valgt),
