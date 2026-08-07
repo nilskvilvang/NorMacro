@@ -111,6 +111,10 @@ variable_summary <- function(
   # Identifiser datasettstype
   # ------------------------------------------------------------
   
+  if (is.null(metadata)) {
+    metadata <- get_metadata(data)
+  }
+  
   has_country_column <- "Land" %in% names(data)
   
   has_kostra <- all(
@@ -207,10 +211,7 @@ variable_summary <- function(
     
     # Viktig: hent metadata mens objektet fortsatt
     # har KOSTRA-strukturen og attributtene.
-    if (is.null(metadata)) {
-      metadata <- get_metadata(data)
-    }
-    
+
     selected_unit <- data |>
       dplyr::filter(
         .data$Enhet == unit

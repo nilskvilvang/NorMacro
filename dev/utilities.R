@@ -23,3 +23,13 @@
 
 # Test tid det tar å kjøre funksjon
 # system.time({international <- get_international_macro()})
+
+
+# kostra <- get_kostra_keyfigures(
+  #regions = c(
+    #"0301",
+    #"4601",
+    #"5001"
+  #),
+ # years = 2015:2025
+#)
