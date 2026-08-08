@@ -1,6 +1,8 @@
 
 test_that("get_kostra_keyfigures returns standardized data", {
   
+  skip_if_not_live_api()
+  
   result <- get_kostra_keyfigures(
     regions = "0301",
     years = 2024
@@ -27,6 +29,8 @@ test_that("get_kostra_keyfigures returns standardized data", {
 
 test_that("get_kostra_financial_keyfigures returns standardized data", {
   
+  skip_if_not_live_api()
+  
   result <- get_kostra_financial_keyfigures(
     regions = "0301",
     concepts = "AGD23",
@@ -50,6 +54,8 @@ test_that("get_kostra_financial_keyfigures returns standardized data", {
 })
 
 test_that("get_kostra_main_accounts returns standardized data", {
+  
+  skip_if_not_live_api()
   
   result <- get_kostra_main_accounts(
     regions = "0301",

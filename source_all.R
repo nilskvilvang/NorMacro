@@ -270,6 +270,17 @@ source("R/set_kostra_attributes.R")
 source("R/get_px_variable.R")
 source("R/kostra_metadata.R")
 
+source("R/clean_kostra_unit_name.R")
+source("R/get_kostra_group_membership.R")
+source("R/get_kostra_group.R")
+source("R/get_kostra_peer_group.R")
+source("R/filter_kostra_peer_group.R")
+source("R/get_kostra_group_membership_history.R")
+source("R/get_kostra_peer_group_history.R")
+source("R/filter_kostra_peer_group_history.R")
+source("R/get_kostra_peer_group_data.R")
+
+
 source("R/get_kostra_table.R")
 source("R/get_kostra_regions.R")
 
@@ -392,6 +403,8 @@ source("R/compare_kostra_units.R")
 source("R/kostra_summary.R")
 source("R/benchmark_kostra.R")
 source("R/kostra_timeseries_benchmark.R")
+source("R/benchmark_kostra_peer_group.R")
+source("R/kostra_timeseries_benchmark_peer_group.R")
 
 
 ## ============================================================================
@@ -402,3 +415,5 @@ source("R/plot_kostra_benchmark.R")
 source("R/plot_kostra_ranking.R")
 source("R/plot_kostra_timeseries_benchmark.R")
 source("R/plot_kostra_position_over_time.R")
+source("R/plot_kostra_timeseries_benchmark_peer_group.R")
+source("R/plot_kostra_position_over_time_peer_group.R")

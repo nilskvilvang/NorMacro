@@ -60,3 +60,19 @@
 #   ),
 #   years = 2015:2025
 # )
+
+
+## For å kjøre tests uten live pga timinig:
+
+# Sys.setenv(
+#   NORMACRO_RUN_LIVE_TESTS = "true"
+# )
+# 
+# devtools::test()
+
+## Deretter
+
+# Sys.unsetenv(
+#   "NORMACRO_RUN_LIVE_TESTS"
+# )
+
