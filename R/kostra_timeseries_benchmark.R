@@ -9,8 +9,11 @@ kostra_timeseries_benchmark <- function(
     comparison = c(
       "data",
       "kostra_group",
-      "county"
+      "county",
+      "custom"
     ),
+    comparison_units = NULL,
+    comparison_name = NULL,
     table = "12134"
 ) {
   
@@ -115,6 +118,8 @@ kostra_timeseries_benchmark <- function(
       start_year = start_year,
       end_year = end_year,
       comparison = comparison,
+      comparison_units = comparison_units,
+      comparison_name = comparison_name,
       table = table
     )
     
@@ -340,7 +345,7 @@ kostra_timeseries_benchmark <- function(
   }
   
   # ------------------------------------------------------------
-  # Sammenligningsmetadata
+  # Sammenligningsmetadata i resultatet
   # ------------------------------------------------------------
   
   if (!is.null(comparison_info)) {
@@ -425,14 +430,17 @@ kostra_timeseries_benchmark <- function(
   
   if (!is.null(comparison_info)) {
     
+    comparison_group <- switch(
+      comparison,
+      kostra_group = "KOSTRA-gruppe",
+      county = "Fylke",
+      custom = "Egendefinert gruppe"
+    )
+    
     attr(
       selected_unit,
       "comparison_group"
-    ) <- if (comparison == "kostra_group") {
-      "KOSTRA-gruppe"
-    } else {
-      "Fylke"
-    }
+    ) <- comparison_group
     
     attr(
       selected_unit,
@@ -443,6 +451,14 @@ kostra_timeseries_benchmark <- function(
       selected_unit,
       "comparison_group_name"
     ) <- comparison_info$group_name
+    
+    if (comparison == "custom") {
+      
+      attr(
+        selected_unit,
+        "comparison_units"
+      ) <- comparison_info$comparison_units
+    }
   }
   
   if (nrow(meta) > 0L) {
@@ -476,4 +492,5 @@ kostra_timeseries_benchmark <- function(
   
   selected_unit
 }
+
 

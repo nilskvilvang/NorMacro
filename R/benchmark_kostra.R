@@ -8,8 +8,11 @@ benchmark_kostra <- function(
     comparison = c(
       "data",
       "kostra_group",
-      "county"
+      "county",
+      "custom"
     ),
+    comparison_units = NULL,
+    comparison_name = NULL,
     table = "12134"
 ) {
   
@@ -67,6 +70,8 @@ benchmark_kostra <- function(
       start_year = year,
       end_year = year,
       comparison = comparison,
+      comparison_units = comparison_units,
+      comparison_name = comparison_name,
       table = table
     )
     
@@ -295,14 +300,17 @@ benchmark_kostra <- function(
   
   if (!is.null(comparison_info)) {
     
+    comparison_group <- switch(
+      comparison,
+      kostra_group = "KOSTRA-gruppe",
+      county = "Fylke",
+      custom = "Egendefinert gruppe"
+    )
+    
     attr(
       result,
       "comparison_group"
-    ) <- if (comparison == "kostra_group") {
-      "KOSTRA-gruppe"
-    } else {
-      "Fylke"
-    }
+    ) <- comparison_group
     
     attr(
       result,
@@ -313,6 +321,14 @@ benchmark_kostra <- function(
       result,
       "comparison_group_name"
     ) <- comparison_info$group_name
+    
+    if (comparison == "custom") {
+      
+      attr(
+        result,
+        "comparison_units"
+      ) <- comparison_info$comparison_units
+    }
   }
   
   class(result) <- c(
@@ -322,4 +338,5 @@ benchmark_kostra <- function(
   
   result
 }
+
 

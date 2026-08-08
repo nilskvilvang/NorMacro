@@ -322,3 +322,96 @@ testthat::test_that(
     )
   }
 )
+
+testthat::test_that(
+  "plot_kostra_timeseries_benchmark supports custom comparison",
+  {
+    skip_if_not_live_api()
+    
+    p <- plot_kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "custom",
+      comparison_units = c(
+        "1103",
+        "1108",
+        "1120",
+        "1121",
+        "1122",
+        "1124"
+      ),
+      comparison_name = "Nabokommuner"
+    )
+    
+    testthat::expect_s3_class(
+      p,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      p$labels$title,
+      "Netto driftsresultat"
+    )
+    
+    testthat::expect_equal(
+      p$labels$subtitle,
+      "Stavanger - 2020-2025 | Nabokommuner"
+    )
+    
+    testthat::expect_equal(
+      p$data$Aar,
+      2020:2025
+    )
+    
+    testthat::expect_equal(
+      p$data$Antall_enheter,
+      rep(6L, 6)
+    )
+    
+    testthat::expect_equal(
+      p$data$Verdi,
+      c(
+        4.3,
+        8.0,
+        6.4,
+        3.2,
+        -0.1,
+        2.9
+      )
+    )
+    
+    testthat::expect_equal(
+      attr(
+        p$data,
+        "comparison"
+      ),
+      "custom"
+    )
+    
+    testthat::expect_equal(
+      attr(
+        p$data,
+        "comparison_group_name"
+      ),
+      "Nabokommuner"
+    )
+    
+    testthat::expect_equal(
+      attr(
+        p$data,
+        "comparison_units"
+      ),
+      c(
+        "1103",
+        "1108",
+        "1120",
+        "1121",
+        "1122",
+        "1124"
+      )
+    )
+  }
+)
+

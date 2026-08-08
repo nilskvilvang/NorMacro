@@ -359,5 +359,161 @@ testthat::test_that(
   }
 )
 
+testthat::test_that(
+  "kostra_timeseries_benchmark supports custom comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "custom",
+      comparison_units = c(
+        "1103",
+        "1108",
+        "1120",
+        "1121",
+        "1122",
+        "1124"
+      ),
+      comparison_name = "Nabokommuner"
+    )
+    
+    testthat::expect_equal(
+      result$Aar,
+      2020:2025
+    )
+    
+    testthat::expect_equal(
+      result$Antall_enheter,
+      rep(6L, 6)
+    )
+    
+    testthat::expect_equal(
+      result$Rang,
+      c(
+        2L,
+        2L,
+        3L,
+        4L,
+        4L,
+        5L
+      )
+    )
+    
+    testthat::expect_equal(
+      result$Percentil,
+      c(
+        80,
+        80,
+        60,
+        40,
+        40,
+        20
+      )
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison"),
+      "custom"
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_group"),
+      "Egendefinert gruppe"
+    )
+    
+    testthat::expect_null(
+      attr(result, "comparison_group_code")
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_group_name"),
+      "Nabokommuner"
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_units"),
+      c(
+        "1103",
+        "1108",
+        "1120",
+        "1121",
+        "1122",
+        "1124"
+      )
+    )
+  }
+)
+
+testthat::test_that(
+  "kostra_timeseries_benchmark custom comparison matches explicit data",
+  {
+    skip_if_not_live_api()
+    
+    custom_info <- prepare_kostra_comparison(
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "custom",
+      comparison_units = c(
+        "1103",
+        "1108",
+        "1120",
+        "1121",
+        "1122",
+        "1124"
+      ),
+      comparison_name = "Nabokommuner"
+    )
+    
+    custom_result <- kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "custom",
+      comparison_units = custom_info$comparison_units,
+      comparison_name = "Nabokommuner"
+    )
+    
+    data_result <- kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      data = custom_info$data,
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025
+    )
+    
+    testthat::expect_equal(
+      custom_result |>
+        dplyr::select(
+          Aar,
+          Verdi,
+          Rang,
+          Antall_enheter,
+          Percentil,
+          Gjennomsnitt,
+          Median,
+          Q1,
+          Q3
+        ),
+      data_result |>
+        dplyr::select(
+          Aar,
+          Verdi,
+          Rang,
+          Antall_enheter,
+          Percentil,
+          Gjennomsnitt,
+          Median,
+          Q1,
+          Q3
+        )
+    )
+  }
+)
 
 

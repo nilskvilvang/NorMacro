@@ -473,3 +473,136 @@ testthat::test_that(
     )
   }
 )
+
+testthat::test_that(
+  "plot_kostra_position_over_time supports custom percentile comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- plot_kostra_position_over_time(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "custom",
+      comparison_units = c(
+        "1103",
+        "1108",
+        "1120",
+        "1121",
+        "1122",
+        "1124"
+      ),
+      comparison_name = "Nabokommuner"
+    )
+    
+    testthat::expect_s3_class(
+      result,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      result$data$Percentil,
+      c(
+        80,
+        80,
+        60,
+        40,
+        40,
+        20
+      )
+    )
+    
+    testthat::expect_equal(
+      result$data$Antall_enheter,
+      rep(6L, 6)
+    )
+    
+    testthat::expect_equal(
+      result$labels$subtitle,
+      "Stavanger - 2020-2025 - 6 enheter | Nabokommuner"
+    )
+    
+    testthat::expect_equal(
+      result$labels$y,
+      "Percentil"
+    )
+    
+    testthat::expect_equal(
+      attr(
+        result$data,
+        "comparison"
+      ),
+      "custom"
+    )
+    
+    testthat::expect_equal(
+      attr(
+        result$data,
+        "comparison_group_name"
+      ),
+      "Nabokommuner"
+    )
+  }
+)
+
+testthat::test_that(
+  "plot_kostra_position_over_time supports custom rank comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- plot_kostra_position_over_time(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      metric = "rank",
+      comparison = "custom",
+      comparison_units = c(
+        "1103",
+        "1108",
+        "1120",
+        "1121",
+        "1122",
+        "1124"
+      ),
+      comparison_name = "Nabokommuner"
+    )
+    
+    testthat::expect_s3_class(
+      result,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      result$data$Rang,
+      c(
+        2L,
+        2L,
+        3L,
+        4L,
+        4L,
+        5L
+      )
+    )
+    
+    testthat::expect_equal(
+      result$labels$subtitle,
+      "Stavanger - 2020-2025 - 6 enheter | Nabokommuner"
+    )
+    
+    testthat::expect_equal(
+      result$labels$y,
+      "Rang"
+    )
+    
+    rank_scale <- result$scales$get_scales(
+      "y"
+    )
+    
+    testthat::expect_equal(
+      rank_scale$breaks,
+      1:6
+    )
+  }
+)

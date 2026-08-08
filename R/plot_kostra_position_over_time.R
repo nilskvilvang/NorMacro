@@ -1,43 +1,76 @@
 
-plot_kostra_position_over_time <- function(variable,
-                                           data = NULL,
-                                           unit,
-                                           start_year = NULL,
-                                           end_year = NULL,
-                                           metric = c("percentile", "rank"),
-                                           descending = TRUE,
-                                           comparison = c("data", "kostra_group", "county"),
-                                           table = "12134") {
-  comparison <- match.arg(comparison)
+plot_kostra_position_over_time <- function(
+    variable,
+    data = NULL,
+    unit,
+    start_year = NULL,
+    end_year = NULL,
+    metric = c(
+      "percentile",
+      "rank"
+    ),
+    descending = TRUE,
+    comparison = c(
+      "data",
+      "kostra_group",
+      "county",
+      "custom"
+    ),
+    comparison_units = NULL,
+    comparison_name = NULL,
+    table = "12134"
+) {
   
-  metric <- match.arg(metric)
+  comparison <- match.arg(
+    comparison
+  )
   
-  if (!is.character(unit) ||
-      length(unit) != 1L ||
-      is.na(unit) ||
-      unit == "") {
-    stop("`unit` må angi én gyldig KOSTRA-enhet.", call. = FALSE)
+  metric <- match.arg(
+    metric
+  )
+  
+  if (
+    !is.character(unit) ||
+    length(unit) != 1L ||
+    is.na(unit) ||
+    unit == ""
+  ) {
+    stop(
+      "`unit` må angi én gyldig KOSTRA-enhet.",
+      call. = FALSE
+    )
   }
   
-  if (!is.logical(descending) ||
-      length(descending) != 1L ||
-      is.na(descending)) {
-    stop("`descending` må være `TRUE` eller `FALSE`.", call. = FALSE)
+  if (
+    !is.logical(descending) ||
+    length(descending) != 1L ||
+    is.na(descending)
+  ) {
+    stop(
+      "`descending` må være `TRUE` eller `FALSE`.",
+      call. = FALSE
+    )
   }
   
-  if (comparison == "data" &&
-      is.null(data)) {
-    stop("`data` må oppgis når `comparison = \"data\"`.", call. = FALSE)
+  if (
+    comparison == "data" &&
+    is.null(data)
+  ) {
+    stop(
+      "`data` må oppgis når `comparison = \"data\"`.",
+      call. = FALSE
+    )
   }
   
-  if (comparison == "data" &&
-      !is.data.frame(data)) {
-    stop("`data` må være et datasett.", call. = FALSE)
+  if (
+    comparison == "data" &&
+    !is.data.frame(data)
+  ) {
+    stop(
+      "`data` må være et datasett.",
+      call. = FALSE
+    )
   }
-  
-  # ------------------------------------------------------------
-  # Benchmark
-  # ------------------------------------------------------------
   
   benchmark <- kostra_timeseries_benchmark(
     variable = variable,
@@ -47,6 +80,8 @@ plot_kostra_position_over_time <- function(variable,
     end_year = end_year,
     descending = descending,
     comparison = comparison,
+    comparison_units = comparison_units,
+    comparison_name = comparison_name,
     table = table
   )
   
@@ -120,6 +155,11 @@ plot_kostra_position_over_time <- function(variable,
   
   comparison_group_name <- attr(benchmark, "comparison_group_name")
   
+  comparison_group_name <- attr(
+    benchmark,
+    "comparison_group_name"
+  )
+  
   comparison_label <- switch(
     comparison,
     
@@ -127,13 +167,29 @@ plot_kostra_position_over_time <- function(variable,
     
     kostra_group = comparison_group_name,
     
-    county = if (!is.null(comparison_group_name) &&
-                 length(comparison_group_name) > 0L &&
-                 !is.na(comparison_group_name) &&
-                 comparison_group_name != "") {
-      paste0("Fylke: ", comparison_group_name)
+    county = if (
+      !is.null(comparison_group_name) &&
+      length(comparison_group_name) > 0L &&
+      !is.na(comparison_group_name) &&
+      comparison_group_name != ""
+    ) {
+      paste0(
+        "Fylke: ",
+        comparison_group_name
+      )
     } else {
       "Fylke"
+    },
+    
+    custom = if (
+      !is.null(comparison_group_name) &&
+      length(comparison_group_name) > 0L &&
+      !is.na(comparison_group_name) &&
+      comparison_group_name != ""
+    ) {
+      comparison_group_name
+    } else {
+      "Egendefinert gruppe"
     }
   )
   

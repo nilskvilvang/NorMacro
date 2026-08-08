@@ -5,8 +5,11 @@ prepare_kostra_comparison <- function(
     end_year,
     comparison = c(
       "kostra_group",
-      "county"
+      "county",
+      "custom"
     ),
+    comparison_units = NULL,
+    comparison_name = NULL,
     table = "12134"
 ) {
   
@@ -58,6 +61,69 @@ prepare_kostra_comparison <- function(
     end_year
   )
   
+  # ------------------------------------------------------------
+  # Custom comparison
+  # ------------------------------------------------------------
+  
+  if (comparison == "custom") {
+    
+    if (
+      is.null(comparison_units) ||
+      !is.character(comparison_units) ||
+      length(comparison_units) == 0L ||
+      anyNA(comparison_units) ||
+      any(comparison_units == "")
+    ) {
+      stop(
+        paste0(
+          "`comparison_units` må være en ikke-tom ",
+          "karaktervektor med gyldige KOSTRA-enheter ",
+          "når `comparison = \"custom\"`."
+        ),
+        call. = FALSE
+      )
+    }
+    
+    comparison_units <- sort(
+      unique(
+        comparison_units
+      )
+    )
+    
+    if (!unit %in% comparison_units) {
+      stop(
+        paste0(
+          "`unit` må inngå i `comparison_units` ",
+          "når `comparison = \"custom\"`."
+        ),
+        call. = FALSE
+      )
+    }
+    
+    if (
+      !is.null(comparison_name) &&
+      (
+        !is.character(comparison_name) ||
+        length(comparison_name) != 1L ||
+        is.na(comparison_name) ||
+        comparison_name == ""
+      )
+    ) {
+      stop(
+        "`comparison_name` må være én gyldig tekstverdi eller `NULL`.",
+        call. = FALSE
+      )
+    }
+    
+    if (is.null(comparison_name)) {
+      comparison_name <- "Egendefinert gruppe"
+    }
+  }
+  
+  # ------------------------------------------------------------
+  # Build comparison data
+  # ------------------------------------------------------------
+  
   data <- switch(
     comparison,
     
@@ -71,8 +137,28 @@ prepare_kostra_comparison <- function(
       unit = unit,
       years = years,
       table = table
+    ),
+    
+    custom = switch(
+      as.character(table),
+      
+      "12134" = get_kostra_keyfigures(
+        regions = comparison_units,
+        years = years
+      ),
+      
+      stop(
+        "KOSTRA-tabell `",
+        table,
+        "` støttes ikke for `comparison = \"custom\"`.",
+        call. = FALSE
+      )
     )
   )
+  
+  # ------------------------------------------------------------
+  # Selected unit
+  # ------------------------------------------------------------
   
   selected <- data |>
     dplyr::filter(
@@ -91,6 +177,10 @@ prepare_kostra_comparison <- function(
   
   unit_name <- selected$Enhet_navn[[1]]
   
+  # ------------------------------------------------------------
+  # Comparison metadata
+  # ------------------------------------------------------------
+  
   if (comparison == "kostra_group") {
     
     group_code <- attr(
@@ -103,7 +193,7 @@ prepare_kostra_comparison <- function(
       "kostra_group_name"
     )
     
-  } else {
+  } else if (comparison == "county") {
     
     group_code <- attr(
       data,
@@ -114,7 +204,16 @@ prepare_kostra_comparison <- function(
       data,
       "kostra_county_name"
     )
+    
+  } else {
+    
+    group_code <- NULL
+    group_name <- comparison_name
   }
+  
+  # ------------------------------------------------------------
+  # Result
+  # ------------------------------------------------------------
   
   list(
     data = data,
@@ -126,6 +225,21 @@ prepare_kostra_comparison <- function(
     comparison = comparison,
     group_code = group_code,
     group_name = group_name,
+    comparison_units = if (
+      comparison == "custom"
+    ) {
+      comparison_units
+    } else {
+      NULL
+    },
+    comparison_name = if (
+      comparison == "custom"
+    ) {
+      comparison_name
+    } else {
+      NULL
+    },
     table = as.character(table)
   )
 }
+

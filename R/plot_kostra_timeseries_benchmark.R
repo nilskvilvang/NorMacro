@@ -9,8 +9,11 @@ plot_kostra_timeseries_benchmark <- function(
     comparison = c(
       "data",
       "kostra_group",
-      "county"
+      "county",
+      "custom"
     ),
+    comparison_units = NULL,
+    comparison_name = NULL,
     table = "12134"
 ) {
   
@@ -62,6 +65,8 @@ plot_kostra_timeseries_benchmark <- function(
     end_year = end_year,
     descending = descending,
     comparison = comparison,
+    comparison_units = comparison_units,
+    comparison_name = comparison_name,
     table = table
   )
   
@@ -149,6 +154,17 @@ plot_kostra_timeseries_benchmark <- function(
       )
     } else {
       "Fylke"
+    },
+    
+    custom = if (
+      !is.null(comparison_group_name) &&
+      length(comparison_group_name) > 0L &&
+      !is.na(comparison_group_name) &&
+      comparison_group_name != ""
+    ) {
+      comparison_group_name
+    } else {
+      "Egendefinert gruppe"
     }
   )
   
@@ -377,5 +393,6 @@ plot_kostra_timeseries_benchmark <- function(
   
   p
 }
+
 
 

@@ -280,3 +280,137 @@ testthat::test_that(
   }
 )
 
+testthat::test_that(
+  "benchmark_kostra supports custom comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- benchmark_kostra(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      year = 2025,
+      comparison = "custom",
+      comparison_units = c(
+        "1103",
+        "1108",
+        "1120",
+        "1121",
+        "1122",
+        "1124"
+      ),
+      comparison_name = "Nabokommuner"
+    )
+    
+    testthat::expect_equal(
+      result$Enhet,
+      "1103"
+    )
+    
+    testthat::expect_equal(
+      result$Antall_enheter,
+      6L
+    )
+    
+    testthat::expect_equal(
+      result$Rang,
+      5L
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison"),
+      "custom"
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_group"),
+      "Egendefinert gruppe"
+    )
+    
+    testthat::expect_null(
+      attr(result, "comparison_group_code")
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_group_name"),
+      "Nabokommuner"
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_units"),
+      c(
+        "1103",
+        "1108",
+        "1120",
+        "1121",
+        "1122",
+        "1124"
+      )
+    )
+  }
+)
+
+testthat::test_that(
+  "benchmark_kostra custom comparison matches explicit data benchmark",
+  {
+    skip_if_not_live_api()
+    
+    custom_info <- prepare_kostra_comparison(
+      unit = "1103",
+      start_year = 2025,
+      end_year = 2025,
+      comparison = "custom",
+      comparison_units = c(
+        "1103",
+        "1108",
+        "1120",
+        "1121",
+        "1122",
+        "1124"
+      ),
+      comparison_name = "Nabokommuner"
+    )
+    
+    custom_result <- benchmark_kostra(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      year = 2025,
+      comparison = "custom",
+      comparison_units = custom_info$comparison_units,
+      comparison_name = "Nabokommuner"
+    )
+    
+    data_result <- benchmark_kostra(
+      variable = "Netto_driftsresultat",
+      data = custom_info$data,
+      unit = "1103",
+      year = 2025
+    )
+    
+    testthat::expect_equal(
+      custom_result |>
+        dplyr::select(
+          Verdi,
+          Rang,
+          Antall_enheter,
+          Percentil,
+          Gjennomsnitt,
+          Median,
+          Q1,
+          Q3
+        ),
+      data_result |>
+        dplyr::select(
+          Verdi,
+          Rang,
+          Antall_enheter,
+          Percentil,
+          Gjennomsnitt,
+          Median,
+          Q1,
+          Q3
+        )
+    )
+  }
+)
+
+
