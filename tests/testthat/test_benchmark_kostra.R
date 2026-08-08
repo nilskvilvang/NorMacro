@@ -125,3 +125,103 @@ testthat::test_that(
     )
   }
 )
+
+testthat::test_that(
+  "benchmark_kostra keeps data comparison as default",
+  {
+    result <- benchmark_kostra(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      year = 2025
+    )
+    
+    testthat::expect_equal(
+      result$Antall_enheter,
+      3L
+    )
+    
+    testthat::expect_equal(
+      result$Enhet,
+      "0301"
+    )
+    
+    testthat::expect_equal(
+      result$Verdi,
+      3.7
+    )
+  }
+)
+
+testthat::test_that(
+  "benchmark_kostra supports KOSTRA group comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- benchmark_kostra(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      year = 2025,
+      comparison = "kostra_group"
+    )
+    
+    testthat::expect_equal(
+      result$Enhet,
+      "1103"
+    )
+    
+    testthat::expect_equal(
+      result$KOSTRA_gruppe,
+      "EKG12"
+    )
+    
+    testthat::expect_equal(
+      result$Antall_enheter,
+      11L
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_group"),
+      "KOSTRA-gruppe"
+    )
+  }
+)
+
+testthat::test_that(
+  "benchmark_kostra requires data for data comparison",
+  {
+    testthat::expect_error(
+      benchmark_kostra(
+        variable = "Netto_driftsresultat",
+        unit = "1103",
+        year = 2025
+      ),
+      "`data` må oppgis"
+    )
+  }
+)
+
+testthat::test_that(
+  "benchmark_kostra data comparison is backward compatible",
+  {
+    default_result <- benchmark_kostra(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      year = 2025
+    )
+    
+    explicit_result <- benchmark_kostra(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      year = 2025,
+      comparison = "data"
+    )
+    
+    testthat::expect_equal(
+      default_result,
+      explicit_result
+    )
+  }
+)

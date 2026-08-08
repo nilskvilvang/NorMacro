@@ -98,3 +98,92 @@ testthat::test_that(
     )
   }
 )
+
+testthat::test_that(
+  "plot_kostra_timeseries_benchmark keeps data comparison as default",
+  {
+    default_plot <- plot_kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      start_year = 2020,
+      end_year = 2025
+    )
+    
+    explicit_plot <- plot_kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "data"
+    )
+    
+    testthat::expect_s3_class(
+      default_plot,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      default_plot$data,
+      explicit_plot$data
+    )
+    
+    testthat::expect_equal(
+      default_plot$labels,
+      explicit_plot$labels
+    )
+  }
+)
+
+
+testthat::test_that(
+  "plot_kostra_timeseries_benchmark requires data for data comparison",
+  {
+    testthat::expect_error(
+      plot_kostra_timeseries_benchmark(
+        variable = "Netto_driftsresultat",
+        unit = "1103",
+        start_year = 2020,
+        end_year = 2025
+      ),
+      "`data` må oppgis"
+    )
+  }
+)
+
+
+testthat::test_that(
+  "plot_kostra_timeseries_benchmark supports KOSTRA group comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- plot_kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "kostra_group"
+    )
+    
+    testthat::expect_s3_class(
+      result,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      result$labels$title,
+      "Netto driftsresultat"
+    )
+    
+    testthat::expect_equal(
+      result$labels$subtitle,
+      "Stavanger - KOSTRA-gruppe 12 - 2020-2025"
+    )
+    
+    testthat::expect_equal(
+      result$labels$caption,
+      "Kilde: SSB KOSTRA, tabell 12134"
+    )
+  }
+)

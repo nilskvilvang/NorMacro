@@ -1,16 +1,70 @@
 
 plot_kostra_position_over_time <- function(
     variable,
-    data,
+    data = NULL,
     unit,
     start_year = NULL,
     end_year = NULL,
-    descending = TRUE,
     metric = c(
       "percentile",
       "rank"
-    )
+    ),
+    descending = TRUE,
+    comparison = c(
+      "data",
+      "kostra_group"
+    ),
+    table = "12134"
 ) {
+  
+  comparison <- match.arg(
+    comparison
+  )
+  
+  metric <- match.arg(
+    metric
+  )
+  
+  if (
+    !is.character(unit) ||
+    length(unit) != 1L ||
+    is.na(unit) ||
+    unit == ""
+  ) {
+    stop(
+      "`unit` må angi én gyldig KOSTRA-enhet.",
+      call. = FALSE
+    )
+  }
+  
+  if (comparison == "kostra_group") {
+    
+    return(
+      plot_kostra_position_over_time_peer_group(
+        variable = variable,
+        unit = unit,
+        start_year = start_year,
+        end_year = end_year,
+        metric = metric,
+        descending = descending,
+        table = table
+      )
+    )
+  }
+  
+  if (is.null(data)) {
+    stop(
+      "`data` må oppgis når `comparison = \"data\"`.",
+      call. = FALSE
+    )
+  }
+  
+  if (!is.data.frame(data)) {
+    stop(
+      "`data` må være et datasett.",
+      call. = FALSE
+    )
+  }
   
   metric <- match.arg(
     metric

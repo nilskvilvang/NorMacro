@@ -1,11 +1,52 @@
 
 benchmark_kostra <- function(
     variable,
-    data,
-    unit,
+    data = NULL,
+    unit = NULL,
     year = NULL,
-    descending = TRUE
+    descending = TRUE,
+    comparison = c(
+      "data",
+      "kostra_group"
+    ),
+    table = "12134"
 ) {
+  
+  comparison <- match.arg(
+    comparison
+  )
+  
+  if (
+    !is.character(unit) ||
+    length(unit) != 1L ||
+    is.na(unit) ||
+    unit == ""
+  ) {
+    stop(
+      "`unit` må angi én gyldig KOSTRA-enhet.",
+      call. = FALSE
+    )
+  }
+  
+  if (comparison == "kostra_group") {
+    
+    return(
+      benchmark_kostra_peer_group(
+        variable = variable,
+        unit = unit,
+        year = year,
+        descending = descending,
+        table = table
+      )
+    )
+  }
+  
+  if (is.null(data)) {
+    stop(
+      "`data` må oppgis når `comparison = \"data\"`.",
+      call. = FALSE
+    )
+  }
   
   if (!is.data.frame(data)) {
     stop(

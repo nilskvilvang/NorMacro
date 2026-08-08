@@ -196,3 +196,95 @@ testthat::test_that(
     )
   }
 )
+
+testthat::test_that(
+  "kostra_timeseries_benchmark keeps data comparison as default",
+  {
+    default_result <- kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      start_year = 2020,
+      end_year = 2025
+    )
+    
+    explicit_result <- kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "data"
+    )
+    
+    testthat::expect_equal(
+      default_result,
+      explicit_result
+    )
+  }
+)
+
+
+testthat::test_that(
+  "kostra_timeseries_benchmark requires data for data comparison",
+  {
+    testthat::expect_error(
+      kostra_timeseries_benchmark(
+        variable = "Netto_driftsresultat",
+        unit = "1103",
+        start_year = 2020,
+        end_year = 2025
+      ),
+      "`data` må oppgis"
+    )
+  }
+)
+
+
+testthat::test_that(
+  "kostra_timeseries_benchmark supports KOSTRA group comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "kostra_group"
+    )
+    
+    testthat::expect_equal(
+      result$Aar,
+      2020:2025
+    )
+    
+    testthat::expect_equal(
+      result$Antall_enheter,
+      rep(11L, 6)
+    )
+    
+    testthat::expect_equal(
+      result$Percentil,
+      c(
+        80,
+        100,
+        100,
+        80,
+        40,
+        50
+      )
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_group"),
+      "KOSTRA-gruppe"
+    )
+    
+    testthat::expect_equal(
+      attr(result, "kostra_group"),
+      "EKG12"
+    )
+  }
+)
+

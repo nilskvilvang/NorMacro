@@ -151,3 +151,134 @@ testthat::test_that(
     )
   }
 )
+
+testthat::test_that(
+  "plot_kostra_position_over_time keeps data comparison as default",
+  {
+    default_plot <- plot_kostra_position_over_time(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      start_year = 2020,
+      end_year = 2025
+    )
+    
+    explicit_plot <- plot_kostra_position_over_time(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "data"
+    )
+    
+    testthat::expect_s3_class(
+      default_plot,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      default_plot$data,
+      explicit_plot$data
+    )
+    
+    testthat::expect_equal(
+      default_plot$labels,
+      explicit_plot$labels
+    )
+  }
+)
+
+
+testthat::test_that(
+  "plot_kostra_position_over_time requires data for data comparison",
+  {
+    testthat::expect_error(
+      plot_kostra_position_over_time(
+        variable = "Netto_driftsresultat",
+        unit = "1103",
+        start_year = 2020,
+        end_year = 2025
+      ),
+      "`data` må oppgis"
+    )
+  }
+)
+
+
+testthat::test_that(
+  "plot_kostra_position_over_time supports KOSTRA group percentile comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- plot_kostra_position_over_time(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      metric = "percentile",
+      comparison = "kostra_group"
+    )
+    
+    testthat::expect_s3_class(
+      result,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      result$data$Percentil,
+      c(
+        80,
+        100,
+        100,
+        80,
+        40,
+        50
+      )
+    )
+    
+    testthat::expect_equal(
+      result$labels$subtitle,
+      "Stavanger - KOSTRA-gruppe 12 - 2020-2025"
+    )
+  }
+)
+
+
+testthat::test_that(
+  "plot_kostra_position_over_time supports KOSTRA group rank comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- plot_kostra_position_over_time(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      metric = "rank",
+      comparison = "kostra_group"
+    )
+    
+    testthat::expect_s3_class(
+      result,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      result$data$Rang,
+      c(
+        3L,
+        1L,
+        1L,
+        3L,
+        7L,
+        6L
+      )
+    )
+    
+    testthat::expect_equal(
+      result$labels$subtitle,
+      "Stavanger - KOSTRA-gruppe 12 - 2020-2025"
+    )
+  }
+)
