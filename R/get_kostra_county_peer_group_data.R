@@ -1,5 +1,5 @@
 
-get_kostra_peer_group_data <- function(
+get_kostra_county_peer_group_data <- function(
     unit,
     years,
     table = "12134"
@@ -38,7 +38,7 @@ get_kostra_peer_group_data <- function(
   start_year <- min(years)
   end_year <- max(years)
   
-  peer_history <- get_kostra_peer_group_history(
+  county_history <- get_kostra_county_peer_group_history(
     unit = unit,
     start_year = start_year,
     end_year = end_year
@@ -47,14 +47,14 @@ get_kostra_peer_group_data <- function(
       .data$Aar %in% years
     )
   
-  if (nrow(peer_history) == 0L) {
+  if (nrow(county_history) == 0L) {
     stop(
-      "Fant ingen historisk KOSTRA-gruppe for valgt kommune og periode.",
+      "Fant ingen historisk fylkestilhørighet for valgt kommune og periode.",
       call. = FALSE
     )
   }
   
-  peer_units <- peer_history$Enhet |>
+  county_units <- county_history$Enhet |>
     unique() |>
     sort()
   
@@ -62,26 +62,26 @@ get_kostra_peer_group_data <- function(
     as.character(table),
     
     "12134" = get_kostra_keyfigures(
-      regions = peer_units,
+      regions = county_units,
       years = years
     ),
     
     stop(
       "KOSTRA-tabell `",
       table,
-      "` støttes ikke av `get_kostra_peer_group_data()`.",
+      "` støttes ikke av `get_kostra_county_peer_group_data()`.",
       call. = FALSE
     )
   )
   
   result <- data |>
     dplyr::inner_join(
-      peer_history |>
+      county_history |>
         dplyr::select(
           Enhet,
           Aar,
-          KOSTRA_gruppe,
-          KOSTRA_gruppe_navn
+          Fylke,
+          Fylke_navn
         ),
       by = c(
         "Enhet",
@@ -95,36 +95,38 @@ get_kostra_peer_group_data <- function(
   
   if (nrow(result) == 0L) {
     stop(
-      "Fant ingen KOSTRA-data for valgt kommunegruppe og periode.",
+      "Fant ingen KOSTRA-data for valgt fylkesgruppe og periode.",
       call. = FALSE
     )
   }
   
-  selected_group <- peer_history |>
+  selected_county <- county_history |>
     dplyr::filter(
       .data$Enhet == unit
     ) |>
     dplyr::distinct(
-      .data$KOSTRA_gruppe,
-      .data$KOSTRA_gruppe_navn
+      Fylke,
+      Fylke_navn
     )
   
-  attr(result, "kostra_peer_unit") <- unit
-  attr(result, "kostra_group_definition") <- "historical"
-  attr(result, "kostra_group_start_year") <- start_year
-  attr(result, "kostra_group_end_year") <- end_year
+  attr(result, "kostra_county_unit") <- unit
+  attr(result, "kostra_county_definition") <- "historical"
+  attr(result, "kostra_county_start_year") <- start_year
+  attr(result, "kostra_county_end_year") <- end_year
   
-  if (nrow(selected_group) == 1L) {
-    attr(
-      result,
-      "kostra_group"
-    ) <- selected_group$KOSTRA_gruppe[[1]]
+  if (nrow(selected_county) == 1L) {
     
     attr(
       result,
-      "kostra_group_name"
-    ) <- selected_group$KOSTRA_gruppe_navn[[1]]
+      "kostra_county"
+    ) <- selected_county$Fylke[[1]]
+    
+    attr(
+      result,
+      "kostra_county_name"
+    ) <- selected_county$Fylke_navn[[1]]
   }
   
   result
 }
+

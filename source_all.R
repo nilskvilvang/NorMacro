@@ -280,6 +280,12 @@ source("R/get_kostra_group_membership_history.R")
 source("R/get_kostra_peer_group_history.R")
 source("R/filter_kostra_peer_group_history.R")
 source("R/get_kostra_peer_group_data.R")
+source("R/get_kostra_county_membership.R")
+source("R/get_kostra_county.R")
+source("R/get_kostra_county_peer_group.R")
+source("R/get_kostra_county_membership_history.R")
+source("R/get_kostra_county_peer_group_history.R")
+source("R/get_kostra_county_peer_group_data.R")
 
 
 source("R/get_kostra_table.R")
