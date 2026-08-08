@@ -73,7 +73,7 @@ get_kostra_group_membership_history <- function(
       membership |>
         dplyr::mutate(
           Aar = year,
-          .after = .data$Enhet_navn
+          .after = Enhet_navn
         )
     }
   )
