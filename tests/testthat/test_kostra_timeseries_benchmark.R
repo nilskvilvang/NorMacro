@@ -288,3 +288,76 @@ testthat::test_that(
   }
 )
 
+testthat::test_that(
+  "kostra_timeseries_benchmark supports county comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2019,
+      end_year = 2025,
+      comparison = "county"
+    )
+    
+    testthat::expect_equal(
+      result$Aar,
+      2019:2025
+    )
+    
+    testthat::expect_equal(
+      result$Fylke,
+      rep("11", 7)
+    )
+    
+    testthat::expect_equal(
+      result$Fylke_navn,
+      rep("Rogaland", 7)
+    )
+    
+    testthat::expect_equal(
+      result$Antall_enheter,
+      c(
+        26L,
+        rep(23L, 6)
+      )
+    )
+    
+    testthat::expect_equal(
+      result$Rang,
+      c(
+        4L,
+        9L,
+        6L,
+        11L,
+        14L,
+        16L,
+        15L
+      )
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison"),
+      "county"
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_group"),
+      "Fylke"
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_group_code"),
+      "11"
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_group_name"),
+      "Rogaland"
+    )
+  }
+)
+
+
+

@@ -286,6 +286,7 @@ source("R/get_kostra_county_peer_group.R")
 source("R/get_kostra_county_membership_history.R")
 source("R/get_kostra_county_peer_group_history.R")
 source("R/get_kostra_county_peer_group_data.R")
+source("R/prepare_kostra_comparison.R")
 
 
 source("R/get_kostra_table.R")

@@ -7,7 +7,8 @@ benchmark_kostra <- function(
     descending = TRUE,
     comparison = c(
       "data",
-      "kostra_group"
+      "kostra_group",
+      "county"
     ),
     table = "12134"
 ) {
@@ -28,18 +29,53 @@ benchmark_kostra <- function(
     )
   }
   
-  if (comparison == "kostra_group") {
+  # ------------------------------------------------------------
+  # Bygg sammenligningsunivers når dette ikke kommer fra data
+  # ------------------------------------------------------------
+  
+  comparison_info <- NULL
+  
+  if (comparison != "data") {
     
-    return(
-      benchmark_kostra_peer_group(
-        variable = variable,
-        unit = unit,
-        year = year,
-        descending = descending,
-        table = table
+    if (is.null(year)) {
+      year <- as.integer(
+        format(
+          Sys.Date(),
+          "%Y"
+        )
       )
+    }
+    
+    if (
+      !is.numeric(year) ||
+      length(year) != 1L ||
+      is.na(year) ||
+      !is.finite(year)
+    ) {
+      stop(
+        "`year` må være ett gyldig år.",
+        call. = FALSE
+      )
+    }
+    
+    year <- as.integer(
+      year
     )
+    
+    comparison_info <- prepare_kostra_comparison(
+      unit = unit,
+      start_year = year,
+      end_year = year,
+      comparison = comparison,
+      table = table
+    )
+    
+    data <- comparison_info$data
   }
+  
+  # ------------------------------------------------------------
+  # Ordinær data-sammenligning
+  # ------------------------------------------------------------
   
   if (is.null(data)) {
     stop(
@@ -170,6 +206,36 @@ benchmark_kostra <- function(
       )
     )
   
+  # ------------------------------------------------------------
+  # Legg på sammenligningsmetadata i selve resultatet
+  # ------------------------------------------------------------
+  
+  if (!is.null(comparison_info)) {
+    
+    if (comparison == "kostra_group") {
+      
+      result <- result |>
+        dplyr::mutate(
+          KOSTRA_gruppe = comparison_info$group_code,
+          KOSTRA_gruppe_navn = comparison_info$group_name,
+          .after = Enhetstype
+        )
+      
+    } else if (comparison == "county") {
+      
+      result <- result |>
+        dplyr::mutate(
+          Fylke = comparison_info$group_code,
+          Fylke_navn = comparison_info$group_name,
+          .after = Enhetstype
+        )
+    }
+  }
+  
+  # ------------------------------------------------------------
+  # Variabelmetadata
+  # ------------------------------------------------------------
+  
   metadata <- get_metadata(
     data
   )
@@ -180,6 +246,7 @@ benchmark_kostra <- function(
     )
   
   if (nrow(meta) > 0L) {
+    
     if ("Display_navn" %in% names(meta)) {
       attr(
         result,
@@ -202,6 +269,10 @@ benchmark_kostra <- function(
     }
   }
   
+  # ------------------------------------------------------------
+  # Analysemetadata
+  # ------------------------------------------------------------
+  
   attr(
     result,
     "variable"
@@ -217,6 +288,33 @@ benchmark_kostra <- function(
     "descending"
   ) <- descending
   
+  attr(
+    result,
+    "comparison"
+  ) <- comparison
+  
+  if (!is.null(comparison_info)) {
+    
+    attr(
+      result,
+      "comparison_group"
+    ) <- if (comparison == "kostra_group") {
+      "KOSTRA-gruppe"
+    } else {
+      "Fylke"
+    }
+    
+    attr(
+      result,
+      "comparison_group_code"
+    ) <- comparison_info$group_code
+    
+    attr(
+      result,
+      "comparison_group_name"
+    ) <- comparison_info$group_name
+  }
+  
   class(result) <- c(
     "kostra_benchmark",
     class(result)
@@ -224,3 +322,4 @@ benchmark_kostra <- function(
   
   result
 }
+

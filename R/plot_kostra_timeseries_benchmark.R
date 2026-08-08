@@ -8,7 +8,8 @@ plot_kostra_timeseries_benchmark <- function(
     descending = TRUE,
     comparison = c(
       "data",
-      "kostra_group"
+      "kostra_group",
+      "county"
     ),
     table = "12134"
 ) {
@@ -29,40 +30,29 @@ plot_kostra_timeseries_benchmark <- function(
     )
   }
   
-  if (comparison == "kostra_group") {
-    
-    return(
-      plot_kostra_timeseries_benchmark_peer_group(
-        variable = variable,
-        unit = unit,
-        start_year = start_year,
-        end_year = end_year,
-        descending = descending,
-        table = table
-      )
-    )
-  }
-  
-  if (is.null(data)) {
+  if (
+    comparison == "data" &&
+    is.null(data)
+  ) {
     stop(
       "`data` må oppgis når `comparison = \"data\"`.",
       call. = FALSE
     )
   }
   
-  if (!is.data.frame(data)) {
+  if (
+    comparison == "data" &&
+    !is.data.frame(data)
+  ) {
     stop(
       "`data` må være et datasett.",
       call. = FALSE
     )
   }
   
-  if (!is.data.frame(data)) {
-    stop(
-      "`data` må være et datasett.",
-      call. = FALSE
-    )
-  }
+  # ------------------------------------------------------------
+  # Benchmark
+  # ------------------------------------------------------------
   
   benchmark <- kostra_timeseries_benchmark(
     variable = variable,
@@ -70,23 +60,27 @@ plot_kostra_timeseries_benchmark <- function(
     unit = unit,
     start_year = start_year,
     end_year = end_year,
-    descending = descending
+    descending = descending,
+    comparison = comparison,
+    table = table
   )
   
-  metadata <- get_metadata(data)
+  # ------------------------------------------------------------
+  # Metadata
+  # ------------------------------------------------------------
   
-  meta <- metadata |>
-    dplyr::filter(
-      .data$Variabel == variable
-    )
+  display_name <- attr(
+    benchmark,
+    "display_name"
+  )
   
-  display_name <- if (
-    nrow(meta) > 0L &&
-    "Display_navn" %in% names(meta)
+  if (
+    is.null(display_name) ||
+    length(display_name) == 0L ||
+    is.na(display_name) ||
+    display_name == ""
   ) {
-    meta$Display_navn[[1]]
-  } else {
-    stringr::str_to_sentence(
+    display_name <- stringr::str_to_sentence(
       gsub(
         "_",
         " ",
@@ -95,13 +89,18 @@ plot_kostra_timeseries_benchmark <- function(
     )
   }
   
-  measure_unit <- if (
-    nrow(meta) > 0L &&
-    "Enhet" %in% names(meta)
+  measure_unit <- attr(
+    benchmark,
+    "unit"
+  )
+  
+  if (
+    is.null(measure_unit) ||
+    length(measure_unit) == 0L ||
+    is.na(measure_unit) ||
+    measure_unit == ""
   ) {
-    meta$Enhet[[1]]
-  } else {
-    NULL
+    measure_unit <- NULL
   }
   
   selected_name <- benchmark$Enhet_navn[[1]]
@@ -122,18 +121,64 @@ plot_kostra_timeseries_benchmark <- function(
     na.rm = TRUE
   )
   
+  # ------------------------------------------------------------
+  # Comparison label
+  # ------------------------------------------------------------
+  
+  comparison_group_name <- attr(
+    benchmark,
+    "comparison_group_name"
+  )
+  
+  comparison_label <- switch(
+    comparison,
+    
+    data = NULL,
+    
+    kostra_group = comparison_group_name,
+    
+    county = if (
+      !is.null(comparison_group_name) &&
+      length(comparison_group_name) > 0L &&
+      !is.na(comparison_group_name) &&
+      comparison_group_name != ""
+    ) {
+      paste0(
+        "Fylke: ",
+        comparison_group_name
+      )
+    } else {
+      "Fylke"
+    }
+  )
+  
+  # ------------------------------------------------------------
   # Benchmarkreferansen gir først mening når minst
   # to enheter har observasjon samme år.
+  # ------------------------------------------------------------
   
   reference_data <- benchmark |>
     dplyr::filter(
       .data$Antall_enheter >= 2L
     )
   
+  # ------------------------------------------------------------
+  # Caption
+  # ------------------------------------------------------------
+  
   kostra_table <- attr(
-    data,
+    benchmark,
     "kostra_table"
   )
+  
+  if (
+    is.null(kostra_table) ||
+    length(kostra_table) == 0L ||
+    is.na(kostra_table) ||
+    kostra_table == ""
+  ) {
+    kostra_table <- table
+  }
   
   caption <- "Kilde: SSB KOSTRA"
   
@@ -150,6 +195,10 @@ plot_kostra_timeseries_benchmark <- function(
     )
   }
   
+  # ------------------------------------------------------------
+  # Subtitle
+  # ------------------------------------------------------------
+  
   subtitle <- paste0(
     selected_name,
     " - ",
@@ -157,6 +206,23 @@ plot_kostra_timeseries_benchmark <- function(
     "-",
     last_year
   )
+  
+  if (
+    !is.null(comparison_label) &&
+    length(comparison_label) > 0L &&
+    !is.na(comparison_label) &&
+    comparison_label != ""
+  ) {
+    subtitle <- paste0(
+      subtitle,
+      " | ",
+      comparison_label
+    )
+  }
+  
+  # ------------------------------------------------------------
+  # Year axis
+  # ------------------------------------------------------------
   
   year_range <- range(
     benchmark$Aar,
@@ -184,8 +250,10 @@ plot_kostra_timeseries_benchmark <- function(
   )
   
   if (
-    tail(year_breaks, 1) !=
-    year_range[[2]]
+    tail(
+      year_breaks,
+      1
+    ) != year_range[[2]]
   ) {
     year_breaks <- sort(
       unique(
@@ -196,6 +264,10 @@ plot_kostra_timeseries_benchmark <- function(
       )
     )
   }
+  
+  # ------------------------------------------------------------
+  # Plot
+  # ------------------------------------------------------------
   
   p <- ggplot2::ggplot(
     benchmark,
@@ -305,4 +377,5 @@ plot_kostra_timeseries_benchmark <- function(
   
   p
 }
+
 

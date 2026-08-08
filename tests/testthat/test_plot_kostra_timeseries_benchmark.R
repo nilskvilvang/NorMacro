@@ -187,3 +187,138 @@ testthat::test_that(
     )
   }
 )
+
+testthat::test_that(
+  "plot_kostra_timeseries_benchmark keeps data comparison as default",
+  {
+    default_plot <- plot_kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      start_year = 2020,
+      end_year = 2025
+    )
+    
+    explicit_plot <- plot_kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "data"
+    )
+    
+    testthat::expect_s3_class(
+      default_plot,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      default_plot$data,
+      explicit_plot$data
+    )
+    
+    testthat::expect_equal(
+      default_plot$labels,
+      explicit_plot$labels
+    )
+  }
+)
+
+
+testthat::test_that(
+  "plot_kostra_timeseries_benchmark supports KOSTRA group comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- plot_kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "kostra_group"
+    )
+    
+    testthat::expect_s3_class(
+      result,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      result$data$Aar,
+      2020:2025
+    )
+    
+    testthat::expect_equal(
+      result$data$Antall_enheter,
+      rep(11L, 6)
+    )
+    
+    testthat::expect_equal(
+      result$labels$subtitle,
+      "Stavanger - 2020-2025 | KOSTRA-gruppe 12"
+    )
+    
+    testthat::expect_equal(
+      result$labels$caption,
+      "Kilde: SSB KOSTRA, tabell 12134"
+    )
+  }
+)
+
+
+testthat::test_that(
+  "plot_kostra_timeseries_benchmark supports county comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- plot_kostra_timeseries_benchmark(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2019,
+      end_year = 2025,
+      comparison = "county"
+    )
+    
+    testthat::expect_s3_class(
+      result,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      result$data$Aar,
+      2019:2025
+    )
+    
+    testthat::expect_equal(
+      result$data$Antall_enheter,
+      c(
+        26L,
+        rep(23L, 6)
+      )
+    )
+    
+    testthat::expect_equal(
+      result$data$Rang,
+      c(
+        4L,
+        9L,
+        6L,
+        11L,
+        14L,
+        16L,
+        15L
+      )
+    )
+    
+    testthat::expect_equal(
+      result$labels$subtitle,
+      "Stavanger - 2019-2025 | Fylke: Rogaland"
+    )
+    
+    testthat::expect_equal(
+      result$labels$caption,
+      "Kilde: SSB KOSTRA, tabell 12134"
+    )
+  }
+)

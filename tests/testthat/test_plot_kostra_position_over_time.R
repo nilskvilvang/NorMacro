@@ -282,3 +282,194 @@ testthat::test_that(
     )
   }
 )
+
+testthat::test_that(
+  "plot_kostra_position_over_time keeps data comparison as default",
+  {
+    default_plot <- plot_kostra_position_over_time(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      start_year = 2020,
+      end_year = 2025
+    )
+    
+    explicit_plot <- plot_kostra_position_over_time(
+      variable = "Netto_driftsresultat",
+      data = kostra_test_data,
+      unit = "0301",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "data"
+    )
+    
+    testthat::expect_s3_class(
+      default_plot,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      default_plot$data,
+      explicit_plot$data
+    )
+    
+    testthat::expect_equal(
+      default_plot$labels,
+      explicit_plot$labels
+    )
+  }
+)
+
+
+testthat::test_that(
+  "plot_kostra_position_over_time supports KOSTRA group comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- plot_kostra_position_over_time(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2020,
+      end_year = 2025,
+      comparison = "kostra_group"
+    )
+    
+    testthat::expect_s3_class(
+      result,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      result$data$Aar,
+      2020:2025
+    )
+    
+    testthat::expect_equal(
+      result$data$Antall_enheter,
+      rep(11L, 6)
+    )
+    
+    testthat::expect_equal(
+      result$labels$subtitle,
+      "Stavanger - 2020-2025 - 11 enheter | KOSTRA-gruppe 12"
+    )
+    
+    testthat::expect_equal(
+      result$labels$y,
+      "Percentil"
+    )
+  }
+)
+
+
+testthat::test_that(
+  "plot_kostra_position_over_time supports county percentile comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- plot_kostra_position_over_time(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2019,
+      end_year = 2025,
+      comparison = "county"
+    )
+    
+    testthat::expect_s3_class(
+      result,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      result$data$Antall_enheter,
+      c(
+        26L,
+        rep(23L, 6)
+      )
+    )
+    
+    testthat::expect_equal(
+      result$data$Rang,
+      c(
+        4L,
+        9L,
+        6L,
+        11L,
+        14L,
+        16L,
+        15L
+      )
+    )
+    
+    testthat::expect_equal(
+      result$labels$subtitle,
+      paste0(
+        "Stavanger - 2019-2025 - ",
+        "23-26 enheter over perioden | Fylke: Rogaland"
+      )
+    )
+    
+    testthat::expect_equal(
+      result$labels$y,
+      "Percentil"
+    )
+  }
+)
+
+
+testthat::test_that(
+  "plot_kostra_position_over_time supports county rank comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- plot_kostra_position_over_time(
+      variable = "Netto_driftsresultat",
+      unit = "1103",
+      start_year = 2019,
+      end_year = 2025,
+      metric = "rank",
+      comparison = "county"
+    )
+    
+    testthat::expect_s3_class(
+      result,
+      "ggplot"
+    )
+    
+    testthat::expect_equal(
+      result$data$Rang,
+      c(
+        4L,
+        9L,
+        6L,
+        11L,
+        14L,
+        16L,
+        15L
+      )
+    )
+    
+    testthat::expect_equal(
+      result$labels$y,
+      "Rang"
+    )
+    
+    rank_scale <- result$scales$get_scales("y")
+    
+    testthat::expect_equal(
+      rank_scale$breaks,
+      c(
+        1,
+        5,
+        10,
+        15,
+        20,
+        25
+      )
+    )
+    
+    testthat::expect_false(
+      26 %in% rank_scale$breaks
+    )
+  }
+)
