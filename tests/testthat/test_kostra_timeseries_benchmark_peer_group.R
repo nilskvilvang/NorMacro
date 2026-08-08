@@ -112,7 +112,7 @@ testthat::test_that(
         start_year = 2025,
         end_year = 2020
       ),
-      "`start_year` kan ikke være større enn `end_year`"
+      "`start_year`.*`end_year`"
     )
   }
 )

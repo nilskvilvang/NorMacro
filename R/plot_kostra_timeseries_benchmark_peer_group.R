@@ -8,159 +8,39 @@ plot_kostra_timeseries_benchmark_peer_group <- function(
     table = "12134"
 ) {
   
-  current_year <- as.integer(
-    format(
-      Sys.Date(),
-      "%Y"
-    )
-  )
-  
-  if (is.null(end_year)) {
-    end_year <- current_year
-  }
-  
-  if (is.null(start_year)) {
-    start_year <- max(
-      2020L,
-      end_year - 10L
-    )
-  }
-  
-  if (
-    !is.numeric(start_year) ||
-    length(start_year) != 1L ||
-    is.na(start_year) ||
-    !is.finite(start_year)
-  ) {
-    stop(
-      "`start_year` må være ett gyldig år.",
-      call. = FALSE
-    )
-  }
-  
-  if (
-    !is.numeric(end_year) ||
-    length(end_year) != 1L ||
-    is.na(end_year) ||
-    !is.finite(end_year)
-  ) {
-    stop(
-      "`end_year` må være ett gyldig år.",
-      call. = FALSE
-    )
-  }
-  
-  start_year <- as.integer(
-    start_year
-  )
-  
-  end_year <- as.integer(
-    end_year
-  )
-  
-  if (start_year > end_year) {
-    stop(
-      "`start_year` kan ikke være større enn `end_year`.",
-      call. = FALSE
-    )
-  }
-  
-  if (
-    !is.character(unit) ||
-    length(unit) != 1L ||
-    is.na(unit) ||
-    unit == ""
-  ) {
-    stop(
-      "`unit` må angi én gyldig KOSTRA-enhet.",
-      call. = FALSE
-    )
-  }
-  
-  # ------------------------------------------------------------
-  # Hent historisk korrekt KOSTRA-gruppedatasett
-  # ------------------------------------------------------------
-  
-  peer_data <- get_kostra_peer_group_data(
-    unit = unit,
-    years = seq.int(
-      start_year,
-      end_year
-    ),
-    table = table
-  )
-  
-  # ------------------------------------------------------------
-  # Navn på valgt kommune
-  # ------------------------------------------------------------
-  
-  selected_name <- peer_data |>
-    dplyr::filter(
-      .data$Enhet == unit
-    ) |>
-    dplyr::distinct(
-      Enhet_navn
-    ) |>
-    dplyr::pull(
-      Enhet_navn
-    )
-  
-  if (length(selected_name) == 0L) {
-    selected_name <- unit
-  } else {
-    selected_name <- selected_name[[1]]
-  }
-  
-  # ------------------------------------------------------------
-  # KOSTRA-gruppe
-  # ------------------------------------------------------------
-  
-  group_info <- peer_data |>
-    dplyr::filter(
-      .data$Enhet == unit
-    ) |>
-    dplyr::distinct(
-      KOSTRA_gruppe,
-      KOSTRA_gruppe_navn
-    )
-  
-  # ------------------------------------------------------------
-  # Lag ordinært tidsseriebenchmark-plott
-  # ------------------------------------------------------------
-  
-  p <- plot_kostra_timeseries_benchmark(
-    variable = variable,
-    data = peer_data,
+  peer <- prepare_kostra_peer_analysis(
     unit = unit,
     start_year = start_year,
     end_year = end_year,
+    table = table
+  )
+  
+  p <- plot_kostra_timeseries_benchmark(
+    variable = variable,
+    data = peer$data,
+    unit = peer$unit,
+    start_year = peer$start_year,
+    end_year = peer$end_year,
     descending = descending
   )
   
-  # ------------------------------------------------------------
-  # Tilpass undertittel til KOSTRA-gruppen
-  # ------------------------------------------------------------
-  
-  if (nrow(group_info) == 1L) {
-    
-    subtitle <- paste0(
-      selected_name,
+  subtitle <- if (!is.null(peer$group_name)) {
+    paste0(
+      peer$unit_name,
       " - ",
-      group_info$KOSTRA_gruppe_navn[[1]],
+      peer$group_name,
       " - ",
-      start_year,
+      peer$start_year,
       "-",
-      end_year
+      peer$end_year
     )
-    
   } else {
-    
-    subtitle <- paste0(
-      selected_name,
+    paste0(
+      peer$unit_name,
       " - ",
-      start_year,
+      peer$start_year,
       "-",
-      end_year
+      peer$end_year
     )
   }
   
@@ -169,32 +49,10 @@ plot_kostra_timeseries_benchmark_peer_group <- function(
       subtitle = subtitle
     )
   
-  # ------------------------------------------------------------
-  # Metadata på selve ggplot-objektet
-  # ------------------------------------------------------------
-  
-  attr(
-    p,
-    "comparison_group"
-  ) <- "KOSTRA-gruppe"
-  
-  attr(
-    p,
-    "kostra_peer_unit"
-  ) <- unit
-  
-  if (nrow(group_info) == 1L) {
-    
-    attr(
-      p,
-      "kostra_group"
-    ) <- group_info$KOSTRA_gruppe[[1]]
-    
-    attr(
-      p,
-      "kostra_group_name"
-    ) <- group_info$KOSTRA_gruppe_navn[[1]]
-  }
+  attr(p, "comparison_group") <- "KOSTRA-gruppe"
+  attr(p, "kostra_peer_unit") <- peer$unit
+  attr(p, "kostra_group") <- peer$group_code
+  attr(p, "kostra_group_name") <- peer$group_name
   
   p
 }
