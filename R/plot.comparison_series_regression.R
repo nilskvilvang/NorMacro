@@ -1,4 +1,5 @@
 
+#' @export
 
 plot.comparison_series_regression <- function(x, type = c("fitted", "residuals"), ...) {
   type <- match.arg(type)

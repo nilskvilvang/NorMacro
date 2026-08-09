@@ -1,4 +1,6 @@
 
+#' @export
+
 print.comparison_series_regression_diagnosis <- function(x, digits = 3, ...) {
   cat("<comparison_series_regression_diagnosis>\n\n")
   

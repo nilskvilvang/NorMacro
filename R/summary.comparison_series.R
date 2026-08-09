@@ -1,4 +1,6 @@
 
+#' @export
+
 summary.comparison_series <- function(object, ...) {
   required_columns <- c("Aar", "Serie_id", "Display_navn", "Verdi")
   

@@ -1,4 +1,6 @@
 
+#' @export
+
 autocorrelate.comparison_series <- function(x,
                                             lags = 1:5,
                                             start_year = NULL,

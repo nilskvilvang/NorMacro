@@ -78,3 +78,6 @@
 
 ## load test for alle
 # devtools::test()
+
+## Build-check
+# devtools::check()

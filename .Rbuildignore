@@ -1,2 +1,12 @@
+
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^docs$
+^PROJECT_STATUS\.html$
+^README\.qmd$
+^README_backup\.md$
+^README_files$
+^cache$
+^dev$
+^source_all\.R$
+^utvikling\.md$

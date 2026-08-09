@@ -1,0 +1,165 @@
+
+---
+title: "Kom i gang med NorMacro"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Kom i gang med NorMacro}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(NorMacro)
+```
+
+# Kom i gang med NorMacro
+
+NorMacro er en R-pakke for analyse av norsk og internasjonal økonomi.
+
+Pakken samler økonomiske data fra flere kilder i et felles format og
+inneholder funksjoner for å utforske, analysere og visualisere dataene.
+Målet er å gjøre det enklere å gå fra et økonomisk spørsmål til en
+reproduserbar analyse i R.
+
+Denne introduksjonen viser en vanlig arbeidsflyt i NorMacro:
+
+1. få oversikt over tilgjengelige data
+2. finne relevante variabler
+3. undersøke hva variablene betyr og hvor dataene kommer fra
+4. kontrollere hvilken periode dataene dekker
+5. analysere dataene
+6. visualisere resultatene
+
+Du trenger ikke kjenne den interne oppbygningen av NorMacro for å bruke
+analyseverktøyene.
+
+# Last NorMacro
+
+Etter at NorMacro er installert, lastes pakken på vanlig måte:
+
+```{r}
+library(NorMacro)
+```
+
+NorMacro inneholder et standardisert datasett med makroøkonomiske
+tidsserier. Det kan hentes med:
+
+```{r get-data, eval = FALSE}
+data <- get_normacro()
+```
+
+`data` er nå et vanlig R-datasett som kan brukes både med funksjonene i
+NorMacro og med andre R-pakker.
+
+For mange NorMacro-funksjoner trenger du imidlertid ikke hente datasettet
+eksplisitt. Dersom `data` ikke oppgis, brukes NorMacros standarddatasett
+automatisk.
+
+Dette gjør at du for eksempel kan utforske tilgjengelige data direkte.
+
+# Få oversikt over dataene
+
+En god start er å undersøke hva NorMacro inneholder:
+
+```{r, eval = FALSE}
+overview()
+```
+
+`overview()` gir en overordnet beskrivelse av datasettet og er nyttig når
+du møter NorMacro for første gang.
+
+Et mer konkret spørsmål er ofte:
+
+> Hvilke økonomiske variabler finnes i datasettet?
+
+Du kan se variablene med:
+
+```{r, eval = FALSE}
+list_variables()
+```
+
+Listen kan være lang. Dersom du allerede vet omtrent hva du er interessert
+i, er det derfor ofte enklere å søke.
+
+Anta for eksempel at du vil undersøke arbeidsledighet:
+
+```{r, eval = FALSE}
+search_variables("arbeidsledighet")
+```
+
+Søket gjør at du ikke trenger å kjenne NorMacros eksakte variabelnavn på
+forhånd.
+
+Det samme kan gjøres for andre økonomiske temaer. For eksempel:
+
+```{r, eval = FALSE}
+search_variables("inflasjon")
+```
+
+eller:
+
+```{r, eval = FALSE}
+search_variables("BNP")
+```
+
+Dette gir en enkel arbeidsmåte:
+
+**økonomisk tema → søk etter variabel → undersøk variabelen → analyser**
+
+# Forstå variabelen før du analyserer
+
+Når du har funnet en interessant variabel, bør du undersøke hva den
+faktisk representerer før du bruker den i en analyse.
+
+Anta at søket har gitt deg variabelen `Arbeidsledighet`.
+
+Du kan undersøke variabelen med:
+
+```{r, eval = FALSE}
+describe_variable("Arbeidsledighet")
+```
+
+Her får du informasjon som hjelper deg å tolke tidsserien riktig.
+
+Det er særlig viktig å være oppmerksom på:
+
+- hva variabelen måler
+- hvilken enhet den er oppgitt i
+- hvilken datakilde den kommer fra
+- hvilken periode den dekker
+
+Dette er en viktig del av økonomisk analyse. To tidsserier kan ha lignende
+navn, men likevel måle forskjellige økonomiske størrelser.
+
+Du kan også få en samlet oppsummering av en variabel:
+
+```{r, eval = FALSE}
+variable_summary("Arbeidsledighet")
+```
+
+`variable_summary()` kombinerer informasjon om variabelen med en
+statistisk oppsummering av dataene.
+
+# Hvor langt tilbake finnes data?
+
+Økonomiske tidsserier har ulik dekningsperiode. Før du velger periode for
+en analyse, er det derfor nyttig å undersøke datadekningen.
+
+```{r, eval = FALSE}
+coverage()
+```
+
+Dersom du arbeider med en bestemt variabel, kan informasjonen fra
+`describe_variable()` og `variable_summary()` brukes sammen med
+dekningsoversikten for å vurdere hvilken analyseperiode som er
+hensiktsmessig.
+
+Dette er spesielt viktig når flere variabler skal sammenliknes. En analyse
+kan ikke uten videre starte tidligere enn den korteste tidsserien som
+inngår.
+

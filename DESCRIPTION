@@ -1,6 +1,6 @@
 Package: NorMacro
 Title: Norwegian Macroeconomic Database
-Version: 0.1.0
+Version: 2.0.3
 Authors@R:
     person(
         given = "Nils",
@@ -25,10 +25,17 @@ Imports:
     tibble,
     scales,
     pxweb,
-    PxWebApiData,
     janitor,
-    lubridate,
     quantmod,
-    testthat,
     eurostat,
-    zoo
+    zoo,
+    cli,
+    httr2
+Depends:
+    R (>= 4.1.0)
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3

@@ -1,4 +1,5 @@
 
+#' @export
 
 correlate.comparison_series <- function(x,
                                         method = c("pearson", "spearman", "kendall"),

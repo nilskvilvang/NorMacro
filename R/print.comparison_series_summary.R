@@ -1,4 +1,6 @@
 
+#' @export
+
 print.comparison_series_summary <- function(x, ...) {
   transformation <- attr(x, "transformation")
   

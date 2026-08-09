@@ -1,4 +1,6 @@
 
+#' @export
+
 correlation_matrix.default <- function(
     variables,
     data = NULL,

@@ -1,4 +1,6 @@
 
+#' @export
+
 growth.comparison_series <- function(x,
                                      periods = 1,
                                      percent = TRUE,

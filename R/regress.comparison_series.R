@@ -1,4 +1,6 @@
 
+#' @export
+
 regress.comparison_series <- function(x,
                                       formula,
                                       model = "ols",

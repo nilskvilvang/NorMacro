@@ -1,4 +1,57 @@
 
+#' Oppsummer en økonomisk variabel
+#'
+#' Lager en samlet oppsummering av én variabel med metadata, datadekning,
+#' siste observasjon og relevante statistiske analyser.
+#'
+#' Innholdet tilpasses variabelens analysetype. For nivå- og
+#' indeksvariabler vises blant annet vekst over ulike perioder. For
+#' ratevariabler vises en statistisk oppsummering. Funksjonen kan også
+#' beregne de sterkeste korrelasjonene mot andre numeriske variabler.
+#'
+#' `variable_summary()` kan brukes med norske makrodata, internasjonale
+#' data og KOSTRA-data. Internasjonale datasett med flere land krever at
+#' ett land velges med `country`. KOSTRA-datasett med flere enheter krever
+#' tilsvarende at én enhet velges med `unit`.
+#'
+#' @param variable Navnet på variabelen som skal oppsummeres.
+#' @param data Et datasett eller `NULL`. Dersom `NULL`, brukes NorMacros
+#'   standarddatasett når `country` ikke er angitt, og internasjonale
+#'   makrodata når `country` er angitt.
+#' @param country Valgfri landkode for internasjonale data. Må angi ett
+#'   land dersom datasettet inneholder flere land.
+#' @param unit Valgfri KOSTRA-enhet. Må angi én enhet dersom
+#'   KOSTRA-datasettet inneholder flere enheter.
+#' @param metadata Valgfritt metadata-datasett. Dersom `NULL`, hentes
+#'   metadata fra `data`.
+#' @param correlation_variables Valgfri tegnvektor med variabler som skal
+#'   brukes i korrelasjonsanalysen. Dersom `NULL`, vurderes øvrige
+#'   numeriske variabler i datasettet.
+#' @param top_n_correlations Positivt heltall som angir hvor mange av de
+#'   sterkeste korrelasjonene som skal vises. Standard er `5`.
+#'
+#' @return En liste returnert usynlig med elementene `metadata`,
+#'   `coverage`, `latest`, `growth`, `rate_summary`, `correlations`,
+#'   `country`, `kostra_unit`, `kostra_unit_name`, `kostra_table` og
+#'   `kostra_title`. Funksjonen skriver samtidig en formatert oppsummering
+#'   til konsollen.
+#'
+#' @examples
+#' \dontrun{
+#' variable_summary("BNP_Fastland")
+#'
+#' # Begrens korrelasjonsanalysen til utvalgte variabler
+#' variable_summary(
+#'   variable = "BNP_Fastland",
+#'   correlation_variables = c(
+#'     "Privat_konsum",
+#'     "Fastlandsinvesteringer"
+#'   )
+#' )
+#' }
+#'
+#' @export
+
 variable_summary <- function(
     variable,
     data = NULL,

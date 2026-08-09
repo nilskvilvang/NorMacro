@@ -1,4 +1,6 @@
 
+#' @export
+
 print.comparison_series_autocorrelation <- function(x, ...) {
   method <- attr(x, "method")
   

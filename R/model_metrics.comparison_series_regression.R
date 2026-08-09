@@ -1,4 +1,6 @@
 
+#' @export
+
 rmse.comparison_series_regression <- function(object, ...) {
   residual_values <-
     residuals(object)
@@ -7,6 +9,7 @@ rmse.comparison_series_regression <- function(object, ...) {
   
 }
 
+#' @export
 
 mae.comparison_series_regression <- function(object, ...) {
   residual_values <-
@@ -16,6 +19,7 @@ mae.comparison_series_regression <- function(object, ...) {
   
 }
 
+#' @export
 
 mape.comparison_series_regression <- function(object, ...) {
   augmented_data <-

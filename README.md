@@ -12,7 +12,7 @@ execute:
 
 # NorMacro
 
-**Version:** 2.0.2
+**Version:** 2.0.3
 
 NorMacro er en R-pakke for utforsking, visualisering og analyse av
 norsk makroøkonomi.

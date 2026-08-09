@@ -1,4 +1,38 @@
 
+#' List tilgjengelige variabler
+#'
+#' Gir en oversikt over variablene som er tilgjengelige i NorMacro eller
+#' i et angitt datasett. Variablene grupperes etter kategori og vises med
+#' både variabelnavn og beskrivende navn når dette finnes.
+#'
+#' Listen kan avgrenses til en bestemt kategori eller variabeltype.
+#' Funksjonen er særlig nyttig for å utforske hvilke data som finnes før
+#' en analyse.
+#'
+#' @param data Et NorMacro-datasett eller `NULL`. Dersom `NULL`, brukes
+#'   den samlede NorMacro-metadataen.
+#' @param category Valgfri kategori som variabellisten skal begrenses til.
+#'   Standard er `NULL`, som inkluderer alle kategorier.
+#' @param type Valgfri variabeltype som listen skal begrenses til.
+#'   Standard er `NULL`, som inkluderer alle typer.
+#' @param print Logisk verdi. Dersom `TRUE`, skrives en formatert oversikt
+#'   til konsollen. Standard er `TRUE`.
+#'
+#' @return Metadata for variablene som oppfyller kriteriene, returnert
+#'   usynlig.
+#'
+#' @examples
+#' \dontrun{
+#' list_variables()
+#'
+#' # Resultatet kan også lagres uten utskrift
+#' variables <- list_variables(
+#'   print = FALSE
+#' )
+#' }
+#'
+#' @export
+
 list_variables <- function(data = NULL,
                            category = NULL,
                            type = NULL,

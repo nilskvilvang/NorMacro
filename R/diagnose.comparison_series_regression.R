@@ -1,4 +1,6 @@
 
+#' @export
+
 diagnose.comparison_series_regression <- function(object, ...) {
   model_summary <-
     summary(object$model)

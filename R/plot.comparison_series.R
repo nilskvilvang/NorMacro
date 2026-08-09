@@ -1,4 +1,5 @@
 
+#' @export
 
 plot.comparison_series <- function(x,
                                    start_year = NULL,

@@ -1,4 +1,6 @@
 
+#' @export
+
 print.comparison_series_regression <- function(x, ...) {
   model_summary <- summary(x$model)
   
