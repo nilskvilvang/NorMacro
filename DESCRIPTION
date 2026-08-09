@@ -30,6 +30,7 @@ Imports:
     eurostat,
     zoo,
     cli,
+    rlang,
     httr2
 Depends:
     R (>= 4.1.0)

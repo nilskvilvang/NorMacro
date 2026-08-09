@@ -23,7 +23,9 @@ install_dependencies <- function() {
   message("Installerer manglende pakker: ",
           paste(missing, collapse = ", "))
   
-  install.packages(missing)
+  utils::install.packages(
+    missing
+  )
   
   invisible(TRUE)
 }
