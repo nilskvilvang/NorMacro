@@ -77,4 +77,4 @@
 # )
 
 ## load test for alle
-# 
+# devtools::test()

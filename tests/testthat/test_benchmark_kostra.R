@@ -414,4 +414,63 @@ testthat::test_that(
   }
 )
 
+testthat::test_that(
+  "benchmark_kostra supports all configured KOSTRA tables",
+  {
+    skip_if_not_live_api()
+    
+    cases <- tibble::tribble(
+      ~table,   ~variable,
+      "12134",  "Netto_driftsresultat",
+      "12135",  "Langsiktig_gjeld_uten_pensjonsforpliktelser",
+      "12137",  "Brutto_driftsutgifter_per_innbygger",
+      "12143",  "Netto_driftsresultat",
+      "12333",  "Fond_investeringsregnskap_netto",
+      "12364",  "Akkumulert_regnskapsmessig_resultat",
+      "12858",  "Brutto_driftsinntekter",
+      "13553",  "Brutto_kraftinntekter"
+    )
+    
+    for (i in seq_len(nrow(cases))) {
+      
+      result <- benchmark_kostra(
+        variable = cases$variable[[i]],
+        unit = "1103",
+        year = 2025,
+        comparison = "kostra_group",
+        table = cases$table[[i]]
+      )
+      
+      testthat::expect_s3_class(
+        result,
+        "kostra_benchmark"
+      )
+      
+      testthat::expect_equal(
+        result$Enhet,
+        "1103"
+      )
+      
+      testthat::expect_equal(
+        result$Aar,
+        2025L
+      )
+      
+      testthat::expect_equal(
+        result$Variabel,
+        cases$variable[[i]]
+      )
+      
+      testthat::expect_equal(
+        result$KOSTRA_gruppe,
+        "EKG12"
+      )
+      
+      testthat::expect_equal(
+        attr(result, "comparison"),
+        "kostra_group"
+      )
+    }
+  }
+)
 

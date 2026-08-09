@@ -261,6 +261,15 @@ source("R/business_cycle_explain.R")
 source("R/recession_periods.R")
 source("R/recession_period_explain.R")
 
+## ============================================================================
+## SSB public expenditure
+## ============================================================================
+
+source("R/get_public_sector_macro.R")
+source("R/public_sector_analysis.R")
+source("R/plot_public_sector_macro.R")
+
+
 
 ## ============================================================================
 ## Generic KOSTRA infrastructure
