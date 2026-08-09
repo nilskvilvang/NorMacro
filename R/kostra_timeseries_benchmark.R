@@ -117,6 +117,7 @@ kostra_timeseries_benchmark <- function(
       unit = unit,
       start_year = start_year,
       end_year = end_year,
+      variable = variable,
       comparison = comparison,
       comparison_units = comparison_units,
       comparison_name = comparison_name,

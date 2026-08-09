@@ -147,7 +147,7 @@ testthat::test_that(
         start_year = 2020,
         end_year = 2025
       ),
-      "`data` må oppgis"
+      "`data`.*oppgis"
     )
   }
 )

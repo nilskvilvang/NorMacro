@@ -2,6 +2,7 @@
 get_kostra_county_peer_group_data <- function(
     unit,
     years,
+    variable,
     table = "12134"
 ) {
   
@@ -29,14 +30,31 @@ get_kostra_county_peer_group_data <- function(
     )
   }
   
+  if (
+    !is.character(variable) ||
+    length(variable) != 1L ||
+    is.na(variable) ||
+    variable == ""
+  ) {
+    stop(
+      "`variable` må være navnet på én gyldig variabel.",
+      call. = FALSE
+    )
+  }
+  
   years <- sort(
     unique(
       as.integer(years)
     )
   )
   
-  start_year <- min(years)
-  end_year <- max(years)
+  start_year <- min(
+    years
+  )
+  
+  end_year <- max(
+    years
+  )
   
   county_history <- get_kostra_county_peer_group_history(
     unit = unit,
@@ -58,20 +76,11 @@ get_kostra_county_peer_group_data <- function(
     unique() |>
     sort()
   
-  data <- switch(
-    as.character(table),
-    
-    "12134" = get_kostra_keyfigures(
-      regions = county_units,
-      years = years
-    ),
-    
-    stop(
-      "KOSTRA-tabell `",
-      table,
-      "` støttes ikke av `get_kostra_county_peer_group_data()`.",
-      call. = FALSE
-    )
+  data <- get_kostra_analysis_data(
+    table = table,
+    regions = county_units,
+    years = years,
+    variables = variable
   )
   
   result <- data |>
@@ -109,10 +118,25 @@ get_kostra_county_peer_group_data <- function(
       Fylke_navn
     )
   
-  attr(result, "kostra_county_unit") <- unit
-  attr(result, "kostra_county_definition") <- "historical"
-  attr(result, "kostra_county_start_year") <- start_year
-  attr(result, "kostra_county_end_year") <- end_year
+  attr(
+    result,
+    "kostra_county_unit"
+  ) <- unit
+  
+  attr(
+    result,
+    "kostra_county_definition"
+  ) <- "historical"
+  
+  attr(
+    result,
+    "kostra_county_start_year"
+  ) <- start_year
+  
+  attr(
+    result,
+    "kostra_county_end_year"
+  ) <- end_year
   
   if (nrow(selected_county) == 1L) {
     
@@ -129,4 +153,5 @@ get_kostra_county_peer_group_data <- function(
   
   result
 }
+
 

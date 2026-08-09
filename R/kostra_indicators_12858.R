@@ -1,22 +1,58 @@
 
 kostra_indicators_12858 <- function() {
   
-  tibble::tribble(
-    ~KOKartkap0000, ~Variabel,
-    "AGD13",  "Brutto_driftsinntekter",
-    "AGD9",   "Brutto_driftsutgifter",
-    "AGD18",  "Brutto_driftsresultat",
-    "AGD21a", "Avdrag_korrigert",
-    "AGD21",  "Avdrag_netto",
-    "AGD26",  "Finansutgifter_netto",
-    "AG6",    "Utlaan",
-    "A990",   "Motpost_avskrivninger",
-    "AGD23",  "Netto_driftsresultat",
-    "AGI1",   "Brutto_investeringsutgifter",
-    "AGI2",   "Tilskudd_refusjoner_salgsinntekter",
-    "AGID1",  "Overskudd_foer_laan_og_avsetninger",
-    "AGI36",  "Bruk_av_laan_netto",
-    "AGID2",  "Bruk_av_fond_netto"
+  tibble::tibble(
+    KOKartkap0000 = c(
+      "AGD13",
+      "AGD9",
+      "AGD18",
+      "AGD21a",
+      "AGD21",
+      "AGD26",
+      "AG6",
+      "A990",
+      "AGD23",
+      "AGI1",
+      "AGI2",
+      "AGID1",
+      "AGI36",
+      "AGID2"
+    ),
+    Variabel = c(
+      "Brutto_driftsinntekter",
+      "Brutto_driftsutgifter",
+      "Brutto_driftsresultat",
+      "Avdrag_korrigert",
+      "Avdrag_netto",
+      "Finansutgifter_netto",
+      "Utlaan",
+      "Motpost_avskrivninger",
+      "Netto_driftsresultat",
+      "Brutto_investeringsutgifter",
+      "Tilskudd_refusjoner_salgsinntekter",
+      "Overskudd_foer_laan_og_avsetninger",
+      "Bruk_av_laan_netto",
+      "Bruk_av_fond_netto"
+    ),
+    Display_navn = c(
+      "Brutto driftsinntekter i alt",
+      "Brutto driftsutgifter totalt",
+      "Brutto driftsresultat",
+      "Avdrag i driftsregnskapet, korrigert",
+      "Avdrag (netto) i driftsregnskapet",
+      "Finans(utgift) (netto)",
+      "Utlån",
+      "Motpost avskrivninger",
+      "Netto driftsresultat",
+      "Brutto investeringsutgifter totalt",
+      "Tilskudd, refusjoner, salgsinntekter",
+      "Overskudd før lån og avsetninger",
+      "Bruk av lån inkl. aksjer, andeler og utlån (netto)",
+      "Bruk av fond/avsetning til fond, drift og investering"
+    ),
+    Enhet = "1000 kroner",
+    Analyse_type = "level"
   )
 }
+
 

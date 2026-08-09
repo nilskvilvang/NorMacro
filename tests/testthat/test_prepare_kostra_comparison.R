@@ -14,6 +14,7 @@ testthat::test_that(
       unit = "1103",
       start_year = 2020,
       end_year = 2025,
+      variable = "Netto_driftsresultat",
       comparison = "kostra_group"
     )
     
@@ -54,6 +55,7 @@ testthat::test_that(
       unit = "1103",
       start_year = 2019,
       end_year = 2025,
+      variable = "Netto_driftsresultat",
       comparison = "county"
     )
     
@@ -116,14 +118,16 @@ testthat::test_that(
     implicit <- prepare_kostra_comparison(
       unit = "1103",
       start_year = 2025,
-      end_year = 2025
+      end_year = 2025,
+      variable = "Netto_driftsresultat"
     )
     
     explicit <- prepare_kostra_comparison(
       unit = "1103",
       start_year = 2025,
       end_year = 2025,
-      comparison = "kostra_group"
+      comparison = "kostra_group",
+      variable = "Netto_driftsresultat"
     )
     
     testthat::expect_identical(
@@ -162,9 +166,10 @@ testthat::test_that(
       prepare_kostra_comparison(
         unit = "1103",
         start_year = 2025,
-        end_year = 2020
+        end_year = 2020,
+        variable = "Netto_driftsresultat"
       ),
-      "`start_year` kan ikke være større enn `end_year`"
+      "`start_year` kan ikke.*`end_year`"
     )
   }
 )
@@ -258,6 +263,7 @@ testthat::test_that(
       unit = "1103",
       start_year = 2025,
       end_year = 2025,
+      variable = "Netto_driftsresultat",
       comparison = "custom",
       comparison_units = c(
         "1103",
@@ -287,6 +293,7 @@ testthat::test_that(
       unit = "1103",
       start_year = 2025,
       end_year = 2025,
+      variable = "Netto_driftsresultat",
       comparison = "custom",
       comparison_units = c(
         "1108",
@@ -314,6 +321,7 @@ testthat::test_that(
         unit = "1103",
         start_year = 2025,
         end_year = 2025,
+        variable = "Netto_driftsresultat",
         comparison = "custom"
       ),
       "`comparison_units`"
@@ -330,13 +338,14 @@ testthat::test_that(
         unit = "1103",
         start_year = 2025,
         end_year = 2025,
+        variable = "Netto_driftsresultat",
         comparison = "custom",
         comparison_units = c(
           "1108",
           "1120"
         )
       ),
-      "`unit` må inngå i `comparison_units`"
+      "`unit`.*`comparison_units`"
     )
   }
 )

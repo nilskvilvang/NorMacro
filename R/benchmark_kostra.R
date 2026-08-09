@@ -69,6 +69,7 @@ benchmark_kostra <- function(
       unit = unit,
       start_year = year,
       end_year = year,
+      variable = variable,
       comparison = comparison,
       comparison_units = comparison_units,
       comparison_name = comparison_name,

@@ -308,5 +308,23 @@ plot_kostra_position_over_time <- function(
         caption = caption
       )
   }
+  # ------------------------------------------------------------
+  # Common styling
+  # ------------------------------------------------------------
+  
+  p <- p +
+    ggplot2::scale_x_continuous(
+      breaks = year_breaks,
+      labels = scales::label_number(
+        accuracy = 1,
+        big.mark = ""
+      )
+    ) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(
+      panel.grid.minor = ggplot2::element_blank()
+    )
+  
+  p
 }
   

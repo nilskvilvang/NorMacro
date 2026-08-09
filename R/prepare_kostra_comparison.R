@@ -3,6 +3,7 @@ prepare_kostra_comparison <- function(
     unit,
     start_year,
     end_year,
+    variable,
     comparison = c(
       "kostra_group",
       "county",
@@ -25,6 +26,18 @@ prepare_kostra_comparison <- function(
   ) {
     stop(
       "`unit` må være én gyldig KOSTRA-enhet.",
+      call. = FALSE
+    )
+  }
+  
+  if (
+    !is.character(variable) ||
+    length(variable) != 1L ||
+    is.na(variable) ||
+    variable == ""
+  ) {
+    stop(
+      "`variable` må være navnet på én gyldig variabel.",
       call. = FALSE
     )
   }
@@ -130,29 +143,22 @@ prepare_kostra_comparison <- function(
     kostra_group = get_kostra_peer_group_data(
       unit = unit,
       years = years,
+      variable = variable,
       table = table
     ),
     
     county = get_kostra_county_peer_group_data(
       unit = unit,
       years = years,
+      variable = variable,
       table = table
     ),
     
-    custom = switch(
-      as.character(table),
-      
-      "12134" = get_kostra_keyfigures(
-        regions = comparison_units,
-        years = years
-      ),
-      
-      stop(
-        "KOSTRA-tabell `",
-        table,
-        "` støttes ikke for `comparison = \"custom\"`.",
-        call. = FALSE
-      )
+    custom = get_kostra_analysis_data(
+      table = table,
+      regions = comparison_units,
+      years = years,
+      variables = variable
     )
   )
   
@@ -222,6 +228,7 @@ prepare_kostra_comparison <- function(
     start_year = start_year,
     end_year = end_year,
     years = years,
+    variable = variable,
     comparison = comparison,
     group_code = group_code,
     group_name = group_name,
@@ -242,4 +249,5 @@ prepare_kostra_comparison <- function(
     table = as.character(table)
   )
 }
+
 

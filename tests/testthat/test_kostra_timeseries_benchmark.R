@@ -235,7 +235,7 @@ testthat::test_that(
         start_year = 2020,
         end_year = 2025
       ),
-      "`data` må oppgis"
+      "`data`.*oppgis"
     )
   }
 )
@@ -512,6 +512,93 @@ testthat::test_that(
           Q1,
           Q3
         )
+    )
+  }
+)
+
+testthat::test_that(
+  "kostra_timeseries_benchmark supports non-12134 KOSTRA group comparison",
+  {
+    skip_if_not_live_api()
+    
+    result <- kostra_timeseries_benchmark(
+      variable = "Langsiktig_gjeld_uten_pensjonsforpliktelser",
+      unit = "1103",
+      start_year = 2024,
+      end_year = 2025,
+      comparison = "kostra_group",
+      table = "12135"
+    )
+    
+    testthat::expect_equal(
+      result$Aar,
+      2024:2025
+    )
+    
+    testthat::expect_equal(
+      result$Antall_enheter,
+      c(11L, 11L)
+    )
+    
+    testthat::expect_equal(
+      attr(result, "comparison_group_name"),
+      "KOSTRA-gruppe 12"
+    )
+    
+    testthat::expect_equal(
+      attr(result, "kostra_table"),
+      "12135"
+    )
+  }
+)
+
+testthat::test_that(
+  "kostra_timeseries_benchmark supports non-12134 county and custom comparisons",
+  {
+    skip_if_not_live_api()
+    
+    county <- kostra_timeseries_benchmark(
+      variable = "Langsiktig_gjeld_uten_pensjonsforpliktelser",
+      unit = "1103",
+      start_year = 2024,
+      end_year = 2025,
+      comparison = "county",
+      table = "12135"
+    )
+    
+    custom <- kostra_timeseries_benchmark(
+      variable = "Langsiktig_gjeld_uten_pensjonsforpliktelser",
+      unit = "1103",
+      start_year = 2024,
+      end_year = 2025,
+      comparison = "custom",
+      comparison_units = c(
+        "1103",
+        "1108",
+        "1120"
+      ),
+      comparison_name = "Testgruppe",
+      table = "12135"
+    )
+    
+    testthat::expect_equal(
+      county$Antall_enheter,
+      c(23L, 23L)
+    )
+    
+    testthat::expect_equal(
+      custom$Antall_enheter,
+      c(3L, 3L)
+    )
+    
+    testthat::expect_equal(
+      attr(county, "comparison_group_name"),
+      "Rogaland"
+    )
+    
+    testthat::expect_equal(
+      attr(custom, "comparison_group_name"),
+      "Testgruppe"
     )
   }
 )

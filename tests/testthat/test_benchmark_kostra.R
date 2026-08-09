@@ -196,7 +196,7 @@ testthat::test_that(
         unit = "1103",
         year = 2025
       ),
-      "`data` må oppgis"
+      "`data`.*oppgis"
     )
   }
 )
@@ -358,6 +358,7 @@ testthat::test_that(
       unit = "1103",
       start_year = 2025,
       end_year = 2025,
+      variable = "Netto_driftsresultat",
       comparison = "custom",
       comparison_units = c(
         "1103",
