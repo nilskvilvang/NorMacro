@@ -39,7 +39,7 @@ plot_correlation_matrix <- function(
   if (!is.null(country)) {
     subtitle <- paste0(
       subtitle,
-      " · ",
+      " \u00b7 ",
       country
     )
   }
@@ -63,13 +63,13 @@ plot_correlation_matrix <- function(
       
       subtitle <- paste0(
         subtitle,
-        " · ",
+        " \u00b7 ",
         unit_name
       )
     } else {
       subtitle <- paste0(
         subtitle,
-        " · ",
+        " \u00b7 ",
         unit
       )
     }

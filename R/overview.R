@@ -132,7 +132,7 @@ overview_all <- function(print = TRUE) {
     cat("========\n\n")
     
     cat("Metadata-drevet rammeverk for norske og internasjonale\n")
-    cat("makroøkonomiske tidsserier og kommunale KOSTRA-data.\n\n")
+    cat("makro\u00f8konomiske tidsserier og kommunale KOSTRA-data.\n\n")
     
     cat("Norske data\n")
     cat("-----------\n")
@@ -209,7 +209,7 @@ overview_all <- function(print = TRUE) {
     cat(sprintf(
       "%-32s %s\n",
       "search_variables()",
-      "Søk etter variabler"
+      "S\u00f8k etter variabler"
     ))
   }
   
@@ -290,7 +290,7 @@ overview_macro_data <- function(
       sep = ""
     )
     
-    cat("Makroøkonomisk database med årlige indikatorer.\n\n")
+    cat("Makro\u00f8konomisk database med \u00e5rlige indikatorer.\n\n")
     
     cat("Dekning\n")
     cat("-------\n")
@@ -453,7 +453,7 @@ overview_kostra_data <- function(
       cat("\n")
     }
     
-    cat("Kommunale og regionale nøkkeltall fra KOSTRA.\n\n")
+    cat("Kommunale og regionale n\u00f8kkeltall fra KOSTRA.\n\n")
     
     cat("Dekning\n")
     cat("-------\n")
@@ -506,7 +506,7 @@ identify_overview_dataset <- function(data) {
   
   if (!is.data.frame(data)) {
     cli::cli_abort(
-      "{.arg data} må være en data.frame eller tibble."
+      "{.arg data} m\u00e5 v\u00e6re en data.frame eller tibble."
     )
   }
   
@@ -537,7 +537,7 @@ identify_overview_dataset <- function(data) {
     c(
       "Ukjent datastruktur.",
       "i" = paste0(
-        "Datasettet må inneholde {.field Aar}, ",
+        "Datasettet m\u00e5 inneholde {.field Aar}, ",
         "{.field Land} og {.field Aar}, eller KOSTRA-kolonnene ",
         "{.field Enhet}, {.field Enhet_navn}, ",
         "{.field Enhetstype} og {.field Aar}."

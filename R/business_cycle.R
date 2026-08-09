@@ -17,7 +17,7 @@ business_cycle <- function(
       Fase = dplyr::case_when(
         Score <= recession_max ~ "Nedgang",
         Score > recession_max & Score <= slowdown_max ~ "Svak vekst",
-        Score >= boom_min ~ "Høykonjunktur",
+        Score >= boom_min ~ "H\u00f8ykonjunktur",
         TRUE ~ "Ekspansjon"
       )
     ) |>

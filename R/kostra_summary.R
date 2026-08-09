@@ -7,7 +7,7 @@ kostra_summary <- function(
   
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være et datasett.",
+      "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
@@ -43,7 +43,7 @@ kostra_summary <- function(
     variable == ""
   ) {
     stop(
-      "`variable` må være navnet på én gyldig variabel.",
+      "`variable` m\u00e5 v\u00e6re navnet p\u00e5 \u00e9n gyldig variabel.",
       call. = FALSE
     )
   }
@@ -60,7 +60,7 @@ kostra_summary <- function(
     stop(
       "Variabelen `",
       variable,
-      "` må være numerisk.",
+      "` m\u00e5 v\u00e6re numerisk.",
       call. = FALSE
     )
   }
@@ -99,7 +99,7 @@ kostra_summary <- function(
       !is.finite(year)
     ) {
       stop(
-        "`year` må være ett gyldig år.",
+        "`year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
         call. = FALSE
       )
     }

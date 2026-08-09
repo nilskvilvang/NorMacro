@@ -17,7 +17,7 @@ get_kostra_analysis_data <- function(
     any(regions == "")
   ) {
     stop(
-      "`regions` må være en ikke-tom karaktervektor.",
+      "`regions` m\u00e5 v\u00e6re en ikke-tom karaktervektor.",
       call. = FALSE
     )
   }
@@ -35,7 +35,7 @@ get_kostra_analysis_data <- function(
     any(!is.finite(years))
   ) {
     stop(
-      "`years` må være en vektor med gyldige år.",
+      "`years` m\u00e5 v\u00e6re en vektor med gyldige \u00e5r.",
       call. = FALSE
     )
   }
@@ -53,7 +53,7 @@ get_kostra_analysis_data <- function(
     any(variables == "")
   ) {
     stop(
-      "`variables` må være en ikke-tom karaktervektor.",
+      "`variables` m\u00e5 v\u00e6re en ikke-tom karaktervektor.",
       call. = FALSE
     )
   }
@@ -146,7 +146,7 @@ get_kostra_analysis_data <- function(
       stop(
         "KOSTRA-tabell `",
         table,
-        "` støttes ikke av analyselaget.",
+        "` st\u00f8ttes ikke av analyselaget.",
         call. = FALSE
       )
     )

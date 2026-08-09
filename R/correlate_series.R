@@ -19,7 +19,7 @@ correlate_series <- function(variables,
     stop(
       paste0(
         "correlate_series() kan analysere ett land om gangen. ",
-        "Filtrer data til ett land først."
+        "Filtrer data til ett land f\u00f8rst."
       ),
       call. = FALSE
     )

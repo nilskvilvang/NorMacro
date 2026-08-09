@@ -6,7 +6,7 @@ filter_kostra_peer_group <- function(
 ) {
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være et datasett.",
+      "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }

@@ -6,7 +6,7 @@ combine_series <- function(norway = NULL,
                            end_year = NULL) {
   if (is.null(norway) &&
       is.null(international)) {
-    stop("Velg minst én norsk eller internasjonal serie.", call. = FALSE)
+    stop("Velg minst \u00e9n norsk eller internasjonal serie.", call. = FALSE)
   }
   
   results <- list()
@@ -16,7 +16,7 @@ combine_series <- function(norway = NULL,
         length(norway) == 0 ||
         any(is.na(norway)) ||
         any(norway == "")) {
-      stop("Velg minst én gyldig norsk variabel.", call. = FALSE)
+      stop("Velg minst \u00e9n gyldig norsk variabel.", call. = FALSE)
     }
     
     norway <- unique(norway)
@@ -58,7 +58,7 @@ combine_series <- function(norway = NULL,
         any(names(international) == "")) {
       stop(
         paste0(
-          "Internasjonale serier må angis som en navngitt liste, ",
+          "Internasjonale serier m\u00e5 angis som en navngitt liste, ",
           "for eksempel list(SE = c(\"HICP\", \"BNP_vekst\"))."
         ),
         call. = FALSE
@@ -91,7 +91,7 @@ combine_series <- function(norway = NULL,
           length(variables) == 0 ||
           any(is.na(variables)) ||
           any(variables == "")) {
-        stop("Velg minst én gyldig internasjonal variabel for landet: ",
+        stop("Velg minst \u00e9n gyldig internasjonal variabel for landet: ",
              country,
              call. = FALSE)
       }

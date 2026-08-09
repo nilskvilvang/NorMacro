@@ -36,7 +36,7 @@ coverage <- function(data = NULL) {
   
   if (!"Aar" %in% names(data)) {
     stop(
-      "Datasettet må inneholde kolonnen `Aar`.",
+      "Datasettet m\u00e5 inneholde kolonnen `Aar`.",
       call. = FALSE
     )
   }
@@ -58,7 +58,7 @@ coverage <- function(data = NULL) {
   
   if (length(variable_names) == 0L) {
     stop(
-      "Fant ingen variabler å beregne dekning for.",
+      "Fant ingen variabler \u00e5 beregne dekning for.",
       call. = FALSE
     )
   }

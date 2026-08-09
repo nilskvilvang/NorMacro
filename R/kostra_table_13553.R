@@ -2,7 +2,7 @@
 kostra_table_13553 <- function() {
   list(
     table = "13553",
-    title = "Gjeldsnøkkeltall",
+    title = "Gjeldsn\u00f8kkeltall",
     url = paste0(
       "https://data.ssb.no/api/v0/no/table/",
       "os/os01/kostrahoved/SBMENU10423/",

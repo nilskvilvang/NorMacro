@@ -41,7 +41,7 @@ correlation_matrix.comparison_series <- function(
   
   if (length(missing_columns) > 0L) {
     stop(
-      "Mangler nødvendige kolonner: ",
+      "Mangler n\u00f8dvendige kolonner: ",
       paste(
         missing_columns,
         collapse = ", "
@@ -71,7 +71,7 @@ correlation_matrix.comparison_series <- function(
       stop(
         "`",
         argument,
-        "` må være ett endelig numerisk år.",
+        "` m\u00e5 v\u00e6re ett endelig numerisk \u00e5r.",
         call. = FALSE
       )
     }
@@ -95,7 +95,7 @@ correlation_matrix.comparison_series <- function(
     start_year > end_year
   ) {
     stop(
-      "`start_year` kan ikke være større enn `end_year`.",
+      "`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.",
       call. = FALSE
     )
   }

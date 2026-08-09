@@ -13,7 +13,7 @@ latest_observations <- function(
   
   if (!"Aar" %in% names(data)) {
     stop(
-      "Datasettet må inneholde kolonnen `Aar`.",
+      "Datasettet m\u00e5 inneholde kolonnen `Aar`.",
       call. = FALSE
     )
   }
@@ -43,7 +43,7 @@ latest_observations <- function(
   
   if (length(variable_names) == 0L) {
     stop(
-      "Fant ingen variabler å oppsummere.",
+      "Fant ingen variabler \u00e5 oppsummere.",
       call. = FALSE
     )
   }

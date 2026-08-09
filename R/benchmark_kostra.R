@@ -27,7 +27,7 @@ benchmark_kostra <- function(
     unit == ""
   ) {
     stop(
-      "`unit` må angi én gyldig KOSTRA-enhet.",
+      "`unit` m\u00e5 angi \u00e9n gyldig KOSTRA-enhet.",
       call. = FALSE
     )
   }
@@ -56,7 +56,7 @@ benchmark_kostra <- function(
       !is.finite(year)
     ) {
       stop(
-        "`year` må være ett gyldig år.",
+        "`year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
         call. = FALSE
       )
     }
@@ -85,14 +85,14 @@ benchmark_kostra <- function(
   
   if (is.null(data)) {
     stop(
-      "`data` må oppgis når `comparison = \"data\"`.",
+      "`data` m\u00e5 oppgis n\u00e5r `comparison = \"data\"`.",
       call. = FALSE
     )
   }
   
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være et datasett.",
+      "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
@@ -161,7 +161,7 @@ benchmark_kostra <- function(
   
   if (nrow(selected) == 0L) {
     stop(
-      "Enheten mangler observasjon for valgt år.",
+      "Enheten mangler observasjon for valgt \u00e5r.",
       call. = FALSE
     )
   }

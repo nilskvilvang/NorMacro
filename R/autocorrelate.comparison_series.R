@@ -23,7 +23,7 @@ autocorrelate.comparison_series <- function(x,
   
   if (length(missing_columns) > 0) {
     stop(
-      "Mangler nødvendige kolonner: ",
+      "Mangler n\u00f8dvendige kolonner: ",
       paste(missing_columns, collapse = ", "),
       ".",
       call. = FALSE
@@ -39,7 +39,7 @@ autocorrelate.comparison_series <- function(x,
         length(value) != 1 ||
         is.na(value) ||
         !is.finite(value)) {
-      stop("`", argument, "` må være ett endelig numerisk år.", call. = FALSE)
+      stop("`", argument, "` m\u00e5 v\u00e6re ett endelig numerisk \u00e5r.", call. = FALSE)
     }
     
     invisible(NULL)
@@ -52,7 +52,7 @@ autocorrelate.comparison_series <- function(x,
   if (!is.null(start_year) &&
       !is.null(end_year) &&
       start_year > end_year) {
-    stop("`start_year` kan ikke være større enn `end_year`.", call. = FALSE)
+    stop("`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.", call. = FALSE)
   }
   
   if (!is.numeric(lags) ||
@@ -61,7 +61,7 @@ autocorrelate.comparison_series <- function(x,
       any(!is.finite(lags)) ||
       any(lags <= 0) ||
       any(lags != floor(lags))) {
-    stop("`lags` må være en vektor med positive heltall.", call. = FALSE)
+    stop("`lags` m\u00e5 v\u00e6re en vektor med positive heltall.", call. = FALSE)
   }
   
   lags <- sort(unique(as.integer(lags)))
@@ -69,7 +69,7 @@ autocorrelate.comparison_series <- function(x,
   if (!is.logical(format) ||
       length(format) != 1 ||
       is.na(format)) {
-    stop("`format` må være TRUE eller FALSE.", call. = FALSE)
+    stop("`format` m\u00e5 v\u00e6re TRUE eller FALSE.", call. = FALSE)
   }
   
   analysis_data <- tibble::as_tibble(x)
@@ -93,7 +93,7 @@ autocorrelate.comparison_series <- function(x,
     dplyr::filter(.data$Antall > 1)
   
   if (nrow(duplicate_years) > 0) {
-    stop("Hver serie må ha maksimalt én observasjon per år.", call. = FALSE)
+    stop("Hver serie m\u00e5 ha maksimalt \u00e9n observasjon per \u00e5r.", call. = FALSE)
   }
   
   series_lookup <- analysis_data |>

@@ -20,7 +20,7 @@ retry_download <- function(expr,
     }
     
     if (i < retries) {
-      msg <- sprintf("%s feilet. Prøver igjen om %s sekunder (forsøk %s av %s).",
+      msg <- sprintf("%s feilet. Pr\u00f8ver igjen om %s sekunder (fors\u00f8k %s av %s).",
                      label,
                      wait,
                      i + 1,

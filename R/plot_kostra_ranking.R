@@ -10,7 +10,7 @@ plot_kostra_ranking <- function(
   
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være et datasett.",
+      "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
@@ -41,7 +41,7 @@ plot_kostra_ranking <- function(
     variable == ""
   ) {
     stop(
-      "`variable` må være navnet på én gyldig variabel.",
+      "`variable` m\u00e5 v\u00e6re navnet p\u00e5 \u00e9n gyldig variabel.",
       call. = FALSE
     )
   }
@@ -58,7 +58,7 @@ plot_kostra_ranking <- function(
     stop(
       "Variabelen `",
       variable,
-      "` må være numerisk.",
+      "` m\u00e5 v\u00e6re numerisk.",
       call. = FALSE
     )
   }
@@ -69,7 +69,7 @@ plot_kostra_ranking <- function(
     is.na(descending)
   ) {
     stop(
-      "`descending` må være `TRUE` eller `FALSE`.",
+      "`descending` m\u00e5 v\u00e6re `TRUE` eller `FALSE`.",
       call. = FALSE
     )
   }
@@ -88,7 +88,7 @@ plot_kostra_ranking <- function(
       any(units == "")
     ) {
       stop(
-        "`units` må være en tegnvektor med gyldige KOSTRA-enheter.",
+        "`units` m\u00e5 v\u00e6re en tegnvektor med gyldige KOSTRA-enheter.",
         call. = FALSE
       )
     }
@@ -128,7 +128,7 @@ plot_kostra_ranking <- function(
       any(highlight == "")
     ) {
       stop(
-        "`highlight` må være en tegnvektor med gyldige KOSTRA-enheter.",
+        "`highlight` m\u00e5 v\u00e6re en tegnvektor med gyldige KOSTRA-enheter.",
         call. = FALSE
       )
     }

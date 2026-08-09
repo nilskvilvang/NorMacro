@@ -15,7 +15,7 @@ resolve_kostra_concepts <- function(
     any(variables == "")
   ) {
     stop(
-      "`variables` må være en ikke-tom karaktervektor.",
+      "`variables` m\u00e5 v\u00e6re en ikke-tom karaktervektor.",
       call. = FALSE
     )
   }

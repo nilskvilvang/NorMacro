@@ -10,7 +10,7 @@ find_first_common_year <- function(data,
   
   if (length(missing_columns) > 0) {
     stop(
-      "Datasettet mangler nødvendige kolonner: ",
+      "Datasettet mangler n\u00f8dvendige kolonner: ",
       paste(missing_columns, collapse = ", "),
       ".",
       call. = FALSE
@@ -38,7 +38,7 @@ find_first_common_year <- function(data,
     dplyr::arrange(.data[[year_column]])
   
   if (nrow(common_years) == 0) {
-    stop(paste0("Fant ingen felles år med gyldige verdier ", "for alle seriene."),
+    stop(paste0("Fant ingen felles \u00e5r med gyldige verdier ", "for alle seriene."),
          call. = FALSE)
   }
   

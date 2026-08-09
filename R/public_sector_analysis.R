@@ -22,7 +22,7 @@ public_sector_analysis <- function(
     !is.finite(start_year)
   ) {
     stop(
-      "`start_year` må være ett gyldig år.",
+      "`start_year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
       call. = FALSE
     )
   }
@@ -47,7 +47,7 @@ public_sector_analysis <- function(
     !is.finite(end_year)
   ) {
     stop(
-      "`end_year` må være ett gyldig år.",
+      "`end_year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
       call. = FALSE
     )
   }
@@ -58,7 +58,7 @@ public_sector_analysis <- function(
   
   if (start_year > end_year) {
     stop(
-      "`start_year` kan ikke være større enn `end_year`.",
+      "`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.",
       call. = FALSE
     )
   }
@@ -107,7 +107,7 @@ public_sector_analysis <- function(
       !is.finite(base_year)
     ) {
       stop(
-        "`base_year` må være ett gyldig år.",
+        "`base_year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
         call. = FALSE
       )
     }
@@ -121,7 +121,7 @@ public_sector_analysis <- function(
       base_year > end_year
     ) {
       stop(
-        "`base_year` må ligge innenfor valgt periode.",
+        "`base_year` m\u00e5 ligge innenfor valgt periode.",
         call. = FALSE
       )
     }

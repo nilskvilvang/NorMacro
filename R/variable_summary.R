@@ -73,7 +73,7 @@ variable_summary <- function(
     variable == ""
   ) {
     stop(
-      "`variable` må være navnet på én gyldig variabel.",
+      "`variable` m\u00e5 v\u00e6re navnet p\u00e5 \u00e9n gyldig variabel.",
       call. = FALSE
     )
   }
@@ -86,7 +86,7 @@ variable_summary <- function(
       country == ""
     ) {
       stop(
-        "`country` må være én gyldig landkode.",
+        "`country` m\u00e5 v\u00e6re \u00e9n gyldig landkode.",
         call. = FALSE
       )
     }
@@ -100,7 +100,7 @@ variable_summary <- function(
       unit == ""
     ) {
       stop(
-        "`unit` må være én gyldig KOSTRA-enhet.",
+        "`unit` m\u00e5 v\u00e6re \u00e9n gyldig KOSTRA-enhet.",
         call. = FALSE
       )
     }
@@ -113,7 +113,7 @@ variable_summary <- function(
     top_n_correlations < 1
   ) {
     stop(
-      "`top_n_correlations` må være et positivt heltall.",
+      "`top_n_correlations` m\u00e5 v\u00e6re et positivt heltall.",
       call. = FALSE
     )
   }
@@ -140,14 +140,14 @@ variable_summary <- function(
   
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være et datasett.",
+      "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
   
   if (!"Aar" %in% names(data)) {
     stop(
-      "Datasettet mangler årskolonnen `Aar`.",
+      "Datasettet mangler \u00e5rskolonnen `Aar`.",
       call. = FALSE
     )
   }
@@ -245,7 +245,7 @@ variable_summary <- function(
         stop(
           paste0(
             "Datasettet inneholder flere KOSTRA-enheter. ",
-            "Angi én enhet med argumentet `unit`."
+            "Angi \u00e9n enhet med argumentet `unit`."
           ),
           call. = FALSE
         )
@@ -324,7 +324,7 @@ variable_summary <- function(
   
   if (!is.data.frame(metadata)) {
     stop(
-      "`metadata` må være et datasett.",
+      "`metadata` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
@@ -359,7 +359,7 @@ variable_summary <- function(
   # Analysetype
   # ------------------------------------------------------------
   
-  analysis_type <- "nivå"
+  analysis_type <- "niv\u00e5"
   
   if (
     nrow(meta) > 0L &&
@@ -371,7 +371,7 @@ variable_summary <- function(
       is.na(analysis_type) ||
       analysis_type == ""
     ) {
-      analysis_type <- "nivå"
+      analysis_type <- "niv\u00e5"
     }
   }
   
@@ -398,7 +398,7 @@ variable_summary <- function(
   growth <- NULL
   rate_summary <- NULL
   
-  if (analysis_type %in% c("nivå", "indeks")) {
+  if (analysis_type %in% c("niv\u00e5", "indeks")) {
     
     growth <- growth_table(
       variables = variable,
@@ -501,7 +501,7 @@ variable_summary <- function(
   if (!is.character(correlation_variables)) {
     stop(
       paste0(
-        "`correlation_variables` må være ",
+        "`correlation_variables` m\u00e5 v\u00e6re ",
         "en tegnvektor eller `NULL`."
       ),
       call. = FALSE
@@ -694,7 +694,7 @@ variable_summary <- function(
         "Enhet" %in% names(meta) &&
         !is.na(meta$Enhet[1])
       ) {
-        cat("Måleenhet:   ", meta$Enhet[1], "\n", sep = "")
+        cat("M\u00e5leenhet:   ", meta$Enhet[1], "\n", sep = "")
       }
       
       if (
@@ -772,7 +772,7 @@ variable_summary <- function(
     cat("-----------------\n")
     
     cat(
-      "År:    ",
+      "\u00c5r:    ",
       latest$Siste_aar[[1]],
       "\n",
       sep = ""
@@ -790,7 +790,7 @@ variable_summary <- function(
   # Vekst / oppsummering
   # ------------------------------------------------------------
   
-  if (analysis_type %in% c("nivå", "indeks")) {
+  if (analysis_type %in% c("niv\u00e5", "indeks")) {
     
     cat("Vekst\n")
     cat("-----\n")

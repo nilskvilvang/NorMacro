@@ -24,7 +24,7 @@ cache_get <- function(name,
     }
     
     if (verbose) {
-      message("Kunne ikke lese cache. Laster ned på nytt: ", name)
+      message("Kunne ikke lese cache. Laster ned p\u00e5 nytt: ", name)
     }
   }
   

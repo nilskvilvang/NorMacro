@@ -13,7 +13,7 @@ prepare_kostra_peer_analysis <- function(
     unit == ""
   ) {
     stop(
-      "`unit` må angi én gyldig KOSTRA-enhet.",
+      "`unit` m\u00e5 angi \u00e9n gyldig KOSTRA-enhet.",
       call. = FALSE
     )
   }
@@ -36,7 +36,7 @@ prepare_kostra_peer_analysis <- function(
     !is.finite(end_year)
   ) {
     stop(
-      "`end_year` må være ett gyldig år.",
+      "`end_year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
       call. = FALSE
     )
   }
@@ -59,7 +59,7 @@ prepare_kostra_peer_analysis <- function(
     !is.finite(start_year)
   ) {
     stop(
-      "`start_year` må være ett gyldig år.",
+      "`start_year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
       call. = FALSE
     )
   }
@@ -70,7 +70,7 @@ prepare_kostra_peer_analysis <- function(
   
   if (start_year > end_year) {
     stop(
-      "`start_year` kan ikke være større enn `end_year`.",
+      "`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.",
       call. = FALSE
     )
   }

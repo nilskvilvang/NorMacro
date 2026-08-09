@@ -5,7 +5,7 @@ plot_kostra_benchmark <- function(variable,
                                   year = NULL,
                                   descending = TRUE) {
   if (!is.data.frame(data)) {
-    stop("`data` må være et datasett.", call. = FALSE)
+    stop("`data` m\u00e5 v\u00e6re et datasett.", call. = FALSE)
   }
   
   required_columns <- c("Enhet", "Enhet_navn", "Enhetstype", "Aar")
@@ -52,7 +52,7 @@ plot_kostra_benchmark <- function(variable,
     dplyr::mutate(Valgt = .data$Enhet == unit)
   
   if (nrow(plot_data) == 0L) {
-    stop("Fant ingen observasjoner for valgt år.", call. = FALSE)
+    stop("Fant ingen observasjoner for valgt \u00e5r.", call. = FALSE)
   }
   
   selected_name <- benchmark$Enhet_navn[[1]]

@@ -14,7 +14,7 @@ compare_periods <- function(
   
   if (!"Aar" %in% names(data)) {
     stop(
-      "Datasettet må inneholde kolonnen `Aar`.",
+      "Datasettet m\u00e5 inneholde kolonnen `Aar`.",
       call. = FALSE
     )
   }
@@ -38,7 +38,7 @@ compare_periods <- function(
     !is.numeric(start_year)
   ) {
     stop(
-      "`start_year` må være ett numerisk år.",
+      "`start_year` m\u00e5 v\u00e6re ett numerisk \u00e5r.",
       call. = FALSE
     )
   }
@@ -49,14 +49,14 @@ compare_periods <- function(
     !is.numeric(end_year)
   ) {
     stop(
-      "`end_year` må være ett numerisk år.",
+      "`end_year` m\u00e5 v\u00e6re ett numerisk \u00e5r.",
       call. = FALSE
     )
   }
   
   if (start_year > end_year) {
     stop(
-      "`start_year` kan ikke være større enn `end_year`.",
+      "`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.",
       call. = FALSE
     )
   }

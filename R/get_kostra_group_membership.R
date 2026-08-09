@@ -2,7 +2,7 @@
 get_kostra_group_membership <- function(date = Sys.Date()) {
   if (length(date) != 1L ||
       is.na(date)) {
-    stop("`date` må være én gyldig dato.", call. = FALSE)
+    stop("`date` m\u00e5 v\u00e6re \u00e9n gyldig dato.", call. = FALSE)
   }
   
   date <- as.Date(date)
@@ -16,7 +16,7 @@ get_kostra_group_membership <- function(date = Sys.Date()) {
   
   if (is.null(response$correspondenceItems) ||
       nrow(response$correspondenceItems) == 0L) {
-    stop("Fant ingen KOSTRA-gruppetilhørighet for valgt dato.",
+    stop("Fant ingen KOSTRA-gruppetilh\u00f8righet for valgt dato.",
          call. = FALSE)
   }
   

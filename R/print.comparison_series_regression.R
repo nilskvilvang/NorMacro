@@ -37,7 +37,7 @@ print.comparison_series_regression <- function(x, ...) {
   }
   
   print_field("Estimert periode",
-              paste0(x$estimated_start_year, "–", x$estimated_end_year))
+              paste0(x$estimated_start_year, "\u2013", x$estimated_end_year))
   
   print_field("Observasjoner", x$number_of_observations)
   

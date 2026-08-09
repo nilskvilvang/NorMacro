@@ -27,7 +27,7 @@ print.comparison_series_summary <- function(x, ...) {
   }
   
   if (!is.null(base_year)) {
-    cat("Basisår:        ", base_year, "\n", sep = "")
+    cat("Basis\u00e5r:        ", base_year, "\n", sep = "")
   }
   
   if (!is.null(transformation_base_value)) {

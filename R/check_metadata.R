@@ -12,7 +12,7 @@ check_metadata <- function(data,
   
   if (length(missing_vars) == 0) {
     if (verbose) {
-      message("✓ Alle variabler er dokumentert i metadata.")
+      message("\u2713 Alle variabler er dokumentert i metadata.")
     }
     
   } else {

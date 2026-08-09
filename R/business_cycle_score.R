@@ -26,7 +26,7 @@ business_cycle_score <- function(data = NULL,
   missing <- setdiff(required, names(data))
   
   if (length(missing) > 0) {
-    stop("Fant ikke nødvendige variabler i datasettet: ",
+    stop("Fant ikke n\u00f8dvendige variabler i datasettet: ",
          paste(missing, collapse = ", "))
   }
   

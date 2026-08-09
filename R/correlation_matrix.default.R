@@ -21,14 +21,14 @@ correlation_matrix.default <- function(
   
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være en data.frame eller tibble.",
+      "`data` m\u00e5 v\u00e6re en data.frame eller tibble.",
       call. = FALSE
     )
   }
   
   if (!"Aar" %in% names(data)) {
     stop(
-      "Datasettet må inneholde kolonnen `Aar`.",
+      "Datasettet m\u00e5 inneholde kolonnen `Aar`.",
       call. = FALSE
     )
   }
@@ -76,7 +76,7 @@ correlation_matrix.default <- function(
       stop(
         "`",
         argument,
-        "` må være ett endelig numerisk år.",
+        "` m\u00e5 v\u00e6re ett endelig numerisk \u00e5r.",
         call. = FALSE
       )
     }
@@ -100,7 +100,7 @@ correlation_matrix.default <- function(
     start_year > end_year
   ) {
     stop(
-      "`start_year` kan ikke være større enn `end_year`.",
+      "`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.",
       call. = FALSE
     )
   }
@@ -138,7 +138,7 @@ correlation_matrix.default <- function(
         is.na(country)
       ) {
         stop(
-          "`country` må angi nøyaktig ett land.",
+          "`country` m\u00e5 angi n\u00f8yaktig ett land.",
           call. = FALSE
         )
       }
@@ -162,7 +162,7 @@ correlation_matrix.default <- function(
       stop(
         paste0(
           "Datasettet inneholder flere land. ",
-          "Velg ett land med `country =` før ",
+          "Velg ett land med `country =` f\u00f8r ",
           "korrelasjonsmatrisen beregnes."
         ),
         call. = FALSE
@@ -189,7 +189,7 @@ correlation_matrix.default <- function(
         is.na(unit)
       ) {
         stop(
-          "`unit` må angi nøyaktig én KOSTRA-enhet.",
+          "`unit` m\u00e5 angi n\u00f8yaktig \u00e9n KOSTRA-enhet.",
           call. = FALSE
         )
       }
@@ -213,7 +213,7 @@ correlation_matrix.default <- function(
       stop(
         paste0(
           "Datasettet inneholder flere KOSTRA-enheter. ",
-          "Velg én enhet med `unit =` før ",
+          "Velg \u00e9n enhet med `unit =` f\u00f8r ",
           "korrelasjonsmatrisen beregnes."
         ),
         call. = FALSE

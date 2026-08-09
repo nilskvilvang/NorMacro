@@ -17,14 +17,14 @@ scatter_series <- function(
   
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være et datasett.",
+      "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
   
   if (!"Aar" %in% names(data)) {
     stop(
-      "Datasettet mangler årskolonnen `Aar`.",
+      "Datasettet mangler \u00e5rskolonnen `Aar`.",
       call. = FALSE
     )
   }
@@ -105,7 +105,7 @@ scatter_series <- function(
       country == ""
     ) {
       stop(
-        "`country` må angi nøyaktig ett land.",
+        "`country` m\u00e5 angi n\u00f8yaktig ett land.",
         call. = FALSE
       )
     }
@@ -145,7 +145,7 @@ scatter_series <- function(
         stop(
           paste0(
             "Datasettet inneholder flere KOSTRA-enheter. ",
-            "Angi én enhet med argumentet `unit`."
+            "Angi \u00e9n enhet med argumentet `unit`."
           ),
           call. = FALSE
         )
@@ -161,7 +161,7 @@ scatter_series <- function(
       unit == ""
     ) {
       stop(
-        "`unit` må angi nøyaktig én KOSTRA-enhet.",
+        "`unit` m\u00e5 angi n\u00f8yaktig \u00e9n KOSTRA-enhet.",
         call. = FALSE
       )
     }
@@ -382,7 +382,7 @@ scatter_series <- function(
       r
     ),
     sprintf(
-      "R² = %.2f",
+      "R\u00b2 = %.2f",
       r2
     ),
     if (p_value < 0.001) {
@@ -445,7 +445,7 @@ scatter_series <- function(
       min(
         plot_data$Aar
       ),
-      "–",
+      "\u2013",
       max(
         plot_data$Aar
       )
@@ -454,7 +454,7 @@ scatter_series <- function(
   
   subtitle <- paste(
     subtitle_parts,
-    collapse = " · "
+    collapse = " \u00b7 "
   )
   
   # ------------------------------------------------------------

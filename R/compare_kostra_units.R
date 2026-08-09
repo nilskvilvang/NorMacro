@@ -10,7 +10,7 @@ compare_kostra_units <- function(
   
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være et datasett.",
+      "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
@@ -43,7 +43,7 @@ compare_kostra_units <- function(
     variable == ""
   ) {
     stop(
-      "`variable` må være navnet på én gyldig variabel.",
+      "`variable` m\u00e5 v\u00e6re navnet p\u00e5 \u00e9n gyldig variabel.",
       call. = FALSE
     )
   }
@@ -60,7 +60,7 @@ compare_kostra_units <- function(
     stop(
       "Variabelen `",
       variable,
-      "` må være numerisk.",
+      "` m\u00e5 v\u00e6re numerisk.",
       call. = FALSE
     )
   }
@@ -71,7 +71,7 @@ compare_kostra_units <- function(
     is.na(descending)
   ) {
     stop(
-      "`descending` må være `TRUE` eller `FALSE`.",
+      "`descending` m\u00e5 v\u00e6re `TRUE` eller `FALSE`.",
       call. = FALSE
     )
   }
@@ -91,7 +91,7 @@ compare_kostra_units <- function(
       any(units == "")
     ) {
       stop(
-        "`units` må være en tegnvektor med gyldige KOSTRA-enheter.",
+        "`units` m\u00e5 v\u00e6re en tegnvektor med gyldige KOSTRA-enheter.",
         call. = FALSE
       )
     }
@@ -161,14 +161,14 @@ compare_kostra_units <- function(
       !is.finite(start_year)
     ) {
       stop(
-        "`start_year` må være ett gyldig år.",
+        "`start_year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
         call. = FALSE
       )
     }
     
     if (start_year >= selected_year) {
       stop(
-        "`start_year` må være mindre enn valgt `year`.",
+        "`start_year` m\u00e5 v\u00e6re mindre enn valgt `year`.",
         call. = FALSE
       )
     }

@@ -12,14 +12,14 @@ plot_series <- function(
   
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være en data.frame eller tibble.",
+      "`data` m\u00e5 v\u00e6re en data.frame eller tibble.",
       call. = FALSE
     )
   }
   
   if (!"Aar" %in% names(data)) {
     stop(
-      "Datasettet må inneholde kolonnen `Aar`.",
+      "Datasettet m\u00e5 inneholde kolonnen `Aar`.",
       call. = FALSE
     )
   }
@@ -184,7 +184,7 @@ plot_series <- function(
     ) {
       caption <- paste0(
         caption,
-        " · Tabell ",
+        " \u00b7 Tabell ",
         kostra_table
       )
     }

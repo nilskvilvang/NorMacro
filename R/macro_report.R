@@ -57,7 +57,7 @@ macro_report <- function(data = NULL, year = NULL) {
   cat("\n")
   cat("NorMacro makrorapport\n")
   cat("=====================\n\n")
-  cat("År: ", year, "\n\n", sep = "")
+  cat("\u00c5r: ", year, "\n\n", sep = "")
   
   if (nrow(cycle) > 0) {
     cat("Konjunkturfase\n")
@@ -66,7 +66,7 @@ macro_report <- function(data = NULL, year = NULL) {
     cat("Score: ", cycle$Score[1], "\n\n", sep = "")
   }
   
-  cat("Nøkkeltall\n")
+  cat("N\u00f8kkeltall\n")
   cat("----------\n")
   print(report_table |>
           dplyr::select(Display_navn, Verdi, Enhet, Kategori, Kilde))

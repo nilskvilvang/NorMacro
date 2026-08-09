@@ -33,18 +33,18 @@ print.comparison_series_correlation <- function(x, ...) {
   if (!is.null(start_year) ||
       !is.null(end_year)) {
     period_start <- if (is.null(start_year)) {
-      "første tilgjengelige år"
+      "f\u00f8rste tilgjengelige \u00e5r"
     } else {
       as.character(start_year)
     }
     
     period_end <- if (is.null(end_year)) {
-      "siste tilgjengelige år"
+      "siste tilgjengelige \u00e5r"
     } else {
       as.character(end_year)
     }
     
-    cat("Valgt periode:  ", period_start, "–", period_end, "\n", sep = "")
+    cat("Valgt periode:  ", period_start, "\u2013", period_end, "\n", sep = "")
   }
   
   cat("Diagonal:       ", if (isTRUE(include_diagonal)) {

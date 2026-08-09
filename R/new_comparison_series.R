@@ -7,7 +7,7 @@ new_comparison_series <- function(x,
                                   transformation_periods = NULL,
                                   transformation_base_value = NULL) {
   if (!inherits(x, "data.frame")) {
-    stop("`x` må være en data.frame eller tibble.", call. = FALSE)
+    stop("`x` m\u00e5 v\u00e6re en data.frame eller tibble.", call. = FALSE)
   }
   
   required_columns <- c(
@@ -26,7 +26,7 @@ new_comparison_series <- function(x,
   
   if (length(missing_columns) > 0) {
     stop(
-      "Mangler nødvendige kolonner: ",
+      "Mangler n\u00f8dvendige kolonner: ",
       paste(missing_columns, collapse = ", "),
       ".",
       call. = FALSE
@@ -36,7 +36,7 @@ new_comparison_series <- function(x,
   if (!is.logical(normalized) ||
       length(normalized) != 1 ||
       is.na(normalized)) {
-    stop("`normalized` må være TRUE eller FALSE.", call. = FALSE)
+    stop("`normalized` m\u00e5 v\u00e6re TRUE eller FALSE.", call. = FALSE)
   }
   
   if (!is.null(base_year)) {
@@ -44,7 +44,7 @@ new_comparison_series <- function(x,
         length(base_year) != 1 ||
         is.na(base_year) ||
         base_year != floor(base_year)) {
-      stop("`base_year` må være ett gyldig heltallig årstall.", call. = FALSE)
+      stop("`base_year` m\u00e5 v\u00e6re ett gyldig heltallig \u00e5rstall.", call. = FALSE)
     }
     
     base_year <- as.integer(base_year)
@@ -58,7 +58,7 @@ new_comparison_series <- function(x,
         transformation_base_value == 0) {
       stop(
         paste0(
-          "`transformation_base_value` må være ",
+          "`transformation_base_value` m\u00e5 v\u00e6re ",
           "ett endelig numerisk tall ulik null."
         ),
         call. = FALSE
@@ -67,7 +67,7 @@ new_comparison_series <- function(x,
   }
   
   if (normalized && is.null(base_year)) {
-    stop("`base_year` må oppgis når `normalized = TRUE`.", call. = FALSE)
+    stop("`base_year` m\u00e5 oppgis n\u00e5r `normalized = TRUE`.", call. = FALSE)
   }
   
   valid_transformations <- c("level", "indexed", "growth_percent", "growth_absolute")
@@ -77,7 +77,7 @@ new_comparison_series <- function(x,
       is.na(transformation) ||
       !transformation %in% valid_transformations) {
     stop(
-      "`transformation` må være en av: ",
+      "`transformation` m\u00e5 v\u00e6re en av: ",
       paste(valid_transformations, collapse = ", "),
       ".",
       call. = FALSE
@@ -90,7 +90,7 @@ new_comparison_series <- function(x,
         is.na(transformation_periods) ||
         transformation_periods < 1 ||
         transformation_periods != floor(transformation_periods)) {
-      stop("`transformation_periods` må være et positivt heltall.",
+      stop("`transformation_periods` m\u00e5 v\u00e6re et positivt heltall.",
            call. = FALSE)
     }
     
@@ -99,14 +99,14 @@ new_comparison_series <- function(x,
   
   if (identical(transformation, "indexed") &&
       is.null(base_year)) {
-    stop("`base_year` må oppgis for indekserte serier.", call. = FALSE)
+    stop("`base_year` m\u00e5 oppgis for indekserte serier.", call. = FALSE)
   }
   
   if (identical(transformation, "indexed") &&
       is.null(transformation_base_value)) {
     stop(
       paste0(
-        "`transformation_base_value` må oppgis ",
+        "`transformation_base_value` m\u00e5 oppgis ",
         "for indekserte serier."
       ),
       call. = FALSE
@@ -128,7 +128,7 @@ new_comparison_series <- function(x,
       is.null(transformation_periods)) {
     stop(
       paste0(
-        "`transformation_periods` må oppgis for ",
+        "`transformation_periods` m\u00e5 oppgis for ",
         "vekst- og endringstransformasjoner."
       ),
       call. = FALSE
@@ -139,7 +139,7 @@ new_comparison_series <- function(x,
       !is.null(transformation_periods)) {
     stop(
       paste0(
-        "`transformation_periods` skal være NULL for ",
+        "`transformation_periods` skal v\u00e6re NULL for ",
         "`level` og `normalized`."
       ),
       call. = FALSE

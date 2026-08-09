@@ -25,7 +25,7 @@ prepare_kostra_comparison <- function(
     unit == ""
   ) {
     stop(
-      "`unit` må være én gyldig KOSTRA-enhet.",
+      "`unit` m\u00e5 v\u00e6re \u00e9n gyldig KOSTRA-enhet.",
       call. = FALSE
     )
   }
@@ -37,7 +37,7 @@ prepare_kostra_comparison <- function(
     variable == ""
   ) {
     stop(
-      "`variable` må være navnet på én gyldig variabel.",
+      "`variable` m\u00e5 v\u00e6re navnet p\u00e5 \u00e9n gyldig variabel.",
       call. = FALSE
     )
   }
@@ -49,7 +49,7 @@ prepare_kostra_comparison <- function(
     is.na(end_year)
   ) {
     stop(
-      "`start_year` og `end_year` må angi ett år hver.",
+      "`start_year` og `end_year` m\u00e5 angi ett \u00e5r hver.",
       call. = FALSE
     )
   }
@@ -64,7 +64,7 @@ prepare_kostra_comparison <- function(
   
   if (start_year > end_year) {
     stop(
-      "`start_year` kan ikke være større enn `end_year`.",
+      "`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.",
       call. = FALSE
     )
   }
@@ -89,9 +89,9 @@ prepare_kostra_comparison <- function(
     ) {
       stop(
         paste0(
-          "`comparison_units` må være en ikke-tom ",
+          "`comparison_units` m\u00e5 v\u00e6re en ikke-tom ",
           "karaktervektor med gyldige KOSTRA-enheter ",
-          "når `comparison = \"custom\"`."
+          "n\u00e5r `comparison = \"custom\"`."
         ),
         call. = FALSE
       )
@@ -106,8 +106,8 @@ prepare_kostra_comparison <- function(
     if (!unit %in% comparison_units) {
       stop(
         paste0(
-          "`unit` må inngå i `comparison_units` ",
-          "når `comparison = \"custom\"`."
+          "`unit` m\u00e5 inng\u00e5 i `comparison_units` ",
+          "n\u00e5r `comparison = \"custom\"`."
         ),
         call. = FALSE
       )
@@ -123,7 +123,7 @@ prepare_kostra_comparison <- function(
       )
     ) {
       stop(
-        "`comparison_name` må være én gyldig tekstverdi eller `NULL`.",
+        "`comparison_name` m\u00e5 v\u00e6re \u00e9n gyldig tekstverdi eller `NULL`.",
         call. = FALSE
       )
     }

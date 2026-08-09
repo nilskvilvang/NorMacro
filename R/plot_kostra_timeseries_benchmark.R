@@ -28,7 +28,7 @@ plot_kostra_timeseries_benchmark <- function(
     unit == ""
   ) {
     stop(
-      "`unit` må angi én gyldig KOSTRA-enhet.",
+      "`unit` m\u00e5 angi \u00e9n gyldig KOSTRA-enhet.",
       call. = FALSE
     )
   }
@@ -38,7 +38,7 @@ plot_kostra_timeseries_benchmark <- function(
     is.null(data)
   ) {
     stop(
-      "`data` må oppgis når `comparison = \"data\"`.",
+      "`data` m\u00e5 oppgis n\u00e5r `comparison = \"data\"`.",
       call. = FALSE
     )
   }
@@ -48,7 +48,7 @@ plot_kostra_timeseries_benchmark <- function(
     !is.data.frame(data)
   ) {
     stop(
-      "`data` må være et datasett.",
+      "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }

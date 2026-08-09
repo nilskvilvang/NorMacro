@@ -11,7 +11,7 @@ get_kostra_county_membership_history <- function(
     is.na(end_year)
   ) {
     stop(
-      "`start_year` og `end_year` må angi ett år hver.",
+      "`start_year` og `end_year` m\u00e5 angi ett \u00e5r hver.",
       call. = FALSE
     )
   }
@@ -21,7 +21,7 @@ get_kostra_county_membership_history <- function(
   
   if (start_year > end_year) {
     stop(
-      "`start_year` kan ikke være større enn `end_year`.",
+      "`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.",
       call. = FALSE
     )
   }

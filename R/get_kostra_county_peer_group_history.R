@@ -12,7 +12,7 @@ get_kostra_county_peer_group_history <- function(
     unit == ""
   ) {
     stop(
-      "`unit` må angi én gyldig KOSTRA-enhet.",
+      "`unit` m\u00e5 angi \u00e9n gyldig KOSTRA-enhet.",
       call. = FALSE
     )
   }

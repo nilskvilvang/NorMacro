@@ -16,7 +16,7 @@ correlate.comparison_series <- function(x,
   
   if (length(missing_columns) > 0) {
     stop(
-      "Mangler nødvendige kolonner: ",
+      "Mangler n\u00f8dvendige kolonner: ",
       paste(missing_columns, collapse = ", "),
       ".",
       call. = FALSE
@@ -32,7 +32,7 @@ correlate.comparison_series <- function(x,
         length(value) != 1 ||
         is.na(value) ||
         !is.finite(value)) {
-      stop("`", argument, "` må være ett endelig numerisk år.", call. = FALSE)
+      stop("`", argument, "` m\u00e5 v\u00e6re ett endelig numerisk \u00e5r.", call. = FALSE)
     }
     
     invisible(NULL)
@@ -45,19 +45,19 @@ correlate.comparison_series <- function(x,
   if (!is.null(start_year) &&
       !is.null(end_year) &&
       start_year > end_year) {
-    stop("`start_year` kan ikke være større enn `end_year`.", call. = FALSE)
+    stop("`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.", call. = FALSE)
   }
   
   if (!is.logical(include_diagonal) ||
       length(include_diagonal) != 1 ||
       is.na(include_diagonal)) {
-    stop("`include_diagonal` må være TRUE eller FALSE.", call. = FALSE)
+    stop("`include_diagonal` m\u00e5 v\u00e6re TRUE eller FALSE.", call. = FALSE)
   }
   
   if (!is.logical(format) ||
       length(format) != 1 ||
       is.na(format)) {
-    stop("`format` må være TRUE eller FALSE.", call. = FALSE)
+    stop("`format` m\u00e5 v\u00e6re TRUE eller FALSE.", call. = FALSE)
   }
   
   analysis_data <- tibble::as_tibble(x)

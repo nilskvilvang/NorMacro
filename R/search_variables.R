@@ -50,7 +50,7 @@ search_variables <- function(query, ignore_case = TRUE) {
     dplyr::arrange(.data$Display_navn, .data$Variabel)
   
   if (nrow(result) == 0) {
-    message("Fant ingen variabler som matcher søket: ", query)
+    message("Fant ingen variabler som matcher s\u00f8ket: ", query)
   }
   
   result

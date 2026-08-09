@@ -31,7 +31,7 @@ index.comparison_series <- function(x,
   
   if (length(missing_columns) > 0) {
     stop(
-      "Objektet mangler nødvendige kolonner: ",
+      "Objektet mangler n\u00f8dvendige kolonner: ",
       paste(missing_columns, collapse = ", "),
       ".",
       call. = FALSE
@@ -55,8 +55,8 @@ index.comparison_series <- function(x,
   if (!identical(transformation, "level")) {
     stop(
       paste0(
-        "`index()` kan bare brukes på serier ",
-        "på opprinnelig nivå. Nåværende transformasjon: ",
+        "`index()` kan bare brukes p\u00e5 serier ",
+        "p\u00e5 opprinnelig niv\u00e5. N\u00e5v\u00e6rende transformasjon: ",
         transformation,
         "."
       ),
@@ -69,7 +69,7 @@ index.comparison_series <- function(x,
       is.na(base_value) ||
       !is.finite(base_value) ||
       base_value == 0) {
-    stop("`base_value` må være ett endelig numerisk tall ulik null.",
+    stop("`base_value` m\u00e5 v\u00e6re ett endelig numerisk tall ulik null.",
          call. = FALSE)
   }
   
@@ -92,7 +92,7 @@ index.comparison_series <- function(x,
     
     if (nrow(common_years) == 0) {
       stop(paste0(
-        "Fant ingen felles år med gyldige verdier ",
+        "Fant ingen felles \u00e5r med gyldige verdier ",
         "for alle seriene."
       ),
       call. = FALSE)
@@ -106,7 +106,7 @@ index.comparison_series <- function(x,
         is.na(base_year) ||
         !is.finite(base_year) ||
         base_year != floor(base_year)) {
-      stop("`base_year` må være ett gyldig heltallig årstall.", call. = FALSE)
+      stop("`base_year` m\u00e5 v\u00e6re ett gyldig heltallig \u00e5rstall.", call. = FALSE)
     }
     
     base_year <- as.integer(base_year)
@@ -128,7 +128,7 @@ index.comparison_series <- function(x,
   
   if (length(missing_series) > 0) {
     stop(
-      "Alle seriene må ha data i valgt basisår: ",
+      "Alle seriene m\u00e5 ha data i valgt basis\u00e5r: ",
       base_year,
       ". Mangler for: ",
       paste(missing_series, collapse = ", "),
@@ -143,7 +143,7 @@ index.comparison_series <- function(x,
   
   if (length(zero_series) > 0) {
     stop(
-      "Basisverdien kan ikke være null. Gjelder: ",
+      "Basisverdien kan ikke v\u00e6re null. Gjelder: ",
       paste(zero_series, collapse = ", "),
       ".",
       call. = FALSE

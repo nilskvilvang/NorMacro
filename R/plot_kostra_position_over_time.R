@@ -36,7 +36,7 @@ plot_kostra_position_over_time <- function(
     unit == ""
   ) {
     stop(
-      "`unit` må angi én gyldig KOSTRA-enhet.",
+      "`unit` m\u00e5 angi \u00e9n gyldig KOSTRA-enhet.",
       call. = FALSE
     )
   }
@@ -47,7 +47,7 @@ plot_kostra_position_over_time <- function(
     is.na(descending)
   ) {
     stop(
-      "`descending` må være `TRUE` eller `FALSE`.",
+      "`descending` m\u00e5 v\u00e6re `TRUE` eller `FALSE`.",
       call. = FALSE
     )
   }
@@ -57,7 +57,7 @@ plot_kostra_position_over_time <- function(
     is.null(data)
   ) {
     stop(
-      "`data` må oppgis når `comparison = \"data\"`.",
+      "`data` m\u00e5 oppgis n\u00e5r `comparison = \"data\"`.",
       call. = FALSE
     )
   }
@@ -67,7 +67,7 @@ plot_kostra_position_over_time <- function(
     !is.data.frame(data)
   ) {
     stop(
-      "`data` må være et datasett.",
+      "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
@@ -113,7 +113,7 @@ plot_kostra_position_over_time <- function(
     if (nrow(plot_data) == 0L) {
       stop(
         paste0(
-          "Fant ingen år med tilstrekkelig ",
+          "Fant ingen \u00e5r med tilstrekkelig ",
           "sammenligningsgrunnlag for percentil."
         ),
         call. = FALSE
@@ -127,7 +127,7 @@ plot_kostra_position_over_time <- function(
     if (nrow(plot_data) == 0L) {
       stop(
         paste0(
-          "Fant ingen år med tilstrekkelig ",
+          "Fant ingen \u00e5r med tilstrekkelig ",
           "sammenligningsgrunnlag for rangering."
         ),
         call. = FALSE

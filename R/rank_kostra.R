@@ -9,7 +9,7 @@ rank_kostra <- function(
   
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være et datasett.",
+      "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
@@ -42,7 +42,7 @@ rank_kostra <- function(
     variable == ""
   ) {
     stop(
-      "`variable` må være navnet på én gyldig variabel.",
+      "`variable` m\u00e5 v\u00e6re navnet p\u00e5 \u00e9n gyldig variabel.",
       call. = FALSE
     )
   }
@@ -59,7 +59,7 @@ rank_kostra <- function(
     stop(
       "Variabelen `",
       variable,
-      "` må være numerisk.",
+      "` m\u00e5 v\u00e6re numerisk.",
       call. = FALSE
     )
   }
@@ -70,7 +70,7 @@ rank_kostra <- function(
     is.na(descending)
   ) {
     stop(
-      "`descending` må være `TRUE` eller `FALSE`.",
+      "`descending` m\u00e5 v\u00e6re `TRUE` eller `FALSE`.",
       call. = FALSE
     )
   }
@@ -84,7 +84,7 @@ rank_kostra <- function(
       top_n < 1
     ) {
       stop(
-        "`top_n` må være et positivt heltall eller `NULL`.",
+        "`top_n` m\u00e5 v\u00e6re et positivt heltall eller `NULL`.",
         call. = FALSE
       )
     }
@@ -126,7 +126,7 @@ rank_kostra <- function(
       !is.finite(year)
     ) {
       stop(
-        "`year` må være ett gyldig år.",
+        "`year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
         call. = FALSE
       )
     }

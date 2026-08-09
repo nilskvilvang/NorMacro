@@ -16,7 +16,7 @@ install_dependencies <- function() {
   missing <- packages[!vapply(packages, requireNamespace, logical(1), quietly = TRUE)]
   
   if (length(missing) == 0) {
-    message("✓ Alle nødvendige pakker er installert.")
+    message("\u2713 Alle n\u00f8dvendige pakker er installert.")
     return(invisible(TRUE))
   }
   

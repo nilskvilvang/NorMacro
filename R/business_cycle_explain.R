@@ -7,14 +7,14 @@ business_cycle_explain <- function(year, data = NULL, ...) {
     dplyr::filter(Aar == year)
   
   if (nrow(result) == 0) {
-    stop("Fant ikke året i konjunkturklassifiseringen: ", year)
+    stop("Fant ikke \u00e5ret i konjunkturklassifiseringen: ", year)
   }
   
   cat("\n")
   cat("Konjunkturklassifisering\n")
   cat("========================\n\n")
   
-  cat("År:    ", result$Aar[1], "\n", sep = "")
+  cat("\u00c5r:    ", result$Aar[1], "\n", sep = "")
   cat("Fase:  ", result$Fase[1], "\n", sep = "")
   cat("Score: ", result$Score[1], "\n\n", sep = "")
   

@@ -13,7 +13,7 @@ get_kostra_county_membership <- function(
     is.na(date)
   ) {
     stop(
-      "`date` må være én gyldig dato.",
+      "`date` m\u00e5 v\u00e6re \u00e9n gyldig dato.",
       call. = FALSE
     )
   }

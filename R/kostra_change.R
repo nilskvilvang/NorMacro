@@ -10,7 +10,7 @@ kostra_change <- function(
   
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være et datasett.",
+      "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
@@ -43,7 +43,7 @@ kostra_change <- function(
     variable == ""
   ) {
     stop(
-      "`variable` må være navnet på én gyldig variabel.",
+      "`variable` m\u00e5 v\u00e6re navnet p\u00e5 \u00e9n gyldig variabel.",
       call. = FALSE
     )
   }
@@ -60,7 +60,7 @@ kostra_change <- function(
     stop(
       "Variabelen `",
       variable,
-      "` må være numerisk.",
+      "` m\u00e5 v\u00e6re numerisk.",
       call. = FALSE
     )
   }
@@ -78,7 +78,7 @@ kostra_change <- function(
       stop(
         "`",
         argument,
-        "` må være ett gyldig år.",
+        "` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
         call. = FALSE
       )
     }
@@ -96,7 +96,7 @@ kostra_change <- function(
   
   if (start_year >= end_year) {
     stop(
-      "`start_year` må være mindre enn `end_year`.",
+      "`start_year` m\u00e5 v\u00e6re mindre enn `end_year`.",
       call. = FALSE
     )
   }
@@ -107,7 +107,7 @@ kostra_change <- function(
     is.na(descending)
   ) {
     stop(
-      "`descending` må være `TRUE` eller `FALSE`.",
+      "`descending` m\u00e5 v\u00e6re `TRUE` eller `FALSE`.",
       call. = FALSE
     )
   }
@@ -121,7 +121,7 @@ kostra_change <- function(
       top_n < 1
     ) {
       stop(
-        "`top_n` må være et positivt heltall eller `NULL`.",
+        "`top_n` m\u00e5 v\u00e6re et positivt heltall eller `NULL`.",
         call. = FALSE
       )
     }
@@ -140,7 +140,7 @@ kostra_change <- function(
       .data$Variabel == variable
     )
   
-  analysis_type <- "nivå"
+  analysis_type <- "niv\u00e5"
   
   if (
     nrow(meta) > 0L &&
@@ -152,7 +152,7 @@ kostra_change <- function(
       is.na(analysis_type) ||
       analysis_type == ""
     ) {
-      analysis_type <- "nivå"
+      analysis_type <- "niv\u00e5"
     }
   }
   

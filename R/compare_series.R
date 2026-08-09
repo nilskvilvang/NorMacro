@@ -16,14 +16,14 @@ compare_series <- function(
   
   if (!is.data.frame(data)) {
     stop(
-      "`data` må være en data.frame eller tibble.",
+      "`data` m\u00e5 v\u00e6re en data.frame eller tibble.",
       call. = FALSE
     )
   }
   
   if (!"Aar" %in% names(data)) {
     stop(
-      "Datasettet må inneholde kolonnen `Aar`.",
+      "Datasettet m\u00e5 inneholde kolonnen `Aar`.",
       call. = FALSE
     )
   }
@@ -35,7 +35,7 @@ compare_series <- function(
     any(variables == "")
   ) {
     stop(
-      "`variables` må være en tegnvektor med gyldige variabelnavn.",
+      "`variables` m\u00e5 v\u00e6re en tegnvektor med gyldige variabelnavn.",
       call. = FALSE
     )
   }
@@ -115,7 +115,7 @@ compare_series <- function(
       country == ""
     ) {
       stop(
-        "`country` må angi nøyaktig ett land.",
+        "`country` m\u00e5 angi n\u00f8yaktig ett land.",
         call. = FALSE
       )
     }
@@ -154,7 +154,7 @@ compare_series <- function(
         stop(
           paste0(
             "Datasettet inneholder flere KOSTRA-enheter. ",
-            "Angi én enhet med argumentet `unit`."
+            "Angi \u00e9n enhet med argumentet `unit`."
           ),
           call. = FALSE
         )
@@ -170,7 +170,7 @@ compare_series <- function(
       unit == ""
     ) {
       stop(
-        "`unit` må angi nøyaktig én KOSTRA-enhet.",
+        "`unit` m\u00e5 angi n\u00f8yaktig \u00e9n KOSTRA-enhet.",
         call. = FALSE
       )
     }
@@ -246,7 +246,7 @@ compare_series <- function(
     length(common_years) == 0L
   ) {
     stop(
-      "Fant ingen år der alle valgte variabler har data.",
+      "Fant ingen \u00e5r der alle valgte variabler har data.",
       call. = FALSE
     )
   }
@@ -260,7 +260,7 @@ compare_series <- function(
     if (length(common_years) == 0L) {
       stop(
         paste0(
-          "Fant ikke et felles basisår der alle valgte variabler har data. ",
+          "Fant ikke et felles basis\u00e5r der alle valgte variabler har data. ",
           "Angi `base_year` eksplisitt eller bruk `normalize = FALSE`."
         ),
         call. = FALSE
@@ -469,7 +469,7 @@ compare_series <- function(
   
   subtitle <- paste(
     subtitle_parts,
-    collapse = " · "
+    collapse = " \u00b7 "
   )
   
   # ------------------------------------------------------------

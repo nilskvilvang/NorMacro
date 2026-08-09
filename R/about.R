@@ -12,7 +12,7 @@ about <- function(data = NULL) {
   cat("\n")
   cat("NorMacro\n")
   cat("========\n\n")
-  cat("Kuratert makroøkonomisk database for Norge.\n\n")
+  cat("Kuratert makro\u00f8konomisk database for Norge.\n\n")
   
   cat("Dekning\n")
   cat("-------\n")

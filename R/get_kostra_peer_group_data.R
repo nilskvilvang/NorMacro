@@ -13,7 +13,7 @@ get_kostra_peer_group_data <- function(
     unit == ""
   ) {
     stop(
-      "`unit` må være én gyldig KOSTRA-enhet.",
+      "`unit` m\u00e5 v\u00e6re \u00e9n gyldig KOSTRA-enhet.",
       call. = FALSE
     )
   }
@@ -25,7 +25,7 @@ get_kostra_peer_group_data <- function(
     any(!is.finite(years))
   ) {
     stop(
-      "`years` må være en vektor med gyldige år.",
+      "`years` m\u00e5 v\u00e6re en vektor med gyldige \u00e5r.",
       call. = FALSE
     )
   }
@@ -37,7 +37,7 @@ get_kostra_peer_group_data <- function(
     variable == ""
   ) {
     stop(
-      "`variable` må være navnet på én gyldig variabel.",
+      "`variable` m\u00e5 v\u00e6re navnet p\u00e5 \u00e9n gyldig variabel.",
       call. = FALSE
     )
   }

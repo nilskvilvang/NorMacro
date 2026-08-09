@@ -11,7 +11,7 @@ plot.comparison_series <- function(x,
   
   if (length(missing_columns) > 0) {
     stop(
-      "Objektet mangler nødvendige kolonner: ",
+      "Objektet mangler n\u00f8dvendige kolonner: ",
       paste(missing_columns, collapse = ", "),
       call. = FALSE
     )
@@ -26,7 +26,7 @@ plot.comparison_series <- function(x,
     if (!is.numeric(start_year) ||
         length(start_year) != 1 ||
         is.na(start_year)) {
-      stop("`start_year` må være ett gyldig årstall.", call. = FALSE)
+      stop("`start_year` m\u00e5 v\u00e6re ett gyldig \u00e5rstall.", call. = FALSE)
     }
     
     start_year <- as.integer(start_year)
@@ -36,7 +36,7 @@ plot.comparison_series <- function(x,
     if (!is.numeric(end_year) ||
         length(end_year) != 1 ||
         is.na(end_year)) {
-      stop("`end_year` må være ett gyldig årstall.", call. = FALSE)
+      stop("`end_year` m\u00e5 v\u00e6re ett gyldig \u00e5rstall.", call. = FALSE)
     }
     
     end_year <- as.integer(end_year)
@@ -45,7 +45,7 @@ plot.comparison_series <- function(x,
   if (!is.null(start_year) &&
       !is.null(end_year) &&
       start_year > end_year) {
-    stop("`start_year` kan ikke være større enn `end_year`.", call. = FALSE)
+    stop("`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.", call. = FALSE)
   }
   
   plot_data <- x |>
@@ -66,7 +66,7 @@ plot.comparison_series <- function(x,
     requested_period <- paste0(if (is.null(start_year))
       "-Inf"
       else
-        start_year, "–", if (is.null(end_year))
+        start_year, "\u2013", if (is.null(end_year))
           "Inf"
       else
         end_year)
@@ -104,7 +104,7 @@ plot.comparison_series <- function(x,
     stop(
       paste0(
         "Seriene har ulike enheter. ",
-        "Normaliser dem først med normalize(), ",
+        "Normaliser dem f\u00f8rst med normalize(), ",
         "for eksempel plot(normalize(x))."
       ),
       call. = FALSE
@@ -169,14 +169,14 @@ plot.comparison_series <- function(x,
     
   } else if (identical(transformation, "growth_percent")) {
     if (identical(transformation_periods, 1L)) {
-      title <- "Årlig vekst"
+      title <- "\u00c5rlig vekst"
     } else {
       title <- paste0("Vekst over ", transformation_periods, " perioder")
     }
     
   } else if (identical(transformation, "growth_absolute")) {
     if (identical(transformation_periods, 1L)) {
-      title <- "Årlig endring"
+      title <- "\u00c5rlig endring"
     } else {
       title <- paste0("Endring over ", transformation_periods, " perioder")
     }

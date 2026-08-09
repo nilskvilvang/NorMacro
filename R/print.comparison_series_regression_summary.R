@@ -71,7 +71,7 @@ print.comparison_series_regression_summary <- function(x, ...) {
     "Estimert periode",
     paste0(
       data_statistics$Estimert_startaar,
-      "–",
+      "\u2013",
       data_statistics$Estimert_sluttaar
     )
   )

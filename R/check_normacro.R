@@ -12,7 +12,7 @@ check_normacro <- function(data, verbose = FALSE) {
   
   if (length(failed) == 0) {
     if (verbose) {
-      message("✓ NorMacro bestod alle kvalitetskontroller.")
+      message("\u2713 NorMacro bestod alle kvalitetskontroller.")
     }
     
   } else {

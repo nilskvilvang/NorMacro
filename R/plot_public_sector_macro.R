@@ -27,7 +27,7 @@ plot_public_sector_macro <- function(
     !is.finite(start_year)
   ) {
     stop(
-      "`start_year` må være ett gyldig år.",
+      "`start_year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
       call. = FALSE
     )
   }
@@ -52,7 +52,7 @@ plot_public_sector_macro <- function(
     !is.finite(end_year)
   ) {
     stop(
-      "`end_year` må være ett gyldig år.",
+      "`end_year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
       call. = FALSE
     )
   }
@@ -63,7 +63,7 @@ plot_public_sector_macro <- function(
   
   if (start_year > end_year) {
     stop(
-      "`start_year` kan ikke være større enn `end_year`.",
+      "`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.",
       call. = FALSE
     )
   }
@@ -74,7 +74,7 @@ plot_public_sector_macro <- function(
     is.na(include_state)
   ) {
     stop(
-      "`include_state` må være `TRUE` eller `FALSE`.",
+      "`include_state` m\u00e5 v\u00e6re `TRUE` eller `FALSE`.",
       call. = FALSE
     )
   }
@@ -315,7 +315,7 @@ plot_public_sector_macro <- function(
       y = y_label,
       colour = NULL,
       caption = paste0(
-        "Kilde: Statistisk sentralbyrå, ",
+        "Kilde: Statistisk sentralbyr\u00e5, ",
         "tabell 09189"
       )
     ) +

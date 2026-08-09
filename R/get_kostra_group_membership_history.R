@@ -17,7 +17,7 @@ get_kostra_group_membership_history <- function(
       stop(
         "`",
         argument,
-        "` må være ett gyldig år.",
+        "` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
         call. = FALSE
       )
     }
@@ -45,7 +45,7 @@ get_kostra_group_membership_history <- function(
   
   if (start_year > end_year) {
     stop(
-      "`start_year` kan ikke være større enn `end_year`.",
+      "`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.",
       call. = FALSE
     )
   }

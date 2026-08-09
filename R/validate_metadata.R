@@ -61,7 +61,7 @@ validate_metadata <- function(
   if (!identical(names(metadata), expected_cols)) {
     errors <- c(
       errors,
-      "Kolonnene står ikke i forventet rekkefølge."
+      "Kolonnene st\u00e5r ikke i forventet rekkef\u00f8lge."
     )
   }
   
@@ -75,7 +75,7 @@ validate_metadata <- function(
       errors <- c(
         errors,
         paste0(
-          "Manglende variabelnavn på rad: ",
+          "Manglende variabelnavn p\u00e5 rad: ",
           paste(missing_variable, collapse = ", ")
         )
       )
@@ -150,16 +150,16 @@ validate_metadata <- function(
       "Arbeidsmarked",
       "Boligmarked",
       "Demografi",
-      "Energi og råvarer",
+      "Energi og r\u00e5varer",
       "Finansmarkeder",
-      "Husholdningsøkonomi",
+      "Husholdnings\u00f8konomi",
       "Kreditt og husholdninger",
-      "Lønn og inntekt",
+      "L\u00f8nn og inntekt",
       "Nasjonalregnskap",
       "Offentlige finanser",
       "Priser og inflasjon",
       "Produksjon og aktivitet",
-      "Utenriksøkonomi",
+      "Utenriks\u00f8konomi",
       "Konjunkturindikatorer"
     )
     
@@ -223,7 +223,7 @@ validate_metadata <- function(
   if ("Analyse_type" %in% names(metadata)) {
     valid_analysis_types <- c(
       "rate",
-      "nivå",
+      "niv\u00e5",
       "indeks"
     )
     
@@ -282,7 +282,7 @@ validate_metadata <- function(
         paste0(
           "Manglende verdier i ",
           col,
-          " på rad: ",
+          " p\u00e5 rad: ",
           paste(missing_rows, collapse = ", ")
         )
       )
@@ -307,7 +307,7 @@ validate_metadata <- function(
       errors <- c(
         errors,
         paste0(
-          "Startaar er større enn Sluttaar på rad: ",
+          "Startaar er st\u00f8rre enn Sluttaar p\u00e5 rad: ",
           paste(bad_years, collapse = ", ")
         )
       )
@@ -316,7 +316,7 @@ validate_metadata <- function(
   
   if (length(errors) > 0L) {
     message(
-      "✗ Metadata-validering feilet:\n"
+      "\u2717 Metadata-validering feilet:\n"
     )
     
     for (error in errors) {
@@ -330,7 +330,7 @@ validate_metadata <- function(
   
   if (verbose) {
     message(
-      "✓ Metadata bestod validering."
+      "\u2713 Metadata bestod validering."
     )
   }
   

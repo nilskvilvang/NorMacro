@@ -92,7 +92,7 @@ list_variables <- function(data = NULL,
                      display_name == variable_name) {
           variable_name
         } else{
-          paste0(variable_name, " — ", display_name)
+          paste0(variable_name, " \u2014 ", display_name)
         }
         
         if (variable_name %in% duplicate_variables) {

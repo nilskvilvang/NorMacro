@@ -8,7 +8,7 @@ summary.comparison_series <- function(object, ...) {
   
   if (length(missing_columns) > 0) {
     stop(
-      "Mangler nødvendige kolonner: ",
+      "Mangler n\u00f8dvendige kolonner: ",
       paste(missing_columns, collapse = ", "),
       ".",
       call. = FALSE

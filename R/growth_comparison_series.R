@@ -11,7 +11,7 @@ growth.comparison_series <- function(x,
   
   if (length(missing_columns) > 0) {
     stop(
-      "Objektet mangler nødvendige kolonner: ",
+      "Objektet mangler n\u00f8dvendige kolonner: ",
       paste(missing_columns, collapse = ", "),
       ".",
       call. = FALSE
@@ -23,7 +23,7 @@ growth.comparison_series <- function(x,
       is.na(periods) ||
       periods < 1 ||
       periods != floor(periods)) {
-    stop("`periods` må være et positivt heltall.", call. = FALSE)
+    stop("`periods` m\u00e5 v\u00e6re et positivt heltall.", call. = FALSE)
   }
   
   periods <- as.integer(periods)
@@ -31,7 +31,7 @@ growth.comparison_series <- function(x,
   if (!is.logical(percent) ||
       length(percent) != 1 ||
       is.na(percent)) {
-    stop("`percent` må være TRUE eller FALSE.", call. = FALSE)
+    stop("`percent` m\u00e5 v\u00e6re TRUE eller FALSE.", call. = FALSE)
   }
   
   result <- x |>

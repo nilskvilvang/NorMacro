@@ -12,7 +12,7 @@ regress.comparison_series <- function(x,
   # ------------------------------------------------------------
   
   if (!inherits(formula, "formula")) {
-    stop("`formula` må være en R-formel, for eksempel ",
+    stop("`formula` m\u00e5 v\u00e6re en R-formel, for eksempel ",
          "`NO_KPI ~ SE_HICP + DK_HICP`.",
          call. = FALSE)
   }
@@ -28,7 +28,7 @@ regress.comparison_series <- function(x,
         length(value) != 1 ||
         is.na(value) ||
         !is.finite(value)) {
-      stop("`", argument, "` må være ett endelig numerisk år.", call. = FALSE)
+      stop("`", argument, "` m\u00e5 v\u00e6re ett endelig numerisk \u00e5r.", call. = FALSE)
     }
     
     invisible(NULL)
@@ -41,7 +41,7 @@ regress.comparison_series <- function(x,
   if (!is.null(start_year) &&
       !is.null(end_year) &&
       start_year > end_year) {
-    stop("`start_year` kan ikke være større enn `end_year`.", call. = FALSE)
+    stop("`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.", call. = FALSE)
   }
   
   required_columns <- c("Aar", "Serie_id", "Display_navn", "Verdi")
@@ -50,7 +50,7 @@ regress.comparison_series <- function(x,
   
   if (length(missing_columns) > 0) {
     stop(
-      "Mangler nødvendige kolonner: ",
+      "Mangler n\u00f8dvendige kolonner: ",
       paste(missing_columns, collapse = ", "),
       ".",
       call. = FALSE
@@ -62,7 +62,7 @@ regress.comparison_series <- function(x,
   
   if (!is.symbol(formula_response)) {
     stop(
-      "Venstresiden i `formula` må være én `Serie_id`, ",
+      "Venstresiden i `formula` m\u00e5 v\u00e6re \u00e9n `Serie_id`, ",
       "for eksempel `NO_KPI ~ SE_HICP`.",
       call. = FALSE
     )
@@ -75,7 +75,7 @@ regress.comparison_series <- function(x,
   independent_variables <- setdiff(formula_variables, dependent_variable)
   
   if (length(independent_variables) == 0) {
-    stop("Formelen må inneholde minst én forklaringsvariabel.",
+    stop("Formelen m\u00e5 inneholde minst \u00e9n forklaringsvariabel.",
          call. = FALSE)
   }
   
@@ -85,7 +85,7 @@ regress.comparison_series <- function(x,
   
   if (length(missing_series) > 0) {
     stop(
-      "Fant ikke følgende serier i objektet: ",
+      "Fant ikke f\u00f8lgende serier i objektet: ",
       paste(missing_series, collapse = ", "),
       ".",
       call. = FALSE
@@ -122,7 +122,7 @@ regress.comparison_series <- function(x,
       dplyr::slice_head(n = 1)
     
     stop(
-      "Hver serie må ha maksimalt én observasjon per år. ",
+      "Hver serie m\u00e5 ha maksimalt \u00e9n observasjon per \u00e5r. ",
       "Fant flere observasjoner for `",
       duplicate_example$Serie_id,
       "` i ",
@@ -141,7 +141,7 @@ regress.comparison_series <- function(x,
     dplyr::filter(.data$Antall_navn > 1)
   
   if (nrow(inconsistent_display_names) > 0) {
-    stop("Minst én `Serie_id` har flere ulike display-navn.", call. = FALSE)
+    stop("Minst \u00e9n `Serie_id` har flere ulike display-navn.", call. = FALSE)
   }
   
   wide_data <- analysis_data |>
@@ -187,7 +187,7 @@ regress.comparison_series <- function(x,
   
   if (number_of_observations <= number_of_parameters) {
     stop(
-      "For få komplette observasjoner til å estimere modellen. ",
+      "For f\u00e5 komplette observasjoner til \u00e5 estimere modellen. ",
       "Modellen har ",
       number_of_parameters,
       " parametere og bare ",

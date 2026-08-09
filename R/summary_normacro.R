@@ -44,7 +44,7 @@ summary_normacro <- function(data = NULL) {
       min(cov$Startaar_data, na.rm = TRUE),
       "\n",
       sep = "")
-  cat("Seneste år:      ", max(cov$Sluttaar_data, na.rm = TRUE), "\n", sep = "")
+  cat("Seneste \u00e5r:      ", max(cov$Sluttaar_data, na.rm = TRUE), "\n", sep = "")
   
   cat("\n")
   
