@@ -12,7 +12,7 @@ Description: Reproducible Norwegian macroeconomic database built from public sou
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0
 Imports:
     broom,
     dplyr,

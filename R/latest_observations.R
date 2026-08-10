@@ -1,4 +1,24 @@
 
+#' Vis siste tilgjengelige observasjoner
+#'
+#' Finner den siste tilgjengelige observasjonen for hver variabel i et
+#' NorMacro-datasett og kombinerer resultatet med sentrale metadata.
+#'
+#' @param data Datasettet som skal undersøkes. Hvis `NULL`, brukes
+#'   NorMacros standarddata.
+#' @param category Valgfri kategori som resultatet skal begrenses til.
+#' @param source Valgfri datakilde som resultatet skal begrenses til.
+#'
+#' @return En tibble med siste år, siste verdi og metadata for hver
+#'   variabel.
+#'
+#' @examples
+#' latest_observations(
+#'   data = normacro_example
+#' )
+#'
+#' @export
+
 latest_observations <- function(
     data = NULL,
     category = NULL,

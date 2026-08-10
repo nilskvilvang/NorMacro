@@ -13,11 +13,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-
-library(NorMacro)
 ```
-
-# Kom i gang med NorMacro
 
 NorMacro er en R-pakke for analyse av norsk og internasjonal økonomi.
 
@@ -121,7 +117,7 @@ Anta at søket har gitt deg variabelen `Arbeidsledighet`.
 Du kan undersøke variabelen med:
 
 ```{r, eval = FALSE}
-describe_variable("Arbeidsledighet")
+describe_variable("Arbledighetsrate_NAV")
 ```
 
 Her får du informasjon som hjelper deg å tolke tidsserien riktig.
@@ -139,7 +135,7 @@ navn, men likevel måle forskjellige økonomiske størrelser.
 Du kan også få en samlet oppsummering av en variabel:
 
 ```{r, eval = FALSE}
-variable_summary("Arbeidsledighet")
+variable_summary("Arbledighetsrate_NAV")
 ```
 
 `variable_summary()` kombinerer informasjon om variabelen med en

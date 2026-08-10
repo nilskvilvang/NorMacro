@@ -1,4 +1,32 @@
 
+#' Sammenlign tidsserier
+#'
+#' Sammenligner flere tidsserier i et felles datasett. Seriene kan
+#' normaliseres til en felles skala, slik at utviklingen kan sammenlignes
+#' selv når variablene har forskjellige måleenheter.
+#'
+#' @param variables En tegnvektor med variabler som skal sammenlignes.
+#' @param data Datasett som inneholder `Aar` og de valgte variablene.
+#'   Hvis `NULL`, brukes NorMacros standarddata.
+#' @param country Valgfritt land ved analyse av internasjonale data.
+#' @param unit Valgfri måleenhet.
+#' @param base_year Valgfritt basisår ved normalisering.
+#' @param normalize Logisk. Hvis `TRUE`, normaliseres seriene før
+#'   sammenligning.
+#' @param start_year Valgfritt første år i sammenligningen.
+#' @param complete_cases Logisk. Hvis `TRUE`, brukes bare år med komplette
+#'   observasjoner for alle valgte variabler.
+#'
+#' @return Et objekt som representerer de sammenlignede tidsseriene.
+#'
+#' @examples
+#' compare_series(
+#'   c("Inflasjon", "Styringsrente"),
+#'   data = normacro_example
+#' )
+#'
+#' @export
+
 compare_series <- function(
     variables,
     data = NULL,

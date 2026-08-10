@@ -1,4 +1,29 @@
 
+#' Lag veksttabell
+#'
+#' Beregner samlet vekst og gjennomsnittlig årlig vekst (CAGR) for
+#' valgte variabler over én eller flere perioder.
+#'
+#' Beregningene tar utgangspunkt i den siste tilgjengelige observasjonen
+#' for hver variabel.
+#'
+#' @param variables En tegnvektor med variabler som skal analyseres.
+#' @param data Datasett som inneholder `Aar` og de valgte variablene.
+#'   Hvis `NULL`, brukes NorMacros standarddata.
+#' @param periods Numerisk vektor med antall år det skal beregnes vekst
+#'   over. Standard er 1, 5 og 10 år.
+#'
+#' @return En tibble med siste observasjon, samlet vekst og CAGR for hver
+#'   angitt periode.
+#'
+#' @examples
+#' growth_table(
+#'   c("Befolkning", "Arbeidsstyrke", "Sysselsatte"),
+#'   data = normacro_example
+#' )
+#'
+#' @export
+
 growth_table <- function(
     variables,
     data = NULL,
@@ -74,7 +99,12 @@ growth_table <- function(
   
   result |>
     dplyr::mutate(
-      Display_navn = get_display_name(Variabel, metadata)
+      Display_navn = vapply(
+        Variabel,
+        get_display_name,
+        character(1),
+        metadata = metadata
+      )
     ) |>
     dplyr::select(
       Display_navn,

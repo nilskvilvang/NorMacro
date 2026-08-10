@@ -10,3 +10,5 @@
 ^dev$
 ^source_all\.R$
 ^utvikling\.md$
+^doc$
+^Meta$

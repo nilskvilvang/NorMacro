@@ -1,0 +1,222 @@
+
+---
+title: "Introduksjon til NorMacro"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduksjon til NorMacro}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(NorMacro)
+```
+
+## NorMacro
+
+NorMacro er en R-pakke for innhenting, organisering og analyse av norske
+makroøkonomiske data.
+
+Pakken samler økonomiske tidsserier fra flere kilder i et felles format og
+knytter dataene til metadata som beskriver blant annet kilde, enhet, kategori
+og analysetype.
+
+Denne vignetten viser en grunnleggende arbeidsflyt med NorMacro. Eksemplene
+bruker et lite, statisk datasett som følger med pakken. Det gjør at vignetten
+kan kjøres uten å hente data fra eksterne API-er.
+
+## Eksempeldata
+
+NorMacro inneholder eksempeldatasettet `normacro_example`. Det består av et
+utvalg norske makroøkonomiske årsserier for perioden 2000–2025.
+
+```{r}
+data(normacro_example)
+data(normacro_example_metadata)
+
+dim(normacro_example)
+```
+
+```{r}
+names(normacro_example)
+```
+
+Datasettet inneholder både nivåserier, vekstrater og indekser fra flere deler
+av norsk økonomi.
+
+De tilhørende metadataene finnes i `normacro_example_metadata`.
+
+```{r}
+normacro_example_metadata[
+  c(
+    "Variabel",
+    "Display_navn",
+    "Kategori",
+    "Enhet",
+    "Analyse_type"
+  )
+]
+```
+
+## Datadekning
+
+`coverage()` gir en samlet oversikt over hvilke perioder variablene dekker,
+antall observasjoner og eventuell manglende data.
+
+```{r}
+coverage(normacro_example)
+```
+
+For eksempeldatasettet har alle seriene observasjoner for hele perioden
+2000–2025.
+
+Med det fullstendige NorMacro-datasettet vil startår og datadekning variere
+mellom seriene.
+
+## Undersøk én variabel
+
+`variable_summary()` samler sentral informasjon om én variabel.
+
+Her undersøker vi norsk inflasjon:
+
+```{r}
+variable_summary(
+  "Inflasjon",
+  data = normacro_example
+)
+```
+
+Resultatet kombinerer metadata og dataanalyse. Det viser blant annet
+beskrivelse, kilde, måleenhet, datadekning, siste observasjon, deskriptiv
+statistikk og de sterkeste korrelasjonene med andre variabler i datasettet.
+
+## Plotting av en tidsserie
+
+`plot_series()` lager en tidsseriefigur med informasjon fra NorMacro-metadataene
+brukt til blant annet tittel og aksemerking.
+
+```{r fig.width=7, fig.height=4.5}
+plot_series(
+  "Inflasjon",
+  data = normacro_example
+)
+```
+
+Figuren viser hvordan inflasjonen har variert gjennom perioden.
+
+## Sammenlign flere serier
+
+Makroøkonomiske variabler har ofte forskjellige måleenheter og størrelsesnivåer.
+`compare_series()` kan derfor normalisere serier slik at utviklingen kan
+sammenlignes på en felles skala.
+
+```{r fig.width=7, fig.height=4.5}
+compare_series(
+  c(
+    "Inflasjon",
+    "Arbledighetsrate_NAV",
+    "BNP_Fastland_vekst",
+    "Styringsrente"
+  ),
+  data = normacro_example
+)
+```
+
+Standardinnstillingen er `normalize = TRUE`. Det gjør figuren egnet til å
+sammenligne utviklingsmønstre selv om de opprinnelige seriene måles på ulike
+skalaer.
+
+## Korrelasjon mellom variabler
+
+`correlate_series()` beregner parvise korrelasjoner mellom valgte tidsserier.
+
+```{r}
+correlate_series(
+  c(
+    "Inflasjon",
+    "Arbledighetsrate_NAV",
+    "BNP_Fastland_vekst",
+    "Styringsrente"
+  ),
+  data = normacro_example
+)
+```
+
+Tabellen viser korrelasjonskoeffisient, p-verdi, antall observasjoner og
+perioden som inngår i beregningen.
+
+Korrelasjon beskriver statistisk samvariasjon mellom serier. Den innebærer
+ikke i seg selv en kausal sammenheng.
+
+## Vekst over flere perioder
+
+For nivåserier kan `growth_table()` brukes til å sammenligne utviklingen over
+flere tidshorisonter.
+
+```{r}
+growth_table(
+  c(
+    "Befolkning",
+    "Arbeidsstyrke",
+    "Sysselsatte"
+  ),
+  data = normacro_example
+)
+```
+
+Tabellen viser siste observasjon samt samlet vekst og gjennomsnittlig årlig
+vekst (CAGR) over ett, fem og ti år.
+
+## Siste tilgjengelige observasjoner
+
+`latest_observations()` gir en kompakt oversikt over den siste observasjonen
+for hver variabel.
+
+```{r}
+latest_observations(
+  data = normacro_example
+)
+```
+
+Resultatet kombinerer siste verdi med sentrale metadata, blant annet kategori,
+beskrivelse, enhet, kilde og analysetype.
+
+## Arbeid med det fullstendige datasettet
+
+Eksempeldatasettet er laget for dokumentasjon og reproducerbare eksempler.
+Ved vanlig bruk kan det fullstendige norske makrodatasettet hentes med
+`get_normacro()`:
+
+```{r eval=FALSE}
+macro <- get_normacro()
+```
+
+Funksjonene i denne vignetten kan deretter brukes på samme måte:
+
+```{r eval=FALSE}
+coverage(macro)
+
+variable_summary(
+  "Inflasjon",
+  data = macro
+)
+
+plot_series(
+  "Inflasjon",
+  data = macro
+)
+```
+
+Det fullstendige datasettet inneholder flere variabler og lengre historiske
+tidsserier enn eksempeldatasettet.
+
+NorMacro inneholder også funksjonalitet for internasjonale sammenligninger,
+konjunkturanalyse og norske kommune- og fylkesdata fra KOSTRA. Disse delene
+behandles separat fra den grunnleggende arbeidsflyten som er vist her.

@@ -1,4 +1,30 @@
 
+#' Beregn korrelasjoner mellom tidsserier
+#'
+#' Beregner parvise korrelasjoner mellom valgte variabler over en angitt
+#' periode.
+#'
+#' @param variables En tegnvektor med variabler som skal analyseres.
+#' @param data Datasett som inneholder `Aar` og de valgte variablene.
+#'   Hvis `NULL`, brukes NorMacros standarddata.
+#' @param start_year Valgfritt første år i analyseperioden.
+#' @param end_year Valgfritt siste år i analyseperioden.
+#' @param method Korrelasjonsmetode: `"pearson"`, `"spearman"` eller
+#'   `"kendall"`.
+#' @param include_diagonal Logisk. Om korrelasjonen mellom en variabel
+#'   og seg selv skal inkluderes.
+#' @param format Logisk. Om resultatet skal formateres for lesbar
+#'   presentasjon.
+#'
+#' @return En tibble med parvise korrelasjoner og tilhørende informasjon.
+#'
+#' @examples
+#' correlate_series(
+#'   c("Inflasjon", "Styringsrente", "BNP_Fastland_vekst"),
+#'   data = normacro_example
+#' )
+#'
+#' @export
 
 correlate_series <- function(variables,
                              data = NULL,

@@ -1,4 +1,31 @@
 
+#' Plot en tidsserie
+#'
+#' Lager en tidsseriefigur for en variabel i et NorMacro-datasett.
+#' Funksjonen bruker metadata til å sette tittel, beskrivelse, måleenhet
+#' og kilde når denne informasjonen er tilgjengelig.
+#'
+#' Funksjonen støtter norske makrodata, internasjonale data med kolonnen
+#' `Land` og KOSTRA-data med enhetsinformasjon.
+#'
+#' @param variable Navnet på variabelen som skal plottes.
+#' @param data Datasett som inneholder `Aar` og variabelen som skal plottes.
+#'   Hvis `NULL`, hentes standarddatasettet med [get_normacro()].
+#' @param metadata Metadata for datasettet. Hvis `NULL`, hentes metadata
+#'   automatisk.
+#' @param countries Valgfri vektor med land som skal inkluderes når `data`
+#'   er et internasjonalt datasett.
+#'
+#' @return Et `ggplot`-objekt.
+#'
+#' @examples
+#' plot_series(
+#'   "Inflasjon",
+#'   data = normacro_example
+#' )
+#'
+#' @export
+
 plot_series <- function(
     variable,
     data = NULL,
