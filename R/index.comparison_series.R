@@ -148,7 +148,6 @@ index.comparison_series <- function(x,
   
   new_comparison_series(
     result,
-    normalized = FALSE,
     base_year = base_year,
     transformation = "indexed",
     transformation_periods = NULL,

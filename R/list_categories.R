@@ -1,4 +1,21 @@
 
+#' List kategorier i NorMacro
+#'
+#' Viser hvilke tematiske kategorier som finnes i et NorMacro-datasett,
+#' samt hvor mange variabler som tilhører hver kategori.
+#'
+#' @param data Valgfritt NorMacro-datasett. Hvis `NULL`, brukes standard
+#'   norske makrodata.
+#' @param print Logisk. Hvis `TRUE`, skrives resultatet til konsollen.
+#'
+#' @return Resultatet returneres usynlig når det skrives til konsollen.
+#'
+#' @examples
+#' list_categories(
+#'   data = normacro_example
+#' )
+#'
+#' @export
 
 list_categories <- function(data = NULL, print = TRUE) {
   metadata <- get_metadata(data)

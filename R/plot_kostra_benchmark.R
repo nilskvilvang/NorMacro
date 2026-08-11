@@ -1,4 +1,30 @@
 
+#' Visualiser KOSTRA-benchmark
+#'
+#' Visualiserer posisjonen til én KOSTRA-enhet i fordelingen av en valgt
+#' indikator for ett år.
+#'
+#' Figuren viser den valgte enheten sammen med median og intervallet
+#' mellom første og tredje kvartil.
+#'
+#' @param variable Navnet på KOSTRA-indikatoren.
+#' @param data Et KOSTRA-datasett.
+#' @param unit KOSTRA-koden til enheten som skal fremheves.
+#' @param year Valgfritt år. Hvis `NULL`, brukes siste tilgjengelige år.
+#' @param descending Logisk. Hvis `TRUE`, rangeres høyeste verdi først.
+#'
+#' @return Et `ggplot`-objekt.
+#'
+#' @examples
+#' plot_kostra_benchmark(
+#'   "Netto_driftsresultat",
+#'   data = normacro_kostra_example,
+#'   unit = "0301",
+#'   year = 2025
+#' )
+#'
+#' @export
+
 plot_kostra_benchmark <- function(variable,
                                   data,
                                   unit,

@@ -125,8 +125,6 @@ plot.comparison_series <- function(x,
       )
     )
   
-  normalized <- isTRUE(attr(x, "normalized"))
-  
   base_year <- attr(x, "base_year")
   
   transformation <- attr(x, "transformation")
@@ -134,20 +132,6 @@ plot.comparison_series <- function(x,
   transformation_periods <- attr(x, "transformation_periods")
   
   transformation_base_value <- attr(x, "transformation_base_value")
-  
-  if (normalized && is.null(base_year)) {
-    warning(
-      paste0(
-        "Objektet er merket som normalisert, ",
-        "men mangler attributtet `base_year`."
-      ),
-      call. = FALSE
-    )
-  }
-  
-  transformation <- attr(x, "transformation")
-  
-  transformation_periods <- attr(x, "transformation_periods")
   
   if (identical(transformation, "indexed")) {
     if (!is.null(base_year) &&

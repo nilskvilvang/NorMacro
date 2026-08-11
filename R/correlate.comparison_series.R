@@ -1,4 +1,22 @@
 
+#' Beregn korrelasjoner mellom sammenligningsserier
+#'
+#' Beregner parvise korrelasjoner mellom seriene i et
+#' `comparison_series`-objekt.
+#'
+#' @param x Et `comparison_series`-objekt.
+#' @param method Korrelasjonsmetode: `"pearson"`, `"spearman"` eller
+#'   `"kendall"`.
+#' @param start_year Valgfritt første år i analyseperioden.
+#' @param end_year Valgfritt siste år i analyseperioden.
+#' @param include_diagonal Logisk. Om korrelasjonen mellom hver serie og seg
+#'   selv skal inkluderes.
+#' @param format Logisk. Om resultatet skal formateres for utskrift.
+#' @param ... Videre argumenter til metoden.
+#'
+#' @return Et objekt av klassen `comparison_series_correlation`.
+#'
+#' @method correlate comparison_series
 #' @export
 
 correlate.comparison_series <- function(x,

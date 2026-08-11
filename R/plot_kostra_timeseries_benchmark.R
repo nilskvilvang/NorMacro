@@ -1,4 +1,40 @@
 
+#' Visualiser KOSTRA-benchmark over tid
+#'
+#' Visualiserer utviklingen for én KOSTRA-enhet sammen med fordelingen i
+#' et valgt sammenligningsgrunnlag over tid.
+#'
+#' Figuren viser den valgte enhetens tidsserie, medianen i
+#' sammenligningsgruppen og intervallet mellom første og tredje kvartil.
+#'
+#' @param variable Navnet på KOSTRA-indikatoren.
+#' @param data Valgfritt KOSTRA-datasett. Må oppgis når
+#'   `comparison = "data"`.
+#' @param unit KOSTRA-koden til enheten som skal analyseres.
+#' @param start_year Valgfritt første år i analyseperioden.
+#' @param end_year Valgfritt siste år i analyseperioden.
+#' @param descending Logisk. Hvis `TRUE`, rangeres høyeste verdi først.
+#' @param comparison Sammenligningsgrunnlag: `"data"`, `"kostra_group"`,
+#'   `"county"` eller `"custom"`.
+#' @param comparison_units Valgfri tegnvektor med enhetskoder når
+#'   `comparison = "custom"`.
+#' @param comparison_name Valgfritt navn på en egendefinert
+#'   sammenligningsgruppe.
+#' @param table KOSTRA-tabell. Standard er `"12134"`.
+#'
+#' @return Et `ggplot`-objekt.
+#'
+#' @examples
+#' plot_kostra_timeseries_benchmark(
+#'   "Netto_driftsresultat",
+#'   data = normacro_kostra_example,
+#'   unit = "0301",
+#'   start_year = 2020,
+#'   end_year = 2025
+#' )
+#'
+#' @export
+
 plot_kostra_timeseries_benchmark <- function(
     variable,
     data = NULL,

@@ -1,4 +1,23 @@
 
+#' Beregn vekst eller endring i sammenligningsserier
+#'
+#' Beregner prosentvis vekst eller absolutt endring separat for hver serie i
+#' et `comparison_series`-objekt.
+#'
+#' Resultatet beholder `comparison_series`-klassen og får metadata som
+#' beskriver transformasjonen og antall perioder.
+#'
+#' @param x Et `comparison_series`-objekt.
+#' @param periods Antall perioder som skal brukes i vekst- eller
+#'   endringsberegningen. Må være et positivt heltall.
+#' @param percent Logisk. Hvis `TRUE`, beregnes prosentvis vekst. Hvis
+#'   `FALSE`, beregnes absolutt endring.
+#' @param ... Videre argumenter til metoden.
+#'
+#' @return Et `comparison_series`-objekt med transformasjonen
+#'   `growth_percent` eller `growth_absolute`.
+#'
+#' @method growth comparison_series
 #' @export
 
 growth.comparison_series <- function(x,
@@ -79,7 +98,6 @@ growth.comparison_series <- function(x,
   
   new_comparison_series(
     result,
-    normalized = FALSE,
     base_year = NULL,
     transformation = transformation,
     transformation_periods = periods,

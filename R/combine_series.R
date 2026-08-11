@@ -1,4 +1,43 @@
 
+#' Kombiner norske og internasjonale tidsserier
+#'
+#' Bygger et standardisert `comparison_series`-objekt fra norske og/eller
+#' internasjonale NorMacro-serier.
+#'
+#' Resultatet bruker langt format og inneholder informasjon om år, serie,
+#' datasett, land, variabel, visningsnavn, verdi, enhet og kilde.
+#'
+#' `comparison_series` er utgangspunktet for NorMacros objektbaserte
+#' analyseverktøy, blant annet [index()], [growth()], [normalize()],
+#' [correlate()], [regress()] og [autocorrelate()].
+#'
+#' @param norway Valgfri tegnvektor med norske NorMacro-variabler.
+#' @param international Valgfri navngitt liste med landkoder som navn og
+#'   internasjonale variabler som verdier, for eksempel
+#'   `list(SE = c("Inflasjon", "BNP_vekst"))`.
+#' @param start_year Valgfritt første år i datasettet.
+#' @param end_year Valgfritt siste år i datasettet.
+#'
+#' @return Et objekt av klassen `comparison_series`.
+#'
+#' @examples
+#' \dontrun{
+#' x <- combine_series(
+#'   norway = c(
+#'     "Inflasjon",
+#'     "BNP_Fastland_vekst"
+#'   ),
+#'   international = list(
+#'     SE = c(
+#'       "Inflasjon",
+#'       "BNP_vekst"
+#'     )
+#'   ),
+#'   start_year = 2000
+#' )
+#' }
+#'
+#' @export
 
 combine_series <- function(norway = NULL,
                            international = NULL,
@@ -22,7 +61,9 @@ combine_series <- function(norway = NULL,
     norway <- unique(norway)
     
     norway_data <- get_normacro()
-    norway_metadata <- get_normacro_metadata()
+    norway_metadata <- get_normacro_metadata() |>
+      dplyr::filter(.data$Omraade == "Norge") |>
+      dplyr::distinct(.data$Variabel, .keep_all = TRUE)
     
     missing_variables <- setdiff(norway, names(norway_data))
     
@@ -160,7 +201,6 @@ combine_series <- function(norway = NULL,
   
   new_comparison_series(
     result,
-    normalized = FALSE,
     base_year = NULL,
     transformation = "level",
     transformation_periods = NULL,

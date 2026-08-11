@@ -1,4 +1,23 @@
 
+#' Estimer regresjonsmodell for sammenligningsserier
+#'
+#' Estimerer en regresjonsmodell basert på seriene i et
+#' `comparison_series`-objekt.
+#'
+#' Modellen angis med en vanlig R-formel der variablene er `Serie_id`-ene i
+#' objektet.
+#'
+#' @param x Et `comparison_series`-objekt.
+#' @param formula En R-formel, for eksempel
+#'   `NO_BNP_Fastland_vekst ~ NO_Inflasjon + SE_BNP_vekst`.
+#' @param model Modelltype. Standard er `"ols"`.
+#' @param start_year Valgfritt første år i estimeringsperioden.
+#' @param end_year Valgfritt siste år i estimeringsperioden.
+#' @param ... Videre argumenter til metoden.
+#'
+#' @return Et objekt av klassen `comparison_series_regression`.
+#'
+#' @method regress comparison_series
 #' @export
 
 regress.comparison_series <- function(x,

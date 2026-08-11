@@ -1,7 +1,5 @@
 
-
 new_comparison_series <- function(x,
-                                  normalized = FALSE,
                                   base_year = NULL,
                                   transformation = "level",
                                   transformation_periods = NULL,
@@ -33,18 +31,13 @@ new_comparison_series <- function(x,
     )
   }
   
-  if (!is.logical(normalized) ||
-      length(normalized) != 1 ||
-      is.na(normalized)) {
-    stop("`normalized` m\u00e5 v\u00e6re TRUE eller FALSE.", call. = FALSE)
-  }
-  
   if (!is.null(base_year)) {
     if (!is.numeric(base_year) ||
         length(base_year) != 1 ||
         is.na(base_year) ||
         base_year != floor(base_year)) {
-      stop("`base_year` m\u00e5 v\u00e6re ett gyldig heltallig \u00e5rstall.", call. = FALSE)
+      stop("`base_year` m\u00e5 v\u00e6re ett gyldig heltallig \u00e5rstall.",
+           call. = FALSE)
     }
     
     base_year <- as.integer(base_year)
@@ -64,10 +57,6 @@ new_comparison_series <- function(x,
         call. = FALSE
       )
     }
-  }
-  
-  if (normalized && is.null(base_year)) {
-    stop("`base_year` m\u00e5 oppgis n\u00e5r `normalized = TRUE`.", call. = FALSE)
   }
   
   valid_transformations <- c("level", "indexed", "growth_percent", "growth_absolute")
@@ -135,41 +124,16 @@ new_comparison_series <- function(x,
     )
   }
   
-  if (transformation %in% c("level", "normalized") &&
+  if (identical(transformation, "level") &&
       !is.null(transformation_periods)) {
     stop(
-      paste0(
-        "`transformation_periods` skal v\u00e6re NULL for ",
-        "`level` og `normalized`."
-      ),
-      call. = FALSE
-    )
-  }
-  
-  if (normalized && transformation != "normalized") {
-    stop(
-      paste0(
-        "`normalized = TRUE` krever ",
-        "`transformation = \"normalized\"`."
-      ),
-      call. = FALSE
-    )
-  }
-  
-  if (transformation == "normalized" &&
-      !normalized) {
-    stop(
-      paste0(
-        "`transformation = \"normalized\"` krever ",
-        "`normalized = TRUE`."
-      ),
+      "`transformation_periods` skal v\u00e6re NULL for `level`.",
       call. = FALSE
     )
   }
   
   x <- tibble::as_tibble(x)
   
-  attr(x, "normalized") <- normalized
   attr(x, "base_year") <- base_year
   attr(x, "transformation") <- transformation
   attr(x, "transformation_periods") <-

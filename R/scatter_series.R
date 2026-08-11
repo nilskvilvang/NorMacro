@@ -1,4 +1,33 @@
 
+#' Lag scatterplott mellom to tidsserier
+#'
+#' Visualiserer sammenhengen mellom to variabler i et NorMacro-datasett.
+#' Figuren kan avgrenses til en bestemt periode og kan inkludere en
+#' utjevnet trendlinje.
+#'
+#' Funksjonen støtter norske makrodata, internasjonale data og KOSTRA-data.
+#'
+#' @param x Navnet på variabelen på x-aksen.
+#' @param y Navnet på variabelen på y-aksen.
+#' @param data Valgfritt NorMacro-datasett.
+#' @param start_year Valgfritt første år i analyseperioden.
+#' @param end_year Valgfritt siste år i analyseperioden.
+#' @param add_smooth Logisk. Om en utjevnet trendlinje skal legges til.
+#' @param label_years Logisk. Om observasjonene skal merkes med år.
+#' @param country Valgfritt land når `data` inneholder internasjonale data.
+#' @param unit Valgfri KOSTRA-enhet når `data` inneholder flere enheter.
+#'
+#' @return Et `ggplot`-objekt.
+#'
+#' @examples
+#' scatter_series(
+#'   x = "BNP_Fastland_vekst",
+#'   y = "Arbledighetsrate_NAV",
+#'   data = normacro_example
+#' )
+#'
+#' @export
+
 scatter_series <- function(
     x,
     y,

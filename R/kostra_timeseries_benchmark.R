@@ -1,4 +1,41 @@
 
+#' Benchmark en KOSTRA-enhet over tid
+#'
+#' Følger posisjonen til én KOSTRA-enhet over tid relativt til et valgt
+#' sammenligningsgrunnlag.
+#'
+#' For hvert år beregnes blant annet rang, percentil, gjennomsnitt,
+#' median og kvartiler.
+#'
+#' @param variable Navnet på KOSTRA-indikatoren.
+#' @param data Valgfritt KOSTRA-datasett. Må oppgis når
+#'   `comparison = "data"`.
+#' @param unit KOSTRA-koden til enheten som skal analyseres.
+#' @param start_year Valgfritt første år i analyseperioden.
+#' @param end_year Valgfritt siste år i analyseperioden.
+#' @param descending Logisk. Hvis `TRUE`, rangeres høyeste verdi først.
+#' @param comparison Sammenligningsgrunnlag: `"data"`, `"kostra_group"`,
+#'   `"county"` eller `"custom"`.
+#' @param comparison_units Valgfri tegnvektor med enhetskoder når
+#'   `comparison = "custom"`.
+#' @param comparison_name Valgfritt navn på en egendefinert
+#'   sammenligningsgruppe.
+#' @param table KOSTRA-tabell. Standard er `"12134"`.
+#'
+#' @return Et objekt av klassen `kostra_timeseries_benchmark` med
+#'   årlige verdier, rangering og fordelingsmål for valgt enhet.
+#'
+#' @examples
+#' kostra_timeseries_benchmark(
+#'   "Netto_driftsresultat",
+#'   data = normacro_kostra_example,
+#'   unit = "0301",
+#'   start_year = 2020,
+#'   end_year = 2025
+#' )
+#'
+#' @export
+
 kostra_timeseries_benchmark <- function(
     variable,
     data = NULL,

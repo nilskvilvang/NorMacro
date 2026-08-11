@@ -1,4 +1,23 @@
 
+#' Hent metadata for et NorMacro-datasett
+#'
+#' Returnerer metadata som passer til datasettet som oppgis. Dersom
+#' `data` ikke oppgis, returneres metadata for de norske makrodataene.
+#'
+#' @param data Valgfritt NorMacro-datasett. Datastrukturen brukes til å
+#'   identifisere riktig metadataområde.
+#'
+#' @return En tibble med metadata for variablene i datasettet.
+#'
+#' @examples
+#' get_metadata()
+#'
+#' get_metadata(
+#'   normacro_international_example
+#' )
+#'
+#' @export
+
 get_metadata <- function(data = NULL) {
   
   metadata <- get_normacro_metadata()

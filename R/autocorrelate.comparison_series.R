@@ -1,4 +1,23 @@
 
+#' Beregn autokorrelasjon i sammenligningsserier
+#'
+#' Beregner autokorrelasjon separat for hver serie i et
+#' `comparison_series`-objekt for ett eller flere lag.
+#'
+#' @param x Et `comparison_series`-objekt.
+#' @param lags Positive heltall som angir hvilke lag som skal beregnes.
+#' @param start_year Valgfritt første år i analyseperioden.
+#' @param end_year Valgfritt siste år i analyseperioden.
+#' @param use Regel for håndtering av manglende observasjoner. Samme valg som
+#'   i `stats::cor()`.
+#' @param method Korrelasjonsmetode: `"pearson"`, `"spearman"` eller
+#'   `"kendall"`.
+#' @param format Logisk. Om resultatet skal formateres for utskrift.
+#' @param ... Videre argumenter til metoden.
+#'
+#' @return Et objekt av klassen `comparison_series_autocorrelation`.
+#'
+#' @method autocorrelate comparison_series
 #' @export
 
 autocorrelate.comparison_series <- function(x,
