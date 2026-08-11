@@ -135,3 +135,38 @@
 "normacro_international_example_metadata"
 
 
+#' KOSTRA-eksempeldatasett fra NorMacro
+#'
+#' Et lite, statisk KOSTRA-datasett med utvalgte kommunale nøkkeltall
+#' for Oslo, Bergen og Trondheim i perioden 2020–2025.
+#'
+#' Datasettet er laget for bruk i eksempler, vignetter og dokumentasjon,
+#' slik at KOSTRA-funksjonene kan demonstreres uten å hente data fra
+#' eksterne API-er.
+#'
+#' Datasettet representerer KOSTRA-tabell 12134, "Utvalgte nøkkeltall
+#' for kommuneregnskap".
+#'
+#' @format En tibble med 18 observasjoner og 7 variabler:
+#' \describe{
+#'   \item{Enhet}{Kommunens KOSTRA-kode.}
+#'   \item{Enhet_navn}{Kommunens navn.}
+#'   \item{Enhetstype}{Type geografisk enhet.}
+#'   \item{Aar}{År.}
+#'   \item{Netto_driftsresultat}{Netto driftsresultat i prosent.}
+#'   \item{Langsiktig_gjeld_uten_pensjonsforpliktelser}{
+#'     Langsiktig gjeld uten pensjonsforpliktelser i prosent.
+#'   }
+#'   \item{Frie_inntekter_per_innbygger}{
+#'     Frie inntekter per innbygger i kroner.
+#'   }
+#' }
+#'
+#' @details
+#' Datasettet har attributtene `dataset_type`, `kostra_table` og
+#' `kostra_title`. Disse brukes av flere KOSTRA-funksjoner til å
+#' identifisere datasettet og hente tilhørende metadata.
+#'
+#' @source NorMacro. Statisk eksempel basert på KOSTRA-tabell 12134.
+#'
+"normacro_kostra_example"

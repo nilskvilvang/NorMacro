@@ -356,6 +356,26 @@ overview_macro_data <- function(
 
 # KOSTRA-data -------------------------------------------------------------
 
+#' Gi oversikt over et KOSTRA-datasett
+#'
+#' Oppsummerer strukturen i et standardisert KOSTRA-datasett og viser
+#' blant annet tabellinformasjon, datadekning, antall enheter, antall
+#' variabler og hvilke enhetstyper datasettet inneholder.
+#'
+#' @param data Et standardisert KOSTRA-datasett.
+#' @param print Logisk. Hvis `TRUE`, skrives en lesbar oversikt til
+#'   konsollen.
+#'
+#' @return Resultatet returneres usynlig. Når `print = TRUE`, skrives
+#'   oversikten også til konsollen.
+#'
+#' @examples
+#' overview_kostra_data(
+#'   normacro_kostra_example
+#' )
+#'
+#' @export
+
 overview_kostra_data <- function(
     data,
     print = TRUE

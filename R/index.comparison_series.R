@@ -1,4 +1,27 @@
 
+#' Indekser sammenligningsserier
+#'
+#' Omgjør et `comparison_series`-objekt på opprinnelig nivå til indeksserier
+#' med et felles basisår og en felles basisverdi.
+#'
+#' Hvis `base_year` ikke oppgis, brukes første år der alle seriene har
+#' tilgjengelige observasjoner.
+#'
+#' `index()` kan bare brukes på serier som fortsatt er på opprinnelig nivå.
+#' Den kan derfor ikke brukes på objekter som allerede er indeksert eller
+#' på annen måte transformert.
+#'
+#' @param x Et `comparison_series`-objekt.
+#' @param base_year Valgfritt basisår. Hvis `NULL`, brukes første felles år
+#'   med observasjoner for alle seriene.
+#' @param base_value Numerisk basisverdi. Standard er 100.
+#' @param ... Videre argumenter til metoden.
+#'
+#' @return Et `comparison_series`-objekt der seriene er omregnet til indeks
+#'   med valgt basisår og basisverdi.
+#'
+#' @method index comparison_series
+#' @export
 
 index.comparison_series <- function(x,
                                     base_year = NULL,

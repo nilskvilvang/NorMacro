@@ -81,3 +81,6 @@
 
 ## Build-check
 # devtools::check()
+
+## SJekke vignetter
+# browseVignettes("NorMacro")

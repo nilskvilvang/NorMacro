@@ -10,547 +10,416 @@ execute:
   freeze: auto
 ---
 
+
 # NorMacro
 
-**Version:** 2.0.3
-
-NorMacro er en R-pakke for utforsking, visualisering og analyse av
-norsk makroøkonomi.
+NorMacro er en R-pakke for utforsking, visualisering og analyse av norsk
+og internasjonal økonomi.
 
 Pakken kombinerer tre datalag i ett konsistent API:
 
 - kuraterte norske makroøkonomiske tidsserier
-- internasjonale indikatorer for relevante sammenligninger
+- internasjonale indikatorer for sammenligning mellom land
 - kommunale og regionale nøkkeltall fra KOSTRA
 
-Dataene suppleres med standardiserte metadata, kvalitetskontroller og
-funksjoner for utforsking, visualisering og analyse.
+Dataene suppleres med standardiserte metadata og funksjoner for
+utforsking, sammenligning, visualisering og analyse.
 
-## Filosofi
+## Hva inneholder NorMacro?
 
-NorMacro bygger på følgende prinsipper:
+### Norske makrodata
 
-- representative indikatorer fremfor flest mulig serier
-- én anbefalt serie per økonomisk fenomen
-- offentlige originalkilder når det er mulig
-- full transparens i datagrunnlag og beregninger
-- metadata som en integrert del av databasen
-- små funksjoner som kan kombineres til større analyser
-- konsistente datastrukturer på tvers av datakilder
+NorMacro samler et kuratert utvalg norske makroøkonomiske indikatorer
+fra blant annet priser, arbeidsmarked, nasjonalregnskap, boligmarked,
+finansmarkeder, utenriksøkonomi og offentlige finanser.
 
-## Status
+Det fullstendige datasettet hentes med:
 
-Per juli 2026 inneholder NorMacro:
+``` r
+normacro <- get_normacro()
+```
 
-- en kuratert database med norske makroøkonomiske indikatorer
-- et internasjonalt sammenligningslag med hovedvekt på Europa
-- støtte for utvalgte KOSTRA-tabeller
-- standardiserte metadata for norske og internasjonale serier
-- automatisert datainnhenting og lokal caching
-- innebygget validering og kvalitetskontroll
-- funksjoner for utforsking, visualisering og analyse
+### Internasjonale data
 
-## Formål
+NorMacro inneholder også standardiserte makroøkonomiske indikatorer for
+Norge og utvalgte europeiske land.
 
-Målet med NorMacro er å tilby et enkelt og transparent datasett for:
+``` r
+international <- get_international_macro()
+```
 
-- undervisning i samfunnsøkonomi
-- analyser av norsk økonomi
-- visualiseringer og dashboards
-- forskning og metodeutvikling
-- tidsserieanalyser og prognoser
+De internasjonale dataene bruker samme variabelstruktur på tvers av land
+og er laget for sammenlignende analyser.
 
-Alle dataserier hentes automatisk fra relevante datakilder, i all
-hovedsak originalkilde.
+### KOSTRA
 
-## Hovedfunksjoner
+NorMacro gir standardisert tilgang til et kuratert utvalg
+KOSTRA-tabeller for kommunale og regionale analyser.
 
-- automatisk innhenting fra offentlige datakilder
-- lokal caching for raske oppslag
-- kuraterte norske makroøkonomiske indikatorer
-- internasjonale indikatorer for sammenligning
-- standardisert tilgang til utvalgte KOSTRA-tabeller
-- metadata for dokumentasjon og variabelforståelse
-- automatisk metadata- og datavalidering
-- oversikt over datasett og datadekning med `overview()` og `coverage()`
-- analyse med blant annet `variable_summary()` og `correlate_series()`
-- visualisering med blant annet `plot_series()`, `compare_series()` og
-  `scatter_series()`
-- eksport til CSV, RDS og Excel
-
-## Designprinsipper
-
-NorMacro bygger på noen enkle prinsipper:
-
-- én konsistent database
-- én representativ tidsserie per økonomisk fenomen
-- originale datakilder når det er mulig
-- full dokumentasjon av alle variabler
-- automatisk kvalitetssikring
-- reproduserbar datainnhenting
+KOSTRA-verktøyene støtter blant annet oversikt, metadata, rangering og
+sammenligning mellom enheter.
 
 ## Installasjon
 
 NorMacro kan installeres direkte fra GitHub:
 
-```r
+``` r
 remotes::install_github(
-    "nilskvilvang/NorMacro"
+  "nilskvilvang/NorMacro"
 )
 ```
 
 Last deretter pakken:
 
-```r
+``` r
 library(NorMacro)
-```
-
-For utvikling kan prosjektet klones:
-
-``` bash
-git clone https://github.com/nilskvilvang/NorMacro.git
 ```
 
 ## Kom i gang
 
+En naturlig start er å få oversikt over de norske makrodataene:
+
 ``` r
-source("source_all.R")
-
-install_dependencies()
-
 overview()
-
-normacro <- get_normacro()
 ```
 
-Resultatet er et data.frame/tibble med alle tilgjengelige dataserier.
-
-## Quick start - norske data
+Finn tilgjengelige variabler:
 
 ``` r
-source("source_all.R")
+list_variables()
+```
 
+Søk etter et økonomisk tema:
+
+``` r
+search_variables("inflasjon")
+```
+
+Undersøk en variabel nærmere:
+
+``` r
+describe_variable("Inflasjon")
+```
+
+Hent deretter datasettet dersom du vil arbeide eksplisitt med det:
+
+``` r
 normacro <- get_normacro()
+```
 
-plot_series("BNP_Fastland")
+## Analyse av norske data
 
-compare_series(
-    c("BNP_Fastland", "Privat_konsum")
-)
+README-eksemplene bruker et lite statisk datasett som følger med pakken,
+slik at de kan kjøres uten eksterne API-kall.
 
-scatter_series(
-    x = "BNP_Fastland_vekst",
-    y = "Arbledighetsrate_NAV"
-)
+``` r
+data(normacro_example)
 
-correlate_series(
-    c(
-        "Inflasjon",
-        "Lonnvekst",
-        "BNP_Fastland_vekst"
-    )
+variable_summary(
+  "Inflasjon",
+  data = normacro_example
 )
 ```
 
-### Compare series - eksempel: Sammenligning av inflasjon og lønnsvekst
+
+    Variabel
+    --------
+    Inflasjon 
+    (Inflasjon)
+
+    Beskrivelse
+    -----------
+    Årsvekst i KPI 
+
+    Metadata
+    --------
+    Kategori: Priser og inflasjon
+    Type:     Beregnet
+    Kilde:    Beregnet
+    Enhet:    Prosent
+    Frekvens: Årlig
+    Analysetype: rate
+
+    Dekning
+    -------
+    2000-2025
+    Observasjoner: 26
+
+    Siste observasjon
+    -----------------
+    År:    2025
+    Verdi: 2.986612
+
+    Oppsummering
+    ------------
+    # A tibble: 1 × 8
+      Display_navn Siste_aar Siste_verdi Gjennomsnitt Median Minimum Maksimum
+      <chr>            <dbl>       <dbl>        <dbl>  <dbl>   <dbl>    <dbl>
+    1 Inflasjon         2025        2.99         2.47   2.27   0.512     5.81
+    # ℹ 1 more variable: Standardavvik <dbl>
+
+    Sterkeste korrelasjoner
+    -----------------------
+    # A tibble: 5 × 3
+      Display_navn         Variabel             Korrelasjon
+      <chr>                <chr>                      <dbl>
+    1 Eksport              Eksport                    0.545
+    2 KPI                  KPI                        0.518
+    3 Arbledighetsrate NAV Arbledighetsrate_NAV      -0.485
+    4 Arbeidsstyrke        Arbeidsstyrke              0.477
+    5 Boligprisindeks      Boligprisindeks            0.476
+
+### Visualiser en tidsserie
+
+``` r
+plot_series(
+  "Inflasjon",
+  data = normacro_example
+)
+```
+
+<div id="fig-inflation">
+
+![](README_files/figure-commonmark/fig-inflation-1.png)
+
+Figure 1: Inflasjon i Norge, 2000–2025.
+
+</div>
+
+### Sammenlign flere serier
 
 ``` r
 compare_series(
   c(
     "Inflasjon",
-    "Lonnvekst"
+    "BNP_Fastland_vekst",
+    "Arbledighetsrate_NAV",
+    "Styringsrente"
   ),
-  data = normacro
+  data = normacro_example
 )
 ```
 
-<div id="fig-compare-inflation-wages">
+<div id="fig-compare-series">
 
-![](README_files/figure-commonmark/fig-compare-inflation-wages-1.png)
+![](README_files/figure-commonmark/fig-compare-series-1.png)
 
-Figure 1: BNP og arbeidsledighet.
+Figure 2: Sammenligning av utvalgte norske makroserier.
 
 </div>
 
-### Scatter series - eksempel: Sammenligning av inflasjon og lønnsvekst
+### Undersøk korrelasjoner
 
 ``` r
-scatter_series(
-    x = "BNP_Fastland_vekst",
-    y = "Arbledighetsrate_NAV"
-)
-```
-
-<div id="fig-scatter-inflation-wages">
-
-![](README_files/figure-commonmark/fig-scatter-inflation-wages-1.png)
-
-Figure 2: Scatterplott vekst BNP fastland og arbeidsledighet.
-
-</div>
-
-## Quick start - internasjonale data
-
-``` r
-international <- get_international_macro()
-
-sweden <-
-    international |>
-    dplyr::filter(Land == "SE")
-
-plot_series(
-    "BNP_vekst",
-    data = sweden
-)
-
-compare_series(
-    c("BNP_vekst", "Inflasjon"),
-    data = sweden
-)
-
-scatter_series(
-    x = "BNP_vekst",
-    y = "Arbeidsledighetsrate",
-    data = sweden
-)
-```
-
-### Compare series - eksempel: BNP vekst og inflasjon i Sverige
-
-``` r
-sweden <-
-    international |>
-    dplyr::filter(Land == "SE")
-
-compare_series(
-    c("BNP_vekst", "Inflasjon"),
-    data = sweden
-)
-```
-
-<div id="fig-compare-growth-inflation-sweden">
-
-![](README_files/figure-commonmark/fig-compare-growth-inflation-sweden-1.png)
-
-Figure 3: BNP vekst og inflasjon i Sverige.
-
-</div>
-
-## Quick start – KOSTRA
-
-NorMacro gir standardisert tilgang til et kuratert utvalg
-KOSTRA-tabeller.
-
-```r
-kostra <- get_kostra_keyfigures(
-    regions = "0301",
-    years = 2015:2025
-)
-
-overview(kostra)
-```
-
-```text
-Eksempel på utskrift:
-
-KOSTRA-data
-===========
-
-Tabell: 12134
-Tema:   Utvalgte nøkkeltall for kommuneregnskap
-
-Kommunale og regionale nøkkeltall fra KOSTRA.
-
-Dekning
--------
-Periode:        2015-2025
-Observasjoner:  11
-Enheter:        1
-Variabler:      9
-```
-
-
-## NorMacro API
-
-```text
-
-Norske data
------------
-get_normacro()
-
-Internasjonale data
--------------------
-get_international_macro()
-
-KOSTRA-data
------------
-get_kostra_keyfigures()
-get_kostra_financial_keyfigures()
-get_kostra_per_capita_keyfigures()
-get_kostra_debt_keyfigures()
-get_kostra_financial_foundations()
-get_kostra_main_accounts()
-get_kostra_operating_financing()
-get_kostra_investment_financing()
-
-KOSTRA-hjelpefunksjoner
------------------------
-get_kostra_regions()
-get_kostra_dimension()
-get_kostra_dimension_metadata()
-
-Metadata
---------
-get_metadata()
-describe_variable()
-search_variables()
-list_categories()
-list_variables()
-
-Utforsking
-----------
-overview()
-coverage()
-variable_summary()
-
-Analyse
--------
-normalize_series()
-compare_series()
-scatter_series()
-correlate_series()
-business_cycle()
-business_cycle_explain()
-
-Visualisering
--------------
-plot_series()
-compare_series()
-scatter_series()
-
-Kvalitet
---------
-check_normacro()
-check_metadata()
-validate_metadata()
-```
-
-## Utforske databasen
-
-NorMacro inneholder metadata for alle variabler og flere
-hjelpefunksjoner for å utforske innholdet.
-
-``` r
-overview()
-
-coverage()
-
-list_categories()
-
-list_variables()
-
-search_variables()
-
-describe_variable()
-
-leading_indicators()
-
-category_variables()
-```
-
-## Typisk analyse
-
-Se [docs/analyse](docs/analyse.qmd)
-
-``` r
-source("source_all.R")
-
-normacro <- get_normacro()
-
-overview(normacro)
-
-describe_variable("BNP_Fastland")
-
-plot_series("BNP_Fastland")
-
-compare_series(
-    c("BNP_Fastland", "Privat_konsum")
-)
-
-scatter_series(
-    x = "BNP_Fastland_vekst",
-    y = "Arbledighetsrate_NAV"
-)
-
 correlate_series(
-    c(
-        "Inflasjon",
-        "Lonnvekst",
-        "BNP_Fastland_vekst"
-    )
+  c(
+    "Inflasjon",
+    "BNP_Fastland_vekst",
+    "Arbledighetsrate_NAV",
+    "Styringsrente"
+  ),
+  data = normacro_example
 )
 ```
 
-### Describe variable - eksempel: BNP fastland
+    # A tibble: 6 × 11
+      Variabel_x           Display_x        Variabel_y Display_y Korrelasjon P_verdi
+      <chr>                <chr>            <chr>      <chr>     <chr>       <chr>  
+    1 Inflasjon            Inflasjon        Arbledigh… Arbledig… -0,485      0,012  
+    2 BNP_Fastland_vekst   BNP Fastland ve… Arbledigh… Arbledig… -0,275      0,173  
+    3 Arbledighetsrate_NAV Arbledighetsrat… Styringsr… Styrings… -0,176      0,389  
+    4 Inflasjon            Inflasjon        BNP_Fastl… BNP Fast… -0,094      0,647  
+    5 BNP_Fastland_vekst   BNP Fastland ve… Styringsr… Styrings… 0,054       0,793  
+    6 Inflasjon            Inflasjon        Styringsr… Styrings… 0,036       0,861  
+    # ℹ 5 more variables: Antall_observasjoner <int>, Metode <chr>, Startaar <dbl>,
+    #   Sluttaar <dbl>, Signifikant <chr>
+
+## Internasjonale sammenligninger
+
+Det statiske eksempeldatasettet `normacro_international_example`
+inneholder data for Norge, Sverige, Danmark, Finland, Tyskland og
+Frankrike.
 
 ``` r
-describe_variable("BNP_Fastland")
+data(normacro_international_example)
+data(normacro_international_example_metadata)
 ```
 
-
-    Variabel:    BNP_Fastland 
-    Beskrivelse: BNP Fastlands-Norge, faste priser 
-    Kilde:       SSB 
-    Enhet:       Millioner kroner, faste priser 
-    Frekvens:    Årlig 
-    Startår:     1970 
-    Sluttår:     NA 
-    Funksjon:    get_bnp_fastland 
-    Tabell:      NRMakroHov 
-    Kommentar:   Makrost = bnpb.nr23_9fn, ContentsCode = Faste 
-
-### Plot series - eksempel: BNP fastland
+Sammenlign inflasjonen mellom Norge, Sverige og Danmark:
 
 ``` r
-plot_series("BNP_Fastland")
+plot_series(
+  "Inflasjon",
+  data = normacro_international_example,
+  metadata = normacro_international_example_metadata,
+  countries = c("NO", "SE", "DK")
+)
 ```
 
-<div id="fig-BNP-fastland">
+<div id="fig-international-inflation">
 
-![](README_files/figure-commonmark/fig-BNP-fastland-1.png)
+![](README_files/figure-commonmark/fig-international-inflation-1.png)
 
-Figure 4: BNP fastland.
+Figure 3: Inflasjon i Norge, Sverige og Danmark.
 
 </div>
 
-## Visualisering
-
-Se [docs/visualisering](docs/visualisering.qmd).
-
-## Konjunkturklassifisering
-
-NorMacro inneholder en transparent indikatorbasert
-konjunkturklassifisering.
+Flere variabler kan også sammenlignes innen ett land:
 
 ``` r
-business_cycle()
-business_cycle_explain(2020)
+compare_series(
+  c(
+    "Inflasjon",
+    "BNP_vekst",
+    "Arbeidsledighetsrate"
+  ),
+  data = normacro_international_example,
+  country = "NO"
+)
 ```
 
-Se [docs/business_cycle](docs/business_cycle.qmd) for metode, vekter
-og poengsystem.
+<div id="fig-norway-international-data">
 
-## Variabler
+![](README_files/figure-commonmark/fig-norway-international-data-1.png)
 
-NorMacro organiserer variablene i følgende kategorier:
+Figure 4: Inflasjon, BNP-vekst og arbeidsledighet i Norge.
 
-- Demografi
-- Priser og inflasjon
-- Arbeidsmarked
-- Lønn og inntekt
-- Husholdningsøkonomi
-- Boligmarked
-- Kreditt og husholdninger
-- Finansmarkeder
-- Offentlige finanser
-- Nasjonalregnskap
-- Produksjon og aktivitet
-- Konjunkturindikatorer
-- Utenriksøkonomi
-- Energi og råvarer
+</div>
 
-For å se alle tilgjengelige variabler:
+## KOSTRA
+
+NorMacro inneholder også et statisk KOSTRA-eksempeldatasett med Oslo,
+Bergen og Trondheim.
 
 ``` r
-list_variables()
+data(normacro_kostra_example)
+
+overview_kostra_data(
+  normacro_kostra_example
+)
 ```
 
-## Cache
 
-Se [docs/cache](docs/cache.qmd).
+    KOSTRA-data
+    ===========
 
-## Metadata
+    Tabell: 12134
+    Tema:   Utvalgte nøkkeltall for kommuneregnskap
 
-NorMacro er metadata-drevet.
+    Kommunale og regionale nøkkeltall fra KOSTRA.
 
-Se [docs/metadata](docs/metadata.qmd).
+    Dekning
+    -------
+    Periode:        2020-2025
+    Observasjoner:  18
+    Enheter:        3
+    Variabler:      3
 
-## Kvalitetskontroll
+    Enhetstyper
+    -----------
+    kommune                          3
 
-NorMacro har en enkel kvalitetskontroll som kjøres automatisk når
-databasen bygges med:
+Kommunene kan for eksempel rangeres etter netto driftsresultat:
 
 ``` r
-normacro <- get_normacro()
+rank_kostra(
+  "Netto_driftsresultat",
+  data = normacro_kostra_example,
+  year = 2025
+)
 ```
 
-NorMacro inneholder automatiske kvalitetskontroller og validering av
-både data og metadata.
+    # A tibble: 3 × 6
+       Rang Enhet Enhet_navn Enhetstype   Aar Verdi
+      <int> <chr> <chr>      <chr>      <int> <dbl>
+    1     1 5001  Trondheim  kommune     2025   6  
+    2     2 0301  Oslo       kommune     2025   3.7
+    3     3 4601  Bergen     kommune     2025   1  
+
+Rangeringen kan visualiseres direkte:
 
 ``` r
-validate_metadata()
-
-check_normacro()
-
-testthat::test_dir("tests/testthat")
+plot_kostra_ranking(
+  "Netto_driftsresultat",
+  data = normacro_kostra_example,
+  year = 2025
+)
 ```
 
-Funksjonen check_normacro() kontrollerer at:
+<div id="fig-kostra-ranking">
 
-- datasettet har en variabel som heter Aar
-- årgangene er sortert stigende
-- det ikke finnes dupliserte år
-- alle variabler er dokumentert i metadata
+![](README_files/figure-commonmark/fig-kostra-ranking-1.png)
 
-## Eksport
+Figure 5: Netto driftsresultat i Oslo, Bergen og Trondheim i 2025.
 
-Eksporter database og metadata:
+</div>
 
-``` r
-normacro <- get_normacro(export = TRUE)
-```
+## Sentrale funksjoner
 
-Dette oppretter:
+Noen av de viktigste funksjonene i NorMacro er:
 
-``` text
-data_clean/
-├── normacro.csv
-├── normacro.rds
-├── metadata.csv
-└── metadata.xlsx
-```
+- `overview()` – oversikt over makrodatasettet
+- `list_variables()` og `search_variables()` – finn variabler
+- `describe_variable()` og `variable_summary()` – forstå og oppsummer
+  serier
+- `coverage()` – undersøk datadekning
+- `plot_series()` – visualiser tidsserier
+- `compare_series()` – sammenlign flere serier
+- `correlate_series()` – beregn parvise korrelasjoner
+- `growth_table()` – analyser vekst over flere perioder
+- `latest_observations()` – finn siste tilgjengelige observasjoner
+- `overview_kostra_data()` – oversikt over KOSTRA-data
+- `rank_kostra()` og `compare_kostra_units()` – sammenlign
+  KOSTRA-enheter
 
-## Arkitektur
-
-Se [docs/arkitektur](docs/arkitektur.qmd).
-
-## Reproduserbarhet
-
-NorMacro inneholder ingen manuelt vedlikeholdte data.
-
-Se [docs/reproduserbarhet](docs/reproduserbarhet.qmd).
+Se funksjonenes hjelpesider i R for full dokumentasjon.
 
 ## Dokumentasjon
 
-NorMacro dokumenteres gjennom en serie korte notater i /docs:
+NorMacro inneholder fire introduksjonsvignetter:
 
-- metadata.md
-- cache.md
-- reproduserbarhet.md
-- arkitektur.md
-- business_cycle.md
-- visualisering.md
-- analyse.md
-- internasjonale_data.md
+1.  **Kom i gang med NorMacro** – finn data, variabler og metadata
+2.  **Introduksjon til NorMacro** – grunnleggende analyse og
+    visualisering
+3.  **Internasjonale sammenligninger med NorMacro** – analyser på tvers
+    av land
+4.  **KOSTRA-analyse med NorMacro** – kommunale og regionale
+    sammenligninger
 
-## Lisens
+Vignettene kan åpnes med:
 
-Datakildene tilhører de respektive institusjonene:
+``` r
+browseVignettes("NorMacro")
+```
+
+## Datakilder
+
+NorMacro henter data fra offentlige og etablerte datakilder, blant
+annet:
 
 - Statistisk sentralbyrå (SSB)
 - Norges Bank
 - NAV
+- Eurostat
 - Federal Reserve Economic Data (FRED)
 
-NorMacro distribuerer kun kode for innhenting og bearbeiding av
-offentlig tilgjengelige data.
+Detaljert kildeinformasjon følger de enkelte variablene i metadataene.
+
+## Prinsipper
+
+NorMacro bygger på noen enkle prinsipper:
+
+- representative indikatorer fremfor flest mulig serier
+- én anbefalt serie per økonomisk fenomen
+- offentlige originalkilder når det er mulig
+- metadata som en integrert del av databasen
+- transparente beregninger
+- konsistente datastrukturer
+- reproduserbar datainnhenting og analyse
+
+## Lisens
+
+Datakildene tilhører de respektive institusjonene.
+
+NorMacro distribuerer kode for innhenting, standardisering,
+dokumentasjon og analyse av offentlig tilgjengelige data.

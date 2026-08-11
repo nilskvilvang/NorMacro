@@ -1,0 +1,218 @@
+
+---
+title: "KOSTRA-analyse med NorMacro"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{KOSTRA-analyse med NorMacro}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+```{r}
+library(NorMacro)
+```
+
+NorMacro inneholder verktøy for å arbeide med kommunale og regionale
+data fra KOSTRA.
+
+KOSTRA-data skiller seg fra de vanlige makroøkonomiske tidsseriene ved
+at datasettet inneholder observasjoner for flere geografiske enheter.
+Dette gjør det mulig å sammenligne kommuner, undersøke utviklingen over
+tid og vurdere en kommune mot andre kommuner.
+
+Denne vignetten viser en grunnleggende arbeidsflyt:
+
+1. undersøk KOSTRA-datasettet
+2. se hvilke indikatorer datasettet inneholder
+3. oppsummer en indikator
+4. ranger kommuner
+5. sammenlign utviklingen mellom kommuner
+6. visualiser resultatene
+
+# Eksempeldata
+
+For å gjøre eksemplene reproduserbare bruker vi det statiske
+eksempeldatasettet `normacro_kostra_example`.
+
+```{r}
+data(normacro_kostra_example)
+
+normacro_kostra_example
+```
+
+Datasettet inneholder utvalgte nøkkeltall for Oslo, Bergen og Trondheim
+for perioden 2020–2025.
+
+Et KOSTRA-datasett i NorMacro har noen faste identifikasjonskolonner:
+
+- `Enhet` er enhetens kode
+- `Enhet_navn` er navnet på kommunen eller den regionale enheten
+- `Enhetstype` angir hvilken type enhet observasjonen gjelder
+- `Aar` angir observasjonsåret
+
+De øvrige kolonnene er KOSTRA-indikatorer.
+
+# Få oversikt over datasettet
+
+En naturlig start er:
+
+```{r}
+overview_kostra_data(normacro_kostra_example)
+```
+
+`overview_kostra_data()` viser blant annet hvilken KOSTRA-tabell
+datasettet kommer fra, hvilken periode det dekker, hvor mange enheter
+det inneholder og hvor mange indikatorer som er tilgjengelige.
+
+NorMacro lagrer informasjon om KOSTRA-tabellen som attributter på
+datasettet. Det gjør at flere funksjoner kan identifisere tabellen
+automatisk.
+
+# Metadata og indikatorer
+
+Metadata for KOSTRA-tabellen kan hentes direkte fra datasettet:
+
+```{r}
+kostra_metadata <- get_kostra_metadata(
+  data = normacro_kostra_example
+)
+
+kostra_metadata
+```
+
+Metadataene viser blant annet indikatorenes variabelnavn, visningsnavn,
+måleenhet og analysetype.
+
+I resten av vignetten bruker vi indikatoren:
+
+```r
+Netto_driftsresultat
+```
+
+Metadataene viser at dette er netto driftsresultat målt i prosent.
+
+# Oppsummer en indikator
+
+`kostra_summary()` gir en statistisk oppsummering av en indikator for
+ett år.
+
+Dersom `year` ikke oppgis, brukes siste tilgjengelige år:
+
+```{r}
+kostra_summary(
+  "Netto_driftsresultat",
+  data = normacro_kostra_example
+)
+```
+
+Her får vi blant annet antall enheter, gjennomsnitt, median, kvartiler,
+minimum og maksimum.
+
+Dette gir et raskt bilde av hvordan indikatoren fordeler seg mellom
+enhetene i datasettet.
+
+# Ranger kommuner
+
+Kommunene kan rangeres etter en bestemt indikator med `rank_kostra()`.
+
+```{r}
+rank_kostra(
+  "Netto_driftsresultat",
+  data = normacro_kostra_example,
+  year = 2025
+)
+```
+
+Som standard rangeres høyeste verdi først.
+
+Rangeringen kan også visualiseres:
+
+```{r}
+plot_kostra_ranking(
+  "Netto_driftsresultat",
+  data = normacro_kostra_example,
+  year = 2025
+)
+```
+
+Figuren gjør det enkelt å se forskjellene mellom kommunene i det valgte
+året.
+
+Det er viktig å tolke en rangering i lys av indikatoren som analyseres.
+En høy verdi er ikke nødvendigvis økonomisk bedre for alle
+KOSTRA-indikatorer.
+
+# Sammenlign kommuner over tid
+
+Et øyeblikksbilde for ett år forteller ikke hele historien. Ofte er det
+minst like interessant å undersøke hvordan kommunene har utviklet seg
+over tid.
+
+`compare_kostra_units()` kan brukes til dette:
+
+```{r}
+compare_kostra_units(
+  "Netto_driftsresultat",
+  data = normacro_kostra_example,
+  units = c("0301", "4601", "5001"),
+  start_year = 2020
+)
+```
+
+Resultatet viser både siste verdi og endringen siden startåret.
+
+Her brukes KOSTRA-kodene:
+
+- `0301` – Oslo
+- `4601` – Bergen
+- `5001` – Trondheim
+
+Dette gjør det mulig å kombinere dagens nivå med utviklingen over en
+lengre periode.
+
+# Visualiser utviklingen
+
+KOSTRA-data kan også brukes direkte med `plot_series()`.
+
+```{r}
+plot_series(
+  "Netto_driftsresultat",
+  data = normacro_kostra_example
+)
+```
+
+Når datasettet inneholder flere kommuner, tegnes én tidsserie for hver
+enhet.
+
+NorMacro bruker informasjonen som er lagret på KOSTRA-datasettet til å
+legge inn blant annet tabelltittel, måleenhet og kilde i figuren.
+
+Dette gjør `plot_series()` nyttig både for vanlige makroøkonomiske
+tidsserier, internasjonale data og KOSTRA-data.
+
+# Fra eksempeldata til egne KOSTRA-analyser
+
+Eksempeldatasettet er lite for at vignetten skal kunne bygges raskt og
+uten eksterne API-kall. I en faktisk analyse vil man normalt arbeide med
+flere kommuner og eventuelt flere indikatorer.
+
+NorMacro inneholder funksjoner for å hente og standardisere KOSTRA-data,
+samt mer avanserte verktøy for blant annet benchmarking mot
+KOSTRA-grupper og andre sammenligningsgrunnlag.
+
+Den grunnleggende arbeidsflyten er likevel den samme:
+
+**hent data → undersøk datasettet → forstå indikatoren → sammenlign
+enheter → analyser utviklingen → visualiser resultatene**
+
+Når denne arbeidsflyten er kjent, kan de mer avanserte
+benchmark-funksjonene brukes til å bygge videre på analysen.

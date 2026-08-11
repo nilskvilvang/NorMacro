@@ -1,4 +1,26 @@
 
+#' Ranger KOSTRA-enheter
+#'
+#' Rangerer kommuner eller andre KOSTRA-enheter etter verdien på en valgt
+#' indikator i ett år.
+#'
+#' @param variable Navnet på KOSTRA-indikatoren.
+#' @param data Et KOSTRA-datasett.
+#' @param year Valgfritt år. Hvis `NULL`, brukes siste tilgjengelige år.
+#' @param descending Logisk. Hvis `TRUE`, rangeres høyeste verdi først.
+#' @param top_n Valgfritt antall øverste enheter som skal returneres.
+#'
+#' @return En tibble med rangering, enhetsinformasjon, år og verdi.
+#'
+#' @examples
+#' rank_kostra(
+#'   "Netto_driftsresultat",
+#'   data = normacro_kostra_example,
+#'   year = 2025
+#' )
+#'
+#' @export
+
 rank_kostra <- function(
     variable,
     data,

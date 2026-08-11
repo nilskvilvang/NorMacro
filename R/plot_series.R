@@ -126,13 +126,35 @@ plot_series <- function(
     subtitle <- NULL
     y_label <- NULL
     caption <- NULL
+    
   } else {
-    title <- meta$Display_navn[[1]]
-    subtitle <- meta$Beskrivelse[[1]]
-    y_label <- meta$Enhet[[1]]
-    source <- meta$Kilde[[1]]
+    
+    title <- if ("Display_navn" %in% names(meta)) {
+      meta$Display_navn[[1]]
+    } else {
+      NULL
+    }
+    
+    subtitle <- if ("Beskrivelse" %in% names(meta)) {
+      meta$Beskrivelse[[1]]
+    } else {
+      NULL
+    }
+    
+    y_label <- if ("Enhet" %in% names(meta)) {
+      meta$Enhet[[1]]
+    } else {
+      NULL
+    }
+    
+    source <- if ("Kilde" %in% names(meta)) {
+      meta$Kilde[[1]]
+    } else {
+      NULL
+    }
     
     if (
+      is.null(title) ||
       is.na(title) ||
       title == ""
     ) {
@@ -145,6 +167,7 @@ plot_series <- function(
     }
     
     if (
+      is.null(subtitle) ||
       is.na(subtitle) ||
       subtitle == ""
     ) {
@@ -152,6 +175,7 @@ plot_series <- function(
     }
     
     if (
+      is.null(y_label) ||
       is.na(y_label) ||
       y_label == ""
     ) {
@@ -159,6 +183,7 @@ plot_series <- function(
     }
     
     if (
+      is.null(source) ||
       is.na(source) ||
       source == ""
     ) {

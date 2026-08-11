@@ -1,4 +1,27 @@
 
+#' Plot en KOSTRA-rangering
+#'
+#' Visualiserer rangeringen av KOSTRA-enheter etter en valgt indikator
+#' i ett år.
+#'
+#' @param variable Navnet på KOSTRA-indikatoren.
+#' @param data Et KOSTRA-datasett.
+#' @param year Valgfritt år. Hvis `NULL`, brukes siste tilgjengelige år.
+#' @param units Valgfri tegnvektor med enhetskoder som skal inkluderes.
+#' @param highlight Valgfri enhet som skal fremheves i figuren.
+#' @param descending Logisk. Hvis `TRUE`, rangeres høyeste verdi først.
+#'
+#' @return Et `ggplot`-objekt.
+#'
+#' @examples
+#' plot_kostra_ranking(
+#'   "Netto_driftsresultat",
+#'   data = normacro_kostra_example,
+#'   year = 2025
+#' )
+#'
+#' @export
+
 plot_kostra_ranking <- function(
     variable,
     data,

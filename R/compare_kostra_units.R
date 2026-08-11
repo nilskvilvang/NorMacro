@@ -1,4 +1,29 @@
 
+#' Sammenlign KOSTRA-enheter
+#'
+#' Sammenligner valgte KOSTRA-enheter for én indikator. Funksjonen kan
+#' brukes både til sammenligning i ett år og til å beregne utviklingen
+#' siden et angitt startår.
+#'
+#' @param variable Navnet på KOSTRA-indikatoren.
+#' @param data Et KOSTRA-datasett.
+#' @param units Valgfri tegnvektor med enhetskoder som skal inkluderes.
+#' @param year Valgfritt sluttår. Hvis `NULL`, brukes siste tilgjengelige år.
+#' @param start_year Valgfritt startår for beregning av endring over tid.
+#' @param descending Logisk. Hvis `TRUE`, rangeres høyeste sluttverdi først.
+#'
+#' @return En tibble med sammenligning av de valgte KOSTRA-enhetene.
+#'
+#' @examples
+#' compare_kostra_units(
+#'   "Netto_driftsresultat",
+#'   data = normacro_kostra_example,
+#'   units = c("0301", "4601", "5001"),
+#'   start_year = 2020
+#' )
+#'
+#' @export
+
 compare_kostra_units <- function(
     variable,
     data,

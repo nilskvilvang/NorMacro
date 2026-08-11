@@ -1,4 +1,24 @@
 
+#' Oppsummer en KOSTRA-indikator
+#'
+#' Lager en statistisk oppsummering av en KOSTRA-indikator for ett år.
+#' Dersom `year` ikke oppgis, brukes siste tilgjengelige år.
+#'
+#' @param variable Navnet på KOSTRA-indikatoren.
+#' @param data Et KOSTRA-datasett.
+#' @param year Valgfritt år. Hvis `NULL`, brukes siste tilgjengelige år.
+#'
+#' @return En tibble med blant annet antall enheter, gjennomsnitt, median,
+#'   kvartiler, minimum, maksimum og standardavvik.
+#'
+#' @examples
+#' kostra_summary(
+#'   "Netto_driftsresultat",
+#'   data = normacro_kostra_example
+#' )
+#'
+#' @export
+
 kostra_summary <- function(
     variable,
     data,

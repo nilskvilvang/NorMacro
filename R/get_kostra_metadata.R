@@ -1,4 +1,22 @@
 
+#' Hent metadata for et KOSTRA-datasett
+#'
+#' Henter metadata for indikatorene i en støttet KOSTRA-tabell.
+#' Tabellen kan identifiseres enten fra attributtene på et KOSTRA-datasett
+#' eller ved å oppgi tabellnummer eksplisitt.
+#'
+#' @param data Valgfritt KOSTRA-datasett med attributtet `kostra_table`.
+#' @param table Valgfritt KOSTRA-tabellnummer.
+#'
+#' @return En tibble med metadata for indikatorene i KOSTRA-tabellen.
+#'
+#' @examples
+#' get_kostra_metadata(
+#'   data = normacro_kostra_example
+#' )
+#'
+#' @export
+
 get_kostra_metadata <- function(
     data = NULL,
     table = NULL
