@@ -14,6 +14,7 @@
 #' @return Et indeksert `comparison_series`-objekt med basisverdi 100.
 #'
 #' @method normalize comparison_series
+#' @keywords internal
 #' @export
 
 normalize.comparison_series <- function(x, base_year = NULL, ...) {

@@ -1,0 +1,108 @@
+
+url: https://nilskvilvang.github.io/NorMacro/
+
+destination: pkgdown-site
+
+template:
+  bootstrap: 5
+
+navbar:
+  structure:
+    left:
+      - intro
+      - articles
+      - reference
+      - news
+    right:
+      - search
+      - github
+
+articles:
+  - title: Kom i gang
+    contents:
+      - kom-i-gang
+
+  - title: Analyse
+    contents:
+      - analyse
+      - avansert-analyse
+      - matches("^business-cycle$")
+
+  - title: Data
+    contents:
+      - international
+      - kostra
+      - matches("^international-sources$")
+
+reference:
+  - title: Data
+    desc: Hent norske, internasjonale og KOSTRA-data.
+    contents:
+      - get_normacro
+      - get_international_macro
+      - get_kostra_keyfigures
+
+  - title: Eksempeldata
+    desc: Små innebygde datasett for eksempler, undervisning og testing.
+    contents:
+      - normacro_example
+      - normacro_example_metadata
+      - normacro_international_example
+      - normacro_international_example_metadata
+      - normacro_kostra_example
+
+  - title: Metadata og utforsking
+    contents:
+      - get_metadata
+      - get_international_metadata
+      - get_kostra_metadata
+      - overview
+      - coverage
+      - list_categories
+      - list_variables
+      - search_variables
+      - describe_variable
+      - latest_observations
+      - variable_summary
+
+  - title: Direkte analyse
+    desc: Oppgaveorienterte funksjoner som arbeider direkte på variabler og datasett.
+    contents:
+      - plot_series
+      - compare_series
+      - scatter_series
+      - correlate_series
+      - growth_table
+
+  - title: Objektbasert analyse
+    desc: Kjedbare analyser basert på comparison_series-objekter.
+    contents:
+      - combine_series
+      - index
+      - normalize
+      - growth
+      - correlate
+      - regress
+      - autocorrelate
+
+  - title: KOSTRA-analyse
+    contents:
+      - overview_kostra_data
+      - kostra_summary
+      - rank_kostra
+      - compare_kostra_units
+      - plot_kostra_ranking
+
+  - title: KOSTRA-benchmarking
+    contents:
+      - benchmark_kostra
+      - kostra_timeseries_benchmark
+      - plot_kostra_benchmark
+      - plot_kostra_timeseries_benchmark
+      
+  - title: Konjunkturanalyse
+    desc: Indikatorbasert klassifisering og forklaring av konjunktursituasjonen.
+    contents:
+      - business_cycle
+      - business_cycle_explain
+      

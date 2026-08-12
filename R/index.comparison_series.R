@@ -21,6 +21,7 @@
 #'   med valgt basisår og basisverdi.
 #'
 #' @method index comparison_series
+#' @keywords internal
 #' @export
 
 index.comparison_series <- function(x,

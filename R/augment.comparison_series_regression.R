@@ -8,6 +8,7 @@
 #' @return A tibble containing model data, fitted values and residuals.
 #'
 #' @importFrom broom augment
+#' @keywords internal
 #' @export
 
 augment.comparison_series_regression <- function(x, ...) {

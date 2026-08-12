@@ -1,0 +1,15 @@
+pandoc: 3.8.3
+pkgdown: 2.2.1
+pkgdown_sha: ~
+articles:
+  06-international-sources: 06-international-sources.html
+  07-business-cycle: 07-business-cycle.html
+  analyse: analyse.html
+  avansert-analyse: avansert-analyse.html
+  international: international.html
+  kom-i-gang: kom-i-gang.html
+  kostra: kostra.html
+last_built: 2026-08-12T19:09Z
+urls:
+  reference: https://nilskvilvang.github.io/NorMacro/reference
+  article: https://nilskvilvang.github.io/NorMacro/articles

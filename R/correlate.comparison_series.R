@@ -17,6 +17,7 @@
 #' @return Et objekt av klassen `comparison_series_correlation`.
 #'
 #' @method correlate comparison_series
+#' @keywords internal
 #' @export
 
 correlate.comparison_series <- function(x,

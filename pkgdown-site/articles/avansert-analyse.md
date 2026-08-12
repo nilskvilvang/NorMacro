@@ -1,0 +1,282 @@
+# Avansert analyse med comparison_series
+
+## Oversikt
+
+NorMacro har et objektbasert analyse-API for analyser som kombinerer
+flere norske og internasjonale tidsserier.
+
+Arbeidsflyten bygger på objekter av klassen `comparison_series`:
+
+``` text
+combine_series()
+       |
+       v
+comparison_series
+       |
+       +-- index()
+       +-- normalize()
+       +-- growth()
+       +-- correlate()
+       +-- regress()
+       +-- autocorrelate()
+       +-- plot()
+```
+
+Dette gjør det mulig å skille mellom valg av serier, transformasjon og
+analyse.
+
+## Kombinere serier
+
+[`combine_series()`](https://nilskvilvang.github.io/NorMacro/reference/combine_series.md)
+kan hente norske og internasjonale serier inn i samme datastruktur.
+
+``` r
+
+x <- combine_series(
+  norway = c(
+    "Inflasjon",
+    "BNP_Fastland_vekst"
+  ),
+  international = list(
+    SE = c(
+      "Inflasjon",
+      "BNP_vekst"
+    )
+  ),
+  start_year = 2000,
+  end_year = 2025
+)
+```
+
+Resultatet er et `comparison_series`-objekt i langt format. Hver serie
+får en unik `Serie_id` som kombinerer land og variabel.
+
+``` r
+
+x
+```
+
+Seriene i eksemplet kan identifiseres med:
+
+``` text
+NO_Inflasjon
+NO_BNP_Fastland_vekst
+SE_Inflasjon
+SE_BNP_vekst
+```
+
+## Visualisering
+
+Et `comparison_series`-objekt kan plottes direkte:
+
+``` r
+
+plot(x)
+```
+
+Transformasjoner returnerer nye `comparison_series`-objekter og kan
+derfor kombineres videre med plotting og analyse.
+
+## Indeksering
+
+Serier med forskjellige måleenheter kan sammenlignes ved å indeksere dem
+til et felles basisår.
+
+``` r
+
+x_index <- index(
+  x,
+  base_year = 2015
+)
+
+plot(x_index)
+```
+
+Standard basisverdi er 100.
+
+[`normalize()`](https://nilskvilvang.github.io/NorMacro/reference/normalize.md)
+er en snarvei for indeksering med basisverdi 100:
+
+``` r
+
+x_normalized <- normalize(
+  x,
+  base_year = 2015
+)
+```
+
+Hvis basisår ikke oppgis, brukes første år der alle seriene har
+tilgjengelige observasjoner.
+
+## Vekst og endring
+
+[`growth()`](https://nilskvilvang.github.io/NorMacro/reference/growth.md)
+beregner transformasjoner separat for hver serie.
+
+Prosentvis vekst fra én periode til den neste:
+
+``` r
+
+x_growth <- growth(
+  x,
+  periods = 1,
+  percent = TRUE
+)
+```
+
+Absolutt endring kan beregnes med:
+
+``` r
+
+x_change <- growth(
+  x,
+  periods = 1,
+  percent = FALSE
+)
+```
+
+Informasjon om transformasjonen lagres i objektet og følger det videre i
+analysen.
+
+## Korrelasjon
+
+Parvise korrelasjoner kan beregnes direkte fra et
+`comparison_series`-objekt:
+
+``` r
+
+correlate(x_growth)
+```
+
+Resultatet inneholder blant annet korrelasjon, p-verdi, antall
+observasjoner og analyseperiode for hvert seriepar.
+
+Andre korrelasjonsmetoder kan også brukes:
+
+``` r
+
+correlate(
+  x_growth,
+  method = "spearman"
+)
+```
+
+## Regresjon
+
+[`regress()`](https://nilskvilvang.github.io/NorMacro/reference/regress.md)
+bruker `Serie_id` som variabelnavn i vanlige R-formler.
+
+``` r
+
+model <- regress(
+  x_growth,
+  formula =
+    NO_BNP_Fastland_vekst ~
+      NO_Inflasjon +
+      SE_BNP_vekst
+)
+
+model
+```
+
+En mer detaljert modelloppsummering fås med:
+
+``` r
+
+summary(model)
+```
+
+Regresjonsresultatet inneholder informasjon om blant annet estimert
+periode, antall observasjoner, koeffisienter og modelltilpasning.
+
+## Autokorrelasjon
+
+Autokorrelasjon kan beregnes separat for hver serie:
+
+``` r
+
+autocorrelate(
+  x_growth,
+  lags = 1:3
+)
+```
+
+Dette gjør det enkelt å undersøke hvor sterkt observasjoner henger
+sammen med tidligere observasjoner i samme serie.
+
+## En samlet arbeidsflyt
+
+Funksjonene er laget for å kunne kombineres med base-R-pipen:
+
+``` r
+
+x <- combine_series(
+  norway = c(
+    "Inflasjon",
+    "BNP_Fastland_vekst"
+  ),
+  international = list(
+    SE = c(
+      "Inflasjon",
+      "BNP_vekst"
+    )
+  ),
+  start_year = 2000,
+  end_year = 2025
+)
+
+x |>
+  growth(
+    periods = 1,
+    percent = TRUE
+  ) |>
+  correlate()
+```
+
+Tilsvarende kan transformerte data sendes videre til regresjon:
+
+``` r
+
+x |>
+  growth(
+    periods = 1,
+    percent = TRUE
+  ) |>
+  regress(
+    NO_BNP_Fastland_vekst ~
+      NO_Inflasjon +
+      SE_BNP_vekst
+  )
+```
+
+## To nivåer i analyse-API-et
+
+NorMacro har to komplementære måter å arbeide med sammenligninger på.
+
+[`compare_series()`](https://nilskvilvang.github.io/NorMacro/reference/compare_series.md)
+er egnet for raske sammenligninger og visualiseringer.
+
+[`combine_series()`](https://nilskvilvang.github.io/NorMacro/reference/combine_series.md)
+oppretter derimot et eksplisitt `comparison_series`-objekt som kan
+transformeres og brukes videre i statistiske analyser.
+
+Det objektbaserte API-et er derfor særlig nyttig når analysen består av
+flere trinn:
+
+``` text
+velg serier
+    |
+    v
+combine_series()
+    |
+    v
+transformer
+    |
+    v
+analyser
+    |
+    v
+visualiser eller oppsummer
+```
+
+Denne strukturen gjør analysene eksplisitte og reproduserbare.

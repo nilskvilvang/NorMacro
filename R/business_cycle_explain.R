@@ -1,4 +1,24 @@
 
+#' Forklar konjunkturklassifisering for ett år
+#'
+#' Viser konjunkturfase, samlet score, delkomponenter og underliggende
+#' indikatorverdier for ett valgt år.
+#'
+#' @param year Året som skal forklares.
+#' @param data Valgfritt NorMacro-datasett. Hvis `NULL`, brukes
+#'   standarddatasettet.
+#' @param ... Videre argumenter sendt til [business_cycle()].
+#'
+#' @return Resultatet for valgt år returneres usynlig som en tibble.
+#'
+#' @examples
+#' \dontrun{
+#' business_cycle_explain(
+#'   2020
+#' )
+#' }
+#'
+#' @export
 
 business_cycle_explain <- function(year, data = NULL, ...) {
   cycle <- business_cycle(data = data, ...)

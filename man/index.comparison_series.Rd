@@ -32,3 +32,4 @@ tilgjengelige observasjoner.
 Den kan derfor ikke brukes på objekter som allerede er indeksert eller
 på annen måte transformert.
 }
+\keyword{internal}

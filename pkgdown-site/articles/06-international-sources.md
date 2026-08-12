@@ -1,0 +1,292 @@
+# Internasjonale data og kilder
+
+## Formål
+
+NorMacro inneholder et kuratert utvalg harmoniserte internasjonale
+makroøkonomiske tidsserier.
+
+Målet er ikke å inkludere flest mulig indikatorer, men å tilby et
+konsistent datasett som egner seg til analyser og sammenligninger på
+tvers av land.
+
+Originalseriene hentes fra offentlige datakilder. Beregnede serier
+konstrueres fra disse originalseriene i NorMacro.
+
+## Prinsipper for valg av serier
+
+Ved valg av internasjonale serier legges det særlig vekt på:
+
+- originale datakilder når det er mulig
+- harmoniserte definisjoner
+- sammenlignbarhet mellom land
+- konsistent årlig frekvens
+- god tidsdekning
+- transparente filtre og transformasjoner
+- én representativ serie per økonomisk fenomen
+- indeksnivå fremfor ferdig beregnede vekstrater når veksten kan
+  beregnes konsistent i NorMacro
+
+Eurostat er hovedkilden for den internasjonale databasen. Andre
+offentlige kilder kan brukes dersom Eurostat ikke tilbyr en egnet
+harmonisert serie.
+
+## Datakilder og harmonisering
+
+Internasjonale data standardiseres før de inngår i NorMacro.
+
+Alle observasjoner identifiseres med:
+
+- `Aar`: kalenderår
+- `Land`: landkode eller kode for geografisk aggregat
+
+Variablene organiseres deretter i bredt format med én rad per land og
+år.
+
+``` r
+
+international <- get_international_macro()
+```
+
+Harmonisering omfatter blant annet:
+
+- standardiserte variabelnavn
+- felles struktur på tvers av land
+- standardiserte metadatafelt
+- konsistente enheter der dette er mulig
+- eksplisitt dokumentasjon av kilde og tabell
+- konsistente beregninger av vekstrater, andeler og per innbygger-serier
+
+Dette gjør det mulig å bruke de samme analysefunksjonene på tvers av
+land.
+
+## Viktige serievalg
+
+Enkelte serier krever faglige valg utover det som fremgår av navn og
+enhet. Nedenfor beskrives noen av de viktigste.
+
+### Harmonisert konsumprisindeks
+
+`HICP` er den harmoniserte konsumprisindeksen som brukes i det
+internasjonale datasettet.
+
+HICP er utviklet for sammenligning mellom europeiske land og er derfor
+bedre egnet til internasjonale analyser enn de enkelte landenes
+nasjonale konsumprisindekser.
+
+NorMacro beholder indeksnivået som originalserie.
+
+`Inflasjon` beregnes deretter som årlig prosentvis vekst i HICP.
+
+### Industriproduksjon
+
+`Industriproduksjon` representerer utviklingen i industriproduksjonen.
+
+NorMacro bruker indeksnivå fremfor en ferdig beregnet vekstrate. Dette
+gjør transformasjonen transparent og gjør det mulig å beregne vekst
+konsistent i pakken.
+
+`Industriproduksjon_vekst` beregnes fra indeksnivået.
+
+### Arbeidsledighetsrate
+
+`Arbeidsledighetsrate` er en harmonisert arbeidsledighetsrate beregnet
+for sammenligning mellom land.
+
+Denne bør skilles fra den norske NAV-serien:
+
+``` text
+Arbledighetsrate_NAV
+```
+
+NAV-serien måler registrerte helt arbeidsledige i Norge og bygger på en
+annen definisjon.
+
+Ved internasjonale sammenligninger bør derfor `Arbeidsledighetsrate`
+brukes.
+
+### BNP
+
+NorMacro inneholder både:
+
+``` text
+BNP_lopende
+BNP_faste_priser
+```
+
+BNP i løpende priser brukes blant annet som grunnlag for:
+
+- BNP per innbygger
+- eksportandel av BNP
+- importandel av BNP
+- handelsbalanse som andel av BNP
+- konsum- og investeringsandeler
+
+BNP i faste priser brukes som grunnlag for `BNP_vekst`.
+
+Dette skiller beregninger av nivå og andeler fra analyser av
+volumutvikling.
+
+### Nasjonalregnskapskomponenter
+
+Det internasjonale datasettet inneholder sentrale komponenter i
+nasjonalregnskapet, blant annet:
+
+- `Privat_konsum`
+- `Offentlig_konsum`
+- `Investeringer`
+- `Eksport`
+- `Import`
+
+Til nivåseriene beregnes relevante vekstrater og, når det er faglig
+meningsfullt, andeler av BNP.
+
+Beregningene gjøres separat for hvert land og sorteres etter `Land` og
+`Aar`.
+
+### Befolkning og per innbygger-serier
+
+`Befolkning` brukes som grunnlag for per innbygger-beregninger.
+
+Dette gjelder blant annet:
+
+``` text
+BNP_lopende_per_innbygger
+```
+
+`Befolkningsvekst` beregnes fra nivåserien.
+
+### Arbeidsmarked
+
+Følgende nivåserier inngår blant annet:
+
+- `Sysselsatte`
+- `Arbeidsstyrke`
+
+På grunnlag av disse og befolkningsdata beregnes relevante
+arbeidsmarkedsmål, blant annet:
+
+- `Sysselsettingsandel`
+- `Arbeidsstyrkeandel`
+
+Beregningene gjøres bare når de nødvendige komponentene er tilgjengelige
+for samme land og år.
+
+### Boligpriser
+
+`Boligprisindeks` er en harmonisert indeks for boligprisutvikling.
+
+`Boligprisvekst` beregnes som årlig prosentvis endring i indeksnivået.
+
+Indeksnivået beholdes som originalserie slik at brukeren også kan gjøre
+andre transformasjoner.
+
+### Utenriksøkonomi
+
+Eksport og import inngår som egne nivåserier:
+
+- `Eksport`
+- `Import`
+
+Disse brukes blant annet til å beregne:
+
+- `Handelsbalanse`
+- `Eksportandel_BNP`
+- `Importandel_BNP`
+- `Handelsbalanse_andel_BNP`
+
+Handelsbalansen beregnes som eksport minus import.
+
+### Offentlige finanser
+
+Internasjonale indikatorer for offentlige finanser velges med vekt på
+sammenlignbarhet mellom land.
+
+Når en harmonisert kildeserie allerede publiseres som andel av BNP,
+beholdes denne dersom det gir bedre sammenlignbarhet enn en alternativ
+beregning i NorMacro.
+
+### Statsrente
+
+`Statsrente_10aar` representerer langsiktige statsobligasjonsrenter for
+de respektive landene.
+
+Serien skal derfor tolkes som en landspesifikk langsiktig statsrente,
+ikke som en norsk rente brukt på tvers av land.
+
+## Originale og beregnede serier
+
+Metadatafeltet `Type` skiller mellom:
+
+- `Original`: hentet fra den underliggende datakilden
+- `Beregnet`: konstruert i NorMacro fra én eller flere originalserier
+
+Beregnede serier omfatter blant annet:
+
+- årlige vekstrater
+- per innbygger-serier
+- andeler av BNP
+- arbeidsmarkedsandeler
+- handelsbalanse
+- arbeidsproduktivitet
+
+Beregningene utføres separat for hvert land.
+
+Dette skillet gjør det mulig å se hvilke observasjoner som kommer
+direkte fra kilden, og hvilke som er transformert eller beregnet i
+NorMacro.
+
+## Metadata
+
+Metadata for de internasjonale seriene kan hentes direkte:
+
+``` r
+
+get_international_metadata()
+```
+
+Når et internasjonalt datasett allerede finnes, kan metadata også hentes
+med:
+
+``` r
+
+international <- get_international_macro()
+
+get_metadata(
+  international
+)
+```
+
+Metadata inneholder blant annet informasjon om:
+
+- variabelnavn
+- visningsnavn
+- type
+- kategori
+- beskrivelse
+- kilde
+- tabell
+- enhet
+- frekvens
+- tidsdekning
+- funksjon
+- geografisk område
+
+Dette gjør kildevalg og transformasjoner transparente for brukeren.
+
+## Reproduserbarhet
+
+Originalseriene kan hentes på nytt fra de underliggende datakildene.
+
+Den internasjonale databasen bygges med:
+
+``` r
+
+international <- get_international_macro()
+```
+
+Cache kan brukes for å redusere nedlastingstid, men er ikke den
+autoritative datakilden.
+
+Kombinasjonen av offentlig tilgjengelige kilder, eksplisitte metadata og
+standardiserte transformasjoner gjør det mulig å reprodusere det
+internasjonale datagrunnlaget i NorMacro.

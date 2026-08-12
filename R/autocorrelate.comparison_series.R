@@ -18,6 +18,7 @@
 #' @return Et objekt av klassen `comparison_series_autocorrelation`.
 #'
 #' @method autocorrelate comparison_series
+#' @keywords internal
 #' @export
 
 autocorrelate.comparison_series <- function(x,

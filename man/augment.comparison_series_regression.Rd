@@ -17,3 +17,4 @@ A tibble containing model data, fitted values and residuals.
 \description{
 Augment a comparison-series regression
 }
+\keyword{internal}

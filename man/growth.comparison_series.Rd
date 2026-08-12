@@ -29,3 +29,4 @@ et `comparison_series`-objekt.
 Resultatet beholder `comparison_series`-klassen og får metadata som
 beskriver transformasjonen og antall perioder.
 }
+\keyword{internal}

@@ -38,3 +38,4 @@ Et objekt av klassen `comparison_series_correlation`.
 Beregner parvise korrelasjoner mellom seriene i et
 `comparison_series`-objekt.
 }
+\keyword{internal}

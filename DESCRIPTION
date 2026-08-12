@@ -1,5 +1,5 @@
 Package: NorMacro
-Title: Norwegian Macroeconomic Database
+Title: Norwegian Macroeconomic Data and Analysis Tools
 Version: 2.0.3
 Authors@R:
     person(
@@ -8,7 +8,11 @@ Authors@R:
         email = "nils@kvilvang.no",
         role = c("aut", "cre")
     )
-Description: Reproducible Norwegian macroeconomic database built from public sources.
+Description: Provides reproducible access to curated Norwegian macroeconomic
+    time series, international indicators, and selected KOSTRA data from public
+    sources. Includes standardized metadata and tools for exploration,
+    visualization, comparison, transformation, correlation, regression, and
+    other time-series analyses.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -40,3 +44,6 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Config/testthat/edition: 3
+URL: https://nilskvilvang.github.io/NorMacro/,
+    https://github.com/nilskvilvang/NorMacro
+BugReports: https://github.com/nilskvilvang/NorMacro/issues

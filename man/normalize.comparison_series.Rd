@@ -24,3 +24,4 @@ felles basisår.
 \details{
 Metoden er en snarvei til `index(x, base_year = ..., base_value = 100)`.
 }
+\keyword{internal}

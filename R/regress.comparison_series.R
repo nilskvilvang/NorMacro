@@ -18,6 +18,7 @@
 #' @return Et objekt av klassen `comparison_series_regression`.
 #'
 #' @method regress comparison_series
+#' @keywords internal
 #' @export
 
 regress.comparison_series <- function(x,

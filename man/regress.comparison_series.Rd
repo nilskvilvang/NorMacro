@@ -31,3 +31,4 @@ Estimerer en regresjonsmodell basert på seriene i et
 Modellen angis med en vanlig R-formel der variablene er `Serie_id`-ene i
 objektet.
 }
+\keyword{internal}

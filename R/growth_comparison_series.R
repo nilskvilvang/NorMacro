@@ -18,6 +18,7 @@
 #'   `growth_percent` eller `growth_absolute`.
 #'
 #' @method growth comparison_series
+#' @keywords internal
 #' @export
 
 growth.comparison_series <- function(x,

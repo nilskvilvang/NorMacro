@@ -42,3 +42,4 @@ Et objekt av klassen `comparison_series_autocorrelation`.
 Beregner autokorrelasjon separat for hver serie i et
 `comparison_series`-objekt for ett eller flere lag.
 }
+\keyword{internal}

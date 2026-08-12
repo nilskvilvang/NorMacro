@@ -13,3 +13,6 @@
 ^doc$
 ^Meta$
 ^data-raw$
+^_pkgdown\.yml$
+^pkgdown$
+^pkgdown-site$
