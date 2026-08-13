@@ -3,7 +3,7 @@
 
 # sjekksekvens
 ## rm(list = ls())
-## source("source_all.R")
+## devtools::load_all()
 ## normacro <- get_normacro()
 ## international <- get_international_macro()
 ## tail(normacro)
