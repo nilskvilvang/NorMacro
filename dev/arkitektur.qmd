@@ -13,11 +13,13 @@ NorMacro er bygd rundt noen enkle prinsipper:
 ## Struktur
 
 NorMacro/
-  R/
-  data/
-  cache/
-  tests/
-  docs/
+├── R/           # pakkekode
+├── data/        # innebygde eksempeldata
+├── data-raw/    # bygging av pakkedata
+├── tests/       # automatiske tester
+├── vignettes/   # brukerdokumentasjon
+├── man/         # generert funksjonsdokumentasjon
+└── dev/         # utviklerdokumentasjon og hjelpeverktøy
 
 NorMacro bygges i flere trinn:
 
