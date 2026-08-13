@@ -1,0 +1,292 @@
+
+---
+title: "Faglig kravkart for NorMacro"
+subtitle: "Styringsdokument for den faglige utviklingen av NorMacro 2.x"
+format: html
+---
+
+# Formål
+
+NorMacro skal være et kuratert makroøkonomisk analyseverktøy, med
+undervisning som en eksplisitt førstebruker.
+
+Pakken skal gjøre det enkelt å arbeide empirisk med sentrale
+makroøkonomiske spørsmål ved hjelp av norske og internasjonale data.
+
+NorMacro skal ikke være en lærebok i makroøkonomi og skal heller ikke
+forsøke å implementere alle teoretiske modeller eller statistiske metoder
+som kan være relevante i makroøkonomisk analyse.
+
+Utviklingen skal i stedet ta utgangspunkt i spørsmålet:
+
+> **Hvilke makroøkonomiske spørsmål bør en student eller analytiker kunne
+> besvare raskt med NorMacro?**
+
+Dette gir et grunnleggende designprinsipp:
+
+> **Vi bygger ikke pakken rundt funksjonene. Vi bygger funksjonene rundt
+> de økonomiske spørsmålene.**
+
+# Målgrupper
+
+NorMacro har to primære og overlappende målgrupper.
+
+## Analyse
+
+NorMacro skal være nyttig for analytikere og andre brukere som trenger
+rask tilgang til kuraterte makroøkonomiske data.
+
+Pakken skal redusere behovet for å:
+
+- finne relevante serier hos flere dataleverandører
+- laste ned og standardisere data manuelt
+- koble sammen datasett
+- håndtere metadata og enheter
+- skrive gjentakende kode for vanlige analyser
+
+Brukeren skal kunne gå raskt fra et økonomisk spørsmål til data,
+visualisering og analyse.
+
+## Undervisning
+
+NorMacro skal kunne brukes som et gjennomgående empirisk verktøy i
+undervisning i makroøkonomi, særlig på bachelornivå.
+
+Pakken skal gjøre det enkelt å koble:
+
+**økonomisk teori → økonomiske spørsmål → faktiske data → empirisk analyse**
+
+NorMacro skal ikke erstatte lærebøker, forelesninger eller teoretiske
+modeller. Pakken skal gjøre det enkelt å undersøke empirisk de økonomiske
+størrelsene og sammenhengene som behandles i undervisningen.
+
+# Faglige prinsipper
+
+## Økonomiske spørsmål først
+
+Nye data og ny funksjonalitet skal som hovedregel kunne begrunnes med et
+relevant økonomisk spørsmål.
+
+Spørsmålet er derfor ikke først:
+
+> Hvilke nye funksjoner kan NorMacro få?
+
+men:
+
+> Hvilke økonomiske spørsmål er det vanskelig å undersøke med NorMacro i
+> dag?
+
+## Kuratering fremfor datamengde
+
+NorMacro skal ikke forsøke å inneholde flest mulig makroøkonomiske
+tidsserier.
+
+Målet er å tilby et kuratert sett av representative og relevante serier
+som dekker sentrale makroøkonomiske problemstillinger.
+
+Dette gjelder også internasjonale data.
+
+Spørsmålet ved utvidelse av internasjonale data skal være:
+
+> **Hvilke internasjonale serier trenger vi for å kunne undersøke
+> spørsmålene i kravkartet?**
+
+Tilgjengelighet hos en datakilde er ikke i seg selv tilstrekkelig grunn
+til å inkludere en serie.
+
+## Generelle verktøy fremfor spesialfunksjoner
+
+Et faglig behov innebærer ikke automatisk behov for en ny funksjon.
+
+Hvis et økonomisk spørsmål kan undersøkes godt med eksisterende
+byggesteiner som `combine_series()`, `growth()`, `index()`,
+`correlate()` og `regress()`, bør disse normalt brukes fremfor å lage
+en egen funksjon for hvert økonomisk fenomen.
+
+Eksempelvis trenger NorMacro ikke nødvendigvis en egen
+`phillips_curve()` dersom Phillipskurven kan undersøkes klart og enkelt
+med eksisterende data- og analyseverktøy.
+
+## Lav terskel, men ordinære R-objekter
+
+Vanlige analyser skal kreve lite kode og begrenset kjennskap til
+underliggende datakilder.
+
+Samtidig skal NorMacro så langt det er hensiktsmessig returnere
+standardiserte og videre anvendelige R-objekter.
+
+Enkel bruk skal ikke hindre videre analyse.
+
+## Metadata er en del av brukergrensesnittet
+
+En bruker skal ikke måtte kjenne NorMacros interne variabelnavn på
+forhånd.
+
+Metadata, søk, kategorier og dokumentasjon skal gjøre relevante
+økonomiske serier lette å finne og forstå.
+
+Oppdagbarhet er derfor en del av gap-analysen på lik linje med
+datadekning og analysefunksjonalitet.
+
+# Faglig kravkart
+
+Kravkartet organiserer NorMacro etter makroøkonomiske spørsmål fremfor
+etter funksjoner eller datakilder.
+
+| Fagområde | Sentrale spørsmål |
+|---|---|
+| **1. Nasjonalregnskap** | Hvor stort er BNP? Hva består økonomien og samlet etterspørsel av? Hvordan utvikler konsum, investeringer, offentlig etterspørsel, eksport og import seg? |
+| **2. Konjunkturer** | Er økonomien i oppgang eller nedgang? Hvordan skiller dagens situasjon seg fra tidligere konjunkturer? |
+| **3. Arbeidsmarked** | Hvordan utvikler arbeidsledighet, sysselsetting og arbeidsstyrke seg? Hvordan reagerer arbeidsmarkedet på konjunkturene? |
+| **4. Inflasjon** | Hvor høy er inflasjonen? Hvordan har den utviklet seg? Hvordan henger inflasjon sammen med lønn, aktivitet og arbeidsledighet? |
+| **5. Pengepolitikk** | Hvordan utvikler renten seg? Hvordan reagerer pengepolitikken på inflasjon og økonomisk aktivitet? Hva skjer med realrenten? |
+| **6. Finanspolitikk** | Hvordan utvikler offentlige inntekter, utgifter, budsjettbalanse og gjeld seg? Hvordan kan finanspolitikken ses i sammenheng med konjunkturene? |
+| **7. Konsum og investering** | Hvordan varierer konsum og investering med inntekt, renter og konjunkturer? |
+| **8. Åpen økonomi** | Hvordan utvikler eksport, import og handelsbalanse seg? Hvordan påvirkes norsk økonomi av utviklingen internasjonalt? |
+| **9. Valutakurs** | Hvordan har kronen utviklet seg? Hvordan henger valutakursen sammen med renter, inflasjon og internasjonale forhold? |
+| **10. Lønn og produktivitet** | Hvordan utvikler lønn, reallønn og produktivitet seg? Hvordan henger disse størrelsene sammen over tid? |
+| **11. Langsiktig vekst** | Hvordan har produksjon, produktivitet og levestandard utviklet seg over tid? Hvordan skiller utviklingen seg mellom land? |
+| **12. Kriser og historiske episoder** | Hva skjedde med økonomien under tidligere kriser og store økonomiske sjokk? Hvordan reagerte sentrale makroøkonomiske størrelser? |
+| **13. Internasjonal makro** | Hvordan skiller Norge seg fra andre økonomier? I hvilken grad beveger konjunkturer, inflasjon, arbeidsmarked og renter seg sammen mellom land? |
+| **14. Finansmarkeder og forventninger** | Hva forteller renter, rentekurve og relevante finansmarkedsindikatorer om økonomien og forventningene fremover? |
+
+Kravkartet er ikke en liste over funksjoner som NorMacro skal
+implementere. Det angir hvilke faglige spørsmål pakken bør gjøre enkle å
+undersøke.
+
+# Gap-analyse
+
+Hvert fagområde analyseres separat.
+
+Gap-analysen skal vurdere fire dimensjoner.
+
+## Data
+
+Har NorMacro de nødvendige seriene for å undersøke de sentrale
+spørsmålene?
+
+Et datagap innebærer at en relevant økonomisk størrelse mangler, har
+utilstrekkelig historikk eller ikke er tilstrekkelig sammenlignbar.
+
+## Analyse og API
+
+Kan spørsmålene undersøkes på en enkel og konsistent måte med
+eksisterende funksjonalitet?
+
+Et analyse- eller API-gap eksisterer bare dersom eksisterende generelle
+verktøy ikke løser oppgaven tilfredsstillende.
+
+## Metadata og oppdagbarhet
+
+Er relevante serier enkle å finne, forstå og velge?
+
+Et problem med oppdagbarhet skal ikke feilaktig behandles som et
+datagap eller et behov for en ny analysefunksjon.
+
+## Undervisning og dokumentasjon
+
+Er det enkelt for en student eller underviser å forstå hvordan NorMacro
+kan brukes til å undersøke fagområdet?
+
+Et undervisningsgap kan ofte løses med eksempler, vignetter eller bedre
+dokumentasjon fremfor ny kode.
+
+# Klassifisering
+
+Hvert fagområde vurderes etter følgende fire dimensjoner:
+
+| Dimensjon | Spørsmål |
+|---|---|
+| **Data (D)** | Har vi de riktige dataene? |
+| **Analyse (A)** | Kan de relevante analysene gjennomføres enkelt? |
+| **Metadata (M)** | Er dataene enkle å finne og forstå? |
+| **Undervisning (U)** | Er det enkelt å bruke NorMacro til å arbeide med temaet i undervisning? |
+
+Status klassifiseres som:
+
+- **Grønn** – behovet er i hovedsak dekket
+- **Gul** – behovet er delvis dekket eller bør forbedres
+- **Rød** – et vesentlig gap finnes
+
+Klassifiseringen skal være faglig begrunnet i den individuelle
+gap-analysen.
+
+# Samlet gap-matrise
+
+Denne tabellen oppdateres etter hvert som de individuelle gap-analysene
+gjennomføres.
+
+| Fagområde | Data | Analyse | Metadata | Undervisning | Samlet gap | Prioritet |
+|---|---|---|---|---|---|---|
+| 1. Nasjonalregnskap | – | – | – | – | – | – |
+| 2. Konjunkturer | – | – | – | – | – | – |
+| 3. Arbeidsmarked | – | – | – | – | – | – |
+| 4. Inflasjon | – | – | – | – | – | – |
+| 5. Pengepolitikk | – | – | – | – | – | – |
+| 6. Finanspolitikk | – | – | – | – | – | – |
+| 7. Konsum og investering | – | – | – | – | – | – |
+| 8. Åpen økonomi | – | – | – | – | – | – |
+| 9. Valutakurs | – | – | – | – | – | – |
+| 10. Lønn og produktivitet | – | – | – | – | – | – |
+| 11. Langsiktig vekst | – | – | – | – | – | – |
+| 12. Kriser og historiske episoder | – | – | – | – | – | – |
+| 13. Internasjonal makro | – | – | – | – | – | – |
+| 14. Finansmarkeder og forventninger | – | – | – | – | – | – |
+
+# Fra gap til utviklingsoppgave
+
+Identifiserte gap skal ikke automatisk føre til ny kode.
+
+For hvert gap vurderes tiltak i denne rekkefølgen:
+
+1. Kan behovet løses med eksisterende data og funksjoner?
+2. Kan bedre metadata eller oppdagbarhet løse behovet?
+3. Kan dokumentasjon eller et undervisningseksempel løse behovet?
+4. Mangler NorMacro nødvendige data?
+5. Krever spørsmålet faktisk ny generell analysefunksjonalitet?
+
+Dette skal bidra til å holde API-et lite og konsistent.
+
+# Avgrensning
+
+NorMacro skal ikke ha som mål å:
+
+- erstatte en lærebok i makroøkonomi
+- implementere alle makroøkonomiske modeller
+- implementere alle statistiske eller økonometriske metoder
+- kopiere hele databaser fra SSB, OECD, Eurostat eller andre kilder
+- tilby spesialfunksjoner for ethvert økonomisk fenomen
+- skjule økonomiske definisjoner eller transformasjoner for brukeren
+
+Nye elementer bør inkluderes når de gir tydelig verdi for ett eller
+flere av spørsmålene i kravkartet.
+
+# Arbeidsmåte
+
+De enkelte fagområdene dokumenteres i separate filer under
+`dev/gap-analyse/`.
+
+Første analyse er:
+
+`01-nasjonalregnskap.qmd`
+
+Denne brukes som pilot for metode og struktur før de øvrige
+gap-analysene gjennomføres.
+
+Resultatene fra de individuelle analysene føres tilbake til den samlede
+gap-matrisen i dette dokumentet.
+
+# Mål
+
+Når gap-analysen er fullført, skal kravkartet gi grunnlag for å avgjøre:
+
+- hvilke dataserier NorMacro bør inneholde
+- hvilke eksisterende serier som eventuelt er overflødige
+- hvilke analyseverktøy som bør utvikles eller forbedres
+- hvilke metadata som må forbedres
+- hvilke bruker- og undervisningseksempler som bør utvikles
+- hvilke områder NorMacro eksplisitt ikke skal dekke
+- hvordan videre utvikling i NorMacro 2.x skal prioriteres
+
+Kravkartet skal dermed fungere som faglig grunnlag for videre roadmap,
+ikke som en ønskeliste over funksjoner.

@@ -1,0 +1,22 @@
+---
+title: "NorMacro - why?"
+output: html_document
+date: "2026-08-13"
+---
+
+| Tema                                | Spørsmål du kan undersøke med NorMacro                                                                 |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **Nasjonalregnskap**                | Hva består norsk økonomi av? Hvordan utvikler BNP, konsum, investeringer og nettoeksport seg?          |
+| **Konjunkturer**                    | Er økonomien i oppgang eller nedgang? Hvordan skiller dagens situasjon seg fra tidligere konjunkturer? |
+| **Arbeidsmarked**                   | Hvordan utvikler ledighet, sysselsetting og arbeidsstyrke seg?                                         |
+| **Inflasjon**                       | Hvor høy er inflasjonen, og hvordan henger den sammen med lønn, aktivitet og arbeidsledighet?          |
+| **Pengepolitikk**                   | Hvordan utvikler renten seg, og hvordan reagerer pengepolitikken på inflasjon og aktivitet?            |
+| **Finanspolitikk**                  | Hvordan utvikler offentlige inntekter, utgifter, budsjettbalanse og gjeld seg?                         |
+| **Konsum og investering**           | Hvordan varierer konsum og investering med inntekt, renter og konjunkturer?                            |
+| **Åpen økonomi**                    | Hvordan utvikler eksport, import og handelsbalanse seg, og hvordan påvirkes Norge av utlandet?         |
+| **Valutakurs**                      | Hvordan utvikler kronen seg, og hvordan henger valutakursen sammen med renter og inflasjon?            |
+| **Lønn og produktivitet**           | Hvordan utvikler lønn, reallønn og produktivitet seg?                                                  |
+| **Langsiktig vekst**                | Hvordan har velstand og produktivitet utviklet seg over tid og mellom land?                            |
+| **Kriser og historiske episoder**   | Hva skjedde med økonomien under tidligere kriser og store økonomiske sjokk?                            |
+| **Internasjonal makro**             | Hvordan skiller Norge seg fra andre økonomier?                                                         |
+| **Finansmarkeder og forventninger** | Hva forteller renter og finansmarkeder om økonomien og forventningene fremover?                        |

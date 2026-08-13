@@ -1,0 +1,95 @@
+
+## Prioriterte tiltak
+
+### 1. BNP for hele økonomien
+
+Legg til BNP i faste priser for hele norsk økonomi, med tilhørende
+årlig realvekst.
+
+Behold samtidig `BNP_Fastland` og `BNP_Fastland_vekst`.
+
+Dette skillet skal være eksplisitt i metadata og dokumentasjon.
+Det har både analytisk og pedagogisk verdi: brukeren skal kunne
+undersøke forskjellen mellom utviklingen i hele norsk økonomi og
+Fastlands-Norge.
+
+### 2. Investeringer for hele økonomien
+
+Legg til bruttoinvestering i fast realkapital for hele økonomien,
+med tilhørende vekstserie.
+
+Behold `Fastlandsinvesteringer` som egen serie.
+
+Dette gjør det mulig å skille mellom samlet investeringsaktivitet
+og investeringer i Fastlands-Norge.
+
+### 3. Nasjonalregnskapsidentiteten
+
+Etabler et konsistent sett med nasjonalregnskapsstørrelser i
+løpende priser:
+
+- BNP
+- privat konsum
+- offentlig konsum
+- bruttoinvesteringer
+- eksport
+- import
+
+Dette skal gjøre det mulig å undersøke den grunnleggende
+nasjonalregnskapsidentiteten
+
+Y = C + I + G + X - M
+
+direkte med NorMacro.
+
+Faste priser brukes primært til analyser av real utvikling og vekst,
+mens løpende priser brukes når additive nasjonalregnskapsstørrelser
+skal sammenlignes.
+
+### 4. BNP-andeler
+
+Gjennomgå alle variabler med navn som `*_andel_BNP`.
+
+Det skal være entydig hvilken BNP-størrelse som brukes som nevner.
+Eksisterende serier som faktisk bruker `BNP_Fastland`, skal enten
+gis et navn som uttrykker dette eksplisitt eller omdefineres dersom
+total BNP er den økonomisk riktige nevneren.
+
+### 5. Metadata
+
+Metadata skal tydelig skille mellom:
+
+- hele norsk økonomi
+- Fastlands-Norge
+- løpende priser
+- faste priser
+- nivå
+- vekstrate
+- andel
+
+Definisjonene skal gjøre det mulig for en student å forstå hva en
+serie representerer uten å måtte undersøke kildekoden.
+
+### 6. Internasjonal konsistens
+
+Gjennomgå metadata for de internasjonale nasjonalregnskapsseriene.
+
+Norske begreper som `BNP Fastlands-Norge` skal ikke brukes om
+internasjonale totaløkonomiske serier.
+
+Navngivning og begrepsbruk bør være så konsistent som mulig mellom
+det norske og internasjonale datalaget.
+
+### 7. Undervisning
+
+Utvikle senere et undervisningseksempel der studenten bruker
+NorMacro til å:
+
+1. identifisere komponentene i BNP
+2. undersøke nasjonalregnskapsidentiteten
+3. studere komponentenes andeler av BNP
+4. analysere realvekst i BNP og etterspørselskomponentene
+5. sammenligne BNP for hele økonomien med BNP for Fastlands-Norge
+
+Eksemplet skal illustrere økonomiske begreper og sammenhenger,
+ikke bare demonstrere funksjonssyntaks.
