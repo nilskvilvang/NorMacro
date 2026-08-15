@@ -117,7 +117,7 @@ Anta at søket har gitt deg variabelen `Arbeidsledighet`.
 Du kan undersøke variabelen med:
 
 ```{r, eval = FALSE}
-describe_variable("Arbledighetsrate_NAV")
+describe_variable("Arbeidsledighetsrate_NAV")
 ```
 
 Her får du informasjon som hjelper deg å tolke tidsserien riktig.
@@ -135,7 +135,7 @@ navn, men likevel måle forskjellige økonomiske størrelser.
 Du kan også få en samlet oppsummering av en variabel:
 
 ```{r, eval = FALSE}
-variable_summary("Arbledighetsrate_NAV")
+variable_summary("Arbeidsledighetsrate_NAV")
 ```
 
 `variable_summary()` kombinerer informasjon om variabelen med en

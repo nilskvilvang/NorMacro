@@ -75,11 +75,10 @@ normacro_international_example_metadata[
 Her sammenlignes inflasjonen i Norge, Sverige og Danmark:
 
 ```{r fig.width=7, fig.height=4.5}
-plot_series(
+compare_countries(
   "Inflasjon",
-  data = normacro_international_example,
-  metadata = normacro_international_example_metadata,
-  countries = c("NO", "SE", "DK")
+  countries = c("NO", "SE", "DK"),
+  data = normacro_international_example
 )
 ```
 
@@ -93,10 +92,9 @@ utviklingen skiller seg mellom landene.
 Det samme kan gjøres for alle landene i datasettet.
 
 ```{r fig.width=7, fig.height=4.5}
-plot_series(
+compare_countries(
   "BNP_vekst",
-  data = normacro_international_example,
-  metadata = normacro_international_example_metadata
+  data = normacro_international_example
 )
 ```
 
@@ -187,10 +185,10 @@ De samme analysefunksjonene kan deretter brukes på det fullstendige
 datasettet.
 
 ```{r eval=FALSE}
-plot_series(
+compare_countries(
   "Inflasjon",
-  data = international,
-  countries = c("NO", "SE", "DK", "DE")
+  countries = c("NO", "SE", "DK", "DE"),
+  data = international
 )
 
 compare_series(

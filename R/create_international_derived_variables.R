@@ -60,7 +60,22 @@ create_international_derived_variables <- function(data) {
         growth_rate(Investeringer, Aar),
       
       Investeringer_andel_BNP =
-        Investeringer / BNP_faste_priser * 100
+        Investeringer / BNP_faste_priser * 100,
+      
+      Lonn_per_ansatt =
+        Lonn_EUR * 1e6 / Ansatte,
+      
+      Lonn_per_ansatt_nasjonal_valuta =
+        Lonn_nasjonal_valuta * 1e6 / Ansatte,
+      
+      Lonnvekst =
+        growth_rate(
+          Lonn_per_ansatt_nasjonal_valuta,
+          Aar
+        ),
+      
+      Reallonnsvekst =
+        Lonnvekst - Inflasjon
       
     ) |>
     dplyr::ungroup()

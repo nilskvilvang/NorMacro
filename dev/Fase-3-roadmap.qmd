@@ -1,0 +1,239 @@
+
+---
+title: "Fase 3-roadmap"
+format: html
+---
+
+# Formål
+
+Dette veikartet styrer utviklingen av NorMacro frem mot versjon 2.1.0
+og den påfølgende 2.1.1-runden.
+
+Veikartet bygger på gap-analysen av de 14 fagområdene i
+`dev/gap-analyse/`.
+
+Etter 2.1.1 gjennomføres en ny samlet vurdering av pakken, inkludert
+oppdatert gap-analyse og nytt veikart.
+
+# Prioriteringsmodell
+
+Utviklingsoppgavene deles i fire grupper:
+
+## MÅ – 2.1.0
+
+Oppgaver som må være fullført før fase 3 og versjon 2.1.0 kan regnes som ferdig.
+
+## BØR – 2.1.0
+
+Oppgaver med høy faglig verdi som bør tas med dersom de kan implementeres
+robust uten å utvide scope vesentlig.
+
+## 2.1.1
+
+Konkrete oppgaver som er ønskelige, men som bevisst skyves til den
+påfølgende utviklingsrunden.
+
+## Ikke prioritert
+
+Temaer og funksjoner som eksplisitt ligger utenfor NorMacros retning nå.
+
+# MÅ – 2.1.0
+
+## MÅ-0 – Korrigere `BNP_lopende`
+
+Status: **Ferdig**
+
+Problem:
+Den tidligere `BNP_lopende`-serien var ikke samlet nominelt BNP og hadde
+feil nivå og utdatert tidsdekning.
+
+Tiltak:
+- bytte til korrekt SSB-serie for BNP, markedsverdi, løpende priser
+- oppdatere metadata
+- kontrollere avledede BNP-andeler
+
+Akseptansekriterier:
+- korrekt nivå og enhet
+- dekning gjennom siste tilgjengelige år
+- metadata konsistent
+- tester og `R CMD check` grønne
+
+Resultat:
+Fullført og pushet.
+
+## MÅ-1 – Fullføre offentlig-finans-blokken
+
+Status: **Ferdig**
+
+Problem:
+NorMacro manglet sentrale størrelser for offentlige inntekter og
+nettofinansinvestering.
+
+Tiltak:
+- `Offentlige_inntekter`
+- `Nettofinansinvestering`
+- `Offentlige_inntekter_andel_BNP`
+- `Offentlige_utgifter_andel_BNP`
+- `Nettofinansinvestering_andel_BNP`
+
+Kilde:
+SSB tabell 14668.
+
+Avgrensning:
+- ikke detaljere statlige/kommunale inntekter
+- ikke bygge eget finanspolitikk-API
+- historiske serier før 1995 vurderes senere
+
+Akseptansekriterier:
+- variablene finnes
+- identiteten inntekter minus utgifter = nettofinansinvestering holder
+- metadata er komplette
+- tester og `R CMD check` grønne
+
+Resultat:
+Fullført og pushet.
+
+## MÅ-2 – Arbeidsmarkedskonsistens
+
+Status: **Ferdig**
+
+Problem:
+Arbeidsmarkedsblokken blandet ulike definisjoner og inneholdt
+inkonsistente navn.
+
+Tiltak Norge:
+- korrekt AKU-arbeidsstyrkeandel for 15–74 år
+- korrekt AKU-sysselsettingsandel for 15–74 år
+- `Befolkning_15_74`
+- `Arbeidsledige_AKU`
+- `Arbeidsledighetsrate_AKU`
+- rette 2006-dobling i sysselsetting
+- `Arbledig*` → `Arbeidsledig*`
+- tydelig skille mellom AKU og NAV
+
+Tiltak internasjonalt:
+- `Arbeidsstyrke` beholdes som Eurostat LFS 15–64
+- `Arbeidsstyrkeandel` hentes direkte fra Eurostat
+- `Arbeidsledighetsrate` beholdes som 15–74
+- `Sysselsatte` beholdes som nasjonalregnskapsbegrep
+- feilaktig internasjonal `Sysselsettingsandel` fjernes
+
+Akseptansekriterier:
+- ingen gammel `Arbledig*`-stavemåte i API/tester
+- korrekt AKU-identitet
+- metadata forklarer aldersgrupper og kilder
+- tester og `R CMD check` grønne
+
+Resultat:
+Fullført og pushet.
+
+## MÅ-3 – Lønn og produktivitet internasjonalt
+
+Status: **Ikke startet**
+
+Mål:
+Gjøre det mulig å sammenligne lønn, lønnsvekst, reallønn og
+produktivitet mellom Norge og andre land.
+
+Foreløpig behov:
+- harmonisert internasjonal lønns-/kompensasjonsserie
+- lønnsvekst
+- reallønnsvekst
+- kontroll av samspill med eksisterende produktivitetsdata
+
+## MÅ-4 – Internasjonal makro som brukeropplevelse
+
+Status: **Ikke startet**
+
+Mål:
+Gjøre eksisterende internasjonale data enkle å bruke i analyse og
+undervisning.
+
+Tema:
+- én variabel på tvers av flere land
+- sammenligning mellom Norge og andre land
+- tverrlands-korrelasjon
+- konsistent bruk av `comparison_series`
+
+## MÅ-5 – Historiske episoder, minimumsløsning
+
+Status: **Ikke startet**
+
+Mål:
+Et lite kuratert episodekatalog-lag for undervisning.
+
+Eksempler:
+- finanskrisen
+- pandemien
+- oljeprisfallet
+- inflasjonssjokk
+- andre sentrale norske/internasjonale episoder
+
+Katalogen skal være liten, transparent og pedagogisk.
+
+## MÅ-6 – Konsistensrunde metadata/API/dokumentasjon
+
+Status: **Pågående**
+
+Tema:
+- skrivefeil og inkonsistente begreper
+- displaynavn
+- `Analyse_type`
+- kilde- og tabellbeskrivelser
+- semantikk i eksisterende funksjonsnavn
+
+## MÅ-7 – Sluttkontroll mot kravkartet
+
+Status: **Ikke startet**
+
+Mål:
+Alle 14 fagområder skal enten være tilfredsstillende dekket eller ha
+et eksplisitt og begrunnet restgap.
+
+# BØR – 2.1.0
+
+Foreløpige kandidater:
+
+- real effektiv valutakurs
+- reallønnsindeks
+- lønnsandel
+- generell lead/lag-analyse mellom to serier
+- gjennomgang av `leading_indicators()`
+- gjennomgang av `compare_periods()` for rate-variabler
+- undervisningseksempler knyttet til rentekurve og forventninger
+
+# 2.1.1
+
+Foreløpige kandidater:
+
+- historiske offentlige finanser før 1995, eventuelt via SSB 14671
+- eventuell harmonisert internasjonal sysselsettingsandel
+- videre utbygging av episodekatalogen
+- mindre API-forbedringer som ikke er release-blockers
+- repository-hygiene, inkludert eventuell `.gitattributes`
+
+# Ikke prioritert
+
+Følgende er eksplisitt utenfor scope for fase 3:
+
+- høyfrekvente finansmarkedsdata
+- trading- eller markedsprognoseverktøy
+- internasjonal `business_cycle()`
+- mange flere land uten konkret faglig begrunnelse
+- full vekstregnskapsmodell
+- TFP/kapitalbeholdning
+- spesialmodeller for valuta, kriser eller Solow-analyse
+- generell finansdatabase
+
+# End-state
+
+Fase 3 avsluttes med release av NorMacro 2.1.0.
+
+Deretter gjennomføres den avgrensede 2.1.1-runden.
+
+Etter 2.1.1 tas en ny samlet fot i bakken:
+- oppdatert gap-analyse
+- vurdering av faktisk bruker/API-erfaring
+- nytt veikart
+- beslutning om neste større versjonsmål
+

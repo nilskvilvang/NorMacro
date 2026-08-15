@@ -9,6 +9,7 @@ build_international_database <- function(refresh = FALSE) {
   gdp_constant <- get_gdp_constant(refresh = refresh)
   industrial_production <- get_industrial_production(refresh = refresh)
   employment <- get_employment(refresh = refresh)
+  employees <- get_employees(refresh = refresh)
   labour_force <- get_labour_force(refresh = refresh)
   government_debt <- get_government_debt(refresh = refresh)
   house_price_index <- get_house_price_index(refresh = refresh)
@@ -19,6 +20,7 @@ build_international_database <- function(refresh = FALSE) {
   public_consumption <- get_public_consumption(refresh = refresh)
   investment <- get_investment(refresh = refresh)
   interest_rate <- get_long_interest_rate(refresh = refresh)
+  wages <- get_wages(refresh = refresh)
   
   international <-
     hicp |>
@@ -28,6 +30,7 @@ build_international_database <- function(refresh = FALSE) {
     dplyr::full_join(gdp_constant, by = join_by) |>
     dplyr::full_join(industrial_production, by = join_by) |>
     dplyr::full_join(employment, by = join_by) |>
+    dplyr::full_join(employees, by = join_by) |>
     dplyr::full_join(labour_force, by = join_by) |>
     dplyr::full_join(government_debt, by = join_by) |>
     dplyr::full_join(house_price_index, by = join_by) |>
@@ -38,7 +41,7 @@ build_international_database <- function(refresh = FALSE) {
     dplyr::full_join(public_consumption, by = join_by) |>
     dplyr::full_join(investment, by = join_by) |>
     dplyr::full_join(interest_rate, by = join_by) |>
-    
+    dplyr::full_join(wages, by = join_by) |>
     create_international_derived_variables()
   
   international

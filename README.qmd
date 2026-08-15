@@ -155,7 +155,7 @@ compare_series(
   c(
     "Inflasjon",
     "BNP_Fastland_vekst",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "Styringsrente"
   ),
   data = normacro_example
@@ -169,7 +169,7 @@ correlate_series(
   c(
     "Inflasjon",
     "BNP_Fastland_vekst",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "Styringsrente"
   ),
   data = normacro_example
@@ -215,7 +215,7 @@ compare_series(
   c(
     "Inflasjon",
     "BNP_vekst",
-    "Arbeidsledighetsrate"
+    "Arbeidsledighetsrate_NAV"
   ),
   data = normacro_international_example,
   country = "NO"

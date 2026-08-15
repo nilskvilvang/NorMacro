@@ -3,7 +3,7 @@
 
 # sjekksekvens
 ## rm(list = ls())
-## devtools::load_all()
+# devtools::load_all()
 ## normacro <- get_normacro()
 ## international <- get_international_macro()
 ## tail(normacro)
@@ -69,6 +69,7 @@
 # )
 # 
 # devtools::test()
+
 
 ## Deretter
 

@@ -11,8 +11,8 @@ example_variables <- c(
   "Befolkning",
   "Arbeidsstyrke",
   "Sysselsatte",
-  "Arbledige_NAV",
-  "Arbledighetsrate_NAV",
+  "Arbeidsledige_NAV",
+  "Arbeidsledighetsrate_NAV",
   "Styringsrente",
   "BNP_Fastland",
   "BNP_Fastland_vekst",
@@ -51,3 +51,4 @@ usethis::use_data(
   overwrite = TRUE,
   compress = "xz"
 )
+

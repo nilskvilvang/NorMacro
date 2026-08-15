@@ -121,7 +121,7 @@ sammenlignes på en felles skala.
 compare_series(
   c(
     "Inflasjon",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "BNP_Fastland_vekst",
     "Styringsrente"
   ),
@@ -141,7 +141,7 @@ skalaer.
 correlate_series(
   c(
     "Inflasjon",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "BNP_Fastland_vekst",
     "Styringsrente"
   ),
