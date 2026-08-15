@@ -1,0 +1,526 @@
+
+---
+title: "Gap-analyse 09 – Produktivitet og langsiktig vekst"
+format: html
+---
+
+# Formål
+
+Denne gap-analysen vurderer i hvilken grad NorMacro gjør det mulig å
+analysere produktivitet og langsiktig økonomisk vekst på en måte som er
+relevant for undervisning i makroøkonomi og for praktisk analyse.
+
+Området skiller seg fra de mer konjunkturorienterte delene av NorMacro
+ved at hovedspørsmålet er hva som bestemmer økonomiens utvikling over
+lengre tid.
+
+NorMacro skal ikke forsøke å implementere komplette vekstmodeller eller
+et fullstendig vekstregnskap. Målet er å gjøre de viktigste empiriske
+spørsmålene om langsiktig vekst enkle å undersøke.
+
+# Sentrale økonomiske spørsmål
+
+NorMacro bør gjøre det mulig å undersøke spørsmål som:
+
+1. Hvor raskt vokser økonomien over tid?
+2. Hvor raskt vokser real BNP per innbygger?
+3. Hvordan har materiell levestandard utviklet seg?
+4. Hvor raskt vokser arbeidsproduktiviteten?
+5. Har produktivitetsveksten økt eller avtatt over tid?
+6. Hvordan henger produksjonsvekst sammen med sysselsetting?
+7. Hvordan henger investeringer sammen med langsiktig vekst?
+8. Hvordan skiller Norge seg fra andre land når det gjelder vekst og
+   produktivitet?
+9. Hvor mye av veksten kan knyttes til høyere arbeidsinnsats og hvor mye
+   til økt produktivitet?
+10. Hvilke begrensninger har en enkel analyse basert på BNP per
+    sysselsatt?
+
+# Eksisterende norske data
+
+NorMacro har allerede et godt datagrunnlag for langsiktig vekstanalyse.
+
+## Produksjon og vekst
+
+Følgende serier er sentrale:
+
+- `BNP_Fastland`
+- `BNP_Fastland_vekst`
+
+Dette gir et naturlig mål på real økonomisk aktivitet i
+Fastlands-Norge.
+
+For analyser av norsk økonomi er Fastlands-BNP særlig relevant fordi
+petroleumsvirksomheten kan gi store utslag i samlet BNP uten å
+representere utviklingen i den øvrige økonomien.
+
+## BNP per innbygger
+
+NorMacro inneholder:
+
+- `BNP_Fastland_per_innbygger`
+- `BNP_Fastland_per_innbygger_vekst`
+
+Dette gir et godt grunnlag for å analysere utviklingen i produksjon og
+inntekt relativt til befolkningen.
+
+Real BNP per innbygger er et mer relevant mål på langsiktig materiell
+velstandsutvikling enn samlet BNP alene.
+
+## Arbeidsproduktivitet
+
+NorMacro har:
+
+- `Arbeidsproduktivitet`
+- `Produktivitetsvekst`
+
+Arbeidsproduktivitet beregnes i dag som:
+
+```r
+BNP_Fastland / Sysselsatte
+```
+
+Dette gir et enkelt og intuitivt mål på produksjon per sysselsatt.
+
+## Arbeidsmarked
+
+Følgende serier er relevante:
+
+- `Sysselsatte`
+- `Arbeidsstyrke`
+- `Arbeidsstyrkeandel`
+
+Disse gjør det mulig å koble langsiktig produksjonsvekst til utviklingen
+i arbeidsinnsatsen.
+
+## Investeringer
+
+NorMacro har blant annet:
+
+- `Fastlandsinvesteringer`
+- `Fastlandsinvesteringer_vekst`
+- `Fastlandsinvesteringer_andel_BNP`
+
+Dette gir et grunnlag for å undersøke sammenhengen mellom investeringer
+og langsiktig produksjonskapasitet.
+
+Når samlet investering for hele økonomien legges til som del av
+gap-analysen for nasjonalregnskap, blir dette området ytterligere
+styrket.
+
+# Eksisterende internasjonale data
+
+Det internasjonale datasettet inneholder flere sentrale serier for
+langsiktig vekstanalyse:
+
+- `BNP_faste_priser`
+- `BNP_vekst`
+- `Sysselsatte`
+- `Arbeidsstyrke`
+- `Arbeidsproduktivitet`
+- `Produktivitetsvekst`
+- `Investeringer`
+- `Investeringsvekst`
+- `Investeringer_andel_BNP`
+
+Dette gjør det mulig å sammenligne både økonomisk vekst,
+arbeidsproduktivitet og investeringsutvikling mellom land.
+
+Det viktigste manglende laget er real BNP per innbygger.
+
+# Styrker i dagens datagrunnlag
+
+## 1. Real økonomisk vekst er godt dekket
+
+NorMacro har både nivå- og vekstserier for real produksjon.
+
+Dette gjør det mulig å analysere:
+
+- langsiktige vekstperioder
+- svakere og sterkere vekstfaser
+- forskjeller mellom Norge og andre land
+
+## 2. Norge har real BNP per innbygger
+
+`BNP_Fastland_per_innbygger` og
+`BNP_Fastland_per_innbygger_vekst` gir et godt mål på langsiktig
+utvikling i produksjon relativt til befolkningen.
+
+Dette er særlig relevant i undervisning fordi samlet BNP kan øke uten at
+BNP per innbygger øker tilsvarende.
+
+## 3. Arbeidsproduktivitet er allerede tilgjengelig
+
+NorMacro har en enkel og transparent produktivitetsindikator:
+
+```r
+Arbeidsproduktivitet =
+  BNP_Fastland / Sysselsatte
+```
+
+Dette er godt egnet som introduksjon til produktivitetsanalyse.
+
+## 4. Investeringer kan kobles til vekst
+
+Investeringsdata gjør det mulig å undersøke empirisk om perioder med høy
+eller lav investeringsaktivitet sammenfaller med forskjeller i
+produktivitet og økonomisk vekst.
+
+NorMacro trenger derfor ikke nye spesialiserte investeringsdata for å
+gjøre grunnleggende langsiktig vekstanalyse mulig.
+
+# Gap 1 – Real BNP per innbygger internasjonalt
+
+Det internasjonale datasettet inneholder i dag:
+
+- `BNP_lopende_per_innbygger`
+
+Denne serien er nominell og er derfor mindre egnet til å analysere
+langsiktig utvikling i materiell levestandard over tid.
+
+Det bør legges til et realt mål basert på:
+
+```r
+BNP_faste_priser / Befolkning
+```
+
+Aktuelle variabler er:
+
+```text
+BNP_per_innbygger
+BNP_per_innbygger_vekst
+```
+
+Dette vil gjøre det mulig å sammenligne langsiktig real vekst per
+innbygger mellom land.
+
+**Prioritet: høy.**
+
+# Gap 2 – Produktivitet per sysselsatt versus per arbeidstime
+
+NorMacros arbeidsproduktivitetsmål bruker antall sysselsatte som
+nevner.
+
+Dette er et nyttig og enkelt mål, men det er ikke identisk med
+produktivitet per arbeidstime.
+
+Forskjellen kan være viktig dersom:
+
+- gjennomsnittlig arbeidstid endrer seg
+- deltidsandelen varierer mellom land
+- arbeidstiden utvikler seg forskjellig over tid
+
+NorMacro bør derfor være eksplisitt om at dagens mål er:
+
+> Real BNP per sysselsatt.
+
+Det bør ikke presenteres som et generelt mål på produksjon per
+arbeidstime.
+
+En harmonisert serie for arbeidstimer kan vurderes senere dersom den gir
+tilstrekkelig analytisk merverdi.
+
+**Prioritet: lav til middels.**
+
+# Gap 3 – Kapitalbeholdning
+
+NorMacro har investeringer, men ikke en eksplisitt serie for
+kapitalbeholdningen.
+
+Dette betyr at pakken ikke kan gjennomføre et fullstendig vekstregnskap
+basert på utviklingen i:
+
+- arbeidsinnsats
+- kapital
+- total faktorproduktivitet
+
+En kapitalbeholdningsserie kan være relevant i mer avansert
+vekstanalyse, men er ikke nødvendig for den grunnleggende
+undervisningsambisjonen.
+
+**Prioritet: lav.**
+
+# Gap 4 – Total faktorproduktivitet
+
+NorMacro har ingen eksplisitt serie for total faktorproduktivitet, TFP.
+
+TFP er sentralt i mange teoretiske vekstmodeller, men krever flere
+antakelser og et mer omfattende datagrunnlag enn dagens
+produktivitetsindikator.
+
+NorMacro bør ikke utvikle en egen TFP-serie bare for å dekke en
+lærebokmodell.
+
+En slik utvidelse bør bare vurderes dersom det senere finnes et klart
+undervisnings- eller analysebehov.
+
+**Prioritet: lav.**
+
+# BNP per innbygger og levestandard
+
+Et viktig pedagogisk skille er forskjellen mellom:
+
+```text
+Samlet real BNP
+        |
+        + befolkningsutvikling
+        |
+        v
+Real BNP per innbygger
+```
+
+Samlet BNP kan øke fordi befolkningen øker.
+
+Det innebærer ikke nødvendigvis at produksjonen eller inntekten per
+innbygger øker like mye.
+
+NorMacro bør gjøre denne forskjellen eksplisitt i undervisningsmateriale
+om langsiktig vekst.
+
+# Produksjon og produktivitet
+
+En naturlig pedagogisk progresjon er:
+
+```text
+Produksjon
+    |
+    +----> flere sysselsatte
+    |
+    +----> høyere produksjon per sysselsatt
+                    |
+                    v
+             Produktivitet
+```
+
+Dette gjør det mulig å diskutere at økonomisk vekst over tid kan komme
+fra både:
+
+- økt arbeidsinnsats
+- økt produktivitet
+
+NorMacro har allerede data som gjør denne grunnleggende
+dekomponeringen mulig å diskutere empirisk.
+
+# Investeringer og vekst
+
+Investeringer øker økonomiens produksjonskapasitet over tid.
+
+NorMacro kan allerede koble:
+
+- investeringer
+- BNP-vekst
+- produktivitetsvekst
+
+Dette gjør det mulig å undersøke om perioder med høy investeringsandel
+sammenfaller med sterkere langsiktig vekst.
+
+Det må samtidig understrekes at korrelasjon ikke innebærer en enkel
+kausal sammenheng.
+
+# Norge og Fastlands-BNP
+
+For Norge brukes i hovedsak BNP Fastlands-Norge i dagens
+produktivitets- og per innbygger-serier.
+
+Dette bør beholdes som et eksplisitt norsk perspektiv.
+
+Det har pedagogisk verdi fordi studenten lærer forskjellen mellom:
+
+- hele norsk økonomi
+- Fastlands-Norge
+
+Ved internasjonale sammenligninger vil total real BNP normalt være det
+mest tilgjengelige og sammenlignbare målet.
+
+Forskjellen bør dokumenteres tydelig.
+
+# Internasjonale sammenligninger
+
+Når real BNP per innbygger legges til, vil NorMacro kunne sammenligne:
+
+- real BNP-vekst
+- real BNP per innbygger
+- BNP per innbygger-vekst
+- arbeidsproduktivitet
+- produktivitetsvekst
+- investeringsandel
+
+mellom land.
+
+Dette gir et svært godt grunnlag for empiriske spørsmål om langsiktig
+vekst i et bachelorfag.
+
+# Analyse og API
+
+Dagens generelle analyse-API er godt egnet til dette området.
+
+Relevante funksjoner inkluderer:
+
+- `plot_series()`
+- `compare_series()`
+- `combine_series()`
+- `index()`
+- `growth()`
+- `correlate()`
+- `regress()`
+
+Det er derfor ikke behov for egne modeller for økonomisk vekst nå.
+
+NorMacro bør prioritere et godt datagrunnlag og generelle
+analyseverktøy.
+
+# Mulig senere analysefunksjon
+
+Datagrunnlaget er allerede godt nok til at NorMacro senere kan vurdere
+en enkel oppsummering av langsiktig vekst.
+
+En slik analyse kan eksempelvis vise gjennomsnittlig utvikling over
+perioder på 5, 10 eller 20 år for:
+
+- real BNP
+- real BNP per innbygger
+- arbeidsproduktivitet
+- sysselsetting
+- investeringsandel
+
+Dette kan besvare spørsmålet:
+
+> Hva kjennetegner den langsiktige økonomiske utviklingen?
+
+En slik funksjon bør være en oppsummerende analysefunksjon, ikke en
+implementasjon av en bestemt teoretisk vekstmodell.
+
+**Prioritet: vurderes i senere funksjons-gap-analyse.**
+
+# Vekstregnskap
+
+Et fullstendig vekstregnskap kan forenklet uttrykkes som en dekomponering
+av vekstbidrag fra:
+
+```text
+Arbeidsinnsats
+      +
+Kapital
+      +
+Total faktorproduktivitet
+      |
+      v
+Produksjonsvekst
+```
+
+NorMacro har i dag ikke hele datagrunnlaget som kreves for dette.
+
+Det bør heller ikke være et krav for at pakken skal fungere godt i et
+bachelorfag.
+
+NorMacro bør først og fremst gjøre det enkelt å undersøke de empiriske
+byggesteinene.
+
+# Metadata
+
+Metadata bør eksplisitt angi hvordan arbeidsproduktivitet er definert.
+
+Dagens definisjon bør beskrives som:
+
+> Real BNP Fastlands-Norge per sysselsatt
+
+for norske data.
+
+Internasjonalt bør tilsvarende definisjon beskrive korrekt BNP-begrep og
+nevner.
+
+Metadata bør også tydelig skille mellom:
+
+- nominelt BNP per innbygger
+- realt BNP per innbygger
+- samlet BNP
+- BNP Fastlands-Norge
+- BNP per sysselsatt
+- eventuelle senere mål per arbeidstime
+
+# Avgrensning
+
+NorMacro bør foreløpig ikke prioritere:
+
+- detaljert kapitalbeholdning
+- kapitaltjenester
+- omfattende vekstregnskap
+- egenberegnet TFP
+- komplette Solow-modeller
+- endogen vekstmodeller
+
+Disse kan være relevante i mer spesialiserte kurs, men ligger utenfor
+pakkens kjerneambisjon.
+
+Målet er at studenten skal kunne analysere de viktigste empiriske
+spørsmålene uten at NorMacro forsøker å erstatte læreboken.
+
+# Prioriterte tiltak
+
+## Prioritet 1
+
+1. Legg til real BNP per innbygger internasjonalt.
+2. Legg til vekst i real BNP per innbygger internasjonalt.
+3. Sørg for tydelig metadata om forskjellen mellom nominelt og realt BNP
+   per innbygger.
+4. Sørg for tydelig dokumentasjon av forskjellen mellom norsk
+   Fastlands-BNP og internasjonalt total-BNP.
+
+## Prioritet 2
+
+5. Presiser at `Arbeidsproduktivitet` måler real produksjon per
+   sysselsatt.
+6. Gjør sammenhengen mellom produksjonsvekst, sysselsetting og
+   produktivitet til en eksplisitt pedagogisk arbeidsflyt.
+7. Vurder senere en enkel oppsummerende analyse av langsiktig vekst.
+
+## Prioritet 3
+
+8. Vurder arbeidstimer dersom en harmonisert serie senere viser seg å ha
+   tydelig analytisk merverdi.
+9. Ikke prioriter kapitalbeholdning eller TFP nå.
+10. Ikke bygg egne teoretiske vekstmodeller inn i NorMacro.
+
+# Samlet vurdering
+
+**Data: grønn/gul**
+
+NorMacro har allerede svært god dekning av sentrale størrelser for
+langsiktig vekst. Det viktigste datagapet er real BNP per innbygger
+internasjonalt.
+
+**Analyse: grønn**
+
+Eksisterende generelle analyseverktøy dekker de viktigste behovene.
+
+**Metadata: gul**
+
+Produktivitetsbegrepet og forskjellen mellom nominell og real BNP per
+innbygger bør dokumenteres tydeligere.
+
+**Undervisning: gul/grønn**
+
+Datagrunnlaget er allerede svært godt egnet til undervisning. En tydelig
+pedagogisk arbeidsflyt vil gjøre området enda sterkere.
+
+**Samlet gap: lite**
+
+**Prioritet: middels til høy**
+
+NorMacro trenger ikke et omfattende nytt datalag for å dekke
+produktivitet og langsiktig vekst.
+
+Det viktigste løftet er å gjøre internasjonal real BNP per innbygger
+tilgjengelig og å være presis på hvordan produktivitet måles.
+
+Målet bør være at studenten raskt kan gå fra spørsmål som:
+
+> Har økonomisk vekst gitt høyere produksjon per innbygger?
+
+og:
+
+> Skyldes langsiktig vekst flere sysselsatte eller høyere
+> produktivitet?
+
+til relevante data og empirisk analyse i NorMacro.
+

@@ -19,19 +19,13 @@ create_international_derived_variables <- function(data) {
       
       Industriproduksjon_vekst =
         growth_rate(Industriproduksjon, Aar),
-      
-      Sysselsettingsandel =
-        Sysselsatte / Befolkning * 100,
-      
+
       Arbeidsproduktivitet =
         BNP_faste_priser * 1e6 / Sysselsatte,
       
       Produktivitetsvekst =
         growth_rate(Arbeidsproduktivitet, Aar),
-      
-      Arbeidsstyrkeandel =
-        Arbeidsstyrke / Befolkning * 100,
-      
+
       Boligprisvekst =
         growth_rate(Boligprisindeks, Aar),
       

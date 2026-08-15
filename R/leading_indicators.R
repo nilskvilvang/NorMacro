@@ -14,7 +14,7 @@ leading_indicators <- function(data = NULL) {
     "Kapasitetsutnytting",
     "Ressursknapphet",
     "Ordrebeholdning",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "Styringsrente",
     "Pengemarkedsrente_3mnd",
     "Statsrente_10aar",

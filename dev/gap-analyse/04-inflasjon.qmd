@@ -1,0 +1,210 @@
+
+---
+title: "Gap-analyse 03: Priser og inflasjon"
+format: html
+---
+
+# Formål
+
+Denne gap-analysen vurderer om NorMacro har de dataene og
+analysemulighetene som trengs for å undersøke sentrale spørsmål om
+prisnivå og inflasjon på bachelor-nivå i makroøkonomi.
+
+Utgangspunktet er at NorMacro skal være et kuratert makroøkonomisk
+analyseverktøy, ikke en fullstendig database over alle tilgjengelige
+prisindekser.
+
+# Økonomiske spørsmål
+
+En student eller analytiker bør med NorMacro raskt kunne undersøke:
+
+- Hvordan har prisnivået utviklet seg over tid?
+- Hvordan har inflasjonen utviklet seg?
+- Hvordan varierer inflasjonen mellom perioder og land?
+- Hva er forskjellen mellom prisnivå og inflasjon?
+- Hva er forskjellen mellom nominelle og reelle størrelser?
+- Hvordan har lønninger og kjøpekraft utviklet seg relativt til prisene?
+- Hvordan henger inflasjon sammen med økonomisk aktivitet?
+- Hvordan henger inflasjon sammen med renter og pengepolitikk?
+- Hvilken rolle kan energi- og råvarepriser spille for inflasjonen?
+- Hvordan skiller samlet inflasjon seg fra underliggende inflasjon?
+
+# Dagens dekning
+
+## Norge
+
+NorMacro har en lang norsk KPI-serie og beregnet årlig inflasjon.
+
+Sentrale serier er blant annet:
+
+- `KPI`
+- `Inflasjon`
+- `Lonnvekst`
+- `Reallonnsvekst`
+- `BNP_lopende`
+- `BNP_Fastland`
+- `Boligprisindeks`
+- `Boligprisvekst`
+- `Oljepris_USD`
+- `Oljeprisvekst`
+- `Strompris`
+- `Stromprisvekst`
+
+Den norske KPI-serien går tilbake til 1865, mens beregnet inflasjon
+starter i 1866.
+
+Dette gir NorMacro en særlig sterk historisk dekning av norsk
+prisutvikling.
+
+## Internasjonalt
+
+Den sentrale internasjonale prisserien er:
+
+- `HICP`
+
+Årlig internasjonal inflasjon beregnes fra HICP.
+
+HICP gir en harmonisert prisindeks som er velegnet til sammenligninger
+mellom europeiske land.
+
+Det er hensiktsmessig at NorMacro beholder skillet mellom norsk KPI og
+internasjonal HICP.
+
+Norsk KPI gir den lange nasjonale historien, mens HICP gir et
+harmonisert grunnlag for internasjonale sammenligninger.
+
+# Vurdering mot kravkartet
+
+| Krav / økonomisk spørsmål | Norge | Internasjonalt | Vurdering |
+|---|---|---|---|
+| Prisnivå over tid | KPI | HICP | Godt dekket |
+| Årlig inflasjon | Inflasjon | Inflasjon fra HICP | Godt dekket |
+| Lang historisk inflasjonsanalyse | Svært god | Begrenset | God norsk dekning |
+| Sammenligne inflasjon mellom land | Ikke hovedformål | HICP | Godt dekket |
+| Nominelle og reelle størrelser | Ja | Ja | Godt dekket |
+| Inflasjon og lønn/kjøpekraft | Lonnvekst og Reallonnsvekst | Begrenset | Delvis/godt dekket |
+| Inflasjon og økonomisk aktivitet | Ja | Ja | Godt dekket |
+| Inflasjon og renter | Ja | Ja, avhengig av rentedekning | Godt grunnlag |
+| Underliggende inflasjon | Nei | Nei | Gap |
+| Inflasjonskomponenter | Begrenset | Begrenset | Ikke prioritert |
+| Energi- og råvareprissjokk | Olje og strøm | Begrenset | God norsk dekning |
+| BNP-deflator | Ikke eksplisitt | Ikke eksplisitt | Mulig senere gap |
+
+# Pedagogiske styrker
+
+## Prisnivå og inflasjon
+
+NorMacro gjør det mulig å vise skillet mellom et prisnivå og endringen
+i prisnivået direkte:
+
+- `KPI` viser utviklingen i prisnivået
+- `Inflasjon` viser årlig prosentvis endring i KPI
+
+Dette er et grunnleggende skille i makroøkonomi og bør gjøres eksplisitt
+i undervisningsmaterialet.
+
+## Nominelle og reelle størrelser
+
+Pakken inneholder også byggesteiner for å illustrere forskjellen mellom
+nominelle og reelle størrelser.
+
+Eksempler er:
+
+- `BNP_lopende`
+- `BNP_Fastland`
+- `Lonnvekst`
+- `Reallonnsvekst`
+
+Dette gjør det mulig å knytte prisutviklingen direkte til realøkonomiske
+spørsmål og utviklingen i kjøpekraft.
+
+## KPI og HICP
+
+Forskjellen mellom norsk KPI og internasjonal HICP bør ikke
+standardiseres bort.
+
+Skillet har pedagogisk verdi:
+
+- KPI brukes for den lange norske pris- og inflasjonshistorien
+- HICP brukes for harmoniserte internasjonale sammenligninger
+
+Dette bør forklares eksplisitt i dokumentasjonen.
+
+# Identifiserte gap
+
+## Underliggende inflasjon
+
+Det viktigste datagapet er mangel på et mål for underliggende inflasjon.
+
+For Norge er KPI-JAE en naturlig kandidat.
+
+En slik serie vil gjøre det mulig å undersøke forskjellen mellom samlet
+prisvekst og mer underliggende prispress.
+
+Dette er særlig relevant ved analyse av pengepolitikk og tilbudssjokk.
+
+**Prioritet: høy.**
+
+## Inflasjonskomponenter
+
+NorMacro inneholder enkelte serier som kan brukes til å diskutere
+prissjokk, særlig oljepris og strømpris.
+
+Det er likevel ikke et mål at pakken skal inneholde et stort antall
+undergrupper fra KPI.
+
+En omfattende KPI-dekomponering vil trekke NorMacro i retning av en
+generell statistikkdatabase og er derfor ikke prioritert nå.
+
+**Prioritet: lav.**
+
+## BNP-deflator
+
+En eksplisitt BNP-deflator kan være pedagogisk nyttig for å illustrere
+forholdet mellom nominelt og reelt BNP.
+
+NorMacro har allerede nominelle og reelle nasjonalregnskapsserier som
+dekker mye av det samme undervisningsbehovet.
+
+BNP-deflator bør derfor vurderes senere, men er ikke et kritisk gap.
+
+**Prioritet: lav til middels.**
+
+# Metadatafunn
+
+Den internasjonale variabelen `Inflasjon` beregnes fra `HICP`, men
+beskrivelsen er i dag:
+
+> Årsvekst i KPI
+
+Dette er misvisende.
+
+Beskrivelsen bør endres til for eksempel:
+
+> Årlig vekst i harmonisert konsumprisindeks (HICP)
+
+Dette er en metadataretting og krever ikke endring i selve dataserien.
+
+# Prioriterte tiltak
+
+1. Legg til en norsk serie for underliggende inflasjon, primært KPI-JAE.
+2. Rett metadata for internasjonal `Inflasjon` slik at det fremgår at
+   serien er beregnet fra HICP.
+3. Bevar skillet mellom norsk KPI og internasjonal HICP.
+4. Gjør sammenhengen mellom prisnivå, inflasjon, nominelle størrelser,
+   reelle størrelser og kjøpekraft eksplisitt i undervisningsmaterialet.
+5. Ikke bygg ut en omfattende katalog av KPI-undergrupper nå.
+6. Vurder BNP-deflator som en mulig senere utvidelse.
+
+# Konklusjon
+
+Dekningen av priser og inflasjon i NorMacro er god.
+
+Pakken har en særlig sterk norsk historisk KPI- og inflasjonsserie og
+et godt harmonisert internasjonalt sammenligningsgrunnlag gjennom HICP.
+
+Det viktigste faglige gapet er underliggende inflasjon.
+
+Med tillegg av KPI-JAE og mindre metadataopprydding vil dette området
+være svært godt egnet både til makroøkonomisk analyse og undervisning
+på bachelor-nivå.

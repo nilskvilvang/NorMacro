@@ -1,0 +1,77 @@
+
+---
+title: "Gap-analyse 13 – Internasjonal makro"
+format: html
+---
+
+# Formål
+
+Denne gap-analysen vurderer i hvilken grad NorMacro gjør det mulig å
+analysere internasjonal makroøkonomi og sammenligne Norge med andre
+økonomier.
+
+Kravkartet stiller følgende hovedspørsmål:
+
+> Hvordan skiller Norge seg fra andre økonomier? I hvilken grad beveger
+> konjunkturer, inflasjon, arbeidsmarked og renter seg sammen mellom land?
+
+Området er tverrgående og bygger på mange av de øvrige fagområdene i
+kravkartet.
+
+Internasjonal makro bør derfor ikke utvikles som et separat og isolert
+analyse-API. Området bør først og fremst være en test på om NorMacros
+generelle data- og analysearkitektur fungerer godt på tvers av land.
+
+# Sentrale økonomiske spørsmål
+
+NorMacro bør gjøre det mulig å undersøke spørsmål som:
+
+1. Hvordan skiller norsk BNP-vekst seg fra utviklingen i andre land?
+2. Beveger konjunkturene seg samtidig mellom land?
+3. Hvordan skiller inflasjonen i Norge seg fra inflasjonen i andre
+   europeiske økonomier?
+4. Beveger arbeidsledigheten seg på samme måte mellom land?
+5. Hvordan skiller rentenivå og pengepolitisk utvikling seg mellom land?
+6. Hvordan utvikler konsum og investeringer seg i ulike økonomier?
+7. Hvordan skiller produktivitetsveksten seg mellom land?
+8. Hvordan påvirkes ulike land av de samme internasjonale sjokkene?
+9. Hvordan skiller Norge seg fra euroområdet og EU samlet?
+10. Hvordan skiller land med egen valuta seg fra land som bruker euro?
+11. Hvor sterkt samvarierer sentrale makroøkonomiske variable mellom
+    land?
+12. Hvordan bør nivåforskjeller mellom land skilles fra forskjeller i
+    vekst og konjunkturutvikling?
+
+# Eksisterende internasjonalt datalag
+
+NorMacro har allerede et bredt internasjonalt datasett.
+
+Det internasjonale metadataregisteret inneholder 38 variabler innen blant
+annet:
+
+- arbeidsmarked
+- demografi
+- finansmarkeder
+- husholdningsøkonomi
+- nasjonalregnskap
+- offentlige finanser
+- priser og inflasjon
+- produksjon og aktivitet
+- utenriksøkonomi
+- boligmarked
+
+Dette gir et godt grunnlag for internasjonal makroanalyse.
+
+# Land og geografiske aggregater
+
+Det internasjonale datasettet inneholder følgende land og aggregater:
+
+```text
+DE
+DK
+EA20
+EU27_2020
+FI
+FR
+NO
+SE

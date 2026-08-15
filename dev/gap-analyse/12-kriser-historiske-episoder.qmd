@@ -1,0 +1,191 @@
+
+---
+title: "Gap-analyse 12 – Kriser og historiske episoder"
+format: html
+---
+
+# Formål
+
+Denne gap-analysen vurderer hvor godt NorMacro støtter analyse og
+undervisning knyttet til økonomiske kriser, tilbakeslag og andre sentrale
+historiske makroøkonomiske episoder.
+
+Det faglige spørsmålet i kravkartet er:
+
+> Hva skjedde med økonomien under tidligere kriser og store økonomiske
+> sjokk? Hvordan reagerte sentrale makroøkonomiske størrelser?
+
+Analysen vurderer både norske og internasjonale data, eksisterende
+analyseverktøy og behovet for et eventuelt kuratert lag for historiske
+episoder.
+
+# Faglig behov
+
+Analyse av historiske kriser krever ikke nødvendigvis egne dataserier.
+Det sentrale behovet er å kunne kombinere eksisterende makroøkonomiske
+serier på tvers av perioder og undersøke hvordan sentrale størrelser
+utviklet seg før, under og etter en økonomisk episode.
+
+Sentrale variabler omfatter blant annet:
+
+- BNP og BNP-vekst
+- arbeidsledighet og sysselsetting
+- inflasjon
+- privat konsum
+- investeringer
+- eksport og import
+- handelsbalanse
+- renter og rentekurve
+- valutakurs
+- oljepris
+- finansmarkedsindikatorer
+- konjunkturindikatorer og kapasitetsutnytting
+
+# Eksisterende datadekning
+
+NorMacro har allerede bred dekning av variabler som er relevante for
+analyse av økonomiske kriser.
+
+For Norge finnes blant annet:
+
+- `BNP_Fastland`
+- `BNP_Fastland_vekst`
+- `Arbledighetsrate_NAV`
+- `Sysselsatte`
+- `Inflasjon`
+- `Privat_konsum`
+- `Privat_konsum_vekst`
+- `Fastlandsinvesteringer`
+- `Fastlandsinvesteringer_vekst`
+- `Eksport`
+- `Import`
+- `Handelsbalanse`
+- `Styringsrente`
+- `Pengemarkedsrente_3mnd`
+- `Statsrente_10aar`
+- `Rentekurve`
+- `Valutakurs_I44`
+- `Valutakurs_I44_vekst`
+- `Oljepris_USD`
+- `Oljeprisvekst`
+- `OSEAX`
+- `OSEAX_vekst`
+- `Kreditt_K2`
+- `Konjunkturindikator`
+- `Kapasitetsutnytting`
+
+Det internasjonale datasettet inneholder blant annet:
+
+- `BNP_vekst`
+- `Arbeidsledighetsrate`
+- `Sysselsatte`
+- `Inflasjon`
+- `Privat_konsum`
+- `Privat_konsum_vekst`
+- `Eksport`
+- `Import`
+- `Handelsbalanse`
+- `Statsrente_10aar`
+
+Datagrunnlaget er dermed tilstrekkelig bredt til å studere hvordan
+sentrale makroøkonomiske størrelser reagerer under historiske episoder.
+
+**Vurdering: grønn.**
+
+# Eksisterende analyseverktøy
+
+NorMacro har allerede flere generelle funksjoner som er relevante for
+analyse av historiske episoder.
+
+## `compare_periods()`
+
+`compare_periods()` kan sammenligne nivået på én eller flere variabler
+mellom to valgte år.
+
+Funksjonen fungerer for:
+
+- norske data
+- internasjonale paneldata
+- KOSTRA-data
+
+og returnerer blant annet:
+
+- startverdi
+- sluttverdi
+- absolutt endring
+- prosentvis endring
+
+Dette gir et generelt verktøy for å sammenligne økonomiske størrelser
+før og etter en historisk episode.
+
+Funksjonen sammenligner imidlertid endepunktene i perioden. Den er derfor
+ikke alene et komplett verktøy for å beskrive utviklingen *gjennom* en
+krise.
+
+Dette er ikke nødvendigvis et funksjonsgap. Eksisterende tidsseriedata og
+generelle analyseverktøy kan brukes til å undersøke selve forløpet.
+
+## Konjunkturfunksjoner
+
+NorMacro har også:
+
+- `business_cycle_score()`
+- `business_cycle()`
+- `recession_periods()`
+- `recession_period_explain()`
+
+Disse gir et eget lag for klassifisering og analyse av norske
+konjunkturperioder.
+
+`recession_periods()` identifiserer perioder som klassifiseres som
+nedgang basert på NorMacros konjunkturmodell.
+
+Dette er nyttig, men må skilles faglig fra historiske økonomiske
+episoder.
+
+En historisk episode kan være relevant selv om den ikke sammenfaller
+eksakt med perioder klassifisert som `Nedgang` av
+`business_cycle()`.
+
+Eksempler kan være finansielle sjokk, oljeprisfall, pandemien eller
+internasjonale kriser.
+
+**Vurdering av analyse/API: grønn.**
+
+Det er ikke identifisert behov for en ny spesialisert
+`crisis_analysis()`-funksjon.
+
+# Gap: historiske episoder som faglig metadata
+
+Det tydeligste gapet ligger ikke i data eller beregningsfunksjoner, men i
+kuratering.
+
+NorMacro kjenner i dag tidsseriene, men har ikke et eksplisitt lag som
+forteller brukeren hvilke historiske perioder som er særlig interessante
+å undersøke.
+
+Dette er spesielt relevant for undervisning.
+
+En student som ønsker å undersøke finanskrisen bør ikke nødvendigvis
+måtte vite på forhånd hvilke år som er faglig relevante eller hvilke
+andre episoder som egner seg for sammenligning.
+
+**Vurdering: gult gap.**
+
+# Forslag: et lite kuratert episodekatalog-lag
+
+NorMacro bør på sikt kunne inneholde en liten, eksplisitt kuratert
+katalog over sentrale makroøkonomiske episoder.
+
+Katalogen bør være metadata, ikke en ny analysemodell.
+
+En mulig struktur kan være:
+
+```r
+tibble::tribble(
+  ~Episode, ~Startaar, ~Sluttaar, ~Tema,
+  "Bankkrisen", 1988, 1993, "Finansiell krise",
+  "Finanskrisen", 2008, 2009, "Internasjonal finanskrise",
+  "Oljeprisfallet", 2014, 2016, "Olje og norsk økonomi",
+  "Pandemien", 2020, 2021, "Pandemi og økonomisk tilbakeslag"
+)

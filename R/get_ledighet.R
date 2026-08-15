@@ -23,11 +23,11 @@ get_ledighet <- function(refresh = FALSE) {
       
       names(venstre) <- c(
         "Aar",
-        "Menn_arbledige_NAV",
-        "Kvinner_arbledige_NAV",
-        "Arbledige_NAV",
-        "Arbledighetsrate_NAV",
-        "Kvinneandel_arbledige_NAV"
+        "Menn_arbeidsledige_NAV",
+        "Kvinner_arbeidsledige_NAV",
+        "Arbeidsledige_NAV",
+        "Arbeidsledighetsrate_NAV",
+        "Kvinneandel_arbeidsledige_NAV"
       )
       
       names(hoyre) <- names(venstre)
@@ -35,13 +35,19 @@ get_ledighet <- function(refresh = FALSE) {
       dplyr::bind_rows(venstre, hoyre) |>
         dplyr::mutate(
           Aar = readr::parse_number(as.character(Aar)),
-          Menn_arbledige_NAV = as.numeric(Menn_arbledige_NAV),
-          Kvinner_arbledige_NAV = as.numeric(Kvinner_arbledige_NAV),
-          Arbledige_NAV = as.numeric(Arbledige_NAV),
-          Arbledighetsrate_NAV = as.numeric(Arbledighetsrate_NAV) * 100,
-          Kvinneandel_arbledige_NAV = as.numeric(Kvinneandel_arbledige_NAV) * 100
+          Menn_arbeidsledige_NAV = as.numeric(Menn_arbeidsledige_NAV),
+          Kvinner_arbeidsledige_NAV = as.numeric(Kvinner_arbeidsledige_NAV),
+          Arbeidsledige_NAV = as.numeric(Arbeidsledige_NAV),
+          Arbeidsledighetsrate_NAV =
+            as.numeric(Arbeidsledighetsrate_NAV) * 100,
+          Kvinneandel_arbeidsledige_NAV =
+            as.numeric(Kvinneandel_arbeidsledige_NAV) * 100
         ) |>
-        dplyr::filter(!is.na(Aar), Aar >= 1948, Aar <= 2025) |>
+        dplyr::filter(
+          !is.na(Aar),
+          Aar >= 1948,
+          Aar <= 2025
+        ) |>
         dplyr::arrange(Aar)
     }
   )

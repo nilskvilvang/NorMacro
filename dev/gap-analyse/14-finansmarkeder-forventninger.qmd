@@ -1,0 +1,68 @@
+
+---
+title: "Gap-analyse 14 – Finansmarkeder og forventninger"
+format: html
+---
+
+# Formål
+
+Denne gap-analysen vurderer i hvilken grad NorMacro gjør det mulig å
+analysere finansmarkeder og forventningsindikatorer på en måte som er
+relevant for undervisning i makroøkonomi og for praktisk
+makroøkonomisk analyse.
+
+Kravkartet stiller følgende hovedspørsmål:
+
+> Hva forteller renter, rentekurve og relevante finansmarkedsindikatorer
+> om økonomien og forventningene fremover?
+
+Området handler derfor ikke primært om finansmarkedene som eget fagfelt.
+Det sentrale spørsmålet er hvordan finansielle priser og andre
+forventningsindikatorer kan brukes som informasjon om den
+makroøkonomiske utviklingen.
+
+NorMacro bør ikke utvikles til en generell finansdatabase.
+
+# Sentrale økonomiske spørsmål
+
+NorMacro bør gjøre det mulig å undersøke spørsmål som:
+
+1. Hvordan utvikler korte og lange renter seg?
+2. Hva forteller forskjellen mellom korte og lange renter?
+3. Hvordan har rentekurven utviklet seg over tid?
+4. Har en flat eller invertert rentekurve blitt etterfulgt av svakere
+   økonomisk vekst?
+5. Kan aksjemarkedet gi informasjon om fremtidig økonomisk aktivitet?
+6. Hvordan henger kredittvekst sammen med senere makroøkonomisk
+   utvikling?
+7. Kan ordrebeholdning eller konjunkturindikatorer gi informasjon om
+   senere produksjonsutvikling?
+8. Hva er forskjellen mellom en samtidig indikator og en ledende
+   indikator?
+9. Hvordan kan vi empirisk undersøke om en indikator faktisk leder en
+   annen variabel?
+10. Hvor stor vekt bør legges på finansielle indikatorer når økonomiens
+    tilstand vurderes?
+11. Hvordan skiller markedsbaserte forventninger seg fra
+    spørreundersøkelser og realøkonomiske indikatorer?
+
+# Eksisterende norsk datagrunnlag
+
+NorMacro har allerede et relativt bredt og kuratert norsk datagrunnlag
+for makrofinansiell analyse.
+
+## Renter
+
+Følgende serier finnes:
+
+- `Styringsrente`
+- `Pengemarkedsrente_3mnd`
+- `Statsrente_10aar`
+- `Rentekurve`
+
+`Rentekurve` beregnes som:
+
+```r
+Rentekurve =
+  Statsrente_10aar - Styringsrente
+  

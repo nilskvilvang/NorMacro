@@ -1,0 +1,526 @@
+
+---
+title: "Gap-analyse 08 – Valutakurs"
+format: html
+---
+
+# Formål
+
+Denne gap-analysen vurderer i hvilken grad NorMacro gjør det mulig å
+analysere valutakurs på en måte som er relevant for undervisning i
+makroøkonomi og for praktisk makroøkonomisk analyse.
+
+Valutakurs er særlig viktig i norsk makroøkonomi fordi Norge er en liten,
+åpen økonomi med egen valuta, omfattende utenrikshandel og betydelig
+råvareeksport.
+
+NorMacro bør ikke utvikles til en omfattende valutakursdatabase. Målet
+bør være et lite, kuratert sett av indikatorer som gjør sentrale
+makroøkonomiske mekanismer enkle å undersøke empirisk.
+
+# Sentrale økonomiske spørsmål
+
+NorMacro bør gjøre det mulig å undersøke spørsmål som:
+
+1. Hvordan har kronekursen utviklet seg over tid?
+2. Når styrker eller svekker kronen seg?
+3. Hva er forskjellen mellom en bilateral valutakurs og en effektiv
+   valutakurs?
+4. Hva er forskjellen mellom nominell og real valutakurs?
+5. Hvordan henger valutakursen sammen med rentenivå og pengepolitikk?
+6. Hvordan henger valutakursen sammen med inflasjon?
+7. Hvordan henger oljepris og kronekurs sammen?
+8. Hvordan kan valutakursen påvirke eksport og import?
+9. Hvordan kan valutakursen påvirke konkurranseevnen?
+10. Hvordan skiller Norge seg fra andre europeiske land?
+11. Hvordan skiller land med egen valuta seg fra land som bruker euro?
+
+# Eksisterende norske data
+
+NorMacro har allerede en tydelig norsk hovedindikator for valutakurs:
+
+- `Valutakurs_I44`
+- `Valutakurs_I44_vekst`
+
+`Valutakurs_I44` er Norges Banks importveide kronekursindeks I-44 og
+starter i 1990.
+
+`Valutakurs_I44_vekst` starter i 1991.
+
+Metadataene angir eksplisitt at:
+
+> Høyere verdi betyr svakere krone.
+
+Dette er viktig fordi fortegnet ellers lett kan misforstås.
+
+# I-44 som hovedindikator
+
+I-44 er en god hovedindikator for valutakurs i NorMacro.
+
+Indeksen beskriver kronens verdi mot et sett av handelspartneres valutaer
+og er derfor mer representativ for norsk økonomi samlet enn én enkelt
+bilateral valutakurs.
+
+Dette passer godt med NorMacros kurateringsprinsipp:
+
+> Én indikator – én anbefalt serie.
+
+NorMacro bør derfor beholde `Valutakurs_I44` som den anbefalte norske
+hovedserien for nominell valutakursutvikling.
+
+# Relaterte norske indikatorer
+
+Valutakursen kan allerede analyseres sammen med en rekke andre
+makroøkonomiske indikatorer.
+
+## Renter
+
+NorMacro har blant annet:
+
+- `Styringsrente`
+- `Pengemarkedsrente_3mnd`
+- `Statsrente_10aar`
+- `Rentekurve`
+
+Dette gir et godt grunnlag for å undersøke sammenhengen mellom renter og
+valutakurs.
+
+## Inflasjon
+
+NorMacro har:
+
+- `KPI`
+- `Inflasjon`
+
+Dermed kan valutakursen kobles til prisutviklingen i norsk økonomi.
+
+## Utenrikshandel
+
+NorMacro har:
+
+- `Eksport`
+- `Import`
+- `Eksportvekst`
+- `Importvekst`
+
+Dette gjør det mulig å undersøke sammenhenger mellom valutakurs og
+utenrikshandel.
+
+## Oljepris
+
+NorMacro har:
+
+- `Oljepris_USD`
+- `Oljeprisvekst`
+
+Dette er særlig relevant for Norge.
+
+Sammenhengen mellom oljepris og kronekurs er et naturlig empirisk
+spørsmål i undervisning om norsk økonomi.
+
+# Eksisterende internasjonale data
+
+Det internasjonale datasettet inneholder relevante variabler som:
+
+- `HICP`
+- `Inflasjon`
+- `Statsrente_10aar`
+- `Eksport`
+- `Import`
+
+Det finnes imidlertid ingen tydelig internasjonal valutakursindikator.
+
+Dette innebærer at NorMacro foreløpig ikke gir en harmonisert måte å
+sammenligne valutakursutviklingen mellom land på.
+
+Dette er det viktigste internasjonale datagapet i dette området.
+
+# Styrker i dagens datagrunnlag
+
+## 1. En tydelig norsk hovedindikator finnes allerede
+
+`Valutakurs_I44` gir en økonomisk relevant og kuratert indikator for
+kronekursen.
+
+Det er derfor ikke behov for å bygge valutakursområdet fra bunnen av.
+
+## 2. Fortegnet er dokumentert
+
+Metadataene forklarer at høyere I-44 innebærer svakere krone.
+
+Dette er pedagogisk viktig.
+
+## 3. Gode koblingsvariabler finnes
+
+NorMacro har allerede data for:
+
+- renter
+- inflasjon
+- oljepris
+- eksport
+- import
+- konjunkturutvikling
+
+Valutakursen kan dermed analyseres som en del av et større
+makroøkonomisk system.
+
+## 4. Eksisterende analyse-API er tilstrekkelig
+
+Valutakursanalyse krever i utgangspunktet ikke egne spesialfunksjoner.
+
+Eksisterende funksjoner kan brukes til blant annet:
+
+- tidsserieanalyse
+- sammenligning
+- korrelasjon
+- regresjon
+- indeksering
+
+# Gap 1 – Real effektiv valutakurs
+
+NorMacro har i dag en nominell importveid valutakursindeks, men mangler
+en real effektiv valutakurs.
+
+Dette er det viktigste datagapet på området.
+
+En nominell valutakurs beskriver endringer i selve valutakursen.
+
+En real valutakurs tar også hensyn til relativ pris- eller
+kostnadsutvikling mellom land.
+
+Dette er viktig for analyser av konkurranseevne.
+
+En forenklet pedagogisk sammenheng kan uttrykkes som:
+
+```text
+Nominell valutakurs
+        +
+relative priser eller kostnader
+        |
+        v
+Real valutakurs
+```
+
+NorMacro bør undersøke muligheten for å inkludere en kuratert serie for:
+
+```text
+Real_effektiv_valutakurs
+```
+
+Det bør fortrinnsvis være en etablert og dokumentert indikator fremfor
+en egenkonstruert NorMacro-serie dersom en egnet kilde finnes.
+
+**Prioritet: høy.**
+
+# Gap 2 – Bilateral valutakurs
+
+NorMacro mangler en enkel bilateral valutakurs.
+
+Dette er ikke nødvendig for den overordnede analysen av kronekursen,
+fordi I-44 er et bedre samlet mål.
+
+En bilateral kurs kan likevel være pedagogisk nyttig.
+
+Eksempelvis er en serie som:
+
+```text
+NOK_EUR
+```
+
+intuitiv å tolke:
+
+> Hvor mange norske kroner koster én euro?
+
+Dette gjør bilateral valutakurs egnet som introduksjon før studenten går
+videre til effektive valutakursindekser.
+
+Det bør vurderes å inkludere én sentral bilateral kurs, men NorMacro bør
+ikke bygge en omfattende matrise av bilaterale valutakurser.
+
+**Prioritet: middels.**
+
+# Gap 3 – Internasjonal effektiv valutakurs
+
+Det internasjonale datasettet mangler valutakurs.
+
+Dette begrenser muligheten til å undersøke spørsmål som:
+
+- Hvordan har valutakursen utviklet seg i Norge og Sverige?
+- Har valutaene beveget seg forskjellig gjennom konjunkturene?
+- Hvordan skiller land med egen valuta seg fra euroland?
+- Hvordan har konkurranseevnen utviklet seg mellom land?
+
+En harmonisert effektiv valutakursindikator vil være mer nyttig enn et
+stort antall bilaterale valutakurser.
+
+NorMacro bør derfor undersøke én harmonisert serie for effektiv
+valutakurs internasjonalt.
+
+Dersom en god harmonisert real effektiv valutakurs finnes, kan denne
+potensielt dekke både dette gapet og deler av gapet knyttet til real
+valutakurs.
+
+**Prioritet: høy.**
+
+# Nominell og real valutakurs
+
+Skillet mellom nominell og real valutakurs bør være eksplisitt i
+NorMacro.
+
+Dette er et sentralt pedagogisk skille.
+
+En nominell svekkelse av kronen innebærer ikke nødvendigvis en
+tilsvarende varig forbedring i norsk konkurranseevne.
+
+Dersom norske priser eller kostnader samtidig stiger relativt til
+handelspartnerne, kan deler av konkurranseforbedringen forsvinne.
+
+NorMacro bør derfor gjøre det enkelt å undersøke:
+
+```text
+Nominell valutakurs
+        |
+        + relative priser/kostnader
+        |
+        v
+Real effektiv valutakurs
+        |
+        v
+Konkurranseevne
+```
+
+# Valutakurs og pengepolitikk
+
+NorMacro har allerede et godt datagrunnlag for å undersøke sammenhengen
+mellom rente og valutakurs.
+
+Eksempelvis kan studenten sammenligne:
+
+- `Styringsrente`
+- `Valutakurs_I44`
+
+Dette gjør det mulig å undersøke empirisk om perioder med renteendringer
+sammenfaller med endringer i kronekursen.
+
+Det er viktig at NorMacro ikke presenterer en enkel korrelasjon som en
+kausal sammenheng.
+
+Valutakursen påvirkes av mange faktorer samtidig.
+
+# Valutakurs og inflasjon
+
+NorMacro kan allerede koble:
+
+- `Valutakurs_I44`
+- `Inflasjon`
+
+En svakere krone kan gjøre importerte varer dyrere og dermed bidra til
+økt inflasjon.
+
+Dette gir en naturlig empirisk kobling mellom gap-analysen for
+pengepolitikk og gap-analysen for valutakurs.
+
+Det kan senere danne grunnlag for undervisning om valutakurskanalen i
+pengepolitikken.
+
+# Valutakurs og oljepris
+
+Norsk økonomi gir en særlig interessant kobling mellom:
+
+- `Oljepris_USD`
+- `Valutakurs_I44`
+
+Dette bør utnyttes pedagogisk.
+
+Studenten kan eksempelvis undersøke om perioder med fallende oljepris
+også har vært perioder med svakere krone.
+
+Igjen bør skillet mellom korrelasjon og kausalitet fremheves.
+
+# Valutakurs og utenrikshandel
+
+Valutakursområdet henger tett sammen med gap-analysen for åpen økonomi.
+
+NorMacro har allerede eksport- og importserier som gjør det mulig å
+undersøke sammenhenger mellom:
+
+```text
+Valutakurs
+     |
+     +----> eksport
+     |
+     +----> import
+     |
+     +----> inflasjon
+```
+
+Når real effektiv valutakurs eventuelt legges til, blir også
+konkurranseevne langt bedre dekket.
+
+# Land med og uten egen valuta
+
+Det internasjonale datalaget gir en interessant pedagogisk mulighet.
+
+Norge og Sverige har egne valutaer, mens mange europeiske land bruker
+euro.
+
+Dette gjør det mulig å sammenligne hvordan økonomier med ulike
+valutaregimer reagerer på makroøkonomiske sjokk.
+
+NorMacro trenger ikke modellere valutaregimer eksplisitt.
+
+En harmonisert effektiv valutakursindikator kombinert med eksisterende
+makrodata kan være tilstrekkelig til å gjøre slike sammenligninger
+mulige.
+
+# Analyse og API
+
+Dagens generelle analyseverktøy dekker behovene godt.
+
+Relevant funksjonalitet inkluderer:
+
+- `plot_series()`
+- `compare_series()`
+- `combine_series()`
+- `index()`
+- `growth()`
+- `correlate()`
+- `regress()`
+
+Det er derfor ikke behov for egne valutakursfunksjoner nå.
+
+NorMacro bør prioritere gode data og tydelige økonomiske definisjoner
+fremfor et større funksjons-API.
+
+# Metadata
+
+Metadataene for `Valutakurs_I44` har allerede en viktig styrke:
+
+> Høyere verdi betyr svakere krone.
+
+Denne informasjonen bør beholdes og gjerne gjøres enda mer synlig i
+brukerdokumentasjonen.
+
+Dersom nye valutakursserier legges til, bør metadata eksplisitt angi:
+
+- om serien er bilateral eller effektiv
+- om serien er nominell eller real
+- hvilken retning en økning i serien representerer
+- hvilke valutaer eller handelspartnere som inngår
+- hvilket pris- eller kostnadsmål som brukes dersom serien er real
+
+Dette er nødvendig for å unngå feilfortolkning.
+
+# Undervisning
+
+Valutakursområdet har stort undervisningspotensial.
+
+En naturlig progresjon kan være:
+
+```text
+1. Hva er en valutakurs?
+        |
+        v
+2. Bilateral NOK/EUR
+        |
+        v
+3. Effektiv valutakurs – I-44
+        |
+        v
+4. Nominell versus real valutakurs
+        |
+        v
+5. Konkurranseevne
+        |
+        v
+6. Rente, inflasjon, oljepris og handel
+```
+
+Dette gir en progresjon fra en intuitiv pris på valuta til mer
+makroøkonomisk relevante valutakursmål.
+
+# Avgrensning
+
+NorMacro bør ikke forsøke å inkludere:
+
+- alle bilaterale valutakurser
+- daglige valutakurser som hoveddatasett
+- valutaderivater
+- termin- og forwardkurser
+- omfattende valutamarkedsdata
+- avanserte modeller for valutakursbestemmelse
+
+Dette ligger utenfor pakkens kjerneformål.
+
+Fokus bør være på indikatorer som hjelper studenten eller analytikeren
+med å forstå sentrale makroøkonomiske sammenhenger.
+
+# Prioriterte tiltak
+
+## Prioritet 1
+
+1. Behold `Valutakurs_I44` som norsk hovedindikator.
+2. Undersøk en etablert serie for real effektiv valutakurs for Norge.
+3. Undersøk en harmonisert effektiv valutakursserie for det
+   internasjonale datalaget.
+4. Gjør skillet mellom nominell og real valutakurs eksplisitt i
+   metadata og dokumentasjon.
+
+## Prioritet 2
+
+5. Vurder én bilateral valutakurs, fortrinnsvis NOK/EUR, som pedagogisk
+   introduksjonsserie.
+6. Sørg for at fortegnet til alle valutakursserier dokumenteres
+   eksplisitt.
+
+## Prioritet 3
+
+7. Utvikle senere undervisningseksempler som kobler valutakurs til:
+   - rente
+   - inflasjon
+   - oljepris
+   - eksport og import
+8. Bruk eksisterende generelle analysefunksjoner fremfor å utvikle et
+   eget valutakurs-API.
+9. Ikke bygg en omfattende valutakursdatabase.
+
+# Samlet vurdering
+
+**Data: gul**
+
+NorMacro har en god norsk hovedindikator gjennom `Valutakurs_I44`, men
+mangler real effektiv valutakurs og harmoniserte internasjonale
+valutakursdata.
+
+**Analyse: grønn**
+
+Eksisterende analyseverktøy dekker behovene godt.
+
+**Metadata: grønn/gul**
+
+Fortegnet til I-44 er godt dokumentert. Ved utvidelse bør skillet mellom
+bilateral/effektiv og nominell/real valutakurs dokumenteres eksplisitt.
+
+**Undervisning: gul**
+
+Dagens data gjør flere relevante analyser mulige, men en real effektiv
+valutakurs og eventuelt én bilateral kurs vil gi en langt bedre
+pedagogisk progresjon.
+
+**Samlet gap: middels**
+
+**Prioritet: høy**
+
+NorMacro trenger ikke mange flere valutakurser.
+
+Det viktigste faglige løftet er å gå fra bare:
+
+> Hvordan har den nominelle kronekursen utviklet seg?
+
+til også å kunne undersøke:
+
+> Hvordan har Norges relative konkurranseevne utviklet seg når vi tar
+> hensyn til både valutakurs og relative priser eller kostnader?
+
+Dette gjør real effektiv valutakurs til det viktigste nye databehovet i
+dette området.

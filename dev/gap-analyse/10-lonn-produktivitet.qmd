@@ -1,0 +1,632 @@
+
+---
+title: "Gap-analyse 10 – Lønn og produktivitet"
+format: html
+---
+
+# Formål
+
+Denne gap-analysen vurderer i hvilken grad NorMacro gjør det mulig å
+analysere lønn, reallønn og produktivitet på en måte som er relevant
+for undervisning i makroøkonomi og for praktisk makroøkonomisk analyse.
+
+Kravkartet stiller følgende hovedspørsmål:
+
+> Hvordan utvikler lønn, reallønn og produktivitet seg? Hvordan henger
+> disse størrelsene sammen over tid?
+
+Området overlapper med langsiktig vekst, men har et annet faglig
+tyngdepunkt.
+
+Langsiktig vekst handler primært om utviklingen i produksjon,
+produktivitet og levestandard.
+
+Denne analysen handler mer spesifikt om:
+
+- nominell lønn
+- lønnsvekst
+- kjøpekraft og reallønn
+- arbeidsproduktivitet
+- forholdet mellom lønns- og produktivitetsutvikling
+
+NorMacro skal ikke implementere en komplett modell for lønnsdannelse.
+Målet er å gjøre de sentrale empiriske sammenhengene enkle å undersøke.
+
+# Sentrale økonomiske spørsmål
+
+NorMacro bør gjøre det mulig å undersøke spørsmål som:
+
+1. Hvordan har nominell lønn utviklet seg?
+2. Hvor raskt vokser lønningene?
+3. Hvor mye av nominell lønnsvekst spises opp av inflasjon?
+4. Hvordan har arbeidstakernes kjøpekraft utviklet seg?
+5. Hvordan utvikler arbeidsproduktiviteten seg?
+6. Hvordan har produktivitetsveksten endret seg over tid?
+7. Hvordan henger lønnsvekst og inflasjon sammen?
+8. Hvordan henger reallønnsvekst og produktivitetsvekst sammen?
+9. Har reallønnen over lengre perioder utviklet seg i takt med
+   produktiviteten?
+10. Hvordan skiller utviklingen seg mellom Norge og andre land?
+11. Hvordan bør lønnsbegrepene defineres når land sammenlignes?
+12. Hvordan har arbeidets andel av samlet verdiskaping utviklet seg?
+
+# Eksisterende norske data
+
+NorMacro har allerede et godt datagrunnlag for dette fagområdet.
+
+## Lønn
+
+Følgende serier finnes:
+
+- `Lonn`
+- `Lonnvekst`
+
+`Lonn` er definert som påløpt årslønn og representerer gjennomsnittet
+for alle lønnstakere.
+
+Serien starter i 1970.
+
+`Lonnvekst` starter i 1971 og er den årlige prosentvise endringen i
+årslønn.
+
+Dette gir lange og pedagogisk anvendelige tidsserier for norsk
+lønnsutvikling.
+
+# Inflasjon og reallønnsvekst
+
+NorMacro har:
+
+- `Inflasjon`
+- `Reallonnsvekst`
+
+`Reallonnsvekst` beregnes som:
+
+```r
+Reallonnsvekst =
+  Lonnvekst - Inflasjon
+```
+
+Dette gir et enkelt og intuitivt mål på den årlige endringen i
+lønningenes kjøpekraft.
+
+Serien starter i 1971.
+
+Sammenhengen kan uttrykkes pedagogisk som:
+
+```text
+Nominell lønnsvekst
+        -
+Inflasjon
+        |
+        v
+Reallønnsvekst
+```
+
+Dette er et sterkt utgangspunkt for undervisning.
+
+# Arbeidsproduktivitet
+
+NorMacro har:
+
+- `Arbeidsproduktivitet`
+- `Produktivitetsvekst`
+
+For Norge beregnes arbeidsproduktivitet som:
+
+```r
+BNP_Fastland / Sysselsatte
+```
+
+Dette gir real produksjon i Fastlands-Norge per sysselsatt.
+
+`Arbeidsproduktivitet` starter i 1972 og
+`Produktivitetsvekst` i 1973.
+
+Dette gjør det mulig å analysere utviklingen i produktivitet over en
+lang periode.
+
+# Eksisterende internasjonale data
+
+Det internasjonale datasettet har:
+
+- `Arbeidsproduktivitet`
+- `Produktivitetsvekst`
+- `Inflasjon`
+- `Sysselsatte`
+
+Arbeidsproduktivitet beregnes som:
+
+```r
+BNP_faste_priser * 1e6 / Sysselsatte
+```
+
+Dette gir et harmonisert mål på real BNP per sysselsatt.
+
+Internasjonal produktivitetsdekning er derfor allerede god.
+
+Det mangler derimot en tilsvarende harmonisert lønnsserie.
+
+Det internasjonale datasettet har foreløpig ikke:
+
+- `Lonn`
+- `Lonnvekst`
+- `Reallonnsvekst`
+
+Dette er det viktigste datagapet på området.
+
+# Styrker i dagens datagrunnlag
+
+## 1. Norsk lønnsutvikling er godt dekket
+
+NorMacro har både lønnsnivå og lønnsvekst tilbake til begynnelsen av
+1970-tallet.
+
+Dette er tilstrekkelig til å analysere lange perioder med norsk
+lønnsutvikling.
+
+## 2. Reallønnsvekst er direkte tilgjengelig
+
+Studenten trenger ikke selv å koble lønnsvekst og inflasjon for å
+beregne reallønnsvekst.
+
+Samtidig er beregningen transparent og enkel å forklare.
+
+Dette passer godt med NorMacros prinsipp om at beregnede indikatorer
+skal være forståelige og etterprøvbare.
+
+## 3. Produktivitetsutviklingen er godt dekket
+
+NorMacro har både nivå og vekst i arbeidsproduktiviteten.
+
+Dette gjør det mulig å sammenligne:
+
+```text
+Lønnsvekst
+Reallønnsvekst
+Produktivitetsvekst
+```
+
+over tid.
+
+## 4. Lange norske tidsserier gir høy undervisningsverdi
+
+Lønn, reallønn og produktivitet dekker i hovedsak perioden fra
+1970-tallet og fremover.
+
+Dette gjør det mulig å undersøke utviklingen gjennom svært ulike
+perioder med:
+
+- høy og lav inflasjon
+- sterke og svake konjunkturer
+- oljeprisendringer
+- finanskriser
+- pandemi
+- perioder med ulik produktivitetsvekst
+
+# Gap 1 – Internasjonal lønnsserie
+
+Det største datagapet er manglende harmonisert lønnsinformasjon
+internasjonalt.
+
+NorMacro kan i dag sammenligne produktivitetsvekst og inflasjon mellom
+land, men ikke lønnsvekst eller reallønnsvekst.
+
+Det bør derfor undersøkes én kuratert og harmonisert serie for lønn
+eller kompensasjon per sysselsatt.
+
+En mulig internasjonal serie kan være basert på nasjonalregnskapets
+mål på kompensasjon per ansatt.
+
+Det er imidlertid viktig å kontrollere definisjonen nøye.
+
+En serie for:
+
+> compensation per employee
+
+er ikke nødvendigvis det samme som den norske serien `Lonn`.
+
+Kompensasjon kan inkludere arbeidsgivers sosiale kostnader og andre
+elementer utover utbetalt eller påløpt lønn.
+
+NorMacro bør derfor ikke bruke identiske variabelnavn dersom
+definisjonene ikke er tilstrekkelig sammenlignbare.
+
+**Prioritet: høy.**
+
+# Gap 2 – Internasjonal lønnsvekst og reallønnsvekst
+
+Dersom en harmonisert lønnsserie inkluderes, kan NorMacro beregne:
+
+```text
+Lønnsvekst
+Reallønnsvekst
+```
+
+internasjonalt.
+
+Reallønnsvekst kan beregnes ved å kombinere nominell lønnsvekst med
+eksisterende harmonisert inflasjon.
+
+Dette vil gjøre det mulig å undersøke:
+
+- hvor lønningene vokser raskest
+- hvor kjøpekraften utvikler seg sterkest
+- hvordan lønns- og produktivitetsvekst varierer mellom land
+
+**Prioritet: høy.**
+
+# Gap 3 – Reallønnsnivå
+
+NorMacro har `Reallonnsvekst`, men ikke en eksplisitt serie som viser
+utviklingen i reallønnsnivå over tid.
+
+En årlig vekstrate besvarer spørsmålet:
+
+> Hvor mye økte eller falt reallønnen dette året?
+
+Men den er mindre intuitiv når spørsmålet er:
+
+> Hvor mye høyere er reallønnen i dag enn for 20 eller 50 år siden?
+
+Det bør derfor vurderes en reallønnsindeks.
+
+Konseptuelt kan den beregnes ved å deflatere nominell lønn med KPI og
+indeksere resultatet til et basisår.
+
+Eksempel:
+
+```text
+Nominell lønn
+      /
+Prisnivå
+      |
+      v
+Reallønn
+      |
+      v
+Reallønnsindeks
+```
+
+Dette vil være særlig nyttig i undervisning.
+
+**Prioritet: middels til høy.**
+
+# Gap 4 – Lønnsandel
+
+NorMacro mangler en indikator for arbeidets andel av samlet
+verdiskaping.
+
+En slik indikator omtales ofte som:
+
+- lønnsandel
+- labour share
+
+Konseptuelt kan den uttrykkes som:
+
+\[
+\text{Lønnsandel}
+=
+\frac{\text{lønnskostnader}}{\text{verdiskaping}}
+\]
+
+Dette gir mulighet til å undersøke et annet spørsmål enn ren
+lønnsvekst:
+
+> Hvor stor del av verdiskapingen tilfaller arbeidskraften?
+
+En lønnsandel kan være relevant både for:
+
+- langsiktig utvikling
+- lønn og produktivitet
+- internasjonale sammenligninger
+
+NorMacro bør ikke konstruere denne direkte fra dagens `Lonn`, fordi
+årslønn per lønnstaker ikke er identisk med økonomiens samlede
+lønnskostnader.
+
+Det bør i stedet undersøkes om en etablert nasjonalregnskapsbasert
+serie finnes.
+
+**Prioritet: middels.**
+
+# Lønn og produktivitet
+
+Den faglige kjernen i dette området er sammenhengen mellom:
+
+```text
+Nominell lønnsvekst
+        |
+        + inflasjon
+        |
+        v
+Reallønnsvekst
+
+og
+
+Produktivitetsvekst
+```
+
+På lang sikt er det relevant å undersøke om reallønnsutviklingen står
+i rimelig forhold til utviklingen i arbeidsproduktiviteten.
+
+NorMacro bør ikke presentere dette som en mekanisk identitet.
+
+Sammenhengen påvirkes blant annet av:
+
+- lønnsandel
+- bytteforhold
+- skatter og avgifter
+- kapitalinntekter
+- arbeidsmarked
+- institusjoner
+- konjunkturer
+
+Pakken bør i stedet gjøre det enkelt å undersøke sammenhengen empirisk.
+
+# Reallønn og kjøpekraft
+
+Et viktig pedagogisk poeng er forskjellen mellom nominell og real lønn.
+
+En arbeidstaker kan få høyere nominell lønn uten å få høyere
+kjøpekraft dersom prisene øker like mye eller mer.
+
+Dette kan illustreres direkte med:
+
+```text
+Lonnvekst = 5 prosent
+Inflasjon = 3 prosent
+
+Reallonnsvekst ≈ 2 prosent
+```
+
+NorMacro har allerede alle nødvendige data for slike analyser.
+
+# Produktivitetsbegrepet
+
+NorMacro må være tydelig på hva `Arbeidsproduktivitet` måler.
+
+Dagens norske indikator er:
+
+> real BNP Fastlands-Norge per sysselsatt
+
+Internasjonalt er indikatoren:
+
+> real BNP per sysselsatt
+
+Dette er et nyttig og transparent mål, men det er ikke det samme som
+produksjon per arbeidstime.
+
+Forskjellen kan være relevant når:
+
+- gjennomsnittlig arbeidstid endrer seg
+- deltidsandelen endrer seg
+- arbeidstid varierer mellom land
+
+Metadata og undervisningsmateriale bør derfor eksplisitt beskrive
+nevneren.
+
+Et produktivitetsmål per arbeidstime kan vurderes senere, men er ikke
+et prioritert gap nå.
+
+# Norsk og internasjonalt lønnsbegrep
+
+NorMacros norske serie `Lonn` er intuitiv og godt egnet til norsk
+analyse.
+
+Det er ikke gitt at en harmonisert internasjonal serie bruker samme
+lønnskonsept.
+
+NorMacro bør ikke skape falsk sammenlignbarhet ved å gi forskjellige
+økonomiske størrelser samme navn.
+
+Et bedre prinsipp er:
+
+> Faglig korrekt forskjell er bedre enn kunstig harmonisering.
+
+Dersom internasjonale data må baseres på kompensasjon per ansatt, bør
+metadata og eventuelt variabelnavn reflektere dette.
+
+# Analyse og API
+
+Dagens generelle analyse-API dekker dette fagområdet godt.
+
+Relevante funksjoner inkluderer:
+
+- `plot_series()`
+- `compare_series()`
+- `combine_series()`
+- `index()`
+- `growth()`
+- `correlate()`
+- `regress()`
+
+Det er eksempelvis naturlig å analysere:
+
+```r
+comparison <- combine_series(
+  norway = c(
+    "Lonnvekst",
+    "Reallonnsvekst",
+    "Produktivitetsvekst"
+  )
+)
+```
+
+og deretter bruke generelle analyseverktøy.
+
+Det er ikke behov for egne funksjoner som:
+
+```r
+wage_model()
+productivity_wage_model()
+```
+
+NorMacro bør gjøre dataene tilgjengelige og la økonomiske spørsmål
+styre analysen.
+
+# Pedagogisk arbeidsflyt
+
+En naturlig undervisningsprogresjon er:
+
+```text
+Nominell lønn
+      |
+      v
+Lønnsvekst
+      |
+      +---- Inflasjon
+      |
+      v
+Reallønnsvekst
+      |
+      +---- Produktivitetsvekst
+      |
+      v
+Langsiktig utvikling i kjøpekraft
+```
+
+Dette kan utvides med lønnsandel dersom en slik indikator senere
+inkluderes.
+
+En student kan dermed gå fra et enkelt spørsmål om egen kjøpekraft til
+bredere spørsmål om produktivitet og fordeling av verdiskaping.
+
+# Internasjonale sammenligninger
+
+Internasjonalt kan NorMacro allerede sammenligne:
+
+- inflasjon
+- arbeidsproduktivitet
+- produktivitetsvekst
+- sysselsetting
+
+Når en harmonisert lønnsserie legges til, kan området utvides med:
+
+- nominell lønnsvekst
+- reallønnsvekst
+- lønn relativt til produktivitet
+- eventuelt lønnsandel
+
+Dette vil gjøre internasjonal sammenligning langt sterkere.
+
+# Metadata
+
+Metadata bør gjøre følgende eksplisitt:
+
+## Lønn
+
+- hva som inngår i lønnsbegrepet
+- om serien er lønn eller samlet kompensasjon
+- om beløpet er per lønnstaker, per sysselsatt eller aggregert
+- om serien er nominell eller real
+
+## Produktivitet
+
+- hvilket BNP-begrep som brukes
+- om produktiviteten måles per sysselsatt eller per arbeidstime
+- om produksjonen gjelder totaløkonomien eller Fastlands-Norge
+
+## Reallønn
+
+- hvilket prisindeks som brukes som deflator
+- om serien er nivå, indeks eller vekstrate
+
+Dette er avgjørende for korrekt tolkning.
+
+# Avgrensning
+
+NorMacro bør foreløpig ikke forsøke å inkludere:
+
+- detaljerte lønnsdata etter yrke
+- lønnsfordelinger
+- lønn etter utdanning
+- detaljerte næringsvise lønninger
+- komplette modeller for lønnsdannelse
+- Phillipskurvemodeller som egen spesialfunksjon
+- avanserte produktivitetsdekomponeringer
+
+Disse kan være relevante i arbeidsmarkedsøkonomi eller mer
+spesialiserte kurs, men ligger utenfor NorMacros kjerneformål.
+
+# Prioriterte tiltak
+
+## Prioritet 1
+
+1. Behold `Lonn`, `Lonnvekst` og `Reallonnsvekst` som norsk
+   kjerneblokk.
+2. Undersøk én harmonisert internasjonal serie for lønn eller
+   kompensasjon per ansatt.
+3. Beregn internasjonal lønnsvekst dersom datagrunnlaget er egnet.
+4. Beregn internasjonal reallønnsvekst ved hjelp av harmonisert
+   inflasjon.
+5. Dokumenter eventuelle definisjonsforskjeller mellom norsk lønn og
+   internasjonal kompensasjon eksplisitt.
+
+## Prioritet 2
+
+6. Vurder en norsk reallønnsindeks som viser langsiktig utvikling i
+   kjøpekraft.
+7. Undersøk en etablert nasjonalregnskapsbasert indikator for
+   lønnsandel.
+8. Vurder tilsvarende harmonisert lønnsandel internasjonalt dersom en
+   egnet kilde finnes.
+
+## Prioritet 3
+
+9. Presiser i metadata at `Arbeidsproduktivitet` er produksjon per
+   sysselsatt.
+10. Vurder produktivitet per arbeidstime senere dersom det gir tydelig
+    analytisk merverdi.
+11. Ikke utvikle egne lønns- eller produktivitetsmodeller nå.
+
+# Gap-vurdering
+
+| Dimensjon | Status | Vurdering |
+|---|---|---|
+| Data | 🟢/🟡 | Svært god norsk dekning, men internasjonal lønn mangler |
+| Analyse | 🟢 | Generelt analyse-API dekker behovene godt |
+| Metadata | 🟡 | Lønnsbegrep og produktivitetsnevner må dokumenteres tydelig |
+| Undervisning | 🟢/🟡 | Meget sterk norsk arbeidsflyt, internasjonal sammenligning mangler |
+| Samlet gap | Lite–middels | Primært internasjonalt datagap |
+| Prioritet | Høy | Sentralt for kjøpekraft, lønnsutvikling og produktivitet |
+
+# Konklusjon
+
+NorMacro har allerede et svært godt norsk datagrunnlag for å analysere
+lønn, reallønn og produktivitet.
+
+Den eksisterende kombinasjonen av:
+
+```text
+Lonn
+Lonnvekst
+Inflasjon
+Reallonnsvekst
+Arbeidsproduktivitet
+Produktivitetsvekst
+```
+
+gir en sterk empirisk kjerne for undervisning.
+
+Det viktigste gapet er internasjonalt.
+
+En kuratert harmonisert lønnsserie vil gjøre det mulig å koble dagens
+internasjonale data for inflasjon og produktivitet til lønns- og
+reallønnsutvikling.
+
+I tillegg vil en reallønnsindeks gi et intuitivt mål på den langsiktige
+utviklingen i kjøpekraft.
+
+En eventuell lønnsandel vil senere kunne utvide spørsmålet fra:
+
+> Hvor raskt vokser lønnen?
+
+til:
+
+> Hvordan har arbeidsinntekten utviklet seg relativt til produktivitet
+> og samlet verdiskaping?
+
+NorMacro trenger ikke en egen modell for lønnsdannelse.
+
+Pakken trenger først og fremst konsistente og tydelig dokumenterte data
+som gjør disse spørsmålene enkle å undersøke empirisk.

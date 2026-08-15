@@ -1,0 +1,73 @@
+
+## Prioriterte tiltak
+
+### 1. Norsk AKU-ledighet
+
+Legg til arbeidsledige og arbeidsledighetsrate basert på AKU.
+
+NAV-seriene beholdes som et separat mål på registrert arbeidsledighet.
+
+Dette gjør det mulig å sammenligne to ulike mål på arbeidsledighet i Norge
+og å knytte norsk AKU-ledighet til harmoniserte internasjonale data.
+
+### 2. Korrekt arbeidsstyrkeandel
+
+Dagens `Arbeidsstyrkeandel` beregnes som arbeidsstyrken dividert på
+totalbefolkningen.
+
+Dette er ikke konsistent med telleren, som gjelder en avgrenset aldersgruppe.
+
+Indikatoren skal derfor beregnes mot en befolkningsserie med samme
+aldersavgrensning som arbeidsstyrken.
+
+### 3. Sysselsettingsandel
+
+Legg til en norsk sysselsettingsandel beregnet mot samme relevante
+aldersgruppe som sysselsettingstallene.
+
+### 4. NAV versus AKU
+
+Dokumenter forskjellen mellom registrert arbeidsledighet fra NAV og
+arbeidsledighet etter AKU.
+
+Begge målene skal kunne brukes side om side uten at brukeren trenger å
+kjenne underliggende datakilder på forhånd.
+
+### 5. Navngivning
+
+Gjennomgå NAV-variablene med staveformen `Arbledige`.
+
+Vurder overgang til konsistente navn som:
+
+- `Arbeidsledige_NAV`
+- `Menn_arbeidsledige_NAV`
+- `Kvinner_arbeidsledige_NAV`
+- `Arbeidsledighetsrate_NAV`
+
+Endringen bør håndteres samlet som en eventuell API-endring.
+
+### 6. Metadata
+
+Metadata skal eksplisitt dokumentere:
+
+- aldersgruppe
+- teller
+- nevner
+- kilde
+- forskjellen mellom AKU og NAV
+
+Andelsmål skal ikke dokumenteres bare som «andel av befolkningen» dersom
+befolkningsgrunnlaget er aldersavgrenset.
+
+### 7. Undervisning
+
+Utvikle senere et undervisningseksempel der studenten:
+
+1. skiller mellom arbeidsstyrke, sysselsatte og arbeidsledige
+2. beregner og tolker arbeidsstyrkeandel
+3. beregner og tolker sysselsettingsandel
+4. beregner og tolker arbeidsledighetsrate
+5. sammenligner NAV- og AKU-ledighet
+6. undersøker arbeidsmarkedet gjennom ulike konjunkturepisoder
+7. sammenligner Norge med andre land
+

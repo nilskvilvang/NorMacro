@@ -1,0 +1,358 @@
+
+---
+title: "Gap-analyse 05 – Finanspolitikk og offentlig sektor"
+format: html
+---
+
+# Formål
+
+Denne gap-analysen vurderer i hvilken grad NorMacro gjør det mulig å
+analysere finanspolitikk og offentlig sektor på en måte som er relevant
+for undervisning i makroøkonomi og for praktisk makroøkonomisk analyse.
+
+Utgangspunktet er at NorMacro ikke skal forsøke å modellere hele
+offentlig sektor eller implementere komplette finanspolitiske modeller.
+Pakken bør derimot inneholde de sentrale dataene og analyseverktøyene
+som gjør det mulig å undersøke de viktigste makroøkonomiske spørsmålene
+knyttet til finanspolitikk.
+
+# Sentrale økonomiske spørsmål
+
+NorMacro bør gjøre det mulig å undersøke spørsmål som:
+
+1. Hvor stor er offentlig sektor?
+2. Hvordan har offentlig konsum og offentlige investeringer utviklet seg?
+3. Hvordan har offentlige utgifter utviklet seg over tid?
+4. Hvordan fordeles offentlige utgifter mellom stat og kommune?
+5. Hvor stor er offentlig gjeld relativt til BNP?
+6. Hvordan har offentlig sektors finansielle stilling utviklet seg?
+7. Har finanspolitikken vært ekspansiv eller kontraktiv?
+8. Hvordan påvirker finanspolitikken samlet etterspørsel og konjunkturer?
+9. Hvordan skiller Norge seg fra andre land når det gjelder offentlig
+   gjeld, offentlig konsum og andre finanspolitiske størrelser?
+10. Hvilken rolle spiller petroleumsinntekter og bruk av oljeinntekter
+    i norsk finanspolitikk?
+
+# Eksisterende norske data
+
+NorMacro har allerede et relativt omfattende datagrunnlag for offentlig
+sektor.
+
+## Offentlig gjeld og finansielle fordringer
+
+Følgende serier finnes:
+
+- `Offentlig_gjeld`
+- `Offentlig_nettofordringer`
+- `Offentlig_gjeld_andel_BNP`
+- `Offentlig_nettofordringer_andel_BNP`
+
+Dette gjør det mulig å analysere både offentlig bruttogjeld og offentlig
+sektors netto finansielle stilling.
+
+Seriene starter i 1995.
+
+Dette er særlig viktig for Norge, siden offentlig bruttogjeld alene gir
+et ufullstendig bilde av offentlig sektors finansielle stilling.
+
+## Offentlige utgifter
+
+Følgende serier finnes:
+
+- `Offentlige_utgifter`
+- `Statlige_utgifter`
+- `Kommunale_utgifter`
+- `Kommunal_utgiftsandel`
+- `Statlig_utgiftsandel`
+
+Seriene gjør det mulig å analysere både utviklingen i samlede offentlige
+utgifter og fordelingen mellom stats- og kommuneforvaltningen.
+
+Datadekningen starter i 1995.
+
+## Offentlige investeringer
+
+Følgende serier finnes:
+
+- `Offentlige_investeringer`
+- `Offentlige_investeringer_vekst`
+- `Offentlige_investeringer_andel_BNP`
+
+Datadekningen starter i 1970.
+
+Dette gir et godt grunnlag for å skille mellom offentlig konsum og
+offentlig investering, noe som er viktig både analytisk og pedagogisk.
+
+## Offentlig konsum
+
+Følgende serier finnes:
+
+- `Offentlig_konsum`
+- `Offentlig_konsum_vekst`
+- `Offentlig_konsum_andel_BNP`
+
+Datadekningen starter i 1970.
+
+Disse seriene gjør det mulig å studere offentlig etterspørsel over en
+relativt lang periode.
+
+# Eksisterende internasjonale data
+
+Det internasjonale datasettet har foreløpig et mer begrenset
+finanspolitisk innhold.
+
+Følgende sentrale serier finnes:
+
+- `Offentlig_gjeld_andel_BNP`
+- `Offentlig_konsum`
+- `Offentlig_konsum_vekst`
+- `Offentlig_konsum_andel_BNP`
+
+Dette gjør det mulig å sammenligne offentlig konsum og offentlig
+bruttogjeld mellom land.
+
+Datadekningen er god:
+
+- offentlig konsum fra 1975
+- offentlig gjeld som andel av BNP fra 1995
+
+# Styrker i dagens datagrunnlag
+
+## 1. Offentlig konsum er godt dekket
+
+NorMacro har både:
+
+- nivå
+- vekst
+- andel av BNP
+
+for offentlig konsum.
+
+Dette finnes både for Norge og i det internasjonale datasettet.
+
+Offentlig konsum er derfor allerede godt egnet til undervisning og
+komparativ analyse.
+
+## 2. Offentlige investeringer er godt dekket for Norge
+
+Det norske datasettet inneholder nivå, vekst og BNP-andel.
+
+Dette gjør det mulig å skille mellom to sentrale komponenter i
+offentlig etterspørsel:
+
+- offentlig konsum
+- offentlige investeringer
+
+Dette skillet er viktig i makroøkonomisk analyse.
+
+## 3. Offentlig gjeld er tilgjengelig
+
+Offentlig gjeld finnes både som norsk serie og som internasjonalt
+sammenlignbar serie.
+
+Dette gir et godt utgangspunkt for analyser av finanspolitisk
+bærekraft og internasjonale forskjeller.
+
+## 4. Norge har data for nettofordringer
+
+`Offentlig_nettofordringer` og
+`Offentlig_nettofordringer_andel_BNP` er spesielt relevante for Norge.
+
+De gjør det mulig å vise hvorfor offentlig bruttogjeld alene ikke er
+tilstrekkelig for å beskrive den norske stats finansielle stilling.
+
+# Viktige gap
+
+## Gap 1 – Offentlige inntekter mangler
+
+NorMacro har data for offentlige utgifter, men ikke en tilsvarende
+hovedserie for offentlige inntekter.
+
+Dette gjør at pakken foreløpig ikke kan analysere den grunnleggende
+budsjettidentiteten direkte:
+
+\[
+\text{budsjettbalanse}
+=
+\text{offentlige inntekter}
+-
+\text{offentlige utgifter}
+\]
+
+En serie for samlede offentlige inntekter bør derfor vurderes som et
+høyt prioritert tillegg.
+
+# Gap 2 – Budsjettbalanse mangler
+
+Det finnes ikke en tydelig hovedindikator for offentlig
+budsjettoverskudd eller budsjettunderskudd.
+
+Dette er et vesentlig gap for undervisning i finanspolitikk.
+
+Det bør vurderes serier for:
+
+- budsjettbalanse i kroner
+- budsjettbalanse som andel av BNP
+
+Den internasjonale varianten er særlig viktig for sammenligninger
+mellom land.
+
+# Gap 3 – Skatter og avgifter
+
+NorMacro mangler en enkel hovedindikator for skattebelastningen.
+
+En relevant indikator kan være:
+
+- samlede skatter og avgifter
+- skatter og avgifter som andel av BNP
+
+En BNP-andel vil sannsynligvis være mest nyttig som hovedindikator,
+siden den egner seg godt til både tidsserieanalyse og internasjonale
+sammenligninger.
+
+# Gap 4 – Norsk oljepengebruk
+
+For norsk makroøkonomi er forbindelsen mellom finanspolitikk og
+petroleumsinntekter sentral.
+
+NorMacro mangler foreløpig en eksplisitt indikator for dette.
+
+Aktuelle størrelser som bør undersøkes er blant annet:
+
+- strukturelt oljekorrigert budsjettunderskudd
+- bruk av oljeinntekter
+- Statens pensjonsfond utland
+- oljepengebruk relativt til fondets størrelse
+
+Det bør undersøkes hvilke av disse som gir størst analytisk og
+pedagogisk verdi uten at NorMacro blir unødvendig detaljert.
+
+# Gap 5 – Finanspolitisk impuls
+
+Spørsmålet
+
+> Har finanspolitikken blitt mer ekspansiv eller kontraktiv?
+
+kan ikke besvares tilfredsstillende bare ved å se på nivået på
+offentlige utgifter.
+
+På sikt bør NorMacro derfor vurdere om en egnet indikator for
+finanspolitisk impuls kan inkluderes.
+
+Dette bør imidlertid ikke nødvendigvis være en førsteprioritet.
+
+En slik indikator krever tydelige definisjoner og bør bare inkluderes
+dersom den kan bygges transparent og dokumenteres godt.
+
+# Gap 6 – Begrenset internasjonal dekning
+
+Internasjonalt har NorMacro offentlig gjeld og offentlig konsum, men
+mangler sentrale finanspolitiske indikatorer.
+
+Særlig relevante kandidater er:
+
+- offentlige inntekter som andel av BNP
+- offentlige utgifter som andel av BNP
+- budsjettbalanse som andel av BNP
+- skatter som andel av BNP
+
+Dette vil gjøre internasjonale sammenligninger av finanspolitikk
+betydelig sterkere.
+
+# Konsistens og metadata
+
+Analysen avdekker også noen mindre konsistensproblemer.
+
+Internasjonalt er beskrivelsen av
+`Offentlig_konsum_andel_BNP` oppgitt som:
+
+> Offentlig konsum som andel av BNP Fastlands-Norge
+
+mens beregningen faktisk bruker:
+
+`Offentlig_konsum / BNP_faste_priser * 100`
+
+Beskrivelsen bør derfor endres til noe i retning av:
+
+> Offentlig konsum som andel av BNP
+
+Tilsvarende metadata bør gjennomgås systematisk slik at norske og
+internasjonale definisjoner ikke blandes.
+
+# Pedagogisk vurdering
+
+Dagens NorMacro kan allerede brukes til å illustrere flere viktige
+temaer:
+
+- offentlig sektors størrelse
+- offentlig konsum
+- offentlige investeringer
+- offentlig gjeld
+- offentlig nettoformue
+- statlig versus kommunal aktivitet
+- internasjonale forskjeller i offentlig gjeld og konsum
+
+Det viktigste pedagogiske gapet er at pakken foreløpig beskriver
+**offentlig sektors utgiftsside og balanse bedre enn selve
+finanspolitikken**.
+
+For å analysere finanspolitikk trenger studenten også inntektssiden og
+budsjettbalansen.
+
+# Prioriterte tiltak
+
+## Prioritet 1
+
+Undersøk og eventuelt legg til:
+
+1. offentlige inntekter
+2. budsjettbalanse
+3. budsjettbalanse som andel av BNP
+4. offentlige inntekter som andel av BNP
+5. offentlige utgifter som andel av BNP
+
+Disse bør vurderes både for Norge og internasjonalt.
+
+## Prioritet 2
+
+Undersøk:
+
+1. skatter og avgifter som andel av BNP
+2. strukturelt oljekorrigert budsjettunderskudd
+3. en enkel indikator for norsk oljepengebruk
+4. Statens pensjonsfond utland dersom dette gir analytisk merverdi
+
+## Prioritet 3
+
+Vurder senere:
+
+- finanspolitisk impuls
+- mer detaljerte dekomponeringer av offentlige inntekter og utgifter
+
+Disse bør bare inkluderes dersom de bidrar til konkrete økonomiske
+spørsmål i kravkartet.
+
+# Samlet vurdering
+
+**Gap: middels–stort**
+
+**Prioritet: svært høy**
+
+NorMacro har allerede et godt datagrunnlag for å beskrive offentlig
+sektor, spesielt for Norge.
+
+Det største manglende laget er selve finanspolitikken:
+
+- inntekter
+- budsjettbalanse
+- skattebelastning
+- norsk oljepengebruk
+
+Dette er sentrale temaer i et makroøkonomikurs og bør derfor ha høy
+prioritet i videre utvikling.
+
+Målet bør være at en student med NorMacro raskt kan besvare spørsmålet:
+
+> Hvordan har finanspolitikken utviklet seg, hvor stor er offentlig
+> sektor, hvordan finansieres den, og hvordan skiller Norge seg fra
+> andre land?

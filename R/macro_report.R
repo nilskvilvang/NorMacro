@@ -23,7 +23,7 @@ macro_report <- function(data = NULL, year = NULL) {
   key_vars <- c(
     "BNP_Fastland_vekst",
     "Inflasjon",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "Styringsrente",
     "Pengemarkedsrente_3mnd",
     "Statsrente_10aar",

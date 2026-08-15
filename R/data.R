@@ -15,8 +15,8 @@
 #'   \item{Befolkning}{Befolkning.}
 #'   \item{Arbeidsstyrke}{Personer i arbeidsstyrken.}
 #'   \item{Sysselsatte}{Sysselsatte personer.}
-#'   \item{Arbledige_NAV}{Registrerte arbeidsledige hos NAV.}
-#'   \item{Arbledighetsrate_NAV}{Registrert arbeidsledighet i prosent.}
+#'   \item{Arbeidsledige_NAV}{Registrerte arbeidsledige hos NAV.}
+#'   \item{Arbeidsledighetsrate_NAV}{Registrert arbeidsledighet i prosent.}
 #'   \item{Styringsrente}{Norges Banks styringsrente.}
 #'   \item{BNP_Fastland}{BNP for Fastlands-Norge.}
 #'   \item{BNP_Fastland_vekst}{Årlig vekst i BNP for Fastlands-Norge.}

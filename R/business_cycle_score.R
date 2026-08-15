@@ -14,7 +14,7 @@ business_cycle_score <- function(data = NULL,
   required <- c(
     "Aar",
     "BNP_Fastland_vekst",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "Konjunkturindikator",
     "Kapasitetsutnytting"
   )
@@ -42,10 +42,10 @@ business_cycle_score <- function(data = NULL,
       ) * bnp_weight,
       
       Score_ledighet = dplyr::case_when(
-        Arbledighetsrate_NAV > 5 ~ -2,
-        Arbledighetsrate_NAV > 3 & Arbledighetsrate_NAV <= 5 ~ -1,
-        Arbledighetsrate_NAV >= 2 & Arbledighetsrate_NAV <= 3 ~ 1,
-        Arbledighetsrate_NAV < 2 ~ 2,
+        Arbeidsledighetsrate_NAV > 5 ~ -2,
+        Arbeidsledighetsrate_NAV > 3 & Arbeidsledighetsrate_NAV <= 5 ~ -1,
+        Arbeidsledighetsrate_NAV >= 2 & Arbeidsledighetsrate_NAV <= 3 ~ 1,
+        Arbeidsledighetsrate_NAV < 2 ~ 2,
         TRUE ~ NA_real_
       ) * unemployment_weight,
       

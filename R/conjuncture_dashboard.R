@@ -14,7 +14,7 @@ conjuncture_dashboard <- function(data = NULL) {
     "Kapasitetsutnytting",
     "Ressursknapphet",
     "Ordrebeholdning",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "Rentekurve"
   )
   

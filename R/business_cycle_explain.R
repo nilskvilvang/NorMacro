@@ -64,7 +64,7 @@ business_cycle_explain <- function(year, data = NULL, ...) {
   cat(sprintf(
     "%-24s %8.2f\n",
     "NAV-ledighet",
-    result$Arbledighetsrate_NAV[1]
+    result$Arbeidsledighetsrate_NAV[1]
   ))
   cat(sprintf(
     "%-24s %8.2f\n",

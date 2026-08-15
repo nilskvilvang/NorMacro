@@ -22,7 +22,7 @@
 #' @examples
 #' scatter_series(
 #'   x = "BNP_Fastland_vekst",
-#'   y = "Arbledighetsrate_NAV",
+#'   y = "Arbeidsledighetsrate_NAV",
 #'   data = normacro_example
 #' )
 #'

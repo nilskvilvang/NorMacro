@@ -1,0 +1,81 @@
+
+---
+title: "Gap-analyse 06 – Konsum, sparing og investering"
+format: html
+---
+
+# Formål
+
+Denne gap-analysen vurderer i hvilken grad NorMacro gjør det mulig å
+analysere konsum, sparing og investering på en måte som er relevant for
+undervisning i makroøkonomi og for praktisk makroøkonomisk analyse.
+
+Utgangspunktet er at NorMacro ikke skal implementere komplette
+konsum- eller investeringsmodeller. Pakken bør i stedet inneholde de
+sentrale dataene og generelle analyseverktøyene som gjør det mulig å
+undersøke viktige makroøkonomiske spørsmål empirisk.
+
+# Sentrale økonomiske spørsmål
+
+NorMacro bør gjøre det mulig å undersøke spørsmål som:
+
+1. Hvordan utvikler privat konsum seg over tid?
+2. Hvordan varierer konsumveksten gjennom konjunkturene?
+3. Hvordan henger disponibel inntekt, konsum og sparing sammen?
+4. Hvor stor del av disponibel inntekt sparer husholdningene?
+5. Hvordan varierer spareraten mellom perioder?
+6. Hvordan utvikler investeringene seg gjennom konjunkturene?
+7. Hvordan skiller samlede investeringer, fastlandsinvesteringer,
+   boliginvesteringer og offentlige investeringer seg fra hverandre?
+8. Hvordan henger renter, boligpriser, boliginvesteringer og
+   husholdningsgjeld sammen?
+9. Hvordan skiller konsum og investeringer i Norge seg fra andre land?
+10. Kan husholdningenes sparing og disponible inntekt sammenlignes
+    internasjonalt?
+
+# Eksisterende norske data
+
+NorMacro har allerede et relativt omfattende datagrunnlag for konsum,
+sparing, husholdningsøkonomi og investering.
+
+## Konsum
+
+Følgende sentrale serier finnes:
+
+- `Privat_konsum`
+- `Privat_konsum_vekst`
+- `Privat_konsum_andel_BNP`
+
+`Privat_konsum` starter i 1970 og representerer konsum i husholdningene
+i faste priser.
+
+Dette gir et godt grunnlag for analyser av real konsumvekst og
+konjunkturutvikling.
+
+## Disponibel inntekt
+
+NorMacro inneholder:
+
+- `Disponibel_inntekt_husholdninger`
+
+Serien starter i 1978 og er oppgitt i løpende priser.
+
+Dette er en viktig serie fordi disponibel inntekt er et mer relevant mål
+for husholdningenes økonomiske handlingsrom enn lønn alene.
+
+## Sparing
+
+Følgende serier finnes:
+
+- `Husholdningssparing`
+- `Husholdningssparing_vekst`
+- `Husholdningssparing_andel_disponibel_inntekt`
+
+Seriene starter i 1978 eller 1979.
+
+Spareraten beregnes som:
+
+```r
+Husholdningssparing /
+  Disponibel_inntekt_husholdninger * 100
+```

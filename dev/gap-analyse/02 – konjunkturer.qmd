@@ -1,0 +1,78 @@
+
+---
+title: "Gap-analyse 10 – Konjunkturer og makroøkonomiske svingninger"
+format: html
+---
+
+## Formål
+
+Denne gap-analysen vurderer hvor godt NorMacro dekker analyse av
+konjunkturer og makroøkonomiske svingninger.
+
+Området omfatter både:
+
+- utviklingen i økonomisk aktivitet
+- arbeidsmarkedet
+- kapasitetsutnytting
+- forventnings- og konjunkturindikatorer
+- penge- og finansielle indikatorer
+- identifikasjon og beskrivelse av konjunkturfaser
+- internasjonale sammenligninger av konjunkturutviklingen
+
+Et viktig skille er mellom **økonomisk vekst** og
+**konjunkturposisjon**. Positiv BNP-vekst innebærer ikke nødvendigvis
+høykonjunktur, og negativ vekst er ikke i seg selv en fullstendig
+definisjon av lavkonjunktur eller resesjon.
+
+## Eksisterende datagrunnlag
+
+NorMacro har allerede et bredt datagrunnlag for konjunkturanalyse.
+
+På norsk side finnes blant annet:
+
+- BNP Fastlands-Norge
+- BNP-vekst for Fastlands-Norge
+- sysselsetting
+- registrert arbeidsledighet
+- inflasjon
+- privat konsum
+- fastlandsinvesteringer
+- styringsrente
+- pengemarkedsrente
+- langsiktig statsrente
+- rentekurve
+- ordrebeholdning
+- konjunkturindikator
+- kapasitetsutnytting
+
+Internasjonalt finnes blant annet:
+
+- BNP i faste priser
+- BNP-vekst
+- arbeidsledighet
+- sysselsetting
+- privat konsum
+- konsumvekst
+- investeringer
+- investeringsvekst
+- inflasjon
+- langsiktig rente
+
+Datadekningen vurderes derfor som god.
+
+Det viktigste datagapet er ikke flere ordinære konjunkturserier, men et
+godt mål på **produksjonsgap eller aktivitetsgap**.
+
+## Eksisterende analysefunksjoner
+
+NorMacro har allerede en egen familie av funksjoner for
+konjunkturklassifisering:
+
+```{r}
+#| eval: false
+
+business_cycle_score()
+business_cycle()
+recession_periods()
+recession_period_explain()
+

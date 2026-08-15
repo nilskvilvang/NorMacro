@@ -39,7 +39,7 @@ recession_period_explain <- function(start_year,
       dplyr::select(
         Aar,
         BNP_Fastland_vekst,
-        Arbledighetsrate_NAV,
+        Arbeidsledighetsrate_NAV,
         Konjunkturindikator,
         Kapasitetsutnytting,
         Rentekurve

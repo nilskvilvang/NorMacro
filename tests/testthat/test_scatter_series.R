@@ -4,7 +4,7 @@ testthat::test_that(
   {
     result <- scatter_series(
       x = "BNP_Fastland_vekst",
-      y = "Arbledighetsrate_NAV",
+      y = "Arbeidsledighetsrate_NAV",
       data = normacro
     )
     
@@ -169,7 +169,7 @@ testthat::test_that(
   {
     result <- scatter_series(
       x = "BNP_Fastland_vekst",
-      y = "Arbledighetsrate_NAV",
+      y = "Arbeidsledighetsrate_NAV",
       data = normacro,
       label_years = TRUE
     )

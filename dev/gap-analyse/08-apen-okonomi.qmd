@@ -1,0 +1,65 @@
+
+---
+title: "Gap-analyse 07 – Åpen økonomi"
+format: html
+---
+
+# Formål
+
+Denne gap-analysen vurderer i hvilken grad NorMacro gjør det mulig å
+analysere en åpen økonomi på en måte som er relevant for undervisning i
+makroøkonomi og for praktisk makroøkonomisk analyse.
+
+Utgangspunktet er at NorMacro ikke skal bli en komplett handelsdatabase.
+Pakken bør i stedet inneholde et kuratert sett av serier som gjør det
+mulig å undersøke sentrale spørsmål om eksport, import, handelsbalanse,
+driftsbalanse, valutakurs og Norges særtrekk som råvareeksporterende
+økonomi.
+
+# Sentrale økonomiske spørsmål
+
+NorMacro bør gjøre det mulig å undersøke spørsmål som:
+
+1. Hvordan utvikler eksport og import seg over tid?
+2. Hvordan varierer eksport- og importveksten gjennom konjunkturene?
+3. Hvor åpen er norsk økonomi?
+4. Har Norge handelsoverskudd eller handelsunderskudd?
+5. Hvordan utvikler handelsbalansen seg relativt til BNP?
+6. Hva er forskjellen mellom real eksportvekst og verdien av eksporten?
+7. Hvordan skiller handelsbalansen seg fra driftsbalansen?
+8. Hvordan påvirkes norsk økonomi av oljepris og internasjonale forhold?
+9. Hvordan henger valutakursen sammen med utenriksøkonomien?
+10. Hvordan påvirker bytteforholdet norsk økonomi?
+11. Hvordan skiller Norge seg fra andre land når det gjelder eksport,
+    import og utenriksbalanse?
+
+# Eksisterende norske data
+
+NorMacro har allerede et godt grunnlag for å analysere eksport og import.
+
+## Eksport og import
+
+Følgende serier finnes:
+
+- `Eksport`
+- `Import`
+- `Eksportvekst`
+- `Importvekst`
+
+Eksport og import starter i 1970 og er oppgitt i faste 2023-priser.
+
+Dette gir et godt grunnlag for å analysere real utvikling i
+utenrikshandelen.
+
+## Handelsbalanse
+
+NorMacro beregner:
+
+- `Handelsbalanse`
+- `Handelsbalanse_andel_BNP`
+
+`Handelsbalanse` beregnes i dag som:
+
+```r
+Eksport - Import
+

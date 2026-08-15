@@ -1,0 +1,301 @@
+
+---
+title: "Gap-analyse 04: Pengepolitikk og renter"
+format: html
+---
+
+# Formål
+
+Denne gap-analysen vurderer om NorMacro har de dataene og
+analysemulighetene som trengs for å undersøke sentrale spørsmål om
+pengepolitikk og renter på bachelor-nivå i makroøkonomi.
+
+Utgangspunktet er at NorMacro skal gjøre sentrale makroøkonomiske
+spørsmål enkle å undersøke empirisk, uten å forsøke å implementere
+alle pengepolitiske modeller eller samle alle tilgjengelige renteserier.
+
+# Økonomiske spørsmål
+
+En student eller analytiker bør med NorMacro raskt kunne undersøke:
+
+- Hvordan har styringsrenten utviklet seg over tid?
+- Hvordan henger styringsrenten sammen med inflasjonen?
+- Hvordan henger pengepolitikken sammen med konjunkturutviklingen?
+- Hva er forskjellen mellom styringsrente, kort markedsrente og lang rente?
+- Hvordan påvirkes markedsrentene av styringsrenten?
+- Hva forteller rentekurven om økonomiske forhold og forventninger?
+- Hva er forskjellen mellom nominell rente og realrente?
+- Hvordan skiller renteutviklingen i Norge seg fra andre land?
+- Hvordan kan en enkel pengepolitisk reaksjonsfunksjon undersøkes empirisk?
+
+# Dagens dekning
+
+## Norge
+
+NorMacro inneholder flere sentrale norske renteserier:
+
+- `Styringsrente`
+- `Pengemarkedsrente_3mnd`
+- `Statsrente_10aar`
+- `Rentekurve`
+
+I tillegg finnes sentrale serier som kan kobles til renteutviklingen:
+
+- `Inflasjon`
+- `KPI`
+- `BNP_Fastland_vekst`
+- arbeidsmarkedsindikatorer
+
+`Styringsrente` starter i 1982.
+
+`Pengemarkedsrente_3mnd` starter i 2013.
+
+`Statsrente_10aar` er en lang norsk statsobligasjonsrente.
+
+`Rentekurve` beregnes som:
+
+```r
+Statsrente_10aar - Styringsrente
+```
+
+Dette gir et godt grunnlag for å analysere både pengepolitikk og
+rentemarkedet.
+
+## Internasjonalt
+
+Den sentrale internasjonale renteserien er:
+
+- `Statsrente_10aar`
+
+Serien kommer fra Eurostat og starter i 1967 for Norge. Tilgjengelig
+periode vil kunne variere mellom land.
+
+Serien representerer en langsiktig statsobligasjonsrente basert på
+Maastricht-kriteriene.
+
+Internasjonale data inneholder også:
+
+- `HICP`
+- `Inflasjon`
+- `BNP_vekst`
+- arbeidsmarkedsindikatorer
+
+Dette gjør det mulig å analysere lange renter sammen med inflasjon og
+realøkonomisk utvikling på tvers av land.
+
+Det mangler imidlertid en internasjonalt sammenlignbar kort rente eller
+policy-rente i dagens datasett.
+
+# Vurdering mot kravkartet
+
+| Krav / økonomisk spørsmål | Norge | Internasjonalt | Vurdering |
+|---|---|---|---|
+| Pengepolitisk rente | Styringsrente | Mangler | Delvis dekket |
+| Kort markedsrente | Pengemarkedsrente_3mnd | Mangler | Norsk serie har kort historikk |
+| Lang rente | Statsrente_10aar | Statsrente_10aar | Godt dekket |
+| Rentekurve | Rentekurve | Ikke eksplisitt | God norsk dekning |
+| Rente og inflasjon | Ja | Delvis | Godt norsk grunnlag |
+| Rente og økonomisk aktivitet | Ja | Delvis | Godt norsk grunnlag |
+| Nominell rente | Ja | Ja | Godt dekket |
+| Realrente | Ikke eksplisitt | Ikke eksplisitt | Gap |
+| Internasjonal pengepolitisk sammenligning | Begrenset | Mangler policy-rente | Gap |
+| Enkel pengepolitisk reaksjonsanalyse | Datagrunnlag delvis tilgjengelig | Begrenset | Delvis dekket |
+
+# Pedagogiske styrker
+
+## Rentenes løpetid og rolle
+
+NorMacro har allerede serier som kan brukes til å illustrere tre ulike
+deler av rentesystemet:
+
+- `Styringsrente` representerer det pengepolitiske virkemiddelet
+- `Pengemarkedsrente_3mnd` representerer en kort markedsrente
+- `Statsrente_10aar` representerer en lang markedsrente
+
+Dette er pedagogisk verdifullt fordi studenten kan undersøke at
+"renten" ikke er én enkelt økonomisk størrelse.
+
+Seriene kan brukes til å studere hvordan pengepolitikken forplanter
+seg til andre renter i økonomien.
+
+## Rentekurven
+
+`Rentekurve` beregnes som forskjellen mellom den lange statsrenten og
+styringsrenten:
+
+```r
+Rentekurve = Statsrente_10aar - Styringsrente
+```
+
+Dette gir en enkel inngang til å diskutere rentenes terminstruktur og
+forventninger om fremtidig økonomisk utvikling.
+
+Rentekurven kan også kobles til konjunkturindikatorer og senere
+økonomisk aktivitet.
+
+## Pengepolitikk, inflasjon og aktivitet
+
+NorMacro har allerede sentrale byggesteiner for en empirisk analyse av
+pengepolitikken:
+
+- styringsrente
+- inflasjon
+- BNP-vekst
+- arbeidsmarkedsindikatorer
+
+Dette gjør det mulig å undersøke hvordan pengepolitikken har utviklet
+seg i perioder med ulik inflasjon og realøkonomisk aktivitet.
+
+Med det objektbaserte analyse-API-et kan seriene også brukes til
+korrelasjon, lag-analyse og enkel regresjon.
+
+# Identifiserte gap
+
+## Kort norsk markedsrente
+
+`Pengemarkedsrente_3mnd` starter først i 2013.
+
+Dette begrenser muligheten til å analysere viktige historiske perioder,
+blant annet:
+
+- pengepolitikken på 1990-tallet
+- innføringen av inflasjonsmålet
+- finanskrisen i 2008–2009
+- transmisjonen fra styringsrente til markedsrenter over lengre perioder
+
+Det bør undersøkes om NorMacro kan få en konsistent norsk
+pengemarkedsrente med betydelig lengre historikk.
+
+Målet bør være én anbefalt kort markedsrente, ikke en omfattende
+samling av ulike pengemarkedsrenter.
+
+**Prioritet: høy.**
+
+## Realrente
+
+NorMacro har nominell styringsrente og inflasjon, men ingen eksplisitt
+realrente.
+
+En enkel ex-post realrente kan beregnes som:
+
+```r
+Realrente = Styringsrente - Inflasjon
+```
+
+En slik serie vil være pedagogisk nyttig, men må defineres tydelig.
+
+Den må ikke presenteres som identisk med den forventede realrenten som
+står sentralt i makroøkonomisk teori.
+
+Skillet mellom nominell rente, ex-post realrente og forventet realrente
+har i seg selv pedagogisk verdi.
+
+**Prioritet: middels til høy.**
+
+## Internasjonal policy-rente
+
+Det internasjonale datasettet inneholder lang statsrente, men mangler
+en rente som direkte representerer pengepolitikken.
+
+Dette gjør det vanskelig å undersøke spørsmål som:
+
+- Hvordan har pengepolitikken variert mellom land?
+- Hvordan har ulike sentralbanker reagert på inflasjon?
+- Hvordan har pengepolitikken utviklet seg gjennom felles internasjonale
+  konjunkturperioder?
+
+Det bør undersøkes om det finnes én egnet og konsistent internasjonal
+policy-rente eller kort rente som kan inngå i det kuraterte datasettet.
+
+Målet er ikke å bygge en stor database med sentralbankrenter, men å
+velge en serie som gjør internasjonale pengepolitiske sammenligninger
+mulige.
+
+**Prioritet: middels til høy.**
+
+## Produksjonsgap og pengepolitisk reaksjonsanalyse
+
+NorMacro har styringsrente, inflasjon og BNP-vekst, men ikke et
+eksplisitt produksjonsgap.
+
+Dette begrenser muligheten til å undersøke en standard Taylor-regel
+direkte.
+
+Det bør likevel ikke løses ved å implementere en egen
+` taylor_rule()`-funksjon nå.
+
+Det relevante spørsmålet for NorMacro er først om pakken bør ha et
+egnet mål på produksjonsgap eller kapasitetsutnytting.
+
+Dette bør vurderes i gap-analysen av konjunkturer og økonomisk aktivitet.
+
+**Prioritet: vurderes senere.**
+
+# Metadatafunn
+
+## Startår for norsk statsrente
+
+`Statsrente_10aar` har manglende `Startaar` i norske metadata.
+
+Dette bør undersøkes og korrigeres.
+
+## Startår for rentekurven
+
+`Rentekurve` har også manglende `Startaar`.
+
+Startåret bør følge første år der både `Statsrente_10aar` og
+`Styringsrente` er tilgjengelige.
+
+Dette bør beregnes eller dokumenteres korrekt i metadata.
+
+# Avgrensning
+
+NorMacro bør ikke forsøke å bli en database over alle tilgjengelige
+renter.
+
+For undervisning og generell makroøkonomisk analyse er det mer
+verdifullt med et lite antall tydelig definerte serier:
+
+- én pengepolitisk rente
+- én kort markedsrente
+- én lang rente
+- én rentekurve
+- eventuelt én tydelig definert realrente
+
+Det følger NorMacros prinsipp om representative indikatorer fremfor
+flest mulig serier.
+
+# Prioriterte tiltak
+
+1. Undersøk muligheten for en betydelig lengre norsk
+   3-måneders pengemarkedsrente.
+2. Vurder å legge til en beregnet `Realrente`, tydelig definert som en
+   enkel ex-post realrente.
+3. Undersøk én kuratert internasjonal policy-rente eller kort rente.
+4. Rett `Startaar` for norsk `Statsrente_10aar`.
+5. Rett `Startaar` for `Rentekurve`.
+6. Gjør sammenhengen mellom rente, inflasjon og økonomisk aktivitet
+   til en eksplisitt pedagogisk arbeidsflyt.
+7. Ikke implementer en egen Taylor-regel-modell nå.
+8. Vurder produksjonsgap som eget databehov i en senere gap-analyse.
+
+# Konklusjon
+
+Dekningen av pengepolitikk og renter i NorMacro er god på norsk side.
+
+Pakken har allerede en hensiktsmessig struktur med styringsrente, kort
+markedsrente, lang rente og rentekurve. Sammen med inflasjon,
+BNP-vekst og arbeidsmarkedsdata gir dette et godt grunnlag for
+undervisning og empirisk makroøkonomisk analyse.
+
+Det viktigste norske datagapet er den korte historikken til
+`Pengemarkedsrente_3mnd`.
+
+Det viktigste internasjonale gapet er mangel på en sammenlignbar
+policy-rente eller kort rente.
+
+En eksplisitt ex-post realrente vil i tillegg styrke den pedagogiske
+dekningen med svært liten økning i kompleksitet.
+
+Med disse forbedringene vil området være svært godt egnet som del av
+et kuratert analyseverktøy for makroøkonomi på bachelor-nivå.

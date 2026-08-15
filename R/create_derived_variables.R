@@ -1,5 +1,4 @@
 
-
 create_derived_variables <- function(data) {
   data |>
     dplyr::arrange(Aar) |>
@@ -10,17 +9,26 @@ create_derived_variables <- function(data) {
       Reallonnsvekst =
         Lonnvekst - Inflasjon,
       
-      Arbeidsstyrkeandel =
-        Arbeidsstyrke / Befolkning * 100,
+      Arbeidsledige_AKU =
+        Arbeidsstyrke - Sysselsatte,
       
-      Arbledige_andel_arbeidsstyrke_NAV =
-        Arbledige_NAV / Arbeidsstyrke * 100,
+      Arbeidsledighetsrate_AKU =
+        Arbeidsledige_AKU / Arbeidsstyrke * 100,
       
       Offentlig_gjeld_andel_BNP =
         Offentlig_gjeld / BNP_lopende * 100,
       
       Offentlig_nettofordringer_andel_BNP =
         Offentlig_nettofordringer / BNP_lopende * 100,
+      
+      Offentlige_inntekter_andel_BNP =
+        Offentlige_inntekter / BNP_lopende * 100,
+      
+      Offentlige_utgifter_andel_BNP =
+        Offentlige_utgifter / BNP_lopende * 100,
+      
+      Nettofinansinvestering_andel_BNP =
+        Nettofinansinvestering / BNP_lopende * 100,
       
       Kommunal_utgiftsandel =
         Kommunale_utgifter / Offentlige_utgifter * 100,
@@ -75,9 +83,12 @@ create_derived_variables <- function(data) {
       
       Rentekurve =
         Statsrente_10aar - Styringsrente
-      
     ) |>
-    
-    dplyr::mutate(Produktivitetsvekst =
-                    (Arbeidsproduktivitet / dplyr::lag(Arbeidsproduktivitet) - 1) * 100)
+    dplyr::mutate(
+      Produktivitetsvekst =
+        (
+          Arbeidsproduktivitet /
+            dplyr::lag(Arbeidsproduktivitet) - 1
+        ) * 100
+    )
 }
