@@ -1,6 +1,7 @@
 
 build_database <- function() {
   kpi <- get_kpi()
+  kpi_jae <- get_kpi_jae()
   befolkning <- get_befolkning()
   arbeidsstyrke <- get_arbeidsstyrke()
   sysselsatte <- get_sysselsatte()
@@ -71,6 +72,7 @@ build_database <- function() {
     dplyr::left_join(pengemarkedsrente, by = "Aar") |>
     dplyr::left_join(statsrente, by = "Aar") |>
     dplyr::left_join(tjenesteproduksjon, by = "Aar") |>
-    
-    create_derived_variables()
+    dplyr::full_join(kpi_jae, by = "Aar") |>
+  
+  create_derived_variables()
 }
