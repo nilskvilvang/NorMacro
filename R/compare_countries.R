@@ -280,7 +280,12 @@ compare_countries <- function(
   
   metadata <- get_metadata(data)
   
-  display <- if (variable %in% metadata$Variabel) {
+  meta <- metadata |>
+    dplyr::filter(
+      .data$Variabel == variable
+    )
+  
+  display <- if (nrow(meta) > 0L) {
     get_display_name(
       variable,
       metadata
@@ -295,6 +300,30 @@ compare_countries <- function(
     )
   }
   
+  source_text <- if (nrow(meta) > 0L) {
+    meta$Kilde |>
+      unique() |>
+      stats::na.omit() |>
+      as.character()
+  } else {
+    character()
+  }
+  
+  source_text <- source_text[
+    nzchar(source_text)
+  ]
+  
+  caption <- if (length(source_text) > 0L) {
+    paste0(
+      "Kilde: ",
+      paste(
+        source_text,
+        collapse = ", "
+      )
+    )
+  } else {
+    NULL
+  }
 
   # ------------------------------------------------------------
   # Plot
@@ -326,7 +355,7 @@ compare_countries <- function(
       x = NULL,
       y = y_label,
       colour = "Land",
-      caption = "Kilde: Eurostat"
+      caption = caption
     ) +
     ggplot2::theme_minimal()
 }

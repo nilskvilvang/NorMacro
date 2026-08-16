@@ -20,6 +20,7 @@ build_international_database <- function(refresh = FALSE) {
   public_consumption <- get_public_consumption(refresh = refresh)
   investment <- get_investment(refresh = refresh)
   interest_rate <- get_long_interest_rate(refresh = refresh)
+  short_interest_rate <- get_short_interest_rate(refresh = refresh)
   wages <- get_wages(refresh = refresh)
   
   international <-
@@ -41,8 +42,10 @@ build_international_database <- function(refresh = FALSE) {
     dplyr::full_join(public_consumption, by = join_by) |>
     dplyr::full_join(investment, by = join_by) |>
     dplyr::full_join(interest_rate, by = join_by) |>
+    dplyr::full_join(short_interest_rate, by = join_by) |>
     dplyr::full_join(wages, by = join_by) |>
     create_international_derived_variables()
   
   international
 }
+
