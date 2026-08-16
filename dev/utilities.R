@@ -85,3 +85,12 @@
 
 ## SJekke vignetter
 # browseVignettes("NorMacro")
+
+## ASCII
+
+# \u00e5  å
+# \u00e6  æ
+# \u00f8  ø
+# \u00c5  Å
+# \u00c6  Æ
+# \u00d8  Ø

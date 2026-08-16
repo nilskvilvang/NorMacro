@@ -3,7 +3,12 @@
 #'
 #' Lager et tidsserieplott for en internasjonal makrovariabel
 #' paa tvers av valgte land.
+#'
 #' @param variable Navn paa en variabel i det internasjonale datasettet.
+#' @param countries Tegnvektor med landkoder som skal sammenlignes.
+#'   Hvis `NULL`, brukes tilgjengelige standardland.
+#' @param data Internasjonalt NorMacro-datasett. Hvis `NULL`, brukes
+#'   [get_international_macro()].
 #' @param start_year Forste aar som skal vises. Standard er `NULL`.
 #' @param normalize Logisk. Hvis `TRUE`, normaliseres seriene til
 #'   100 i et felles basisaar.

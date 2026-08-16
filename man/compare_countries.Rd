@@ -2,7 +2,7 @@
 % Please edit documentation in R/compare_countries.R
 \name{compare_countries}
 \alias{compare_countries}
-\title{Sammenlign én variabel mellom land}
+\title{Sammenlign en variabel mellom land}
 \usage{
 compare_countries(
   variable,
@@ -14,28 +14,28 @@ compare_countries(
 )
 }
 \arguments{
-\item{variable}{Navn på én variabel i det internasjonale datasettet.}
+\item{variable}{Navn paa en variabel i det internasjonale datasettet.}
 
-\item{countries}{Tegnvektor med landkoder. Hvis `NULL`, brukes
-NorMacros standardland.}
+\item{countries}{Tegnvektor med landkoder som skal sammenlignes.
+Hvis `NULL`, brukes tilgjengelige standardland.}
 
 \item{data}{Internasjonalt NorMacro-datasett. Hvis `NULL`, brukes
 [get_international_macro()].}
 
-\item{start_year}{Første år som skal vises. Standard er `NULL`.}
+\item{start_year}{Forste aar som skal vises. Standard er `NULL`.}
 
 \item{normalize}{Logisk. Hvis `TRUE`, normaliseres seriene til
-100 i et felles basisår.}
+100 i et felles basisaar.}
 
-\item{base_year}{Basisår ved normalisering. Hvis `NULL`, brukes
-første felles år med data for alle valgte land.}
+\item{base_year}{Basisaar ved normalisering. Hvis `NULL`, brukes
+forste felles aar med data for alle valgte land.}
 }
 \value{
 Et `ggplot`-objekt.
 }
 \description{
-Lager et tidsserieplott for én internasjonal makrovariabel
-på tvers av valgte land.
+Lager et tidsserieplott for en internasjonal makrovariabel
+paa tvers av valgte land.
 }
 \examples{
 \dontrun{
