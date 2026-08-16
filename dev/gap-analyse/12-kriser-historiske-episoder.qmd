@@ -50,7 +50,7 @@ For Norge finnes blant annet:
 
 - `BNP_Fastland`
 - `BNP_Fastland_vekst`
-- `Arbledighetsrate_NAV`
+- `Arbeidsledighetsrate_NAV`
 - `Sysselsatte`
 - `Inflasjon`
 - `Privat_konsum`

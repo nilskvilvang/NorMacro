@@ -216,22 +216,51 @@ gap-analysen.
 Denne tabellen oppdateres etter hvert som de individuelle gap-analysene
 gjennomføres.
 
-| Fagområde | Data | Analyse | Metadata | Undervisning | Samlet gap | Prioritet |
+| Fagområde | Data | Analyse | Metadata | Undervisning | Samlet gap | Prioritet videre |
 |---|---|---|---|---|---|---|
-| 1. Nasjonalregnskap | – | – | – | – | – | – |
-| 2. Konjunkturer | – | – | – | – | – | – |
-| 3. Arbeidsmarked | – | – | – | – | – | – |
-| 4. Inflasjon | – | – | – | – | – | – |
-| 5. Pengepolitikk | – | – | – | – | – | – |
-| 6. Finanspolitikk | – | – | – | – | – | – |
-| 7. Konsum og investering | – | – | – | – | – | – |
-| 8. Åpen økonomi | – | – | – | – | – | – |
-| 9. Valutakurs | – | – | – | – | – | – |
-| 10. Lønn og produktivitet | – | – | – | – | – | – |
-| 11. Langsiktig vekst | – | – | – | – | – | – |
-| 12. Kriser og historiske episoder | – | – | – | – | – | – |
-| 13. Internasjonal makro | – | – | – | – | – | – |
-| 14. Finansmarkeder og forventninger | – | – | – | – | – | – |
+| 1. Nasjonalregnskap | 🟢 | 🟢 | 🟢 | 🟡 | Lite | Lav |
+| 2. Konjunkturer | 🟡 | 🟢 | 🟢 | 🟢 | Lite | Middels |
+| 3. Arbeidsmarked | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 4. Inflasjon | 🟡 | 🟢 | 🟢 | 🟢 | Lite–middels | Middels |
+| 5. Pengepolitikk | 🟡 | 🟢 | 🟢 | 🟢 | Lite–middels | Middels |
+| 6. Finanspolitikk | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 7. Konsum og investering | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 8. Åpen økonomi | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 9. Valutakurs | 🟡 | 🟢 | 🟢 | 🟡 | Middels | Høy |
+| 10. Lønn og produktivitet | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 11. Langsiktig vekst | 🟡 | 🟢 | 🟢 | 🟢 | Lite | Middels |
+| 12. Kriser og historiske episoder | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 13. Internasjonal makro | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 14. Finansmarkeder og forventninger | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+
+## Status mot 2.1.0
+
+Sluttkontrollen etter utviklingsarbeidet mot 2.1.0 viser at ingen av de
+14 fagområdene har et vesentlig rødt gap.
+
+De viktigste gapene som tidligere ble identifisert innen arbeidsmarked,
+finanspolitikk, internasjonal lønn, internasjonal brukerflyt og historiske
+episoder er i hovedsak lukket.
+
+Følgende eksplisitte restgap videreføres til senere utvikling:
+
+- **Konjunkturer:** produksjonsgap eller annet eksplisitt aktivitetsgap.
+- **Inflasjon:** underliggende inflasjon, for eksempel KPI-JAE.
+- **Pengepolitikk:** lengre historikk for kort markedsrente, eksplisitt
+  ex-post realrente og internasjonalt sammenlignbar policy- eller kort rente.
+- **Valutakurs:** real effektiv valutakurs er det tydeligste gjenværende
+  faglige datagapet. Harmonisert internasjonal effektiv valutakurs og
+  eventuelt én bilateral kurs bør vurderes sammen med dette.
+- **Langsiktig vekst:** realt BNP per innbygger og vekst i realt BNP per
+  innbygger internasjonalt.
+- **Nasjonalregnskap:** et mer eksplisitt undervisningseksempel kan styrke
+  arbeidsflyten ytterligere.
+
+Andre mulige utvidelser, som BNP-deflator, driftsbalanse, bytteforhold,
+lønnsandel, produktivitet per arbeidstime, kapitalbeholdning og TFP,
+vurderes som senere forbedringer og ikke som krav for 2.1.0.
+
+På dette grunnlaget vurderes den faglige dekningen som tilstrekkelig for 2.1.0.
 
 # Fra gap til utviklingsoppgave
 
