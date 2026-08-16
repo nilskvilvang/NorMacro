@@ -18,6 +18,8 @@ utils::globalVariables(c(
   "BNP_Fastland_per_innbygger",
   "BNP_Fastland_vekst",
   "BNP_faste_priser",
+  "BNP_faste_priser_per_innbygger",
+  "BNP_faste_priser_per_innbygger_vekst",
   "BNP_lopende",
   "Befolkning",
   "Befolkning_15_74_kjonn",
