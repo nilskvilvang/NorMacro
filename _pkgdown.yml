@@ -3,6 +3,8 @@ url: https://nilskvilvang.github.io/NorMacro/
 
 destination: pkgdown-site
 
+llm-docs: false
+
 template:
   bootstrap: 5
 
@@ -70,6 +72,7 @@ reference:
     contents:
       - plot_series
       - compare_series
+      - compare_countries
       - scatter_series
       - correlate_series
       - growth_table
@@ -99,10 +102,15 @@ reference:
       - kostra_timeseries_benchmark
       - plot_kostra_benchmark
       - plot_kostra_timeseries_benchmark
-      
+
   - title: Konjunkturanalyse
     desc: Indikatorbasert klassifisering og forklaring av konjunktursituasjonen.
     contents:
       - business_cycle
       - business_cycle_explain
-      
+
+  - title: Historiske episoder
+    desc: Kuraterte makroøkonomiske episoder og kobling til relevante data.
+    contents:
+      - historical_episodes
+      - episode_explain

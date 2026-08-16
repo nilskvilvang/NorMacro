@@ -1,4 +1,45 @@
 
+# NorMacro 2.1.0
+
+## Nye data og faglig dekning
+
+- Utvidet arbeidsmarkedsblokken med norsk AKU-ledighet, korrekt
+  arbeidsstyrkeandel og sysselsettingsandel basert på befolkningen
+  15–74 år.
+- Utvidet offentlige finanser med offentlige inntekter,
+  nettofinansinvestering og sentrale størrelser som andel av BNP.
+- Lagt til internasjonale lønnsdata, ansatte, lønn per ansatt,
+  lønnsvekst og reallønnsvekst.
+- Utvidet og kvalitetssikret metadata for norske og internasjonale
+  makroøkonomiske serier.
+
+## Nye funksjoner
+
+- Lagt til `compare_countries()` for sammenligning av én
+  makroøkonomisk variabel på tvers av land.
+- Lagt til `historical_episodes()` med en kuratert katalog over
+  sentrale norske makroøkonomiske episoder.
+- Lagt til `episode_explain()` for å koble historiske episoder til
+  relevante NorMacro-data.
+
+## Forbedringer
+
+- Ryddet og standardisert NAV-navngivning fra `Arbledig*` til
+  `Arbeidsledig*`.
+- Forbedret arbeidsmarkedsdefinisjoner og skille mellom AKU- og
+  NAV-ledighet.
+- Forbedret internasjonal brukerflyt og landnavn i sammenligninger.
+- Ryddet metadata, displaynavn, kategorier og analyseklassifisering.
+- Gjennomført samlet faglig gap-analyse mot 14 makroøkonomiske
+  kravområder og dokumentert eksplisitte restgap for senere utvikling.
+- Oppdatert dokumentasjon og vignetter til dagens API.
+
+## Kvalitet
+
+- Utvidet testdekningen for nye data- og analysefunksjoner.
+- Pakken passerer `R CMD check` uten feil, advarsler eller merknader.
+
+
 # NorMacro 2.0.3
 
 ## Nye funksjoner

@@ -17,6 +17,10 @@ execute:
 #| include: false
 
 library(NorMacro)
+
+knitr::opts_chunk$set(
+  fig.path = "man/figures/"
+)
 ```
 
 # NorMacro
@@ -134,6 +138,7 @@ variable_summary(
 ```{r}
 #| label: fig-inflation
 #| fig-cap: "Inflasjon i Norge, 2000–2025."
+#| fig-alt: "Tidsserie som viser utviklingen i norsk inflasjon fra 2000 til 2025."
 #| fig-width: 8
 #| fig-height: 5
 
@@ -148,6 +153,7 @@ plot_series(
 ```{r}
 #| label: fig-compare-series
 #| fig-cap: "Sammenligning av utvalgte norske makroserier."
+#| fig-alt: "Sammenligning av inflasjon, BNP-vekst, arbeidsledighet og styringsrente i Norge."
 #| fig-width: 8
 #| fig-height: 5
 
@@ -192,6 +198,7 @@ Sammenlign inflasjonen mellom Norge, Sverige og Danmark:
 ```{r}
 #| label: fig-international-inflation
 #| fig-cap: "Inflasjon i Norge, Sverige og Danmark."
+#| fig-alt: "Inflasjon sammenlignet mellom Norge, Sverige og Danmark."
 #| fig-width: 8
 #| fig-height: 5
 
@@ -208,6 +215,7 @@ Flere variabler kan også sammenlignes innen ett land:
 ```{r}
 #| label: fig-norway-international-data
 #| fig-cap: "Inflasjon, BNP-vekst og arbeidsledighet i Norge."
+#| fig-alt: "Inflasjon, BNP-vekst og arbeidsledighet i Norge basert på det internasjonale eksempeldatasettet."
 #| fig-width: 8
 #| fig-height: 5
 
@@ -215,7 +223,7 @@ compare_series(
   c(
     "Inflasjon",
     "BNP_vekst",
-    "Arbeidsledighetsrate_NAV"
+    "Arbeidsledighetsrate"
   ),
   data = normacro_international_example,
   country = "NO"
@@ -250,6 +258,7 @@ Rangeringen kan visualiseres direkte:
 ```{r}
 #| label: fig-kostra-ranking
 #| fig-cap: "Netto driftsresultat i Oslo, Bergen og Trondheim i 2025."
+#| fig-alt: "Rangering av netto driftsresultat for Oslo, Bergen og Trondheim i 2025."
 #| fig-width: 8
 #| fig-height: 5
 

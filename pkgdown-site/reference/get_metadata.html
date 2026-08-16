@@ -9,7 +9,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">NorMacro</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@ identifisere riktig metadataområde.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_metadata</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 130 × 16</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 144 × 16</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Variabel Display_navn Type  Kategori Beskrivelse Kilde Kilde_url Tabell Enhet</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> KPI      KPI          Orig… Priser … Konsumpris… SSB   https://… 14711  2025…</span>
@@ -71,12 +71,12 @@ identifisere riktig metadataområde.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Befolkn… Befolkning   Orig… Demogra… Befolkning… SSB   https://… 5803   Pers…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Arbeids… Arbeidsstyr… Orig… Arbeids… Personer i… SSB … https://… 3780   Pers…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Syssels… Sysselsatte  Orig… Arbeids… Sysselsatt… SSB … https://… 3781   Pers…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Arbledi… Arbledige N… Orig… Arbeids… Registrert… NAV   https://… Tabel… Pers…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Menn_ar… Menn arbled… Orig… Arbeids… Registrert… NAV   https://… Tabel… Pers…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Arbeids… Arbeidsledi… Orig… Arbeids… Registrert… NAV   https://… Tabel… Pers…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Menn_ar… Menn arbeid… Orig… Arbeids… Registrert… NAV   https://… Tabel… Pers…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Kvinner… Kvinner arb… Orig… Arbeids… Registrert… NAV   https://… Tabel… Pers…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Arbledi… Arbledighet… Orig… Arbeids… Registrert… NAV   https://… Tabel… Pros…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Arbeids… Arbeidsledi… Orig… Arbeids… Registrert… NAV   https://… Tabel… Pros…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Kvinnea… Kvinneandel… Orig… Arbeids… Andel kvin… NAV   https://… Tabel… Pros…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 120 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 134 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: Frekvens &lt;chr&gt;, Startaar &lt;dbl&gt;, Sluttaar &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Funksjon &lt;chr&gt;, Kommentar &lt;chr&gt;, Omraade &lt;chr&gt;, Analyse_type &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
@@ -96,7 +96,7 @@ identifisere riktig metadataområde.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Eksport  Eksport      Orig… Utenrik… Eksport i … Euro… https://… nama_… Mill…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Import   Import       Orig… Utenrik… Import i a… Euro… https://… nama_… Mill…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Inflasj… Inflasjon    Bere… Priser … Årsvekst i… Bere… <span style="color: #BB0000;">NA</span>        HICP   Pros…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> BNP_vek… BNP vekst    Bere… Nasjona… Erlig pros… Bere… <span style="color: #BB0000;">NA</span>        BNP_f… Pros…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> BNP_vek… BNP vekst    Bere… Nasjona… Årlig pros… Bere… <span style="color: #BB0000;">NA</span>        BNP_f… Pros…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Boligpr… Boligprisve… Bere… Boligma… Årlig pros… Bere… <span style="color: #BB0000;">NA</span>        Bolig… Pros…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: Frekvens &lt;chr&gt;, Startaar &lt;dbl&gt;, Sluttaar &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Funksjon &lt;chr&gt;, Kommentar &lt;chr&gt;, Omraade &lt;chr&gt;, Analyse_type &lt;chr&gt;</span></span>

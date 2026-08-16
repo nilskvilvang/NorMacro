@@ -37,11 +37,11 @@ En data.frame med 26 observasjoner og 17 variabler:
 
   Sysselsatte personer.
 
-- Arbledige_NAV:
+- Arbeidsledige_NAV:
 
   Registrerte arbeidsledige hos NAV.
 
-- Arbledighetsrate_NAV:
+- Arbeidsledighetsrate_NAV:
 
   Registrert arbeidsledighet i prosent.
 

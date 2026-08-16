@@ -90,11 +90,10 @@ Her sammenlignes inflasjonen i Norge, Sverige og Danmark:
 
 ``` r
 
-plot_series(
+compare_countries(
   "Inflasjon",
-  data = normacro_international_example,
-  metadata = normacro_international_example_metadata,
-  countries = c("NO", "SE", "DK")
+  countries = c("NO", "SE", "DK"),
+  data = normacro_international_example
 )
 ```
 
@@ -111,10 +110,9 @@ Det samme kan gjøres for alle landene i datasettet.
 
 ``` r
 
-plot_series(
+compare_countries(
   "BNP_vekst",
-  data = normacro_international_example,
-  metadata = normacro_international_example_metadata
+  data = normacro_international_example
 )
 ```
 
@@ -212,7 +210,7 @@ latest_observations(
 #>  5      2025 DE    Boligpri…     3.18e+0 Boligprisve… Boligma… Bere… Årlig pros…
 #>  6      2025 DE    Befolkni…     8.36e+7 Befolkning   Demogra… Orig… Befolkning…
 #>  7      2025 DE    BNP_fast…     3.26e+6 BNP faste p… Nasjona… Orig… Bruttonasj…
-#>  8      2025 DE    BNP_vekst     5.71e-2 BNP vekst    Nasjona… Bere… Erlig pros…
+#>  8      2025 DE    BNP_vekst     5.71e-2 BNP vekst    Nasjona… Bere… Årlig pros…
 #>  9      2025 DE    HICP          1.32e+2 Harmonisert… Priser … Orig… Harmoniser…
 #> 10      2025 DE    Inflasjon     2.25e+0 Inflasjon    Priser … Bere… Årsvekst i…
 #> # ℹ 62 more rows
@@ -241,10 +239,10 @@ datasettet.
 
 ``` r
 
-plot_series(
+compare_countries(
   "Inflasjon",
-  data = international,
-  countries = c("NO", "SE", "DK", "DE")
+  countries = c("NO", "SE", "DK", "DE"),
+  data = international
 )
 
 compare_series(

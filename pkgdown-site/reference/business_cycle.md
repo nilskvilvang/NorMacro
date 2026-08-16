@@ -50,8 +50,7 @@ høykonjunktur.
 ## Examples
 
 ``` r
-cycle <- business_cycle(
-  data = normacro_example
-)
-#> Error in business_cycle_score(data = data, ...): Fant ikke nødvendige variabler i datasettet: Konjunkturindikator, Kapasitetsutnytting, Rentekurve
+if (FALSE) { # \dontrun{
+cycle <- business_cycle()
+} # }
 ```

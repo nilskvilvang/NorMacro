@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">NorMacro</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,12 +88,15 @@ Det består av et utvalg norske makroøkonomiske årsserier for perioden
 <span><span class="co">#&gt; [1] 26 17</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">normacro_example</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "Aar"                  "KPI"                  "Inflasjon"           </span></span>
-<span><span class="co">#&gt;  [4] "Befolkning"           "Arbeidsstyrke"        "Sysselsatte"         </span></span>
-<span><span class="co">#&gt;  [7] "Arbledige_NAV"        "Arbledighetsrate_NAV" "Styringsrente"       </span></span>
-<span><span class="co">#&gt; [10] "BNP_Fastland"         "BNP_Fastland_vekst"   "Lonnvekst"           </span></span>
-<span><span class="co">#&gt; [13] "Boligprisindeks"      "Boligprisvekst"       "Oljepris_USD"        </span></span>
-<span><span class="co">#&gt; [16] "Eksport"              "Import"</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] "Aar"                      "KPI"                     </span></span>
+<span><span class="co">#&gt;  [3] "Inflasjon"                "Befolkning"              </span></span>
+<span><span class="co">#&gt;  [5] "Arbeidsstyrke"            "Sysselsatte"             </span></span>
+<span><span class="co">#&gt;  [7] "Arbeidsledige_NAV"        "Arbeidsledighetsrate_NAV"</span></span>
+<span><span class="co">#&gt;  [9] "Styringsrente"            "BNP_Fastland"            </span></span>
+<span><span class="co">#&gt; [11] "BNP_Fastland_vekst"       "Lonnvekst"               </span></span>
+<span><span class="co">#&gt; [13] "Boligprisindeks"          "Boligprisvekst"          </span></span>
+<span><span class="co">#&gt; [15] "Oljepris_USD"             "Eksport"                 </span></span>
+<span><span class="co">#&gt; [17] "Import"</span></span></code></pre></div>
 <p>Datasettet inneholder både nivåserier, vekstrater og indekser fra
 flere deler av norsk økonomi.</p>
 <p>De tilhørende metadataene finnes i
@@ -109,24 +112,24 @@ flere deler av norsk økonomi.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 5</span></span></span>
-<span><span class="co">#&gt;    Variabel             Display_navn         Kategori         Enhet Analyse_type</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> KPI                  KPI                  Priser og infla… 2025… indeks      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Inflasjon            Inflasjon            Priser og infla… Pros… rate        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Befolkning           Befolkning           Demografi        Pers… nivå        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Arbeidsstyrke        Arbeidsstyrke        Arbeidsmarked    Pers… nivå        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Sysselsatte          Sysselsatte          Arbeidsmarked    Pers… nivå        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Arbledige_NAV        Arbledige NAV        Arbeidsmarked    Pers… nivå        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Arbledighetsrate_NAV Arbledighetsrate NAV Arbeidsmarked    Pros… rate        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Styringsrente        Styringsrente        Finansmarkeder   Pros… rate        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> BNP_Fastland         BNP Fastland         Nasjonalregnskap Mill… nivå        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> BNP_Fastland_vekst   BNP Fastland vekst   Nasjonalregnskap Pros… rate        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Lonnvekst            Lonnvekst            Lønn og inntekt  Pros… rate        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Boligprisindeks      Boligprisindeks      Boligmarked      Inde… indeks      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Boligprisvekst       Boligprisvekst       Boligmarked      Pros… rate        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> Oljepris_USD         Oljepris USD         Energi og råvar… USD … nivå        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Eksport              Eksport              Utenriksøkonomi  Mill… nivå        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> Import               Import               Utenriksøkonomi  Mill… nivå</span></span></code></pre></div>
+<span><span class="co">#&gt;    Variabel                 Display_navn             Kategori Enhet Analyse_type</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> KPI                      KPI                      Priser … 2025… indeks      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Inflasjon                Inflasjon                Priser … Pros… rate        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Befolkning               Befolkning               Demogra… Pers… nivå        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Arbeidsstyrke            Arbeidsstyrke            Arbeids… Pers… nivå        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Sysselsatte              Sysselsatte              Arbeids… Pers… nivå        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Arbeidsledige_NAV        Arbeidsledige NAV        Arbeids… Pers… nivå        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Arbeidsledighetsrate_NAV Arbeidsledighetsrate NAV Arbeids… Pros… rate        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Styringsrente            Styringsrente            Finansm… Pros… rate        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> BNP_Fastland             BNP Fastland             Nasjona… Mill… nivå        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> BNP_Fastland_vekst       BNP Fastland vekst       Nasjona… Pros… rate        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Lonnvekst                Lonnvekst                Lønn og… Pros… rate        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Boligprisindeks          Boligprisindeks          Boligma… Inde… indeks      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Boligprisvekst           Boligprisvekst           Boligma… Pros… rate        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> Oljepris_USD             Oljepris USD             Energi … USD … nivå        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Eksport                  Eksport                  Utenrik… Mill… nivå        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> Import                   Import                   Utenrik… Mill… nivå</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="datadekning">Datadekning<a class="anchor" aria-label="anchor" href="#datadekning"></a>
@@ -138,9 +141,9 @@ variablene dekker, antall observasjoner og eventuell manglende data.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 11</span></span></span>
 <span><span class="co">#&gt;    Variabel      Startaar_data Sluttaar_data Antall_observasjoner Antall_mangler</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Arbeidsstyrke          <span style="text-decoration: underline;">2</span>000          <span style="text-decoration: underline;">2</span>025                   26              0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Arbledige_NAV          <span style="text-decoration: underline;">2</span>000          <span style="text-decoration: underline;">2</span>025                   26              0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Arbledighets…          <span style="text-decoration: underline;">2</span>000          <span style="text-decoration: underline;">2</span>025                   26              0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Arbeidsledig…          <span style="text-decoration: underline;">2</span>000          <span style="text-decoration: underline;">2</span>025                   26              0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Arbeidsledig…          <span style="text-decoration: underline;">2</span>000          <span style="text-decoration: underline;">2</span>025                   26              0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Arbeidsstyrke          <span style="text-decoration: underline;">2</span>000          <span style="text-decoration: underline;">2</span>025                   26              0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Sysselsatte            <span style="text-decoration: underline;">2</span>000          <span style="text-decoration: underline;">2</span>025                   26              0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Boligprisind…          <span style="text-decoration: underline;">2</span>000          <span style="text-decoration: underline;">2</span>025                   26              0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Boligprisvek…          <span style="text-decoration: underline;">2</span>000          <span style="text-decoration: underline;">2</span>025                   26              0</span></span>
@@ -212,13 +215,13 @@ variabel.</p>
 <span><span class="co">#&gt; Sterkeste korrelasjoner</span></span>
 <span><span class="co">#&gt; -----------------------</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
-<span><span class="co">#&gt;   Display_navn         Variabel             Korrelasjon</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Eksport              Eksport                    0.545</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> KPI                  KPI                        0.518</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Arbledighetsrate NAV Arbledighetsrate_NAV      -<span style="color: #BB0000;">0.485</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Arbeidsstyrke        Arbeidsstyrke              0.477</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Boligprisindeks      Boligprisindeks            0.476</span></span></code></pre></div>
+<span><span class="co">#&gt;   Display_navn             Variabel                 Korrelasjon</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Eksport                  Eksport                        0.545</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> KPI                      KPI                            0.518</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Sysselsatte              Sysselsatte                    0.491</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Arbeidsledighetsrate NAV Arbeidsledighetsrate_NAV      -<span style="color: #BB0000;">0.485</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Arbeidsstyrke            Arbeidsstyrke                  0.477</span></span></code></pre></div>
 <p>Resultatet kombinerer metadata og dataanalyse. Det viser blant annet
 beskrivelse, kilde, måleenhet, datadekning, siste observasjon,
 deskriptiv statistikk og de sterkeste korrelasjonene med andre variabler
@@ -248,7 +251,7 @@ serier slik at utviklingen kan sammenlignes på en felles skala.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/compare_series.html">compare_series</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"Inflasjon"</span>,</span>
-<span>    <span class="st">"Arbledighetsrate_NAV"</span>,</span>
+<span>    <span class="st">"Arbeidsledighetsrate_NAV"</span>,</span>
 <span>    <span class="st">"BNP_Fastland_vekst"</span>,</span>
 <span>    <span class="st">"Styringsrente"</span></span>
 <span>  <span class="op">)</span>,</span>
@@ -268,21 +271,21 @@ valgte tidsserier.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/correlate_series.html">correlate_series</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"Inflasjon"</span>,</span>
-<span>    <span class="st">"Arbledighetsrate_NAV"</span>,</span>
+<span>    <span class="st">"Arbeidsledighetsrate_NAV"</span>,</span>
 <span>    <span class="st">"BNP_Fastland_vekst"</span>,</span>
 <span>    <span class="st">"Styringsrente"</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">normacro_example</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 11</span></span></span>
-<span><span class="co">#&gt;   Variabel_x           Display_x        Variabel_y Display_y Korrelasjon P_verdi</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Inflasjon            Inflasjon        Arbledigh… Arbledig… -0,485      0,012  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Arbledighetsrate_NAV Arbledighetsrat… BNP_Fastl… BNP Fast… -0,275      0,173  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Arbledighetsrate_NAV Arbledighetsrat… Styringsr… Styrings… -0,176      0,389  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Inflasjon            Inflasjon        BNP_Fastl… BNP Fast… -0,094      0,647  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> BNP_Fastland_vekst   BNP Fastland ve… Styringsr… Styrings… 0,054       0,793  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Inflasjon            Inflasjon        Styringsr… Styrings… 0,036       0,861  </span></span>
+<span><span class="co">#&gt;   Variabel_x               Display_x    Variabel_y Display_y Korrelasjon P_verdi</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Inflasjon                Inflasjon    Arbeidsle… Arbeidsl… -0,485      0,012  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Arbeidsledighetsrate_NAV Arbeidsledi… BNP_Fastl… BNP Fast… -0,275      0,173  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Arbeidsledighetsrate_NAV Arbeidsledi… Styringsr… Styrings… -0,176      0,389  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Inflasjon                Inflasjon    BNP_Fastl… BNP Fast… -0,094      0,647  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> BNP_Fastland_vekst       BNP Fastlan… Styringsr… Styrings… 0,054       0,793  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Inflasjon                Inflasjon    Styringsr… Styrings… 0,036       0,861  </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: Antall_observasjoner &lt;int&gt;, Metode &lt;chr&gt;, Startaar &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   Sluttaar &lt;dbl&gt;, Signifikant &lt;chr&gt;</span></span></span></code></pre></div>
 <p>Tabellen viser korrelasjonskoeffisient, p-verdi, antall observasjoner
@@ -326,9 +329,9 @@ siste observasjonen for hver variabel.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 10</span></span></span>
 <span><span class="co">#&gt;    Siste_aar Variabel  Siste_verdi Display_navn Kategori Type  Beskrivelse Enhet</span></span>
 <span><span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>      <span style="text-decoration: underline;">2</span>025 Arbeidss…  3<span style="text-decoration: underline;">039</span>000    Arbeidsstyr… Arbeids… Orig… Personer i… Pers…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>      <span style="text-decoration: underline;">2</span>025 Arbledig…    <span style="text-decoration: underline;">63</span>036    Arbledige N… Arbeids… Orig… Registrert… Pers…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>      <span style="text-decoration: underline;">2</span>025 Arbledig…        2.1  Arbledighet… Arbeids… Orig… Registrert… Pros…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>      <span style="text-decoration: underline;">2</span>025 Arbeidsl…    <span style="text-decoration: underline;">63</span>036    Arbeidsledi… Arbeids… Orig… Registrert… Pers…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>      <span style="text-decoration: underline;">2</span>025 Arbeidsl…        2.1  Arbeidsledi… Arbeids… Orig… Registrert… Pros…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>      <span style="text-decoration: underline;">2</span>025 Arbeidss…  3<span style="text-decoration: underline;">039</span>000    Arbeidsstyr… Arbeids… Orig… Personer i… Pers…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>      <span style="text-decoration: underline;">2</span>025 Sysselsa…  2<span style="text-decoration: underline;">903</span>000    Sysselsatte  Arbeids… Orig… Sysselsatt… Pers…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>      <span style="text-decoration: underline;">2</span>025 Boligpri…      152.   Boligprisin… Boligma… Orig… Prisindeks… Inde…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>      <span style="text-decoration: underline;">2</span>025 Boligpri…        5.46 Boligprisve… Boligma… Bere… Årlig pros… Pros…</span></span>

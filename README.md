@@ -161,13 +161,13 @@ variable_summary(
     Sterkeste korrelasjoner
     -----------------------
     # A tibble: 5 × 3
-      Display_navn         Variabel             Korrelasjon
-      <chr>                <chr>                      <dbl>
-    1 Eksport              Eksport                    0.545
-    2 KPI                  KPI                        0.518
-    3 Arbledighetsrate NAV Arbledighetsrate_NAV      -0.485
-    4 Arbeidsstyrke        Arbeidsstyrke              0.477
-    5 Boligprisindeks      Boligprisindeks            0.476
+      Display_navn             Variabel                 Korrelasjon
+      <chr>                    <chr>                          <dbl>
+    1 Eksport                  Eksport                        0.545
+    2 KPI                      KPI                            0.518
+    3 Sysselsatte              Sysselsatte                    0.491
+    4 Arbeidsledighetsrate NAV Arbeidsledighetsrate_NAV      -0.485
+    5 Arbeidsstyrke            Arbeidsstyrke                  0.477
 
 ### Visualiser en tidsserie
 
@@ -180,7 +180,9 @@ plot_series(
 
 <div id="fig-inflation">
 
-![](README_files/figure-commonmark/fig-inflation-1.png)
+<img src="man/figures/fig-inflation-1.png"
+data-fig-alt="Tidsserie som viser utviklingen i norsk inflasjon fra 2000 til 2025."
+alt="Tidsserie som viser utviklingen i norsk inflasjon fra 2000 til 2025." />
 
 Figure 1: Inflasjon i Norge, 2000–2025.
 
@@ -193,7 +195,7 @@ compare_series(
   c(
     "Inflasjon",
     "BNP_Fastland_vekst",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "Styringsrente"
   ),
   data = normacro_example
@@ -202,7 +204,9 @@ compare_series(
 
 <div id="fig-compare-series">
 
-![](README_files/figure-commonmark/fig-compare-series-1.png)
+<img src="man/figures/fig-compare-series-1.png"
+data-fig-alt="Sammenligning av inflasjon, BNP-vekst, arbeidsledighet og styringsrente i Norge."
+alt="Sammenligning av inflasjon, BNP-vekst, arbeidsledighet og styringsrente i Norge." />
 
 Figure 2: Sammenligning av utvalgte norske makroserier.
 
@@ -215,7 +219,7 @@ correlate_series(
   c(
     "Inflasjon",
     "BNP_Fastland_vekst",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "Styringsrente"
   ),
   data = normacro_example
@@ -223,14 +227,14 @@ correlate_series(
 ```
 
     # A tibble: 6 × 11
-      Variabel_x           Display_x        Variabel_y Display_y Korrelasjon P_verdi
-      <chr>                <chr>            <chr>      <chr>     <chr>       <chr>  
-    1 Inflasjon            Inflasjon        Arbledigh… Arbledig… -0,485      0,012  
-    2 BNP_Fastland_vekst   BNP Fastland ve… Arbledigh… Arbledig… -0,275      0,173  
-    3 Arbledighetsrate_NAV Arbledighetsrat… Styringsr… Styrings… -0,176      0,389  
-    4 Inflasjon            Inflasjon        BNP_Fastl… BNP Fast… -0,094      0,647  
-    5 BNP_Fastland_vekst   BNP Fastland ve… Styringsr… Styrings… 0,054       0,793  
-    6 Inflasjon            Inflasjon        Styringsr… Styrings… 0,036       0,861  
+      Variabel_x               Display_x    Variabel_y Display_y Korrelasjon P_verdi
+      <chr>                    <chr>        <chr>      <chr>     <chr>       <chr>  
+    1 Inflasjon                Inflasjon    Arbeidsle… Arbeidsl… -0,485      0,012  
+    2 BNP_Fastland_vekst       BNP Fastlan… Arbeidsle… Arbeidsl… -0,275      0,173  
+    3 Arbeidsledighetsrate_NAV Arbeidsledi… Styringsr… Styrings… -0,176      0,389  
+    4 Inflasjon                Inflasjon    BNP_Fastl… BNP Fast… -0,094      0,647  
+    5 BNP_Fastland_vekst       BNP Fastlan… Styringsr… Styrings… 0,054       0,793  
+    6 Inflasjon                Inflasjon    Styringsr… Styrings… 0,036       0,861  
     # ℹ 5 more variables: Antall_observasjoner <int>, Metode <chr>, Startaar <dbl>,
     #   Sluttaar <dbl>, Signifikant <chr>
 
@@ -258,7 +262,9 @@ plot_series(
 
 <div id="fig-international-inflation">
 
-![](README_files/figure-commonmark/fig-international-inflation-1.png)
+<img src="man/figures/fig-international-inflation-1.png"
+data-fig-alt="Inflasjon sammenlignet mellom Norge, Sverige og Danmark."
+alt="Inflasjon sammenlignet mellom Norge, Sverige og Danmark." />
 
 Figure 3: Inflasjon i Norge, Sverige og Danmark.
 
@@ -280,7 +286,9 @@ compare_series(
 
 <div id="fig-norway-international-data">
 
-![](README_files/figure-commonmark/fig-norway-international-data-1.png)
+<img src="man/figures/fig-norway-international-data-1.png"
+data-fig-alt="Inflasjon, BNP-vekst og arbeidsledighet i Norge basert på det internasjonale eksempeldatasettet."
+alt="Inflasjon, BNP-vekst og arbeidsledighet i Norge basert på det internasjonale eksempeldatasettet." />
 
 Figure 4: Inflasjon, BNP-vekst og arbeidsledighet i Norge.
 
@@ -348,7 +356,9 @@ plot_kostra_ranking(
 
 <div id="fig-kostra-ranking">
 
-![](README_files/figure-commonmark/fig-kostra-ranking-1.png)
+<img src="man/figures/fig-kostra-ranking-1.png"
+data-fig-alt="Rangering av netto driftsresultat for Oslo, Bergen og Trondheim i 2025."
+alt="Rangering av netto driftsresultat for Oslo, Bergen og Trondheim i 2025." />
 
 Figure 5: Netto driftsresultat i Oslo, Bergen og Trondheim i 2025.
 

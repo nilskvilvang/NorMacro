@@ -36,8 +36,6 @@ Modellen bruker som standard:
 
 #### NAV-ledighet
 
-#### NAV-ledighet
-
 |         Verdi | Poeng |
 |--------------:|------:|
 |         `> 5` |    -2 |

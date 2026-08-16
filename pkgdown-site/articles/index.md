@@ -11,7 +11,7 @@
   NorMacro](https://nilskvilvang.github.io/NorMacro/articles/analyse.md):
 - [Avansert analyse med
   comparison_series](https://nilskvilvang.github.io/NorMacro/articles/avansert-analyse.md):
-- [Konjunkturklassifisering](https://nilskvilvang.github.io/NorMacro/articles/07-business-cycle.md):
+- [Konjunkturklassifisering](https://nilskvilvang.github.io/NorMacro/articles/business-cycle.md):
 
 ### Data
 
@@ -20,4 +20,4 @@
 - [KOSTRA-analyse med
   NorMacro](https://nilskvilvang.github.io/NorMacro/articles/kostra.md):
 - [Internasjonale data og
-  kilder](https://nilskvilvang.github.io/NorMacro/articles/06-international-sources.md):
+  kilder](https://nilskvilvang.github.io/NorMacro/articles/international-sources.md):

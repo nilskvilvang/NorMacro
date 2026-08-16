@@ -111,7 +111,7 @@ Du kan undersøke variabelen med:
 
 ``` r
 
-describe_variable("Arbledighetsrate_NAV")
+describe_variable("Arbeidsledighetsrate_NAV")
 ```
 
 Her får du informasjon som hjelper deg å tolke tidsserien riktig.
@@ -130,7 +130,7 @@ Du kan også få en samlet oppsummering av en variabel:
 
 ``` r
 
-variable_summary("Arbledighetsrate_NAV")
+variable_summary("Arbeidsledighetsrate_NAV")
 ```
 
 [`variable_summary()`](https://nilskvilvang.github.io/NorMacro/reference/variable_summary.md)

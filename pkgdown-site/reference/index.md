@@ -60,6 +60,8 @@ datasett.
   : Plot en tidsserie
 - [`compare_series()`](https://nilskvilvang.github.io/NorMacro/reference/compare_series.md)
   : Sammenlign tidsserier
+- [`compare_countries()`](https://nilskvilvang.github.io/NorMacro/reference/compare_countries.md)
+  : Sammenlign en variabel mellom land
 - [`scatter_series()`](https://nilskvilvang.github.io/NorMacro/reference/scatter_series.md)
   : Lag scatterplott mellom to tidsserier
 - [`correlate_series()`](https://nilskvilvang.github.io/NorMacro/reference/correlate_series.md)
@@ -118,3 +120,12 @@ Indikatorbasert klassifisering og forklaring av konjunktursituasjonen.
   : Klassifiser konjunkturfase
 - [`business_cycle_explain()`](https://nilskvilvang.github.io/NorMacro/reference/business_cycle_explain.md)
   : Forklar konjunkturklassifisering for ett år
+
+## Historiske episoder
+
+Kuraterte makroøkonomiske episoder og kobling til relevante data.
+
+- [`historical_episodes()`](https://nilskvilvang.github.io/NorMacro/reference/historical_episodes.md)
+  : Historiske makroøkonomiske episoder
+- [`episode_explain()`](https://nilskvilvang.github.io/NorMacro/reference/episode_explain.md)
+  : Forklar en historisk makroepisode

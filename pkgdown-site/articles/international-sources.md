@@ -95,7 +95,7 @@ for sammenligning mellom land.
 Denne bør skilles fra den norske NAV-serien:
 
 ``` text
-Arbledighetsrate_NAV
+Arbeidsledighetsrate_NAV
 ```
 
 NAV-serien måler registrerte helt arbeidsledige i Norge og bygger på en

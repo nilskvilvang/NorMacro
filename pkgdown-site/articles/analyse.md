@@ -35,12 +35,15 @@ dim(normacro_example)
 ``` r
 
 names(normacro_example)
-#>  [1] "Aar"                  "KPI"                  "Inflasjon"           
-#>  [4] "Befolkning"           "Arbeidsstyrke"        "Sysselsatte"         
-#>  [7] "Arbledige_NAV"        "Arbledighetsrate_NAV" "Styringsrente"       
-#> [10] "BNP_Fastland"         "BNP_Fastland_vekst"   "Lonnvekst"           
-#> [13] "Boligprisindeks"      "Boligprisvekst"       "Oljepris_USD"        
-#> [16] "Eksport"              "Import"
+#>  [1] "Aar"                      "KPI"                     
+#>  [3] "Inflasjon"                "Befolkning"              
+#>  [5] "Arbeidsstyrke"            "Sysselsatte"             
+#>  [7] "Arbeidsledige_NAV"        "Arbeidsledighetsrate_NAV"
+#>  [9] "Styringsrente"            "BNP_Fastland"            
+#> [11] "BNP_Fastland_vekst"       "Lonnvekst"               
+#> [13] "Boligprisindeks"          "Boligprisvekst"          
+#> [15] "Oljepris_USD"             "Eksport"                 
+#> [17] "Import"
 ```
 
 Datasettet inneholder både nivåserier, vekstrater og indekser fra flere
@@ -60,24 +63,24 @@ normacro_example_metadata[
   )
 ]
 #> # A tibble: 16 × 5
-#>    Variabel             Display_navn         Kategori         Enhet Analyse_type
-#>    <chr>                <chr>                <chr>            <chr> <chr>       
-#>  1 KPI                  KPI                  Priser og infla… 2025… indeks      
-#>  2 Inflasjon            Inflasjon            Priser og infla… Pros… rate        
-#>  3 Befolkning           Befolkning           Demografi        Pers… nivå        
-#>  4 Arbeidsstyrke        Arbeidsstyrke        Arbeidsmarked    Pers… nivå        
-#>  5 Sysselsatte          Sysselsatte          Arbeidsmarked    Pers… nivå        
-#>  6 Arbledige_NAV        Arbledige NAV        Arbeidsmarked    Pers… nivå        
-#>  7 Arbledighetsrate_NAV Arbledighetsrate NAV Arbeidsmarked    Pros… rate        
-#>  8 Styringsrente        Styringsrente        Finansmarkeder   Pros… rate        
-#>  9 BNP_Fastland         BNP Fastland         Nasjonalregnskap Mill… nivå        
-#> 10 BNP_Fastland_vekst   BNP Fastland vekst   Nasjonalregnskap Pros… rate        
-#> 11 Lonnvekst            Lonnvekst            Lønn og inntekt  Pros… rate        
-#> 12 Boligprisindeks      Boligprisindeks      Boligmarked      Inde… indeks      
-#> 13 Boligprisvekst       Boligprisvekst       Boligmarked      Pros… rate        
-#> 14 Oljepris_USD         Oljepris USD         Energi og råvar… USD … nivå        
-#> 15 Eksport              Eksport              Utenriksøkonomi  Mill… nivå        
-#> 16 Import               Import               Utenriksøkonomi  Mill… nivå
+#>    Variabel                 Display_navn             Kategori Enhet Analyse_type
+#>    <chr>                    <chr>                    <chr>    <chr> <chr>       
+#>  1 KPI                      KPI                      Priser … 2025… indeks      
+#>  2 Inflasjon                Inflasjon                Priser … Pros… rate        
+#>  3 Befolkning               Befolkning               Demogra… Pers… nivå        
+#>  4 Arbeidsstyrke            Arbeidsstyrke            Arbeids… Pers… nivå        
+#>  5 Sysselsatte              Sysselsatte              Arbeids… Pers… nivå        
+#>  6 Arbeidsledige_NAV        Arbeidsledige NAV        Arbeids… Pers… nivå        
+#>  7 Arbeidsledighetsrate_NAV Arbeidsledighetsrate NAV Arbeids… Pros… rate        
+#>  8 Styringsrente            Styringsrente            Finansm… Pros… rate        
+#>  9 BNP_Fastland             BNP Fastland             Nasjona… Mill… nivå        
+#> 10 BNP_Fastland_vekst       BNP Fastland vekst       Nasjona… Pros… rate        
+#> 11 Lonnvekst                Lonnvekst                Lønn og… Pros… rate        
+#> 12 Boligprisindeks          Boligprisindeks          Boligma… Inde… indeks      
+#> 13 Boligprisvekst           Boligprisvekst           Boligma… Pros… rate        
+#> 14 Oljepris_USD             Oljepris USD             Energi … USD … nivå        
+#> 15 Eksport                  Eksport                  Utenrik… Mill… nivå        
+#> 16 Import                   Import                   Utenrik… Mill… nivå
 ```
 
 ## Datadekning
@@ -92,9 +95,9 @@ coverage(normacro_example)
 #> # A tibble: 16 × 11
 #>    Variabel      Startaar_data Sluttaar_data Antall_observasjoner Antall_mangler
 #>    <chr>                 <dbl>         <dbl>                <int>          <int>
-#>  1 Arbeidsstyrke          2000          2025                   26              0
-#>  2 Arbledige_NAV          2000          2025                   26              0
-#>  3 Arbledighets…          2000          2025                   26              0
+#>  1 Arbeidsledig…          2000          2025                   26              0
+#>  2 Arbeidsledig…          2000          2025                   26              0
+#>  3 Arbeidsstyrke          2000          2025                   26              0
 #>  4 Sysselsatte            2000          2025                   26              0
 #>  5 Boligprisind…          2000          2025                   26              0
 #>  6 Boligprisvek…          2000          2025                   26              0
@@ -171,13 +174,13 @@ variable_summary(
 #> Sterkeste korrelasjoner
 #> -----------------------
 #> # A tibble: 5 × 3
-#>   Display_navn         Variabel             Korrelasjon
-#>   <chr>                <chr>                      <dbl>
-#> 1 Eksport              Eksport                    0.545
-#> 2 KPI                  KPI                        0.518
-#> 3 Arbledighetsrate NAV Arbledighetsrate_NAV      -0.485
-#> 4 Arbeidsstyrke        Arbeidsstyrke              0.477
-#> 5 Boligprisindeks      Boligprisindeks            0.476
+#>   Display_navn             Variabel                 Korrelasjon
+#>   <chr>                    <chr>                          <dbl>
+#> 1 Eksport                  Eksport                        0.545
+#> 2 KPI                      KPI                            0.518
+#> 3 Sysselsatte              Sysselsatte                    0.491
+#> 4 Arbeidsledighetsrate NAV Arbeidsledighetsrate_NAV      -0.485
+#> 5 Arbeidsstyrke            Arbeidsstyrke                  0.477
 ```
 
 Resultatet kombinerer metadata og dataanalyse. Det viser blant annet
@@ -216,7 +219,7 @@ felles skala.
 compare_series(
   c(
     "Inflasjon",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "BNP_Fastland_vekst",
     "Styringsrente"
   ),
@@ -240,21 +243,21 @@ beregner parvise korrelasjoner mellom valgte tidsserier.
 correlate_series(
   c(
     "Inflasjon",
-    "Arbledighetsrate_NAV",
+    "Arbeidsledighetsrate_NAV",
     "BNP_Fastland_vekst",
     "Styringsrente"
   ),
   data = normacro_example
 )
 #> # A tibble: 6 × 11
-#>   Variabel_x           Display_x        Variabel_y Display_y Korrelasjon P_verdi
-#>   <chr>                <chr>            <chr>      <chr>     <chr>       <chr>  
-#> 1 Inflasjon            Inflasjon        Arbledigh… Arbledig… -0,485      0,012  
-#> 2 Arbledighetsrate_NAV Arbledighetsrat… BNP_Fastl… BNP Fast… -0,275      0,173  
-#> 3 Arbledighetsrate_NAV Arbledighetsrat… Styringsr… Styrings… -0,176      0,389  
-#> 4 Inflasjon            Inflasjon        BNP_Fastl… BNP Fast… -0,094      0,647  
-#> 5 BNP_Fastland_vekst   BNP Fastland ve… Styringsr… Styrings… 0,054       0,793  
-#> 6 Inflasjon            Inflasjon        Styringsr… Styrings… 0,036       0,861  
+#>   Variabel_x               Display_x    Variabel_y Display_y Korrelasjon P_verdi
+#>   <chr>                    <chr>        <chr>      <chr>     <chr>       <chr>  
+#> 1 Inflasjon                Inflasjon    Arbeidsle… Arbeidsl… -0,485      0,012  
+#> 2 Arbeidsledighetsrate_NAV Arbeidsledi… BNP_Fastl… BNP Fast… -0,275      0,173  
+#> 3 Arbeidsledighetsrate_NAV Arbeidsledi… Styringsr… Styrings… -0,176      0,389  
+#> 4 Inflasjon                Inflasjon    BNP_Fastl… BNP Fast… -0,094      0,647  
+#> 5 BNP_Fastland_vekst       BNP Fastlan… Styringsr… Styrings… 0,054       0,793  
+#> 6 Inflasjon                Inflasjon    Styringsr… Styrings… 0,036       0,861  
 #> # ℹ 5 more variables: Antall_observasjoner <int>, Metode <chr>, Startaar <dbl>,
 #> #   Sluttaar <dbl>, Signifikant <chr>
 ```
@@ -306,9 +309,9 @@ latest_observations(
 #> # A tibble: 16 × 10
 #>    Siste_aar Variabel  Siste_verdi Display_navn Kategori Type  Beskrivelse Enhet
 #>        <dbl> <chr>           <dbl> <chr>        <chr>    <chr> <chr>       <chr>
-#>  1      2025 Arbeidss…  3039000    Arbeidsstyr… Arbeids… Orig… Personer i… Pers…
-#>  2      2025 Arbledig…    63036    Arbledige N… Arbeids… Orig… Registrert… Pers…
-#>  3      2025 Arbledig…        2.1  Arbledighet… Arbeids… Orig… Registrert… Pros…
+#>  1      2025 Arbeidsl…    63036    Arbeidsledi… Arbeids… Orig… Registrert… Pers…
+#>  2      2025 Arbeidsl…        2.1  Arbeidsledi… Arbeids… Orig… Registrert… Pros…
+#>  3      2025 Arbeidss…  3039000    Arbeidsstyr… Arbeids… Orig… Personer i… Pers…
 #>  4      2025 Sysselsa…  2903000    Sysselsatte  Arbeids… Orig… Sysselsatt… Pers…
 #>  5      2025 Boligpri…      152.   Boligprisin… Boligma… Orig… Prisindeks… Inde…
 #>  6      2025 Boligpri…        5.46 Boligprisve… Boligma… Bere… Årlig pros… Pros…
