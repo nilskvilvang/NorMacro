@@ -1,5 +1,6 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://nilskvilvang.github.io/NorMacro/404.html</loc></url>
+<url><loc>https://nilskvilvang.github.io/NorMacro/LICENSE-text.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/articles/analyse.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/articles/avansert-analyse.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/articles/business-cycle.html</loc></url>
@@ -10,8 +11,8 @@
 <url><loc>https://nilskvilvang.github.io/NorMacro/articles/kostra.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/authors.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/index.html</loc></url>
-<url><loc>https://nilskvilvang.github.io/NorMacro/LICENSE-text.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/news/index.html</loc></url>
+<url><loc>https://nilskvilvang.github.io/NorMacro/reference/NorMacro-package.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/reference/augment.comparison_series_regression.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/reference/autocorrelate.comparison_series.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/reference/autocorrelate.html</loc></url>
@@ -46,7 +47,6 @@
 <url><loc>https://nilskvilvang.github.io/NorMacro/reference/latest_observations.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/reference/list_categories.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/reference/list_variables.html</loc></url>
-<url><loc>https://nilskvilvang.github.io/NorMacro/reference/NorMacro-package.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/reference/normacro_example.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/reference/normacro_example_metadata.html</loc></url>
 <url><loc>https://nilskvilvang.github.io/NorMacro/reference/normacro_international_example.html</loc></url>
