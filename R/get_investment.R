@@ -1,14 +1,18 @@
 
-get_investment <- function(countries = NULL, refresh = FALSE) {
+get_investment <- function(
+    countries = NULL,
+    refresh = FALSE
+) {
   cache_get(
     name = "international_investment",
     refresh = refresh,
     fun = function() {
+
       if (is.null(countries)) {
         countries <- get_standard_countries()
       }
-      
-      get_eurostat_data(
+
+      investeringer_faste <- get_eurostat_data(
         id = "nama_10_gdp",
         filters = list(
           unit = "CLV20_MEUR",
@@ -21,8 +25,39 @@ get_investment <- function(countries = NULL, refresh = FALSE) {
           Land = .data$geo,
           Investeringer = .data$values
         ) |>
-        dplyr::filter(!is.na(.data$Investeringer)) |>
-        dplyr::arrange(.data$Land, .data$Aar)
+        dplyr::filter(
+          !is.na(.data$Investeringer)
+        )
+
+      investeringer_lopende <- get_eurostat_data(
+        id = "nama_10_gdp",
+        filters = list(
+          unit = "CP_MEUR",
+          na_item = "P51G",
+          geo = countries
+        )
+      ) |>
+        dplyr::transmute(
+          Aar = as.integer(format(.data$time, "%Y")),
+          Land = .data$geo,
+          Investeringer_lopende = .data$values
+        ) |>
+        dplyr::filter(
+          !is.na(.data$Investeringer_lopende)
+        )
+
+      investeringer_faste |>
+        dplyr::full_join(
+          investeringer_lopende,
+          by = c(
+            "Aar",
+            "Land"
+          )
+        ) |>
+        dplyr::arrange(
+          .data$Land,
+          .data$Aar
+        )
     }
   )
 }

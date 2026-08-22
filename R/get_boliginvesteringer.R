@@ -1,27 +1,62 @@
 
-
 get_boliginvesteringer <- function(refresh = FALSE) {
   cache_get(
     name = "boliginvesteringer",
     refresh = refresh,
     fun = function() {
-      bolig_inv_raw <- ssb_get(
-        url = "https://data.ssb.no/api/v0/no/table/nk/nk03/knr/SBMENU5140/NRMakroHov",
+
+      url <- paste0(
+        "https://data.ssb.no/api/v0/no/table/",
+        "nk/nk03/knr/SBMENU5140/NRMakroHov"
+      )
+
+      bolig_inv_faste_raw <- ssb_get(
+        url = url,
         query = list(
           Makrost = "bif.nr8368",
           ContentsCode = "Faste",
           Tid = "*"
         )
       )
-      
-      bolig_inv_raw |>
+
+      bolig_inv_lopende_raw <- ssb_get(
+        url = url,
+        query = list(
+          Makrost = "bif.nr8368",
+          ContentsCode = "Priser",
+          Tid = "*"
+        )
+      )
+
+      bolig_inv_faste_raw |>
         dplyr::transmute(
-          Aar = as.integer(ar),
-          Boliginvesteringer = as.numeric(faste_2023_priser_mill_kr)
+          Aar = as.integer(.data$ar),
+
+          Boliginvesteringer = as.numeric(
+            .data$faste_2023_priser_mill_kr
+          )
         ) |>
-        dplyr::arrange(Aar) |>
-        dplyr::mutate(Boliginvesteringer_vekst =
-                        (Boliginvesteringer / dplyr::lag(Boliginvesteringer) - 1) * 100)
+        dplyr::left_join(
+          bolig_inv_lopende_raw |>
+            dplyr::transmute(
+              Aar = as.integer(.data$ar),
+
+              Boliginvesteringer_lopende = as.numeric(
+                .data$lopende_priser_mill_kr
+              )
+            ),
+          by = "Aar"
+        ) |>
+        dplyr::arrange(
+          .data$Aar
+        ) |>
+        dplyr::mutate(
+          Boliginvesteringer_vekst =
+            (
+              .data$Boliginvesteringer /
+                dplyr::lag(.data$Boliginvesteringer) - 1
+            ) * 100
+        )
     }
   )
 }

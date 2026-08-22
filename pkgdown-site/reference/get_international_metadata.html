@@ -54,20 +54,20 @@ makrodatasett.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_international_metadata</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 48 × 16</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 53 × 16</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Variabel Display_navn Type  Kategori Beskrivelse Kilde Kilde_url Tabell Enhet</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> HICP     Harmonisert… Orig… Priser … Harmoniser… Euro… https://… prc_h… Inde…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Befolkn… Befolkning   Orig… Demogra… Befolkning… Euro… https://… demo_… Pers…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Arbeids… Arbeidsledi… Orig… Arbeids… Arbeidsled… Euro… https://… une_r… Pros…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BNP_lop… BNP løpende  Orig… Nasjona… Bruttonasj… Euro… https://… nama_… Mill…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> BNP_fas… BNP faste p… Orig… Nasjona… Bruttonasj… Euro… https://… nama_… Mill…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Industr… Industripro… Orig… Produks… Produksjon… Euro… https://… sts_i… Inde…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Syssels… Sysselsatte  Orig… Arbeids… Sysselsatt… Euro… https://… nama_… Pers…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Arbeids… Arbeidsstyr… Orig… Arbeids… Personer i… Euro… https://… lfsi_… Pers…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Offentl… Offentlig g… Bere… Offentl… Offentlig … Euro… https://… gov_1… Pros…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Boligpr… Boligprisin… Orig… Boligma… Prisindeks… Euro… https://… prc_h… Inde…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 38 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Ansatte  Ansatte      Orig… Arbeids… Ansatte pe… Euro… https://… nama_… Pers…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Arbeids… Arbeidsledi… Orig… Arbeids… Arbeidsled… Euro… https://… une_r… Pros…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Arbeids… Arbeidsstyr… Orig… Arbeids… Personer i… Euro… https://… lfsi_… Pers…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Arbeids… Arbeidsstyr… Bere… Arbeids… Arbeidssty… Bere… <span style="color: #BB0000;">NA</span>        Arbei… Pros…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Syssels… Sysselsatte  Orig… Arbeids… Sysselsatt… Euro… https://… nama_… Pers…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Boligpr… Boligprisin… Orig… Boligma… Prisindeks… Euro… https://… prc_h… Inde…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Boligpr… Boligprisve… Bere… Boligma… Årlig pros… Bere… <span style="color: #BB0000;">NA</span>        Bolig… Pros…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Befolkn… Befolkning   Orig… Demogra… Befolkning… Euro… https://… demo_… Pers…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Befolkn… Befolknings… Bere… Demogra… Årlig veks… Bere… <span style="color: #BB0000;">NA</span>        Befol… Pros…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Pengema… Pengemarked… Orig… Finansm… Årlig gjen… OECD  https://… DSD_S… Pros…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 43 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: Frekvens &lt;chr&gt;, Startaar &lt;dbl&gt;, Sluttaar &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Funksjon &lt;chr&gt;, Kommentar &lt;chr&gt;, Omraade &lt;chr&gt;, Analyse_type &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>

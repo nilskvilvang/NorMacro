@@ -124,17 +124,31 @@ BNP_lopende
 BNP_faste_priser
 ```
 
+#### BNP-begreper
+
+De internasjonale BNP-seriene i NorMacro gjelder totalt BNP for hvert land.
+Dette skiller seg fra den sentrale norske serien `BNP_Fastland`, som gjelder
+BNP Fastlands-Norge og dermed utelater petroleumsvirksomhet og utenriks
+sjøfart.
+
+Ved sammenligninger mellom Norge og andre land må dette skillet tas hensyn
+til. Internasjonale serier som `BNP_lopende`, `BNP_faste_priser` og
+`BNP_vekst` er basert på totalt BNP, mens norske analyser ofte bruker
+`BNP_Fastland` eller `BNP_Fastland_vekst`.
+
 BNP i løpende priser brukes blant annet som grunnlag for:
 
-* BNP per innbygger
+* BNP per innbygger i løpende priser
 * eksportandel av BNP
 * importandel av BNP
 * handelsbalanse som andel av BNP
 * konsum- og investeringsandeler
 
-BNP i faste priser brukes som grunnlag for `BNP_vekst`.
+BNP i faste priser brukes blant annet til analyser av realøkonomisk
+volumutvikling og som grunnlag for `BNP_vekst`.
 
-Dette skiller beregninger av nivå og andeler fra analyser av volumutvikling.
+Dette sikrer at BNP-andeler beregnes med størrelser i samme prisgrunnlag,
+mens vekstanalyser bygger på realutviklingen.
 
 ### Nasjonalregnskapskomponenter
 

@@ -63,7 +63,7 @@ identifisere riktig metadataområde.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_metadata</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 149 × 16</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 164 × 16</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Variabel Display_navn Type  Kategori Beskrivelse Kilde Kilde_url Tabell Enhet</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> KPI      KPI          Orig… Priser … Konsumpris… SSB   https://… 14711  2025…</span>
@@ -76,7 +76,7 @@ identifisere riktig metadataområde.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Kvinner… Kvinner arb… Orig… Arbeids… Registrert… NAV   https://… Tabel… Pers…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Arbeids… Arbeidsledi… Orig… Arbeids… Registrert… NAV   https://… Tabel… Pros…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Kvinnea… Kvinneandel… Orig… Arbeids… Andel kvin… NAV   https://… Tabel… Pros…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 139 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 154 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: Frekvens &lt;chr&gt;, Startaar &lt;dbl&gt;, Sluttaar &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Funksjon &lt;chr&gt;, Kommentar &lt;chr&gt;, Omraade &lt;chr&gt;, Analyse_type &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
@@ -86,18 +86,18 @@ identifisere riktig metadataområde.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 16</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Variabel Display_navn Type  Kategori Beskrivelse Kilde Kilde_url Tabell Enhet</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> HICP     Harmonisert… Orig… Priser … Harmoniser… Euro… https://… prc_h… Inde…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Befolkn… Befolkning   Orig… Demogra… Befolkning… Euro… https://… demo_… Pers…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Arbeids… Arbeidsledi… Orig… Arbeids… Arbeidsled… Euro… https://… une_r… Pros…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BNP_fas… BNP faste p… Orig… Nasjona… Bruttonasj… Euro… https://… nama_… Mill…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Syssels… Sysselsatte  Orig… Arbeids… Sysselsatt… Euro… https://… nama_… Pers…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Arbeids… Arbeidsstyr… Orig… Arbeids… Personer i… Euro… https://… lfsi_… Pers…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Boligpr… Boligprisin… Orig… Boligma… Prisindeks… Euro… https://… prc_h… Inde…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Eksport  Eksport      Orig… Utenrik… Eksport i … Euro… https://… nama_… Mill…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Import   Import       Orig… Utenrik… Import i a… Euro… https://… nama_… Mill…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Arbeids… Arbeidsledi… Orig… Arbeids… Arbeidsled… Euro… https://… une_r… Pros…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Arbeids… Arbeidsstyr… Orig… Arbeids… Personer i… Euro… https://… lfsi_… Pers…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Syssels… Sysselsatte  Orig… Arbeids… Sysselsatt… Euro… https://… nama_… Pers…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Boligpr… Boligprisin… Orig… Boligma… Prisindeks… Euro… https://… prc_h… Inde…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Boligpr… Boligprisve… Bere… Boligma… Årlig pros… Bere… <span style="color: #BB0000;">NA</span>        Bolig… Pros…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Befolkn… Befolkning   Orig… Demogra… Befolkning… Euro… https://… demo_… Pers…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> BNP_fas… BNP faste p… Orig… Nasjona… Bruttonasj… Euro… https://… nama_… Mill…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> BNP_vek… BNP vekst    Bere… Nasjona… Årlig pros… Bere… <span style="color: #BB0000;">NA</span>        BNP_f… Pros…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> HICP     Harmonisert… Orig… Priser … Harmoniser… Euro… https://… prc_h… Inde…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Inflasj… Inflasjon    Bere… Priser … Årsvekst i… Bere… <span style="color: #BB0000;">NA</span>        HICP   Pros…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> BNP_vek… BNP vekst    Bere… Nasjona… Årlig pros… Bere… <span style="color: #BB0000;">NA</span>        BNP_f… Pros…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Boligpr… Boligprisve… Bere… Boligma… Årlig pros… Bere… <span style="color: #BB0000;">NA</span>        Bolig… Pros…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Eksport  Eksport      Orig… Utenrik… Eksport av… Euro… https://… nama_… Mill…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Import   Import       Orig… Utenrik… Import av … Euro… https://… nama_… Mill…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: Frekvens &lt;chr&gt;, Startaar &lt;dbl&gt;, Sluttaar &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Funksjon &lt;chr&gt;, Kommentar &lt;chr&gt;, Omraade &lt;chr&gt;, Analyse_type &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>

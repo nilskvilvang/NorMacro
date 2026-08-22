@@ -15,6 +15,7 @@ utils::globalVariables(c(
   "Arbeidsledighetsrate_NAV",
   "Autokorrelasjon",
   "BNP_Fastland",
+  "BNP_Fastland_lopende",
   "BNP_Fastland_per_innbygger",
   "BNP_Fastland_vekst",
   "BNP_faste_priser",
@@ -25,6 +26,7 @@ utils::globalVariables(c(
   "Befolkning_15_74_kjonn",
   "Beskrivelse",
   "Boliginvesteringer",
+  "Boliginvesteringer_lopende",
   "Boligprisindeks",
   "Byggeaktivitet",
   "Code",
@@ -184,5 +186,13 @@ utils::globalVariables(c(
   "sysselsatte_1_000_personer",
   "unit",
   "value",
-  "volumindeks_ujustert"
+  "volumindeks_ujustert",
+  "Eksport_lopende",
+  "Fastlandsinvesteringer_lopende",
+  "Handelsbalanse_lopende",
+  "Import_lopende",
+  "Investeringer_lopende",
+  "Offentlig_konsum_lopende",
+  "Offentlige_investeringer_lopende",
+  "Privat_konsum_lopende"
 ))

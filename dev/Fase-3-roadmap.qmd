@@ -171,141 +171,67 @@ restgap med høy faglig verdi.
 
 ## 2.1.1-1 – Real BNP per innbygger internasjonalt
 
-Prioritet: **Høy**
-
-Bakgrunn:
-
-NorMacro har nominelt BNP per innbygger internasjonalt, men mangler en
-harmonisert serie for real BNP per innbygger.
-
-Dette ble identifisert som det viktigste datagapet innen langsiktig
-vekst.
-
-Tiltak:
-
-- legg til real BNP per innbygger internasjonalt
-- legg til vekst i real BNP per innbygger
-- bruk en harmonisert Eurostat-definisjon dersom egnet serie finnes
-- dokumenter tydelig forskjellen mellom nominelt og realt BNP per
-  innbygger
-- kontroller bruk i `compare_countries()` og generelle analysefunksjoner
-
-Akseptansekriterier:
-
-- harmonisert serie for eksisterende landutvalg
-- konsistent enhet og prisgrunnlag
-- komplett metadata
-- relevante tester
-- dokumentert forskjell mellom nominelt og realt mål
+Status: **Ferdig**
 
 ## 2.1.1-2 – Underliggende inflasjon i Norge
 
-Prioritet: **Høy**
-
-Bakgrunn:
-
-Gap-analysen for inflasjon vurderte den samlede dekningen som god, men
-identifiserte underliggende inflasjon som det viktigste norske
-restgapet.
-
-Tiltak:
-
-- vurder og implementer KPI-JAE som anbefalt norsk mål på underliggende
-  inflasjon
-- kontroller historisk dekning og kilde
-- legg til metadata som forklarer forskjellen mellom KPI, inflasjon og
-  KPI-JAE
-- vurder hvordan serien bør brukes i eksisterende analysefunksjoner
-
-Akseptansekriterier:
-
-- én tydelig anbefalt serie
-- stabil offentlig kilde
-- komplett metadata
-- ingen unødvendige parallelle mål på underliggende inflasjon
+Status: **Ferdig**
 
 ## 2.1.1-3 – Internasjonal kort rente eller policy-rente
 
-Prioritet: **Høy**
-
-Bakgrunn:
-
-NorMacro har harmoniserte langsiktige renter internasjonalt, men mangler
-et godt sammenlignbart mål på kort rente eller pengepolitisk rente.
-
-Dette begrenser internasjonale analyser av pengepolitikk.
-
-Tiltak:
-
-- kartlegg tilgjengelige harmoniserte europeiske serier
-- vurder policy-rente mot kort pengemarkedsrente
-- velg én løsning dersom den gir faglig sammenlignbare data
-- dokumenter særskilt hvordan euroområdet skal håndteres
-
-Akseptansekriterier:
-
-- økonomisk meningsfull sammenligning mellom land
-- tydelig definisjon og kilde
-- ingen blanding av prinsipielt ulike rentebegreper uten eksplisitt
-  dokumentasjon
-
-Dersom en robust harmonisert løsning ikke finnes, dokumenteres dette som
-et eksplisitt restgap fremfor å inkludere en svak serie.
+Status: **Ferdig**
 
 ## 2.1.1-4 – Gjennomgang av BNP-andeler
 
-Prioritet: **Middels**
+Status: **Ferdig**
 
-Bakgrunn:
+BNP-andeler er gjennomgått og standardisert.
 
-Gap-analysen identifiserte behov for å være helt eksplisitt om hvilken
-BNP-størrelse som brukes som nevner i `*_andel_BNP`.
+Prinsipp:
 
-Tiltak:
+- vekst og real utvikling beregnes fra faste priser / kjedevolum
+- andeler av BNP beregnes med løpende priser i både teller og nevner
+- Fastlandsinvesteringer beregnes mot BNP Fastlands-Norge i løpende priser
 
-- gjennomgå alle norske `*_andel_BNP`
-- kontroller om nevneren er total BNP eller BNP Fastlands-Norge
-- korriger navn eller beregning der semantikken ikke er entydig
-- kontroller tilsvarende internasjonale metadata
-
-Akseptansekriterier:
-
-- variabelnavn og beregning er semantisk konsistente
-- metadata identifiserer nevneren
-- ingen serie omtales som andel av BNP dersom den faktisk bruker en
-  annen BNP-definisjon uten at dette fremgår
+Nominelle søsterserier er lagt til for relevante norske og internasjonale
+nasjonalregnskapskomponenter. Metadata og validering er oppdatert
+tilsvarende.
 
 ## 2.1.1-5 – Små API- og metadataforbedringer
 
-Prioritet: **Middels**
+Status: **Ferdig**
 
-Gjennomfør bare forbedringer som oppstår gjennom faktisk bruk eller som
-allerede er identifisert i gap-analysen.
+Gjennomført:
 
-Aktuelle tema:
+- tydeligere definisjon av arbeidsproduktivitet nasjonalt og internasjonalt
+- eksplisitt dokumentasjon av forskjellen mellom norsk BNP Fastlands-Norge
+  og internasjonalt total-BNP
+- harmonisering av utvalgte displaynavn og metadata
+- opprydding i foreldede internasjonale metadata
+- konsistent routing mellom norske og internasjonale metadata
 
-- mindre displaynavn- og metadataforbedringer
-- tydeligere produktivitetsdefinisjon
-- dokumentasjon av forskjellen mellom norsk Fastlands-BNP og
-  internasjonalt total-BNP
-- mindre forbedringer i `compare_countries()` og episodefunksjonene
-  dersom faktisk bruk avdekker behov
-- konsistens mellom README, vignetter og funksjonsdokumentasjon
-
-Dette punktet skal ikke brukes som inngang til større API-endringer.
+Ingen større API-endringer ble gjennomført.
+`compare_countries()` og episodefunksjonene ble ikke endret fordi faktisk
+bruk ikke avdekket konkrete behov.
 
 ## 2.1.1-6 – Repository-hygiene
 
-Prioritet: **Lav**
+Status: **Ferdig**
 
-Tiltak:
+Gjennomført:
 
-- vurder `.gitattributes` for konsistente line endings
-- gjennomgå genererte filer og build-artefakter
-- behold en reproduserbar og enkel releaseprosess
-- unngå repository-opprydding som ikke gir konkret vedlikeholdsverdi
+- genererte vignette-HTML-filer og gammel `docs/`-struktur er ryddet
+- pkgdown bygges reproduserbart fra kildene
+- `.gitattributes` er lagt til for konsistente line endings i tekstfiler
+- midlertidige filer og trailing whitespace er ryddet
+- `git diff --check` er rent
 
-Repository-hygiene skal ikke blokkere faglige forbedringer.
+Ingen ytterligere repository-opprydding er prioritert uten konkret
+vedlikeholdsverdi
+
+## 2.1.1-7 – Sluttkontroll
+
+Status: **Ferdig**
 
 # Senere vurdering
 
