@@ -1,6 +1,4 @@
 
-# R/theme_normacro.R
-
 .normacro_palette <- c(
   blue = "#0072B2",
   vermillion = "#D55E00",
@@ -13,47 +11,21 @@
   grey = "#999999"
 )
 
-get_normacro_palette <- function(n) {
-  base <- unname(
-    .normacro_palette[
-      c(
-        "blue",
-        "vermillion",
-        "bluish_green",
-        "orange",
-        "sky_blue",
-        "reddish_purple",
-        "black"
-      )
-    ]
-  )
+#' NorMacro plot theme
+#'
+#' Standard ggplot2 theme used by NorMacro plots.
+#'
+#' The theme is based on [ggplot2::theme_minimal()] with a small number
+#' of adjustments for consistent titles, captions, grid lines and legends.
+#'
+#' @param base_size Base font size.
+#' @param base_family Base font family.
+#'
+#' @return A ggplot2 theme object.
+#'
+#' @export
 
-  extended <- c(
-    base,
-    .normacro_palette[["grey"]]
-  )
 
-  if (n <= length(base)) {
-    return(
-      base[seq_len(n)]
-    )
-  }
-
-  if (n <= length(extended)) {
-    return(
-      extended[seq_len(n)]
-    )
-  }
-
-  stop(
-    paste0(
-      "NorMacro-paletten st\u00f8tter opptil ",
-      length(extended),
-      " tydelig adskilte serier."
-    ),
-    call. = FALSE
-  )
-}
 
 theme_normacro <- function(
     base_size = 11,
@@ -93,6 +65,21 @@ theme_normacro <- function(
     )
 }
 
+#' NorMacro discrete colour scale
+#'
+#' Discrete colour scale used by NorMacro for categorical series.
+#'
+#' The scale uses a colour-blind-friendly palette inspired by the
+#' Okabe-Ito colour universal design palette. Up to eight distinct
+#' series are supported.
+#'
+#' @param n Number of discrete series.
+#' @param ... Additional arguments passed to [ggplot2::scale_colour_manual()].
+#'
+#' @return A ggplot2 discrete colour scale.
+#'
+#' @export
+
 scale_colour_normacro <- function(
     n = 7,
     ...
@@ -102,6 +89,20 @@ scale_colour_normacro <- function(
     ...
   )
 }
+
+#' NorMacro diverging fill scale
+#'
+#' Diverging fill scale for variables with a meaningful midpoint at zero,
+#' such as correlations.
+#'
+#' Negative values are shown in blue, values around zero in a neutral
+#' light tone, and positive values in vermillion.
+#'
+#' @param ... Additional arguments passed to [ggplot2::scale_fill_gradient2()].
+#'
+#' @return A ggplot2 continuous fill scale.
+#'
+#' @export
 
 scale_fill_normacro_diverging <- function(...) {
   ggplot2::scale_fill_gradient2(
