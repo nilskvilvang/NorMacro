@@ -30,33 +30,33 @@ plot_kostra_ranking <- function(
     highlight = NULL,
     descending = TRUE
 ) {
-  
+
   if (!is.data.frame(data)) {
     stop(
       "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
-  
+
   required_columns <- c(
     "Enhet",
     "Enhet_navn",
     "Enhetstype",
     "Aar"
   )
-  
+
   missing_columns <- setdiff(
     required_columns,
     names(data)
   )
-  
+
   if (length(missing_columns) > 0L) {
     stop(
       "`plot_kostra_ranking()` krever et KOSTRA-datasett.",
       call. = FALSE
     )
   }
-  
+
   if (
     !is.character(variable) ||
     length(variable) != 1L ||
@@ -68,7 +68,7 @@ plot_kostra_ranking <- function(
       call. = FALSE
     )
   }
-  
+
   if (!variable %in% names(data)) {
     stop(
       "Fant ikke variabelen i datasettet: ",
@@ -76,7 +76,7 @@ plot_kostra_ranking <- function(
       call. = FALSE
     )
   }
-  
+
   if (!is.numeric(data[[variable]])) {
     stop(
       "Variabelen `",
@@ -85,7 +85,7 @@ plot_kostra_ranking <- function(
       call. = FALSE
     )
   }
-  
+
   if (
     !is.logical(descending) ||
     length(descending) != 1L ||
@@ -96,14 +96,14 @@ plot_kostra_ranking <- function(
       call. = FALSE
     )
   }
-  
+
   available_units <- data$Enhet |>
     unique() |>
     stats::na.omit() |>
     as.character()
-  
+
   if (!is.null(units)) {
-    
+
     if (
       !is.character(units) ||
       length(units) == 0L ||
@@ -115,16 +115,16 @@ plot_kostra_ranking <- function(
         call. = FALSE
       )
     }
-    
+
     units <- unique(
       units
     )
-    
+
     missing_units <- setdiff(
       units,
       available_units
     )
-    
+
     if (length(missing_units) > 0L) {
       stop(
         "Fant ikke KOSTRA-enheter i datasettet: ",
@@ -135,15 +135,15 @@ plot_kostra_ranking <- function(
         call. = FALSE
       )
     }
-    
+
     data <- data |>
       dplyr::filter(
         .data$Enhet %in% units
       )
   }
-  
+
   if (!is.null(highlight)) {
-    
+
     if (
       !is.character(highlight) ||
       length(highlight) == 0L ||
@@ -155,16 +155,16 @@ plot_kostra_ranking <- function(
         call. = FALSE
       )
     }
-    
+
     highlight <- unique(
       highlight
     )
-    
+
     missing_highlight <- setdiff(
       highlight,
       unique(data$Enhet)
     )
-    
+
     if (length(missing_highlight) > 0L) {
       stop(
         "Fant ikke fremhevede KOSTRA-enheter i datasettet: ",
@@ -176,28 +176,28 @@ plot_kostra_ranking <- function(
       )
     }
   }
-  
+
   ranking <- rank_kostra(
     variable = variable,
     data = data,
     year = year,
     descending = descending
   )
-  
+
   selected_year <- attr(
     ranking,
     "year"
   )
-  
+
   metadata <- get_metadata(
     data
   )
-  
+
   meta <- metadata |>
     dplyr::filter(
       .data$Variabel == variable
     )
-  
+
   display_name <- if (
     nrow(meta) > 0L &&
     "Display_navn" %in% names(meta)
@@ -212,7 +212,7 @@ plot_kostra_ranking <- function(
       )
     )
   }
-  
+
   measure_unit <- if (
     nrow(meta) > 0L &&
     "Enhet" %in% names(meta)
@@ -221,7 +221,7 @@ plot_kostra_ranking <- function(
   } else {
     NULL
   }
-  
+
   ranking <- ranking |>
     dplyr::mutate(
       Enhet_navn_kort = sub(
@@ -235,7 +235,7 @@ plot_kostra_ranking <- function(
         .data$Enhet %in% highlight
       }
     )
-  
+
   # Faktorrekkefølgen må følge rangeringen.
   ranking <- ranking |>
     dplyr::mutate(
@@ -246,14 +246,14 @@ plot_kostra_ranking <- function(
         )
       )
     )
-  
+
   kostra_table <- attr(
     data,
     "kostra_table"
   )
-  
+
   caption <- "Kilde: SSB KOSTRA"
-  
+
   if (
     !is.null(kostra_table) &&
     length(kostra_table) > 0L &&
@@ -266,23 +266,23 @@ plot_kostra_ranking <- function(
       kostra_table
     )
   }
-  
+
   subtitle <- paste0(
     selected_year,
     " - ",
     nrow(ranking),
     " enheter"
   )
-  
+
   value_range <- range(
     ranking$Verdi,
     na.rm = TRUE
   )
-  
+
   label_nudge <- diff(
     value_range
   ) * 0.025
-  
+
   if (
     !is.finite(label_nudge) ||
     label_nudge == 0
@@ -292,14 +292,14 @@ plot_kostra_ranking <- function(
       na.rm = TRUE
     ) * 0.025
   }
-  
+
   if (
     !is.finite(label_nudge) ||
     label_nudge == 0
   ) {
     label_nudge <- 0.1
   }
-  
+
   p <- ggplot2::ggplot(
     ranking,
     ggplot2::aes(
@@ -363,12 +363,7 @@ plot_kostra_ranking <- function(
       y = NULL,
       caption = caption
     ) +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      panel.grid.major.y = ggplot2::element_blank(),
-      panel.grid.minor = ggplot2::element_blank()
-    )
-  
+    theme_normacro()
   p
 }
 

@@ -4,7 +4,7 @@ conjuncture_dashboard <- function(data = NULL) {
   if (is.null(data)) {
     data <- suppressMessages(get_normacro())
   }
-  
+
   indicators <- c(
     "Industriproduksjon",
     "Byggeaktivitet",
@@ -17,9 +17,9 @@ conjuncture_dashboard <- function(data = NULL) {
     "Arbeidsledighetsrate_NAV",
     "Rentekurve"
   )
-  
+
   existing <- intersect(indicators, names(data))
-  
+
   plot_data <- data |>
     dplyr::select(Aar, dplyr::all_of(existing)) |>
     tidyr::pivot_longer(cols = -Aar,
@@ -29,7 +29,7 @@ conjuncture_dashboard <- function(data = NULL) {
     dplyr::left_join(get_metadata() |>
                        dplyr::select(Variabel, Beskrivelse, Enhet),
                      by = "Variabel")
-  
+
   ggplot2::ggplot(plot_data, ggplot2::aes(x = Aar, y = Verdi)) +
     ggplot2::geom_line() +
     ggplot2::facet_wrap(ggplot2::vars(Variabel), scales = "free_y") +
@@ -41,5 +41,5 @@ conjuncture_dashboard <- function(data = NULL) {
       y = NULL,
       caption = "Kilde: NorMacro"
     ) +
-    ggplot2::theme_minimal()
+    theme_normacro()
 }

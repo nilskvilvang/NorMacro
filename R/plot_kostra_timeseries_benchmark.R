@@ -52,11 +52,11 @@ plot_kostra_timeseries_benchmark <- function(
     comparison_name = NULL,
     table = "12134"
 ) {
-  
+
   comparison <- match.arg(
     comparison
   )
-  
+
   if (
     !is.character(unit) ||
     length(unit) != 1L ||
@@ -68,7 +68,7 @@ plot_kostra_timeseries_benchmark <- function(
       call. = FALSE
     )
   }
-  
+
   if (
     comparison == "data" &&
     is.null(data)
@@ -78,7 +78,7 @@ plot_kostra_timeseries_benchmark <- function(
       call. = FALSE
     )
   }
-  
+
   if (
     comparison == "data" &&
     !is.data.frame(data)
@@ -88,11 +88,11 @@ plot_kostra_timeseries_benchmark <- function(
       call. = FALSE
     )
   }
-  
+
   # ------------------------------------------------------------
   # Benchmark
   # ------------------------------------------------------------
-  
+
   benchmark <- kostra_timeseries_benchmark(
     variable = variable,
     data = data,
@@ -105,16 +105,16 @@ plot_kostra_timeseries_benchmark <- function(
     comparison_name = comparison_name,
     table = table
   )
-  
+
   # ------------------------------------------------------------
   # Metadata
   # ------------------------------------------------------------
-  
+
   display_name <- attr(
     benchmark,
     "display_name"
   )
-  
+
   if (
     is.null(display_name) ||
     length(display_name) == 0L ||
@@ -129,12 +129,12 @@ plot_kostra_timeseries_benchmark <- function(
       )
     )
   }
-  
+
   measure_unit <- attr(
     benchmark,
     "unit"
   )
-  
+
   if (
     is.null(measure_unit) ||
     length(measure_unit) == 0L ||
@@ -143,41 +143,41 @@ plot_kostra_timeseries_benchmark <- function(
   ) {
     measure_unit <- NULL
   }
-  
+
   selected_name <- benchmark$Enhet_navn[[1]]
-  
+
   selected_name <- sub(
     "\\s+-\\s+.*$",
     "",
     selected_name
   )
-  
+
   first_year <- min(
     benchmark$Aar,
     na.rm = TRUE
   )
-  
+
   last_year <- max(
     benchmark$Aar,
     na.rm = TRUE
   )
-  
+
   # ------------------------------------------------------------
   # Comparison label
   # ------------------------------------------------------------
-  
+
   comparison_group_name <- attr(
     benchmark,
     "comparison_group_name"
   )
-  
+
   comparison_label <- switch(
     comparison,
-    
+
     data = NULL,
-    
+
     kostra_group = comparison_group_name,
-    
+
     county = if (
       !is.null(comparison_group_name) &&
       length(comparison_group_name) > 0L &&
@@ -191,7 +191,7 @@ plot_kostra_timeseries_benchmark <- function(
     } else {
       "Fylke"
     },
-    
+
     custom = if (
       !is.null(comparison_group_name) &&
       length(comparison_group_name) > 0L &&
@@ -203,26 +203,26 @@ plot_kostra_timeseries_benchmark <- function(
       "Egendefinert gruppe"
     }
   )
-  
+
   # ------------------------------------------------------------
   # Benchmarkreferansen gir først mening når minst
   # to enheter har observasjon samme år.
   # ------------------------------------------------------------
-  
+
   reference_data <- benchmark |>
     dplyr::filter(
       .data$Antall_enheter >= 2L
     )
-  
+
   # ------------------------------------------------------------
   # Caption
   # ------------------------------------------------------------
-  
+
   kostra_table <- attr(
     benchmark,
     "kostra_table"
   )
-  
+
   if (
     is.null(kostra_table) ||
     length(kostra_table) == 0L ||
@@ -231,9 +231,9 @@ plot_kostra_timeseries_benchmark <- function(
   ) {
     kostra_table <- table
   }
-  
+
   caption <- "Kilde: SSB KOSTRA"
-  
+
   if (
     !is.null(kostra_table) &&
     length(kostra_table) > 0L &&
@@ -246,11 +246,11 @@ plot_kostra_timeseries_benchmark <- function(
       kostra_table
     )
   }
-  
+
   # ------------------------------------------------------------
   # Subtitle
   # ------------------------------------------------------------
-  
+
   subtitle <- paste0(
     selected_name,
     " - ",
@@ -258,7 +258,7 @@ plot_kostra_timeseries_benchmark <- function(
     "-",
     last_year
   )
-  
+
   if (
     !is.null(comparison_label) &&
     length(comparison_label) > 0L &&
@@ -271,20 +271,20 @@ plot_kostra_timeseries_benchmark <- function(
       comparison_label
     )
   }
-  
+
   # ------------------------------------------------------------
   # Year axis
   # ------------------------------------------------------------
-  
+
   year_range <- range(
     benchmark$Aar,
     na.rm = TRUE
   )
-  
+
   year_span <- diff(
     year_range
   )
-  
+
   year_step <- if (year_span <= 12) {
     1
   } else if (year_span <= 25) {
@@ -294,13 +294,13 @@ plot_kostra_timeseries_benchmark <- function(
   } else {
     10
   }
-  
+
   year_breaks <- seq(
     from = year_range[[1]],
     to = year_range[[2]],
     by = year_step
   )
-  
+
   if (
     tail(
       year_breaks,
@@ -316,24 +316,24 @@ plot_kostra_timeseries_benchmark <- function(
       )
     )
   }
-  
+
   # ------------------------------------------------------------
   # Plot
   # ------------------------------------------------------------
-  
+
   p <- ggplot2::ggplot(
     benchmark,
     ggplot2::aes(
       x = .data$Aar
     )
   )
-  
+
   # ------------------------------------------------------------
   # Benchmark distribution
   # ------------------------------------------------------------
-  
+
   if (nrow(reference_data) > 0L) {
-    
+
     p <- p +
       ggplot2::geom_ribbon(
         data = reference_data,
@@ -357,11 +357,11 @@ plot_kostra_timeseries_benchmark <- function(
         linewidth = 0.7
       )
   }
-  
+
   # ------------------------------------------------------------
   # Selected KOSTRA unit
   # ------------------------------------------------------------
-  
+
   p <- p +
     ggplot2::geom_line(
       ggplot2::aes(
@@ -388,17 +388,18 @@ plot_kostra_timeseries_benchmark <- function(
         decimal.mark = ","
       )
     )
-  
+
   # ------------------------------------------------------------
   # Benchmark legend
   # ------------------------------------------------------------
-  
+
   if (nrow(reference_data) > 0L) {
-    
+
     p <- p +
       ggplot2::scale_fill_manual(
         values = c(
-          "Midtre 50 %" = "grey50"
+          "Midtre 50 %" =
+            .normacro_palette[["grey"]]
         )
       ) +
       ggplot2::scale_linetype_manual(
@@ -407,11 +408,11 @@ plot_kostra_timeseries_benchmark <- function(
         )
       )
   }
-  
+
   # ------------------------------------------------------------
   # Labels and theme
   # ------------------------------------------------------------
-  
+
   p <- p +
     ggplot2::labs(
       title = display_name,
@@ -422,11 +423,11 @@ plot_kostra_timeseries_benchmark <- function(
       linetype = NULL,
       caption = caption
     ) +
-    ggplot2::theme_minimal() +
+    theme_normacro() +
     ggplot2::theme(
       legend.position = "bottom"
     )
-  
+
   p
 }
 

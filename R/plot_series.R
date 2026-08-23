@@ -32,25 +32,25 @@ plot_series <- function(
     metadata = NULL,
     countries = NULL
 ) {
-  
+
   if (is.null(data)) {
     data <- get_normacro()
   }
-  
+
   if (!is.data.frame(data)) {
     stop(
       "`data` m\u00e5 v\u00e6re en data.frame eller tibble.",
       call. = FALSE
     )
   }
-  
+
   if (!"Aar" %in% names(data)) {
     stop(
       "Datasettet m\u00e5 inneholde kolonnen `Aar`.",
       call. = FALSE
     )
   }
-  
+
   if (!variable %in% names(data)) {
     stop(
       "Fant ikke variabelen i datasettet: ",
@@ -58,18 +58,18 @@ plot_series <- function(
       call. = FALSE
     )
   }
-  
+
   if (is.null(metadata)) {
     metadata <- get_metadata(data)
   }
-  
+
   has_country <- all(
     c(
       "Land",
       "Aar"
     ) %in% names(data)
   )
-  
+
   has_kostra <- all(
     c(
       "Enhet",
@@ -78,19 +78,19 @@ plot_series <- function(
       "Aar"
     ) %in% names(data)
   )
-  
+
   # Filtrering av internasjonale data -------------------------------
-  
+
   if (has_country && !is.null(countries)) {
     available_countries <- unique(
       data$Land
     )
-    
+
     missing_countries <- setdiff(
       countries,
       available_countries
     )
-    
+
     if (length(missing_countries) > 0L) {
       stop(
         "Fant ikke land i datasettet: ",
@@ -101,20 +101,20 @@ plot_series <- function(
         call. = FALSE
       )
     }
-    
+
     data <- data |>
       dplyr::filter(
         .data$Land %in% countries
       )
   }
-  
+
   # Metadata --------------------------------------------------------
-  
+
   meta <- metadata |>
     dplyr::filter(
       .data$Variabel == variable
     )
-  
+
   if (nrow(meta) == 0L) {
     title <- variable |>
       gsub(
@@ -122,37 +122,37 @@ plot_series <- function(
         replacement = " "
       ) |>
       stringr::str_to_sentence()
-    
+
     subtitle <- NULL
     y_label <- NULL
     caption <- NULL
-    
+
   } else {
-    
+
     title <- if ("Display_navn" %in% names(meta)) {
       meta$Display_navn[[1]]
     } else {
       NULL
     }
-    
+
     subtitle <- if ("Beskrivelse" %in% names(meta)) {
       meta$Beskrivelse[[1]]
     } else {
       NULL
     }
-    
+
     y_label <- if ("Enhet" %in% names(meta)) {
       meta$Enhet[[1]]
     } else {
       NULL
     }
-    
+
     source <- if ("Kilde" %in% names(meta)) {
       meta$Kilde[[1]]
     } else {
       NULL
     }
-    
+
     if (
       is.null(title) ||
       is.na(title) ||
@@ -165,7 +165,7 @@ plot_series <- function(
         ) |>
         stringr::str_to_sentence()
     }
-    
+
     if (
       is.null(subtitle) ||
       is.na(subtitle) ||
@@ -173,7 +173,7 @@ plot_series <- function(
     ) {
       subtitle <- NULL
     }
-    
+
     if (
       is.null(y_label) ||
       is.na(y_label) ||
@@ -181,7 +181,7 @@ plot_series <- function(
     ) {
       y_label <- NULL
     }
-    
+
     if (
       is.null(source) ||
       is.na(source) ||
@@ -195,20 +195,20 @@ plot_series <- function(
       )
     }
   }
-  
+
   # KOSTRA-informasjon ---------------------------------------------
-  
+
   if (has_kostra) {
     kostra_table <- attr(
       data,
       "kostra_table"
     )
-    
+
     kostra_title <- attr(
       data,
       "kostra_title"
     )
-    
+
     if (
       !is.null(kostra_title) &&
       length(kostra_title) > 0L &&
@@ -225,9 +225,9 @@ plot_series <- function(
         )
       }
     }
-    
+
     caption <- "Kilde: SSB/KOSTRA"
-    
+
     if (
       !is.null(kostra_table) &&
       length(kostra_table) > 0L &&
@@ -241,9 +241,9 @@ plot_series <- function(
       )
     }
   }
-  
+
   # Internasjonale data --------------------------------------------
-  
+
   if (has_country) {
     plot_data <- data |>
       dplyr::select(
@@ -259,7 +259,11 @@ plot_series <- function(
         .data$Land,
         .data$Aar
       )
-    
+
+    n_countries <- dplyr::n_distinct(
+      plot_data$Land
+    )
+
     p <- ggplot2::ggplot(
       plot_data,
       ggplot2::aes(
@@ -272,12 +276,15 @@ plot_series <- function(
       ggplot2::geom_line(
         linewidth = 0.9
       ) +
+      scale_colour_normacro(
+        n = n_countries
+      ) +
       ggplot2::labs(
         colour = NULL
       )
-    
+
     # KOSTRA-data -----------------------------------------------------
-    
+
   } else if (has_kostra) {
     plot_data <- data |>
       dplyr::select(
@@ -301,11 +308,11 @@ plot_series <- function(
         .data$Enhet,
         .data$Aar
       )
-    
+
     n_units <- dplyr::n_distinct(
       plot_data$Enhet
     )
-    
+
     if (n_units > 1L) {
       p <- ggplot2::ggplot(
         plot_data,
@@ -318,6 +325,9 @@ plot_series <- function(
       ) +
         ggplot2::geom_line(
           linewidth = 0.9
+        ) +
+        scale_colour_normacro(
+          n = n_units
         ) +
         ggplot2::labs(
           colour = NULL
@@ -335,9 +345,9 @@ plot_series <- function(
           linewidth = 0.9
         )
     }
-    
+
     # Norske makrodata ------------------------------------------------
-    
+
   } else {
     plot_data <- data |>
       dplyr::select(
@@ -351,7 +361,7 @@ plot_series <- function(
       dplyr::arrange(
         .data$Aar
       )
-    
+
     p <- ggplot2::ggplot(
       plot_data,
       ggplot2::aes(
@@ -363,25 +373,25 @@ plot_series <- function(
         linewidth = 0.9
       )
   }
-  
+
   if (nrow(plot_data) == 0L) {
     stop(
       "Variabelen har ingen observasjoner som kan plottes.",
       call. = FALSE
     )
   }
-  
+
   # Årsakse ---------------------------------------------------------
-  
+
   year_range <- range(
     plot_data$Aar,
     na.rm = TRUE
   )
-  
+
   year_span <- diff(
     year_range
   )
-  
+
   year_step <- if (year_span <= 8) {
     1
   } else if (year_span <= 16) {
@@ -393,13 +403,13 @@ plot_series <- function(
   } else {
     20
   }
-  
+
   year_breaks <- seq(
     from = year_range[[1]],
     to = year_range[[2]],
     by = year_step
   )
-  
+
   if (
     tail(year_breaks, 1) !=
     year_range[[2]]
@@ -413,7 +423,7 @@ plot_series <- function(
       )
     )
   }
-  
+
   p <- p +
     ggplot2::scale_x_continuous(
       breaks = year_breaks,
@@ -435,10 +445,10 @@ plot_series <- function(
       y = y_label,
       caption = caption
     ) +
-    ggplot2::theme_minimal()
-  
+    theme_normacro()
+
   # Nullinje --------------------------------------------------------
-  
+
   show_zero_line <- grepl(
     paste(
       c(
@@ -455,7 +465,7 @@ plot_series <- function(
     variable,
     ignore.case = TRUE
   )
-  
+
   if (show_zero_line) {
     p <- p +
       ggplot2::geom_hline(
@@ -464,6 +474,6 @@ plot_series <- function(
         linewidth = 0.3
       )
   }
-  
+
   p
 }

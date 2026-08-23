@@ -42,32 +42,32 @@ compare_countries <- function(
     normalize = FALSE,
     base_year = NULL
 ) {
-  
+
   # ------------------------------------------------------------
   # Hent data
   # ------------------------------------------------------------
-  
+
   if (is.null(data)) {
     data <- get_international_macro()
   }
-  
+
   if (!is.data.frame(data)) {
     stop(
       "`data` m\u00e5 v\u00e6re en data.frame eller tibble.",
       call. = FALSE
     )
   }
-  
+
   required_columns <- c(
     "Aar",
     "Land"
   )
-  
+
   missing_columns <- setdiff(
     required_columns,
     names(data)
   )
-  
+
   if (length(missing_columns) > 0L) {
     stop(
       "Datasettet m\u00e5 inneholde kolonnene: ",
@@ -76,11 +76,11 @@ compare_countries <- function(
       call. = FALSE
     )
   }
-  
+
   # ------------------------------------------------------------
   # Valider variabel
   # ------------------------------------------------------------
-  
+
   if (
     !is.character(variable) ||
     length(variable) != 1L ||
@@ -92,7 +92,7 @@ compare_countries <- function(
       call. = FALSE
     )
   }
-  
+
   if (!variable %in% names(data)) {
     stop(
       "Fant ikke variabelen i datasettet: ",
@@ -100,23 +100,23 @@ compare_countries <- function(
       call. = FALSE
     )
   }
-  
+
   # ------------------------------------------------------------
   # Land
   # ------------------------------------------------------------
-  
+
   available_countries <- data$Land |>
     unique() |>
     stats::na.omit() |>
     as.character()
-  
+
   if (is.null(countries)) {
     countries <- intersect(
       get_standard_countries(),
       available_countries
     )
   }
-  
+
   if (
     !is.character(countries) ||
     length(countries) < 1L ||
@@ -128,14 +128,14 @@ compare_countries <- function(
       call. = FALSE
     )
   }
-  
+
   countries <- unique(countries)
-  
+
   missing_countries <- setdiff(
     countries,
     available_countries
   )
-  
+
   if (length(missing_countries) > 0L) {
     stop(
       "Fant ikke land i datasettet: ",
@@ -143,11 +143,11 @@ compare_countries <- function(
       call. = FALSE
     )
   }
-  
+
   # ------------------------------------------------------------
   # Velg data
   # ------------------------------------------------------------
-  
+
   plot_data <- data |>
     dplyr::filter(
       .data$Land %in% countries
@@ -160,22 +160,22 @@ compare_countries <- function(
     dplyr::filter(
       !is.na(.data[[variable]])
     )
-  
+
   if (!is.null(start_year)) {
     plot_data <- plot_data |>
       dplyr::filter(
         .data$Aar >= start_year
       )
   }
-  
+
   # ------------------------------------------------------------
   # Normalisering
   # ------------------------------------------------------------
-  
+
   if (normalize) {
-    
+
     if (is.null(base_year)) {
-      
+
       common_years <- plot_data |>
         dplyr::count(
           .data$Aar
@@ -186,13 +186,13 @@ compare_countries <- function(
         dplyr::pull(
           .data$Aar
         )
-      
+
       if (!is.null(start_year)) {
         common_years <- common_years[
           common_years >= start_year
         ]
       }
-      
+
       if (length(common_years) == 0L) {
         stop(
           paste0(
@@ -202,10 +202,10 @@ compare_countries <- function(
           call. = FALSE
         )
       }
-      
+
       base_year <- min(common_years)
     }
-    
+
     base_values <- plot_data |>
       dplyr::filter(
         .data$Aar == base_year
@@ -217,14 +217,14 @@ compare_countries <- function(
       dplyr::rename(
         Baseverdi = dplyr::all_of(variable)
       )
-    
+
     missing_base <- setdiff(
       countries,
       base_values$Land[
         !is.na(base_values$Baseverdi)
       ]
     )
-    
+
     if (length(missing_base) > 0L) {
       stop(
         "Mangler data i basis\u00e5ret ",
@@ -235,7 +235,7 @@ compare_countries <- function(
         call. = FALSE
       )
     }
-    
+
     plot_data <- plot_data |>
       dplyr::left_join(
         base_values,
@@ -245,27 +245,27 @@ compare_countries <- function(
         Verdi = .data[[variable]] /
           .data$Baseverdi * 100
       )
-    
+
     y_label <- paste0(
       "Indeks, ",
       base_year,
       " = 100"
     )
-    
+
   } else {
-    
+
     plot_data <- plot_data |>
       dplyr::mutate(
         Verdi = .data[[variable]]
       )
-    
+
     y_label <- NULL
   }
-  
+
   # ------------------------------------------------------------
   # Landnavn og rekkefolge
   # ------------------------------------------------------------
-  
+
   plot_data <- plot_data |>
     dplyr::mutate(
       Land_navn = factor(
@@ -273,18 +273,18 @@ compare_countries <- function(
         levels = get_country_name(countries)
       )
     )
-  
+
   # ------------------------------------------------------------
   # Metadata
   # ------------------------------------------------------------
-  
+
   metadata <- get_metadata(data)
-  
+
   meta <- metadata |>
     dplyr::filter(
       .data$Variabel == variable
     )
-  
+
   display <- if (nrow(meta) > 0L) {
     get_display_name(
       variable,
@@ -299,7 +299,7 @@ compare_countries <- function(
       )
     )
   }
-  
+
   source_text <- if (nrow(meta) > 0L) {
     meta$Kilde |>
       unique() |>
@@ -308,11 +308,11 @@ compare_countries <- function(
   } else {
     character()
   }
-  
+
   source_text <- source_text[
     nzchar(source_text)
   ]
-  
+
   caption <- if (length(source_text) > 0L) {
     paste0(
       "Kilde: ",
@@ -328,7 +328,7 @@ compare_countries <- function(
   # ------------------------------------------------------------
   # Plot
   # ------------------------------------------------------------
-  
+
   ggplot2::ggplot(
     plot_data,
     ggplot2::aes(
@@ -340,7 +340,8 @@ compare_countries <- function(
     ggplot2::geom_line(
       linewidth = 0.9
     ) +
-    ggplot2::scale_colour_discrete(
+    scale_colour_normacro(
+      n = length(countries),
       limits = get_country_name(countries)
     ) +
     ggplot2::scale_y_continuous(
@@ -357,5 +358,5 @@ compare_countries <- function(
       colour = "Land",
       caption = caption
     ) +
-    ggplot2::theme_minimal()
+    theme_normacro()
 }

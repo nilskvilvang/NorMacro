@@ -37,25 +37,25 @@ compare_series <- function(
     start_year = NULL,
     complete_cases = FALSE
 ) {
-  
+
   if (is.null(data)) {
     data <- get_normacro()
   }
-  
+
   if (!is.data.frame(data)) {
     stop(
       "`data` m\u00e5 v\u00e6re en data.frame eller tibble.",
       call. = FALSE
     )
   }
-  
+
   if (!"Aar" %in% names(data)) {
     stop(
       "Datasettet m\u00e5 inneholde kolonnen `Aar`.",
       call. = FALSE
     )
   }
-  
+
   if (
     !is.character(variables) ||
     length(variables) < 1L ||
@@ -67,16 +67,16 @@ compare_series <- function(
       call. = FALSE
     )
   }
-  
+
   variables <- unique(
     variables
   )
-  
+
   missing <- setdiff(
     variables,
     names(data)
   )
-  
+
   if (length(missing) > 0L) {
     stop(
       "Fant ikke variabler i datasettet: ",
@@ -87,13 +87,13 @@ compare_series <- function(
       call. = FALSE
     )
   }
-  
+
   # ------------------------------------------------------------
   # Identifiser datasettstype
   # ------------------------------------------------------------
-  
+
   has_country <- "Land" %in% names(data)
-  
+
   has_kostra <- all(
     c(
       "Enhet",
@@ -101,28 +101,28 @@ compare_series <- function(
       "Enhetstype"
     ) %in% names(data)
   )
-  
+
   # Metadata må hentes før KOSTRA-identifikatorene eventuelt
   # fjernes fra datasettet.
   metadata <- get_metadata(data)
-  
+
   kostra_table <- NULL
   kostra_title <- NULL
   kostra_unit_name <- NULL
-  
+
   # ------------------------------------------------------------
   # Internasjonale data
   # ------------------------------------------------------------
-  
+
   if (has_country) {
-    
+
     available_countries <- data$Land |>
       unique() |>
       stats::na.omit() |>
       as.character()
-    
+
     if (is.null(country)) {
-      
+
       if (length(available_countries) > 1L) {
         stop(
           paste0(
@@ -132,10 +132,10 @@ compare_series <- function(
           call. = FALSE
         )
       }
-      
+
       country <- available_countries[[1]]
     }
-    
+
     if (
       !is.character(country) ||
       length(country) != 1L ||
@@ -147,7 +147,7 @@ compare_series <- function(
         call. = FALSE
       )
     }
-    
+
     if (!country %in% available_countries) {
       stop(
         "Fant ikke landet i datasettet: ",
@@ -155,7 +155,7 @@ compare_series <- function(
         call. = FALSE
       )
     }
-    
+
     data <- data |>
       dplyr::filter(
         .data$Land == country
@@ -164,20 +164,20 @@ compare_series <- function(
         -dplyr::all_of("Land")
       )
   }
-  
+
   # ------------------------------------------------------------
   # KOSTRA-data
   # ------------------------------------------------------------
-  
+
   if (has_kostra) {
-    
+
     available_units <- data$Enhet |>
       unique() |>
       stats::na.omit() |>
       as.character()
-    
+
     if (is.null(unit)) {
-      
+
       if (length(available_units) > 1L) {
         stop(
           paste0(
@@ -187,10 +187,10 @@ compare_series <- function(
           call. = FALSE
         )
       }
-      
+
       unit <- available_units[[1]]
     }
-    
+
     if (
       !is.character(unit) ||
       length(unit) != 1L ||
@@ -202,7 +202,7 @@ compare_series <- function(
         call. = FALSE
       )
     }
-    
+
     if (!unit %in% available_units) {
       stop(
         "Fant ikke KOSTRA-enheten i datasettet: ",
@@ -210,33 +210,33 @@ compare_series <- function(
         call. = FALSE
       )
     }
-    
+
     selected_unit <- data |>
       dplyr::filter(
         .data$Enhet == unit
       )
-    
+
     kostra_unit_name <- selected_unit$Enhet_navn |>
       unique() |>
       stats::na.omit() |>
       as.character()
-    
+
     if (length(kostra_unit_name) > 0L) {
       kostra_unit_name <- kostra_unit_name[[1]]
     } else {
       kostra_unit_name <- unit
     }
-    
+
     kostra_table <- attr(
       data,
       "kostra_table"
     )
-    
+
     kostra_title <- attr(
       data,
       "kostra_title"
     )
-    
+
     data <- selected_unit |>
       dplyr::select(
         -dplyr::any_of(
@@ -248,11 +248,11 @@ compare_series <- function(
         )
       )
   }
-  
+
   # ------------------------------------------------------------
   # Finn felles observasjonsperiode
   # ------------------------------------------------------------
-  
+
   common_years <- data |>
     dplyr::select(
       Aar,
@@ -268,7 +268,7 @@ compare_series <- function(
     dplyr::pull(
       .data$Aar
     )
-  
+
   if (
     complete_cases &&
     length(common_years) == 0L
@@ -278,13 +278,13 @@ compare_series <- function(
       call. = FALSE
     )
   }
-  
+
   if (
     normalize &&
     is.null(base_year) &&
     is.null(start_year)
   ) {
-    
+
     if (length(common_years) == 0L) {
       stop(
         paste0(
@@ -294,14 +294,14 @@ compare_series <- function(
         call. = FALSE
       )
     }
-    
+
     start_year <- min(
       common_years
     )
-    
+
     base_year <- start_year
   }
-  
+
   if (
     complete_cases &&
     is.null(start_year)
@@ -310,14 +310,14 @@ compare_series <- function(
       common_years
     )
   }
-  
+
   if (!is.null(start_year)) {
-    
+
     data <- data |>
       dplyr::filter(
         .data$Aar >= start_year
       )
-    
+
     if (
       is.null(base_year) &&
       normalize
@@ -325,19 +325,19 @@ compare_series <- function(
       base_year <- start_year
     }
   }
-  
+
   # ------------------------------------------------------------
   # Normalisering
   # ------------------------------------------------------------
-  
+
   if (normalize) {
-    
+
     plot_data <- normalize_series(
       data = data,
       variables = variables,
       base_year = base_year
     )
-    
+
     y_label <- if (is.null(base_year)) {
       "Indeks"
     } else {
@@ -347,22 +347,22 @@ compare_series <- function(
         " = 100"
       )
     }
-    
+
   } else {
-    
+
     plot_data <- data |>
       dplyr::select(
         Aar,
         dplyr::all_of(variables)
       )
-    
+
     y_label <- NULL
   }
-  
+
   # ------------------------------------------------------------
   # Visningsnavn
   # ------------------------------------------------------------
-  
+
   display_lookup <- tibble::tibble(
     Variabel = variables,
     Display_navn = vapply(
@@ -386,7 +386,7 @@ compare_series <- function(
       character(1)
     )
   )
-  
+
   plot_data_long <- plot_data |>
     tidyr::pivot_longer(
       cols = -Aar,
@@ -400,15 +400,15 @@ compare_series <- function(
     dplyr::filter(
       !is.na(.data$Verdi)
     )
-  
+
   # ------------------------------------------------------------
   # Caption
   # ------------------------------------------------------------
-  
+
   if (has_kostra) {
-    
+
     caption <- "Kilde: SSB KOSTRA"
-    
+
     if (
       !is.null(kostra_table) &&
       length(kostra_table) > 0L &&
@@ -420,9 +420,9 @@ compare_series <- function(
         kostra_table
       )
     }
-    
+
   } else if ("Kilde" %in% names(metadata)) {
-    
+
     sources <- metadata |>
       dplyr::filter(
         .data$Variabel %in% variables
@@ -432,7 +432,7 @@ compare_series <- function(
       ) |>
       unique() |>
       stats::na.omit()
-    
+
     caption <- if (length(sources) == 0L) {
       NULL
     } else {
@@ -444,29 +444,29 @@ compare_series <- function(
         )
       )
     }
-    
+
   } else {
     caption <- NULL
   }
-  
+
   # ------------------------------------------------------------
   # Undertittel
   # ------------------------------------------------------------
-  
+
   subtitle_parts <- c(
     paste(
       display_lookup$Display_navn,
       collapse = ", "
     )
   )
-  
+
   if (has_country && !is.null(country)) {
     subtitle_parts <- c(
       subtitle_parts,
       country
     )
   }
-  
+
   if (
     has_kostra &&
     !is.null(kostra_unit_name)
@@ -476,13 +476,13 @@ compare_series <- function(
       "",
       kostra_unit_name
     )
-    
+
     subtitle_parts <- c(
       subtitle_parts,
       short_unit_name
     )
   }
-  
+
   if (
     has_kostra &&
     !is.null(kostra_title) &&
@@ -494,25 +494,25 @@ compare_series <- function(
       kostra_title
     )
   }
-  
+
   subtitle <- paste(
     subtitle_parts,
     collapse = " \u00b7 "
   )
-  
+
   # ------------------------------------------------------------
   # Årsakse
   # ------------------------------------------------------------
-  
+
   year_range <- range(
     plot_data_long$Aar,
     na.rm = TRUE
   )
-  
+
   year_span <- diff(
     year_range
   )
-  
+
   year_step <- if (year_span <= 8) {
     1
   } else if (year_span <= 16) {
@@ -524,13 +524,13 @@ compare_series <- function(
   } else {
     20
   }
-  
+
   year_breaks <- seq(
     from = year_range[[1]],
     to = year_range[[2]],
     by = year_step
   )
-  
+
   if (
     tail(year_breaks, 1) != year_range[[2]]
   ) {
@@ -543,11 +543,15 @@ compare_series <- function(
       )
     )
   }
-  
+
   # ------------------------------------------------------------
   # Plot
   # ------------------------------------------------------------
-  
+
+  n_series <- dplyr::n_distinct(
+    plot_data_long$Display_navn
+  )
+
   ggplot2::ggplot(
     plot_data_long,
     ggplot2::aes(
@@ -558,6 +562,9 @@ compare_series <- function(
   ) +
     ggplot2::geom_line(
       linewidth = 0.9
+    ) +
+    scale_colour_normacro(
+      n = n_series
     ) +
     ggplot2::scale_x_continuous(
       breaks = year_breaks,
@@ -580,5 +587,5 @@ compare_series <- function(
       colour = NULL,
       caption = caption
     ) +
-    ggplot2::theme_minimal()
+    theme_normacro()
 }

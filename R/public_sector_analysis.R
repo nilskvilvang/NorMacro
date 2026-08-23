@@ -10,11 +10,11 @@ public_sector_analysis <- function(
     ),
     base_year = NULL
 ) {
-  
+
   measure <- match.arg(
     measure
   )
-  
+
   if (
     !is.numeric(start_year) ||
     length(start_year) != 1L ||
@@ -22,47 +22,41 @@ public_sector_analysis <- function(
     !is.finite(start_year)
   ) {
     stop(
-      "`start_year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
+      "`start_year` m\u00e5 v\u00e6rere ett gyldig \u00e5r.",
       call. = FALSE
     )
   }
-  
+
   start_year <- as.integer(
     start_year
   )
-  
-  if (is.null(end_year)) {
-    end_year <- as.integer(
-      format(
-        Sys.Date(),
-        "%Y"
+
+  if (!is.null(end_year)) {
+
+    if (
+      !is.numeric(end_year) ||
+      length(end_year) != 1L ||
+      is.na(end_year) ||
+      !is.finite(end_year)
+    ) {
+      stop(
+        "`end_year` m\u00e5 v\u00e6rere ett gyldig \u00e5r.",
+        call. = FALSE
       )
+    }
+
+    end_year <- as.integer(
+      end_year
     )
+
+    if (start_year > end_year) {
+      stop(
+        "`start_year` kan ikke v\u00e6rere st\u00f8rre enn `end_year`.",
+        call. = FALSE
+      )
+    }
   }
-  
-  if (
-    !is.numeric(end_year) ||
-    length(end_year) != 1L ||
-    is.na(end_year) ||
-    !is.finite(end_year)
-  ) {
-    stop(
-      "`end_year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
-      call. = FALSE
-    )
-  }
-  
-  end_year <- as.integer(
-    end_year
-  )
-  
-  if (start_year > end_year) {
-    stop(
-      "`start_year` kan ikke v\u00e6re st\u00f8rre enn `end_year`.",
-      call. = FALSE
-    )
-  }
-  
+
   prices <- if (
     measure %in% c(
       "level",
@@ -73,15 +67,27 @@ public_sector_analysis <- function(
   } else {
     "nominal"
   }
-  
+
   data <- get_public_sector_macro(
     start_year = start_year,
     end_year = end_year,
     prices = prices
   )
-  
+
+  if (nrow(data) == 0L) {
+    stop(
+      "Ingen data tilgjengelig for valgt periode.",
+      call. = FALSE
+    )
+  }
+
+  end_year <- max(
+    data$Aar,
+    na.rm = TRUE
+  )
+
   if (measure == "level") {
-    
+
     result <- data |>
       tidyr::pivot_longer(
         cols = c(
@@ -93,13 +99,13 @@ public_sector_analysis <- function(
         names_to = "Variabel",
         values_to = "Verdi"
       )
-    
+
   } else if (measure == "index") {
-    
+
     if (is.null(base_year)) {
       base_year <- start_year
     }
-    
+
     if (
       !is.numeric(base_year) ||
       length(base_year) != 1L ||
@@ -107,15 +113,15 @@ public_sector_analysis <- function(
       !is.finite(base_year)
     ) {
       stop(
-        "`base_year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
+        "`base_year` m\u00e5 v\u00e6rere ett gyldig \u00e5r.",
         call. = FALSE
       )
     }
-    
+
     base_year <- as.integer(
       base_year
     )
-    
+
     if (
       base_year < start_year ||
       base_year > end_year
@@ -125,7 +131,7 @@ public_sector_analysis <- function(
         call. = FALSE
       )
     }
-    
+
     result <- data |>
       tidyr::pivot_longer(
         cols = c(
@@ -155,9 +161,9 @@ public_sector_analysis <- function(
         Variabel,
         Verdi
       )
-    
+
   } else if (measure == "share_gdp") {
-    
+
     result <- data |>
       dplyr::transmute(
         Aar = .data$Aar,
@@ -179,9 +185,9 @@ public_sector_analysis <- function(
         names_to = "Variabel",
         values_to = "Verdi"
       )
-    
+
   } else {
-    
+
     result <- data |>
       dplyr::transmute(
         Aar = .data$Aar,
@@ -200,38 +206,48 @@ public_sector_analysis <- function(
         values_to = "Verdi"
       )
   }
-  
+
   result <- result |>
     dplyr::arrange(
       .data$Variabel,
       .data$Aar
     )
-  
+
   attr(
     result,
     "dataset_type"
   ) <- "macro"
-  
+
   attr(
     result,
     "source"
   ) <- "SSB"
-  
+
   attr(
     result,
     "ssb_table"
   ) <- "09189"
-  
+
   attr(
     result,
     "measure"
   ) <- measure
-  
+
   attr(
     result,
     "prices"
   ) <- prices
-  
+
+  attr(
+    result,
+    "start_year"
+  ) <- start_year
+
+  attr(
+    result,
+    "end_year"
+  ) <- end_year
+
   attr(
     result,
     "base_year"
@@ -240,7 +256,7 @@ public_sector_analysis <- function(
   } else {
     NULL
   }
-  
+
   attr(
     result,
     "unit"
@@ -251,7 +267,6 @@ public_sector_analysis <- function(
     share_gdp = "Prosent av BNP Fastlands-Norge",
     share_public = "Prosent av offentlig konsum"
   )
-  
+
   result
 }
-

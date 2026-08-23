@@ -39,30 +39,30 @@ scatter_series <- function(
     country = NULL,
     unit = NULL
 ) {
-  
+
   if (is.null(data)) {
     data <- get_normacro()
   }
-  
+
   if (!is.data.frame(data)) {
     stop(
       "`data` m\u00e5 v\u00e6re et datasett.",
       call. = FALSE
     )
   }
-  
+
   if (!"Aar" %in% names(data)) {
     stop(
       "Datasettet mangler \u00e5rskolonnen `Aar`.",
       call. = FALSE
     )
   }
-  
+
   missing <- setdiff(
     c(x, y),
     names(data)
   )
-  
+
   if (length(missing) > 0L) {
     stop(
       "Fant ikke variabler i datasettet: ",
@@ -70,9 +70,9 @@ scatter_series <- function(
       call. = FALSE
     )
   }
-  
+
   has_country <- "Land" %in% names(data)
-  
+
   has_kostra <- all(
     c(
       "Enhet",
@@ -80,40 +80,40 @@ scatter_series <- function(
       "Enhetstype"
     ) %in% names(data)
   )
-  
+
   # Metadata og KOSTRA-attributter må hentes før
   # panelidentifikatorene eventuelt fjernes.
   metadata <- get_metadata(data)
-  
+
   kostra_table <- NULL
   kostra_title <- NULL
   unit_name <- NULL
-  
+
   if (has_kostra) {
     kostra_table <- attr(
       data,
       "kostra_table"
     )
-    
+
     kostra_title <- attr(
       data,
       "kostra_title"
     )
   }
-  
+
   # ------------------------------------------------------------
   # Internasjonale data
   # ------------------------------------------------------------
-  
+
   if (has_country) {
-    
+
     available_countries <- data$Land |>
       unique() |>
       stats::na.omit() |>
       as.character()
-    
+
     if (is.null(country)) {
-      
+
       if (length(available_countries) > 1L) {
         stop(
           paste0(
@@ -123,10 +123,10 @@ scatter_series <- function(
           call. = FALSE
         )
       }
-      
+
       country <- available_countries[[1]]
     }
-    
+
     if (
       !is.character(country) ||
       length(country) != 1L ||
@@ -138,7 +138,7 @@ scatter_series <- function(
         call. = FALSE
       )
     }
-    
+
     if (!country %in% available_countries) {
       stop(
         "Fant ikke landet i datasettet: ",
@@ -146,7 +146,7 @@ scatter_series <- function(
         call. = FALSE
       )
     }
-    
+
     data <- data |>
       dplyr::filter(
         .data$Land == country
@@ -155,21 +155,21 @@ scatter_series <- function(
         -dplyr::all_of("Land")
       )
   }
-  
+
   # ------------------------------------------------------------
   # KOSTRA-data
   # ------------------------------------------------------------
-  
+
   if (has_kostra) {
-    
+
     available_units <- data |>
       dplyr::distinct(
         .data$Enhet,
         .data$Enhet_navn
       )
-    
+
     if (is.null(unit)) {
-      
+
       if (nrow(available_units) > 1L) {
         stop(
           paste0(
@@ -179,10 +179,10 @@ scatter_series <- function(
           call. = FALSE
         )
       }
-      
+
       unit <- available_units$Enhet[[1]]
     }
-    
+
     if (
       !is.character(unit) ||
       length(unit) != 1L ||
@@ -194,7 +194,7 @@ scatter_series <- function(
         call. = FALSE
       )
     }
-    
+
     if (!unit %in% available_units$Enhet) {
       stop(
         "Fant ikke KOSTRA-enheten: ",
@@ -202,7 +202,7 @@ scatter_series <- function(
         call. = FALSE
       )
     }
-    
+
     unit_name <- available_units |>
       dplyr::filter(
         .data$Enhet == unit
@@ -211,7 +211,7 @@ scatter_series <- function(
         .data$Enhet_navn
       ) |>
       dplyr::first()
-    
+
     if (
       !is.null(unit_name) &&
       !is.na(unit_name)
@@ -222,7 +222,7 @@ scatter_series <- function(
         unit_name
       )
     }
-    
+
     data <- data |>
       dplyr::filter(
         .data$Enhet == unit
@@ -237,11 +237,11 @@ scatter_series <- function(
         )
       )
   }
-  
+
   # ------------------------------------------------------------
   # Analyseperiode
   # ------------------------------------------------------------
-  
+
   plot_data <- data |>
     dplyr::select(
       Aar,
@@ -249,38 +249,38 @@ scatter_series <- function(
         c(x, y)
       )
     )
-  
+
   if (!is.null(start_year)) {
     plot_data <- plot_data |>
       dplyr::filter(
         .data$Aar >= start_year
       )
   }
-  
+
   if (!is.null(end_year)) {
     plot_data <- plot_data |>
       dplyr::filter(
         .data$Aar <= end_year
       )
   }
-  
+
   plot_data <- plot_data |>
     dplyr::filter(
       !is.na(.data[[x]]),
       !is.na(.data[[y]])
     )
-  
+
   if (nrow(plot_data) == 0L) {
     stop(
       "Fant ingen observasjoner der begge variablene har data.",
       call. = FALSE
     )
   }
-  
+
   # ------------------------------------------------------------
   # Visningsnavn og måleenhet
   # ------------------------------------------------------------
-  
+
   x_label <- if (x %in% metadata$Variabel) {
     get_display_name(
       x,
@@ -295,7 +295,7 @@ scatter_series <- function(
       )
     )
   }
-  
+
   y_label <- if (y %in% metadata$Variabel) {
     get_display_name(
       y,
@@ -310,7 +310,7 @@ scatter_series <- function(
       )
     )
   }
-  
+
   x_unit <- metadata |>
     dplyr::filter(
       .data$Variabel == x
@@ -318,7 +318,7 @@ scatter_series <- function(
     dplyr::pull(
       dplyr::any_of("Enhet")
     )
-  
+
   y_unit <- metadata |>
     dplyr::filter(
       .data$Variabel == y
@@ -326,15 +326,15 @@ scatter_series <- function(
     dplyr::pull(
       dplyr::any_of("Enhet")
     )
-  
+
   # ------------------------------------------------------------
   # Kilde
   # ------------------------------------------------------------
-  
+
   if (has_kostra) {
-    
+
     caption <- "Kilde: SSB KOSTRA"
-    
+
     if (
       !is.null(kostra_table) &&
       length(kostra_table) > 0L &&
@@ -347,9 +347,9 @@ scatter_series <- function(
         kostra_table
       )
     }
-    
+
   } else if ("Kilde" %in% names(metadata)) {
-    
+
     source_text <- metadata |>
       dplyr::filter(
         .data$Variabel %in% c(x, y)
@@ -359,7 +359,7 @@ scatter_series <- function(
       ) |>
       unique() |>
       stats::na.omit()
-    
+
     caption <- if (length(source_text) == 0L) {
       NULL
     } else {
@@ -371,40 +371,40 @@ scatter_series <- function(
         )
       )
     }
-    
+
   } else {
     caption <- NULL
   }
-  
+
   # ------------------------------------------------------------
   # Statistikk
   # ------------------------------------------------------------
-  
+
   fit <- stats::lm(
     plot_data[[y]] ~ plot_data[[x]]
   )
-  
+
   r <- stats::cor(
     plot_data[[x]],
     plot_data[[y]],
     use = "complete.obs"
   )
-  
+
   fit_summary <- summary(
     fit
   )
-  
+
   r2 <- fit_summary$r.squared
-  
+
   p_value <- fit_summary$coefficients[
     2,
     4
   ]
-  
+
   n <- nrow(
     plot_data
   )
-  
+
   stats_label <- paste(
     sprintf(
       "r = %.2f",
@@ -428,13 +428,13 @@ scatter_series <- function(
     ),
     sep = "\n"
   )
-  
+
   # ------------------------------------------------------------
   # Undertittel
   # ------------------------------------------------------------
-  
+
   subtitle_parts <- character()
-  
+
   if (
     has_country &&
     !is.null(country)
@@ -444,7 +444,7 @@ scatter_series <- function(
       country
     )
   }
-  
+
   if (
     has_kostra &&
     !is.null(unit_name)
@@ -454,7 +454,7 @@ scatter_series <- function(
       unit_name
     )
   }
-  
+
   if (
     has_kostra &&
     !is.null(kostra_title) &&
@@ -467,7 +467,7 @@ scatter_series <- function(
       kostra_title
     )
   }
-  
+
   subtitle_parts <- c(
     subtitle_parts,
     paste0(
@@ -480,16 +480,16 @@ scatter_series <- function(
       )
     )
   )
-  
+
   subtitle <- paste(
     subtitle_parts,
     collapse = " \u00b7 "
   )
-  
+
   # ------------------------------------------------------------
   # Plot
   # ------------------------------------------------------------
-  
+
   p <- ggplot2::ggplot(
     plot_data,
     ggplot2::aes(
@@ -549,8 +549,8 @@ scatter_series <- function(
       size = 3.5,
       linewidth = 0.3
     ) +
-    ggplot2::theme_minimal()
-  
+    theme_normacro()
+
   if (add_smooth) {
     p <- p +
       ggplot2::geom_smooth(
@@ -559,7 +559,7 @@ scatter_series <- function(
         se = FALSE
       )
   }
-  
+
   if (label_years) {
     p <- p +
       ggplot2::geom_text(
@@ -570,6 +570,6 @@ scatter_series <- function(
         check_overlap = TRUE
       )
   }
-  
+
   p
 }
