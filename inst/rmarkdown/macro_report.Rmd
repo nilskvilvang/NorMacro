@@ -1,0 +1,149 @@
+
+---
+title: "NorMacro makrorapport"
+params:
+  report: NULL
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+
+report <- params$report
+```
+
+## År
+
+`r report$year`
+
+## Konjunkturfase
+
+```{r business-cycle, results='asis'} 
+if (nrow(report$business_cycle) > 0L) {
+  cat(
+    "**Fase:** ",
+    report$business_cycle$Fase[[1]],
+    "  \n",
+    sep = ""
+  )
+
+  cat(
+    "**Score:** ",
+    report$business_cycle$Score[[1]],
+    "\n",
+    sep = ""
+  )
+}
+```
+
+## Aktivitet
+
+```{r activity-plot, fig.width=8, fig.height=4.5}
+report$plots$activity
+```
+
+## Inflasjon og renter
+
+```{r prices-rates-plot, fig.width=8, fig.height=4.5}
+report$plots$prices_rates
+```
+
+## Nøkkeltall
+
+```{r key-indicators, results='asis'}
+table_data <- report$key_indicators |>
+  dplyr::mutate(
+    Verdi = dplyr::case_when(
+      Enhet %in% c(
+        "Prosent",
+        "Prosentpoeng"
+      ) ~ formatC(
+        Verdi,
+        format = "f",
+        digits = 2,
+        decimal.mark = ","
+      ),
+
+      grepl(
+        "^Indeks",
+        Enhet
+      ) ~ formatC(
+        Verdi,
+        format = "f",
+        digits = 1,
+        decimal.mark = ","
+      ),
+
+      Enhet == "Antall måneder" ~ formatC(
+        Verdi,
+        format = "f",
+        digits = 1,
+        decimal.mark = ","
+      ),
+
+      TRUE ~ formatC(
+        Verdi,
+        format = "f",
+        digits = 2,
+        decimal.mark = ","
+      )
+    )
+  ) |>
+  dplyr::select(
+    Display_navn,
+    Verdi,
+    Enhet,
+    Kategori,
+    Kilde
+  )
+
+categories <- unique(
+  table_data$Kategori
+)
+
+for (category in categories) {
+
+  cat(
+    "### ",
+    category,
+    "\n\n",
+    sep = ""
+  )
+
+  category_data <- table_data |>
+    dplyr::filter(
+      .data$Kategori == category
+    ) |>
+    dplyr::select(
+      Display_navn,
+      Verdi,
+      Enhet,
+      Kilde
+    )
+
+  names(category_data)[[1]] <- "Variabel"
+
+  print(
+    knitr::kable(
+      category_data,
+      align = c(
+        "l",
+        "r",
+        "l",
+        "l"
+      )
+    )
+  )
+
+  cat("\n\n")
+}
+```
+
+## Oppsummering
+
+`r paste(summary(report)$text, collapse = "\n\n")`
+
+

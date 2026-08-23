@@ -1,0 +1,44 @@
+
+h2 {
+  margin-top: 1.2em !important;
+  margin-bottom: 0.6em !important;
+}
+
+h3 {
+  margin-top: 0.8em !important;
+  margin-bottom: 0.2em !important;
+}
+
+table {
+  margin-top: 0 !important;
+  margin-bottom: 0.8em !important;
+  width: 100%;
+  table-layout: fixed;
+}
+
+th,
+td {
+  padding-top: 0.25em !important;
+  padding-bottom: 0.25em !important;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+  width: 42%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 12%;
+  text-align: right;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 26%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 20%;
+}
