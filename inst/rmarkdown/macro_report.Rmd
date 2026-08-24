@@ -21,7 +21,7 @@ report <- params$report
 
 ## Konjunkturfase
 
-```{r business-cycle, results='asis'} 
+```{r business-cycle, results='asis'}
 if (nrow(report$business_cycle) > 0L) {
   cat(
     "**Fase:** ",
@@ -57,20 +57,14 @@ report$plots$prices_rates
 table_data <- report$key_indicators |>
   dplyr::mutate(
     Verdi = dplyr::case_when(
-      Enhet %in% c(
-        "Prosent",
-        "Prosentpoeng"
-      ) ~ formatC(
+      Enhet %in% c("Prosent", "Prosentpoeng") ~ formatC(
         Verdi,
         format = "f",
         digits = 2,
         decimal.mark = ","
       ),
 
-      grepl(
-        "^Indeks",
-        Enhet
-      ) ~ formatC(
+      grepl("^Indeks", Enhet) ~ formatC(
         Verdi,
         format = "f",
         digits = 1,
@@ -92,27 +86,11 @@ table_data <- report$key_indicators |>
       )
     )
   ) |>
-  dplyr::select(
-    Display_navn,
-    Verdi,
-    Enhet,
-    Kategori,
-    Kilde
-  )
+  dplyr::select(Display_navn, Verdi, Enhet, Kategori, Kilde)
 
-categories <- unique(
-  table_data$Kategori
-)
+categories <- unique(table_data$Kategori)
 
 for (category in categories) {
-
-  cat(
-    "### ",
-    category,
-    "\n\n",
-    sep = ""
-  )
-
   category_data <- table_data |>
     dplyr::filter(
       .data$Kategori == category
@@ -126,19 +104,53 @@ for (category in categories) {
 
   names(category_data)[[1]] <- "Variabel"
 
-  print(
-    knitr::kable(
-      category_data,
-      align = c(
-        "l",
-        "r",
-        "l",
-        "l"
+  if (knitr::is_latex_output()) {
+
+    cat(
+      "\\subsubsection*{",
+      category,
+      "}\n",
+      sep = ""
+    )
+
+    print(
+      knitr::kable(
+        category_data,
+        format = "latex",
+        align = c(
+          "l",
+          "r",
+          "l",
+          "l"
+        )
       )
     )
-  )
 
-  cat("\n\n")
+    cat("\n\n")
+
+  } else {
+
+    cat(
+      "### ",
+      category,
+      "\n\n",
+      sep = ""
+    )
+
+    print(
+      knitr::kable(
+        category_data,
+        align = c(
+          "l",
+          "r",
+          "l",
+          "l"
+        )
+      )
+    )
+
+    cat("\n\n")
+  }
 }
 ```
 

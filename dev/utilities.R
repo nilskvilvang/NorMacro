@@ -82,8 +82,9 @@
 
 ## Build-check
 # devtools::check()
+# slett tmp-report før check i bash: rm -rf tmp-report
 
-## SJekke vignetter
+## Sjekke vignetter
 # browseVignettes("NorMacro")
 
 ## ASCII
@@ -94,3 +95,9 @@
 # \u00c5  Å
 # \u00c6  Æ
 # \u00d8  Ø
+
+## Report-eksempel
+
+# report <- macro_report(
+#   year = 2025
+# )

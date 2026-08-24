@@ -23,6 +23,52 @@ macro_report <- function(data = NULL, year = NULL) {
     year <- max(data$Aar, na.rm = TRUE)
   }
 
+  if (
+    !is.numeric(year) ||
+    length(year) != 1L ||
+    is.na(year) ||
+    !is.finite(year)
+  ) {
+    stop(
+      "`year` m\u00e5 v\u00e6re ett gyldig \u00e5r.",
+      call. = FALSE
+    )
+  }
+
+  year <- as.integer(
+    year
+  )
+
+  if (!year %in% data$Aar) {
+    stop(
+      paste0(
+        "Fant ingen data for ",
+        year,
+        "."
+      ),
+      call. = FALSE
+    )
+  }
+
+  year_data <- data |>
+    dplyr::filter(
+      .data$Aar == year
+    )
+
+  if (
+    !"BNP_Fastland_vekst" %in% names(year_data) ||
+    all(is.na(year_data$BNP_Fastland_vekst))
+  ) {
+    stop(
+      paste0(
+        "Rapporten kan ikke genereres for ",
+        year,
+        " fordi BNP Fastland vekst mangler."
+      ),
+      call. = FALSE
+    )
+  }
+
   metadata <- get_metadata(data)
 
   cycle <- business_cycle(data = data) |>
