@@ -1,0 +1,352 @@
+
+---
+title: "Gap-analyse 2 – Inflasjon"
+format: html
+---
+
+# Faglige spørsmål
+
+Inflasjonsdelen i NorMacro skal gjøre det enkelt å undersøke:
+
+- hvordan det generelle prisnivået utvikler seg
+- hvor høy inflasjonen er
+- hvordan inflasjonen har utviklet seg historisk
+- forskjellen mellom samlet og underliggende inflasjon
+- hvordan energipriser og andre relevante prisimpulser utvikler seg
+- hvordan inflasjon henger sammen med lønn, aktivitet og arbeidsledighet
+- hvordan norsk inflasjon sammenlignes med utviklingen i andre land
+
+Et viktig faglig skille er mellom:
+
+- prisnivå
+- endring i prisnivået
+- samlet inflasjon
+- underliggende inflasjon
+- harmoniserte internasjonale prisindekser
+
+Disse størrelsene skal ikke behandles som om de er samme økonomiske
+begrep.
+
+# Baseline fra gap-analyse 1
+
+Den første gap-analysen vurderte inflasjon slik:
+
+| Dimensjon | Status |
+|---|---|
+| Data | 🟡 |
+| Analyse | 🟢 |
+| Metadata | 🟢 |
+| Undervisning | 🟢 |
+| Samlet gap | Lite–middels |
+| Prioritet videre | Middels |
+
+Det viktigste eksplisitte restgapet var:
+
+- underliggende inflasjon, særlig KPI-JAE
+
+Dette ble senere prioritert som et konkret kompletteringspunkt.
+
+# Utvikling siden baseline
+
+## KPI og samlet inflasjon
+
+NorMacro inneholder:
+
+- `KPI`
+- `Inflasjon`
+
+`KPI` er konsumprisindeksen, mens `Inflasjon` representerer årsveksten
+i KPI.
+
+Tidsdekningen er svært lang:
+
+| Variabel | Start | Slutt |
+|---|---:|---:|
+| `KPI` | 1865 | 2025 |
+| `Inflasjon` | 1866 | 2025 |
+
+Dette gir NorMacro et meget godt grunnlag for både moderne og langsiktig
+historisk inflasjonsanalyse.
+
+Status: **Godt dekket**
+
+## Underliggende inflasjon
+
+NorMacro inneholder nå:
+
+- `KPI_JAE`
+- `Inflasjon_JAE`
+
+`KPI_JAE` beskrives som konsumprisindeksen justert for avgiftsendringer
+og uten energivarer.
+
+`Inflasjon_JAE` beskrives som årsendringen i KPI-JAE og har
+displaynavnet **Underliggende inflasjon**.
+
+Tidsdekningen er:
+
+| Variabel | Start | Slutt |
+|---|---:|---:|
+| `KPI_JAE` | 2003 | 2025 |
+| `Inflasjon_JAE` | 2004 | 2025 |
+
+Dette lukker det viktigste eksplisitte datagapet fra den første
+gap-analysen.
+
+Status: **Lukket**
+
+# Dagens datadekning
+
+## Prisnivå og inflasjon
+
+Kombinasjonen av:
+
+- `KPI`
+- `Inflasjon`
+- `KPI_JAE`
+- `Inflasjon_JAE`
+
+gir et ryddig sett for analyse av både prisnivå, samlet inflasjon og
+underliggende inflasjon.
+
+Variabelstrukturen er også konsistent:
+
+- indeksnivå representeres som indeks
+- inflasjon representeres som årlig prosentvis endring
+
+## Relevante prisimpulser
+
+NorMacro inneholder i tillegg blant annet:
+
+- `Oljepris_USD`
+- `Oljeprisvekst`
+- `Strompris`
+- `Stromprisvekst`
+
+Disse gjør det mulig å undersøke viktige prisimpulser som kan være
+relevante for norsk inflasjon.
+
+`Strompris` har kortere historikk enn de øvrige hovedseriene, men dette
+er ikke et vesentlig gap i den generelle inflasjonsdekningen.
+
+## Boligpriser
+
+NorMacro har også:
+
+- `Boligprisindeks`
+- `Boligprisvekst`
+
+Boligpriser skal imidlertid ikke behandles som en komponent i ordinær
+konsumprisinflasjon.
+
+Seriene er relevante for bredere makroøkonomiske analyser, men utgjør
+ikke en erstatning for KPI eller KPI-JAE.
+
+# Internasjonal dekning
+
+Det internasjonale datalaget inneholder blant annet:
+
+- `HICP`
+- `Inflasjon`
+
+`HICP` er den harmoniserte konsumprisindeksen og gir et konsistent
+grunnlag for prisnivåsammenligninger over tid mellom europeiske land.
+
+Dette er konseptuelt forskjellig fra den norske nasjonale KPI-serien.
+
+NorMacro bør beholde dette skillet:
+
+- norsk datalag bruker nasjonale KPI-begreper
+- internasjonalt datalag bruker harmoniserte europeiske indikatorer når
+  disse er mest egnet for sammenligning
+
+Det er ikke nødvendig at variabelnavnene er identiske dersom
+definisjonene og metadataene er tydelige.
+
+Status: **Godt dekket**
+
+# Analyse og API
+
+Inflasjonsdataene kan analyseres med NorMacros generelle
+analyseverktøy.
+
+Blant relevante funksjoner finnes:
+
+- `growth()`
+- `growth_table()`
+- `compare_series()`
+- `compare_periods()`
+- `compare_countries()`
+- `plot_series()`
+- korrelasjonsverktøy
+- regresjonsverktøy
+- `macro_report()`
+- `render_macro_report()`
+
+I tillegg finnes `price_model()`.
+
+Det er ikke identifisert behov for ytterligere spesialiserte
+inflasjonsfunksjoner.
+
+Sammenhenger som:
+
+- inflasjon og arbeidsledighet
+- inflasjon og lønnsvekst
+- inflasjon og rente
+- inflasjon og aktivitet
+- inflasjon og energipriser
+
+kan undersøkes med eksisterende generelle analyseverktøy.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+Metadataene skiller tydelig mellom de sentrale begrepene.
+
+Eksempler:
+
+- `KPI` – konsumprisindeks
+- `Inflasjon` – årsvekst i KPI
+- `KPI_JAE` – konsumprisindeks justert for avgiftsendringer og uten
+  energivarer
+- `Inflasjon_JAE` – årsendring i KPI-JAE / underliggende inflasjon
+
+Dette er en viktig forbedring fordi brukeren både kan finne selve
+indeksen og den økonomisk mer direkte anvendelige inflasjonsraten.
+
+Metadataene gjør også definisjonen av underliggende inflasjon eksplisitt
+fremfor å forutsette at brukeren kjenner forkortelsen KPI-JAE.
+
+**Metadata: Grønn**
+
+# Undervisning og dokumentasjon
+
+Dagens datagrunnlag støtter flere sentrale undervisningstemaer:
+
+- prisnivå mot inflasjon
+- samlet mot underliggende inflasjon
+- kortsiktige inflasjonssjokk
+- energipriser og inflasjon
+- inflasjon og pengepolitikk
+- inflasjon og arbeidsmarked
+- historiske inflasjonsperioder
+- internasjonale inflasjonssammenligninger
+
+KPI-JAE er særlig viktig pedagogisk fordi studenten kan sammenligne
+samlet KPI-inflasjon med et mål som korrigerer for avgiftsendringer og
+utelater energivarer.
+
+Eksisterende analyse-, visualiserings- og rapportverktøy er
+tilstrekkelige for slike analyser.
+
+**Undervisning: Grønn**
+
+# Tidligere gap – status
+
+| Tidligere gap | Status | Kommentar |
+|---|---|---|
+| KPI/prisnivå | Dekket | Svært lang historikk |
+| Samlet inflasjon | Dekket | Årsvekst i KPI fra 1866 |
+| Underliggende inflasjon | Lukket | `KPI_JAE` og `Inflasjon_JAE` er lagt til |
+| Inflasjonsanalyse | Dekket | Generelle analyseverktøy er tilstrekkelige |
+| Internasjonal sammenligning | Dekket | HICP og internasjonal inflasjon finnes |
+
+# Nye gap
+
+Det er ikke identifisert nye vesentlige gap.
+
+Mer detaljerte prisserier kan naturligvis være interessante, for
+eksempel:
+
+- vare- og tjenesteinflasjon
+- importert inflasjon
+- matvarepriser
+- flere mål på underliggende inflasjon
+- inflasjonsforventninger
+
+Disse skal ikke automatisk klassifiseres som datagap.
+
+De bør bare inkluderes dersom senere fagområder eller konkret bruk viser
+at de er nødvendige for å besvare NorMacros sentrale spørsmål.
+
+Inflasjonsforventninger vurderes eventuelt under finansmarkeder og
+forventninger, ikke som et automatisk krav til den ordinære
+inflasjonsdelen.
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 1 | Analyse 2 | Begrunnelse |
+|---|---|---|---|
+| Data | 🟡 | 🟢 | Underliggende inflasjon er nå inkludert |
+| Analyse | 🟢 | 🟢 | Eksisterende analyseverktøy dekker behovene |
+| Metadata | 🟢 | 🟢 | Prisnivå, inflasjon og KPI-JAE er tydelig definert |
+| Undervisning | 🟢 | 🟢 | Datagrunnlaget dekker sentrale inflasjonstemaer |
+
+# Samlet vurdering
+
+**Samlet gap: Lite**
+
+Inflasjonsområdet har nå en konsistent kjerne bestående av:
+
+- samlet konsumprisindeks
+- samlet inflasjon
+- KPI-JAE
+- underliggende inflasjon
+- relevante energi- og prisindikatorer
+- internasjonalt harmoniserte prisdata
+
+Det viktigste datagapet fra den første analysen er dermed lukket.
+
+# Anbefalte tiltak
+
+## Ingen ny høyt prioritert datainnhenting
+
+Det er ikke identifisert et inflasjonsdatagap som bør prioriteres i
+neste utviklingsfase.
+
+## Bevar begrepsdistinksjonene
+
+Fremtidig utvikling bør fortsatt skille tydelig mellom:
+
+- indeksnivå og inflasjonsrate
+- samlet og underliggende inflasjon
+- nasjonal KPI og internasjonal HICP
+
+## Unngå unødvendig utvidelse
+
+Flere prisindekser eller alternative mål på underliggende inflasjon bør
+bare inkluderes dersom de tilfører en klar faglig funksjon.
+
+NorMacro bør ikke utvikles til en generell prisstatistikkdatabase.
+
+# Prioritering
+
+**Samlet prioritet videre: Lav**
+
+Videre arbeid bør primært bestå av vedlikehold og konsistent
+dokumentasjon.
+
+# Konklusjon
+
+Inflasjonsområdet er tydelig styrket siden den første gap-analysen.
+
+Det viktigste tidligere restgapet er lukket gjennom:
+
+- `KPI_JAE`
+- `Inflasjon_JAE`
+
+Samtidig har NorMacro svært lang historikk for samlet KPI og inflasjon,
+og det internasjonale datalaget gir harmoniserte europeiske
+sammenligningsmuligheter.
+
+Det er ikke identifisert nye vesentlige gap.
+
+Endelig status:
+
+- **Data: 🟢**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟢**
+- **Samlet gap: Lite**
+- **Prioritet: Lav**

@@ -1,0 +1,404 @@
+
+---
+title: "Gap-analyse 2 – Renter og pengepolitikk"
+format: html
+---
+
+# Faglige spørsmål
+
+Rente- og pengepolitikkområdet i NorMacro skal gjøre det enkelt å
+undersøke:
+
+- hvordan styringsrenten har utviklet seg
+- hvordan korte markedsrenter utvikler seg relativt til styringsrenten
+- hvordan lange renter utvikler seg
+- hvordan rentekurven endrer seg gjennom konjunkturene
+- hvordan renter henger sammen med inflasjon og økonomisk aktivitet
+- hvordan norsk renteutvikling sammenlignes med andre land
+- hvordan pengepolitikken virker gjennom finansielle markeder og videre
+  inn i økonomien
+
+Et viktig faglig skille går mellom:
+
+- styringsrente
+- kort markedsrente
+- lang markedsrente
+- rentekurve
+- realrente
+- renter som husholdninger og foretak faktisk møter
+
+Disse målene beskriver forskjellige deler av pengepolitikken og dens
+transmisjon.
+
+# Baseline fra gap-analyse 1
+
+Den første gap-analysen identifiserte renter og pengepolitikk som et
+område med god grunnstruktur, men med muligheter for komplettering.
+
+Gap-analyse 2 vurderer både hvilke renteserier som nå finnes og om
+historikken er tilstrekkelig for NorMacros analyseformål.
+
+# Dagens datadekning
+
+## Styringsrente
+
+NorMacro inneholder:
+
+- `Styringsrente`
+
+Serien beskrives som Norges Banks styringsrente og dekker:
+
+- 1982–2025
+
+Dette gir et godt historisk grunnlag for analyse av norsk pengepolitikk
+gjennom flere konjunktur- og inflasjonsperioder.
+
+Status: **Godt dekket**
+
+## Pengemarkedsrente
+
+NorMacro inneholder:
+
+- `Pengemarkedsrente_3mnd`
+
+Den norske serien er 3-måneders NIBOR, uttrykt som
+årsgjennomsnitt.
+
+Tidsdekningen i det norske datasettet er:
+
+- 2013–2025
+
+Serien gir dermed et relevant mål på kort markedsrente, men historikken
+er vesentlig kortere enn for styringsrenten.
+
+Dette begrenser analyser av forholdet mellom styringsrente og
+pengemarkedsrente over lengre historiske perioder.
+
+Status: **Delvis dekket**
+
+## Lang statsrente
+
+NorMacro inneholder:
+
+- `Statsrente_10aar`
+
+Serien beskrives som 10-årig norsk statsobligasjonsrente.
+
+Tidsdekningen i det norske datasettet er:
+
+- 2019–2025
+
+Dette er tilstrekkelig for analyse av de aller siste årene, men for
+kort for historisk konjunktur-, inflasjons- og pengepolitisk analyse.
+
+Status: **Delvis dekket**
+
+## Rentekurve
+
+NorMacro beregner:
+
+- `Rentekurve`
+
+som:
+
+> 10-årig statsrente minus styringsrente
+
+Dette gir et enkelt og transparent mål på helningen på rentekurven.
+
+Siden den lange statsrenten bare dekker 2019–2025, får også
+`Rentekurve` denne korte historikken.
+
+Metoden er dermed på plass, mens datagrunnlaget begrenser den historiske
+nytten.
+
+Status: **Metodisk dekket, historisk begrenset**
+
+# Historisk dekning som hovedgap
+
+Den viktigste svakheten i dagens rentedata er ikke mangelen på sentrale
+rentebegreper, men ulik og til dels kort tidsdekning.
+
+| Variabel | Start | Slutt | Vurdering |
+|---|---:|---:|---|
+| `Styringsrente` | 1982 | 2025 | God |
+| `Pengemarkedsrente_3mnd` | 2013 | 2025 | Kort |
+| `Statsrente_10aar` | 2019 | 2025 | Svært kort |
+| `Rentekurve` | 2019 | 2025 | Svært kort |
+
+Dette gjør at NorMacro kan analysere dagens rentestruktur godt, men
+ikke hele den historiske transmisjonen mellom korte og lange renter.
+
+Dette vurderes som et reelt datagap.
+
+# Bank- og utlånsrenter
+
+Det norske hoveddatasettet inneholder ikke en eksplisitt serie for:
+
+- boliglånsrente
+- bankenes utlånsrente
+- innskuddsrente
+
+Slike renter er faglig relevante fordi styringsrenten ikke er renten
+husholdninger og foretak direkte betaler.
+
+En utlåns- eller boliglånsrente kan derfor tilføre en egen dimensjon til
+analyse av pengepolitisk transmisjon.
+
+Dette vurderes som et **reelt, men ikke kritisk restgap**.
+
+NorMacro har allerede styringsrente og markedsrenter, slik at grunnlaget
+for ordinær makroøkonomisk renteanalyse er til stede.
+
+# Realrente
+
+NorMacro inneholder ikke en eksplisitt `Realrente`.
+
+En enkel ex-post realrente kan prinsipielt beregnes fra eksisterende
+data, for eksempel som en nominell rente minus observert inflasjon.
+
+Dette er imidlertid ikke nødvendigvis det samme som den forventede
+realrenten som er relevant for pengepolitiske beslutninger.
+
+NorMacro bør derfor ikke introdusere én serie kalt `Realrente` uten en
+tydelig definisjon.
+
+Mangelen vurderes som et **analyse-/utvidelsespunkt**, ikke et
+prioritert datagap.
+
+# Internasjonal dekning
+
+Det internasjonale datalaget inneholder:
+
+- `Pengemarkedsrente_3mnd`
+- `Statsrente_10aar`
+
+Metadataene identifiserer disse som henholdsvis:
+
+- årlig gjennomsnittlig 3-måneders pengemarkedsrente
+- langsiktig statsobligasjonsrente etter Maastricht-kriteriet
+
+Kildene er OECD og Eurostat.
+
+Dette gir et godt grunnlag for internasjonale sammenligninger av korte
+og lange renter.
+
+Det er positivt at NorMacro bruker harmoniserte internasjonale serier
+fremfor å forsøke å gjøre nasjonale rentedefinisjoner identiske.
+
+Status: **Godt dekket**
+
+# Analyse og API
+
+NorMacro har egne datainnhentingsfunksjoner for sentrale renter:
+
+- `get_rente()`
+- `get_pengemarkedsrente()`
+- `get_statsrente()`
+- `get_short_interest_rate()`
+- `get_long_interest_rate()`
+
+De ferdige seriene kan analyseres med det generelle API-et:
+
+- `compare_series()`
+- `compare_periods()`
+- `compare_countries()`
+- `plot_series()`
+- korrelasjonsverktøy
+- regresjonsverktøy
+- `business_cycle()`
+- `macro_report()`
+- `render_macro_report()`
+
+Det er ikke identifisert behov for et større spesialisert
+pengepolitisk analyse-API.
+
+Sammenhenger mellom:
+
+- styringsrente og inflasjon
+- styringsrente og arbeidsledighet
+- korte og lange renter
+- renter og økonomisk aktivitet
+
+kan analyseres med eksisterende generelle verktøy.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+Metadataene skiller tydelig mellom:
+
+- styringsrente
+- 3-måneders pengemarkedsrente
+- 10-årig statsrente
+- rentekurve
+
+Enheter og kilder er eksplisitte.
+
+`Rentekurve` er også definert direkte som differansen mellom 10-årig
+statsrente og styringsrente.
+
+Dette er viktig fordi begrepet rentekurve ellers kan referere til hele
+terminstrukturen, mens NorMacro bruker ett bestemt spreadmål.
+
+Det er ikke identifisert et vesentlig metadatagap.
+
+**Metadata: Grønn**
+
+# Undervisning og dokumentasjon
+
+Dagens datagrunnlag støtter sentrale undervisningstemaer som:
+
+- pengepolitiske renteendringer
+- inflasjon og rente
+- korte mot lange renter
+- rentekurvens helning
+- konjunkturer og pengepolitikk
+- internasjonale renteforskjeller
+
+Den korte historikken for markedsrentene begrenser enkelte historiske
+case.
+
+Eksempelvis kan styringsrenten studeres gjennom flere tiår, mens
+samspillet med 10-årsrenten bare kan undersøkes fra 2019 i det norske
+hoveddatasettet.
+
+Dette er først og fremst et dataproblem, ikke et
+undervisningsarkitekturproblem.
+
+**Undervisning: Grønn**
+
+# Tidligere og nåværende gap
+
+| Område | Status | Kommentar |
+|---|---|---|
+| Styringsrente | Dekket | God historikk fra 1982 |
+| Kort markedsrente | Delvis | Finnes, men først fra 2013 |
+| Lang statsrente | Delvis | Finnes, men først fra 2019 |
+| Rentekurve | Delvis | Beregnes, men begrenses av langrenten |
+| Internasjonale renter | Dekket | Korte og lange renter finnes |
+| Bank-/utlånsrente | Åpent | Ingen slik serie i hoveddatasettet |
+| Realrente | Åpent, lav prioritet | Krever eksplisitt definisjon |
+
+# Nye gap
+
+Gap-analyse 2 tydeliggjør særlig to forhold:
+
+1. **Historisk rentedekning**
+
+   Pengemarkedsrenten og særlig statsrenten har for kort historikk for
+   NorMacros langsiktige analyseambisjon.
+
+2. **Pengepolitisk transmisjon til bankrenter**
+
+   Det finnes ingen eksplisitt rente som representerer renten
+   husholdninger eller foretak møter.
+
+Dette betyr ikke at NorMacro trenger et omfattende nytt
+pengepolitikk-API.
+
+Gapene ligger først og fremst i datalaget.
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 2 | Begrunnelse |
+|---|---|---|
+| Data | 🟡 | Sentrale renter finnes, men markedsrentehistorikken er kort og bankrenter mangler |
+| Analyse | 🟢 | Eksisterende generelle analyseverktøy dekker behovet |
+| Metadata | 🟢 | Rentebegrepene og rentekurven er tydelig definert |
+| Undervisning | 🟢 | Sentrale pengepolitiske problemstillinger kan analyseres |
+
+# Samlet vurdering
+
+**Samlet gap: Lite–middels**
+
+NorMacro har en god rentearkitektur:
+
+- styringsrente
+- kort markedsrente
+- lang statsrente
+- rentekurve
+- internasjonale sammenligningsserier
+
+Det største problemet er historikken.
+
+En 10-årsrente som starter i 2019 er særlig begrensende for et
+makrodatasett som ellers legger stor vekt på historiske analyser og
+sammenligning av økonomiske episoder.
+
+# Anbefalte tiltak
+
+## 1. Forleng historikken for 10-årig statsrente
+
+**Prioritet: Middels–høy**
+
+Dette er det tydeligste tiltaket.
+
+Målet bør være å finne en stabil og dokumentert kilde som kan gi en
+vesentlig lengre årlig serie.
+
+En forlengelse vil samtidig forbedre `Rentekurve`.
+
+## 2. Forleng historikken for 3-måneders pengemarkedsrente
+
+**Prioritet: Middels**
+
+Undersøk om den eksisterende serien kan forlenges bakover fra 2013 med
+en konsistent og dokumentert kilde.
+
+## 3. Kartlegg bank-/utlånsrente
+
+**Prioritet: Middels**
+
+Undersøk om én robust serie kan representere pengepolitisk transmisjon
+til husholdninger eller privat sektor.
+
+Det bør foretrekkes én tydelig makroserie fremfor et stort sett av
+detaljerte bankrenter.
+
+## 4. Ikke legg til realrente uten tydelig definisjon
+
+**Prioritet: Lav**
+
+En realrente bør bare inkluderes dersom NorMacro kan være eksplisitt om:
+
+- hvilken nominell rente som brukes
+- hvilket inflasjonsmål som brukes
+- om inflasjonen er observert eller forventet
+
+En enkel beregnet realrente kan eventuelt vurderes senere som et
+analyseverktøy.
+
+# Prioritering
+
+**Samlet prioritet videre: Middels**
+
+Det er ikke behov for ny analysearkitektur.
+
+Prioriteten bør ligge på å forbedre det eksisterende rentedatasettet,
+særlig historikken for markedsrentene.
+
+# Konklusjon
+
+Rente- og pengepolitikkområdet har en god konseptuell struktur, men
+datadekningen er ujevn.
+
+Styringsrenten har god historikk, mens:
+
+- 3-måneders pengemarkedsrente først starter i 2013
+- 10-årig statsrente først starter i 2019
+- rentekurven dermed også først starter i 2019
+- bank-/utlånsrenter mangler
+
+Internasjonalt er både korte og lange renter tilgjengelige.
+
+Det viktigste videre tiltaket er derfor ikke å utvikle flere
+analysefunksjoner, men å forbedre historisk rentedekning.
+
+Endelig status:
+
+- **Data: 🟡**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟢**
+- **Samlet gap: Lite–middels**
+- **Prioritet: Middels**

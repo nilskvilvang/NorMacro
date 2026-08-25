@@ -1,0 +1,446 @@
+
+---
+title: "Gap-analyse 2 – Konsum og investering"
+format: html
+---
+
+# Faglige spørsmål
+
+Området konsum og investering skal gjøre det enkelt å undersøke:
+
+- hvordan privat konsum utvikler seg
+- hvordan konsum varierer med husholdningenes disponible inntekt
+- hvordan sparing varierer over tid
+- hvordan husholdningenes gjeld utvikler seg
+- hvordan renter og boligmarked kan ses i sammenheng med husholdningenes
+  etterspørsel
+- hvordan investeringene utvikler seg
+- hvordan investeringer varierer med renter og konjunkturer
+- hvordan privat konsum og investeringer kan sammenlignes mellom land
+
+Kravet er ikke at NorMacro skal ha alle mulige konsum- og
+investeringskomponenter.
+
+Målet er et kuratert sett av representative serier som gjør de sentrale
+makroøkonomiske sammenhengene enkle å undersøke.
+
+# Baseline fra gap-analyse 1
+
+Den første gap-analysen vurderte området slik:
+
+| Dimensjon | Status |
+|---|---|
+| Data | 🟢 |
+| Analyse | 🟢 |
+| Metadata | 🟢 |
+| Undervisning | 🟢 |
+| Samlet gap | Lite |
+| Prioritet videre | Lav |
+
+Det ble ikke videreført noe eksplisitt hovedgap for konsum og
+investering ved avslutningen av den første analysen.
+
+Gap-analyse 2 vurderer derfor om denne klassifiseringen fortsatt holder.
+
+# Dagens norske datadekning
+
+## Privat konsum
+
+NorMacro inneholder:
+
+- `Privat_konsum`
+- `Privat_konsum_lopende`
+- `Privat_konsum_vekst`
+- `Privat_konsum_andel_BNP`
+
+Tidsdekningen for hovedserien er:
+
+- 1970–2025
+
+Dette gir et godt grunnlag for analyse av både real utvikling, nominelt
+nivå, vekst og konsumets relative størrelse.
+
+Status: **Godt dekket**
+
+## Disponibel inntekt
+
+NorMacro inneholder:
+
+- `Disponibel_inntekt_husholdninger`
+
+Serien dekker:
+
+- 1978–2025
+
+Dette gjør det mulig å undersøke sammenhengen mellom husholdningenes
+inntekt og konsum.
+
+Status: **Godt dekket**
+
+## Sparing
+
+NorMacro inneholder:
+
+- `Husholdningssparing`
+- `Husholdningssparing_vekst`
+- `Husholdningssparing_andel_disponibel_inntekt`
+
+Seriene går tilbake til slutten av 1970-tallet.
+
+Dette gir både nivå, utvikling og en økonomisk meningsfull sparerate.
+
+Kombinasjonen av:
+
+- disponibel inntekt
+- konsum
+- sparing
+- sparerate
+
+gir en konsistent husholdningsblokk.
+
+Status: **Godt dekket**
+
+## Husholdningsgjeld
+
+NorMacro inneholder blant annet:
+
+- `Husholdningsgjeldsrate`
+- `Husholdningsgjeldsvekst`
+- `Husholdningsfordringsrate`
+- `Husholdningsnettofordringsrate`
+
+De sentrale gjeldsseriene dekker perioden fra 1996.
+
+Dette gjør det mulig å knytte konsum- og boligmarkedsutvikling til
+husholdningenes finansielle stilling.
+
+Status: **Godt dekket**
+
+# Investeringer
+
+## Fastlandsinvesteringer
+
+NorMacro inneholder:
+
+- `Fastlandsinvesteringer`
+- `Fastlandsinvesteringer_lopende`
+- `Fastlandsinvesteringer_vekst`
+- `Fastlandsinvesteringer_andel_BNP_Fastland`
+
+Seriene går tilbake til 1970.
+
+For analyse av norsk konjunktur og innenlandsk etterspørsel er
+Fastlandsinvesteringer en faglig relevant hovedserie.
+
+Status: **Godt dekket**
+
+## Boliginvesteringer
+
+NorMacro inneholder:
+
+- `Boliginvesteringer`
+- `Boliginvesteringer_lopende`
+- `Boliginvesteringer_vekst`
+- `Boliginvesteringer_andel_BNP`
+
+Seriene går tilbake til 1970.
+
+Dette gir en egen investeringskomponent som er særlig relevant for
+husholdninger, boligmarked og renteanalyse.
+
+Status: **Godt dekket**
+
+## Offentlige investeringer
+
+NorMacro inneholder:
+
+- `Offentlige_investeringer`
+- `Offentlige_investeringer_lopende`
+- `Offentlige_investeringer_vekst`
+- `Offentlige_investeringer_andel_BNP`
+
+Disse seriene gir mulighet til å skille offentlig investeringsaktivitet
+fra øvrig investering.
+
+Status: **Godt dekket**
+
+# Samlede investeringer
+
+Det norske hoveddatasettet inneholder ikke en standardserie kalt:
+
+- `Investeringer`
+- `Investeringer_lopende`
+- `Investeringer_vekst`
+
+for hele økonomien.
+
+Dette er allerede identifisert som et relevant datagap under
+nasjonalregnskap.
+
+For fagområdet **konsum og investering** vurderes det imidlertid ikke som
+tilstrekkelig grunn til å nedgradere Data.
+
+Begrunnelsen er at NorMacro allerede har:
+
+- Fastlandsinvesteringer
+- boliginvesteringer
+- offentlige investeringer
+
+som gjør det mulig å analysere sentrale makroøkonomiske
+investeringsspørsmål.
+
+Gapet bør derfor ikke dobbeltføres som et separat hovedgap her.
+
+Status: **Ikke eget gap i dette fagområdet**
+
+# Renter og konsum/investering
+
+NorMacro har:
+
+- `Styringsrente`
+- `Pengemarkedsrente_3mnd`
+- `Statsrente_10aar`
+
+Dette gjør det mulig å analysere sammenhenger mellom renter, konsum,
+boligmarked og investeringer.
+
+Den korte historikken for markedsrentene begrenser enkelte historiske
+analyser.
+
+Dette er allerede klassifisert som et datagap under rente- og
+pengepolitikkområdet.
+
+Det bør ikke dobbeltregistreres som et konsum-/investeringsgap.
+
+# Boligmarked
+
+NorMacro inneholder:
+
+- `Boligprisindeks`
+- `Boligprisvekst`
+- boliginvesteringer
+- husholdningsgjeld
+
+Dette gir en nyttig kobling mellom:
+
+- boligpriser
+- investeringer
+- gjeld
+- renter
+- husholdningenes etterspørsel
+
+Det er ikke nødvendig med et eget boligmarkeds-API for å analysere
+disse sammenhengene.
+
+# Internasjonal dekning
+
+Det internasjonale datalaget inneholder:
+
+- `Privat_konsum`
+- `Privat_konsum_lopende`
+- `Privat_konsum_vekst`
+- `Privat_konsum_andel_BNP`
+- `Investeringer`
+- `Investeringer_lopende`
+- `Investeringer_vekst`
+- `Investeringer_andel_BNP`
+
+Dette gir et godt og harmonisert grunnlag for landssammenligninger.
+
+Det internasjonale laget har faktisk en mer eksplisitt samlet
+investeringsserie enn det norske hoveddatasettet.
+
+Dette er positivt for internasjonal makroanalyse og utgjør ikke et
+konsistensproblem så lenge metadataene er tydelige.
+
+Status: **Godt dekket**
+
+# Analyse og API
+
+Relevante brukerrettede funksjoner omfatter blant annet:
+
+- `get_private_consumption()`
+- `get_boliginvesteringer()`
+- `get_fastlandsinvesteringer()`
+- `get_offentlige_investeringer()`
+- `get_investment()`
+- `compare_series()`
+- `compare_periods()`
+- `compare_countries()`
+- `growth()`
+- `plot_series()`
+- korrelasjonsverktøy
+- regresjonsverktøy
+- `macro_report()`
+
+Dette er tilstrekkelig til å analysere sammenhenger som:
+
+- konsum og inntekt
+- konsum og rente
+- sparing og inntekt
+- investering og rente
+- investering og BNP-vekst
+- boligpriser og boliginvestering
+- husholdningsgjeld og konsum
+
+Det er ikke behov for egne funksjoner som `consumption_function()` eller
+`investment_function()`.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+Metadataene skiller tydelig mellom:
+
+- konsum
+- disponibel inntekt
+- sparing
+- gjeld
+- boligpriser
+- boliginvesteringer
+- offentlige investeringer
+- Fastlandsinvesteringer
+- nivå
+- vekst
+- løpende priser
+- BNP-andeler
+
+Navnet:
+
+`Fastlandsinvesteringer_andel_BNP_Fastland`
+
+gjør også den relevante BNP-nevneren eksplisitt.
+
+Det er ikke identifisert et vesentlig metadatagap.
+
+**Metadata: Grønn**
+
+# Undervisning og dokumentasjon
+
+Området støtter flere sentrale makroøkonomiske undervisningstemaer:
+
+- konsum og disponibel inntekt
+- marginal og gjennomsnittlig konsumadferd
+- sparing
+- husholdningsgjeld
+- renter og konsum
+- renter og investering
+- boligmarked
+- investeringssykler
+- konsum og investering gjennom konjunkturene
+- internasjonale forskjeller i konsum og investering
+
+Eksisterende generelle verktøy gjør det mulig å gå fra økonomisk teori
+til empirisk analyse uten spesialiserte modeller.
+
+**Undervisning: Grønn**
+
+# Tidligere gap – status
+
+Det var ingen vesentlige eksplisitte restgap innen området ved
+avslutningen av gap-analyse 1.
+
+Gap-analyse 2 finner ingen grunn til å endre dette.
+
+| Område | Status | Kommentar |
+|---|---|---|
+| Privat konsum | Dekket | Nivå, vekst, løpende priser og BNP-andel |
+| Disponibel inntekt | Dekket | Historikk fra 1978 |
+| Sparing | Dekket | Nivå, vekst og sparerate |
+| Husholdningsgjeld | Dekket | Flere relevante indikatorer |
+| Fastlandsinvesteringer | Dekket | Nivå, vekst, løpende priser og andel |
+| Boliginvesteringer | Dekket | God historikk og flere transformasjoner |
+| Offentlige investeringer | Dekket | God historikk |
+| Internasjonale investeringer | Dekket | Harmonisert samlet investeringsserie |
+
+# Nye gap
+
+Det er ikke identifisert nye vesentlige gap.
+
+To forhold er registrert andre steder i gap-analysen:
+
+- samlet norsk investering mangler under nasjonalregnskap
+- markedsrentene har kort historikk under pengepolitikk
+
+Disse begrenser ikke konsum- og investeringsområdet tilstrekkelig til å
+klassifiseres som egne gap her.
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 1 | Analyse 2 | Begrunnelse |
+|---|---|---|---|
+| Data | 🟢 | 🟢 | Konsum, inntekt, sparing og sentrale investeringstyper er godt dekket |
+| Analyse | 🟢 | 🟢 | Generelle verktøy dekker de relevante sammenhengene |
+| Metadata | 🟢 | 🟢 | Variabler, transformasjoner og definisjoner er tydelige |
+| Undervisning | 🟢 | 🟢 | Området støtter sentrale makroøkonomiske problemstillinger direkte |
+
+# Samlet vurdering
+
+**Samlet gap: Lite**
+
+Konsum og investering er fortsatt et godt dekket område.
+
+Særlig sterk er husholdningsblokken:
+
+- privat konsum
+- disponibel inntekt
+- sparing
+- sparerate
+- gjeld
+- boligpriser
+- boliginvesteringer
+
+På investeringssiden gir Fastlandsinvesteringer, boliginvesteringer og
+offentlige investeringer et godt grunnlag for analyse.
+
+# Anbefalte tiltak
+
+## Ingen høyt prioritert utvidelse
+
+Det er ikke identifisert behov for nye dataserier eller nytt API i
+dette fagområdet.
+
+## Ikke dobbeltfør gap
+
+Manglende samlet norsk investering håndteres under nasjonalregnskap.
+
+Kort rentehistorikk håndteres under pengepolitikk.
+
+Disse bør ikke brukes til å gjøre konsum og investering gult dersom de
+sentrale spørsmålene i dette fagområdet ellers kan analyseres godt.
+
+## Bevar kurateringsprinsippet
+
+Mer detaljerte konsum- og investeringsserier bør bare legges til dersom
+de løser et konkret økonomisk spørsmål.
+
+NorMacro bør ikke utvikles til et detaljert husholdnings- eller
+kapitalregnskapsdatasett.
+
+# Prioritering
+
+**Samlet prioritet videre: Lav**
+
+Fagområdet krever primært vedlikehold av eksisterende serier og
+metadata.
+
+# Konklusjon
+
+Gap-analyse 2 bekrefter vurderingen fra første analyse.
+
+NorMacro har en sterk husholdningsblokk og god dekning av sentrale
+investeringsmål.
+
+Manglende samlet norsk investering er et reelt nasjonalregnskapsgap,
+men hindrer ikke de sentrale konsum- og investeringsanalysene.
+
+Det er ikke identifisert nye vesentlige gap.
+
+Endelig status:
+
+- **Data: 🟢**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟢**
+- **Samlet gap: Lite**
+- **Prioritet: Lav**

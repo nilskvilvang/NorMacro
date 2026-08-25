@@ -1,0 +1,219 @@
+
+---
+title: "NorMacro gap-analyse 2 – Internasjonal makro"
+format: html
+---
+
+# 13 Internasjonal makro
+
+## Formål
+
+Vurdere om NorMacro gir tilstrekkelig datadekning og analysefunksjonalitet
+til å sette norsk makroøkonomi i et relevant internasjonalt perspektiv.
+
+Hovedvekten legges på europeiske sammenligninger, særlig Norden,
+Tyskland, Frankrike, euroområdet og EU.
+
+## Status
+
+NorMacro har allerede et omfattende internasjonalt makrolag gjennom
+`get_international_macro()`.
+
+Datasettet inneholder 53 dokumenterte makrovariable og dekker:
+
+- nasjonalregnskap og BNP
+- konsum og investeringer
+- arbeidsmarked
+- produktivitet
+- lønn og reallønn
+- inflasjon
+- industri og detaljhandel
+- boligmarked
+- utenrikshandel
+- offentlig sektor
+- korte og lange renter
+
+Standarduniverset består av:
+
+- Norge
+- Sverige
+- Danmark
+- Finland
+- Tyskland
+- Frankrike
+- euroområdet (EA20)
+- EU27
+
+Dette vurderes som et hensiktsmessig og kurert sammenligningsunivers
+for NorMacros formål.
+
+## Tidsdekning
+
+Tidsdekningen varierer mellom variabler og land.
+
+Enkelte serier går tilbake til 1960-tallet, mens mye av
+nasjonalregnskapsmaterialet dekker perioden fra 1975 eller senere.
+
+Nyere områder har kortere tidsserier, blant annet:
+
+- HICP/inflasjon
+- boligpriser
+- deler av arbeidsmarkedsstatistikken
+
+Datasettet er ikke et balansert panel. Startår varierer mellom land,
+og dette bør kommuniseres tydelig i dokumentasjonen og tas hensyn til
+ved sammenligninger.
+
+## Analyse-API
+
+Det internasjonale laget har et godt utviklet analyse-API.
+
+Sentrale funksjoner omfatter blant annet:
+
+- `get_international_macro()`
+- `get_international_metadata()`
+- `get_eurostat_data()`
+- `get_oecd_data()`
+- `get_standard_countries()`
+- `compare_countries()`
+
+`comparison_series` støtter videre blant annet:
+
+- vekst
+- indeksering
+- normalisering
+- korrelasjon
+- autokorrelasjon
+- regresjon
+- prediksjon
+- diagnostikk
+- RMSE
+- MAE
+- MAPE
+
+Det vurderes derfor ikke å foreligge noe vesentlig generelt
+analyse-API-gap for internasjonale sammenligninger.
+
+## Identifiserte gap
+
+### D1 – Offentlig gjeld for Norge
+
+`Offentlig_gjeld_andel_BNP` finnes i det internasjonale datasettet,
+men Norge mangler observasjoner.
+
+Dette bør korrigeres slik at Norge kan inngå i sammenligninger av
+offentlig gjeld.
+
+**Prioritet: høy**
+
+### D2 – Offentlig budsjettbalanse
+
+Det mangler en internasjonalt sammenlignbar serie for offentlig
+budsjettbalanse/nettofinansinvestering som andel av BNP.
+
+Dette er en sentral indikator for finanspolitisk analyse.
+
+**Prioritet: høy**
+
+### D3 – Driftsbalanse
+
+Det internasjonale datasettet har handelsbalanse, men ikke
+driftsbalanse/current account.
+
+En serie for driftsbalansen som andel av BNP vil være særlig relevant
+for analyser av Norge som liten åpen økonomi.
+
+**Prioritet: høy**
+
+### D4 – Offentlige inntekter og utgifter
+
+Internasjonalt sammenlignbare serier for offentlige inntekter og
+utgifter som andel av BNP mangler.
+
+Disse vil styrke sammenligning av offentlig sektors størrelse og
+finanspolitikk.
+
+**Prioritet: middels/høy**
+
+### D5 – Internasjonal nettofordringsposisjon
+
+Net international investment position / NIIP mangler.
+
+Indikatoren vil være nyttig for analyse av eksterne balanser og
+langsiktig utenriksøkonomisk posisjon.
+
+**Prioritet: middels**
+
+### D6 – Skatteandel
+
+Internasjonalt sammenlignbar skatteandel mangler.
+
+Dette er relevant for analyser av offentlig sektor, men vurderes som
+mindre sentralt enn budsjettbalanse og offentlige utgifter/inntekter.
+
+**Prioritet: middels**
+
+## Landdekning
+
+Det anbefales ikke nå å prioritere en kraftig utvidelse av antall land.
+
+Dagens utvalg gir et faglig relevant sammenligningsgrunnlag for norsk
+makroøkonomi.
+
+Det vurderes som viktigere å øke indikatorbredden innen offentlige
+finanser og utenriksøkonomi enn å øke antallet land.
+
+En senere utvidelse kan vurderes dersom konkrete undervisnings- eller
+analysebehov tilsier dette.
+
+## Metadata og dokumentasjon
+
+Metadataene er gjennomgående gode og følger samme struktur som resten
+av NorMacro.
+
+Det bør likevel dokumenteres tydelig at:
+
+- tidsdekningen varierer mellom land
+- datasettet ikke er et balansert panel
+- enkelte aggregater mangler enkelte finansmarkedsserier
+- valg av sammenligningsland er bevisst kurert
+
+## Undervisningsverdi
+
+Det internasjonale laget har høy undervisningsverdi.
+
+Det gjør det mulig å analysere blant annet:
+
+- norsk vekst relativt til Norden og Europa
+- inflasjonsforskjeller
+- arbeidsmarked
+- produktivitetsutvikling
+- lønns- og reallønnsutvikling
+- konsum og investeringer
+- boligpriser
+- handelsåpenhet
+- renteutvikling
+- offentlig gjeld
+
+De identifiserte nye seriene vil særlig styrke undervisning i
+finanspolitikk og åpen økonomi.
+
+## Samlet vurdering
+
+Internasjonal makro er allerede et av de sterkere områdene i NorMacro.
+
+Hovedbehovet er ikke et nytt analyse-API eller en stor utvidelse av
+landuniverset, men noen få strategiske dataserier som kompletterer
+dagens makroøkonomiske dekning.
+
+### Prioritering
+
+1. **D – offentlig gjeld for Norge**
+2. **D – offentlig budsjettbalanse, % BNP**
+3. **D – driftsbalanse, % BNP**
+4. **D – offentlige inntekter og utgifter, % BNP**
+5. **D – NIIP**
+6. **D – skatteandel**
+7. **M/U – tydeligere dokumentasjon av ulik tidsdekning**
+
+Ingen større nye A-gap identifiseres.

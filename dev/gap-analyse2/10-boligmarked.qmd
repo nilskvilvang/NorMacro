@@ -1,0 +1,408 @@
+
+---
+title: "Gap-analyse 2 – Boligmarked"
+format: html
+---
+
+# Faglige spørsmål
+
+Boligmarkedsområdet skal gjøre det enkelt å undersøke:
+
+- hvordan boligprisene utvikler seg
+- hvordan boligmarkedet varierer gjennom konjunkturene
+- hvordan renter og boligpriser henger sammen
+- hvordan husholdningenes gjeld og boligpriser utvikler seg
+- hvordan boliginvesteringene reagerer på priser, renter og konjunkturer
+- hvordan husholdningenes inntekt og boligmarked kan ses i sammenheng
+- hvordan boligtilbud og byggeaktivitet utvikler seg
+- hvordan norske boligpriser kan sammenlignes med andre land
+
+NorMacro skal ikke være en detaljert boligmarkedsdatabase.
+
+Regionale boligpriser, boligtyper, kvadratmeterpriser og detaljerte
+byggearealer er derfor ikke nødvendige for kjernedekningen.
+
+# Dagens norske datadekning
+
+## Boligpriser
+
+NorMacro inneholder:
+
+- `Boligprisindeks`
+- `Boligprisvekst`
+
+Tidsdekningen er:
+
+- boligprisindeks: 1992–2025
+- boligprisvekst: 1993–2025
+
+Boligprisindeksen dekker brukte boliger for hele landet og alle
+boligtyper.
+
+Dette er en hensiktsmessig nasjonal makroindikator.
+
+Status: **Godt dekket**
+
+# Boliginvesteringer
+
+NorMacro inneholder:
+
+- `Boliginvesteringer`
+- `Boliginvesteringer_lopende`
+- `Boliginvesteringer_vekst`
+- `Boliginvesteringer_andel_BNP`
+
+Tidsdekningen går tilbake til 1970.
+
+Boliginvesteringene gir dermed en lang realøkonomisk indikator for
+aktiviteten i boligsektoren.
+
+Dette gjør det mulig å analysere sammenhenger mellom:
+
+- boligpriser
+- renter
+- konjunkturer
+- investeringer
+
+Status: **Godt dekket**
+
+# Husholdningenes finansielle stilling
+
+NorMacro inneholder:
+
+- `Husholdningsgjeldsrate`
+- `Husholdningsgjeldsvekst`
+- `Husholdningsfordringsrate`
+- `Husholdningsnettofordringsrate`
+
+Seriene dekker perioden 1996–2025.
+
+Dette gir et godt grunnlag for analyse av sammenhengen mellom:
+
+- boligpriser
+- husholdningsgjeld
+- gjeldsbelastning
+- finansielle fordringer
+
+Status: **Godt dekket**
+
+# Husholdningenes inntekt
+
+NorMacro inneholder:
+
+- `Disponibel_inntekt_husholdninger`
+
+Serien dekker perioden 1978–2025.
+
+Dette gjør det mulig å undersøke boligmarkedet i sammenheng med
+husholdningenes inntektsutvikling.
+
+NorMacro inneholder ikke en ferdig boligpris/inntektsindikator.
+
+Dette vurderes ikke som et eget datagap.
+
+En slik indikator krever metodiske valg om blant annet:
+
+- indeksnormalisering
+- nominelle størrelser
+- samlet kontra per-husholdning/per-innbygger inntekt
+
+Den bør derfor eventuelt utvikles som en eksplisitt og dokumentert
+analyseindikator fremfor som en ukritisk ratio mellom eksisterende
+serier.
+
+# Byggeaktivitet
+
+NorMacro inneholder:
+
+- `Byggeaktivitet`
+- `Byggeaktivitet_vekst`
+
+Serien er en produksjonsindeks for bygge- og anleggsvirksomhet.
+
+Tidsdekningen er:
+
+- indeks: 2005–2025
+- vekst: 2006–2025
+
+Dette gir en relevant indikator for den bredere byggesektoren.
+
+`Byggeaktivitet` er imidlertid ikke en spesifikk indikator for
+boligtilbud.
+
+Den omfatter bygge- og anleggsvirksomhet generelt og kan derfor ikke
+tolkes som antall nye boliger eller boligbygging alene.
+
+Status: **Supplerende indikator**
+
+# Boligtilbud og nybygging
+
+NorMacro inneholder ikke eksplisitte serier for:
+
+- igangsatte boliger
+- fullførte boliger
+- byggetillatelser
+- nyboliger
+
+Dette betyr at boligmarkedets fysiske tilbudsside ikke er direkte
+representert.
+
+Boliginvesteringer og generell byggeaktivitet gir informasjon om
+aktiviteten, men måler ikke det samme som antall boliger som tilføres
+eller er på vei inn i boligmarkedet.
+
+Dette vurderes som et reelt datagap.
+
+En enkelt aggregert nasjonal indikator vil sannsynligvis være
+tilstrekkelig.
+
+Status: **Gap**
+
+# Renter og boligmarked
+
+NorMacro inneholder:
+
+- `Styringsrente`
+- `Pengemarkedsrente_3mnd`
+- `Statsrente_10aar`
+
+Det finnes ikke en eksplisitt:
+
+- boliglånsrente
+- bankutlånsrente
+
+Manglende bank-/boliglånsrente er relevant for boligmarkedsanalyse fordi
+den representerer finansieringskostnaden husholdningene faktisk møter.
+
+Dette gapet er imidlertid allerede identifisert under renter og
+pengepolitikk og skal ikke dobbeltregistreres her.
+
+Boligmarkedsdokumentasjonen bør referere til dette som et tilgrensende
+gap.
+
+# Internasjonal dekning
+
+Det internasjonale datalaget inneholder:
+
+- `Boligprisindeks`
+- `Boligprisvekst`
+
+Dette gir harmoniserte boligprissammenligninger mellom land.
+
+Det internasjonale laget inneholder ikke tilsvarende boligbyggings-,
+boliglåns- eller husholdningsgjeldsserier.
+
+For NorMacros nåværende formål vurderes internasjonale boligpriser som
+den viktigste sammenlignbare boligmarkedsindikatoren.
+
+Status: **God kjernedekning**
+
+# Analyse og API
+
+NorMacro har blant annet:
+
+- `get_boligpriser()`
+- `get_boliginvesteringer()`
+- `get_house_price_index()`
+- `compare_series()`
+- `compare_periods()`
+- `compare_countries()`
+- `growth()`
+- `plot_series()`
+- korrelasjonsverktøy
+- regresjonsverktøy
+- `macro_report()`
+
+Dette gjør det mulig å undersøke sammenhenger som:
+
+- boligpris og rente
+- boligpris og husholdningsgjeld
+- boligpris og disponibel inntekt
+- boligpris og boliginvesteringer
+- boligmarked og konjunkturer
+- internasjonale boligprisforskjeller
+
+Det er ikke behov for et eget omfattende boligmarkeds-API.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+Metadataene skiller tydelig mellom:
+
+- boligprisindeks
+- boligprisvekst
+- boliginvesteringer
+- husholdningsgjeld
+- husholdningsfordringer
+- disponibel inntekt
+- generell byggeaktivitet
+
+Det er særlig positivt at `Byggeaktivitet` er definert som bygge- og
+anleggsvirksomhet og dermed ikke implisitt fremstilles som
+boligbygging.
+
+Det er ikke identifisert et vesentlig metadatagap.
+
+**Metadata: Grønn**
+
+# Undervisning og dokumentasjon
+
+Dagens data støtter sentrale boligøkonomiske temaer:
+
+- boligprissykluser
+- renter og boligpriser
+- kreditt og boligpriser
+- husholdningenes gjeld
+- bolig og disponibel inntekt
+- boliginvesteringer
+- boligmarked og konjunkturer
+- internasjonale boligpriser
+
+Det viktigste undervisningsmessige hullet er at tilbudssiden ikke kan
+illustreres direkte gjennom antall nye boliger.
+
+**Undervisning: Grønn**
+
+# Gap-status
+
+| Område | Status | Kommentar |
+|---|---|---|
+| Boligpriser | Dekket | Indeks fra 1992 og vekst fra 1993 |
+| Boliginvesteringer | Dekket | Lang historikk fra 1970 |
+| Husholdningsgjeld | Dekket | Flere indikatorer fra 1996 |
+| Disponibel inntekt | Dekket | Fra 1978 |
+| Byggeaktivitet | Dekket | Bred bygg/anlegg-indeks fra 2005 |
+| Boligtilbud/nybygging | Gap | Ingen eksplisitt boligbyggingsindikator |
+| Boligpris/inntekt | Ikke eget gap | Kan vurderes som dokumentert analyseindikator |
+| Boliglånsrente | Gap annet sted | Behandles under renter og pengepolitikk |
+| Internasjonale boligpriser | Dekket | Harmoniserte indeks- og vekstdata |
+
+# Nye gap
+
+Gap-analyse 2 identifiserer ett nytt hovedgap:
+
+## Boligtilbud
+
+NorMacro mangler en direkte indikator for fysisk boligbygging eller
+boligtilbud.
+
+En aggregert nasjonal serie for eksempelvis:
+
+- igangsatte boliger
+
+vil tilføre en dimensjon som dagens boligpris-, investerings- og
+kredittserier ikke representerer.
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 2 | Begrunnelse |
+|---|---|---|
+| Data | 🟡 | Sterk etterspørsels-/finansieringsblokk, men boligtilbud mangler |
+| Analyse | 🟢 | Generelle analyseverktøy dekker sentrale sammenhenger |
+| Metadata | 🟢 | Eksisterende boligvariable er tydelig definert |
+| Undervisning | 🟢 | Kjernen kan undervises godt; tilbudssiden er eneste tydelige hull |
+
+# Samlet vurdering
+
+**Samlet gap: Lite–middels**
+
+Boligmarkedet er samlet sett godt dekket.
+
+NorMacro har en særlig sterk kombinasjon av:
+
+- boligpriser
+- boliginvesteringer
+- husholdningsgjeld
+- husholdningsfordringer
+- disponibel inntekt
+- renter
+
+Dette gir et godt grunnlag for analyse av boligmarkedets etterspørsels-
+og finansieringsside.
+
+Det viktigste manglende elementet er en direkte indikator for
+boligtilbud/nybygging.
+
+# Anbefalte tiltak
+
+## 1. Legg til én boligbyggingsindikator
+
+**Prioritet: Middels**
+
+Undersøk en årlig nasjonal serie for:
+
+`Igangsatte_boliger`
+
+eller tilsvarende.
+
+Serien bør ideelt ha:
+
+- lang historikk
+- stabil definisjon
+- nasjonal dekning
+- antall boliger som enhet
+- tydelig SSB-kilde
+
+Én representativ serie er tilstrekkelig.
+
+Det er ikke nødvendig å legge til både:
+
+- igangsatte
+- fullførte
+- byggetillatelser
+- boligtyper
+- regionale serier
+
+uten et konkret analysebehov.
+
+## 2. Vurder boligpris/inntekt som analyseindikator
+
+**Prioritet: Lav**
+
+Undersøk om en metodisk robust boligpris/inntektsindikator kan
+konstrueres.
+
+Dette bør ikke prioriteres foran boligbyggingsdata.
+
+## 3. Ikke bygg ut regional boligstatistikk
+
+Regionale boligpriser og detaljerte boligtyper ligger utenfor NorMacros
+nasjonale makrofokus.
+
+## 4. Ikke dobbeltfør boliglånsrentegapet
+
+Manglende boliglåns-/utlånsrente håndteres under renter og
+pengepolitikk.
+
+# Prioritering
+
+**Samlet prioritet videre: Middels**
+
+Boligmarkedet trenger ingen bred utvidelse.
+
+Det konkrete tiltaket er å komplettere den eksisterende sterke
+boligblokken med én representativ indikator for boligtilbud.
+
+# Konklusjon
+
+NorMacro har god dekning av boligmarkedets pris-, investerings-,
+inntekts- og finansieringsside.
+
+Boligprisindeksen går tilbake til 1992, boliginvesteringene til 1970 og
+husholdningenes finansielle indikatorer til 1996.
+
+`Byggeaktivitet` tilfører informasjon om bygg- og anleggssektoren, men
+er ikke en boligbyggingsindikator.
+
+Gap-analyse 2 identifiserer derfor boligtilbud/nybygging som det
+viktigste gjenværende gapet.
+
+Endelig status:
+
+- **Data: 🟡**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟢**
+- **Samlet gap: Lite–middels**
+- **Prioritet: Middels**

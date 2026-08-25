@@ -1,0 +1,423 @@
+
+---
+title: "Gap-analyse 2 – Finansmarkeder"
+format: html
+---
+
+# Faglige spørsmål
+
+Finansmarkedsområdet i NorMacro skal gjøre det enkelt å undersøke:
+
+- hvordan aksjemarkedet utvikler seg
+- hvordan boligprisene utvikler seg
+- hvordan kreditt og kredittvekst utvikler seg
+- hvordan husholdningenes finansielle stilling utvikler seg
+- hvordan aktivapriser og kreditt varierer gjennom konjunkturene
+- hvordan renter, kreditt og aktivapriser kan ses i sammenheng
+- hvordan enkelte finansielle størrelser kan sammenlignes mellom land
+
+NorMacro skal ikke være en detaljert finansmarkedsdatabase.
+
+Målet er et lite sett representative finansielle indikatorer med klar
+makroøkonomisk relevans.
+
+# Avgrensning mot renter og pengepolitikk
+
+Renter behandles primært i fagområdet renter og pengepolitikk.
+
+Dette gjelder blant annet:
+
+- `Styringsrente`
+- `Pengemarkedsrente_3mnd`
+- `Statsrente_10aar`
+- `Rentekurve`
+
+Den korte historikken for markedsrentene er allerede identifisert som et
+datagap der og skal ikke dobbeltregistreres i finansmarkedsområdet.
+
+Renter brukes her som forklarings- og sammenligningsvariabler mot
+aktivapriser og kreditt.
+
+# Dagens norske datadekning
+
+## Aksjemarked
+
+NorMacro inneholder:
+
+- `OSEAX`
+- `OSEAX_vekst`
+
+`OSEAX` representerer Oslo Stock Exchange All-Share Index.
+
+Tidsdekningen er:
+
+- `OSEAX`: 2013–2025
+- `OSEAX_vekst`: 2014–2025
+
+Dette gir både indeksnivå og årlig endring.
+
+Serien er faglig relevant som representativ indikator for det norske
+aksjemarkedet.
+
+Historikken er imidlertid kort.
+
+En serie som starter i 2013 gjør det blant annet umulig å analysere
+aksjemarkedet i NorMacro gjennom:
+
+- bankkrisen på begynnelsen av 1990-tallet
+- dotcom-perioden
+- finanskrisen 2008–2009
+
+Dette er en vesentlig begrensning for et makrodatasett som ellers legger
+vekt på historiske konjunkturanalyser.
+
+Status: **Delvis dekket – historikken bør forlenges**
+
+# Kreditt
+
+## Kreditt K2
+
+NorMacro inneholder:
+
+- `Kreditt_K2`
+- `Kredittvekst_K2`
+
+`Kreditt_K2` beskriver innenlandsk lånegjeld til publikum.
+
+Tidsdekningen er:
+
+- nivå: 1987–2025
+- vekst: 1988–2025
+
+Dette gir en bred og makroøkonomisk relevant kredittindikator.
+
+NorMacro er dermed ikke begrenset til husholdningsgjeld, men har også et
+mål på samlet innenlandsk kredittutvikling.
+
+Status: **Godt dekket**
+
+# Husholdningenes finansielle stilling
+
+NorMacro inneholder:
+
+- `Husholdningsgjeldsrate`
+- `Husholdningsgjeldsvekst`
+- `Husholdningsfordringsrate`
+- `Husholdningsnettofordringsrate`
+
+Disse seriene dekker perioden:
+
+- 1996–2025
+
+Dette gjør det mulig å analysere:
+
+- gjeldsbelastning
+- gjeldsvekst
+- finansielle fordringer
+- netto finansiell stilling
+
+Kombinert med:
+
+- disponibel inntekt
+- boligpriser
+- renter
+- konsum
+
+gir dette en sterk husholdningsorientert finansiell blokk.
+
+Status: **Godt dekket**
+
+# Boligmarked og aktivapriser
+
+NorMacro inneholder:
+
+- `Boligprisindeks`
+- `Boligprisvekst`
+
+Tidsdekningen er:
+
+- boligprisindeks: 1992–2025
+- boligprisvekst: 1993–2025
+
+I tillegg finnes:
+
+- `Boliginvesteringer`
+- `Boliginvesteringer_lopende`
+- `Boliginvesteringer_vekst`
+- `Boliginvesteringer_andel_BNP`
+
+Boligmarkedet er dermed representert både gjennom:
+
+- aktivapris
+- prisvekst
+- real investering
+- nominell investering
+- investeringsvekst
+
+For Norge er dette en viktig del av den makrofinansielle analysen.
+
+Status: **Godt dekket**
+
+# Valutakurs
+
+NorMacro inneholder:
+
+- `Valutakurs_I44`
+- `Valutakurs_I44_vekst`
+
+Valutakursen behandles primært under åpen økonomi, men er også en
+relevant finansiell markedsvariabel.
+
+Tidsdekningen fra 1990 gir et godt historisk grunnlag.
+
+Dette er ikke et eget gap i finansmarkedsområdet.
+
+# Finansielt stress og risikomål
+
+NorMacro inneholder ikke eksplisitte serier for:
+
+- kredittspread
+- finansielt stress
+- markedsvolatilitet
+- VIX
+- risikopremier
+
+Dette vurderes ikke som et nødvendig datagap.
+
+Slike indikatorer kan være nyttige i mer avansert finansmarkedsanalyse,
+men NorMacros mål er makroøkonomisk analyse, ikke detaljert
+markedsanalyse.
+
+En utvidelse med slike serier bør bare vurderes dersom et konkret
+analyse- eller undervisningsbehov identifiseres.
+
+Status: **Ikke prioritert gap**
+
+# Internasjonal dekning
+
+Det internasjonale hoveddatasettet inneholder:
+
+- `Boligprisindeks`
+- `Boligprisvekst`
+- `Offentlig_gjeld_andel_BNP`
+
+Boligprisdata gir en relevant internasjonal aktivaprisdimensjon.
+
+Det internasjonale datasettet inneholder derimot ikke tilsvarende
+harmoniserte serier for:
+
+- aksjemarkedsindeks
+- privat kreditt
+- husholdningsgjeld
+
+Den internasjonale finansmarkedsdekningen er derfor klart smalere enn
+den norske.
+
+Dette vurderes som et mulig senere kompletteringsområde, men ikke som et
+krav for NorMacros primære norske makrofinansielle analyse.
+
+# Analyse og API
+
+NorMacro har generelle analyseverktøy som:
+
+- `compare_series()`
+- `compare_periods()`
+- `compare_countries()`
+- `growth()`
+- `plot_series()`
+- `plot_correlation_matrix()`
+- regresjonsverktøy
+- `business_cycle()`
+- `macro_report()`
+- `render_macro_report()`
+
+Det finnes også relevante datainnhentingsfunksjoner for blant annet
+boligpriser og boligmarked.
+
+Disse verktøyene gjør det mulig å undersøke sammenhenger som:
+
+- aksjemarked og konjunkturer
+- boligpriser og renter
+- boligpriser og kreditt
+- kredittvekst og konsum
+- husholdningsgjeld og boligpriser
+- kreditt og BNP-vekst
+
+Det er ikke identifisert behov for et eget omfattende
+finansmarkedsanalyse-API.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+Metadataene identifiserer tydelig:
+
+- `OSEAX` som norsk all-share aksjeindeks
+- `Kreditt_K2` som innenlandsk lånegjeld til publikum
+- boligprisindeksen som prisindeks for brukte boliger
+- husholdningenes ulike gjelds- og fordringsrater
+- renter og valutakurs med eksplisitte definisjoner
+
+Det er ikke identifisert et vesentlig metadatagap.
+
+**Metadata: Grønn**
+
+# Undervisning og dokumentasjon
+
+Dagens datagrunnlag støtter sentrale makrofinansielle temaer:
+
+- aksjemarked og konjunkturer
+- kredittsykler
+- boligpriser
+- husholdningsgjeld
+- renter og aktivapriser
+- kreditt og økonomisk aktivitet
+- finansielle ubalanser
+
+Særlig kombinasjonen av:
+
+- boligpriser
+- K2
+- husholdningsgjeld
+- renter
+- konsum
+- boliginvesteringer
+
+gir et godt pedagogisk grunnlag.
+
+Den korte OSEAX-historikken begrenser derimot historiske case.
+
+**Undervisning: Grønn**
+
+# Gap-status
+
+| Område | Status | Kommentar |
+|---|---|---|
+| Aksjemarked | Delvis | OSEAX finnes, men bare fra 2013 |
+| Kreditt K2 | Dekket | Nivå fra 1987 og vekst fra 1988 |
+| Husholdningsgjeld | Dekket | Flere indikatorer fra 1996 |
+| Husholdningsfordringer | Dekket | Brutto og netto finansiell stilling |
+| Boligpriser | Dekket | Fra 1992 |
+| Boliginvesteringer | Dekket | Lang historikk |
+| Valutakurs | Dekket annet sted | I-44 fra 1990 |
+| Markedsrenter | Delvis annet sted | Historikkgap behandles under pengepolitikk |
+| Finansielt stress | Ikke prioritert | Ikke nødvendig for NorMacros kjerne |
+| Internasjonale finansmarkeder | Begrenset | Primært boligprisdata |
+
+# Nye gap
+
+Gap-analyse 2 identifiserer ett tydelig nytt datakvalitets-/dekningsgap:
+
+## Historisk aksjemarkedsdekning
+
+`OSEAX` starter først i 2013.
+
+Dette er kort relativt til NorMacros øvrige makrohistorikk og begrenser
+analyse av viktige historiske episoder.
+
+Gapet gjelder først og fremst tidsdekning, ikke valg av
+aksjemarkedsindikator.
+
+OSEAX er i utgangspunktet en hensiktsmessig representativ serie.
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 2 | Begrunnelse |
+|---|---|---|
+| Data | 🟡 | God makrofinansiell bredde, men aksjemarkedsserien har kort historikk |
+| Analyse | 🟢 | Eksisterende verktøy dekker sentrale sammenhenger |
+| Metadata | 🟢 | Finansielle indikatorer er tydelig definert |
+| Undervisning | 🟢 | Kreditt, bolig og aktivapriser kan analyseres godt |
+
+# Samlet vurdering
+
+**Samlet gap: Lite–middels**
+
+NorMacro har en sterk norsk makrofinansiell blokk.
+
+Pakken dekker:
+
+- aksjemarked
+- boligpriser
+- bred kreditt
+- husholdningsgjeld
+- husholdningsfordringer
+- renter
+- valutakurs
+
+Det viktigste svakhetspunktet er ikke manglende bredde, men den korte
+historikken for aksjemarkedet.
+
+# Anbefalte tiltak
+
+## 1. Forleng OSEAX-historikken
+
+**Prioritet: Middels–høy**
+
+Undersøk om en stabil og dokumentert årlig OSEAX-serie kan hentes
+vesentlig lenger tilbake enn 2013.
+
+Dette bør prioriteres fordi en lengre serie vil gjøre det mulig å
+analysere flere viktige norske og internasjonale konjunktur- og
+finansmarkedsperioder.
+
+Dersom OSEAX ikke kan forlenges konsistent, bør det undersøkes om en
+annen bred norsk aksjeindeks kan gi lengre historikk uten å introdusere
+et problematisk seriebrudd.
+
+## 2. Behold K2 som bred kredittindikator
+
+Ingen ny generell kredittserie er nødvendig.
+
+`Kreditt_K2` og `Kredittvekst_K2` gir allerede den brede
+kredittdimensjonen som trengs.
+
+## 3. Ikke prioriter finansielle stressindikatorer
+
+VIX, kredittspreader og sammensatte stressindekser bør ikke legges til
+uten et konkret faglig behov.
+
+Dette ville utvide NorMacro i retning av en mer spesialisert
+finansmarkedsdatabase.
+
+## 4. Vurder internasjonal komplettering senere
+
+**Prioritet: Lav**
+
+Internasjonal privat kreditt eller husholdningsgjeld kan være nyttig
+dersom NorMacro senere prioriterer internasjonal makrofinansiell
+sammenligning.
+
+Dette er ikke nødvendig i dagens kjerne.
+
+# Prioritering
+
+**Samlet prioritet videre: Middels**
+
+Det finnes ingen grunn til en bred utbygging av finansmarkedsområdet.
+
+Det konkrete prioriterte tiltaket er å undersøke lengre historikk for
+den norske aksjemarkedsserien.
+
+# Konklusjon
+
+NorMacro har god dekning av sentrale makrofinansielle indikatorer.
+
+K2 gir bred kredittdekning tilbake til slutten av 1980-tallet,
+husholdningenes finansielle indikatorer går tilbake til midten av
+1990-tallet, og boligprisene dekker perioden fra begynnelsen av
+1990-tallet.
+
+Aksjemarkedet er representert ved OSEAX, men serien starter først i
+2013.
+
+Dette er det viktigste gjenværende gapet.
+
+Endelig status:
+
+- **Data: 🟡**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟢**
+- **Samlet gap: Lite–middels**
+- **Prioritet: Middels**

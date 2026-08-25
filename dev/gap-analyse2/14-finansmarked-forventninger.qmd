@@ -1,0 +1,197 @@
+
+---
+title: "Gap-analyse 2: Finansmarkeder og forventninger"
+format: html
+---
+
+# Formål
+
+Dette dokumentet vurderer NorMacros dekning av finansmarkeder og
+forventninger.
+
+Det sentrale faglige spørsmålet er:
+
+> Hva forteller renter, rentekurve og relevante finansmarkedsindikatorer
+> om økonomien og forventningene fremover?
+
+Vurderingen omfatter data, analyse/API, metadata og undervisning.
+
+# Eksisterende dekning
+
+NorMacro inneholder flere finansmarkedsindikatorer som kan brukes til å
+analysere økonomiske forhold og markedsbaserte signaler:
+
+- `Styringsrente`
+- `Pengemarkedsrente_3mnd`
+- `Statsrente_10aar`
+- `Rentekurve`
+- `OSEAX`
+- `OSEAX_vekst`
+- `Valutakurs_I44`
+- `Valutakurs_I44_vekst`
+
+Pakken inneholder også konjunkturindikatorer som kan ha fremoverskuende
+informasjonsinnhold:
+
+- `Konjunkturindikator`
+- `Ordrebeholdning`
+- `Kapasitetsutnytting`
+- `Ressursknapphet`
+
+Disse gir samlet et godt grunnlag for å studere markedsforhold,
+konjunktursignaler og indikatorer som kan inneholde informasjon om den
+videre økonomiske utviklingen.
+
+# Forventninger versus fremoverskuende indikatorer
+
+Det er viktig å skille mellom eksplisitte mål på forventninger og
+observerte indikatorer som kan ha fremoverskuende informasjonsinnhold.
+
+NorMacro inneholder i dag ingen eksplisitte serier for eksempelvis:
+
+- inflasjonsforventninger
+- renteforventninger
+- konsument- eller forbrukertillit
+- andre direkte surveybaserte forventningsmål
+
+Rentekurven, aksjemarkedet, ordrebeholdningen og enkelte
+konjunkturindikatorer kan likevel brukes som signaler om forventet
+økonomisk utvikling.
+
+Dette betyr at NorMacro har betydelig indirekte dekning av
+forventningsdimensjonen, men ikke direkte målte forventninger.
+
+# Historikk
+
+Historikken varierer mellom indikatorene.
+
+Flere konjunkturindikatorer og valutakursserien går tilbake til 1990,
+mens enkelte sentrale finansmarkedsserier har betydelig kortere
+historikk.
+
+Blant annet starter:
+
+- `OSEAX` i 2013
+- `Pengemarkedsrente_3mnd` i 2013
+- `Statsrente_10aar` i 2019
+- `Rentekurve` i 2019
+
+Den korte rentehistorikken er også relevant for vurderingen av
+pengepolitikk og bør ikke behandles som et separat nytt gap her.
+
+# Analyse og API
+
+Eksisterende generelle analyseverktøy dekker behovet godt.
+
+Relevante funksjoner inkluderer blant annet:
+
+- `compare_series()`
+- `compare_periods()`
+- `plot_series()`
+- `business_cycle()`
+- `business_cycle_score()`
+- `business_cycle_explain()`
+- `conjuncture_dashboard()`
+
+Det er derfor ikke identifisert behov for en egen generell
+analysefunksjon for finansmarkedsforventninger.
+
+# Internasjonal dekning
+
+Det internasjonale datasettet inneholder blant annet:
+
+- `Statsrente_10aar`
+- `Pengemarkedsrente_3mnd`
+- `Boligprisindeks`
+- `Boligprisvekst`
+
+Det inneholder ikke eksplisitte forventnings-, confidence- eller
+sentimentindikatorer.
+
+Internasjonal sammenligning av renter er derfor mulig, mens direkte
+sammenligning av forventningsindikatorer ikke er dekket.
+
+# Gap
+
+## Data
+
+**Status: Gul**
+
+NorMacro har god dekning av renter, rentekurve, aksjemarked,
+valutakurs og flere konjunkturindikatorer med mulig fremoverskuende
+informasjonsinnhold.
+
+Pakken mangler imidlertid et eksplisitt mål på økonomiske
+forventninger.
+
+Dette er et avgrenset datagap, ikke et grunnleggende hull i
+finansmarkedsdekningen.
+
+En mulig senere forbedring er å vurdere én eksplisitt
+forventningsindikator dersom en stabil, faglig relevant og tilstrekkelig
+lang årlig serie kan identifiseres. Inflasjonsforventninger eller en
+bred tillits-/forventningsindikator er naturlige kandidater.
+
+## Analyse og API
+
+**Status: Grønn**
+
+Eksisterende generelle analyse- og konjunkturverktøy er tilstrekkelige.
+
+Det er ikke identifisert behov for ny spesialisert analysefunksjonalitet.
+
+## Metadata og oppdagbarhet
+
+**Status: Grønn**
+
+De eksisterende finansmarkeds- og konjunkturseriene har metadata som
+gjør dem forståelige og oppdagbare.
+
+Det bør likevel være tydelig i dokumentasjonen hvilke indikatorer som
+er direkte observerte markeds- eller aktivitetsmål, og hvilke som kan
+tolkes som fremoverskuende signaler.
+
+## Undervisning og dokumentasjon
+
+**Status: Gul**
+
+Et undervisningseksempel bør vise hvordan rentekurve, aksjemarked,
+ordrebeholdning og konjunkturindikatorer kan brukes til å diskutere
+forventninger om den videre økonomiske utviklingen.
+
+Eksemplet bør samtidig understreke forskjellen mellom:
+
+1. direkte målte forventninger, og
+2. observerte indikatorer med fremoverskuende informasjonsinnhold.
+
+Dette skillet er økonomisk viktig og bør ikke skjules for brukeren.
+
+# Samlet vurdering
+
+| Dimensjon | Status |
+|---|---|
+| Data | Gul |
+| Analyse/API | Grønn |
+| Metadata | Grønn |
+| Undervisning | Gul |
+
+Samlet gap vurderes som **lite til middels**, med **middels prioritet**.
+
+Det viktigste mulige datatiltaket er å undersøke om én eksplisitt
+forventningsindikator bør inkluderes.
+
+Det viktigste undervisningstiltaket er å dokumentere hvordan
+eksisterende finansmarkeds- og konjunkturindikatorer kan brukes som
+fremoverskuende signaler uten å fremstille dem som direkte mål på
+forventninger.
+
+# Konklusjon
+
+NorMacro har allerede en bred og anvendelig dekning av
+finansmarkedsindikatorer og konjunktursignaler.
+
+Det finnes derfor ikke et vesentlig funksjonelt gap.
+
+Den tydeligste svakheten er at forventningsdimensjonen bare dekkes
+indirekte. Dette begrunner gul status for data og undervisning, men
+ikke behov for et større nytt delsystem eller spesialisert API.

@@ -1,0 +1,365 @@
+
+---
+title: "NorMacro gap-analyse 2 – kravkart"
+format: html
+---
+
+# Formål
+
+Denne analysen er den andre samlede faglige gap-analysen av NorMacro.
+
+Den bygger på den opprinnelige gap-analysen i
+`dev/gap-analyse/`, men gjennomføres som en ny vurdering av pakken etter
+utviklingsarbeidet som fulgte den første analysen.
+
+Den opprinnelige analysen beholdes uendret som historisk baseline.
+Resultatene fra denne analysen dokumenteres i:
+
+`dev/gap-analyse2/`
+
+Formålet er å vurdere:
+
+- hvilke tidligere gap som er lukket
+- hvilke tidligere gap som fortsatt er relevante
+- hvilke nye gap faktisk bruk av NorMacro har avdekket
+- om datadekningen fortsatt er faglig hensiktsmessig
+- om analyse-API-et er enkelt og konsistent
+- om metadata og oppdagbarhet fungerer tilfredsstillende
+- om dokumentasjon og undervisningsstøtte er tilstrekkelig
+- hva som bør prioriteres i neste utviklingsfase
+- hva NorMacro fortsatt eksplisitt ikke bør forsøke å dekke
+
+Analysen skal være et faglig grunnlag for videre roadmap, ikke en
+ønskeliste over nye dataserier eller funksjoner.
+
+# Grunnprinsipper
+
+## Kuratert fremfor komplett
+
+NorMacro skal ikke forsøke å kopiere komplette databaser fra SSB,
+Eurostat, OECD eller andre kilder.
+
+Målet er å tilby et kuratert sett av representative og relevante serier
+som gjør sentrale makroøkonomiske problemstillinger enkle å undersøke.
+
+Tilgjengelighet hos en datakilde er ikke i seg selv tilstrekkelig grunn
+til å inkludere en serie.
+
+## Faglige spørsmål fremfor funksjoner
+
+Gap-analysen organiseres etter økonomiske spørsmål, ikke etter
+eksisterende funksjoner eller datakilder.
+
+Et faglig behov innebærer ikke automatisk behov for en ny funksjon.
+
+Hvis et spørsmål kan undersøkes tilfredsstillende med eksisterende
+byggesteiner, bør disse normalt brukes fremfor å lage en egen funksjon
+for hvert økonomisk fenomen.
+
+## Generelle verktøy fremfor spesialfunksjoner
+
+Eksisterende generelle verktøy skal vurderes før ny API-funksjonalitet
+foreslås.
+
+Dette gjelder blant annet funksjoner for:
+
+- sammenstilling av serier
+- vekstberegning
+- indeksering
+- korrelasjon
+- regresjon
+- sammenligning mellom land
+- visualisering
+
+Nye spesialfunksjoner bør bare foreslås dersom de gir en tydelig
+brukerrettet eller faglig merverdi som ikke løses tilfredsstillende av
+eksisterende API.
+
+## Metadata er en del av brukergrensesnittet
+
+En bruker skal ikke måtte kjenne NorMacros interne variabelnavn på
+forhånd.
+
+Metadata, søk, kategorier og dokumentasjon skal gjøre relevante
+økonomiske serier enkle å finne, forstå og bruke.
+
+Et problem med oppdagbarhet skal derfor ikke feilaktig klassifiseres som
+et datagap eller som behov for en ny analysefunksjon.
+
+## Lav terskel, men ordinære R-objekter
+
+Vanlige analyser skal kreve lite kode og begrenset kjennskap til
+underliggende datakilder.
+
+Samtidig skal NorMacro så langt det er hensiktsmessig returnere
+standardiserte og videre anvendelige R-objekter.
+
+Enkel bruk skal ikke hindre videre analyse.
+
+# Faglig kravkart
+
+| Fagområde | Sentrale spørsmål |
+|---|---|
+| **1. Nasjonalregnskap** | Hvor stort er BNP? Hva består økonomien og samlet etterspørsel av? Hvordan utvikler konsum, investeringer, offentlig etterspørsel, eksport og import seg? |
+| **2. Konjunkturer** | Er økonomien i oppgang eller nedgang? Hvordan skiller dagens situasjon seg fra tidligere konjunkturer? |
+| **3. Arbeidsmarked** | Hvordan utvikler arbeidsledighet, sysselsetting og arbeidsstyrke seg? Hvordan reagerer arbeidsmarkedet på konjunkturene? |
+| **4. Inflasjon** | Hvor høy er inflasjonen? Hvordan har den utviklet seg? Hvordan henger inflasjon sammen med lønn, aktivitet og arbeidsledighet? |
+| **5. Pengepolitikk** | Hvordan utvikler renten seg? Hvordan reagerer pengepolitikken på inflasjon og økonomisk aktivitet? Hva skjer med realrenten? |
+| **6. Finanspolitikk** | Hvordan utvikler offentlige inntekter, utgifter, budsjettbalanse og gjeld seg? Hvordan kan finanspolitikken ses i sammenheng med konjunkturene? |
+| **7. Konsum og investering** | Hvordan varierer konsum og investering med inntekt, renter og konjunkturer? |
+| **8. Åpen økonomi** | Hvordan utvikler eksport, import og handelsbalanse seg? Hvordan påvirkes norsk økonomi av utviklingen internasjonalt? |
+| **9. Valutakurs** | Hvordan har kronen utviklet seg? Hvordan henger valutakursen sammen med renter, inflasjon og internasjonale forhold? |
+| **10. Lønn og produktivitet** | Hvordan utvikler lønn, reallønn og produktivitet seg? Hvordan henger disse størrelsene sammen over tid? |
+| **11. Langsiktig vekst** | Hvordan har produksjon, produktivitet og levestandard utviklet seg over tid? Hvordan skiller utviklingen seg mellom land? |
+| **12. Kriser og historiske episoder** | Hva skjedde med økonomien under tidligere kriser og store økonomiske sjokk? Hvordan reagerte sentrale makroøkonomiske størrelser? |
+| **13. Internasjonal makro** | Hvordan skiller Norge seg fra andre økonomier? I hvilken grad beveger konjunkturer, inflasjon, arbeidsmarked og renter seg sammen mellom land? |
+| **14. Finansmarkeder og forventninger** | Hva forteller renter, rentekurve og relevante finansmarkedsindikatorer om økonomien og forventningene fremover? |
+
+# Analysemodell
+
+Hvert fagområde vurderes langs fire dimensjoner.
+
+## Data (D)
+
+Har NorMacro de nødvendige seriene for å undersøke de sentrale
+spørsmålene?
+
+Et datagap innebærer at en relevant økonomisk størrelse:
+
+- mangler
+- har utilstrekkelig historikk
+- har utilstrekkelig kvalitet
+- ikke er tilstrekkelig sammenlignbar
+- eller har en definisjon som gjør den lite egnet til formålet
+
+Flere serier er ikke automatisk bedre datadekning.
+
+## Analyse og API (A)
+
+Kan de relevante spørsmålene undersøkes på en enkel og konsistent måte
+med eksisterende funksjonalitet?
+
+Et API-gap eksisterer bare dersom eksisterende generelle verktøy ikke
+løser oppgaven tilfredsstillende.
+
+Det vurderes også om faktisk bruk har avdekket:
+
+- unødvendig friksjon
+- inkonsistente argumenter eller returverdier
+- manglende komposisjon mellom funksjoner
+- unødvendig spesialisering
+- funksjoner som overlapper hverandre
+
+## Metadata og oppdagbarhet (M)
+
+Er relevante serier og funksjoner enkle å finne, forstå og velge?
+
+Det vurderes blant annet:
+
+- displaynavn
+- beskrivelser
+- kategorier
+- enheter
+- kildeinformasjon
+- definisjoner
+- søk
+- funksjonsdokumentasjon
+- konsistens mellom norsk og internasjonalt datalag
+
+## Undervisning og dokumentasjon (U)
+
+Er det enkelt for en student, underviser eller annen bruker å forstå
+hvordan NorMacro kan brukes til å undersøke fagområdet?
+
+Et undervisningsgap kan ofte løses gjennom:
+
+- bedre eksempler
+- vignetter
+- rapporter
+- visualisering
+- dokumentasjon
+
+fremfor nye data eller ny analysefunksjonalitet.
+
+# Klassifisering
+
+Hver dimensjon klassifiseres som:
+
+- **Grønn** – behovet er i hovedsak dekket
+- **Gul** – behovet er delvis dekket eller bør forbedres
+- **Rød** – et vesentlig gap finnes
+
+Klassifiseringen skal begrunnes i den individuelle analysen.
+
+# Endring siden gap-analyse 1
+
+Gap-analyse 2 skal ikke bare gi en ny status.
+
+For hvert fagområde dokumenteres også utviklingen siden den første
+analysen.
+
+Følgende kategorier brukes for tidligere identifiserte gap:
+
+- **Lukket** – behovet er tilfredsstillende løst
+- **Delvis lukket** – vesentlig forbedring, men et relevant restgap består
+- **Fortsatt åpent** – gapet består i hovedsak
+- **Ikke lenger relevant** – ny vurdering tilsier at gapet ikke bør lukkes
+- **Nytt gap** – faktisk bruk eller ny faglig vurdering har identifisert et behov som ikke var eksplisitt i den første analysen
+
+Denne klassifiseringen holdes adskilt fra D/A/M/U-statusen.
+
+# Tiltakshierarki
+
+Et identifisert gap skal ikke automatisk føre til ny kode.
+
+Tiltak vurderes i denne rekkefølgen:
+
+1. Kan behovet allerede løses tilfredsstillende med eksisterende data og funksjoner?
+2. Kan bedre metadata eller oppdagbarhet løse behovet?
+3. Kan dokumentasjon, rapportering eller et undervisningseksempel løse behovet?
+4. Mangler NorMacro nødvendige data?
+5. Krever spørsmålet faktisk ny generell analysefunksjonalitet?
+
+Dette skal bidra til å holde API-et lite, konsistent og forståelig.
+
+# Prioritering
+
+Et reelt gap prioriteres etter:
+
+- faglig betydning
+- brukerrettet verdi
+- datakvalitet
+- forventet bruk
+- implementeringskostnad
+- vedlikeholdskostnad
+- konsekvenser for API og arkitektur
+
+Prioritet klassifiseres som:
+
+- **Høy**
+- **Middels**
+- **Lav**
+- **Ingen tiltak**
+
+Et gap kan være reelt uten å være prioritert.
+
+# Baseline fra gap-analyse 1
+
+Den første gap-analysen ble avsluttet med følgende vurdering:
+
+| Fagområde | Data | Analyse | Metadata | Undervisning | Samlet gap | Prioritet videre |
+|---|---|---|---|---|---|---|
+| 1. Nasjonalregnskap | 🟢 | 🟢 | 🟢 | 🟡 | Lite | Lav |
+| 2. Konjunkturer | 🟡 | 🟢 | 🟢 | 🟢 | Lite | Middels |
+| 3. Arbeidsmarked | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 4. Inflasjon | 🟡 | 🟢 | 🟢 | 🟢 | Lite–middels | Middels |
+| 5. Pengepolitikk | 🟡 | 🟢 | 🟢 | 🟢 | Lite–middels | Middels |
+| 6. Finanspolitikk | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 7. Konsum og investering | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 8. Åpen økonomi | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 9. Valutakurs | 🟡 | 🟢 | 🟢 | 🟡 | Middels | Høy |
+| 10. Lønn og produktivitet | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 11. Langsiktig vekst | 🟡 | 🟢 | 🟢 | 🟢 | Lite | Middels |
+| 12. Kriser og historiske episoder | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 13. Internasjonal makro | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 14. Finansmarkeder og forventninger | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+
+Denne tabellen er historisk baseline og skal ikke endres.
+
+# Tidligere eksplisitte restgap
+
+Ved avslutningen av den første analysen ble særlig følgende restgap
+videreført:
+
+- eksplisitt aktivitets- eller produksjonsgap
+- underliggende inflasjon
+- lengre historikk for kort markedsrente
+- eksplisitt ex-post realrente
+- internasjonalt sammenlignbar kort rente eller policy-rente
+- real effektiv valutakurs
+- internasjonalt harmonisert effektiv valutakurs
+- eventuelt én relevant bilateral valutakurs
+- realt BNP per innbygger internasjonalt
+- vekst i realt BNP per innbygger internasjonalt
+- mer eksplisitt undervisningseksempel for nasjonalregnskap
+
+Andre mulige utvidelser ble vurdert som senere forbedringer:
+
+- BNP-deflator
+- driftsbalanse
+- bytteforhold
+- lønnsandel
+- produktivitet per arbeidstime
+- kapitalbeholdning
+- TFP
+
+Disse skal vurderes på nytt og ikke automatisk videreføres som gap.
+
+# Samlet gap-matrise – analyse 2
+
+Denne tabellen fylles ut etter hvert som fagområdene gjennomgås.
+
+| Fagområde | Data | Analyse | Metadata | Undervisning | Endring fra baseline | Samlet gap | Prioritet |
+|---|---|---|---|---|---|---|---|
+| 1. Nasjonalregnskap | – | – | – | – | – | – | – |
+| 2. Konjunkturer | – | – | – | – | – | – | – |
+| 3. Arbeidsmarked | – | – | – | – | – | – | – |
+| 4. Inflasjon | – | – | – | – | – | – | – |
+| 5. Pengepolitikk | – | – | – | – | – | – | – |
+| 6. Finanspolitikk | – | – | – | – | – | – | – |
+| 7. Konsum og investering | – | – | – | – | – | – | – |
+| 8. Åpen økonomi | – | – | – | – | – | – | – |
+| 9. Valutakurs | – | – | – | – | – | – | – |
+| 10. Lønn og produktivitet | – | – | – | – | – | – | – |
+| 11. Langsiktig vekst | – | – | – | – | – | – | – |
+| 12. Kriser og historiske episoder | – | – | – | – | – | – | – |
+| 13. Internasjonal makro | – | – | – | – | – | – | – |
+| 14. Finansmarkeder og forventninger | – | – | – | – | – | – | – |
+
+# Struktur for de individuelle analysene
+
+Hver fil `01`–`14` skal så langt det er hensiktsmessig følge samme
+struktur:
+
+1. faglige spørsmål
+2. baseline fra gap-analyse 1
+3. utvikling siden baseline
+4. dagens datadekning
+5. dagens analyse- og API-støtte
+6. metadata og oppdagbarhet
+7. undervisning og dokumentasjon
+8. tidligere gap – status
+9. eventuelle nye gap
+10. D/A/M/U-vurdering
+11. anbefalte tiltak
+12. prioritering
+13. konklusjon
+
+# Avgrensning
+
+NorMacro skal fortsatt ikke ha som mål å:
+
+- erstatte en lærebok i makroøkonomi
+- implementere alle makroøkonomiske modeller
+- implementere alle statistiske eller økonometriske metoder
+- kopiere komplette offentlige databaser
+- tilby spesialfunksjoner for ethvert økonomisk fenomen
+- bli en generell finansdatabase
+- tilby trading- eller markedsprognoseverktøy
+- skjule økonomiske definisjoner eller transformasjoner for brukeren
+
+Gap-analysen skal også identifisere områder hvor den riktige
+anbefalingen er å ikke utvide NorMacro.
+
+# Sluttprodukt
+
+Når alle 14 fagområder er analysert skal gap-analyse 2 gi grunnlag for:
+
+- oppdatert samlet gap-matrise
+- eksplisitt oversikt over lukkede og gjenværende gap
+- identifikasjon av nye gap
+- prioritering av videre datainnhenting
+- prioritering av API- og metadataarbeid
+- prioritering av dokumentasjon og undervisningsstøtte
+- eksplisitte beslutninger om hva som ikke skal utvikles
+- nytt roadmap for neste fase av NorMacro

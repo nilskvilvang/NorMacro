@@ -1,0 +1,427 @@
+
+---
+title: "Gap-analyse 2 – nasjonalregnskap"
+format: html
+---
+
+# Faglige spørsmål
+
+Nasjonalregnskapsdelen i NorMacro skal gjøre det enkelt å undersøke:
+
+- hvor stort norsk BNP er
+- hvordan BNP utvikler seg over tid
+- forskjellen mellom hele norsk økonomi og Fastlands-Norge
+- hvordan samlet etterspørsel fordeler seg mellom konsum, investeringer,
+  offentlig etterspørsel, eksport og import
+- realveksten i sentrale etterspørselskomponenter
+- komponentenes andeler av BNP
+- den grunnleggende nasjonalregnskapsidentiteten
+
+\[
+Y = C + I + G + X - M
+\]
+
+Et viktig skille er mellom løpende og faste priser.
+
+Løpende priser er nødvendige når additive nasjonalregnskapsstørrelser
+skal sammenholdes direkte. Faste priser brukes primært til analyse av
+real utvikling og vekst.
+
+# Baseline fra gap-analyse 1
+
+Den første gap-analysen vurderte nasjonalregnskap slik:
+
+| Dimensjon | Status |
+|---|---|
+| Data | 🟢 |
+| Analyse | 🟢 |
+| Metadata | 🟢 |
+| Undervisning | 🟡 |
+| Samlet gap | Lite |
+| Prioritet videre | Lav |
+
+Analysen identifiserte samtidig flere konkrete forbedringsbehov.
+
+## Tidligere identifiserte tiltak
+
+1. BNP for hele økonomien i faste priser og tilhørende realvekst.
+2. Bruttoinvestering i fast realkapital for hele økonomien og vekst.
+3. Et konsistent løpende-pris-sett for nasjonalregnskapsidentiteten.
+4. Gjennomgang av alle `*_andel_BNP`.
+5. Tydelig skille i metadata mellom hele økonomien og Fastlands-Norge,
+   løpende og faste priser, nivå, vekst og andel.
+6. Konsistent begrepsbruk mellom norsk og internasjonalt datalag.
+7. Et eksplisitt undervisningseksempel om nasjonalregnskap.
+
+# Utvikling siden baseline
+
+Det har skjedd flere relevante forbedringer siden den første analysen.
+
+## BNP i løpende priser
+
+NorMacro inneholder nå:
+
+- `BNP_lopende`
+- `BNP_Fastland_lopende`
+
+`BNP_lopende` representerer samlet norsk BNP i løpende priser, mens
+Fastlands-Norge er eksplisitt representert separat.
+
+Dette lukker et viktig tidligere problem knyttet til skillet mellom
+samlet norsk BNP og BNP Fastlands-Norge.
+
+Status: **Lukket**
+
+## BNP i faste priser
+
+NorMacro inneholder fortsatt:
+
+- `BNP_Fastland`
+- `BNP_Fastland_vekst`
+
+men har ikke egne standardserier:
+
+- `BNP`
+- `BNP_vekst`
+
+for hele norsk økonomi i faste priser.
+
+Det er derfor fortsatt enklere å analysere real utvikling i
+Fastlands-Norge enn i samlet norsk økonomi.
+
+Status: **Fortsatt åpent**
+
+## Investeringer
+
+NorMacro inneholder:
+
+- `Fastlandsinvesteringer`
+- `Fastlandsinvesteringer_vekst`
+- `Fastlandsinvesteringer_lopende`
+
+men ikke en tilsvarende samlet serie for bruttoinvestering i fast
+realkapital for hele økonomien.
+
+Det betyr at skillet mellom samlet investeringsaktivitet og
+Fastlands-investeringer fortsatt ikke er symmetrisk med skillet mellom
+samlet BNP og Fastlands-BNP.
+
+Status: **Fortsatt åpent**
+
+## Nasjonalregnskapsidentiteten
+
+NorMacro har nå løpende-pris-serier for blant annet:
+
+- `BNP_lopende`
+- `Privat_konsum_lopende`
+- `Offentlig_konsum_lopende`
+- `Eksport_lopende`
+- `Import_lopende`
+
+men mangler samlet `Investeringer_lopende`.
+
+Dermed finnes nesten hele settet som kreves for å undersøke
+
+\[
+Y = C + I + G + X - M
+\]
+
+med additive totaløkonomiske størrelser i løpende priser, men
+investeringskomponenten mangler fortsatt.
+
+Dette er en vesentlig forbedring fra baseline, men gapet er ikke fullt
+lukket.
+
+Status: **Delvis lukket**
+
+## BNP-andeler
+
+Gjennomgangen viser blant annet følgende serier:
+
+- `Offentlig_gjeld_andel_BNP`
+- `Offentlig_nettofordringer_andel_BNP`
+- `Offentlige_inntekter_andel_BNP`
+- `Offentlige_utgifter_andel_BNP`
+- `Nettofinansinvestering_andel_BNP`
+- `Boliginvesteringer_andel_BNP`
+- `Offentlige_investeringer_andel_BNP`
+- `Privat_konsum_andel_BNP`
+- `Offentlig_konsum_andel_BNP`
+- `Handelsbalanse_andel_BNP`
+- `Fastlandsinvesteringer_andel_BNP_Fastland`
+
+Navnet `Fastlandsinvesteringer_andel_BNP_Fastland` gjør eksplisitt at
+nevneren er BNP Fastlands-Norge.
+
+Dette er i tråd med anbefalingen fra den første gap-analysen om at
+variabelnavn og metadata skal gjøre BNP-definisjonen entydig.
+
+Det bør likevel fortsatt være et generelt krav at alle eksisterende og
+nye `*_andel_BNP` har dokumentert og økonomisk korrekt nevner.
+
+Status: **I hovedsak lukket**
+
+# Dagens datadekning
+
+## Godt dekket
+
+NorMacro har god dekning av sentrale nasjonalregnskapsstørrelser for
+Fastlands-Norge og av sentrale etterspørselskomponenter.
+
+Blant relevante serier finnes:
+
+- `BNP_lopende`
+- `BNP_Fastland`
+- `BNP_Fastland_vekst`
+- `BNP_Fastland_lopende`
+- `Privat_konsum`
+- `Privat_konsum_lopende`
+- `Offentlig_konsum`
+- `Offentlig_konsum_lopende`
+- `Eksport`
+- `Eksport_lopende`
+- `Eksportvekst`
+- `Import`
+- `Import_lopende`
+- `Importvekst`
+- `Fastlandsinvesteringer`
+- `Fastlandsinvesteringer_lopende`
+- `Fastlandsinvesteringer_vekst`
+
+Dette gjør det mulig å analysere store deler av etterspørselssiden og
+realøkonomien med eksisterende generelle verktøy.
+
+## Gjenværende datagap
+
+To datagap er fortsatt faglig relevante:
+
+### 1. Real-BNP for hele økonomien
+
+En samlet real BNP-serie og tilhørende vekstserie mangler som
+standardiserte brukerrettede variabler.
+
+Dette er særlig relevant fordi NorMacro ellers eksplisitt skiller mellom
+hele norsk økonomi og Fastlands-Norge.
+
+### 2. Samlede investeringer
+
+Bruttoinvestering i fast realkapital for hele økonomien mangler både som
+nivåserie og som nødvendig løpende-pris-komponent i den komplette
+nasjonalregnskapsidentiteten.
+
+Dette er etter denne analysen det tydeligste datagapet innen
+nasjonalregnskap.
+
+# Analyse og API
+
+Den generelle analysefunksjonaliteten vurderes som god.
+
+Eksisterende funksjoner gjør det mulig å:
+
+- sammenligne serier
+- beregne vekst
+- indeksere nivåserier
+- analysere korrelasjoner
+- gjennomføre regresjoner
+- plotte tidsserier
+- sammenligne perioder
+- inkludere relevante indikatorer i rapporter
+
+Blant relevante brukerrettede funksjoner finnes:
+
+- `growth()`
+- `growth_table()`
+- `compare_series()`
+- `compare_periods()`
+- `plot_series()`
+- `macro_report()`
+- `render_macro_report()`
+
+Det er ikke identifisert behov for en egen
+`national_accounts()`- eller `gdp_identity()`-funksjon.
+
+Nasjonalregnskapsidentiteten kan undersøkes med ordinære R-operasjoner
+og eksisterende NorMacro-byggesteiner når datagrunnlaget er komplett.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+Metadataene skiller nå i stor grad mellom:
+
+- samlet norsk økonomi
+- Fastlands-Norge
+- løpende priser
+- faste priser
+- nivå
+- vekst
+- andeler
+
+Eksempelvis beskrives `BNP_lopende` som bruttonasjonalprodukt for Norge,
+mens `BNP_Fastland` og `BNP_Fastland_vekst` eksplisitt viser til
+Fastlands-Norge.
+
+Det eksplisitte navnet
+`Fastlandsinvesteringer_andel_BNP_Fastland` er også en forbedring av
+semantikken rundt BNP-andeler.
+
+Metadata bør fortsatt kontrolleres når nye serier legges til, men det er
+ikke identifisert et generelt metadata-gap i dette området.
+
+**Metadata: Grønn**
+
+# Undervisning og dokumentasjon
+
+Den første analysen etterlyste et eksplisitt undervisningseksempel der
+studenten:
+
+1. identifiserer komponentene i BNP
+2. undersøker nasjonalregnskapsidentiteten
+3. studerer komponentenes andeler av BNP
+4. analyserer realvekst
+5. sammenligner samlet BNP og BNP Fastlands-Norge
+
+NorMacro har siden fått bedre visualisering og et eget rapportlag, med
+rapportobjekter og rendering til HTML, DOCX og PDF.
+
+Dette styrker den generelle undervisnings- og formidlingsverdien, men
+erstatter ikke et eksplisitt nasjonalregnskapseksempel.
+
+Siden datagrunnlaget for den komplette identiteten fortsatt mangler
+samlet investering, er det også naturlig å vente med et fullstendig
+undervisningseksempel til dette eventuelt er komplettert.
+
+**Undervisning: Gul**
+
+# Tidligere gap – status
+
+| Tidligere gap | Status | Kommentar |
+|---|---|---|
+| Total BNP i faste priser | Fortsatt åpent | Fastlands-BNP er godt dekket, men samlet real-BNP mangler |
+| Total BNP-vekst | Fortsatt åpent | Følger av manglende samlet real-BNP |
+| Samlede investeringer | Fortsatt åpent | Fastlandsinvesteringer finnes |
+| Komplett identitet i løpende priser | Delvis lukket | C, G, X, M og Y finnes; samlet I mangler |
+| Entydige BNP-andeler | I hovedsak lukket | Fastlandsnevner er eksplisitt i relevant variabelnavn |
+| Metadata | Lukket | Skillet mellom sentrale begreper er betydelig tydeligere |
+| Internasjonal begrepskonsistens | I hovedsak lukket | Ingen konkret mangel identifisert i denne gjennomgangen |
+| Undervisningseksempel | Fortsatt åpent | Generell dokumentasjon er bedre, men eksplisitt eksempel mangler |
+
+# Nye gap
+
+Det er ikke identifisert noe nytt vesentlig faglig gap innen
+nasjonalregnskap.
+
+Det nye rapportlaget gir snarere bedre muligheter for undervisning og
+formidling enn det som fantes ved første analyse.
+
+Eventuelle ytterligere nasjonalregnskapsserier, som BNP-deflator eller
+mer detaljerte komponenter, vurderes fortsatt som mulige utvidelser og
+ikke som nødvendige for å dekke kravkartet.
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 1 | Analyse 2 | Begrunnelse |
+|---|---|---|---|
+| Data | 🟢 | 🟡 | To klart avgrensede, men faglig relevante datagap består |
+| Analyse | 🟢 | 🟢 | Generelle analyseverktøy dekker behovene |
+| Metadata | 🟢 | 🟢 | Begreper og BNP-definisjoner er i hovedsak tydelige |
+| Undervisning | 🟡 | 🟡 | Eksplisitt undervisningseksempel mangler fortsatt |
+
+# Samlet vurdering
+
+**Samlet gap: Lite–middels**
+
+Nasjonalregnskapsdekningen er bred og i praktisk bruk god, men den er
+fortsatt asymmetrisk:
+
+- Fastlands-Norge har komplett real-BNP- og vekstdekning.
+- Hele økonomien har BNP i løpende priser, men ikke tilsvarende
+  brukerrettet realserie og vekst.
+- Fastlandsinvesteringer er godt dekket, mens samlet investering mangler.
+
+Dette hindrer også en helt konsistent brukerrettet implementering av
+nasjonalregnskapsidentiteten for hele økonomien.
+
+# Anbefalte tiltak
+
+## 1. Vurder samlet real-BNP
+
+**Prioritet: Middels**
+
+Kartlegg om en stabil offentlig kilde kan gi:
+
+- BNP for hele norsk økonomi i faste priser
+- tilhørende årsvekst
+
+Seriene bør bare legges til dersom definisjon, prisgrunnlag og
+tidsdekning er konsistente med NorMacros øvrige nasjonalregnskapsdata.
+
+## 2. Vurder samlet bruttoinvestering
+
+**Prioritet: Middels–høy innen fagområdet**
+
+Dette er det mest konkrete gjenværende gapet.
+
+Det bør vurderes å legge til:
+
+- samlet bruttoinvestering i fast realkapital i faste priser
+- tilhørende vekst
+- samlet bruttoinvestering i løpende priser
+
+Løpende-pris-serien vil samtidig gjøre det mulig å undersøke den
+grunnleggende nasjonalregnskapsidentiteten med et konsistent sett av
+totaløkonomiske størrelser.
+
+## 3. Undervisningseksempel
+
+**Prioritet: Lav–middels**
+
+Når datagrunnlaget eventuelt kompletteres bør det utvikles ett kort,
+faglig undervisningseksempel om:
+
+- BNP-komponentene
+- nasjonalregnskapsidentiteten
+- løpende mot faste priser
+- komponentenes BNP-andeler
+- samlet BNP mot BNP Fastlands-Norge
+
+Eksemplet bør bruke eksisterende generelle NorMacro-verktøy og ikke
+introdusere et nytt spesialisert API.
+
+# Prioritering
+
+**Samlet prioritet videre: Middels**
+
+Prioriteten skyldes ikke manglende generell funksjonalitet, men to
+avgrensede datagap som vil gjøre nasjonalregnskapsdelen mer symmetrisk
+og faglig komplett.
+
+Det er ikke behov for større API-endringer.
+
+# Konklusjon
+
+Nasjonalregnskapsområdet er betydelig forbedret siden den første
+gap-analysen.
+
+Korrekt samlet BNP i løpende priser, tydeligere BNP-begreper,
+forbedrede BNP-andeler, bedre metadata, visualisering og rapportering
+har lukket flere tidligere problemer.
+
+To faglig relevante restgap består:
+
+1. samlet BNP i faste priser med vekst
+2. samlet bruttoinvestering, særlig i løpende priser for
+   nasjonalregnskapsidentiteten
+
+Disse bør vurderes som avgrensede dataforbedringer.
+
+Det er ikke identifisert behov for nye spesialiserte analysefunksjoner.
+
+Endelig status:
+
+- **Data: 🟡**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟡**
+- **Samlet gap: Lite–middels**
+- **Prioritet: Middels**

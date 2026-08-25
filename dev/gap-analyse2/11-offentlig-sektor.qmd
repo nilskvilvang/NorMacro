@@ -1,0 +1,434 @@
+
+---
+title: "Gap-analyse 2 – Offentlig sektor"
+format: html
+---
+
+# Faglige spørsmål
+
+Området offentlig sektor skal gjøre det enkelt å undersøke:
+
+- størrelsen på offentlig sektor
+- offentlige inntekter og utgifter
+- offentlig konsum og investeringer
+- budsjettbalanse og nettofinansinvestering
+- offentlig gjeld
+- offentlig nettoformue/nettofordringer
+- statlig og kommunal utgiftsutvikling
+- finanspolitikkens utvikling over tid
+- hvordan norsk offentlig sektor skiller seg fra andre land
+
+NorMacro har i tillegg et omfattende KOSTRA-lag for analyse av
+kommunesektoren.
+
+Det nasjonale makrolaget og KOSTRA-laget skal vurderes som to
+komplementære deler av pakken.
+
+# Dagens norske datadekning
+
+## Offentlige inntekter og utgifter
+
+NorMacro inneholder:
+
+- `Offentlige_inntekter`
+- `Offentlige_inntekter_andel_BNP`
+- `Offentlige_utgifter`
+- `Offentlige_utgifter_andel_BNP`
+
+Seriene dekker perioden 1995–2025.
+
+Dette gir både nominelle nivåer og størrelsen på offentlig sektor
+relativt til økonomien.
+
+Status: **Godt dekket**
+
+# Budsjettbalanse / nettofinansinvestering
+
+NorMacro inneholder:
+
+- `Nettofinansinvestering`
+- `Nettofinansinvestering_andel_BNP`
+
+Seriene dekker perioden 1995–2025.
+
+Nettofinansinvestering representerer offentlig forvaltnings
+overskudd/underskudd og gir dermed en sentral indikator for
+finanspolitisk stilling.
+
+Det er ikke nødvendig med en separat variabel kalt
+`Budsjettbalanse` dersom nettofinansinvestering er den faglig
+definerte størrelsen som skal brukes.
+
+Status: **Godt dekket**
+
+# Offentlig gjeld og nettofordringer
+
+NorMacro inneholder:
+
+- `Offentlig_gjeld`
+- `Offentlig_gjeld_andel_BNP`
+- `Offentlig_nettofordringer`
+- `Offentlig_nettofordringer_andel_BNP`
+
+Seriene dekker perioden 1995–2025.
+
+Kombinasjonen er særlig viktig for Norge.
+
+Offentlig bruttogjeld alene gir et ufullstendig bilde av norsk
+offentlig sektors finansielle stilling. Nettofordringer gjør det mulig
+å analysere den betydelige offentlige finansformuen.
+
+Status: **Svært godt dekket**
+
+# Offentlig konsum
+
+NorMacro inneholder:
+
+- `Offentlig_konsum`
+- `Offentlig_konsum_lopende`
+- `Offentlig_konsum_vekst`
+- `Offentlig_konsum_andel_BNP`
+
+Seriene har historikk tilbake til 1970.
+
+Dette gir både realøkonomisk nivå, nominelt nivå, vekst og BNP-andel.
+
+Status: **Svært godt dekket**
+
+# Offentlige investeringer
+
+NorMacro inneholder:
+
+- `Offentlige_investeringer`
+- `Offentlige_investeringer_lopende`
+- `Offentlige_investeringer_vekst`
+- `Offentlige_investeringer_andel_BNP`
+
+Seriene har historikk tilbake til 1970.
+
+Offentlig investeringsaktivitet er dermed representert separat fra
+offentlig konsum og øvrige utgifter.
+
+Status: **Svært godt dekket**
+
+# Stat og kommune
+
+NorMacro inneholder:
+
+- `Statlige_utgifter`
+- `Kommunale_utgifter`
+- `Statlig_utgiftsandel`
+- `Kommunal_utgiftsandel`
+
+Seriene dekker perioden 1995–2025.
+
+Dette gir et enkelt nasjonalt skille mellom stats- og
+kommuneforvaltningen.
+
+I tillegg har NorMacro et omfattende separat KOSTRA-lag.
+
+Status: **Godt dekket**
+
+# Skatter og avgifter
+
+NorMacro inneholder ikke en eksplisitt serie for:
+
+- samlede skatter
+- samlede skatter og avgifter
+- skattetrykk som andel av BNP
+
+Dette er ikke det samme som at offentlig sektors inntektsside mangler.
+
+`Offentlige_inntekter` og `Offentlige_inntekter_andel_BNP` dekker
+offentlig forvaltnings samlede inntekter.
+
+En eksplisitt skatteindikator vil likevel kunne være nyttig for spørsmål
+om:
+
+- skattetrykk
+- finansiering av offentlig sektor
+- internasjonale sammenligninger
+- utviklingen i skattebelastningen over tid
+
+Status: **Mulig kompletteringsgap**
+
+Dette vurderes som et mindre gap, ikke et hull i kjernedekningen.
+
+# Finanspolitisk impuls og handlingsregelen
+
+NorMacro inneholder ikke eksplisitte serier for:
+
+- strukturelt oljekorrigert budsjettunderskudd
+- budsjettimpuls
+- oljepengebruk
+- avstand til handlingsregelen
+
+Disse størrelsene er svært relevante for norsk finanspolitisk analyse.
+
+De er samtidig mer institusjonsspesifikke og metodisk krevende enn
+NorMacros grunnleggende makroserier.
+
+Fraværet vurderes derfor ikke som et kravbrudd i kjernedatasettet.
+
+Det kan være et senere spesialiseringsområde dersom NorMacro skal gi
+mer avansert analyse av norsk finanspolitikk.
+
+Status: **Ikke prioritert gap**
+
+# Internasjonal dekning
+
+Det internasjonale datasettet inneholder:
+
+- `Offentlig_gjeld_andel_BNP`
+- `Offentlig_konsum`
+- `Offentlig_konsum_lopende`
+- `Offentlig_konsum_vekst`
+- `Offentlig_konsum_andel_BNP`
+
+Dette gir gode muligheter for å sammenligne:
+
+- offentlig konsum
+- offentlig konsum som andel av BNP
+- offentlig gjeld
+
+Det internasjonale laget mangler derimot harmoniserte serier for:
+
+- offentlige inntekter
+- offentlige utgifter
+- budsjettbalanse/nettofinansinvestering
+- skattetrykk
+- offentlig nettoformue
+
+Internasjonal finanspolitisk sammenligning er derfor smalere enn den
+norske analysen.
+
+Status: **Delvis dekket**
+
+# KOSTRA
+
+NorMacro har et omfattende KOSTRA-lag med funksjonalitet for blant annet:
+
+- kommunale nøkkeltall
+- regnskap
+- gjeld
+- investeringer
+- finansiering
+- kommunegrupper
+- fylker
+- historiske kommunegrupper
+- benchmarking
+- rangering
+- tidsserieanalyse
+- sammenligning med peer groups
+
+Dette gir NorMacro en betydelig kommunal analysekapasitet utover det
+nasjonale makrodatasettet.
+
+KOSTRA skal likevel ikke brukes som erstatning for manglende
+nasjonale makroserier.
+
+Status: **Svært godt dekket**
+
+# Analyse og API
+
+Offentlig sektor er et av områdene hvor NorMacro allerede har et eget
+domeneorientert analyse-API.
+
+Blant funksjonene finnes:
+
+- `get_offentlig_finans()`
+- `get_offentlige_utgifter()`
+- `get_offentlige_investeringer()`
+- `get_government_debt()`
+- `get_public_consumption()`
+- `get_public_sector_macro()`
+- `public_sector_analysis()`
+- `plot_public_sector_macro()`
+
+I tillegg finnes generelle verktøy som:
+
+- `compare_series()`
+- `compare_periods()`
+- `compare_countries()`
+- `plot_series()`
+- `macro_report()`
+
+KOSTRA har dessuten et omfattende eget analyse-API.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+Metadataene skiller tydelig mellom:
+
+- offentlig gjeld
+- nettofordringer
+- inntekter
+- utgifter
+- nettofinansinvestering
+- offentlig konsum
+- offentlige investeringer
+- statlige og kommunale utgifter
+
+Nivåserier og beregnede BNP-andeler er eksplisitt skilt.
+
+Det er ikke identifisert et vesentlig metadatagap.
+
+**Metadata: Grønn**
+
+# Undervisning og dokumentasjon
+
+Datagrunnlaget støtter sentrale temaer innen offentlig økonomi og
+finanspolitikk:
+
+- offentlig sektors størrelse
+- offentlige inntekter og utgifter
+- budsjettoverskudd og underskudd
+- offentlig gjeld
+- offentlig nettoformue
+- offentlig konsum
+- offentlige investeringer
+- stat kontra kommune
+- internasjonale forskjeller i offentlig konsum og gjeld
+
+KOSTRA gir i tillegg mulighet for praktiske analyser av
+kommunaløkonomi.
+
+**Undervisning: Grønn**
+
+# Gap-status
+
+| Område | Status | Kommentar |
+|---|---|---|
+| Offentlige inntekter | Dekket | Nivå og BNP-andel fra 1995 |
+| Offentlige utgifter | Dekket | Nivå og BNP-andel fra 1995 |
+| Nettofinansinvestering | Dekket | Nivå og BNP-andel fra 1995 |
+| Offentlig gjeld | Dekket | Nivå og BNP-andel |
+| Offentlige nettofordringer | Dekket | Viktig norsk formuesdimensjon |
+| Offentlig konsum | Dekket | Lang historikk fra 1970 |
+| Offentlige investeringer | Dekket | Lang historikk fra 1970 |
+| Stat/kommune | Dekket | Utgifter og utgiftsandeler |
+| Skattetrykk | Delvis | Ingen eksplisitt skatteindikator |
+| Finanspolitisk impuls | Ikke prioritert | Mer spesialisert norsk finanspolitikk |
+| Internasjonal finanspolitikk | Delvis | Konsum og gjeld finnes, øvrige finansmål mangler |
+| KOSTRA | Svært godt dekket | Omfattende kommunal analysekapasitet |
+
+# Nye gap
+
+Gap-analyse 2 identifiserer ingen kritiske hull i den norske
+offentlig-sektor-blokken.
+
+To mulige kompletteringsområder identifiseres.
+
+## Skattetrykk
+
+En eksplisitt aggregert indikator for skatter og avgifter som andel av
+BNP kan tilføre en relevant dimensjon som ikke er identisk med samlede
+offentlige inntekter.
+
+## Internasjonal finanspolitisk sammenligning
+
+Det internasjonale laget kan i dag sammenligne offentlig konsum og
+offentlig gjeld, men ikke inntekter, utgifter eller budsjettbalanse.
+
+Dette begrenser bredere internasjonale analyser av finanspolitikk.
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 2 | Begrunnelse |
+|---|---|---|
+| Data | 🟢 | Svært god norsk kjernedekning; bare mindre kompletteringsmuligheter |
+| Analyse | 🟢 | Eget offentlig-sektor-API samt omfattende KOSTRA-verktøy |
+| Metadata | 🟢 | Klare definisjoner og skille mellom nivåer og BNP-andeler |
+| Undervisning | 🟢 | Svært godt grunnlag for nasjonal og kommunal offentlig økonomi |
+
+# Samlet vurdering
+
+**Samlet gap: Lite**
+
+Offentlig sektor er et av NorMacros sterkest dekkede fagområder.
+
+Den norske makroblokken dekker både:
+
+- realøkonomisk offentlig aktivitet
+- offentlige finanser
+- gjeld
+- finansielle nettofordringer
+- statlig og kommunal utgiftsutvikling
+
+I tillegg kommer et omfattende KOSTRA-lag.
+
+De identifiserte hullene gjelder først og fremst videre komplettering,
+ikke mangler i kjernen.
+
+# Anbefalte tiltak
+
+## 1. Vurder skattetrykk
+
+**Prioritet: Lav–middels**
+
+Undersøk om en stabil serie for samlede skatter og avgifter som andel
+av BNP kan legges til.
+
+Serien er særlig interessant dersom den også kan harmoniseres
+internasjonalt.
+
+## 2. Vurder internasjonal budsjettbalanse
+
+**Prioritet: Middels**
+
+Undersøk om en harmonisert serie for offentlig
+budsjettbalanse/nettofinansinvestering som andel av BNP kan legges til
+det internasjonale datasettet.
+
+Dette vil tilføre mer enn ytterligere detaljering av det norske
+datasettet.
+
+## 3. Vurder internasjonale inntekter og utgifter senere
+
+**Prioritet: Lav–middels**
+
+Dersom pålitelige harmoniserte serier er lett tilgjengelige, kan
+offentlige inntekter og utgifter som andel av BNP komplettere
+internasjonal offentlig-sektor-analyse.
+
+## 4. Ikke prioriter avanserte norske finanspolitiske mål nå
+
+Strukturelt oljekorrigert underskudd, budsjettimpuls og
+handlingsregelindikatorer bør bare innføres dersom NorMacro senere får
+et tydelig behov for mer spesialisert norsk finanspolitisk analyse.
+
+# Prioritering
+
+**Samlet prioritet videre: Lav–middels**
+
+Det er ingen grunn til en større utbygging av det norske
+offentlig-sektor-datasettet.
+
+Eventuell videre utvikling bør primært styrke internasjonal
+sammenlignbarhet.
+
+# Konklusjon
+
+NorMacro har svært god dekning av offentlig sektor.
+
+Offentlige inntekter, utgifter, nettofinansinvestering, gjeld og
+nettofordringer gir en komplett grunnblokk for offentlige finanser.
+Offentlig konsum og investeringer har lang historikk, og KOSTRA gir en
+omfattende kommunal analysekapasitet.
+
+Det finnes ingen eksplisitt skatteindikator eller avanserte mål for
+finanspolitisk impuls, men dette vurderes ikke som kritiske hull i
+kjernedekningen.
+
+Det største potensialet for videre forbedring ligger i internasjonal
+sammenlignbarhet.
+
+Endelig status:
+
+- **Data: 🟢**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟢**
+- **Samlet gap: Lite**
+- **Prioritet: Lav–middels**

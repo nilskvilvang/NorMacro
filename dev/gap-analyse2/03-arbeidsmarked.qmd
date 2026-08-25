@@ -1,0 +1,375 @@
+
+---
+title: "Gap-analyse 2 – Arbeidsmarked"
+format: html
+---
+
+# Faglige spørsmål
+
+Arbeidsmarkedsdelen i NorMacro skal gjøre det enkelt å undersøke:
+
+- hvordan arbeidsledigheten utvikler seg
+- hvordan sysselsettingen utvikler seg
+- hvor stor arbeidsstyrken er
+- hvor stor andel av befolkningen som deltar i arbeidsstyrken
+- hvor stor andel av befolkningen som er sysselsatt
+- hvordan arbeidsmarkedet reagerer på konjunkturene
+- forskjellen mellom registrert ledighet og AKU-ledighet
+- hvordan norsk arbeidsmarked utvikler seg sammenlignet med andre land
+
+Arbeidsmarkedet må analyseres med flere komplementære indikatorer.
+
+Særlig viktig er skillet mellom:
+
+- registrert arbeidsledighet fra NAV
+- arbeidsledighet etter AKU-definisjonen
+
+Disse målene bygger på forskjellige definisjoner og skal ikke behandles
+som alternative navn på samme serie.
+
+# Baseline fra gap-analyse 1
+
+Den første gap-analysen vurderte arbeidsmarked slik:
+
+| Dimensjon | Status |
+|---|---|
+| Data | 🟢 |
+| Analyse | 🟢 |
+| Metadata | 🟢 |
+| Undervisning | 🟢 |
+| Samlet gap | Lite |
+| Prioritet videre | Lav |
+
+Arbeidsmarked var dermed allerede et av områdene uten vesentlige
+identifiserte restgap.
+
+Gap-analyse 2 skal derfor primært undersøke om denne vurderingen fortsatt
+holder, og om senere utvikling eller faktisk bruk har avdekket nye
+behov.
+
+# Utvikling siden baseline
+
+Dagens NorMacro har en bred og konsistent arbeidsmarkedsdekning.
+
+## Arbeidsstyrke og sysselsetting
+
+Følgende sentrale serier finnes:
+
+- `Arbeidsstyrke`
+- `Arbeidsstyrkeandel`
+- `Sysselsatte`
+- `Sysselsettingsandel`
+
+Dette gir både nivå- og ratemål.
+
+Arbeidsstyrkeandelen gjør det mulig å analysere deltakelse i
+arbeidsmarkedet, mens sysselsettingsandelen gir et mål på hvor stor del
+av befolkningen i relevant aldersgruppe som faktisk er sysselsatt.
+
+De norske seriene dekker perioden 1972–2025.
+
+Status: **Godt dekket**
+
+## NAV-ledighet
+
+NorMacro inneholder:
+
+- `Arbeidsledige_NAV`
+- `Arbeidsledighetsrate_NAV`
+- `Menn_arbeidsledige_NAV`
+- `Kvinner_arbeidsledige_NAV`
+- `Kvinneandel_arbeidsledige_NAV`
+
+De sentrale NAV-seriene har svært lang historikk, tilbake til 1948.
+
+Dette gir NorMacro et særlig godt grunnlag for historiske analyser av
+registrert arbeidsledighet.
+
+Status: **Godt dekket**
+
+## AKU-ledighet
+
+NorMacro inneholder:
+
+- `Arbeidsledige_AKU`
+- `Arbeidsledighetsrate_AKU`
+
+Seriene dekker perioden 1972–2025 og er eksplisitt merket med
+AKU-definisjonen.
+
+Dermed kan brukeren skille mellom undersøkelsesbasert arbeidsledighet
+og NAVs registrerte arbeidsledighet.
+
+Status: **Godt dekket**
+
+# Tidsdekning
+
+De viktigste seriene har følgende historikk:
+
+| Seriegruppe | Start | Slutt |
+|---|---:|---:|
+| NAV-ledighet | 1948 | 2025 |
+| Arbeidsstyrke | 1972 | 2025 |
+| Arbeidsstyrkeandel | 1972 | 2025 |
+| Sysselsatte | 1972 | 2025 |
+| Sysselsettingsandel | 1972 | 2025 |
+| AKU-ledighet | 1972 | 2025 |
+
+Dette er tilstrekkelig for både langsiktig arbeidsmarkedsanalyse og
+analyse av moderne konjunkturperioder.
+
+Forskjellen i startår mellom NAV- og AKU-baserte serier er naturlig og
+utgjør ikke i seg selv et datagap.
+
+# Analyse og API
+
+Arbeidsmarkedsdataene kan brukes direkte med NorMacros generelle
+analyseverktøy.
+
+Blant relevante funksjoner finnes:
+
+- `growth()`
+- `growth_table()`
+- `compare_series()`
+- `compare_periods()`
+- `plot_series()`
+- korrelasjonsverktøy
+- regresjonsverktøy
+- `business_cycle()`
+- `macro_report()`
+
+I tillegg finnes egne datainnhentingsfunksjoner som:
+
+- `get_arbeidsstyrke()`
+- `get_employment()`
+- `get_labour_force()`
+- `get_unemployment()`
+
+Arbeidsmarkedet inngår også direkte i konjunkturanalysen gjennom
+arbeidsledighetsraten.
+
+Det er ikke identifisert behov for et eget spesialisert
+arbeidsmarkeds-API.
+
+For eksempel kan sammenhengen mellom BNP-vekst og arbeidsledighet,
+eller mellom arbeidsledighet og inflasjon, analyseres med eksisterende
+generelle verktøy.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+Metadataene skiller tydelig mellom de viktigste arbeidsmarkedsbegrepene.
+
+Eksempler:
+
+- `Arbeidsledige_NAV` beskrives som registrerte helt arbeidsledige.
+- `Arbeidsledighetsrate_NAV` beskrives som registrerte helt
+  arbeidsledige i prosent av arbeidsstyrken.
+- `Arbeidsledige_AKU` beskrives eksplisitt som arbeidsledige etter
+  AKU-definisjonen.
+- `Arbeidsledighetsrate_AKU` bruker tilsvarende eksplisitt
+  AKU-definisjonen.
+- `Arbeidsstyrke` viser til personer i arbeidsstyrken, 15–74 år.
+- `Sysselsatte` viser til sysselsatte personer, 15–74 år.
+- `Arbeidsstyrkeandel` og `Sysselsettingsandel` har eksplisitte
+  ratebeskrivelser.
+
+Dette er særlig viktig for NAV og AKU, siden seriene må tolkes som
+forskjellige arbeidsmarkedsmål.
+
+Det er ikke identifisert et vesentlig metadata- eller
+oppdagbarhetsproblem.
+
+**Metadata: Grønn**
+
+# Internasjonal dekning
+
+Det internasjonale datalaget inneholder:
+
+- `Arbeidsledighetsrate`
+- `Sysselsatte`
+- `Arbeidsstyrke`
+- `Arbeidsstyrkeandel`
+- `Arbeidsproduktivitet`
+- `Produktivitetsvekst`
+
+Dette gjør det mulig å sammenligne sentrale arbeidsmarkedsforhold mellom
+Norge og andre europeiske land.
+
+Det er særlig positivt at internasjonale sammenligninger ikke forsøker
+å bruke NAV-ledighet som harmonisert mål.
+
+Den internasjonale `Arbeidsledighetsrate`-serien er definert som
+arbeidsledige som andel av arbeidsstyrken, mens arbeidsstyrke og
+sysselsetting er egne harmoniserte serier.
+
+Dette gir et ryddig skille mellom:
+
+- nasjonale norske indikatorer som NAV-ledighet
+- harmoniserte internasjonale arbeidsmarkedsmål
+
+Status: **Godt dekket**
+
+# Arbeidsproduktivitet
+
+`Arbeidsproduktivitet` finnes også i datalaget.
+
+For Norge er den definert som realt BNP Fastlands-Norge per sysselsatt
+person.
+
+I det internasjonale laget brukes realt BNP per sysselsatt person.
+
+Dette er en enkel produktivitetsindikator og ikke et fullstendig mål på
+produktivitet per arbeidstime.
+
+Det er likevel ikke et arbeidsmarkedsgap. Eventuelle spørsmål om mer
+avanserte produktivitetsmål behandles under fagområdet lønn og
+produktivitet og langsiktig vekst.
+
+# Undervisning og dokumentasjon
+
+Arbeidsmarkedsdataene støtter flere sentrale makroøkonomiske
+undervisningstemaer:
+
+- konjunkturer og arbeidsledighet
+- sysselsetting og arbeidsstyrke
+- yrkes-/arbeidsmarkedsdeltakelse
+- NAV-ledighet mot AKU-ledighet
+- inflasjon og arbeidsledighet
+- historiske kriser
+- internasjonale arbeidsmarkedssammenligninger
+
+Særlig skillet mellom NAV og AKU er pedagogisk nyttig fordi det viser at
+økonomiske begreper må forstås gjennom definisjonene bak seriene, ikke
+bare gjennom variabelnavn og tallverdier.
+
+Eksisterende generelle analyse-, visualiserings- og rapportverktøy er
+tilstrekkelige for å bygge slike eksempler.
+
+Det er ikke identifisert behov for et eget spesialisert
+undervisnings-API.
+
+**Undervisning: Grønn**
+
+# Tidligere gap – status
+
+Det var ingen vesentlige eksplisitte restgap innen arbeidsmarked ved
+avslutningen av gap-analyse 1.
+
+Gap-analyse 2 finner heller ingen grunn til å reversere denne
+vurderingen.
+
+| Område | Status | Kommentar |
+|---|---|---|
+| Arbeidsledighet | Dekket | Både NAV og AKU |
+| Sysselsetting | Dekket | Nivå og andel |
+| Arbeidsstyrke | Dekket | Nivå og andel |
+| Lang historikk | Dekket | NAV fra 1948, sentrale AKU-serier fra 1972 |
+| Definisjoner | Dekket | NAV og AKU er eksplisitt skilt |
+| Konjunkturanalyse | Dekket | Integrert med generelle verktøy og `business_cycle()` |
+| Internasjonal sammenligning | Dekket | Harmoniserte internasjonale arbeidsmarkedsserier |
+
+# Nye gap
+
+Det er ikke identifisert nye vesentlige gap.
+
+Mulige ytterligere arbeidsmarkedsdata som:
+
+- arbeidede timer
+- deltidsarbeid
+- langtidsledighet
+- ledighet etter alder
+- ledige stillinger
+- mer detaljerte demografiske grupper
+
+kan være faglig interessante, men er ikke nødvendige for å dekke
+kravkartets sentrale makroøkonomiske spørsmål.
+
+De bør derfor ikke klassifiseres som gap uten et konkret bruker- eller
+analysebehov.
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 1 | Analyse 2 | Begrunnelse |
+|---|---|---|---|
+| Data | 🟢 | 🟢 | Ledighet, sysselsetting, arbeidsstyrke og deltakelses-/sysselsettingsrater er godt dekket |
+| Analyse | 🟢 | 🟢 | Generelle analyseverktøy og konjunkturfunksjoner dekker behovene |
+| Metadata | 🟢 | 🟢 | NAV, AKU, nivå og rater er tydelig skilt |
+| Undervisning | 🟢 | 🟢 | Datagrunnlaget støtter sentrale arbeidsmarkedstemaer direkte |
+
+# Samlet vurdering
+
+**Samlet gap: Lite**
+
+Arbeidsmarked er fortsatt et av de mest komplette fagområdene i
+NorMacro.
+
+Datagrunnlaget dekker de sentrale dimensjonene:
+
+- arbeidsledighet
+- sysselsetting
+- arbeidsstyrke
+- arbeidsmarkedsdeltakelse
+
+og gir samtidig lang historikk og internasjonale
+sammenligningsmuligheter.
+
+Det viktige metodiske skillet mellom NAV-ledighet og AKU-ledighet er
+eksplisitt bevart.
+
+# Anbefalte tiltak
+
+## Ingen nye dataserier med høy prioritet
+
+Det er ikke identifisert et datagap som tilsier ny datainnhenting i
+neste utviklingsfase.
+
+## Bevar NAV/AKU-distinksjonen
+
+Ved fremtidig dokumentasjon og utvikling bør NorMacro fortsatt være
+tydelig på forskjellen mellom registrert NAV-ledighet og
+AKU-ledighet.
+
+Dette er et metadata- og undervisningsprinsipp, ikke et nytt
+funksjonsbehov.
+
+## Unngå unødvendig detaljutvidelse
+
+Mer detaljerte arbeidsmarkedsserier bør bare legges til dersom et
+konkret makroøkonomisk eller undervisningsmessig behov identifiseres.
+
+NorMacro bør ikke utvikles til en generell arbeidsmarkedsdatabase.
+
+# Prioritering
+
+**Samlet prioritet videre: Lav**
+
+Ingen vesentlige tiltak er nødvendige.
+
+Vedlikehold av eksisterende serier, metadata og definisjonsmessig
+konsistens er viktigere enn utvidelse.
+
+# Konklusjon
+
+Gap-analyse 2 bekrefter vurderingen fra den første analysen.
+
+Arbeidsmarkedsområdet har:
+
+- bred nasjonal datadekning
+- lang historikk
+- både NAV- og AKU-ledighet
+- nivå- og ratemål for arbeidsstyrke og sysselsetting
+- internasjonalt sammenlignbare indikatorer
+- god integrasjon med NorMacros generelle analyseverktøy
+
+Det er ikke identifisert nye vesentlige gap.
+
+Endelig status:
+
+- **Data: 🟢**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟢**
+- **Samlet gap: Lite**
+- **Prioritet: Lav**

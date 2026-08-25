@@ -1,0 +1,457 @@
+
+---
+title: "Gap-analyse 2 – Konjunkturer og makroøkonomiske svingninger"
+format: html
+---
+
+# Faglige spørsmål
+
+Konjunkturdelen i NorMacro skal gjøre det enkelt å undersøke:
+
+- om økonomien er i oppgang eller nedgang
+- hvordan økonomisk aktivitet utvikler seg
+- hvordan arbeidsmarkedet reagerer på konjunkturene
+- graden av kapasitetsutnytting og ressursknapphet
+- hva konjunktur- og forventningsindikatorer signaliserer
+- hvordan finansielle indikatorer utvikler seg gjennom konjunkturene
+- hvilken konjunkturfase økonomien befinner seg i
+- hvordan dagens situasjon skiller seg fra tidligere konjunkturer og
+  økonomiske sjokk
+
+Et viktig faglig skille er mellom **økonomisk vekst** og
+**konjunkturposisjon**.
+
+Positiv BNP-vekst innebærer ikke nødvendigvis høykonjunktur, og negativ
+vekst er ikke i seg selv en fullstendig definisjon av lavkonjunktur
+eller resesjon.
+
+Et mål på aktivitets- eller produksjonsgap kan derfor tilføre
+informasjon som ikke er identisk med observerte vekstrater.
+
+# Baseline fra gap-analyse 1
+
+Den første gap-analysen vurderte konjunkturområdet slik:
+
+| Dimensjon | Status |
+|---|---|
+| Data | 🟡 |
+| Analyse | 🟢 |
+| Metadata | 🟢 |
+| Undervisning | 🟢 |
+| Samlet gap | Lite |
+| Prioritet videre | Middels |
+
+Det eksplisitte restgapet var:
+
+- produksjonsgap eller annet eksplisitt aktivitetsgap
+
+Den første analysen vurderte samtidig det ordinære datagrunnlaget for
+konjunkturanalyse som bredt.
+
+# Utvikling siden baseline
+
+Konjunkturområdet er videreutviklet på flere måter siden den første
+analysen.
+
+## Bredere aktivitetsdata
+
+NorMacro inneholder nå et bredt sett av indikatorer på økonomisk
+aktivitet og press i økonomien.
+
+Blant de sentrale seriene finnes:
+
+- `BNP_Fastland`
+- `BNP_Fastland_vekst`
+- `Industriproduksjon`
+- `Industriproduksjon_vekst`
+- `Byggeaktivitet`
+- `Byggeaktivitet_vekst`
+- `Tjenesteproduksjon`
+- `Tjenesteproduksjon_vekst`
+- `Kapasitetsutnytting`
+- `Konjunkturindikator`
+- `Ressursknapphet`
+- `Ordrebeholdning`
+
+Sammen med arbeidsmarkeds- og finansielle serier gir dette et bredt
+grunnlag for å analysere konjunktursituasjonen.
+
+Status: **Lukket som ordinært databehov**
+
+## Konjunkturklassifisering
+
+NorMacro har en eksplisitt og brukerrettet familie av funksjoner for
+konjunkturklassifisering:
+
+- `business_cycle_score()`
+- `business_cycle()`
+- `business_cycle_explain()`
+
+`business_cycle()` bygger på en indikatorbasert score og klassifiserer
+hvert år som:
+
+- Nedgang
+- Svak vekst
+- Ekspansjon
+- Høykonjunktur
+
+Klassifiseringen bruker blant annet:
+
+- BNP Fastlands-Norge, årlig vekst
+- NAV-ledighet
+- SSBs konjunkturindikator
+- kapasitetsutnytting
+- rentekurve
+
+`business_cycle_explain()` viser både delscore og underliggende
+observasjoner for det valgte året.
+
+Dette gir en transparent kobling mellom data og den resulterende
+konjunkturklassifiseringen.
+
+Status: **Lukket**
+
+## Historiske episoder
+
+NorMacro har fått et kuratert lag for historiske makroøkonomiske
+episoder gjennom:
+
+- `historical_episodes()`
+- `episode_explain()`
+
+Blant episodene finnes:
+
+- bankkrisen 1988–1993
+- finanskrisen 2008–2009
+- oljeprisfallet 2014–2016
+- pandemien 2020–2021
+- inflasjonssjokket 2021–2023
+
+Hver episode kobles til en kort faglig beskrivelse og et lite utvalg
+relevante makroøkonomiske variabler.
+
+Dette gjør det enklere å sammenligne dagens situasjon med viktige
+historiske perioder uten å introdusere en egen krisemodell.
+
+Status: **Lukket**
+
+## Rapportering og visualisering
+
+Konjunkturklassifiseringen inngår også i NorMacros rapportlag.
+
+En makrorapport kan blant annet vise:
+
+- konjunkturfase
+- samlet score
+- BNP-vekst
+- produksjons- og aktivitetsindikatorer
+- konjunkturindikatorer
+- renter og andre finansielle indikatorer
+
+Dette styrker særlig formidlings- og undervisningsverdien.
+
+Status: **Nytt og dekket**
+
+# Dagens datadekning
+
+## Aktivitet
+
+NorMacro har flere komplementære mål på faktisk aktivitet:
+
+- BNP Fastlands-Norge
+- BNP-vekst
+- industri
+- bygg og anlegg
+- tjenesteproduksjon
+- konsum
+- investeringer
+
+Dette gjør det mulig å undersøke både samlet og sektorspesifikk
+aktivitetsutvikling.
+
+## Press i økonomien
+
+Følgende indikatorer gir informasjon om press og kapasitetsbegrensninger:
+
+- `Kapasitetsutnytting`
+- `Ressursknapphet`
+- `Ordrebeholdning`
+
+Disse er særlig relevante fordi observerte vekstrater alene ikke sier
+hvor økonomien befinner seg relativt til normal eller potensiell
+kapasitet.
+
+## Forventnings- og konjunkturindikator
+
+`Konjunkturindikator` gir et separat sammensatt signal om
+konjunktursituasjonen.
+
+## Arbeidsmarked og finansielle forhold
+
+Konjunkturanalysen kan kombineres med blant annet:
+
+- arbeidsledighet
+- sysselsetting
+- styringsrente
+- pengemarkedsrente
+- langsiktig rente
+- rentekurve
+
+Datagrunnlaget for bred konjunkturanalyse vurderes derfor som godt.
+
+# Produksjonsgap og aktivitetsgap
+
+Det finnes fortsatt ingen eksplisitt standardserie for:
+
+- produksjonsgap
+- aktivitetsgap
+- potensielt BNP
+- trendavvik
+
+Dette var det viktigste eksplisitte datagapet i den første analysen.
+
+Gapet er fortsatt **faglig reelt**.
+
+Et produksjonsgap forsøker å måle forskjellen mellom faktisk økonomisk
+aktivitet og et estimert potensielt eller normalt aktivitetsnivå.
+
+Dette er prinsipielt forskjellig fra:
+
+- BNP-vekst
+- kapasitetsutnytting
+- konjunkturindikatorer
+- NorMacros indikatorbaserte `business_cycle()`-klassifisering
+
+De eksisterende indikatorene gir mye av informasjonen som er nødvendig
+for praktisk konjunkturanalyse, men de erstatter ikke konseptuelt et
+eksplisitt produksjonsgap.
+
+Status: **Fortsatt åpent**
+
+# Bør produksjonsgap implementeres?
+
+At gapet er reelt innebærer ikke automatisk at NorMacro bør konstruere
+sitt eget produksjonsgap.
+
+Produksjonsgap er ikke direkte observerbart. Det avhenger av metode for
+å estimere potensiell produksjon eller trend.
+
+Mulige metoder kan blant annet bygge på:
+
+- institusjonelle produksjonsgap
+- statistiske trendfiltre
+- produksjonsfunksjoner
+- modellbaserte estimater
+
+Alternative metoder kan gi vesentlig forskjellige resultater.
+
+Det vil derfor være uheldig om NorMacro introduserer et egenberegnet
+produksjonsgap som fremstår mer objektivt enn datagrunnlaget tilsier.
+
+Dersom en stabil og faglig godt dokumentert offentlig serie finnes, kan
+den vurderes som en kuratert dataserie.
+
+NorMacro bør derimot ikke utvikle en egen produksjonsgapmodell bare for
+å lukke dette gapet.
+
+# Analyse og API
+
+Analyse-API-et for konjunkturer vurderes som sterkt.
+
+NorMacro tilbyr både generelle analyseverktøy og en begrenset,
+domeneorientert konjunkturklassifisering.
+
+Sentrale brukerrettede verktøy omfatter blant annet:
+
+- `business_cycle_score()`
+- `business_cycle()`
+- `business_cycle_explain()`
+- `recession_periods()`
+- `recession_period_explain()`
+- `compare_periods()`
+- `historical_episodes()`
+- `episode_explain()`
+- `conjuncture_dashboard()`
+- `macro_report()`
+
+I tillegg kan ordinære tidsserie-, sammenlignings-, korrelasjons- og
+regresjonsverktøy brukes på de underliggende indikatorene.
+
+Det er ikke identifisert behov for ytterligere spesialiserte
+konjunkturfunksjoner.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+De sentrale indikatorene har egne displaynavn, beskrivelser, enheter,
+kategorier og kilder.
+
+Det er mulig å skille mellom blant annet:
+
+- aktivitetsnivå
+- vekst
+- produksjonsindikatorer
+- kapasitetsindikatorer
+- konjunkturindikatorer
+
+Konjunkturklassifiseringen er også eksplisitt dokumentert som en
+indikatorbasert og regelstyrt vurdering, ikke som en offisiell
+konjunkturprognose.
+
+Dette skillet er viktig og bør beholdes.
+
+**Metadata: Grønn**
+
+# Undervisning og dokumentasjon
+
+Konjunkturområdet er særlig godt egnet til undervisning fordi NorMacro
+kombinerer:
+
+- observerte makroøkonomiske data
+- en transparent konjunkturklassifisering
+- forklaring av delkomponentene
+- historiske episoder
+- visualisering
+- rapportering
+
+`business_cycle_explain()` gjør det mulig å diskutere hvorfor et bestemt
+år klassifiseres som det gjør, samtidig som studenten kan undersøke de
+underliggende dataene.
+
+Historiske episoder gjør det mulig å sammenligne ulike typer sjokk uten
+at NorMacro forsøker å tilby en full makroøkonomisk modell.
+
+En viktig pedagogisk merknad bør fortsatt være at
+`business_cycle()` ikke er det samme som et produksjonsgap eller en
+offisiell konjunkturvurdering.
+
+**Undervisning: Grønn**
+
+# Tidligere gap – status
+
+| Tidligere gap | Status | Kommentar |
+|---|---|---|
+| Bredt konjunkturdatasett | Lukket | Aktivitet, arbeidsmarked, kapasitet og finansielle indikatorer er godt dekket |
+| Konjunkturklassifisering | Lukket | Egen transparent `business_cycle()`-arbeidsflyt finnes |
+| Forklaring av klassifisering | Lukket | `business_cycle_explain()` viser score og underliggende verdier |
+| Historiske sammenligninger | Lukket | Historiske episoder og periodeverktøy gir støtte |
+| Produksjons-/aktivitetsgap | Fortsatt åpent | Ingen eksplisitt serie finnes |
+
+# Nye gap
+
+Det er ikke identifisert nye vesentlige gap.
+
+Rapportering, visualisering og historiske episoder har snarere styrket
+området siden første analyse.
+
+Det bør heller ikke automatisk legges til flere konjunkturindikatorer.
+Det eksisterende datasettet dekker flere komplementære sider ved
+aktivitet og kapasitetsforhold.
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 1 | Analyse 2 | Begrunnelse |
+|---|---|---|---|
+| Data | 🟡 | 🟡 | Eksplisitt produksjons-/aktivitetsgap mangler fortsatt |
+| Analyse | 🟢 | 🟢 | Meget god generell og konjunkturspesifikk støtte |
+| Metadata | 🟢 | 🟢 | Indikatorer og klassifisering er tydelig dokumentert |
+| Undervisning | 🟢 | 🟢 | Transparent klassifisering, episoder og rapportering gir sterk støtte |
+
+# Samlet vurdering
+
+**Samlet gap: Lite**
+
+NorMacro dekker praktisk konjunkturanalyse godt.
+
+Pakken gjør det mulig å undersøke:
+
+- faktisk aktivitetsutvikling
+- arbeidsmarked
+- kapasitetsforhold
+- forventningsindikatorer
+- finansielle signaler
+- konjunkturfase
+- tidligere økonomiske sjokk
+
+Det eneste tydelige faglige datagapet er fortsatt et eksplisitt mål på
+produksjons- eller aktivitetsgap.
+
+Dette gapet er konseptuelt viktig, men begrenser i relativt liten grad
+den praktiske konjunkturanalysen som NorMacro ellers tilbyr.
+
+# Anbefalte tiltak
+
+## 1. Kartlegg offentlig produksjons- eller aktivitetsgap
+
+**Prioritet: Lav–middels**
+
+Undersøk om det finnes en:
+
+- stabil
+- offentlig
+- dokumentert
+- historisk tilstrekkelig
+- regelmessig oppdatert
+
+serie for norsk produksjons- eller aktivitetsgap.
+
+En slik serie kan vurderes dersom den passer NorMacros prinsipp om
+kuraterte, transparente data.
+
+## 2. Ikke egenberegn produksjonsgap nå
+
+**Anbefaling: Ingen egen modell**
+
+NorMacro bør ikke implementere et eget HP-filter, produksjonsfunksjon
+eller annen produksjonsgapmodell bare for å fylle datagapet.
+
+Brukeren kan gjøre slike analyser med ordinære R-verktøy dersom det er
+ønskelig.
+
+## 3. Behold metodisk distinksjon
+
+Dokumentasjonen bør fortsatt være tydelig på forskjellen mellom:
+
+- vekst
+- indikatorbasert konjunkturklassifisering
+- produksjons-/aktivitetsgap
+
+Dette er viktig både faglig og pedagogisk.
+
+# Prioritering
+
+**Samlet prioritet videre: Lav–middels**
+
+Produksjonsgapet er et reelt restgap, men eksisterende NorMacro dekker
+de sentrale spørsmålene i kravkartet godt uten dette.
+
+Gapet bør derfor først føre til kildekartlegging, ikke ny modell- eller
+API-utvikling.
+
+# Konklusjon
+
+Konjunkturområdet er et av de sterkere områdene i NorMacro.
+
+Siden den første gap-analysen er brukerflyten styrket gjennom
+konjunkturklassifisering, forklaring av delscore, historiske episoder,
+visualisering og rapportering.
+
+Det tidligere eksplisitte datagapet består:
+
+- produksjonsgap eller annet aktivitetsgap
+
+Men gapets praktiske betydning er begrenset fordi NorMacro allerede har
+et bredt og komplementært indikatorsett.
+
+Det riktige neste tiltaket er derfor eventuelt å kartlegge en ekstern
+offentlig serie, ikke å utvikle en egen produksjonsgapmodell.
+
+Endelig status:
+
+- **Data: 🟡**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟢**
+- **Samlet gap: Lite**
+- **Prioritet: Lav–middels**

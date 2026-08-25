@@ -1,0 +1,528 @@
+
+---
+title: "NorMacro – veikart mot 2.2.0"
+format: html
+---
+
+# Formål
+
+Versjon 2.2.0 skal følge opp gap-analyse 2 med et begrenset antall
+tiltak med høy faglig verdi.
+
+Målet er ikke å gjøre NorMacro vesentlig større.
+
+Hovedprioriteten er å:
+
+1. lukke tydelige datagap
+2. forbedre historisk dekning der eksisterende serier er for korte
+3. rette konsistensproblemer i eksisterende internasjonale data
+4. styrke noen få sentrale undervisnings- og dokumentasjonsflyter
+5. unngå nye spesialiserte API-er der eksisterende generelle verktøy
+   allerede er tilstrekkelige
+
+# Prinsipper for 2.2.0
+
+## Kuratering fremfor bredde
+
+NorMacro skal fortsatt prioritere et lite antall representative
+makroøkonomiske serier fremfor å kopiere store deler av eksterne
+databaser.
+
+## Data før nytt API
+
+Gap-analyse 2 finner få vesentlige analyse/API-gap.
+
+2.2.0 bør derfor i hovedsak forbedre datalaget og bruke eksisterende:
+
+- `compare_series()`
+- `compare_periods()`
+- `compare_countries()`
+- `growth()`
+- `plot_series()`
+- `business_cycle()`
+- `macro_report()`
+
+## Ikke dobbeltfør gap
+
+Et problem skal ha ett primært hjem i veikartet.
+
+Eksempel:
+
+- rentehistorikk håndteres under renter og pengepolitikk
+- manglende samlet investering håndteres under nasjonalregnskap
+- boliglånsrente håndteres som transmisjonsproblem under pengepolitikk
+
+Andre fagområder kan referere til disse gapene uten å opprette
+parallelle utviklingsoppgaver.
+
+# Prioritetsnivåer
+
+Tiltak klassifiseres som:
+
+- **P0 – må løses før 2.2.0**
+- **P1 – bør inngå i 2.2.0**
+- **P2 – tas inn dersom kilde og implementasjon er enkel og robust**
+- **Senere – dokumentert gap, men ikke mål for 2.2.0**
+
+# P0 – konsistens og åpenbare mangler
+
+## 2.2.0-1 – Offentlig gjeld for Norge i internasjonalt datasett
+
+**Prioritet: P0**
+
+`Offentlig_gjeld_andel_BNP` finnes internasjonalt, men Norge har ingen
+observasjoner.
+
+Dette er et konkret konsistensproblem, ikke et nytt faglig
+utvidelsesønske.
+
+### Tiltak
+
+- finn årsaken til at Norge mangler
+- bruk samme harmoniserte definisjon som de øvrige landene
+- legg Norge inn i serien
+- kontroller `compare_countries()`
+- legg til test som sikrer at Norge ikke er fullstendig `NA`
+
+### Akseptansekriterier
+
+- Norge har gyldige observasjoner
+- definisjonen er internasjonalt sammenlignbar
+- metadata er konsistente
+- test dekker problemet
+
+# P1 – sentrale nye dataserier
+
+## 2.2.0-2 – Driftsbalanse
+
+**Prioritet: P1 – svært høy**
+
+Gap-analyse 2 identifiserer driftsbalansen som et av de tydeligste
+gjenværende makroøkonomiske datagapene.
+
+Eksisterende handelsbalanse dekker ikke inntekts- og
+overføringsstrømmer mot utlandet.
+
+### Ønskede serier
+
+Norge:
+
+- `Driftsbalanse`
+- `Driftsbalanse_andel_BNP`
+
+Internasjonalt, dersom harmonisert kilde er tilgjengelig:
+
+- `Driftsbalanse_andel_BNP`
+
+### Kildeprinsipp
+
+Foretrekk:
+
+- SSB for norsk serie
+- Eurostat/OECD for harmonisert internasjonal serie
+
+### Akseptansekriterier
+
+- klar definisjon
+- dokumentert kilde
+- best mulig historikk
+- korrekt enhet
+- metadata
+- tester
+- fungerer med ordinære analysefunksjoner
+
+## 2.2.0-3 – Norges netto internasjonale investeringsposisjon
+
+**Prioritet: P1 – høy**
+
+NorMacro mangler et mål på Norges samlede finansielle stilling overfor
+utlandet.
+
+Dette er forskjellig fra både:
+
+- offentlig nettofordring
+- husholdningenes nettofordring
+
+### Ønskede serier
+
+- `Netto_IIP` eller annet presist navn
+- eventuelt `Netto_IIP_andel_BNP`
+
+Navnet skal eksplisitt vise at indikatoren gjelder hele økonomiens
+stilling overfor utlandet.
+
+### Akseptansekriterier
+
+- autoritativ offentlig kilde
+- tydelig beholdningsdefinisjon
+- ingen begrepsforveksling med sektorfordringer
+- metadata og tester
+
+## 2.2.0-4 – Lengre norsk 10-årig statsrente
+
+**Prioritet: P1 – høy**
+
+Dagens norske serie starter i 2019.
+
+Dette begrenser:
+
+- rentekurve
+- finansmarkedsanalyse
+- historiske konjunktursammenligninger
+
+### Tiltak
+
+- kartlegg alternative Norges Bank-, SSB- eller andre autoritative
+  historiske serier
+- behold 10-årig rente som representativ langrente
+- unngå å legge inn mange løpetider
+
+### Akseptansekriterier
+
+- vesentlig lengre historikk enn 2019
+- dokumentert håndtering av eventuelle definisjons-/kildebrudd
+- `Rentekurve` beregnes automatisk over den utvidede perioden
+- tester av startår og beregning
+
+## 2.2.0-5 – Lengre norsk 3-måneders pengemarkedsrente
+
+**Prioritet: P1 – høy**
+
+Dagens norske hovedserie starter i 2013, mens det internasjonale
+datasettet allerede har norsk 3-måneders pengemarkedsrente tilbake til
+1979.
+
+Dette tyder på at gapet potensielt kan lukkes uten å finne en helt ny
+økonomisk indikator.
+
+### Tiltak
+
+- undersøk om OECD-serien kan brukes eller kobles til den norske serien
+- vurder konsistens mellom NIBOR-definisjonen og internasjonal
+  pengemarkedsrente
+- foretrekk én sammenhengende hovedserie
+
+### Akseptansekriterier
+
+- vesentlig lengre historikk
+- eksplisitt dokumentasjon av eventuelt seriebrudd
+- ingen skjult blanding av inkompatible definisjoner
+- tester
+
+# P1 – nasjonalregnskap og bolig
+
+## 2.2.0-6 – Samlede investeringer for Norge
+
+**Prioritet: P1**
+
+Det norske hoveddatasettet har:
+
+- Fastlandsinvesteringer
+- boliginvesteringer
+- offentlige investeringer
+
+men mangler en eksplisitt serie for samlede bruttoinvesteringer i fast
+realkapital for hele økonomien.
+
+Det internasjonale datasettet har allerede en slik serie.
+
+### Ønskede serier
+
+- `Investeringer`
+- `Investeringer_lopende`
+- `Investeringer_vekst`
+- eventuelt `Investeringer_andel_BNP`
+
+### Begrunnelse
+
+Dette lukker et nasjonalregnskapsgap og gjør norsk og internasjonal
+struktur mer konsistent.
+
+### Akseptansekriterier
+
+- samsvarer faglig med internasjonal investeringsdefinisjon
+- tydelig skille mot `Fastlandsinvesteringer`
+- komplett metadata
+- tester
+
+## 2.2.0-7 – Boligtilbud
+
+**Prioritet: P1**
+
+Boligmarkedet mangler en direkte indikator for fysisk boligbygging.
+
+`Boliginvesteringer` og `Byggeaktivitet` dekker ikke samme begrep.
+
+### Foretrukket serie
+
+- `Igangsatte_boliger`
+
+Én nasjonal aggregert indikator er tilstrekkelig.
+
+### Ikke nødvendig i 2.2.0
+
+- regionale serier
+- boligtypefordeling
+- både igangsatte, fullførte og tillatelser dersom én serie dekker
+  behovet
+
+### Akseptansekriterier
+
+- stabil SSB-serie
+- langest mulig årlig historikk
+- enhet = antall boliger
+- metadata og tester
+
+# P1/P2 – finansmarkeder
+
+## 2.2.0-8 – Lengre OSEAX-historikk
+
+**Prioritet: P1 dersom stabil kilde finnes, ellers P2**
+
+Dagens OSEAX starter i 2013.
+
+Det gjør det umulig å bruke serien i blant annet:
+
+- finanskrisen
+- dotcom-perioden
+- bankkrisen
+
+### Tiltak
+
+1. undersøk om OSEAX kan forlenges fra en robust kilde
+2. behold samme indeks dersom mulig
+3. vurder annen bred norsk aksjeindeks bare dersom OSEAX ikke kan
+   forlenges på en faglig forsvarlig måte
+
+### Ikke gjør
+
+Ikke legg inn flere parallelle aksjeindekser bare for å øke
+datamengden.
+
+# P2 – strategiske kompletteringer
+
+## 2.2.0-9 – Internasjonal offentlig budsjettbalanse
+
+**Prioritet: P2, men høy verdi**
+
+Legg til en harmonisert serie for:
+
+- offentlig budsjettbalanse som andel av BNP
+
+Dette vil styrke internasjonal finanspolitisk sammenligning betydelig.
+
+Dersom kilde og implementasjon er enkel og stabil, bør tiltaket løftes
+til P1.
+
+## 2.2.0-10 – Offentlige inntekter og utgifter internasjonalt
+
+**Prioritet: P2**
+
+Vurder harmoniserte BNP-andeler for:
+
+- offentlige inntekter
+- offentlige utgifter
+
+Disse bør prioriteres etter budsjettbalansen.
+
+## 2.2.0-11 – Bytteforhold
+
+**Prioritet: P2**
+
+Kartlegg en stabil norsk serie for bytteforhold.
+
+Serien er faglig relevant for Norge, men mindre grunnleggende enn:
+
+- driftsbalanse
+- IIP
+
+Implementeres bare dersom definisjon og historikk er gode.
+
+## 2.2.0-12 – Én eksplisitt forventningsindikator
+
+**Prioritet: P2**
+
+Gap-analyse 2 finner ingen direkte mål på forventninger.
+
+Før implementasjon skal det gjennomføres en kildevurdering av
+eksempelvis:
+
+- inflasjonsforventninger
+- bred tillits-/forventningsindikator
+
+Det skal velges maksimalt én hovedindikator i første omgang.
+
+### Kriterier
+
+- makroøkonomisk relevant
+- stabil årlig historikk
+- transparent definisjon
+- helst offentlig kilde
+- gjerne internasjonalt sammenlignbar
+
+# Dokumentasjonstiltak for 2.2.0
+
+## D1 – Fremoverskuende indikatorer
+
+Dokumenter forskjellen mellom:
+
+- direkte målte forventninger
+- markedsbaserte forventningssignaler
+- samtidige konjunkturindikatorer
+
+Eksempler:
+
+- rentekurve
+- aksjemarked
+- ordrebeholdning
+- konjunkturindikator
+
+## D2 – Ubalansert internasjonalt panel
+
+Dokumenter tydelig at:
+
+- startår varierer mellom land og variabler
+- `compare_countries()` derfor kan ha ulik historikk per land
+- bruker bør kontrollere faktisk overlappende periode
+
+## D3 – Nasjonalregnskap
+
+Lag ett kort undervisningseksempel som viser sammenhengen mellom:
+
+- BNP
+- privat konsum
+- offentlig konsum
+- investeringer
+- eksport
+- import
+
+Når samlet investering er tilgjengelig kan eksemplet brukes til å vise
+nasjonalregnskapsidentiteten eksplisitt.
+
+# Eksplisitt utsatt til senere release
+
+Følgende bør ikke være mål for 2.2.0 med mindre de viser seg svært enkle
+å hente inn som del av annet arbeid:
+
+- egenberegnet produksjonsgap
+- avanserte realrentemål
+- strukturelt oljekorrigert budsjettunderskudd
+- finanspolitisk impuls
+- kapitalbeholdning
+- TFP
+- produktivitet per arbeidstime
+- lønnsandel
+- stort sett av inflasjonskomponenter
+- mange bilaterale valutakurser
+- finansielle stressindekser
+- kredittspreader
+- stort internasjonalt landunivers
+- regionale boligmarkedsdata
+
+Produksjonsgap skal fortsatt kunne vurderes dersom en stabil offentlig
+serie identifiseres, men NorMacro skal ikke utvikle en egen
+produksjonsgapmodell bare for å lukke gapet.
+
+# Foreslått gjennomføringsrekkefølge
+
+## Fase A – rett feil og undersøk kilder
+
+1. offentlig gjeld for Norge internasjonalt
+2. kartlegg historisk norsk statsrente
+3. kartlegg historisk pengemarkedsrente
+4. kartlegg driftsbalanse
+5. kartlegg IIP
+6. kartlegg samlede investeringer
+7. kartlegg igangsatte boliger
+8. kartlegg OSEAX-historikk
+
+Ingen implementasjon bør starte før definisjon, kilde og forventet
+historikk er dokumentert.
+
+## Fase B – implementer kjerneserier
+
+1. offentlig gjeld Norge
+2. driftsbalanse
+3. IIP
+4. lange renter
+5. korte renter
+6. samlede investeringer
+7. igangsatte boliger
+8. OSEAX dersom kildekartleggingen lykkes
+
+## Fase C – internasjonal komplettering
+
+1. budsjettbalanse
+2. driftsbalanse
+3. offentlige inntekter/utgifter
+
+Hver serie vurderes separat mot kurateringsprinsippet.
+
+## Fase D – dokumentasjon og undervisning
+
+1. oppdater metadata
+2. oppdater README/vignetter
+3. dokumenter ubalansert internasjonalt panel
+4. dokumenter forventninger versus fremoverskuende indikatorer
+5. legg til nasjonalregnskapseksempel
+6. oppdater `macro_report()` bare dersom nye serier naturlig hører hjemme
+   der
+
+# Release-kriterier for 2.2.0
+
+2.2.0 anses klar når:
+
+- alle P0-oppgaver er lukket
+- P1-seriene som har faglig forsvarlig datakilde er implementert
+- nye serier har full metadata
+- avledede variabler har transparente beregninger
+- `coverage()` viser forventet historikk
+- Norge og internasjonalt datasett er konsistente der de skal være det
+- eksisterende API fungerer uten spesialtilpasning
+- tester dekker nye dataserier og beregninger
+- `R CMD check` gir 0 errors, 0 warnings og 0 notes
+- README/vignetter er oppdatert der ny funksjonalitet påvirker brukerflyten
+- gap-matrisen er oppdatert etter implementasjonen
+
+# Prioritert 2.2.0-liste
+
+| Nr. | Tiltak | Prioritet | Type |
+|---|---|---|---|
+| 1 | Offentlig gjeld for Norge internasjonalt | P0 | Feil/konsistens |
+| 2 | Driftsbalanse Norge | P1 | Ny data |
+| 3 | Netto IIP Norge | P1 | Ny data |
+| 4 | Lengre 10-årig statsrente | P1 | Historikk |
+| 5 | Lengre 3-mnd pengemarkedsrente | P1 | Historikk |
+| 6 | Samlede investeringer Norge | P1 | Ny data |
+| 7 | Igangsatte boliger | P1 | Ny data |
+| 8 | Lengre OSEAX | P1/P2 | Historikk |
+| 9 | Internasjonal budsjettbalanse | P2 → P1 hvis enkel | Ny data |
+| 10 | Internasjonal driftsbalanse | P2 → P1 hvis enkel | Ny data |
+| 11 | Internasjonale offentlige inntekter/utgifter | P2 | Ny data |
+| 12 | Bytteforhold | P2 | Ny data |
+| 13 | Eksplisitt forventningsindikator | P2 | Ny data |
+| 14 | Dokumentasjon/undervisning | P1 | Dokumentasjon |
+
+# Overordnet konklusjon
+
+2.2.0 bør være en kvalitativ forbedring av NorMacros eksisterende
+makroøkonomiske dekning, ikke en bred funksjonsrelease.
+
+De viktigste tiltakene tilfører økonomiske dimensjoner som i dag faktisk
+mangler:
+
+- driftsbalanse
+- ekstern formuesstilling
+- full investeringskomponent
+- boligtilbud
+
+eller forbedrer eksisterende indikatorer som i dag har utilstrekkelig
+historikk:
+
+- korte renter
+- lange renter
+- aksjemarked
+
+Dette gir større faglig verdi enn å introdusere mange nye
+analysefunksjoner eller et langt større antall serier.
+

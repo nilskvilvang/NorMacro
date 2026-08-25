@@ -1,0 +1,482 @@
+
+---
+title: "Gap-analyse 2 – Utenriksøkonomi"
+format: html
+---
+
+# Faglige spørsmål
+
+Utenriksøkonomiområdet skal gjøre det enkelt å undersøke:
+
+- hvordan eksport og import utvikler seg
+- hvordan handelsbalansen utvikler seg
+- hvor stor utenrikshandelen er relativt til BNP
+- hvordan kronekursen utvikler seg
+- hvordan Norges samlede løpende økonomiske transaksjoner med utlandet
+  utvikler seg
+- hvordan Norges finansielle stilling overfor utlandet utvikler seg
+- hvordan endringer i eksport- og importpriser påvirker norsk økonomi
+- hvordan Norges utenriksøkonomi skiller seg fra andre land
+
+Området overlapper med åpen økonomi, men har et bredere perspektiv.
+
+Åpen økonomi dekker primært:
+
+- handel
+- valutakurs
+- internasjonale realøkonomiske sammenhenger
+
+Utenriksøkonomi omfatter i tillegg:
+
+- driftsbalanse
+- betalingsbalanse
+- ekstern finansiell stilling
+- bytteforhold
+
+# Avgrensning mot åpen økonomi
+
+Handels- og valutakursblokken er allerede vurdert under åpen økonomi.
+
+Gap i disse seriene skal ikke dobbeltregistreres her.
+
+Formålet med dette området er å undersøke om NorMacro dekker
+utenriksøkonomien utover selve vare- og tjenestehandelen.
+
+# Dagens norske datadekning
+
+## Eksport
+
+NorMacro inneholder:
+
+- `Eksport`
+- `Eksport_lopende`
+- `Eksportvekst`
+- `Eksportandel_BNP`
+
+Tidsdekningen er:
+
+- nivåserier: 1970–2025
+- vekst: 1971–2025
+
+Eksport kan dermed analyseres som:
+
+- realt nivå
+- nominelt nivå
+- vekst
+- andel av BNP
+
+Status: **Svært godt dekket**
+
+# Import
+
+NorMacro inneholder:
+
+- `Import`
+- `Import_lopende`
+- `Importvekst`
+- `Importandel_BNP`
+
+Tidsdekningen tilsvarer eksportblokken.
+
+Status: **Svært godt dekket**
+
+# Handelsbalanse
+
+NorMacro inneholder:
+
+- `Handelsbalanse`
+- `Handelsbalanse_lopende`
+- `Handelsbalanse_andel_BNP`
+
+Seriene dekker perioden 1970–2025.
+
+Dette gir både real, nominell og relativ handelsbalanse.
+
+Status: **Svært godt dekket**
+
+# Handelsåpenhet
+
+NorMacro inneholder:
+
+- `Eksportandel_BNP`
+- `Importandel_BNP`
+
+Dette gjør det mulig å analysere økonomiens handelsåpenhet uten at det
+er nødvendig å lagre en egen `Handelsapenhet`-variabel.
+
+En eventuell samlet åpenhetsindikator kan beregnes fra eksisterende
+serier dersom det er ønskelig.
+
+Status: **Dekket**
+
+# Valutakurs
+
+NorMacro inneholder:
+
+- `Valutakurs_I44`
+- `Valutakurs_I44_vekst`
+
+I-44 er en importveid kronekursindeks fra Norges Bank.
+
+Tidsdekningen er:
+
+- indeks: 1990–2025
+- vekst: 1991–2025
+
+Dette er en hensiktsmessig aggregert valutakursindikator for norsk
+makroanalyse.
+
+Bilaterale NOK-kurser er ikke nødvendige for NorMacros kjerne.
+
+Status: **Godt dekket**
+
+# Driftsbalanse
+
+NorMacro inneholder ikke en eksplisitt serie for:
+
+- driftsbalanse
+- betalingsbalansens løpende poster
+- current account
+
+Dette er et vesentlig skille fra handelsbalansen.
+
+Handelsbalansen måler eksport minus import av varer og tjenester, mens
+driftsbalansen også omfatter andre løpende transaksjoner med utlandet,
+blant annet inntektsstrømmer.
+
+For Norge er dette særlig relevant på grunn av store finansielle
+fordringer overfor utlandet.
+
+Driftsbalansen representerer derfor en økonomisk dimensjon som dagens
+handelsbalanse ikke erstatter.
+
+Status: **Gap**
+
+# Ekstern finansiell stilling
+
+NorMacro inneholder ikke en eksplisitt serie for:
+
+- Norges nettofordringer overfor utlandet
+- netto internasjonal investeringsposisjon
+- International Investment Position (IIP)
+- netto utenlandsfordringer
+
+Dette må ikke forveksles med:
+
+- `Offentlig_nettofordringer`
+- `Husholdningsnettofordringsrate`
+
+Disse beskriver bestemte institusjonelle sektorers finansielle
+stillinger.
+
+En IIP-/nettofordringsserie beskriver derimot Norges samlede
+finansielle fordringer og gjeld overfor resten av verden.
+
+Dette er særlig relevant for Norge, hvor den eksterne finansielle
+formuesstillingen er makroøkonomisk viktig.
+
+Status: **Gap**
+
+# Bytteforhold
+
+NorMacro inneholder ikke en eksplisitt serie for:
+
+- bytteforhold
+- terms of trade
+- forholdet mellom eksport- og importpriser
+
+Dette er relevant for Norge fordi store endringer i eksportpriser,
+særlig energipriser, kan endre landets realinntekt uten tilsvarende
+endringer i produksjonsvolumet.
+
+Bytteforhold tilfører derfor en dimensjon som:
+
+- eksportvolum
+- importvolum
+- handelsbalanse
+- oljepris
+
+ikke fullt ut representerer.
+
+Status: **Kompletteringsgap**
+
+Gapet vurderes som mindre kritisk enn driftsbalanse og ekstern
+finansiell stilling.
+
+# Internasjonal dekning
+
+Det internasjonale datalaget inneholder:
+
+- `Eksport`
+- `Eksport_lopende`
+- `Eksportandel_BNP`
+- `Import`
+- `Import_lopende`
+- `Importandel_BNP`
+- `Handelsbalanse`
+- `Handelsbalanse_lopende`
+- `Handelsbalanse_andel_BNP`
+
+Dette gir en svært god harmonisert handelsblokk.
+
+Det internasjonale datasettet inneholder derimot ikke harmoniserte
+serier for:
+
+- driftsbalanse
+- ekstern nettofordringsstilling
+- bytteforhold
+- valutakurs
+
+Internasjonale sammenligninger av den bredere utenriksøkonomien er
+derfor begrenset.
+
+Status: **Delvis dekket**
+
+# Analyse og API
+
+NorMacro har blant annet:
+
+- `get_exports()`
+- `get_imports()`
+- `get_utenrikshandel()`
+- `get_valutakurs()`
+- `compare_series()`
+- `compare_periods()`
+- `compare_countries()`
+- `growth()`
+- `plot_series()`
+- korrelasjonsverktøy
+- regresjonsverktøy
+- `macro_report()`
+
+Dette er et godt API for handel og valutakurs.
+
+Manglende analyse av driftsbalanse og ekstern finansiell stilling
+skyldes først og fremst manglende datagrunnlag, ikke manglende
+analysefunksjonalitet.
+
+Det er derfor ikke behov for nye spesialiserte analysefunksjoner før
+dataseriene eventuelt legges til.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+Eksisterende metadata skiller tydelig mellom:
+
+- eksport
+- import
+- handelsbalanse
+- faste priser
+- løpende priser
+- BNP-andeler
+- valutakurs
+
+`Handelsbalanse` er eksplisitt definert som eksport minus import.
+
+`Valutakurs_I44` er eksplisitt definert som importveid
+kronekursindeks.
+
+Det er ikke identifisert et vesentlig metadatagap i eksisterende data.
+
+**Metadata: Grønn**
+
+# Undervisning og dokumentasjon
+
+Dagens datasett støtter godt undervisning i:
+
+- eksport
+- import
+- handelsbalanse
+- handelsåpenhet
+- valutakurs
+- valutakurs og handel
+- internasjonale handelssammenligninger
+
+Det er derimot vanskeligere å behandle:
+
+- handelsbalanse kontra driftsbalanse
+- Norges inntektsstrømmer mot utlandet
+- Norges eksterne finansielle formue
+- sammenhengen mellom strømmer og beholdninger overfor utlandet
+- bytteforholdsgevinster og -tap
+
+Dette er sentrale temaer dersom området skal dekke utenriksøkonomi i
+bred forstand.
+
+**Undervisning: 🟡**
+
+# Gap-status
+
+| Område | Status | Kommentar |
+|---|---|---|
+| Eksport | Dekket | Real, nominell, vekst og BNP-andel |
+| Import | Dekket | Real, nominell, vekst og BNP-andel |
+| Handelsbalanse | Dekket | Real, nominell og BNP-andel |
+| Handelsåpenhet | Dekket | Kan utledes fra eksport-/importandel |
+| Valutakurs | Dekket | I-44 fra 1990 |
+| Driftsbalanse | Gap | Ingen serie |
+| Ekstern nettofordringsstilling / IIP | Gap | Ingen serie |
+| Bytteforhold | Gap | Ingen serie |
+| Internasjonal handel | Dekket | Harmonisert handelsblokk |
+| Internasjonal bred utenriksøkonomi | Delvis | Driftsbalanse/IIP/bytteforhold mangler |
+
+# Nye gap
+
+Gap-analyse 2 identifiserer tre relevante datagap.
+
+## 1. Driftsbalanse
+
+Dette er det høyest prioriterte gapet.
+
+Driftsbalansen tilfører en sentral strømstørrelse som ikke kan erstattes
+av handelsbalansen.
+
+## 2. Norges nettofordringer overfor utlandet / IIP
+
+Dette er det nest viktigste gapet.
+
+En netto IIP-serie vil gi NorMacro en beholdningsstørrelse som utfyller
+driftsbalansens strømstørrelse.
+
+Sammen vil disse gi en vesentlig mer komplett beskrivelse av Norges
+økonomiske forhold til utlandet.
+
+## 3. Bytteforhold
+
+Bytteforhold er faglig relevant, særlig for Norge som
+råvareeksportør.
+
+Dette bør undersøkes, men prioriteres etter driftsbalanse og IIP.
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 2 | Begrunnelse |
+|---|---|---|
+| Data | 🟡 | Handel og valutakurs er sterke, men driftsbalanse og ekstern formuesstilling mangler |
+| Analyse | 🟢 | Eksisterende generelle verktøy er tilstrekkelige når data finnes |
+| Metadata | 🟢 | Eksisterende utenriksvariable er klart definert |
+| Undervisning | 🟡 | Bred utenriksøkonomi kan ikke dekkes fullt uten driftsbalanse/IIP |
+
+# Samlet vurdering
+
+**Samlet gap: Middels**
+
+NorMacros handelsblokk er svært sterk.
+
+Pakken har lang historikk for:
+
+- eksport
+- import
+- handelsbalanse
+
+og en representativ effektiv valutakursindikator.
+
+Dette dekker utenrikshandel svært godt.
+
+Utenriksøkonomi er imidlertid bredere enn utenrikshandel.
+
+Mangelen på:
+
+- driftsbalanse
+- ekstern nettofordringsstilling
+
+betyr at både en sentral ekstern strømstørrelse og en sentral ekstern
+beholdningsstørrelse mangler.
+
+# Anbefalte tiltak
+
+## 1. Legg til driftsbalanse
+
+**Prioritet: Høy**
+
+Undersøk en årlig norsk serie for:
+
+`Driftsbalanse`
+
+og helst også:
+
+`Driftsbalanse_andel_BNP`
+
+Serien bør ha så lang og konsistent historikk som praktisk mulig.
+
+## 2. Legg til netto internasjonal investeringsposisjon
+
+**Prioritet: Høy**
+
+Undersøk en serie for eksempel:
+
+`Nettofordringer_utlandet`
+
+eller:
+
+`Netto_IIP`
+
+Navn og definisjon bør velges slik at det er tydelig at dette gjelder
+Norges samlede eksterne finansielle stilling, ikke offentlig sektor.
+
+En BNP-andel kan også være analytisk nyttig.
+
+## 3. Undersøk bytteforhold
+
+**Prioritet: Middels**
+
+Finn ut om en stabil årlig serie for norsk bytteforhold er tilgjengelig
+fra en autoritativ kilde.
+
+Serien bør bare legges til dersom definisjonen er konsistent og lett å
+forklare.
+
+## 4. Vurder internasjonal driftsbalanse
+
+**Prioritet: Middels**
+
+Dersom harmoniserte data er enkelt tilgjengelige, vil
+`Driftsbalanse_andel_BNP` være en svært nyttig internasjonal
+sammenligningsserie.
+
+## 5. Ikke utvid med detaljerte betalingsbalanseposter nå
+
+NorMacro trenger ikke et komplett betalingsbalanseregnskap.
+
+Et kuratert sett bestående av:
+
+- handelsbalanse
+- driftsbalanse
+- netto IIP
+- bytteforhold
+- valutakurs
+
+vil gi svært god dekning.
+
+# Prioritering
+
+**Samlet prioritet videre: Høy**
+
+Driftsbalanse og ekstern nettofordringsstilling er blant de tydeligste
+gjenstående makroøkonomiske datagapene.
+
+# Konklusjon
+
+NorMacro dekker utenrikshandel svært godt, men ikke hele
+utenriksøkonomien.
+
+Eksport, import, handelsbalanse og valutakurs gir en sterk handels- og
+konkurranseevneblokk.
+
+Driftsbalansen og Norges samlede finansielle stilling overfor utlandet
+mangler derimot.
+
+Dette er økonomisk distinkte størrelser og kan ikke erstattes av
+eksisterende handels- eller sektorbalanser.
+
+Bytteforhold er i tillegg en relevant kompletteringskandidat.
+
+Endelig status:
+
+- **Data: 🟡**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟡**
+- **Samlet gap: Middels**
+- **Prioritet: Høy**

@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>NorMacro – veikart mot 2.2.0</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="15-veikart-2.2.0_files/libs/clipboard/clipboard.min.js"></script>
+<script src="15-veikart-2.2.0_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="15-veikart-2.2.0_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="15-veikart-2.2.0_files/libs/quarto-html/popper.min.js"></script>
+<script src="15-veikart-2.2.0_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="15-veikart-2.2.0_files/libs/quarto-html/anchor.min.js"></script>
+<link href="15-veikart-2.2.0_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="15-veikart-2.2.0_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="15-veikart-2.2.0_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="15-veikart-2.2.0_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="15-veikart-2.2.0_files/libs/bootstrap/bootstrap-33d2ae8d68d8b77a733b434334000c21.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">NorMacro – veikart mot 2.2.0</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="formål" class="level1">
+<h1>Formål</h1>
+<p>Versjon 2.2.0 skal følge opp gap-analyse 2 med et begrenset antall tiltak med høy faglig verdi.</p>
+<p>Målet er ikke å gjøre NorMacro vesentlig større.</p>
+<p>Hovedprioriteten er å:</p>
+<ol type="1">
+<li>lukke tydelige datagap</li>
+<li>forbedre historisk dekning der eksisterende serier er for korte</li>
+<li>rette konsistensproblemer i eksisterende internasjonale data</li>
+<li>styrke noen få sentrale undervisnings- og dokumentasjonsflyter</li>
+<li>unngå nye spesialiserte API-er der eksisterende generelle verktøy allerede er tilstrekkelige</li>
+</ol>
+</section>
+<section id="prinsipper-for-2.2.0" class="level1">
+<h1>Prinsipper for 2.2.0</h1>
+<section id="kuratering-fremfor-bredde" class="level2">
+<h2 class="anchored" data-anchor-id="kuratering-fremfor-bredde">Kuratering fremfor bredde</h2>
+<p>NorMacro skal fortsatt prioritere et lite antall representative makroøkonomiske serier fremfor å kopiere store deler av eksterne databaser.</p>
+</section>
+<section id="data-før-nytt-api" class="level2">
+<h2 class="anchored" data-anchor-id="data-før-nytt-api">Data før nytt API</h2>
+<p>Gap-analyse 2 finner få vesentlige analyse/API-gap.</p>
+<p>2.2.0 bør derfor i hovedsak forbedre datalaget og bruke eksisterende:</p>
+<ul>
+<li><code>compare_series()</code></li>
+<li><code>compare_periods()</code></li>
+<li><code>compare_countries()</code></li>
+<li><code>growth()</code></li>
+<li><code>plot_series()</code></li>
+<li><code>business_cycle()</code></li>
+<li><code>macro_report()</code></li>
+</ul>
+</section>
+<section id="ikke-dobbeltfør-gap" class="level2">
+<h2 class="anchored" data-anchor-id="ikke-dobbeltfør-gap">Ikke dobbeltfør gap</h2>
+<p>Et problem skal ha ett primært hjem i veikartet.</p>
+<p>Eksempel:</p>
+<ul>
+<li>rentehistorikk håndteres under renter og pengepolitikk</li>
+<li>manglende samlet investering håndteres under nasjonalregnskap</li>
+<li>boliglånsrente håndteres som transmisjonsproblem under pengepolitikk</li>
+</ul>
+<p>Andre fagområder kan referere til disse gapene uten å opprette parallelle utviklingsoppgaver.</p>
+</section>
+</section>
+<section id="prioritetsnivåer" class="level1">
+<h1>Prioritetsnivåer</h1>
+<p>Tiltak klassifiseres som:</p>
+<ul>
+<li><strong>P0 – må løses før 2.2.0</strong></li>
+<li><strong>P1 – bør inngå i 2.2.0</strong></li>
+<li><strong>P2 – tas inn dersom kilde og implementasjon er enkel og robust</strong></li>
+<li><strong>Senere – dokumentert gap, men ikke mål for 2.2.0</strong></li>
+</ul>
+</section>
+<section id="p0-konsistens-og-åpenbare-mangler" class="level1">
+<h1>P0 – konsistens og åpenbare mangler</h1>
+<section id="offentlig-gjeld-for-norge-i-internasjonalt-datasett" class="level2">
+<h2 class="anchored" data-anchor-id="offentlig-gjeld-for-norge-i-internasjonalt-datasett">2.2.0-1 – Offentlig gjeld for Norge i internasjonalt datasett</h2>
+<p><strong>Prioritet: P0</strong></p>
+<p><code>Offentlig_gjeld_andel_BNP</code> finnes internasjonalt, men Norge har ingen observasjoner.</p>
+<p>Dette er et konkret konsistensproblem, ikke et nytt faglig utvidelsesønske.</p>
+<section id="tiltak" class="level3">
+<h3 class="anchored" data-anchor-id="tiltak">Tiltak</h3>
+<ul>
+<li>finn årsaken til at Norge mangler</li>
+<li>bruk samme harmoniserte definisjon som de øvrige landene</li>
+<li>legg Norge inn i serien</li>
+<li>kontroller <code>compare_countries()</code></li>
+<li>legg til test som sikrer at Norge ikke er fullstendig <code>NA</code></li>
+</ul>
+</section>
+<section id="akseptansekriterier" class="level3">
+<h3 class="anchored" data-anchor-id="akseptansekriterier">Akseptansekriterier</h3>
+<ul>
+<li>Norge har gyldige observasjoner</li>
+<li>definisjonen er internasjonalt sammenlignbar</li>
+<li>metadata er konsistente</li>
+<li>test dekker problemet</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="p1-sentrale-nye-dataserier" class="level1">
+<h1>P1 – sentrale nye dataserier</h1>
+<section id="driftsbalanse" class="level2">
+<h2 class="anchored" data-anchor-id="driftsbalanse">2.2.0-2 – Driftsbalanse</h2>
+<p><strong>Prioritet: P1 – svært høy</strong></p>
+<p>Gap-analyse 2 identifiserer driftsbalansen som et av de tydeligste gjenværende makroøkonomiske datagapene.</p>
+<p>Eksisterende handelsbalanse dekker ikke inntekts- og overføringsstrømmer mot utlandet.</p>
+<section id="ønskede-serier" class="level3">
+<h3 class="anchored" data-anchor-id="ønskede-serier">Ønskede serier</h3>
+<p>Norge:</p>
+<ul>
+<li><code>Driftsbalanse</code></li>
+<li><code>Driftsbalanse_andel_BNP</code></li>
+</ul>
+<p>Internasjonalt, dersom harmonisert kilde er tilgjengelig:</p>
+<ul>
+<li><code>Driftsbalanse_andel_BNP</code></li>
+</ul>
+</section>
+<section id="kildeprinsipp" class="level3">
+<h3 class="anchored" data-anchor-id="kildeprinsipp">Kildeprinsipp</h3>
+<p>Foretrekk:</p>
+<ul>
+<li>SSB for norsk serie</li>
+<li>Eurostat/OECD for harmonisert internasjonal serie</li>
+</ul>
+</section>
+<section id="akseptansekriterier-1" class="level3">
+<h3 class="anchored" data-anchor-id="akseptansekriterier-1">Akseptansekriterier</h3>
+<ul>
+<li>klar definisjon</li>
+<li>dokumentert kilde</li>
+<li>best mulig historikk</li>
+<li>korrekt enhet</li>
+<li>metadata</li>
+<li>tester</li>
+<li>fungerer med ordinære analysefunksjoner</li>
+</ul>
+</section>
+</section>
+<section id="norges-netto-internasjonale-investeringsposisjon" class="level2">
+<h2 class="anchored" data-anchor-id="norges-netto-internasjonale-investeringsposisjon">2.2.0-3 – Norges netto internasjonale investeringsposisjon</h2>
+<p><strong>Prioritet: P1 – høy</strong></p>
+<p>NorMacro mangler et mål på Norges samlede finansielle stilling overfor utlandet.</p>
+<p>Dette er forskjellig fra både:</p>
+<ul>
+<li>offentlig nettofordring</li>
+<li>husholdningenes nettofordring</li>
+</ul>
+<section id="ønskede-serier-1" class="level3">
+<h3 class="anchored" data-anchor-id="ønskede-serier-1">Ønskede serier</h3>
+<ul>
+<li><code>Netto_IIP</code> eller annet presist navn</li>
+<li>eventuelt <code>Netto_IIP_andel_BNP</code></li>
+</ul>
+<p>Navnet skal eksplisitt vise at indikatoren gjelder hele økonomiens stilling overfor utlandet.</p>
+</section>
+<section id="akseptansekriterier-2" class="level3">
+<h3 class="anchored" data-anchor-id="akseptansekriterier-2">Akseptansekriterier</h3>
+<ul>
+<li>autoritativ offentlig kilde</li>
+<li>tydelig beholdningsdefinisjon</li>
+<li>ingen begrepsforveksling med sektorfordringer</li>
+<li>metadata og tester</li>
+</ul>
+</section>
+</section>
+<section id="lengre-norsk-10-årig-statsrente" class="level2">
+<h2 class="anchored" data-anchor-id="lengre-norsk-10-årig-statsrente">2.2.0-4 – Lengre norsk 10-årig statsrente</h2>
+<p><strong>Prioritet: P1 – høy</strong></p>
+<p>Dagens norske serie starter i 2019.</p>
+<p>Dette begrenser:</p>
+<ul>
+<li>rentekurve</li>
+<li>finansmarkedsanalyse</li>
+<li>historiske konjunktursammenligninger</li>
+</ul>
+<section id="tiltak-1" class="level3">
+<h3 class="anchored" data-anchor-id="tiltak-1">Tiltak</h3>
+<ul>
+<li>kartlegg alternative Norges Bank-, SSB- eller andre autoritative historiske serier</li>
+<li>behold 10-årig rente som representativ langrente</li>
+<li>unngå å legge inn mange løpetider</li>
+</ul>
+</section>
+<section id="akseptansekriterier-3" class="level3">
+<h3 class="anchored" data-anchor-id="akseptansekriterier-3">Akseptansekriterier</h3>
+<ul>
+<li>vesentlig lengre historikk enn 2019</li>
+<li>dokumentert håndtering av eventuelle definisjons-/kildebrudd</li>
+<li><code>Rentekurve</code> beregnes automatisk over den utvidede perioden</li>
+<li>tester av startår og beregning</li>
+</ul>
+</section>
+</section>
+<section id="lengre-norsk-3-måneders-pengemarkedsrente" class="level2">
+<h2 class="anchored" data-anchor-id="lengre-norsk-3-måneders-pengemarkedsrente">2.2.0-5 – Lengre norsk 3-måneders pengemarkedsrente</h2>
+<p><strong>Prioritet: P1 – høy</strong></p>
+<p>Dagens norske hovedserie starter i 2013, mens det internasjonale datasettet allerede har norsk 3-måneders pengemarkedsrente tilbake til 1979.</p>
+<p>Dette tyder på at gapet potensielt kan lukkes uten å finne en helt ny økonomisk indikator.</p>
+<section id="tiltak-2" class="level3">
+<h3 class="anchored" data-anchor-id="tiltak-2">Tiltak</h3>
+<ul>
+<li>undersøk om OECD-serien kan brukes eller kobles til den norske serien</li>
+<li>vurder konsistens mellom NIBOR-definisjonen og internasjonal pengemarkedsrente</li>
+<li>foretrekk én sammenhengende hovedserie</li>
+</ul>
+</section>
+<section id="akseptansekriterier-4" class="level3">
+<h3 class="anchored" data-anchor-id="akseptansekriterier-4">Akseptansekriterier</h3>
+<ul>
+<li>vesentlig lengre historikk</li>
+<li>eksplisitt dokumentasjon av eventuelt seriebrudd</li>
+<li>ingen skjult blanding av inkompatible definisjoner</li>
+<li>tester</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="p1-nasjonalregnskap-og-bolig" class="level1">
+<h1>P1 – nasjonalregnskap og bolig</h1>
+<section id="samlede-investeringer-for-norge" class="level2">
+<h2 class="anchored" data-anchor-id="samlede-investeringer-for-norge">2.2.0-6 – Samlede investeringer for Norge</h2>
+<p><strong>Prioritet: P1</strong></p>
+<p>Det norske hoveddatasettet har:</p>
+<ul>
+<li>Fastlandsinvesteringer</li>
+<li>boliginvesteringer</li>
+<li>offentlige investeringer</li>
+</ul>
+<p>men mangler en eksplisitt serie for samlede bruttoinvesteringer i fast realkapital for hele økonomien.</p>
+<p>Det internasjonale datasettet har allerede en slik serie.</p>
+<section id="ønskede-serier-2" class="level3">
+<h3 class="anchored" data-anchor-id="ønskede-serier-2">Ønskede serier</h3>
+<ul>
+<li><code>Investeringer</code></li>
+<li><code>Investeringer_lopende</code></li>
+<li><code>Investeringer_vekst</code></li>
+<li>eventuelt <code>Investeringer_andel_BNP</code></li>
+</ul>
+</section>
+<section id="begrunnelse" class="level3">
+<h3 class="anchored" data-anchor-id="begrunnelse">Begrunnelse</h3>
+<p>Dette lukker et nasjonalregnskapsgap og gjør norsk og internasjonal struktur mer konsistent.</p>
+</section>
+<section id="akseptansekriterier-5" class="level3">
+<h3 class="anchored" data-anchor-id="akseptansekriterier-5">Akseptansekriterier</h3>
+<ul>
+<li>samsvarer faglig med internasjonal investeringsdefinisjon</li>
+<li>tydelig skille mot <code>Fastlandsinvesteringer</code></li>
+<li>komplett metadata</li>
+<li>tester</li>
+</ul>
+</section>
+</section>
+<section id="boligtilbud" class="level2">
+<h2 class="anchored" data-anchor-id="boligtilbud">2.2.0-7 – Boligtilbud</h2>
+<p><strong>Prioritet: P1</strong></p>
+<p>Boligmarkedet mangler en direkte indikator for fysisk boligbygging.</p>
+<p><code>Boliginvesteringer</code> og <code>Byggeaktivitet</code> dekker ikke samme begrep.</p>
+<section id="foretrukket-serie" class="level3">
+<h3 class="anchored" data-anchor-id="foretrukket-serie">Foretrukket serie</h3>
+<ul>
+<li><code>Igangsatte_boliger</code></li>
+</ul>
+<p>Én nasjonal aggregert indikator er tilstrekkelig.</p>
+</section>
+<section id="ikke-nødvendig-i-2.2.0" class="level3">
+<h3 class="anchored" data-anchor-id="ikke-nødvendig-i-2.2.0">Ikke nødvendig i 2.2.0</h3>
+<ul>
+<li>regionale serier</li>
+<li>boligtypefordeling</li>
+<li>både igangsatte, fullførte og tillatelser dersom én serie dekker behovet</li>
+</ul>
+</section>
+<section id="akseptansekriterier-6" class="level3">
+<h3 class="anchored" data-anchor-id="akseptansekriterier-6">Akseptansekriterier</h3>
+<ul>
+<li>stabil SSB-serie</li>
+<li>langest mulig årlig historikk</li>
+<li>enhet = antall boliger</li>
+<li>metadata og tester</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="p1p2-finansmarkeder" class="level1">
+<h1>P1/P2 – finansmarkeder</h1>
+<section id="lengre-oseax-historikk" class="level2">
+<h2 class="anchored" data-anchor-id="lengre-oseax-historikk">2.2.0-8 – Lengre OSEAX-historikk</h2>
+<p><strong>Prioritet: P1 dersom stabil kilde finnes, ellers P2</strong></p>
+<p>Dagens OSEAX starter i 2013.</p>
+<p>Det gjør det umulig å bruke serien i blant annet:</p>
+<ul>
+<li>finanskrisen</li>
+<li>dotcom-perioden</li>
+<li>bankkrisen</li>
+</ul>
+<section id="tiltak-3" class="level3">
+<h3 class="anchored" data-anchor-id="tiltak-3">Tiltak</h3>
+<ol type="1">
+<li>undersøk om OSEAX kan forlenges fra en robust kilde</li>
+<li>behold samme indeks dersom mulig</li>
+<li>vurder annen bred norsk aksjeindeks bare dersom OSEAX ikke kan forlenges på en faglig forsvarlig måte</li>
+</ol>
+</section>
+<section id="ikke-gjør" class="level3">
+<h3 class="anchored" data-anchor-id="ikke-gjør">Ikke gjør</h3>
+<p>Ikke legg inn flere parallelle aksjeindekser bare for å øke datamengden.</p>
+</section>
+</section>
+</section>
+<section id="p2-strategiske-kompletteringer" class="level1">
+<h1>P2 – strategiske kompletteringer</h1>
+<section id="internasjonal-offentlig-budsjettbalanse" class="level2">
+<h2 class="anchored" data-anchor-id="internasjonal-offentlig-budsjettbalanse">2.2.0-9 – Internasjonal offentlig budsjettbalanse</h2>
+<p><strong>Prioritet: P2, men høy verdi</strong></p>
+<p>Legg til en harmonisert serie for:</p>
+<ul>
+<li>offentlig budsjettbalanse som andel av BNP</li>
+</ul>
+<p>Dette vil styrke internasjonal finanspolitisk sammenligning betydelig.</p>
+<p>Dersom kilde og implementasjon er enkel og stabil, bør tiltaket løftes til P1.</p>
+</section>
+<section id="offentlige-inntekter-og-utgifter-internasjonalt" class="level2">
+<h2 class="anchored" data-anchor-id="offentlige-inntekter-og-utgifter-internasjonalt">2.2.0-10 – Offentlige inntekter og utgifter internasjonalt</h2>
+<p><strong>Prioritet: P2</strong></p>
+<p>Vurder harmoniserte BNP-andeler for:</p>
+<ul>
+<li>offentlige inntekter</li>
+<li>offentlige utgifter</li>
+</ul>
+<p>Disse bør prioriteres etter budsjettbalansen.</p>
+</section>
+<section id="bytteforhold" class="level2">
+<h2 class="anchored" data-anchor-id="bytteforhold">2.2.0-11 – Bytteforhold</h2>
+<p><strong>Prioritet: P2</strong></p>
+<p>Kartlegg en stabil norsk serie for bytteforhold.</p>
+<p>Serien er faglig relevant for Norge, men mindre grunnleggende enn:</p>
+<ul>
+<li>driftsbalanse</li>
+<li>IIP</li>
+</ul>
+<p>Implementeres bare dersom definisjon og historikk er gode.</p>
+</section>
+<section id="én-eksplisitt-forventningsindikator" class="level2">
+<h2 class="anchored" data-anchor-id="én-eksplisitt-forventningsindikator">2.2.0-12 – Én eksplisitt forventningsindikator</h2>
+<p><strong>Prioritet: P2</strong></p>
+<p>Gap-analyse 2 finner ingen direkte mål på forventninger.</p>
+<p>Før implementasjon skal det gjennomføres en kildevurdering av eksempelvis:</p>
+<ul>
+<li>inflasjonsforventninger</li>
+<li>bred tillits-/forventningsindikator</li>
+</ul>
+<p>Det skal velges maksimalt én hovedindikator i første omgang.</p>
+<section id="kriterier" class="level3">
+<h3 class="anchored" data-anchor-id="kriterier">Kriterier</h3>
+<ul>
+<li>makroøkonomisk relevant</li>
+<li>stabil årlig historikk</li>
+<li>transparent definisjon</li>
+<li>helst offentlig kilde</li>
+<li>gjerne internasjonalt sammenlignbar</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="dokumentasjonstiltak-for-2.2.0" class="level1">
+<h1>Dokumentasjonstiltak for 2.2.0</h1>
+<section id="d1-fremoverskuende-indikatorer" class="level2">
+<h2 class="anchored" data-anchor-id="d1-fremoverskuende-indikatorer">D1 – Fremoverskuende indikatorer</h2>
+<p>Dokumenter forskjellen mellom:</p>
+<ul>
+<li>direkte målte forventninger</li>
+<li>markedsbaserte forventningssignaler</li>
+<li>samtidige konjunkturindikatorer</li>
+</ul>
+<p>Eksempler:</p>
+<ul>
+<li>rentekurve</li>
+<li>aksjemarked</li>
+<li>ordrebeholdning</li>
+<li>konjunkturindikator</li>
+</ul>
+</section>
+<section id="d2-ubalansert-internasjonalt-panel" class="level2">
+<h2 class="anchored" data-anchor-id="d2-ubalansert-internasjonalt-panel">D2 – Ubalansert internasjonalt panel</h2>
+<p>Dokumenter tydelig at:</p>
+<ul>
+<li>startår varierer mellom land og variabler</li>
+<li><code>compare_countries()</code> derfor kan ha ulik historikk per land</li>
+<li>bruker bør kontrollere faktisk overlappende periode</li>
+</ul>
+</section>
+<section id="d3-nasjonalregnskap" class="level2">
+<h2 class="anchored" data-anchor-id="d3-nasjonalregnskap">D3 – Nasjonalregnskap</h2>
+<p>Lag ett kort undervisningseksempel som viser sammenhengen mellom:</p>
+<ul>
+<li>BNP</li>
+<li>privat konsum</li>
+<li>offentlig konsum</li>
+<li>investeringer</li>
+<li>eksport</li>
+<li>import</li>
+</ul>
+<p>Når samlet investering er tilgjengelig kan eksemplet brukes til å vise nasjonalregnskapsidentiteten eksplisitt.</p>
+</section>
+</section>
+<section id="eksplisitt-utsatt-til-senere-release" class="level1">
+<h1>Eksplisitt utsatt til senere release</h1>
+<p>Følgende bør ikke være mål for 2.2.0 med mindre de viser seg svært enkle å hente inn som del av annet arbeid:</p>
+<ul>
+<li>egenberegnet produksjonsgap</li>
+<li>avanserte realrentemål</li>
+<li>strukturelt oljekorrigert budsjettunderskudd</li>
+<li>finanspolitisk impuls</li>
+<li>kapitalbeholdning</li>
+<li>TFP</li>
+<li>produktivitet per arbeidstime</li>
+<li>lønnsandel</li>
+<li>stort sett av inflasjonskomponenter</li>
+<li>mange bilaterale valutakurser</li>
+<li>finansielle stressindekser</li>
+<li>kredittspreader</li>
+<li>stort internasjonalt landunivers</li>
+<li>regionale boligmarkedsdata</li>
+</ul>
+<p>Produksjonsgap skal fortsatt kunne vurderes dersom en stabil offentlig serie identifiseres, men NorMacro skal ikke utvikle en egen produksjonsgapmodell bare for å lukke gapet.</p>
+</section>
+<section id="foreslått-gjennomføringsrekkefølge" class="level1">
+<h1>Foreslått gjennomføringsrekkefølge</h1>
+<section id="fase-a-rett-feil-og-undersøk-kilder" class="level2">
+<h2 class="anchored" data-anchor-id="fase-a-rett-feil-og-undersøk-kilder">Fase A – rett feil og undersøk kilder</h2>
+<ol type="1">
+<li>offentlig gjeld for Norge internasjonalt</li>
+<li>kartlegg historisk norsk statsrente</li>
+<li>kartlegg historisk pengemarkedsrente</li>
+<li>kartlegg driftsbalanse</li>
+<li>kartlegg IIP</li>
+<li>kartlegg samlede investeringer</li>
+<li>kartlegg igangsatte boliger</li>
+<li>kartlegg OSEAX-historikk</li>
+</ol>
+<p>Ingen implementasjon bør starte før definisjon, kilde og forventet historikk er dokumentert.</p>
+</section>
+<section id="fase-b-implementer-kjerneserier" class="level2">
+<h2 class="anchored" data-anchor-id="fase-b-implementer-kjerneserier">Fase B – implementer kjerneserier</h2>
+<ol type="1">
+<li>offentlig gjeld Norge</li>
+<li>driftsbalanse</li>
+<li>IIP</li>
+<li>lange renter</li>
+<li>korte renter</li>
+<li>samlede investeringer</li>
+<li>igangsatte boliger</li>
+<li>OSEAX dersom kildekartleggingen lykkes</li>
+</ol>
+</section>
+<section id="fase-c-internasjonal-komplettering" class="level2">
+<h2 class="anchored" data-anchor-id="fase-c-internasjonal-komplettering">Fase C – internasjonal komplettering</h2>
+<ol type="1">
+<li>budsjettbalanse</li>
+<li>driftsbalanse</li>
+<li>offentlige inntekter/utgifter</li>
+</ol>
+<p>Hver serie vurderes separat mot kurateringsprinsippet.</p>
+</section>
+<section id="fase-d-dokumentasjon-og-undervisning" class="level2">
+<h2 class="anchored" data-anchor-id="fase-d-dokumentasjon-og-undervisning">Fase D – dokumentasjon og undervisning</h2>
+<ol type="1">
+<li>oppdater metadata</li>
+<li>oppdater README/vignetter</li>
+<li>dokumenter ubalansert internasjonalt panel</li>
+<li>dokumenter forventninger versus fremoverskuende indikatorer</li>
+<li>legg til nasjonalregnskapseksempel</li>
+<li>oppdater <code>macro_report()</code> bare dersom nye serier naturlig hører hjemme der</li>
+</ol>
+</section>
+</section>
+<section id="release-kriterier-for-2.2.0" class="level1">
+<h1>Release-kriterier for 2.2.0</h1>
+<p>2.2.0 anses klar når:</p>
+<ul>
+<li>alle P0-oppgaver er lukket</li>
+<li>P1-seriene som har faglig forsvarlig datakilde er implementert</li>
+<li>nye serier har full metadata</li>
+<li>avledede variabler har transparente beregninger</li>
+<li><code>coverage()</code> viser forventet historikk</li>
+<li>Norge og internasjonalt datasett er konsistente der de skal være det</li>
+<li>eksisterende API fungerer uten spesialtilpasning</li>
+<li>tester dekker nye dataserier og beregninger</li>
+<li><code>R CMD check</code> gir 0 errors, 0 warnings og 0 notes</li>
+<li>README/vignetter er oppdatert der ny funksjonalitet påvirker brukerflyten</li>
+<li>gap-matrisen er oppdatert etter implementasjonen</li>
+</ul>
+</section>
+<section id="prioritert-2.2.0-liste" class="level1">
+<h1>Prioritert 2.2.0-liste</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Nr.</th>
+<th>Tiltak</th>
+<th>Prioritet</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Offentlig gjeld for Norge internasjonalt</td>
+<td>P0</td>
+<td>Feil/konsistens</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Driftsbalanse Norge</td>
+<td>P1</td>
+<td>Ny data</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Netto IIP Norge</td>
+<td>P1</td>
+<td>Ny data</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Lengre 10-årig statsrente</td>
+<td>P1</td>
+<td>Historikk</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Lengre 3-mnd pengemarkedsrente</td>
+<td>P1</td>
+<td>Historikk</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Samlede investeringer Norge</td>
+<td>P1</td>
+<td>Ny data</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Igangsatte boliger</td>
+<td>P1</td>
+<td>Ny data</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Lengre OSEAX</td>
+<td>P1/P2</td>
+<td>Historikk</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Internasjonal budsjettbalanse</td>
+<td>P2 → P1 hvis enkel</td>
+<td>Ny data</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Internasjonal driftsbalanse</td>
+<td>P2 → P1 hvis enkel</td>
+<td>Ny data</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>Internasjonale offentlige inntekter/utgifter</td>
+<td>P2</td>
+<td>Ny data</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Bytteforhold</td>
+<td>P2</td>
+<td>Ny data</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>Eksplisitt forventningsindikator</td>
+<td>P2</td>
+<td>Ny data</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>Dokumentasjon/undervisning</td>
+<td>P1</td>
+<td>Dokumentasjon</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="overordnet-konklusjon" class="level1">
+<h1>Overordnet konklusjon</h1>
+<p>2.2.0 bør være en kvalitativ forbedring av NorMacros eksisterende makroøkonomiske dekning, ikke en bred funksjonsrelease.</p>
+<p>De viktigste tiltakene tilfører økonomiske dimensjoner som i dag faktisk mangler:</p>
+<ul>
+<li>driftsbalanse</li>
+<li>ekstern formuesstilling</li>
+<li>full investeringskomponent</li>
+<li>boligtilbud</li>
+</ul>
+<p>eller forbedrer eksisterende indikatorer som i dag har utilstrekkelig historikk:</p>
+<ul>
+<li>korte renter</li>
+<li>lange renter</li>
+<li>aksjemarked</li>
+</ul>
+<p>Dette gir større faglig verdi enn å introdusere mange nye analysefunksjoner eller et langt større antall serier.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

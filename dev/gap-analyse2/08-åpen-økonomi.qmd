@@ -1,0 +1,390 @@
+
+---
+title: "Gap-analyse 2 – Åpen økonomi"
+format: html
+---
+
+# Faglige spørsmål
+
+Området åpen økonomi skal gjøre det enkelt å undersøke:
+
+- hvordan eksport og import utvikler seg
+- hvordan utenrikshandelen bidrar til norsk økonomi
+- hvordan handelsbalansen utvikler seg
+- hvor åpen norsk økonomi er målt ved eksport og import relativt til BNP
+- hvordan kronekursen utvikler seg
+- hvordan valutakurs og utenrikshandel kan ses i sammenheng
+- hvordan oljeprisen påvirker en petroleumseksporterende økonomi
+- hvordan norsk utenrikshandel kan sammenlignes med andre land
+
+Et bredere åpen-økonomi-perspektiv kan også omfatte:
+
+- driftsbalanse
+- bytteforhold
+- petroleumseksport
+- kapitalstrømmer
+
+Disse størrelsene skal vurderes etter om de tilfører vesentlig analytisk
+verdi, ikke automatisk behandles som obligatoriske serier.
+
+# Baseline fra gap-analyse 1
+
+Gap-analyse 2 vurderer om eksisterende dekning av utenrikshandel,
+valutakurs og internasjonale sammenligninger er tilstrekkelig, og om
+det finnes sentrale åpen-økonomi-variable som fortsatt mangler.
+
+# Dagens norske datadekning
+
+## Eksport
+
+NorMacro inneholder:
+
+- `Eksport`
+- `Eksport_lopende`
+- `Eksportvekst`
+- `Eksportandel_BNP`
+
+Hovedseriene dekker perioden:
+
+- 1970–2025
+
+Eksport kan dermed analyseres som:
+
+- realt nivå
+- nominelt nivå
+- årlig vekst
+- andel av BNP
+
+Status: **Godt dekket**
+
+## Import
+
+NorMacro inneholder:
+
+- `Import`
+- `Import_lopende`
+- `Importvekst`
+- `Importandel_BNP`
+
+Også disse seriene dekker perioden tilbake til 1970.
+
+Importblokken er dermed symmetrisk med eksportblokken.
+
+Status: **Godt dekket**
+
+## Handelsbalanse
+
+NorMacro beregner:
+
+- `Handelsbalanse`
+- `Handelsbalanse_lopende`
+- `Handelsbalanse_andel_BNP`
+
+Handelsbalansen kan dermed analyseres både:
+
+- i faste priser
+- i løpende priser
+- relativt til BNP
+
+Tidsdekningen er 1970–2025.
+
+Dette gir en sterk og konsistent handelsblokk.
+
+Status: **Godt dekket**
+
+# Valutakurs
+
+NorMacro inneholder:
+
+- `Valutakurs_I44`
+- `Valutakurs_I44_vekst`
+
+`Valutakurs_I44` er Norges Banks importveide kronekursindeks I-44.
+
+Tidsdekningen er:
+
+- indeks: 1990–2025
+- vekst: 1991–2025
+
+Dette er et godt valg av representativ valutakursindikator fordi
+NorMacro ikke trenger å fylle hoveddatasettet med en rekke bilaterale
+valutakurser.
+
+I-44 gir et aggregert mål på kronens verdi mot valutaene til viktige
+handelspartnere.
+
+Status: **Godt dekket**
+
+# Olje og energi
+
+NorMacro inneholder:
+
+- `Oljepris_USD`
+- `Oljeprisvekst`
+
+Oljeprisen er representert ved Brent Blend og dekker:
+
+- nivå: 1987–2025
+- vekst: 1988–2025
+
+Dette gjør det mulig å analysere en sentral ekstern prisimpuls for norsk
+økonomi.
+
+NorMacro inneholder derimot ikke eksplisitte serier for:
+
+- oljeeksport
+- gasseksport
+- petroleumseksport
+
+Oljeprisen representerer derfor petroleumsdimensjonen som prisimpuls,
+mens petroleumseksporten inngår i samlet eksport.
+
+Dette vurderes ikke som et nødvendig gap for den generelle
+åpen-økonomi-blokken, men petroleumseksport kan være et relevant senere
+kompletteringspunkt.
+
+# Driftsbalanse
+
+NorMacro inneholder ikke en eksplisitt serie for driftsbalansen.
+
+Driftsbalansen er konseptuelt bredere enn handelsbalansen og omfatter
+også blant annet inntekts- og overføringsstrømmer mot utlandet.
+
+For en liten åpen økonomi med betydelige finansielle fordringer på
+utlandet kan dette tilføre informasjon som handelsbalansen alene ikke
+fanger.
+
+Mangelen vurderes derfor som et **reelt mulig datagap**.
+
+Samtidig er ikke driftsbalansen nødvendig for å besvare de sentrale
+handels- og valutakursspørsmålene som NorMacro allerede støtter.
+
+Status: **Kompletteringskandidat**
+
+# Bytteforhold
+
+NorMacro inneholder ikke en eksplisitt serie for bytteforholdet
+(terms of trade).
+
+Dette er særlig relevant for Norge fordi endringer i eksportpriser,
+blant annet olje- og gasspriser, kan påvirke realinntekten uten at dette
+fanges fullt ut av tradisjonelle volumindikatorer.
+
+Bytteforhold kan derfor tilføre en økonomisk dimensjon som verken:
+
+- eksportvolum
+- handelsbalanse
+- oljepris
+
+alene representerer.
+
+Dette vurderes som en **reell kompletteringskandidat**, men ikke som et
+krav for grønn status i dagens NorMacro.
+
+# Internasjonal dekning
+
+Det internasjonale datalaget inneholder:
+
+- `Eksport`
+- `Eksport_lopende`
+- `Eksportandel_BNP`
+- `Import`
+- `Import_lopende`
+- `Importandel_BNP`
+- `Handelsbalanse`
+- `Handelsbalanse_lopende`
+- `Handelsbalanse_andel_BNP`
+
+Dette gir en svært konsistent internasjonal handelsblokk.
+
+Eksport og import er basert på harmoniserte Eurostat-data, mens
+handelsbalansen beregnes fra disse seriene.
+
+Status: **Godt dekket**
+
+Det internasjonale hoveddatasettet inneholder derimot ikke en generell
+valutakursserie eller driftsbalanse.
+
+Dette begrenser enkelte bredere internasjonale åpen-økonomi-analyser,
+men er ikke nødvendig for de sentrale handelssammenligningene.
+
+# Analyse og API
+
+NorMacro har blant annet:
+
+- `get_exports()`
+- `get_imports()`
+- `compare_series()`
+- `compare_periods()`
+- `compare_countries()`
+- `plot_series()`
+- korrelasjonsverktøy
+- regresjonsverktøy
+- `macro_report()`
+- `render_macro_report()`
+
+Eksisterende analyseverktøy gjør det mulig å undersøke sammenhenger
+mellom:
+
+- eksport og BNP
+- import og innenlandsk aktivitet
+- handelsbalanse og konjunkturer
+- valutakurs og eksport
+- valutakurs og import
+- valutakurs og inflasjon
+- oljepris og norsk økonomi
+
+Det er ikke identifisert behov for et eget spesialisert
+åpen-økonomi-API.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+Metadataene skiller tydelig mellom:
+
+- eksport og import
+- faste og løpende priser
+- vekstrater
+- BNP-andeler
+- handelsbalanse
+- valutakursindeks
+- oljepris
+
+`Valutakurs_I44` er eksplisitt beskrevet som importveid
+kronekursindeks.
+
+`Handelsbalanse` er eksplisitt definert som eksport minus import.
+
+Dette gir god begrepsmessig transparens.
+
+**Metadata: Grønn**
+
+# Undervisning og dokumentasjon
+
+Dagens datagrunnlag støtter sentrale temaer innen åpen økonomi:
+
+- eksport og import
+- handelsbalanse
+- økonomisk åpenhet
+- valutakurs
+- valutakurs og konkurranseevne
+- oljepris og norsk økonomi
+- konjunkturer og utenrikshandel
+- internasjonale handelssammenligninger
+
+I-44 er særlig nyttig pedagogisk fordi den gir én representativ
+kronekursindikator fremfor en samling bilaterale valutakurser.
+
+Driftsbalanse og bytteforhold kan senere utvide undervisningsmulighetene,
+men er ikke nødvendige for å dekke kjernen.
+
+**Undervisning: Grønn**
+
+# Gap-status
+
+| Område | Status | Kommentar |
+|---|---|---|
+| Eksport | Dekket | Real, nominell, vekst og BNP-andel |
+| Import | Dekket | Real, nominell, vekst og BNP-andel |
+| Handelsbalanse | Dekket | Real, nominell og BNP-andel |
+| Valutakurs | Dekket | I-44 fra 1990 |
+| Oljepris | Dekket | Brent fra 1987 |
+| Internasjonal handel | Dekket | Harmoniserte eksport-/importserier |
+| Driftsbalanse | Åpent | Relevant kompletteringskandidat |
+| Bytteforhold | Åpent | Relevant kompletteringskandidat |
+| Petroleumseksport | Åpent | Mulig komplettering, lavere prioritet |
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 2 | Begrunnelse |
+|---|---|---|
+| Data | 🟢 | Handel, valutakurs og oljepris gir god kjernedekning |
+| Analyse | 🟢 | Generelle analyseverktøy dekker sentrale sammenhenger |
+| Metadata | 🟢 | Variabler og transformasjoner er tydelig definert |
+| Undervisning | 🟢 | Sentrale åpen-økonomi-spørsmål kan analyseres |
+
+# Samlet vurdering
+
+**Samlet gap: Lite**
+
+NorMacro har en sterk åpen-økonomi-kjerne.
+
+Særlig handelsblokken er komplett og konsistent:
+
+- eksport
+- import
+- handelsbalanse
+- faste priser
+- løpende priser
+- vekst
+- BNP-andeler
+
+I tillegg gir I-44 en representativ kronekursindikator og Brent-prisen
+en sentral ekstern prisvariabel.
+
+# Anbefalte tiltak
+
+## 1. Undersøk driftsbalanse
+
+**Prioritet: Middels**
+
+Kartlegg om en stabil, årlig og godt dokumentert driftsbalanseserie kan
+legges til uten å gjøre datalaget unødvendig detaljert.
+
+En BNP-andel vil sannsynligvis være særlig nyttig.
+
+## 2. Undersøk bytteforhold
+
+**Prioritet: Middels**
+
+Kartlegg tilgjengelige kilder og definisjoner for et norsk
+bytteforholdsmål.
+
+Dette kan være særlig verdifullt for analyse av norsk realinntekt og
+petroleumsrelaterte prisendringer.
+
+## 3. Vurder petroleumseksport separat
+
+**Prioritet: Lav–middels**
+
+Undersøk om én aggregert petroleumseksportserie tilfører tilstrekkelig
+analytisk verdi utover samlet eksport og oljepris.
+
+Unngå et stort detaljert sett av olje- og gassserier uten et klart
+analysebehov.
+
+# Prioritering
+
+**Samlet prioritet videre: Lav–middels**
+
+Dagens kjerne krever ingen kritiske utvidelser.
+
+Driftsbalanse og bytteforhold bør likevel undersøkes som konkrete
+kandidater i neste datakompletteringsrunde.
+
+# Konklusjon
+
+Åpen økonomi er godt dekket i NorMacro.
+
+Eksport, import og handelsbalanse har lang og konsistent historikk.
+Valutakurs er representert ved I-44, og oljeprisen gir en sentral
+petroleumsrelatert prisindikator.
+
+Gap-analyse 2 identifiserer likevel to økonomisk meningsfulle
+kompletteringskandidater:
+
+- driftsbalanse
+- bytteforhold
+
+Disse er ikke nødvendige for grønn status, men er gode kandidater for
+senere utvidelse.
+
+Endelig status:
+
+- **Data: 🟢**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟢**
+- **Samlet gap: Lite**
+- **Prioritet: Lav–middels**

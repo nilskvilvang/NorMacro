@@ -1,0 +1,426 @@
+
+---
+title: "Gap-analyse 2 – Finanspolitikk"
+format: html
+---
+
+# Faglige spørsmål
+
+Finanspolitikkdelen i NorMacro skal gjøre det enkelt å undersøke:
+
+- hvordan offentlige inntekter utvikler seg
+- hvordan offentlige utgifter utvikler seg
+- hvordan budsjettbalansen utvikler seg
+- hvordan offentlig gjeld og nettofordringer utvikler seg
+- hvordan offentlig konsum og investeringer utvikler seg
+- hvordan finanspolitikken kan ses i sammenheng med konjunkturene
+- hvordan sentrale offentlige finansstørrelser målt som andel av BNP
+  utvikler seg
+
+NorMacro skal først og fremst tilby observerbare og transparente
+makroøkonomiske størrelser.
+
+Mer modell- eller regelbaserte mål på finanspolitisk innretning bør bare
+inkluderes dersom de gir tydelig merverdi og kan dokumenteres godt.
+
+# Baseline fra gap-analyse 1
+
+Den første gap-analysen vurderte finanspolitikk slik:
+
+| Dimensjon | Status |
+|---|---|
+| Data | 🟢 |
+| Analyse | 🟢 |
+| Metadata | 🟢 |
+| Undervisning | 🟢 |
+| Samlet gap | Lite |
+| Prioritet videre | Lav |
+
+Tidligere mangler innen offentlige finanser ble i hovedsak lukket før
+2.1.0.
+
+Blokken ble blant annet komplettert med:
+
+- `Offentlige_inntekter`
+- `Nettofinansinvestering`
+- `Offentlige_inntekter_andel_BNP`
+- `Offentlige_utgifter_andel_BNP`
+- `Nettofinansinvestering_andel_BNP`
+
+Gap-analyse 2 vurderer om denne dekningen fortsatt er tilstrekkelig.
+
+# Dagens datadekning
+
+## Offentlige inntekter og utgifter
+
+NorMacro inneholder:
+
+- `Offentlige_inntekter`
+- `Offentlige_utgifter`
+- `Statlige_utgifter`
+- `Kommunale_utgifter`
+
+Dette gjør det mulig å studere både samlet offentlig forvaltning og
+fordelingen mellom statlig og kommunal sektor.
+
+De sentrale totale inntekts- og utgiftsseriene dekker perioden
+1995–2025.
+
+Status: **Godt dekket**
+
+## Budsjettbalanse
+
+NorMacro inneholder:
+
+- `Nettofinansinvestering`
+- `Nettofinansinvestering_andel_BNP`
+
+`Nettofinansinvestering` representerer offentlig forvaltnings
+finansielle overskudd eller underskudd.
+
+Dette dekker kravkartets behov for et mål på offentlig
+budsjett-/finansbalanse.
+
+Det er derfor ikke nødvendig med en parallell variabel kalt
+`Budsjettbalanse` dersom dette bare ville representere samme økonomiske
+størrelse.
+
+Status: **Godt dekket**
+
+## Offentlig gjeld og nettofordringer
+
+NorMacro inneholder:
+
+- `Offentlig_gjeld`
+- `Offentlig_gjeld_andel_BNP`
+- `Offentlig_nettofordringer`
+- `Offentlig_nettofordringer_andel_BNP`
+
+Dette gir både brutto gjeld og en bredere netto balanseindikator.
+
+Tidsdekningen er 1995–2025.
+
+For Norge er nettofordringer særlig relevante fordi offentlig sektor har
+betydelige finansielle eiendeler.
+
+Status: **Godt dekket**
+
+## Offentlig konsum
+
+NorMacro inneholder:
+
+- `Offentlig_konsum`
+- `Offentlig_konsum_lopende`
+- `Offentlig_konsum_vekst`
+- `Offentlig_konsum_andel_BNP`
+
+Seriene dekker perioden tilbake til 1970.
+
+Dette gjør det mulig å analysere både real utvikling, nominelt nivå og
+størrelsen relativt til økonomien.
+
+Status: **Godt dekket**
+
+## Offentlige investeringer
+
+NorMacro inneholder:
+
+- `Offentlige_investeringer`
+- `Offentlige_investeringer_lopende`
+- `Offentlige_investeringer_vekst`
+- `Offentlige_investeringer_andel_BNP`
+
+Også disse seriene går tilbake til 1970.
+
+Dette gir et godt grunnlag for analyse av den offentlige
+investeringskomponenten.
+
+Status: **Godt dekket**
+
+# BNP-andeler
+
+NorMacro har følgende sentrale finanspolitiske BNP-andeler:
+
+- `Offentlig_gjeld_andel_BNP`
+- `Offentlig_nettofordringer_andel_BNP`
+- `Offentlige_inntekter_andel_BNP`
+- `Offentlige_utgifter_andel_BNP`
+- `Nettofinansinvestering_andel_BNP`
+- `Offentlige_investeringer_andel_BNP`
+- `Offentlig_konsum_andel_BNP`
+
+Dette gjør det mulig å skille mellom nominelle nivåendringer og
+utviklingen relativt til økonomiens størrelse.
+
+Status: **Godt dekket**
+
+# Finanspolitikken og konjunkturene
+
+Finanspolitikkdataene kan kombineres med NorMacros øvrige
+konjunkturdata.
+
+Eksempler er:
+
+- BNP Fastlands-Norge
+- BNP-vekst
+- arbeidsledighet
+- inflasjon
+- konjunkturindikator
+- `business_cycle()`
+
+Dette gjør det mulig å undersøke hvordan offentlige inntekter, utgifter,
+konsum, investeringer og finansbalanse varierer med
+konjunktursituasjonen.
+
+Det er ikke nødvendig med en egen `fiscal_cycle()`-funksjon for å
+dekke dette behovet.
+
+# Strukturell saldo og finanspolitisk impuls
+
+NorMacro inneholder ikke egne serier for:
+
+- strukturell budsjettbalanse
+- oljekorrigert budsjettbalanse
+- strukturelt oljekorrigert underskudd
+- finanspolitisk impuls
+
+Disse størrelsene kan være svært relevante i analyse av norsk
+finanspolitikk.
+
+De er imidlertid mer metode- og institusjonsavhengige enn de ordinære
+nasjonalregnskapsbaserte størrelsene i NorMacro.
+
+De krever blant annet vurderinger av:
+
+- konjunkturkorrigering
+- oljeinntekter
+- strukturelle skatteinntekter
+- definisjon av finanspolitisk impuls
+
+Mangelen vurderes derfor ikke som et nødvendig datagap i dagens
+NorMacro.
+
+Dersom en slik serie senere vurderes, bør den hentes fra en autoritativ
+offentlig kilde og dokumenteres eksplisitt, fremfor å beregnes
+selvstendig av NorMacro.
+
+# Internasjonal dekning
+
+Det internasjonale datalaget inneholder:
+
+- `Offentlig_gjeld_andel_BNP`
+- `Offentlig_konsum`
+- `Offentlig_konsum_lopende`
+- `Offentlig_konsum_vekst`
+- `Offentlig_konsum_andel_BNP`
+
+Dette gir et godt minimumsgrunnlag for sammenligning av:
+
+- offentlig gjeld
+- offentlig konsum
+- offentlig sektors relative størrelse
+
+Den internasjonale dekningen er imidlertid smalere enn den norske.
+
+Det finnes ikke tilsvarende harmoniserte serier for blant annet:
+
+- offentlige inntekter
+- samlede offentlige utgifter
+- nettofinansinvestering / offentlig balanse
+
+Dette begrenser mer komplette internasjonale finanspolitiske
+sammenligninger.
+
+Det vurderes som et **mulig senere kompletteringspunkt**, men ikke som
+et vesentlig gap i NorMacros primære norske finanspolitikkdekning.
+
+# Analyse og API
+
+Sentrale funksjoner omfatter blant annet:
+
+- `get_government_debt()`
+- `get_public_consumption()`
+- `get_public_sector_macro()`
+- `public_sector_analysis()`
+- `plot_public_sector_macro()`
+- `compare_series()`
+- `compare_periods()`
+- `compare_countries()`
+- `business_cycle()`
+- `macro_report()`
+
+Dette gir både generelle og enkelte domeneorienterte arbeidsflyter.
+
+Det er ikke identifisert behov for flere spesialiserte
+finanspolitikkfunksjoner.
+
+**Analyse/API: Grønn**
+
+# Metadata og oppdagbarhet
+
+Metadataene skiller tydelig mellom:
+
+- inntekter
+- utgifter
+- gjeld
+- nettofordringer
+- nettofinansinvestering
+- konsum
+- investeringer
+- nivå
+- vekst
+- BNP-andeler
+
+Dette gjør det mulig å forstå både hva seriene måler og hvilken
+økonomisk dimensjon de representerer.
+
+`Nettofinansinvestering` er et særlig viktig eksempel, fordi metadataene
+gjør klart at serien representerer offentlig forvaltnings finansielle
+overskudd eller underskudd.
+
+**Metadata: Grønn**
+
+# Undervisning og dokumentasjon
+
+Dagens data gjør det mulig å arbeide med sentrale finanspolitiske
+temaer:
+
+- offentlig sektors størrelse
+- inntekter og utgifter
+- overskudd og underskudd
+- offentlig gjeld
+- statlig og kommunal sektor
+- offentlig konsum og investering
+- finanspolitikk gjennom konjunkturene
+- Norge sammenlignet med andre land
+
+Kombinasjonen av nivåserier og BNP-andeler er særlig nyttig pedagogisk.
+
+Det er ikke identifisert et eget undervisningsgap.
+
+**Undervisning: Grønn**
+
+# Tidligere gap – status
+
+| Område | Status | Kommentar |
+|---|---|---|
+| Offentlige inntekter | Lukket | Serie og BNP-andel finnes |
+| Offentlige utgifter | Dekket | Total, statlig og kommunal dekning |
+| Budsjett-/finansbalanse | Lukket | `Nettofinansinvestering` dekker behovet |
+| Offentlig gjeld | Dekket | Nivå og BNP-andel |
+| Nettofordringer | Dekket | Nivå og BNP-andel |
+| Offentlig konsum | Dekket | Nivå, vekst, løpende priser og andel |
+| Offentlige investeringer | Dekket | Nivå, vekst, løpende priser og andel |
+| Konjunktursammenheng | Dekket | Kan analyseres med eksisterende verktøy |
+
+# Nye gap
+
+Det er ikke identifisert nye vesentlige gap i det norske datalaget.
+
+Gap-analyse 2 tydeliggjør likevel ett mulig senere forbedringsområde:
+
+## Internasjonal offentlig balanse og inntekter/utgifter
+
+Den internasjonale finanspolitikkdekningen er vesentlig smalere enn den
+norske.
+
+Dersom NorMacro senere ønsker mer komplette finanspolitiske
+landssammenligninger, kan harmoniserte serier for:
+
+- offentlige inntekter
+- offentlige utgifter
+- offentlig underskudd/nettofinansinvestering
+
+vurderes.
+
+Dette er ikke nødvendig for å opprettholde grønn status i det norske
+fagområdet.
+
+# D/A/M/U-vurdering
+
+| Dimensjon | Analyse 1 | Analyse 2 | Begrunnelse |
+|---|---|---|---|
+| Data | 🟢 | 🟢 | Norsk finanspolitisk kjernedekning er bred og konsistent |
+| Analyse | 🟢 | 🟢 | Generelle og offentlige sektor-verktøy dekker behovet |
+| Metadata | 🟢 | 🟢 | Begreper, nivåer og BNP-andeler er tydelige |
+| Undervisning | 🟢 | 🟢 | Sentrale finanspolitiske spørsmål kan undersøkes direkte |
+
+# Samlet vurdering
+
+**Samlet gap: Lite**
+
+Finanspolitikk er et av de mest komplette norske fagområdene i
+NorMacro.
+
+Pakken dekker:
+
+- offentlige inntekter
+- offentlige utgifter
+- finansbalanse
+- offentlig gjeld
+- nettofordringer
+- offentlig konsum
+- offentlige investeringer
+- relevante BNP-andeler
+
+og gjør det mulig å kombinere disse med konjunkturdata.
+
+# Anbefalte tiltak
+
+## Ingen høyt prioritert norsk datainnhenting
+
+Den norske finanspolitikkdelen krever ikke ytterligere serier for å
+dekke kravkartet.
+
+## Vurder senere internasjonal komplettering
+
+**Prioritet: Lav–middels**
+
+Ved senere arbeid med internasjonale data kan det vurderes å legge til
+harmoniserte serier for:
+
+- offentlig balanse
+- offentlige inntekter
+- offentlige utgifter
+
+dersom stabile og sammenlignbare Eurostat-serier finnes.
+
+## Ikke beregn strukturell saldo internt
+
+NorMacro bør ikke utvikle en egen modell for strukturell eller
+oljekorrigert budsjettbalanse.
+
+Hvis slike indikatorer senere inkluderes, bør de komme fra en
+autoritativ kilde og ha tydelig metodebeskrivelse.
+
+# Prioritering
+
+**Samlet prioritet videre: Lav**
+
+Videre arbeid bør primært bestå av vedlikehold og eventuelt
+internasjonal komplettering.
+
+# Konklusjon
+
+Gap-analyse 2 bekrefter i hovedsak vurderingen fra første analyse.
+
+Den norske finanspolitikkdelen er bred og faglig konsistent.
+
+`Nettofinansinvestering` gir et eksplisitt mål på offentlig
+finansbalanse, samtidig som inntekter, utgifter, gjeld,
+nettofordringer, konsum og investeringer er dekket.
+
+Ingen vesentlige nye norske gap er identifisert.
+
+Den internasjonale dekningen er smalere, men dette vurderes som et
+senere kompletteringspunkt og ikke som en grunn til å nedgradere
+fagområdet.
+
+Endelig status:
+
+- **Data: 🟢**
+- **Analyse: 🟢**
+- **Metadata: 🟢**
+- **Undervisning: 🟢**
+- **Samlet gap: Lite**
+- **Prioritet: Lav**
