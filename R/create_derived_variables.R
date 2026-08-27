@@ -81,6 +81,9 @@ create_derived_variables <- function(data) {
       Handelsbalanse_andel_BNP =
         Handelsbalanse_lopende / BNP_lopende * 100,
 
+      Driftsbalanse_andel_BNP =
+        Driftsbalanse / BNP_lopende * 100,
+
       Fastlandsinvesteringer_andel_BNP_Fastland =
         Fastlandsinvesteringer_lopende /
         BNP_Fastland_lopende * 100,

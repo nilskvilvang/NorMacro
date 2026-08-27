@@ -22,6 +22,8 @@ build_international_database <- function(refresh = FALSE) {
   interest_rate <- get_long_interest_rate(refresh = refresh)
   short_interest_rate <- get_short_interest_rate(refresh = refresh)
   wages <- get_wages(refresh = refresh)
+  current_account <- get_current_account_balance(refresh = refresh
+  )
   
   international <-
     hicp |>
@@ -38,6 +40,7 @@ build_international_database <- function(refresh = FALSE) {
     dplyr::full_join(retail_trade, by = join_by) |>
     dplyr::full_join(exports, by = join_by) |>
     dplyr::full_join(imports, by = join_by) |>
+    dplyr::full_join(current_account, by = join_by) |>
     dplyr::full_join(private_consumption, by = join_by) |>
     dplyr::full_join(public_consumption, by = join_by) |>
     dplyr::full_join(investment, by = join_by) |>

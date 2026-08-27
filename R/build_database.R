@@ -14,6 +14,7 @@ build_database <- function() {
   oljepris <- get_oljepris()
   valutakurs <- get_valutakurs()
   utenrikshandel <- get_utenrikshandel()
+  driftsbalanse <- get_driftsbalanse()
   oseax <- get_oseax()
   strompris <- get_strompris()
   offentlig_finans <- get_offentlig_finans()
@@ -50,6 +51,7 @@ build_database <- function() {
     dplyr::left_join(boligpriser, by = "Aar") |>
     dplyr::left_join(oljepris, by = "Aar") |>
     dplyr::left_join(utenrikshandel, by = "Aar") |>
+    dplyr::left_join(driftsbalanse, by = "Aar") |>
     dplyr::left_join(oseax, by = "Aar") |>
     dplyr::left_join(strompris, by = "Aar") |>
     dplyr::left_join(offentlig_finans, by = "Aar") |>

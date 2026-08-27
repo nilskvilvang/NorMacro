@@ -194,5 +194,7 @@ utils::globalVariables(c(
   "Investeringer_lopende",
   "Offentlig_konsum_lopende",
   "Offentlige_investeringer_lopende",
-  "Privat_konsum_lopende"
+  "Privat_konsum_lopende",
+  "Driftsbalanse",
+  "Driftsbalanse_andel_BNP"
 ))

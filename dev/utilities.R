@@ -84,6 +84,10 @@
 # devtools::check()
 # slett tmp-report før check i bash: rm -rf tmp-report
 
+## .git tester
+# git diff --check
+# git status --short
+
 ## Sjekke vignetter
 # browseVignettes("NorMacro")
 
