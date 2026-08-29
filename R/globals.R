@@ -1,5 +1,7 @@
 utils::globalVariables(c(
   "Aar",
+  "Aksjekursindeks",
+  "Aksjekursindeks_vekst",
   "Analyse_type",
   "Andel_mangler",
   "Ansatte",
@@ -99,7 +101,6 @@ utils::globalVariables(c(
   "Nettofinansinvestering_andel_BNP",
   "Nettofordringer",
   "OBS_VALUE",
-  "OSEAX",
   "Offentlig forvaltning",
   "Offentlig_gjeld",
   "Offentlig_konsum",
