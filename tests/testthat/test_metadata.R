@@ -2,8 +2,8 @@
 testthat::test_that(
   "all Norwegian variables have metadata",
   {
-    normacro_test <- get_normacro()
-    metadata_test <- get_metadata()
+    normacro_test <- normacro
+    metadata_test <- metadata
 
     norwegian_metadata <- metadata_test |>
       dplyr::filter(
@@ -28,7 +28,7 @@ testthat::test_that(
 testthat::test_that(
   "Metadata has expected columns",
   {
-    metadata_test <- get_metadata()
+    metadata_test <- metadata
 
     expected_cols <- c(
       "Variabel",

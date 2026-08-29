@@ -1,5 +1,6 @@
 
 test_that("get_driftsbalanse returns complete annual Norwegian data", {
+  skip_if_not_live_api()
   x <- get_driftsbalanse()
 
   expect_equal(min(x$Aar), 1981L)
@@ -14,7 +15,7 @@ test_that("get_driftsbalanse returns complete annual Norwegian data", {
 
 
 test_that("Norwegian current account share is available", {
-  x <- get_normacro()
+  x <- normacro
 
   y <- x |>
     dplyr::filter(
@@ -28,6 +29,7 @@ test_that("Norwegian current account share is available", {
 
 
 test_that("international current account balance has expected coverage", {
+  skip_if_not_live_api()
   x <- get_current_account_balance()
 
   coverage <- x |>
