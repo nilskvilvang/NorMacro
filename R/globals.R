@@ -67,6 +67,7 @@ utils::globalVariables(c(
   "Husholdningsgjeldsvekst",
   "Husholdningsnettofordringsrate",
   "Husholdningssparing",
+  "Igangsatte_boliger",
   "Import",
   "Industriproduksjon",
   "Inflasjon",

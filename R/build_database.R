@@ -31,6 +31,7 @@ build_database <- function() {
   investeringer <- get_investeringer()
   industriproduksjon <- get_industriproduksjon()
   byggeaktivitet <- get_byggeaktivitet()
+  igangsatte_boliger <- get_igangsatte_boliger()
   detaljhandel <- get_detaljhandel()
   kapasitetsutnytting <- get_kapasitetsutnytting()
   konjunkturindikator <- get_konjunkturindikator()
@@ -70,6 +71,7 @@ build_database <- function() {
     dplyr::left_join(investeringer, by = "Aar") |>
     dplyr::left_join(industriproduksjon, by = "Aar") |>
     dplyr::left_join(byggeaktivitet, by = "Aar") |>
+    dplyr::left_join(igangsatte_boliger, by = "Aar") |>
     dplyr::left_join(detaljhandel, by = "Aar") |>
     dplyr::left_join(kapasitetsutnytting, by = "Aar") |>
     dplyr::left_join(konjunkturindikator, by = "Aar") |>
