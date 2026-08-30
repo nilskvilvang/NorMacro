@@ -88,6 +88,9 @@ create_derived_variables <- function(data) {
         Fastlandsinvesteringer_lopende /
         BNP_Fastland_lopende * 100,
 
+      Investeringer_andel_BNP =
+        Investeringer_lopende / BNP_lopende * 100,
+
       Netto_IIP_andel_BNP =
         .data$Netto_IIP / .data$BNP_lopende * 100,
 

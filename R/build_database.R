@@ -28,6 +28,7 @@ build_database <- function() {
   sparing <- get_sparing()
   disponibel_inntekt <- get_disponibel_inntekt()
   fastlandsinvesteringer <- get_fastlandsinvesteringer()
+  investeringer <- get_investeringer()
   industriproduksjon <- get_industriproduksjon()
   byggeaktivitet <- get_byggeaktivitet()
   detaljhandel <- get_detaljhandel()
@@ -66,6 +67,7 @@ build_database <- function() {
     dplyr::left_join(sparing, by = "Aar") |>
     dplyr::left_join(disponibel_inntekt, by = "Aar") |>
     dplyr::left_join(fastlandsinvesteringer, by = "Aar") |>
+    dplyr::left_join(investeringer, by = "Aar") |>
     dplyr::left_join(industriproduksjon, by = "Aar") |>
     dplyr::left_join(byggeaktivitet, by = "Aar") |>
     dplyr::left_join(detaljhandel, by = "Aar") |>

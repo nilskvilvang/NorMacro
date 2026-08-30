@@ -73,6 +73,7 @@ utils::globalVariables(c(
   "Inflasjon_JAE",
   "internasjonal_investeringsposisjon",
   "Investeringer",
+  "Investeringer_lopende",
   "KOKartkap0000",
   "KOSTRA_gruppe",
   "KOSTRA_gruppe_navn",
