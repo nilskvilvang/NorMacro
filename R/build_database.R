@@ -15,6 +15,7 @@ build_database <- function() {
   valutakurs <- get_valutakurs()
   utenrikshandel <- get_utenrikshandel()
   driftsbalanse <- get_driftsbalanse()
+  netto_iip <- get_netto_iip()
   aksjekursindeks <- get_aksjekursindeks()
   strompris <- get_strompris()
   offentlig_finans <- get_offentlig_finans()
@@ -52,6 +53,7 @@ build_database <- function() {
     dplyr::left_join(oljepris, by = "Aar") |>
     dplyr::left_join(utenrikshandel, by = "Aar") |>
     dplyr::left_join(driftsbalanse, by = "Aar") |>
+    dplyr::left_join(netto_iip, by = "Aar") |>
     dplyr::left_join(aksjekursindeks, by = "Aar") |>
     dplyr::left_join(strompris, by = "Aar") |>
     dplyr::left_join(offentlig_finans, by = "Aar") |>
