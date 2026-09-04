@@ -22,10 +22,10 @@ Imports:
     dplyr,
     ggplot2,
     readr,
-    rio, 
-    tidyr, 
-    stringr, 
-    purrr, 
+    rio,
+    tidyr,
+    stringr,
+    purrr,
     tibble,
     scales,
     pxweb,
@@ -35,7 +35,10 @@ Imports:
     zoo,
     cli,
     rlang,
-    httr2
+    httr2,
+    readxl,
+    rvest,
+    stringi
 Depends:
     R (>= 4.1.0)
 Suggests:

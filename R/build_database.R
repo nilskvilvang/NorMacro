@@ -35,6 +35,7 @@ build_database <- function() {
   detaljhandel <- get_detaljhandel()
   kapasitetsutnytting <- get_kapasitetsutnytting()
   konjunkturindikator <- get_konjunkturindikator()
+  inflation_expectations <- get_inflation_expectations()
   ressursknapphet <- get_ressursknapphet()
   ordrebeholdning <- get_ordrebeholdning()
   pengemarkedsrente <- get_pengemarkedsrente()
@@ -75,6 +76,7 @@ build_database <- function() {
     dplyr::left_join(detaljhandel, by = "Aar") |>
     dplyr::left_join(kapasitetsutnytting, by = "Aar") |>
     dplyr::left_join(konjunkturindikator, by = "Aar") |>
+    dplyr::left_join(inflation_expectations, by = "Aar") |>
     dplyr::left_join(ressursknapphet, by = "Aar") |>
     dplyr::left_join(ordrebeholdning, by = "Aar") |>
     dplyr::left_join(pengemarkedsrente, by = "Aar") |>
