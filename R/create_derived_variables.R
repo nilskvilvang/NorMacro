@@ -78,6 +78,14 @@ create_derived_variables <- function(data) {
       Importandel_BNP =
         Import_lopende / BNP_lopende * 100,
 
+      Bytteforhold =
+        (
+          Eksport_lopende / Eksport
+        ) /
+        (
+          Import_lopende / Import
+        ) * 100,
+
       Handelsbalanse_andel_BNP =
         Handelsbalanse_lopende / BNP_lopende * 100,
 
