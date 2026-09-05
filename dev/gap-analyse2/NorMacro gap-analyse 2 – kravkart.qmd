@@ -108,10 +108,10 @@ Enkel bruk skal ikke hindre videre analyse.
 | **6. Finanspolitikk** | Hvordan utvikler offentlige inntekter, utgifter, budsjettbalanse og gjeld seg? Hvordan kan finanspolitikken ses i sammenheng med konjunkturene? |
 | **7. Konsum og investering** | Hvordan varierer konsum og investering med inntekt, renter og konjunkturer? |
 | **8. Åpen økonomi** | Hvordan utvikler eksport, import og handelsbalanse seg? Hvordan påvirkes norsk økonomi av utviklingen internasjonalt? |
-| **9. Valutakurs** | Hvordan har kronen utviklet seg? Hvordan henger valutakursen sammen med renter, inflasjon og internasjonale forhold? |
-| **10. Lønn og produktivitet** | Hvordan utvikler lønn, reallønn og produktivitet seg? Hvordan henger disse størrelsene sammen over tid? |
-| **11. Langsiktig vekst** | Hvordan har produksjon, produktivitet og levestandard utviklet seg over tid? Hvordan skiller utviklingen seg mellom land? |
-| **12. Kriser og historiske episoder** | Hva skjedde med økonomien under tidligere kriser og store økonomiske sjokk? Hvordan reagerte sentrale makroøkonomiske størrelser? |
+| **9. Finansmarkeder** | Hvordan utvikler sentrale finansmarkedsindikatorer seg? Hva forteller renter, aksjemarked og andre markedsdata om økonomisk utvikling og risiko? |
+| **10. Boligmarked** | Hvordan utvikler boligpriser og boligbygging seg? Hvordan henger boligmarkedet sammen med renter, inntekt og konjunkturer? |
+| **11. Offentlig sektor** | Hvordan utvikler offentlig sektors størrelse, inntekter, utgifter og gjeld seg? Hvordan kan utviklingen sammenlignes over tid og mellom land? |
+| **12. Utenriksøkonomi** | Hvordan utvikler driftsbalanse, utenriksformue og bytteforhold seg? Hva forteller disse størrelsene om Norges økonomiske forhold til utlandet? |
 | **13. Internasjonal makro** | Hvordan skiller Norge seg fra andre økonomier? I hvilken grad beveger konjunkturer, inflasjon, arbeidsmarked og renter seg sammen mellom land? |
 | **14. Finansmarkeder og forventninger** | Hva forteller renter, rentekurve og relevante finansmarkedsindikatorer om økonomien og forventningene fremover? |
 
@@ -297,24 +297,58 @@ Disse skal vurderes på nytt og ikke automatisk videreføres som gap.
 
 # Samlet gap-matrise – analyse 2
 
-Denne tabellen fylles ut etter hvert som fagområdene gjennomgås.
+Tabellen oppsummerer resultatene fra de 14 faganalysene i gap-analyse 2.
+Statusene viser situasjonen på analysetidspunktet og skal derfor ikke
+tolkes som dagens status etter senere utviklingsarbeid.
 
-| Fagområde | Data | Analyse | Metadata | Undervisning | Endring fra baseline | Samlet gap | Prioritet |
-|---|---|---|---|---|---|---|---|
-| 1. Nasjonalregnskap | – | – | – | – | – | – | – |
-| 2. Konjunkturer | – | – | – | – | – | – | – |
-| 3. Arbeidsmarked | – | – | – | – | – | – | – |
-| 4. Inflasjon | – | – | – | – | – | – | – |
-| 5. Pengepolitikk | – | – | – | – | – | – | – |
-| 6. Finanspolitikk | – | – | – | – | – | – | – |
-| 7. Konsum og investering | – | – | – | – | – | – | – |
-| 8. Åpen økonomi | – | – | – | – | – | – | – |
-| 9. Valutakurs | – | – | – | – | – | – | – |
-| 10. Lønn og produktivitet | – | – | – | – | – | – | – |
-| 11. Langsiktig vekst | – | – | – | – | – | – | – |
-| 12. Kriser og historiske episoder | – | – | – | – | – | – | – |
-| 13. Internasjonal makro | – | – | – | – | – | – | – |
-| 14. Finansmarkeder og forventninger | – | – | – | – | – | – | – |
+| Fagområde | Data | Analyse | Metadata | Undervisning | Samlet gap | Prioritet |
+|---|---|---|---|---|---|---|
+| 1. Nasjonalregnskap | 🟡 | 🟢 | 🟢 | 🟡 | Lite–middels | Middels |
+| 2. Konjunkturer | 🟡 | 🟢 | 🟢 | 🟢 | Lite | Lav–middels |
+| 3. Arbeidsmarked | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 4. Inflasjon | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 5. Renter og pengepolitikk | 🟡 | 🟢 | 🟢 | 🟢 | Lite–middels | Middels |
+| 6. Finanspolitikk | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 7. Konsum og investering | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav |
+| 8. Åpen økonomi | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav–middels |
+| 9. Finansmarkeder | 🟡 | 🟢 | 🟢 | 🟢 | Lite–middels | Middels |
+| 10. Boligmarked | 🟡 | 🟢 | 🟢 | 🟢 | Lite–middels | Middels |
+| 11. Offentlig sektor | 🟢 | 🟢 | 🟢 | 🟢 | Lite | Lav–middels |
+| 12. Utenriksøkonomi | 🟡 | 🟢 | 🟢 | 🟡 | Middels | Høy |
+| 13. Internasjonal makro | 🟡 | 🟢 | 🟢 | 🟡 | Middels* | Høy |
+| 14. Finansmarkeder og forventninger | 🟡 | 🟢 | 🟢 | 🟡 | Lite–middels | Middels |
+
+\* For internasjonal makro er «Middels» en samlet klassifisering basert på
+de identifiserte og prioriterte datagapene. Den opprinnelige faganalysen
+angir ikke en eksplisitt samlet gapkategori.
+
+# Status etter utviklingsarbeidet mot 2.2.0
+
+Gap-matrisen ovenfor beskriver situasjonen da gap-analyse 2 ble
+gjennomført. Analysen ble deretter brukt som grunnlag for prioritering
+av utviklingsarbeidet mot 2.2.0.
+
+Flere av de viktigste identifiserte gapene er senere lukket eller
+vesentlig redusert. Dette gjelder særlig:
+
+- bredere nasjonalregnskapsdekning og eksplisitt nasjonalregnskapsidentitet
+- lengre historikk for sentrale rente- og finansmarkedsserier
+- samlet bruttoinvestering i tillegg til investering i fast realkapital
+- bedre boligmarkedsdekning
+- driftsbalanse og bytteforhold
+- netto internasjonal investeringsposisjon (NIIP)
+- offentlig gjeld for Norge i internasjonale sammenligninger
+- internasjonal budsjettbalanse
+- internasjonale offentlige inntekter og utgifter
+- eksplisitt forventningsindikator
+- utvidet dokumentasjon og undervisningseksempler
+- tydeligere dokumentasjon av ulik tidsdekning i det internasjonale
+  datasettet
+
+De prioriterte tiltakene fra gap-analyse 2 er dermed i hovedsak
+gjennomført. Gjenværende muligheter skal ikke automatisk behandles som
+release-blokkerende gap, men vurderes ut fra faglig merverdi,
+datakvalitet, brukerbehov og kompleksitet i senere versjoner.
 
 # Struktur for de individuelle analysene
 

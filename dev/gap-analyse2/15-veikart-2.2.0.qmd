@@ -526,3 +526,38 @@ historikk:
 Dette gir større faglig verdi enn å introdusere mange nye
 analysefunksjoner eller et langt større antall serier.
 
+# Status ved avslutning av 2.2.0
+
+Utviklingsarbeidet mot 2.2.0 har gjennomført de prioriterte tiltakene fra
+gap-analyse 2.
+
+Alle P0-oppgaver er lukket, og P1-seriene med faglig forsvarlig og stabil
+datakilde er implementert. Flere P2-tiltak er også gjennomført fordi
+kildene viste seg å være robuste og implementasjonen kunne gjøres uten å
+utvide API-et vesentlig.
+
+Blant de viktigste forbedringene er:
+
+- offentlig gjeld for Norge i internasjonale sammenligninger
+- norsk driftsbalanse og netto internasjonal investeringsposisjon
+- vesentlig lengre historikk for korte og lange renter
+- lang historisk aksjekursserie
+- samlede investeringer og eksplisitt nasjonalregnskapsidentitet
+- igangsatte boliger
+- internasjonal budsjettbalanse
+- internasjonale offentlige inntekter og utgifter
+- bytteforhold
+- eksplisitt inflasjonsforventningsindikator
+- utvidet dokumentasjon for forventninger, internasjonal datadekning og
+  nasjonalregnskap
+
+`macro_report()` er vurdert, men ikke utvidet. De nye seriene vurderes ikke
+som nødvendige i rapportens nåværende konjunkturfokuserte form.
+
+Gap-matrisen er oppdatert etter implementasjonen. Gjenværende faglige
+muligheter, som produksjonsgap og enkelte mer spesialiserte indikatorer,
+er ikke release-blokkerende og vurderes på nytt i en senere utviklingsfase.
+
+Ved avslutning av utviklingsarbeidet oppfyller pakken release-kriteriene
+for 2.2.0, inkludert metadata, tester, dokumentasjon og en ren
+`R CMD check`.

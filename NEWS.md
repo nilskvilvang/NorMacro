@@ -1,4 +1,52 @@
 
+# NorMacro 2.2.0
+
+## Nye data og faglig dekning
+
+* Lagt til norsk driftsbalanse og driftsbalanse som andel av BNP.
+* Lagt til Norges netto internasjonale investeringsposisjon (IIP) og IIP
+  som andel av BNP.
+* Forlenget historikken for norsk 10-årig statsrente og 3-måneders
+  pengemarkedsrente vesentlig.
+* Erstattet kort OSEAX-historikk med en lang historisk norsk
+  aksjekursindeks.
+* Lagt til samlede investeringer for hele økonomien og komplettert
+  nasjonalregnskapsdataene slik at BNP-identiteten kan undersøkes med
+  konsistente komponenter.
+* Lagt til igangsatte boliger som indikator for boligtilbud.
+* Lagt til norsk bytteforhold.
+* Lagt til inflasjonsforventninger fem år frem basert på Norges Banks
+  forventningsundersøkelse.
+* Utvidet det internasjonale datasettet med driftsbalanse,
+  budsjettbalanse og offentlige inntekter og utgifter som andel av BNP.
+* Rettet internasjonal offentlig gjeld og budsjettbalanse slik at Norge
+  inngår med harmoniserte observasjoner.
+
+## Dokumentasjon og undervisning
+
+* Lagt til egen vignett om forventninger og fremoverskuende indikatorer.
+* Lagt til egen nasjonalregnskapsvignett med eksplisitt
+  nasjonalregnskapsidentitet.
+* Dokumentert at det internasjonale datasettet er et ubalansert panel
+  med ulik tidsdekning mellom land og variabler.
+* Oppdatert gap-analyse 2 og veikartet mot 2.2.0 etter gjennomført
+  utviklingsarbeid.
+
+## Forbedringer
+
+* Forbedret konsistensen mellom norske og internasjonale
+  makroøkonomiske serier.
+* Utvidet historisk dekning for sentrale rente- og finansmarkedsdata.
+* Forbedret metadata for nye og utvidede serier.
+* Beholdt eksisterende generelle analyse-API fremfor å introdusere nye
+  spesialfunksjoner der eksisterende verktøy er tilstrekkelige.
+
+## Kvalitet
+
+* Utvidet testdekningen for nye dataserier, internasjonal landdekning og
+  nasjonalregnskapsidentiteten.
+* Pakken passerer `R CMD check` uten feil, advarsler eller merknader.
+
 # NorMacro 2.1.0
 
 ## Nye data og faglig dekning

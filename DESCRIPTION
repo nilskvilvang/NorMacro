@@ -1,6 +1,6 @@
 Package: NorMacro
 Title: Norwegian Macroeconomic Data and Analysis Tools
-Version: 2.1.0
+Version: 2.2.0
 Authors@R:
     person(
         given = "Nils",
