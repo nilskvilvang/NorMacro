@@ -49,7 +49,8 @@ international <- get_international_macro()
 ```
 
 De internasjonale dataene bruker samme variabelstruktur på tvers av land
-og er laget for sammenlignende analyser.
+og er laget for sammenlignende analyser. Datadekningen kan variere mellom
+land og variabler.
 
 ### KOSTRA
 

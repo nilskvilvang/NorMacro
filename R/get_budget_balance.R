@@ -8,7 +8,7 @@ get_budget_balance <- function(countries = NULL, refresh = FALSE) {
         countries <- get_standard_countries()
         }
       get_eurostat_data(
-        id = "gov_10dd_edpt1",
+        id = "gov_10a_main",
         filters = list(
           unit = "PC_GDP",
           sector = "S13",
