@@ -49,8 +49,8 @@ international <- get_international_macro()
 ```
 
 De internasjonale dataene bruker samme variabelstruktur på tvers av land
-og er laget for sammenlignende analyser. Datadekningen kan variere mellom
-land og variabler.
+og er laget for sammenlignende analyser. Datadekningen kan variere
+mellom land og variabler.
 
 ### KOSTRA
 
@@ -67,6 +67,14 @@ NorMacro kan installeres direkte fra GitHub:
 ``` r
 remotes::install_github(
   "nilskvilvang/NorMacro"
+)
+```
+
+For å installere siste stabile release bruk:
+
+``` r
+remotes::install_github(
+  "nilskvilvang/NorMacro@v2.2.0"
 )
 ```
 
@@ -121,7 +129,6 @@ variable_summary(
   data = normacro_example
 )
 ```
-
 
     Variabel
     --------
@@ -185,7 +192,7 @@ plot_series(
 data-fig-alt="Tidsserie som viser utviklingen i norsk inflasjon fra 2000 til 2025."
 alt="Tidsserie som viser utviklingen i norsk inflasjon fra 2000 til 2025." />
 
-Figure 1: Inflasjon i Norge, 2000–2025.
+Figure 1: Figure 1: Inflasjon i Norge, 2000–2025.
 
 </div>
 
@@ -209,7 +216,7 @@ compare_series(
 data-fig-alt="Sammenligning av inflasjon, BNP-vekst, arbeidsledighet og styringsrente i Norge."
 alt="Sammenligning av inflasjon, BNP-vekst, arbeidsledighet og styringsrente i Norge." />
 
-Figure 2: Sammenligning av utvalgte norske makroserier.
+Figure 2: Figure 2: Sammenligning av utvalgte norske makroserier.
 
 </div>
 
@@ -267,7 +274,7 @@ plot_series(
 data-fig-alt="Inflasjon sammenlignet mellom Norge, Sverige og Danmark."
 alt="Inflasjon sammenlignet mellom Norge, Sverige og Danmark." />
 
-Figure 3: Inflasjon i Norge, Sverige og Danmark.
+Figure 3: Figure 3: Inflasjon i Norge, Sverige og Danmark.
 
 </div>
 
@@ -291,7 +298,7 @@ compare_series(
 data-fig-alt="Inflasjon, BNP-vekst og arbeidsledighet i Norge basert på det internasjonale eksempeldatasettet."
 alt="Inflasjon, BNP-vekst og arbeidsledighet i Norge basert på det internasjonale eksempeldatasettet." />
 
-Figure 4: Inflasjon, BNP-vekst og arbeidsledighet i Norge.
+Figure 4: Figure 4: Inflasjon, BNP-vekst og arbeidsledighet i Norge.
 
 </div>
 
@@ -307,7 +314,6 @@ overview_kostra_data(
   normacro_kostra_example
 )
 ```
-
 
     KOSTRA-data
     ===========
@@ -361,7 +367,8 @@ plot_kostra_ranking(
 data-fig-alt="Rangering av netto driftsresultat for Oslo, Bergen og Trondheim i 2025."
 alt="Rangering av netto driftsresultat for Oslo, Bergen og Trondheim i 2025." />
 
-Figure 5: Netto driftsresultat i Oslo, Bergen og Trondheim i 2025.
+Figure 5: Figure 5: Netto driftsresultat i Oslo, Bergen og Trondheim i
+2025.
 
 </div>
 
@@ -385,17 +392,32 @@ Noen av de viktigste funksjonene i NorMacro er:
 
 Se funksjonenes hjelpesider i R for full dokumentasjon.
 
-## Dokumentasjon
+## Vignetter
 
-NorMacro inneholder fire introduksjonsvignetter:
+NorMacro inneholder flere vignetter som dekker både introduksjon,
+analyse og utvalgte faglige temaer.
 
-1.  **Kom i gang med NorMacro** – finn data, variabler og metadata
-2.  **Introduksjon til NorMacro** – grunnleggende analyse og
-    visualisering
-3.  **Internasjonale sammenligninger med NorMacro** – analyser på tvers
-    av land
-4.  **KOSTRA-analyse med NorMacro** – kommunale og regionale
-    sammenligninger
+### Kom i gang og analyse
+
+- `kom-i-gang` – introduksjon til data, metadata og grunnleggende bruk
+- `analyse` – sentrale analysefunksjoner og arbeidsflyter
+- `avansert-analyse` – mer sammensatte analyser og kombinasjon av
+  verktøy
+- `business-cycle` – konjunkturklassifisering og underliggende
+  indikatorer
+
+### Internasjonale data og KOSTRA
+
+- `international` – internasjonale sammenligninger
+- `international-sources` – kilder, definisjoner og internasjonal
+  datadekning
+- `kostra` – kommunale og regionale analyser med KOSTRA
+
+### Faglige temaer
+
+- `nasjonalregnskap` – BNP-komponenter og nasjonalregnskapsidentiteten
+- `forventninger` – inflasjonsforventninger og fremoverskuende
+  indikatorer
 
 Vignettene kan åpnes med:
 
