@@ -47,6 +47,42 @@ get_konsum <- function(refresh = FALSE) {
             ),
           by = "Aar"
         )
+      # Konsum i husholdninger og ideelle organisasjoner ------------------
+      husholdninger_ideelle_faste_raw <- ssb_get(
+        url = url,
+        query = list(
+          Makrost = "koh.nrpriv",
+          ContentsCode = "Faste",
+          Tid = "*"
+        )
+      )
+      husholdninger_ideelle_lopende_raw <- ssb_get(
+        url = url,
+        query = list(
+          Makrost = "koh.nrpriv",
+          ContentsCode = "Priser",
+          Tid = "*"
+        )
+      )
+      husholdninger_ideelle <-
+        husholdninger_ideelle_faste_raw |>
+        dplyr::transmute(
+          Aar = as.integer(.data$ar),
+          Konsum_husholdninger_ideelle = as.numeric(
+            .data$faste_2023_priser_mill_kr
+          )
+        ) |>
+        dplyr::left_join(
+          husholdninger_ideelle_lopende_raw |>
+            dplyr::transmute(
+              Aar = as.integer(.data$ar),
+              Konsum_husholdninger_ideelle_lopende =
+                as.numeric(
+                  .data$lopende_priser_mill_kr
+                )
+            ),
+          by = "Aar"
+        )
 
       # Offentlig konsum --------------------------------------------------
 
@@ -90,6 +126,10 @@ get_konsum <- function(refresh = FALSE) {
 
       privat |>
         dplyr::left_join(
+          husholdninger_ideelle,
+          by = "Aar"
+        ) |>
+        dplyr::left_join(
           offentlig,
           by = "Aar"
         ) |>
@@ -102,7 +142,6 @@ get_konsum <- function(refresh = FALSE) {
               .data$Privat_konsum /
                 dplyr::lag(.data$Privat_konsum) - 1
             ) * 100,
-
           Offentlig_konsum_vekst =
             (
               .data$Offentlig_konsum /

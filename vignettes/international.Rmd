@@ -103,6 +103,43 @@ Her viser figuren årlig vekst i BNP i faste priser.
 Makroøkonomiske sjokk kan påvirke flere land samtidig, men både størrelse
 og tidsforløp kan variere mellom økonomiene.
 
+## Ulik datadekning mellom land
+
+Det fullstendige internasjonale NorMacro-datasettet er et ubalansert panel.
+Det betyr at start- og sluttår kan variere både mellom variabler og mellom
+land for samme variabel.
+
+`compare_countries()` bruker de observasjonene som faktisk er tilgjengelige
+for hvert land. En figur kan derfor vise lengre historikk for enkelte land
+enn for andre.
+
+Ved historiske sammenligninger bør faktisk datadekning kontrolleres før
+resultatene tolkes. Dette er særlig viktig dersom analysen skal sammenligne
+land over en felles periode.
+
+For én variabel kan dekningen undersøkes med for eksempel:
+
+```{r, eval=FALSE}
+data <- get_international_macro()
+
+data |>
+  dplyr::select(
+    Aar,
+    Land,
+    Offentlig_gjeld_andel_BNP
+  ) |>
+  dplyr::filter(
+    !is.na(Offentlig_gjeld_andel_BNP)
+  ) |>
+  dplyr::group_by(Land) |>
+  dplyr::summarise(
+    Startaar = min(Aar),
+    Sluttaar = max(Aar),
+    N = dplyr::n(),
+    .groups = "drop"
+  )
+```
+
 ## Sammenlign flere variabler innen ett land
 
 Internasjonale data kan også brukes til å studere samspillet mellom flere

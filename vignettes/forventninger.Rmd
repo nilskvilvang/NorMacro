@@ -1,0 +1,118 @@
+
+---
+title: "Forventninger og fremoverskuende indikatorer"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Forventninger og fremoverskuende indikatorer}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(NorMacro)
+```
+
+Makroøkonomisk analyse bruker både observerte størrelser og indikatorer som kan
+si noe om utviklingen fremover. Det er viktig å skille mellom direkte målte
+forventninger og observerte indikatorer som har fremoverskuende
+informasjonsinnhold.
+
+NorMacro inneholder begge typer informasjon.
+
+## Direkte målte forventninger
+
+`Inflasjonsforventninger_5aar` viser økonomenes forventning til den generelle
+prisveksten fem år frem.
+
+Serien er basert på Norges Banks forventningsundersøkelse og er et direkte,
+surveybasert mål på langsiktige inflasjonsforventninger.
+
+Den årlige NorMacro-serien er beregnet som gjennomsnittet av de fire
+kvartalsobservasjonene i hvert komplette kalenderår.
+
+```{r, eval=FALSE}
+data <- get_normacro()
+
+data |>
+  dplyr::select(
+    Aar,
+    Inflasjon,
+    Inflasjonsforventninger_5aar
+  ) |>
+  dplyr::filter(
+    Aar >= 2002
+  )
+```
+
+`Inflasjonsforventninger_5aar` bør ikke tolkes som en prognose for neste års
+inflasjon. Serien måler forventet prisvekst fem år frem og er særlig relevant
+for analyser av langsiktige inflasjonsforventninger og forventningsforankring.
+
+## Fremoverskuende indikatorer
+
+Andre NorMacro-serier måler ikke forventninger direkte, men kan inneholde
+informasjon om den videre økonomiske utviklingen.
+
+Eksempler er:
+
+- `Rentekurve`
+- `Aksjekursindeks`
+- `Ordrebeholdning`
+- `Konjunkturindikator`
+- `Ressursknapphet`
+
+Rentekurven og aksjemarkedet reflekterer markedspriser og kan derfor inneholde
+informasjon om markedsaktørenes vurdering av fremtidige økonomiske forhold.
+
+Ordrebeholdning, ressursknapphet og den sammensatte konjunkturindikatoren bygger
+på observerte forhold og virksomhetenes vurderinger. De kan reagere før
+utviklingen blir synlig i bredere realøkonomiske størrelser som BNP og
+arbeidsledighet.
+
+## Tre typer informasjon
+
+Det er nyttig å skille mellom tre grupper:
+
+1. **Realiserte makrodata**, som BNP-vekst, inflasjon og arbeidsledighet.
+2. **Fremoverskuende indikatorer**, som rentekurve, ordrebeholdning og
+   konjunkturindikatorer.
+3. **Direkte målte forventninger**, som `Inflasjonsforventninger_5aar`.
+
+Disse bør ikke tolkes som om de måler det samme. De kan derimot brukes sammen
+for å belyse ulike sider av konjunktur- og forventningsbildet.
+
+## Analyse i NorMacro
+
+Eksisterende generelle analysefunksjoner kan brukes også på
+forventningsindikatorer.
+
+For eksempel:
+
+```{r, eval=FALSE}
+compare_series(
+  c(
+    "Inflasjon",
+    "Inflasjonsforventninger_5aar",
+    "Rentekurve"
+  )
+)
+```
+
+eller:
+
+```{r, eval=FALSE}
+plot_series(
+  "Inflasjonsforventninger_5aar"
+)
+```
+
+NorMacro har ikke en egen analysefunksjon for forventninger. Det er tilsiktet:
+de generelle analyseverktøyene er tilstrekkelige, mens den viktigste
+forskjellen ligger i hvordan indikatorene tolkes.

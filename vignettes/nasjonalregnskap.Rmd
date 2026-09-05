@@ -1,0 +1,171 @@
+
+---
+title: "Nasjonalregnskap med NorMacro"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Nasjonalregnskap med NorMacro}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+```{r}
+library(NorMacro)
+```
+
+## Nasjonalregnskapsidentiteten
+
+En sentral sammenheng i nasjonalregnskapet er at bruttonasjonalproduktet kan
+skrives som summen av innenlandsk etterspørsel og nettoeksport:
+
+\[
+BNP = C + G + I + X - M
+\]
+
+der:
+
+- \(C\) er konsum i husholdninger og ideelle organisasjoner
+- \(G\) er konsum i offentlig forvaltning
+- \(I\) er bruttoinvestering i alt
+- \(X\) er eksport
+- \(M\) er import
+
+NorMacro inneholder årlige serier for alle disse komponentene.
+
+## Variabler i NorMacro
+
+For nasjonalregnskapsidentiteten brukes følgende serier i løpende priser:
+
+- `BNP_lopende`
+- `Konsum_husholdninger_ideelle_lopende`
+- `Offentlig_konsum_lopende`
+- `Bruttoinvestering_i_alt_lopende`
+- `Eksport_lopende`
+- `Import_lopende`
+
+Alle seriene måles i millioner kroner og har data fra 1970.
+
+NorMacro inneholder også `Privat_konsum_lopende`, som gjelder konsum i
+husholdninger, og `Investeringer_lopende`, som gjelder bruttoinvestering i
+fast realkapital. Disse er smalere aggregater enn henholdsvis
+`Konsum_husholdninger_ideelle_lopende` og
+`Bruttoinvestering_i_alt_lopende`, og brukes derfor ikke direkte i
+nasjonalregnskapsidentiteten.
+
+## Kontroller identiteten
+
+Den enkleste måten å kontrollere sammenhengen på er å bruke seriene i løpende
+priser:
+
+```{r, eval=FALSE}
+data <- get_normacro()
+
+nr <- data |>
+  dplyr::transmute(
+    Aar,
+    BNP_lopende,
+    Beregnet_BNP =
+      Konsum_husholdninger_ideelle_lopende +
+      Offentlig_konsum_lopende +
+      Bruttoinvestering_i_alt_lopende +
+      Eksport_lopende -
+      Import_lopende,
+    Avvik =
+      BNP_lopende -
+      Beregnet_BNP
+  )
+
+nr
+```
+
+`Beregnet_BNP` konstrueres her direkte fra etterspørselskomponentene.
+
+`Beregnet_BNP` konstrueres her direkte fra etterspørselskomponentene.
+
+Komponentene summerer til publisert BNP med bare små avrundingsavvik i
+milliontallene. Identiteten kan dermed kontrolleres direkte med
+NorMacro-data.
+
+## Komponenter som andel av BNP
+
+Identiteten gjør det også mulig å undersøke størrelsen på de ulike
+etterspørselskomponentene relativt til BNP.
+
+For eksempel kan andeler av BNP beregnes slik:
+
+```{r, eval=FALSE}
+data |>
+  dplyr::transmute(
+    Aar,
+    Konsum_husholdninger_ideelle_andel =
+      Konsum_husholdninger_ideelle_lopende / BNP_lopende * 100,
+    Offentlig_konsum_andel =
+      Offentlig_konsum_lopende / BNP_lopende * 100,
+    Bruttoinvestering_i_alt_andel =
+      Bruttoinvestering_i_alt_lopende / BNP_lopende * 100,
+    Eksportandel =
+      Eksport_lopende / BNP_lopende * 100,
+    Importandel =
+      Import_lopende / BNP_lopende * 100
+  )
+```
+
+NorMacro inneholder allerede flere slike beregnede BNP-andeler som egne
+variabler.
+
+## Løpende og faste priser
+
+Når selve nasjonalregnskapsidentiteten skal kontrolleres, bør seriene i
+løpende priser brukes.
+
+NorMacro inneholder også realserier i faste priser eller kjedevolum. Disse er
+velegnet til analyse av realøkonomisk vekst, men kjedede volumserier er ikke
+nødvendigvis additive.
+
+Det betyr at man ikke bør summere kjedevolumserier for konsum, investeringer,
+eksport og import og forvente at resultatet blir nøyaktig lik BNP i faste
+priser.
+
+Dette skillet er viktig:
+
+- løpende priser brukes til regnskapsmessige identiteter og andeler
+- faste priser og kjedevolum brukes til analyse av real vekst og volumendringer
+
+## Analyse i NorMacro
+
+Ved analyse av realøkonomisk utvikling kan det være mer relevant å bruke
+de mer avgrensede seriene for husholdningenes konsum og bruttoinvestering
+i fast realkapital:
+
+```{r, eval=FALSE}
+compare_series(
+  c(
+    "Privat_konsum",
+    "Offentlig_konsum",
+    "Investeringer",
+    "Eksport",
+    "Import"
+  )
+)
+```
+
+eller:
+
+```{r, eval=FALSE}
+growth_table(
+  c(
+    "Privat_konsum",
+    "Offentlig_konsum",
+    "Investeringer",
+    "Eksport",
+    "Import"
+  )
+)
+```
+
+Nasjonalregnskapsidentiteten gir dermed både et pedagogisk rammeverk og et
+utgangspunkt for å analysere hvordan ulike deler av etterspørselen utvikler
+seg over tid.
